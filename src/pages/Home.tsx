@@ -121,8 +121,11 @@ const Home = () => {
             {/* ========== 1. Hero - 純粹的使命宣言，不含訂閱表單 ========== */}
             <section className="pt-32 pb-24 px-6 max-w-5xl mx-auto">
                 <div className="text-center">
-                    <div className="inline-flex items-center gap-2 border border-google-blue/30 bg-google-blue/10 text-google-blue px-4 py-1.5 rounded-full text-xs mb-8 font-medium">
-                        <Rocket size={14} /> 讓 AI 成為你的好夥伴
+                    <div className="flex flex-col items-center">
+                        <div className="inline-flex items-center gap-2 border border-google-blue/30 bg-google-blue/10 text-google-blue px-4 py-1.5 rounded-full text-xs mb-8 font-medium relative group">
+                            <Rocket size={14} /> 讓 AI 成為你的好夥伴
+                            <span className="absolute -top-2 -right-12 px-2 py-0.5 bg-gradient-to-r from-amber-500 to-orange-600 text-white text-[10px] font-black rounded-lg shadow-lg shadow-orange-500/20 animate-pulse uppercase tracking-tighter">Beta</span>
+                        </div>
                     </div>
                     <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-[1.1] tracking-tight">
                         將繁瑣交給 AI，<br />
