@@ -123,6 +123,38 @@ const ArticleDetail = () => {
                 dangerouslySetInnerHTML={{ __html: article.content || '' }}
             />
 
+            {/* 💡 靈感金句/深度洞察區塊 (新增) */}
+            {article.insight_quotes && article.insight_quotes.length > 0 && (
+                <div className="grid grid-cols-1 gap-6 mb-20">
+                    {article.insight_quotes.map((quote: any, idx: number) => (
+                        <motion.div 
+                            key={idx}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: idx * 0.1 }}
+                            className="bg-white/5 border border-white/10 rounded-3xl p-8 relative overflow-hidden group"
+                        >
+                            <div className="flex items-start gap-6">
+                                <span className={`${theme.bg} ${theme.text} px-3 py-1 rounded-lg text-sm font-black font-mono flex-shrink-0`}>
+                                    {quote.number || `0${idx + 1}`}
+                                </span>
+                                <div>
+                                    <h4 className="text-xl font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors">
+                                        {quote.title}
+                                    </h4>
+                                    <p className="text-zinc-400 leading-relaxed text-lg">
+                                        {quote.content}
+                                    </p>
+                                </div>
+                            </div>
+                            {/* 裝飾背光 */}
+                            <div className={`absolute -right-4 -bottom-4 w-24 h-24 bg-gradient-to-br ${theme.gradient} opacity-0 group-hover:opacity-10 blur-2xl transition-opacity`} />
+                        </motion.div>
+                    ))}
+                </div>
+            )}
+
             {/* 融合後的【終極生活實戰包】 */}
             {!isNews && article.practice_kit && (
                 <div className={`bg-[#0a0a0a] border ${theme.border} rounded-[2rem] p-10 mb-20 relative overflow-hidden`}>
