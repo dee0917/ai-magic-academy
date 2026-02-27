@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
@@ -24,6 +24,12 @@ const Insights = () => {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [insights, setInsights] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
+    
+    // 滾動與拖拽相關 Ref
+    const scrollRef = useRef<HTMLDivElement>(null);
+    const [isDragging, setIsDragging] = useState(false);
+    const [startX, setStartX] = useState(0);
+    const [scrollLeft, setScrollLeft] = useState(0);
 
     const getColorClasses = (themeColor: string) => {
         const colors: Record<string, any> = {
@@ -60,6 +66,40 @@ const Insights = () => {
         return article?.themeColor || article?.theme_color || 'emerald';
     };
 
+    // 處理電腦版拖拽滾動
+    const handleMouseDown = (e: React.MouseEvent) => {
+        if (!scrollRef.current) return;
+        setIsDragging(true);
+        setStartX(e.pageX - scrollRef.current.offsetLeft);
+        setScrollLeft(scrollRef.current.scrollLeft);
+    };
+
+    const handleMouseLeave = () => setIsDragging(false);
+    const handleMouseUp = () => setIsDragging(false);
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        if (!isDragging || !scrollRef.current) return;
+        e.preventDefault();
+        const x = e.pageX - scrollRef.current.offsetLeft;
+        const walk = (x - startX) * 2; // 滾動速度倍率
+        scrollRef.current.scrollLeft = scrollLeft - walk;
+    };
+
+    // 點擊分類置中邏輯
+    const handleCategoryClick = (category: string | null, e: React.MouseEvent) => {
+        setSelectedCategory(category);
+        
+        if (!scrollRef.current) return;
+        const target = e.currentTarget as HTMLElement;
+        const container = scrollRef.current;
+        
+        const scrollTarget = target.offsetLeft - (container.offsetWidth / 2) + (target.offsetWidth / 2);
+        container.scrollTo({
+            left: scrollTarget,
+            behavior: 'smooth'
+        });
+    };
+
     useEffect(() => {
         fetchInsights();
     }, []);
@@ -90,11 +130,18 @@ const Insights = () => {
                 </p>
             </div>
 
-            {/* 優化後的滾動分類列 */}
-            <div className="relative mb-16">
-                <div className="flex items-center gap-3 overflow-x-auto pb-4 no-scrollbar scroll-smooth">
+            {/* 優化後的滾動分類列 - 支援電腦版拖拽與置中 */}
+            <div className="relative mb-16 group/scroll">
+                <div 
+                    ref={scrollRef}
+                    onMouseDown={handleMouseDown}
+                    onMouseLeave={handleMouseLeave}
+                    onMouseUp={handleMouseUp}
+                    onMouseMove={handleMouseMove}
+                    className={`flex items-center gap-3 overflow-x-auto pb-4 no-scrollbar scroll-smooth cursor-grab active:cursor-grabbing ${isDragging ? 'scroll-auto' : ''}`}
+                >
                     <button 
-                        onClick={() => setSelectedCategory(null)} 
+                        onClick={(e) => handleCategoryClick(null, e)} 
                         className={`flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold transition-all border ${selectedCategory === null 
                             ? 'bg-emerald-500 border-emerald-500 text-black shadow-lg shadow-emerald-500/20' 
                             : 'bg-white/5 border-white/5 text-zinc-400 hover:bg-white/10 hover:border-white/10'}`}
@@ -108,7 +155,7 @@ const Insights = () => {
                         return (
                             <button 
                                 key={category} 
-                                onClick={() => setSelectedCategory(category)} 
+                                onClick={(e) => handleCategoryClick(category, e)} 
                                 className={`flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold transition-all border ${isSelected 
                                     ? `${theme.active} border-transparent shadow-lg` 
                                     : 'bg-white/5 border-white/5 text-zinc-400 hover:bg-white/10 hover:border-white/10'}`}
@@ -120,7 +167,7 @@ const Insights = () => {
                     })}
                 </div>
                 {/* 漸變遮罩提示可滾動 */}
-                <div className="absolute right-0 top-0 bottom-4 w-12 bg-gradient-to-l from-[#0A0A0A] to-transparent pointer-events-none" />
+                <div className="absolute right-0 top-0 bottom-4 w-12 bg-gradient-to-l from-[#0A0A0A] to-transparent pointer-events-none opacity-100 transition-opacity group-hover/scroll:opacity-0" />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
