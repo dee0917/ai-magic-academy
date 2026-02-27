@@ -32,6 +32,7 @@ const ArticleDetail = () => {
     const treasureRef = useRef<HTMLDivElement>(null);
     const quizRef = useRef<HTMLDivElement>(null);
     const rewardRef = useRef<HTMLDivElement>(null);
+    const firstStepRef = useRef<HTMLDivElement>(null);
 
     const getColorClasses = (themeColor: string) => {
         const colors: Record<string, any> = {
@@ -91,6 +92,10 @@ const ArticleDetail = () => {
         setTimeout(() => setCopied(false), 3000);
     };
 
+    const scrollToFirstStep = () => {
+        firstStepRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
+
     const handleStepComplete = (idx: number) => {
         const updated = [...stepsCompleted];
         updated[idx] = true;
@@ -99,20 +104,22 @@ const ArticleDetail = () => {
         if (idx < (article?.steps?.length || 0) - 1) {
             const nextIdx = idx + 1;
             setCurrentStep(nextIdx);
+            // 立即強制至中下一個步驟
             setTimeout(() => {
                 const element = stepRefs.current[nextIdx];
                 if (element) {
-                    const yOffset = -100;
+                    const yOffset = -50; 
                     const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
                     window.scrollTo({ top: y, behavior: 'smooth' });
                 }
-            }, 50);
+            }, 100);
         } else {
+            // 所有步驟完成
             setIsTreasureUnlocking(true);
             setTimeout(() => {
                 const element = treasureRef.current;
                 if (element) {
-                    const y = element.getBoundingClientRect().top + window.pageYOffset - 50;
+                    const y = element.getBoundingClientRect().top + window.pageYOffset - 100;
                     window.scrollTo({ top: y, behavior: 'smooth' });
                 }
                 
@@ -157,8 +164,8 @@ const ArticleDetail = () => {
         confetti({ particleCount: 200, spread: 100, origin: { y: 0.5 }, colors: ['#fbbf24', '#f59e0b', '#d97706'] });
     };
 
-    if (loading) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-mono text-sm tracking-widest animate-pulse">INIT_HYBRID_SYSTEM...</div>;
-    if (!article) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-bold">404: CONTENT_NOT_FOUND</div>;
+    if (loading) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-mono text-sm tracking-widest animate-pulse">INIT_STRICT_MODE...</div>;
+    if (!article) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-bold">404: DATA_SYNC_FAILED</div>;
 
     const theme = getColorClasses(article.themeColor || article.theme_color || 'emerald');
     const isNews = article.category === 'AI 新聞';
@@ -196,10 +203,18 @@ const ArticleDetail = () => {
                         </motion.div>
                     )}
                 </motion.div>
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }} className="absolute bottom-10 flex flex-col items-center gap-4 text-zinc-700">
-                    <span className="text-xs font-black uppercase tracking-[0.4em]">自由探索或點擊開始</span>
-                    <motion.div animate={{ y: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 2 }}><ChevronDown size={40} strokeWidth={3} /></motion.div>
-                </motion.div>
+                
+                {/* 開始進化按鈕 - 修正啟動邏輯 */}
+                <motion.button 
+                    onClick={scrollToFirstStep}
+                    initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }} 
+                    className="absolute bottom-10 flex flex-col items-center gap-4 text-zinc-300 hover:text-emerald-400 transition-colors cursor-pointer group"
+                >
+                    <span className="text-xs font-black uppercase tracking-[0.4em] group-hover:tracking-[0.5em] transition-all">點擊開始修煉</span>
+                    <motion.div animate={{ y: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 2 }}>
+                        <ChevronDown size={40} strokeWidth={3} />
+                    </motion.div>
+                </motion.button>
             </section>
 
             {/* ═══════════ SECTION 2: THE MAGIC ═══════════ */}
@@ -228,7 +243,7 @@ const ArticleDetail = () => {
 
             {/* ═══════════ SECTION 3: THE QUEST ═══════════ */}
             {hasSteps && (
-                <section className="py-24 px-5 md:px-6 text-left max-w-5xl mx-auto min-h-screen">
+                <section className="py-24 px-5 md:px-6 text-left max-w-5xl mx-auto min-h-screen" ref={firstStepRef}>
                     <div className="text-center mb-20">
                         <span className="transition-label">實戰演練</span>
                         <h2 className="text-4xl md:text-6xl font-black text-white text-center justify-center tracking-tighter">一步一步跟著做</h2>
@@ -236,16 +251,22 @@ const ArticleDetail = () => {
                     <div className="space-y-12 relative">
                         {article.steps.map((step: any, idx: number) => {
                             const isDone = stepsCompleted[idx];
-                            const isCurrentTask = idx === currentStep && !isDone;
+                            const isActive = idx === currentStep;
+                            const isFuture = idx > currentStep;
 
                             return (
                                 <motion.div
                                     key={idx} ref={el => stepRefs.current[idx] = el}
-                                    initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                                    className={`relative rounded-[3rem] border-2 p-10 md:p-16 transition-all duration-700 ${isDone ? 'bg-white/[0.03] border-emerald-500/40 shadow-[0_0_60px_rgba(16,185,129,0.1)]' : 'bg-white/5 border-white/10 shadow-xl'}`}
+                                    initial={{ opacity: 0, scale: 0.95 }} 
+                                    animate={{ 
+                                        opacity: isFuture ? 0.05 : 1,
+                                        scale: isActive ? 1 : 0.98,
+                                        filter: isFuture ? 'blur(15px)' : 'blur(0px)'
+                                    }}
+                                    className={`relative rounded-[3rem] border-2 p-10 md:p-16 transition-all duration-700 ${isDone ? 'bg-white/[0.02] border-emerald-500/40 shadow-[0_0_60px_rgba(16,185,129,0.1)]' : isActive ? 'bg-white/5 border-white/20 shadow-2xl scale-100' : 'border-white/5 opacity-10 pointer-events-none'}`}
                                 >
                                     <div className="flex flex-col md:flex-row items-start gap-10">
-                                        <div className={`w-20 h-20 rounded-3xl flex items-center justify-center flex-shrink-0 text-3xl font-black transition-all duration-500 ${isDone ? 'bg-emerald-500 text-black' : 'bg-white text-black'}`}>
+                                        <div className={`w-20 h-20 rounded-3xl flex items-center justify-center flex-shrink-0 text-3xl font-black transition-all duration-500 ${isDone ? 'bg-emerald-500 text-black' : isActive ? 'bg-white text-black' : 'bg-white/5 text-zinc-700'}`}>
                                             {isDone ? '✓' : idx + 1}
                                         </div>
                                         <div className="flex-1">
@@ -256,7 +277,7 @@ const ArticleDetail = () => {
                                                     <p className="text-emerald-400 text-lg md:text-2xl italic font-bold leading-relaxed">💡 Dee's Tip: {step.dee_tip}</p>
                                                 </div>
                                             )}
-                                            {!isDone && (
+                                            {isActive && !isDone && (
                                                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col items-start gap-6">
                                                     <motion.button
                                                         whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
@@ -269,12 +290,19 @@ const ArticleDetail = () => {
                                                         <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity" />
                                                     </motion.button>
                                                     <div className="flex items-center gap-2 text-emerald-500/80 font-black uppercase tracking-[0.3em] text-sm ml-4">
-                                                        <Sparkles size={16} /> 點擊按鈕或手動滑動閱讀，完成所有步驟以解鎖寶物
+                                                        <Sparkles size={16} /> 此章節為必修，完成後方可解鎖下一區
                                                     </div>
                                                 </motion.div>
                                             )}
                                         </div>
                                     </div>
+                                    
+                                    {/* 鎖定蒙層 - 確保不能滑過未來步驟 */}
+                                    {isFuture && (
+                                        <div className="absolute inset-0 z-10 bg-black/40 backdrop-blur-[4px] rounded-[3rem] flex items-center justify-center pointer-events-none">
+                                            <Lock size={64} className="text-white/20" />
+                                        </div>
+                                    )}
                                 </motion.div>
                             );
                         })}
@@ -418,7 +446,7 @@ const ArticleDetail = () => {
                     <Link to={`/insights/${nextArticle.id}`} className="group block bg-white/[0.04] border-4 border-white/5 hover:border-emerald-500/40 p-16 md:p-24 rounded-[4.5rem] transition-all shadow-3xl hover:shadow-[0_40px_100px_rgba(16,185,129,0.2)] hover:-translate-y-4">
                         <div className="flex items-center justify-between gap-16">
                             <div>
-                                <span className="text-emerald-500/60 font-black text-sm md:text-lg uppercase tracking-[0.5em] mb-8 block">Next Level Evolution</span>
+                                <span className="text-emerald-500/60 font-black text-xs md:text-sm uppercase tracking-[0.4em] mb-6 block">Next Level Evolution</span>
                                 <h3 className="text-4xl md:text-7xl font-black text-white group-hover:text-emerald-400 transition-colors leading-[1.1] tracking-tighter">{nextArticle.title}</h3>
                             </div>
                             <ArrowRight className="text-zinc-900 group-hover:text-emerald-400 group-hover:translate-x-10 transition-all flex-shrink-0" size={100} strokeWidth={6} />
