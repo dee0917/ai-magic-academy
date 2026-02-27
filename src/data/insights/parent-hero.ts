@@ -16,7 +16,6 @@ export const insight = {
         right: "✅ 做法：指令『請扮演恐龍專家。用 300 字編一個勇敢小暴龍的故事，教小孩為什麼要愛護地球。』再用 Nano Banana 畫出對應插畫。"
     },
     insight_quote: "高級 Agent 在產出前會自我檢查，這就是為什麼正確率更高的原因。",
-    insight_quote: "高級 Agent 在產出前會自我檢查，這就是為什麼正確率更高的原因。",
     practice_kit: {
         title: "育兒神組合：客製化繪本",
         description: "第一步先編故事，第二步用 Nano Banana 產出插圖：",

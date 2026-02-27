@@ -16,7 +16,6 @@ export const insight = {
         right: "✅ 做法：按下語音圖示，直接說：『我今天好累喔。』看它如何精準捕捉你的低落並給你回饋。"
     },
     insight_quote: "高級 Agent 在產出前會自我檢查，這就是為什麼正確率更高的原因。",
-    insight_quote: "高級 Agent 在產出前會自我檢查，這就是為什麼正確率更高的原因。",
     practice_kit: {
         title: "體驗指令：語音情緒測試",
         description: "開啟高級語音模式後，試試這段話：",
