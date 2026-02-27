@@ -1,4 +1,5 @@
 import { insight as heartMethod1 } from './heart-method-1';
+import { insight as heartMethod2 } from './heart-method-2';
 import { insight as heartMethod3 } from './heart-method-3';
 import { insight as anthropicDirect } from './anthropic-direct';
 import { insight as nanoBananaGuide } from './nano-banana-guide';
@@ -16,9 +17,10 @@ import { insight as mealPlanner } from './meal-planner';
 import { insight as antiProcrastination } from './anti-procrastination';
 import { insight as petTranslator } from './pet-translator';
 
-// 導出所有已改寫的 4.0 豪華版文章 (共 17 篇)
+// 導出所有已改寫的 4.0 豪華版文章 (共 18 篇)
 export const INSIGHTS_LIST = [
     heartMethod1,
+    heartMethod2,
     heartMethod3,
     anthropicDirect,
     nanoBananaGuide,
