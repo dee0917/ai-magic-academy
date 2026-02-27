@@ -15,7 +15,7 @@ export const insight = {
         wrong: "❌ 做法：直接念維基百科給小孩聽，兩個人都聽得昏昏欲睡，最後小孩還是沒聽懂。",
         right: "✅ 做法：指令『請扮演恐龍專家。用 300 字編一個勇敢小暴龍的故事，教小孩為什麼要愛護地球。』再用 Nano Banana 畫出對應插畫。"
     },
-    insight_quote: "高級 Agent 在產出前會自我檢查，這就是為什麼正確率更高的原因。",
+    insight_quote: "科技不該取代陪伴，而是讓每一位父母都能在孩子的夢境中，親手種下魔法的種子。",
     practice_kit: {
         title: "育兒神組合：客製化繪本",
         description: "第一步先編故事，第二步用 Nano Banana 產出插圖：",

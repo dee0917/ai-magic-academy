@@ -15,7 +15,7 @@ export const insight = {
         wrong: "❌ 做法：問 AI『台積電明天會漲嗎？』(AI 回：我無法提供投資建議...)。",
         right: "✅ 做法：指令『請摘要台積電過去三年季報，列出毛利率趨勢並標註管理層提到的風險。』"
     },
-    insight_quote: "高級 Agent 在產出前會自我檢查，這就是為什麼正確率更高的原因。",
+    insight_quote: "股市的波動是數據的雜訊，而 AI 的洞察是穿透恐懼與貪婪的理性指南。",
     practice_kit: {
         title: "指令夾：趨勢摘要指令",
         description: "把繁瑣的法說會紀錄丟給 AI，執行以下任務：",

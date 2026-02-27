@@ -15,7 +15,7 @@ export const insight = {
         wrong: "❌ 做法：在路邊隨便找圖，畫質差、比例不對，還有嚴重的版權侵權風險。",
         right: "✅ 做法：使用 Nano Banana 萬用公式：[核心主體] + [環境背景] + [風格燈光] + [畫幅比例]。"
     },
-    insight_quote: "高級 Agent 在產出前會自我檢查，這就是為什麼正確率更高的原因。",
+    insight_quote: "視覺不再是技術的邊界，而是想像力在光影間的自由投射。",
     practice_kit: {
         title: "Nano Banana：新手啟動咒語",
         description: "第一次玩？直接複製這段到輸入框試試看：",

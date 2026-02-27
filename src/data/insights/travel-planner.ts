@@ -15,7 +15,7 @@ export const insight = {
         wrong: "❌ 做法：自己看 Google Map 算車程，手寫在筆記本上，最後臨時迷路或太趕。",
         right: "✅ 做法：指令『我要去大阪 5 天。帶 2 個小孩。請規劃不趕路、適合推車的行程，並用表格呈現，含午晚餐建議。』"
     },
-    insight_quote: "高級 Agent 在產出前會自我檢查，這就是為什麼正確率更高的原因。",
+    insight_quote: "最好的行程規劃，是讓 AI 處理繁瑣的邏輯，而你負責在抵達時感受靈魂的自由。",
     practice_kit: {
         title: "私人導遊：旅遊規劃指令",
         description: "出國前，請將您的清單與需求貼上：",

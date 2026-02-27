@@ -15,7 +15,7 @@ export const insight = {
         wrong: "❌ 做法：直接上傳一張光線昏暗、雜亂的手機照片，配上生硬的文字標籤。",
         right: "✅ 做法：使用 Nano Banana 指令：『一顆多汁的粉紅水蜜桃在氣泡水中旋轉。微觀視角。明亮棚拍光。極簡海報風格。』"
     },
-    insight_quote: "高級 Agent 在產出前會自我檢查，這就是為什麼正確率更高的原因。",
+    insight_quote: "業務的增長不再源於盲目的擴張，而是在海量數據中精準鎖定價值的脈動。",
     practice_kit: {
         title: "視覺引流：爆款封面指令",
         description: "將以下指令複製到 Nano Banana，為您的文章製作專業質感的封面圖：",
