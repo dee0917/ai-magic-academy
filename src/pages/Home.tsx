@@ -59,6 +59,62 @@ const Home = () => {
         }
     ];
 
+    // 顏色映射邏輯
+    const getColorClasses = (themeColor: string) => {
+        const colors: Record<string, any> = {
+            emerald: {
+                text: 'text-emerald-500',
+                bg: 'bg-emerald-500/10',
+                border: 'hover:border-emerald-500/30',
+                arrow: 'group-hover:text-emerald-400',
+                tag: 'text-emerald-500 bg-emerald-500/10 hover:bg-emerald-500/20'
+            },
+            amber: {
+                text: 'text-amber-500',
+                bg: 'bg-amber-500/10',
+                border: 'hover:border-amber-500/30',
+                arrow: 'group-hover:text-amber-400',
+                tag: 'text-amber-500 bg-amber-500/10 hover:bg-amber-500/20'
+            },
+            blue: {
+                text: 'text-blue-500',
+                bg: 'bg-blue-500/10',
+                border: 'hover:border-blue-500/30',
+                arrow: 'group-hover:text-blue-400',
+                tag: 'text-blue-500 bg-blue-500/10 hover:bg-blue-500/20'
+            },
+            violet: {
+                text: 'text-violet-500',
+                bg: 'bg-violet-500/10',
+                border: 'hover:border-violet-500/30',
+                arrow: 'group-hover:text-violet-400',
+                tag: 'text-violet-500 bg-violet-500/10 hover:bg-violet-500/20'
+            },
+            rose: {
+                text: 'text-rose-500',
+                bg: 'bg-rose-500/10',
+                border: 'hover:border-rose-500/30',
+                arrow: 'group-hover:text-rose-400',
+                tag: 'text-rose-500 bg-rose-500/10 hover:bg-rose-500/20'
+            },
+            sky: {
+                text: 'text-sky-500',
+                bg: 'bg-sky-500/10',
+                border: 'hover:border-sky-500/30',
+                arrow: 'group-hover:text-sky-400',
+                tag: 'text-sky-500 bg-sky-500/10 hover:bg-sky-500/20'
+            },
+            cyan: {
+                text: 'text-cyan-500',
+                bg: 'bg-cyan-500/10',
+                border: 'hover:border-cyan-500/30',
+                arrow: 'group-hover:text-cyan-400',
+                tag: 'text-cyan-500 bg-cyan-500/10 hover:bg-cyan-500/20'
+            }
+        };
+        return colors[themeColor] || colors.emerald;
+    };
+
     return (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
 
@@ -108,27 +164,30 @@ const Home = () => {
                     <p className="text-zinc-400 max-w-xl mx-auto">這些都是免費的！每一篇都是我親自實驗後整理的心得。</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {INSIGHTS.slice(0, 3).map((insight: any, i) => (
-                        <motion.div
-                            key={insight.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: i * 0.1 }}
-                            onClick={() => navigate(`/insights/${insight.id}`)}
-                            className="bg-[#111] border border-white/5 hover:border-emerald-500/30 p-6 rounded-xl cursor-pointer group transition-all hover:-translate-y-1"
-                        >
-                            <div className="flex items-center gap-2 mb-3">
-                                <span className="text-xs text-emerald-500 font-medium px-2 py-1 bg-emerald-500/10 rounded">{insight.category}</span>
-                                <span className="text-xs text-zinc-500">免費閱讀</span>
-                            </div>
-                            <h4 className="text-lg font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors">{insight.title}</h4>
-                            <p className="text-zinc-400 text-sm line-clamp-2 mb-4">{insight.summary}</p>
-                            <div className="flex items-center justify-between">
-                                <span className="text-xs text-zinc-500">{insight.readTime}</span>
-                                <ArrowRight size={16} className="text-zinc-600 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all" />
-                            </div>
-                        </motion.div>
-                    ))}
+                    {INSIGHTS.slice(0, 3).map((insight: any, i) => {
+                        const theme = getColorClasses(insight.themeColor || 'emerald');
+                        return (
+                            <motion.div
+                                key={insight.id}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ delay: i * 0.1 }}
+                                onClick={() => navigate(`/insights/${insight.id}`)}
+                                className={`bg-[#111] border border-white/5 ${theme.border} p-6 rounded-xl cursor-pointer group transition-all hover:-translate-y-1`}
+                            >
+                                <div className="flex items-center gap-2 mb-3">
+                                    <span className={`text-xs font-medium px-2 py-1 rounded ${theme.tag}`}>{insight.category}</span>
+                                    <span className="text-xs text-zinc-500">免費閱讀</span>
+                                </div>
+                                <h4 className={`text-lg font-bold text-white mb-3 group-hover:${theme.text.split(' ')[0]} transition-colors`}>{insight.title}</h4>
+                                <p className="text-zinc-400 text-sm line-clamp-2 mb-4">{insight.summary}</p>
+                                <div className="flex items-center justify-between">
+                                    <span className="text-xs text-zinc-500">{insight.readTime}</span>
+                                    <ArrowRight size={16} className={`text-zinc-600 ${theme.arrow} group-hover:translate-x-1 transition-all`} />
+                                </div>
+                            </motion.div>
+                        );
+                    })}
                 </div>
                 <div className="text-center mt-10">
                     <Link to="/insights" className="inline-flex items-center gap-2 text-emerald-500 hover:underline font-medium">

@@ -1,232 +1,172 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, AlertTriangle, MapPin, Lightbulb, Code, CheckCircle } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { api, Insight } from '../lib/supabase';
+import { ArrowLeft, AlertTriangle, MapPin, Lightbulb, Code, CheckCircle, Star, ArrowRight, Copy, Check } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { api } from '../lib/supabase';
 import { INSIGHTS } from '../data/mock';
 
 const ArticleDetail = () => {
     const { id } = useParams();
-    const [article, setArticle] = useState<Insight | null>(null);
+    const [article, setArticle] = useState<any | null>(null);
     const [loading, setLoading] = useState(true);
+    const [copied, setCopied] = useState(false);
+
+    const getColorClasses = (themeColor: string) => {
+        const colors: Record<string, any> = {
+            emerald: { text: 'text-emerald-500', lightText: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20', gradient: 'from-emerald-500/10 to-teal-500/10' },
+            yellow: { text: 'text-yellow-500', lightText: 'text-yellow-400', bg: 'bg-yellow-500/10', border: 'border-yellow-500/20', gradient: 'from-yellow-500/10 to-orange-500/10' },
+            amber: { text: 'text-amber-500', lightText: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/20', gradient: 'from-amber-500/10 to-yellow-500/10' },
+            blue: { text: 'text-blue-500', lightText: 'text-blue-400', bg: 'bg-blue-500/10', border: 'border-blue-500/20', gradient: 'from-blue-500/10 to-indigo-500/10' },
+            violet: { text: 'text-violet-500', lightText: 'text-violet-400', bg: 'bg-violet-500/10', border: 'border-violet-500/20', gradient: 'from-violet-500/10 to-purple-500/10' },
+            rose: { text: 'text-rose-500', lightText: 'text-rose-400', bg: 'bg-rose-500/10', border: 'border-rose-500/20', gradient: 'from-rose-500/10 to-pink-500/10' },
+            teal: { text: 'text-teal-500', lightText: 'text-teal-400', bg: 'bg-teal-500/10', border: 'border-teal-500/20', gradient: 'from-teal-500/10 to-cyan-500/10' },
+            zinc: { text: 'text-zinc-300', lightText: 'text-zinc-200', bg: 'bg-white/5', border: 'border-white/10', gradient: 'from-white/5 to-zinc-900' }
+        };
+        return colors[themeColor] || colors.emerald;
+    };
 
     useEffect(() => {
-        if (id) {
-            fetchArticle(parseInt(id));
-        }
+        if (id) fetchArticle(parseInt(id));
     }, [id]);
 
     const fetchArticle = async (articleId: number) => {
         setLoading(true);
-        const data = await api.getInsightById(articleId);
-        if (data) {
-            setArticle(data);
-        } else {
-            // Fallback to mock data
-            const mockArticle = INSIGHTS.find(insight => insight.id === articleId);
-            if (mockArticle) {
-                // Convert mock article to Insight type
-                const convertedArticle: Insight = {
-                    id: mockArticle.id,
-                    category: mockArticle.category,
-                    title: mockArticle.title,
-                    summary: (mockArticle as any).summary || null,
-                    content: mockArticle.content || null,
-                    read_time: (mockArticle as any).readTime || '5 分鐘',
-                    is_published: true,
-                    published_at: mockArticle.date ? `${mockArticle.date}T00:00:00Z` : null,
-                    created_at: new Date().toISOString(),
-                    updated_at: new Date().toISOString(),
-                    seo_title: (mockArticle as any).seo_title || null,
-                    keywords: mockArticle.keywords || null,
-                    search_intent: mockArticle.search_intent || null,
-                    target_audience: mockArticle.target_audience || null,
-                    pain_point: mockArticle.pain_point || null,
-                    scenario: mockArticle.scenario || null,
-                    solution: mockArticle.solution || null,
-                    example: mockArticle.example || null,
-                    faq: mockArticle.faq || null,
-                    semantic_tags: (mockArticle as any).semantic_tags || null,
-                    relevance_score: (mockArticle as any).relevance_score || null,
-                    popularity_score: (mockArticle as any).popularity_score || null,
-                    last_analyzed_at: null
-                };
-                setArticle(convertedArticle);
-            } else {
-                setArticle(null);
-            }
+        try {
+            const data = await api.getInsightById(articleId);
+            if (data) setArticle(data);
+            else setArticle(INSIGHTS.find(i => i.id === articleId) || null);
+        } catch (e) {
+            setArticle(INSIGHTS.find(i => i.id === articleId) || null);
         }
         setLoading(false);
     };
 
-    if (loading) return <div className="text-center pt-32 text-white">載入中...</div>;
-    if (!article) return <div className="text-center pt-32 text-white">文章不存在</div>;
+    const handleCopy = (text: string) => {
+        const cleanText = text.replace(/<[^>]*>?/gm, '');
+        navigator.clipboard.writeText(cleanText);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
+
+    if (loading) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-mono">LOADING_CONTENT...</div>;
+    if (!article) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white">404_NOT_FOUND</div>;
+
+    const theme = getColorClasses(article.themeColor || article.theme_color || 'emerald');
+    const isNews = article.category === 'AI 新聞';
+    const nextArticle = INSIGHTS.find(i => i.difficulty_level === (Math.min(5, Math.max(0, article.difficulty_level || 1))) + 1) || INSIGHTS[0];
+
+    const extractCommand = (content: string) => {
+        const match = content.match(/<code[^>]*>([\s\S]*?)<\/code>/);
+        return match ? match[1] : "";
+    };
+    const practiceCommand = extractCommand(article.content || "");
+    const cleanedContent = article.content?.replace(/<code[^>]*>[\s\S]*?<\/code>/g, '') || "";
+
+    const stars = Math.min(5, Math.max(0, article.difficulty_level || 1));
 
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-32 pb-20 px-6 max-w-4xl mx-auto min-h-screen">
-            {/* 返回按鈕 */}
-            <Link to="/insights" className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors mb-8">
-                <ArrowLeft size={18} /> 返回文章列表
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-32 pb-20 px-6 max-w-4xl mx-auto min-h-screen text-left">
+            <Link to={isNews ? "/news" : "/insights"} className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors mb-12 text-sm font-medium">
+                <ArrowLeft size={16} /> 返回{isNews ? "新聞" : "教學"}列表
             </Link>
 
-            {/* 文章頭部 */}
-            <header className="mb-12">
-                <div className="flex items-center gap-3 mb-6">
-                    <span className="text-emerald-500 font-bold uppercase tracking-widest text-xs">{article.category}</span>
-                    <span className="text-zinc-600 text-xs">•</span>
-                    <span className="text-zinc-500 text-xs font-mono">{article.read_time || (article as any).readTime}</span>
+            <header className="mb-12 text-left">
+                <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center gap-4">
+                        <span className={`${theme.text} font-bold uppercase tracking-widest text-xs`}>{article.category}</span>
+                        {!isNews && (
+                            <div className="flex gap-0.5">
+                                {[...Array(5)].map((_, idx) => (
+                                    <Star key={idx} size={10} className={idx < stars ? theme.text : 'text-zinc-800'} fill="currentColor" />
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                    <span className="text-zinc-600 text-xs font-mono">{article.date}</span>
                 </div>
-                <h1 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight font-serif">{article.title}</h1>
-                <p className="text-xl text-zinc-400 leading-relaxed font-light">{article.summary || ''}</p>
+                <h1 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight font-serif text-left">{article.title}</h1>
+                <div className="flex flex-wrap gap-2 mb-8">
+                    {article.tags?.map((tag: string) => (
+                        <span key={tag} className="text-[10px] text-zinc-500 border border-white/10 px-2 py-1 rounded-full">{tag}</span>
+                    ))}
+                </div>
             </header>
 
-            {/* 結構化內容區塊 */}
-            {(article.pain_point || (article as any).painPoint) && (
-                <motion.section
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="mb-8"
-                >
-                    <div className="bg-gradient-to-r from-red-500/10 to-orange-500/10 border border-red-500/20 rounded-2xl p-6">
-                        <div className="flex items-start gap-4">
-                            <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center flex-shrink-0">
-                                <AlertTriangle size={24} className="text-red-400" />
-                            </div>
-                            <div className="flex-1">
-                                <h2 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
-                                    生活痛點
-                                </h2>
-                                <p className="text-zinc-300 leading-relaxed">{article.pain_point || (article as any).painPoint}</p>
-                            </div>
-                        </div>
-                    </div>
-                </motion.section>
-            )}
-
-            {article.scenario && (
-                <motion.section
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 }}
-                    className="mb-8"
-                >
-                    <div className="bg-gradient-to-r from-amber-500/10 to-yellow-500/10 border border-amber-500/20 rounded-2xl p-6">
-                        <div className="flex items-start gap-4">
-                            <div className="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center flex-shrink-0">
-                                <MapPin size={24} className="text-amber-400" />
-                            </div>
-                            <div className="flex-1">
-                                <h2 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
-                                    應用場景
-                                </h2>
-                                <p className="text-zinc-300 leading-relaxed">{article.scenario}</p>
-                            </div>
-                        </div>
-                    </div>
-                </motion.section>
-            )}
-
-            {article.solution && (
-                <motion.section
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="mb-8"
-                >
-                    <div className="bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-500/20 rounded-2xl p-6">
-                        <div className="flex items-start gap-4">
-                            <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
-                                <Lightbulb size={24} className="text-emerald-400" />
-                            </div>
-                            <div className="flex-1">
-                                <h2 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
-                                    AI 解決方案
-                                </h2>
-                                <p className="text-zinc-300 leading-relaxed">{article.solution}</p>
-                            </div>
-                        </div>
-                    </div>
-                </motion.section>
-            )}
-
-            {article.example && (
-                <motion.section
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className="mb-12"
-                >
-                    <div className="bg-[#111] border border-white/10 rounded-2xl p-6">
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className="w-10 h-10 rounded-lg bg-violet-500/10 flex items-center justify-center flex-shrink-0">
-                                <Code size={20} className="text-violet-400" />
-                            </div>
-                            <h2 className="text-xl font-bold text-white">簡單實例</h2>
-                        </div>
-
-                        <div className="space-y-4">
-                            {article.example.wrong && (
-                                <div className="bg-red-500/5 border border-red-500/20 rounded-xl p-5">
-                                    <div className="flex items-center gap-2 mb-3">
-                                        <span className="text-red-400 font-bold text-sm">❌ 錯誤示範</span>
-                                    </div>
-                                    <p className="text-zinc-400 text-sm whitespace-pre-line">{article.example.wrong}</p>
+            {!isNews && (
+                <div className="space-y-8 mb-16 text-left">
+                    {article.pain_point && (
+                        <div className="bg-gradient-to-r from-red-500/10 to-orange-500/10 border border-red-500/20 rounded-2xl p-6 text-left">
+                            <div className="flex items-start gap-4">
+                                <AlertTriangle size={24} className="text-red-400 flex-shrink-0" />
+                                <div>
+                                    <h2 className="text-xl font-bold text-white mb-2">生活痛點</h2>
+                                    <p className="text-zinc-300 leading-relaxed text-left">{article.pain_point}</p>
                                 </div>
-                            )}
-
-                            {article.example.right && (
-                                <div className="bg-emerald-500/5 border border-emerald-500/20 rounded-xl p-5">
-                                    <div className="flex items-center gap-2 mb-3">
-                                        <CheckCircle size={18} className="text-emerald-400" />
-                                        <span className="text-emerald-400 font-bold text-sm">✅ 正確用法</span>
-                                    </div>
-                                    <p className="text-zinc-300 text-sm whitespace-pre-line">{article.example.right}</p>
-                                </div>
-                            )}
+                            </div>
                         </div>
-                    </div>
-                </motion.section>
+                    )}
+                    {article.scenario && (
+                        <div className="bg-gradient-to-r from-amber-500/10 to-yellow-500/10 border border-amber-500/20 rounded-2xl p-6 text-left">
+                            <div className="flex items-start gap-4">
+                                <MapPin size={24} className="text-amber-400 flex-shrink-0" />
+                                <div>
+                                    <h2 className="text-xl font-bold text-white mb-2">應用場景</h2>
+                                    <p className="text-zinc-300 leading-relaxed text-left">{article.scenario}</p>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                    {article.solution && (
+                        <div className={`bg-gradient-to-r ${theme.gradient} border ${theme.border} rounded-2xl p-6 text-left`}>
+                            <div className="flex items-start gap-4">
+                                <Lightbulb size={24} className={theme.lightText} flex-shrink-0 />
+                                <div>
+                                    <h2 className="text-xl font-bold text-white mb-2">AI 解決方案</h2>
+                                    <p className="text-zinc-300 leading-relaxed text-left">{article.solution}</p>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
             )}
 
-            {/* FAQ 區塊 */}
-            {article.faq && article.faq.length > 0 && (
-                <motion.section
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
-                    className="mb-12"
-                >
-                    <div className="bg-[#111] border border-white/10 rounded-2xl p-6">
-                        <h2 className="text-xl font-bold text-white mb-6">常見問題</h2>
-                        <div className="space-y-4">
-                            {article.faq.map((item, index) => (
-                                <div key={index} className="bg-white/5 border border-white/10 rounded-xl p-5">
-                                    <h3 className="text-lg font-bold text-white mb-2">Q: {item.question}</h3>
-                                    <p className="text-zinc-300 text-sm whitespace-pre-line">A: {item.answer}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </motion.section>
-            )}
-
-            {/* 完整文章內容 */}
-            <motion.article
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="article-content prose prose-invert max-w-none"
-                dangerouslySetInnerHTML={{ __html: article.content || '' }}
+            <motion.article 
+                className="article-content prose prose-invert prose-lg max-w-none leading-relaxed mb-16 text-left"
+                dangerouslySetInnerHTML={{ __html: cleanedContent || '' }}
             />
 
-            {/* 底部CTA */}
-            <div className="mt-16 pt-8 border-t border-white/10 text-center">
-                <p className="text-zinc-500 mb-4">覺得這篇文章有幫助嗎？</p>
-                <Link
-                    to="/insights"
-                    className="inline-flex items-center gap-2 text-emerald-500 hover:text-emerald-400 font-medium transition-colors"
-                >
-                    繼續閱讀更多文章
+            {!isNews && practiceCommand && (
+                <div className={`bg-gradient-to-br ${theme.gradient} border ${theme.border} rounded-3xl p-8 mb-20 relative overflow-hidden text-left`}>
+                    <div className="flex items-center justify-between mb-6">
+                        <div className="flex items-center gap-3">
+                            <div className={`w-10 h-10 rounded-xl ${theme.bg} flex items-center justify-center`}>
+                                <Code size={20} className={theme.lightText} />
+                            </div>
+                            <h3 className="text-xl font-bold text-white">生活實戰包</h3>
+                        </div>
+                        <button 
+                            onClick={() => handleCopy(practiceCommand)}
+                            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all ${copied ? 'bg-emerald-500 text-white' : `${theme.bg} ${theme.lightText} hover:brightness-125`}`}
+                        >
+                            {copied ? <><Check size={16} /> 已複製</> : <><Copy size={16} /> 一鍵複製指令</>}
+                        </button>
+                    </div>
+                    <div className={`bg-black/40 backdrop-blur-sm border border-white/5 rounded-xl p-6 font-mono text-sm leading-relaxed ${theme.lightText} whitespace-pre-wrap text-left`}>
+                        {practiceCommand.replace(/<[^>]*>?/gm, '')}
+                    </div>
+                </div>
+            )}
+
+            <div className="pt-16 border-t border-white/5 text-left">
+                <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-6">下一階挑戰</p>
+                <Link to={`/insights/${nextArticle.id}`} className="group block bg-white/5 border border-white/10 hover:border-white/20 p-8 rounded-3xl transition-all">
+                    <div className="flex items-center justify-between">
+                        <div>
+                            <span className="text-[10px] text-zinc-500 uppercase tracking-widest mb-2 block">Level Up</span>
+                            <h3 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">{nextArticle.title}</h3>
+                        </div>
+                        <ArrowRight className="text-zinc-700 group-hover:text-emerald-400 group-hover:translate-x-2 transition-all" size={32} />
+                    </div>
                 </Link>
             </div>
         </motion.div>

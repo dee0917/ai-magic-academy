@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Newspaper } from 'lucide-react';
 
 const Navbar = () => {
     const location = useLocation();
@@ -18,9 +18,12 @@ const Navbar = () => {
                     <span className="text-[10px] md:text-xs uppercase tracking-widest text-zinc-500">AI 生活實驗室</span>
                 </Link>
 
-                {/* 桌面版導航 - 使用更易懂的文字 */}
+                {/* 桌面版導航 */}
                 <div className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
                     <Link to="/insights" className={linkClass('/insights')}>免費教學</Link>
+                    <Link to="/news" className={`flex items-center gap-1.5 ${linkClass('/news')}`}>
+                        <Newspaper size={14} /> AI 新聞
+                    </Link>
                     <Link to="/lab" className={linkClass('/lab')}>AI 實驗室</Link>
                     <Link to="/solutions" className={linkClass('/solutions')}>學習資源</Link>
                     <Link to="/about" className={linkClass('/about')}>關於 Dee</Link>
@@ -34,10 +37,13 @@ const Navbar = () => {
                 </button>
             </div>
 
-            {/* 手機版選單 - 使用更易懂的文字 */}
+            {/* 手機版選單 */}
             {mobileMenuOpen && (
                 <div className="md:hidden absolute top-20 left-0 w-full bg-[#0A0A0A] border-b border-white/10 p-6 flex flex-col gap-6 animate-fade-in shadow-2xl">
                     <Link to="/insights" onClick={() => setMobileMenuOpen(false)} className="text-lg text-zinc-300">免費教學</Link>
+                    <Link to="/news" onClick={() => setMobileMenuOpen(false)} className="text-lg text-zinc-300 flex items-center gap-2">
+                        <Newspaper size={18} /> AI 新聞
+                    </Link>
                     <Link to="/lab" onClick={() => setMobileMenuOpen(false)} className="text-lg text-zinc-300">AI 實驗室</Link>
                     <Link to="/solutions" onClick={() => setMobileMenuOpen(false)} className="text-lg text-zinc-300">學習資源</Link>
                     <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="text-lg text-zinc-300">關於 Dee</Link>
