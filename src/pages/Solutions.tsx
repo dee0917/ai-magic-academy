@@ -1,3 +1,4 @@
+import SEO from '../components/ui/SEO';
 import { useState } from 'react';
 import { ArrowRight, X, Sparkles, Users, Zap, BookOpen, MessageCircle, CheckCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -61,7 +62,7 @@ const Solutions = () => {
     const [selected, setSelected] = useState<typeof enhancedSolutions[0] | null>(null);
 
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-32 pb-20 px-6 max-w-6xl mx-auto min-h-screen">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-32 pb-20 px-6 max-w-6xl mx-auto min-h-screen"><SEO title="學習資源" description="系統化的 AI 學習路徑，從免費懶人包到一對一諮詢。" path="/solutions" />
             {/* 標題區 - 與首頁語氣一致 */}
             <div className="mb-16 text-center">
                 <span className="text-amber-500 font-bold tracking-widest text-xs uppercase mb-4 block">LEARNING PATHS</span>

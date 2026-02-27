@@ -1,3 +1,4 @@
+import SEO from '../components/ui/SEO';
 import { motion } from 'framer-motion';
 import { ExternalLink, ArrowRight, Sparkles, Clock, Shield, Copy, Calendar, Bot } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -49,7 +50,7 @@ const projects = [
 
 const Lab = () => {
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-32 pb-20 px-6 max-w-6xl mx-auto min-h-screen">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-32 pb-20 px-6 max-w-6xl mx-auto min-h-screen"><SEO title="AI 實驗室" description="用 AI 輔助開發的實際專案展示，不會寫程式也能做到。" path="/lab" />
             {/* 標題區 */}
             <div className="text-center mb-16">
                 <span className="text-violet-500 font-bold tracking-widest text-xs uppercase mb-4 block">AI LAB</span>

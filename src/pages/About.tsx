@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles, Heart, Users, BookOpen, Zap, Instagram } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { INSIGHTS_LIST } from '../data/insights';
+import SEO from '../components/ui/SEO';
 
 const milestones = [
     { year: '2025', event: '開始探索 AI，發現它能徹底改變日常生活的效率' },
@@ -22,6 +23,7 @@ const About = () => {
 
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-32 pb-20 px-6 max-w-4xl mx-auto min-h-screen">
+            <SEO title="關於 Dee" description="我是 Dee，專門把複雜的 AI 知識變成任何人都能用的實用技能。" path="/about" />
 
             {/* Hero */}
             <div className="text-center mb-20">

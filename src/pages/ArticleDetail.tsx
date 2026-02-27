@@ -4,6 +4,7 @@ import { ArrowLeft, AlertTriangle, MapPin, Lightbulb, Code, CheckCircle, Star, A
 import { motion, AnimatePresence } from 'framer-motion';
 import { api } from '../lib/supabase';
 import { INSIGHTS } from '../data/mock';
+import SEO from '../components/ui/SEO';
 
 const ArticleDetail = () => {
     const { id } = useParams();
@@ -68,6 +69,8 @@ const ArticleDetail = () => {
             <Link to={isNews ? "/news" : "/insights"} className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors mb-12 text-sm font-medium">
                 <ArrowLeft size={16} /> 返回{isNews ? "新聞" : "教學"}列表
             </Link>
+
+            <SEO title={article.title} description={article.summary || article.pain_point || ''} path={`/insights/${article.id}`} />
 
             <header className="mb-12 text-left">
                 <div className="flex items-center justify-between mb-6">

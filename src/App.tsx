@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Home from './pages/Home';
@@ -14,6 +15,7 @@ import AdminDashboard from './pages/admin/AdminDashboard';
 
 function App() {
   return (
+    <HelmetProvider>
     <Router>
       <div className="min-h-screen bg-[#0A0A0A] flex flex-col relative">
         <div className="grid-bg" />
@@ -35,6 +37,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    </HelmetProvider>
   );
 }
 
