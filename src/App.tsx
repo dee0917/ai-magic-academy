@@ -8,6 +8,7 @@ import Lab from './pages/Lab';
 import Solutions from './pages/Solutions';
 import About from './pages/About';
 import News from './pages/News';
+import NotFound from './pages/NotFound';
 import AdminLogin from './pages/admin/AdminLogin';
 import AdminDashboard from './pages/admin/AdminDashboard';
 
@@ -28,6 +29,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         <Footer />

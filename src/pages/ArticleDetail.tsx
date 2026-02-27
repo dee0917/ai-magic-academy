@@ -38,8 +38,8 @@ const ArticleDetail = () => {
         const dbData = await api.getInsightById(articleId);
         
         if (localArticle) {
-            // 合併本地與資料庫數據，以本地（程式碼）為準，因為我們正在頻繁迭代 UI 結構
-            setArticle({ ...localArticle, ...dbData });
+            // 合併本地與資料庫數據，以本地（程式碼）為準
+            setArticle({ ...dbData, ...localArticle });
         } else if (dbData) {
             setArticle(dbData);
         } else {
