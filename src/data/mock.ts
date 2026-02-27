@@ -389,3 +389,4 @@ export const TESTIMONIALS = [
         text: "本來以為 AI 是給年輕人玩的，沒想到我竟然可以用它查到長照補助的細節！Dee 教的方法真的很白話，甚至還會叫 AI 幫我翻譯醫學報告。"
     }
 ];
+// Final Deploy Check: Fri Feb 27 09:03:51 AM UTC 2026
