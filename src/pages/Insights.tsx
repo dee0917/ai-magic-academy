@@ -14,7 +14,8 @@ import {
     Home as HomeIcon, 
     Briefcase, 
     TrendingUp, 
-    Rocket 
+    Rocket,
+    ChevronRight
 } from 'lucide-react';
 import { api } from '../lib/supabase';
 import { INSIGHTS } from '../data/mock';
@@ -30,6 +31,7 @@ const Insights = () => {
     const [isDragging, setIsDragging] = useState(false);
     const [startX, setStartX] = useState(0);
     const [scrollLeft, setScrollLeft] = useState(0);
+    const [showScrollIndicator, setShowScrollIndicator] = useState(true);
 
     const getColorClasses = (themeColor: string) => {
         const colors: Record<string, any> = {
@@ -66,6 +68,14 @@ const Insights = () => {
         return article?.themeColor || article?.theme_color || 'emerald';
     };
 
+    // 檢查滾動狀態
+    const checkScroll = () => {
+        if (!scrollRef.current) return;
+        const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+        // 如果還沒滾動到底，就顯示提示
+        setShowScrollIndicator(scrollLeft + clientWidth < scrollWidth - 10);
+    };
+
     // 處理電腦版拖拽滾動
     const handleMouseDown = (e: React.MouseEvent) => {
         if (!scrollRef.current) return;
@@ -83,6 +93,7 @@ const Insights = () => {
         const x = e.pageX - scrollRef.current.offsetLeft;
         const walk = (x - startX) * 2; // 滾動速度倍率
         scrollRef.current.scrollLeft = scrollLeft - walk;
+        checkScroll();
     };
 
     // 點擊分類置中邏輯
@@ -98,6 +109,7 @@ const Insights = () => {
             left: scrollTarget,
             behavior: 'smooth'
         });
+        setTimeout(checkScroll, 500); // 延遲檢查滾動狀態，等待平滑滾動結束
     };
 
     useEffect(() => {
@@ -109,6 +121,8 @@ const Insights = () => {
         try {
             const cleanInsights = INSIGHTS.filter(i => i.category !== 'AI 新聞');
             setInsights(cleanInsights);
+            // 資料加載後檢查一次滾動
+            setTimeout(checkScroll, 100);
         } catch (e) {
             setInsights(INSIGHTS.filter(i => i.category !== 'AI 新聞'));
         }
@@ -130,7 +144,7 @@ const Insights = () => {
                 </p>
             </div>
 
-            {/* 優化後的滾動分類列 - 支援電腦版拖拽與置中 */}
+            {/* 優化後的滾動分類列 - 支援電腦版拖拽、置中、與右滑提示 */}
             <div className="relative mb-16 group/scroll">
                 <div 
                     ref={scrollRef}
@@ -138,7 +152,8 @@ const Insights = () => {
                     onMouseLeave={handleMouseLeave}
                     onMouseUp={handleMouseUp}
                     onMouseMove={handleMouseMove}
-                    className={`flex items-center gap-3 overflow-x-auto pb-4 no-scrollbar scroll-smooth cursor-grab active:cursor-grabbing ${isDragging ? 'scroll-auto' : ''}`}
+                    onScroll={checkScroll}
+                    className={`flex items-center gap-3 overflow-x-auto pb-4 no-scrollbar cursor-grab active:cursor-grabbing ${isDragging ? 'scroll-auto select-none' : 'scroll-smooth'}`}
                 >
                     <button 
                         onClick={(e) => handleCategoryClick(null, e)} 
@@ -166,8 +181,29 @@ const Insights = () => {
                         );
                     })}
                 </div>
-                {/* 漸變遮罩提示可滾動 */}
-                <div className="absolute right-0 top-0 bottom-4 w-12 bg-gradient-to-l from-[#0A0A0A] to-transparent pointer-events-none opacity-100 transition-opacity group-hover/scroll:opacity-0" />
+
+                {/* 向右滑動提示圖標 */}
+                <AnimatePresence>
+                    {showScrollIndicator && (
+                        <motion.div 
+                            initial={{ opacity: 0, x: 10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: 10 }}
+                            className="absolute right-0 top-0 bottom-4 flex items-center pr-2 pointer-events-none"
+                        >
+                            <div className="flex flex-col items-center gap-1 bg-gradient-to-l from-[#0A0A0A] via-[#0A0A0A] to-transparent pl-12 py-2">
+                                <motion.div
+                                    animate={{ x: [0, 5, 0] }}
+                                    transition={{ repeat: Infinity, duration: 1.5 }}
+                                    className="bg-emerald-500/20 p-2 rounded-full border border-emerald-500/30"
+                                >
+                                    <ChevronRight size={16} className="text-emerald-400" />
+                                </motion.div>
+                                <span className="text-[8px] font-bold text-emerald-500 uppercase tracking-tighter">向右滑動</span>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
