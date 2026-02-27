@@ -52,65 +52,69 @@ body {
   @apply bg-zinc-900/60 backdrop-blur-md border border-white/10 transition-all duration-300;
 }
 
-/* 革命版字體與排版 */
+/* 回歸標準但清晰的字體比例 */
 .article-content p {
-  @apply font-sans mb-8 leading-relaxed text-zinc-200 text-xl md:text-2xl font-normal;
+  @apply font-sans mb-6 leading-relaxed text-zinc-300 text-lg md:text-xl font-light;
+}
+
+.article-content h1 {
+  @apply font-serif text-4xl md:text-6xl font-black text-white leading-tight mb-8;
 }
 
 .article-content h2 {
-  @apply font-sans text-3xl md:text-4xl font-black mt-16 mb-8 text-white flex items-center gap-4;
+  @apply font-sans text-2xl md:text-3xl font-bold mt-12 mb-6 text-white flex items-center gap-3;
 }
 
 .article-content h2::before {
   content: '';
   display: block;
-  width: 6px;
-  height: 32px;
+  width: 4px;
+  height: 24px;
   background-color: #10b981;
-  border-radius: 4px;
+  border-radius: 2px;
 }
 
-/* 教學步驟清單樣式 - 更加顯眼 */
+/* 教學步驟清單樣式 - 清晰不擁擠 */
 .step-list {
-  @apply list-none pl-0 space-y-8;
+  @apply list-none pl-0 space-y-6;
 }
 
 .step-item {
-  @apply flex flex-col md:flex-row md:items-start gap-5 p-8 rounded-[2rem] bg-white/5 border-2 border-white/5 transition-all duration-500;
+  @apply flex flex-col md:flex-row md:items-start gap-4 p-6 md:p-8 rounded-3xl bg-white/5 border border-white/10 transition-all duration-300;
 }
 
 .step-item.active-step {
-  @apply border-emerald-500/30 bg-emerald-500/5 shadow-[0_0_40px_rgba(16,185,129,0.1)];
+  @apply border-emerald-500/30 bg-emerald-500/5 shadow-[0_10px_30px_rgba(16,185,129,0.05)];
 }
 
 .step-number {
-  @apply font-mono text-base font-black px-4 py-1.5 rounded-xl bg-white/10 text-white whitespace-nowrap self-start;
+  @apply font-mono text-sm font-black px-3 py-1 rounded-lg bg-white/10 text-white whitespace-nowrap self-start;
 }
 
-/* 銜接標籤樣式 */
+/* 高對比銜接標籤 - 保持清晰但尺寸適中 */
 .transition-label {
-  @apply inline-block text-xs font-black tracking-[0.4em] uppercase py-2 px-6 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-8 animate-pulse;
+  @apply inline-block text-[10px] font-black tracking-[0.3em] uppercase py-1.5 px-4 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-6;
 }
 
 .article-content ul {
-  @apply list-none pl-0 mb-10 space-y-4;
+  @apply list-none pl-0 mb-8 space-y-3;
 }
 
 .article-content li {
-  @apply relative pl-8 text-zinc-300 text-xl md:text-2xl font-light;
+  @apply relative pl-6 text-zinc-300 text-lg md:text-xl font-light;
 }
 
 .article-content li::before {
   content: '→';
-  @apply absolute left-0 text-emerald-500 font-black;
-}
-
-/* 閃爍發光 */
-@keyframes glow {
-  0%, 100% { box-shadow: 0 0 5px rgba(16,185,129,0.2); }
-  50% { box-shadow: 0 0 25px rgba(16,185,129,0.6); }
+  @apply absolute left-0 text-emerald-500 font-bold;
 }
 
 .btn-glow {
+  @apply shadow-[0_0_20px_rgba(16,185,129,0.3)];
   animation: glow 2s infinite ease-in-out;
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(16,185,129,0.2); }
+  50% { box-shadow: 0 0 25px rgba(16,185,129,0.5); }
 }
