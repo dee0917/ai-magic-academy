@@ -134,24 +134,11 @@ const ArticleDetail = () => {
                 dangerouslySetInnerHTML={{ __html: article.content || '' }}
             />
 
-            {/* 💡 靈感金句/深度洞察區塊 (新增) */}
-            {article.insight_quotes && article.insight_quotes.length > 0 && (
-                <div className="flex flex-col items-center gap-12 mb-20">
-                    {article.insight_quotes.map((quote: any, idx: number) => (
-                        <motion.div 
-                            key={idx}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: idx * 0.1 }}
-                            className="max-w-2xl w-full text-center"
-                        >
-                            <p className="text-zinc-300 italic leading-relaxed text-lg md:text-xl font-medium tracking-wide">
-                                「{quote.content}」
-                            </p>
-                        </motion.div>
-                    ))}
-                </div>
+            {/* 💡 靈感金句 (參照 201 文章風格) */}
+            {article.insight_quote && (
+                <p className="text-xl text-zinc-300 font-serif italic text-center py-10 border-y border-white/5 my-10 leading-relaxed">
+                    「{article.insight_quote}」
+                </p>
             )}
 
             {/* 融合後的【終極生活實戰包】 */}

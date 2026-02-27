@@ -15,23 +15,7 @@ export const insight = {
         wrong: "❌ 做法：在路邊隨便找圖，畫質差、比例不對，還有嚴重的版權侵權風險。",
         right: "✅ 做法：使用 Nano Banana 萬用公式：[核心主體] + [環境背景] + [風格燈光] + [畫幅比例]。"
     },
-    insight_quotes: [
-        {
-            number: "01",
-            title: "視覺翻譯官",
-            content: "繪圖 AI 的本質不是『畫畫』，而是將你大腦中的感性形容詞，精準轉譯成可視化的光影數據。"
-        },
-        {
-            number: "02",
-            title: "美感過濾器",
-            content: "Nano Banana 降低了技術門檻，這意味著創作者的『美感』與『品味』將成為區分作品層級的唯一標準。"
-        },
-        {
-            number: "03",
-            title: "自我糾錯",
-            content: "高級 Agent 在產出前會自我檢查，這就是為什麼正確率更高的原因。"
-        }
-    ],
+    insight_quote: "高級 Agent 在產出前會自我檢查，這就是為什麼正確率更高的原因。",
     practice_kit: {
         title: "Nano Banana：新手啟動咒語",
         description: "第一次玩？直接複製這段到輸入框試試看：",
