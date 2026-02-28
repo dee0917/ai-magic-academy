@@ -11,6 +11,30 @@ import { INSIGHTS } from '../data/mock';
 import { CHAPTERS, MAIN_QUEST_ORDER, SIDE_QUEST_IDS } from '../data/insights';
 import { ChatGPTLogo, ClaudeLogo, GeminiLogo } from '../components/AILogos';
 
+// ═══════════════════════════════════════════
+// 全域分類配色定義 — 確保全站一致
+// ═══════════════════════════════════════════
+const CATEGORY_THEMES: Record<string, string> = {
+    '出發準備': 'teal',
+    '入門心法': 'emerald',
+    '指令技巧': 'violet',
+    '生活實戰': 'blue',
+    '進階挑戰': 'rose',
+    '支線任務': 'amber'
+};
+
+const THEME_CONFIG: Record<string, any> = {
+    emerald: { text: 'text-emerald-500', lightText: 'text-emerald-400', tag: 'bg-emerald-500/10 text-emerald-500', border: 'hover:border-emerald-500/20', glow: 'group-hover:shadow-emerald-500/10' },
+    yellow: { text: 'text-yellow-500', lightText: 'text-yellow-400', tag: 'bg-yellow-500/10 text-yellow-500', border: 'hover:border-yellow-500/20', glow: 'group-hover:shadow-yellow-500/10' },
+    amber: { text: 'text-amber-500', lightText: 'text-amber-400', tag: 'bg-amber-500/10 text-amber-500', border: 'hover:border-amber-500/20', glow: 'group-hover:shadow-amber-500/10' },
+    blue: { text: 'text-blue-500', lightText: 'text-blue-400', tag: 'bg-blue-500/10 text-blue-500', border: 'hover:border-blue-500/20', glow: 'group-hover:shadow-blue-500/10' },
+    violet: { text: 'text-violet-500', lightText: 'text-violet-400', tag: 'bg-violet-500/10 text-violet-500', border: 'hover:border-violet-500/20', glow: 'group-hover:shadow-violet-500/10' },
+    rose: { text: 'text-rose-500', lightText: 'text-rose-400', tag: 'bg-rose-500/10 text-rose-500', border: 'hover:border-rose-500/20', glow: 'group-hover:shadow-rose-500/10' },
+    teal: { text: 'text-teal-500', lightText: 'text-teal-400', tag: 'bg-teal-500/10 text-teal-500', border: 'hover:border-teal-500/20', glow: 'group-hover:shadow-teal-500/10' },
+    zinc: { text: 'text-zinc-300', lightText: 'text-zinc-200', tag: 'bg-white/5 text-zinc-400', border: 'hover:border-zinc-300/20', glow: '' },
+    indigo: { text: 'text-indigo-500', lightText: 'text-indigo-400', tag: 'bg-indigo-500/10 text-indigo-500', border: 'hover:border-indigo-500/20', glow: 'group-hover:shadow-indigo-500/10' },
+};
+
 /* ═══════════════════════════════════════════
    ONBOARDING
    ═══════════════════════════════════════════ */
@@ -94,12 +118,12 @@ const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free'
                                 <div><div className="font-black">ChatGPT</div><div className="text-zinc-500 text-xs">OpenAI · 全球最多人用</div></div>
                             </button>
                             <button onClick={() => handlePlatform('claude')}
-                                className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-emerald-500/10 hover:border-emerald-500/30 text-white font-bold text-lg transition-all text-left flex items-center gap-4">
+                                className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-violet-500/10 hover:border-violet-500/30 text-white font-bold text-lg transition-all text-left flex items-center gap-4">
                                 <div className="w-9 h-9 rounded-xl bg-[#D97757]/15 flex items-center justify-center flex-shrink-0"><ClaudeLogo size={22} /></div>
                                 <div><div className="font-black">Claude</div><div className="text-zinc-500 text-xs">Anthropic · 最會聽話</div></div>
                             </button>
                             <button onClick={() => handlePlatform('gemini')}
-                                className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-emerald-500/10 hover:border-emerald-500/30 text-white font-bold text-lg transition-all text-left flex items-center gap-4">
+                                className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-blue-500/10 hover:border-blue-500/30 text-white font-bold text-lg transition-all text-left flex items-center gap-4">
                                 <div className="w-9 h-9 rounded-xl bg-[#1C7DEB]/15 flex items-center justify-center flex-shrink-0"><GeminiLogo size={22} /></div>
                                 <div><div className="font-black">Gemini</div><div className="text-zinc-500 text-xs">Google · 搜尋最即時</div></div>
                             </button>
@@ -142,7 +166,7 @@ const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free'
                         </div>
                         <div className="space-y-3">
                             <button onClick={() => handleExperience(0)}
-                                className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-emerald-500/10 hover:border-emerald-500/30 text-white font-bold transition-all text-left">
+                                className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-emerald-500/10 hover:border-emerald-500/30 text-white font-bold transition-all text-left">
                                 <div className="font-black mb-1">🌱 隨便聊聊、查查問題</div>
                                 <div className="text-zinc-500 text-xs">知道怎麼用，但不太確定怎麼問才能得到好答案</div>
                             </button>
@@ -239,7 +263,7 @@ const SkipChapterModal = ({ targetChapter, onPass, onClose }: { targetChapter: n
                         <div className="space-y-3">
                             {questions[current].options.map((opt, idx) => (
                                 <motion.button key={idx} whileTap={{ scale: 0.97 }} onClick={() => handleAnswer(idx)}
-                                    className="w-full py-4 px-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-amber-500/10 hover:border-amber-500/30 text-zinc-300 hover:text-white font-bold transition-all text-base text-left">
+                                    className="w-full py-4 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-amber-500/10 hover:border-amber-500/30 text-zinc-300 hover:text-white font-bold transition-all text-base text-left">
                                     {opt}
                                 </motion.button>
                             ))}
@@ -600,10 +624,13 @@ const Insights = () => {
    CHAPTER NODE
    ═══════════════════════════════════════════ */
 const ChapterNode = ({ chapter, items, completedIds, completedCount, isLocked, isComplete, isCurrent, isExpanded, onToggle, onSkip, onTagClick, index }: any) => {
+    const themeColor = CATEGORY_THEMES[chapter.title] || 'emerald';
+    const theme = THEME_CONFIG[themeColor];
+    
     const statusColor = isComplete
-        ? 'border-emerald-500 bg-emerald-500'
+        ? `border-${themeColor}-500 bg-${themeColor}-500`
         : isCurrent
-        ? 'border-emerald-400 bg-emerald-500 shadow-lg shadow-emerald-500/20 animate-pulse'
+        ? `border-${themeColor}-400 bg-${themeColor}-500 shadow-lg shadow-${themeColor}-500/20 animate-pulse`
         : 'border-zinc-800 bg-zinc-900';
 
     return (
@@ -615,8 +642,8 @@ const ChapterNode = ({ chapter, items, completedIds, completedCount, isLocked, i
 
             <motion.div
                 className={`border rounded-[1.5rem] transition-all duration-300 cursor-pointer group ${
-                    isCurrent ? 'border-emerald-500/30 bg-emerald-500/[0.03] shadow-xl shadow-emerald-500/[0.02]' :
-                    isComplete ? 'border-emerald-500/10 bg-emerald-500/[0.01]' :
+                    isCurrent ? `border-${themeColor}-500/30 bg-${themeColor}-500/[0.03] shadow-xl shadow-${themeColor}-500/[0.02]` :
+                    isComplete ? `border-${themeColor}-500/10 bg-${themeColor}-500/[0.01]` :
                     isLocked ? 'border-zinc-800/50 bg-transparent' :
                     'border-white/[0.05] bg-white/[0.01] hover:border-white/10'
                 }`}
@@ -628,8 +655,8 @@ const ChapterNode = ({ chapter, items, completedIds, completedCount, isLocked, i
                         <div className="min-w-0">
                             <div className="flex items-center gap-3 flex-wrap">
                                 <h2 className="text-xl font-black text-white truncate">{chapter.title}</h2>
-                                {isCurrent && <span className="text-[8px] bg-emerald-500 text-black px-2 py-0.5 rounded font-black uppercase tracking-wider animate-pulse">Questing</span>}
-                                {isComplete && <span className="text-[8px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-black uppercase tracking-wider">Done</span>}
+                                {isCurrent && <span className={`text-[8px] bg-${themeColor}-500 text-black px-2 py-0.5 rounded font-black uppercase tracking-wider animate-pulse`}>Questing</span>}
+                                {isComplete && <span className={`text-[8px] bg-${themeColor}-500/10 text-${themeColor}-400 px-2 py-0.5 rounded font-black uppercase tracking-wider`}>Done</span>}
                             </div>
                             <p className="text-zinc-600 text-xs mt-1 truncate">{chapter.subtitle}</p>
                         </div>
@@ -638,7 +665,7 @@ const ChapterNode = ({ chapter, items, completedIds, completedCount, isLocked, i
                         <div className="hidden sm:flex gap-1.5 items-center bg-black/20 px-3 py-1.5 rounded-full border border-white/5">
                             {items.map((item: any) => (
                                 <div key={item.id} className={`w-2 h-2 rounded-full transition-all duration-700 ${
-                                    completedIds.includes(item.id) ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]' : isLocked ? 'bg-zinc-800' : 'bg-zinc-700'
+                                    completedIds.includes(item.id) ? `bg-${themeColor}-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]` : isLocked ? 'bg-zinc-800' : 'bg-zinc-700'
                                 }`} />
                             ))}
                         </div>
@@ -660,9 +687,9 @@ const ChapterNode = ({ chapter, items, completedIds, completedCount, isLocked, i
                                         const isDone = completedIds.includes(item.id);
                                         return (
                                             <Link key={item.id} to={`/insights/${item.id}`}
-                                                className={`group/item flex items-center gap-5 p-4 rounded-2xl transition-all duration-300 ${isDone ? 'bg-emerald-500/[0.04] hover:bg-emerald-500/[0.07]' : 'hover:bg-white/[0.03]'}`}>
+                                                className={`group/item flex items-center gap-5 p-4 rounded-2xl transition-all duration-300 ${isDone ? `bg-${themeColor}-500/[0.04] hover:bg-${themeColor}-500/[0.07]` : 'hover:bg-white/[0.03]'}`}>
                                                 <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-xs font-black flex-shrink-0 transition-all ${
-                                                    isDone ? 'bg-emerald-500 text-black shadow-lg shadow-emerald-500/20' : 'bg-zinc-800 text-zinc-500 group-hover/item:bg-zinc-700'
+                                                    isDone ? `bg-${themeColor}-500 text-black shadow-lg shadow-${themeColor}-500/20` : 'bg-zinc-800 text-zinc-500 group-hover/item:bg-zinc-700'
                                                 }`}>
                                                     {isDone ? <CheckCircle2 size={16} /> : i + 1}
                                                 </div>
@@ -670,10 +697,13 @@ const ChapterNode = ({ chapter, items, completedIds, completedCount, isLocked, i
                                                     <h4 className="text-sm md:text-base font-black text-white truncate group-hover/item:text-emerald-300 transition-colors">{item.title}</h4>
                                                     <div className="flex items-center gap-3 mt-1">
                                                         <span className="text-zinc-700 text-[9px] font-mono flex items-center gap-1"><Zap size={8} /> {item.readTime}</span>
-                                                        <span className="text-emerald-500/30 text-[8px] font-black uppercase tracking-tighter">Enter Level</span>
+                                                        <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); onTagClick?.(item.category); }} 
+                                                            className={`text-${themeColor}-500/50 text-[8px] font-black uppercase tracking-tighter hover:text-${themeColor}-400`}>
+                                                            {item.category}
+                                                        </button>
                                                     </div>
                                                 </div>
-                                                <ChevronRight size={18} className="text-zinc-800 group-hover/item:text-emerald-400 group-hover/item:translate-x-1 transition-all flex-shrink-0" />
+                                                <ChevronRight size={18} className={`text-zinc-800 group-hover:text-${themeColor}-400 group-hover:item:translate-x-1 transition-all flex-shrink-0`} />
                                             </Link>
                                         );
                                     })}
@@ -700,25 +730,15 @@ const ChapterNode = ({ chapter, items, completedIds, completedCount, isLocked, i
    INSIGHT CARD
    ═══════════════════════════════════════════ */
 const InsightCard = ({ insight, idx, completed, locked, onTagClick }: any) => {
-    const themes: Record<string, any> = {
-        emerald: { text: 'text-emerald-500', tag: 'bg-emerald-500/10 text-emerald-500', border: 'hover:border-emerald-500/20', glow: 'group-hover:shadow-emerald-500/10' },
-        yellow: { text: 'text-yellow-500', tag: 'bg-yellow-500/10 text-yellow-500', border: 'hover:border-yellow-500/20', glow: 'group-hover:shadow-yellow-500/10' },
-        amber: { text: 'text-amber-500', tag: 'bg-amber-500/10 text-amber-500', border: 'hover:border-amber-500/20', glow: 'group-hover:shadow-amber-500/10' },
-        blue: { text: 'text-blue-500', tag: 'bg-blue-500/10 text-blue-500', border: 'hover:border-blue-500/20', glow: 'group-hover:shadow-blue-500/10' },
-        violet: { text: 'text-violet-500', tag: 'bg-violet-500/10 text-violet-500', border: 'hover:border-violet-500/20', glow: 'group-hover:shadow-violet-500/10' },
-        rose: { text: 'text-rose-500', tag: 'bg-rose-500/10 text-rose-500', border: 'hover:border-rose-500/20', glow: 'group-hover:shadow-rose-500/10' },
-        teal: { text: 'text-teal-500', tag: 'bg-teal-500/10 text-teal-500', border: 'hover:border-teal-500/20', glow: 'group-hover:shadow-teal-500/10' },
-        zinc: { text: 'text-zinc-300', tag: 'bg-white/5 text-zinc-400', border: 'hover:border-zinc-300/20', glow: '' },
-        indigo: { text: 'text-indigo-500', tag: 'bg-indigo-500/10 text-indigo-500', border: 'hover:border-indigo-500/20', glow: 'group-hover:shadow-indigo-500/10' },
-    };
-    const theme = themes[insight.themeColor || 'emerald'] || themes.emerald;
+    const themeColor = CATEGORY_THEMES[insight.category] || insight.themeColor || 'emerald';
+    const theme = THEME_CONFIG[themeColor] || THEME_CONFIG.emerald;
 
     const CardContent = (
         <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.04 }} viewport={{ once: true }}
-            className={`bg-zinc-900/50 backdrop-blur-sm border border-white/[0.05] ${locked ? '' : theme.border} p-6 md:p-7 rounded-[2rem] h-full flex flex-col relative transition-all duration-500 group-hover:shadow-2xl ${theme.glow} ${completed ? 'bg-emerald-500/[0.03] border-emerald-500/20' : ''}`}>
+            className={`bg-zinc-900/50 backdrop-blur-sm border border-white/[0.05] ${locked ? '' : theme.border} p-6 md:p-7 rounded-[2rem] h-full flex flex-col relative transition-all duration-500 group-hover:shadow-2xl ${theme.glow} ${completed ? `bg-${themeColor}-500/[0.03] border-${themeColor}-500/20` : ''}`}>
             
             {completed && (
-                <div className="absolute -top-1.5 -right-1.5 bg-emerald-500 text-black p-1.5 rounded-full shadow-lg shadow-emerald-500/40 z-10">
+                <div className={`absolute -top-1.5 -right-1.5 bg-${themeColor}-500 text-black p-1.5 rounded-full shadow-lg shadow-${themeColor}-500/40 z-10`}>
                     <CheckCircle2 size={16} />
                 </div>
             )}
@@ -730,10 +750,10 @@ const InsightCard = ({ insight, idx, completed, locked, onTagClick }: any) => {
                 >
                     {insight.category}
                 </button>
-                {insight.tags?.slice(0, 2).map((tag: string, ti: number) => (
+                {insight.tags?.slice(0, 3).map((tag: string, ti: number) => (
                     <button key={ti}
                         onClick={(e) => { e.preventDefault(); e.stopPropagation(); onTagClick?.(tag.replace('#', '')); }}
-                        className="text-[9px] font-bold text-zinc-500 bg-white/[0.02] px-3 py-1.5 rounded-lg border border-white/[0.04] hover:border-emerald-500/30 hover:text-emerald-400 transition-all"
+                        className={`text-[9px] font-bold text-zinc-500 bg-white/[0.02] px-3 py-1.5 rounded-lg border border-white/[0.04] hover:border-${themeColor}-500/30 hover:text-${themeColor}-400 transition-all`}
                     >
                         {tag}
                     </button>
@@ -752,7 +772,7 @@ const InsightCard = ({ insight, idx, completed, locked, onTagClick }: any) => {
                     <span className="text-zinc-700 text-[10px] font-mono flex items-center gap-1.5">
                         <Zap size={10} className="text-amber-500/50" /> {insight.readTime}
                     </span>
-                    <div className="flex items-center gap-1.5 text-emerald-500/50 group-hover:text-emerald-400 transition-all">
+                    <div className={`flex items-center gap-1.5 text-${themeColor}-500/50 group-hover:text-${themeColor}-400 transition-all`}>
                         <span className="text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all">Start</span>
                         <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                     </div>

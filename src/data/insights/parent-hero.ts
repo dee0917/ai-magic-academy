@@ -1,7 +1,7 @@
 export const insight = {
     id: 304,
     category: "支線任務",
-    themeColor: "rose",
+    themeColor: "amber",
     difficulty_level: 2,
     level: 1,
     tags: ["#育兒神器", "#講故事", "#小孩教育", "#家長救星", "#親子溝通", "#教育助手"],

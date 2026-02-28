@@ -1,7 +1,7 @@
 export const insight = {
     id: 307,
     category: "支線任務",
-    themeColor: "blue",
+    themeColor: "amber",
     difficulty_level: 2,
     level: 3,
     tags: ["#自我介紹", "#吸引人開場", "#破冰文案", "#社交技巧", "#個人品牌", "#交友軟體"],

@@ -1,7 +1,7 @@
 export const insight = {
     id: 401,
     category: "進階挑戰",
-    themeColor: "teal",
+    themeColor: "rose",
     difficulty_level: 2,
     level: 3,
     tags: ["#新聞摘要", "#快速吸收", "#防資訊焦慮", "#重點抓取", "#閱讀助手", "#效率閱讀"],

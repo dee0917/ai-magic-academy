@@ -1,7 +1,7 @@
 export const insight = {
     id: 403,
     category: "進階挑戰",
-    themeColor: "violet",
+    themeColor: "rose",
     difficulty_level: 2,
     level: 2,
     tags: ["#學英文", "#口說練習", "#翻譯神器", "#語言學習", "#專屬家教", "#多國語言"],

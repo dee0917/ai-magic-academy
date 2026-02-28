@@ -1,7 +1,7 @@
 export const insight = {
     id: 305,
     category: "生活實戰",
-    themeColor: "amber",
+    themeColor: "blue",
     difficulty_level: 2,
     level: 2,
     tags: ["#排行程", "#懶人旅遊", "#自由行規劃", "#當地美食推薦", "#預算規劃", "#出國旅遊"],

@@ -1,7 +1,7 @@
 export const insight = {
     id: 302,
     category: "指令技巧",
-    themeColor: "zinc",
+    themeColor: "violet",
     difficulty_level: 2,
     level: 2,
     tags: ["#高情商拒絕", "#婉拒範本", "#拒絕信技巧", "#委婉拒絕", "#職場溝通術", "#人際關係"],

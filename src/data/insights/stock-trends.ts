@@ -1,7 +1,7 @@
 export const insight = {
     id: 404,
     category: "支線任務",
-    themeColor: "emerald",
+    themeColor: "amber",
     difficulty_level: 3,
     level: 3,
     tags: ["#投資理財", "#財報分析", "#市場趨勢", "#理財小白", "#輔助工具", "#股票分析"],

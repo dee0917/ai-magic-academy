@@ -1,7 +1,7 @@
 export const insight = {
     id: 204,
     category: "入門心法",
-    themeColor: "blue",
+    themeColor: "violet",
     difficulty_level: 2,
     level: 2,
     tags: ["#萬用公式", "#角色限制目標", "#結構化指令", "#溝通不誤解", "#指令範本", "#精準指令"],

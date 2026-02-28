@@ -1,7 +1,7 @@
 export const insight = {
     id: 303,
     category: "支線任務",
-    themeColor: "rose",
+    themeColor: "amber",
     difficulty_level: 1,
     level: 1,
     tags: ["#長輩學習AI", "#退休生活", "#數位教練", "#健康諮詢", "#科技不難", "#銀髮族必學"],

@@ -1,7 +1,7 @@
 export const insight = {
     id: 306,
     category: "生活實戰",
-    themeColor: "indigo",
+    themeColor: "blue",
     difficulty_level: 2,
     level: 2,
     tags: ["#會議紀錄", "#重點整理", "#省時工具", "#行動待辦", "#職場必備", "#會議助手"],

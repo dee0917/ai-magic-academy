@@ -1,7 +1,7 @@
 export const insight = {
     id: 402,
     category: "支線任務",
-    themeColor: "emerald",
+    themeColor: "amber",
     difficulty_level: 3,
     level: 3,
     tags: ["#風險評估", "#檢查清單", "#合約審查", "#理財安全", "#避坑指南", "#投資安全"],

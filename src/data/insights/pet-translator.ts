@@ -1,7 +1,7 @@
 export const insight = {
     id: 309,
     category: "支線任務",
-    themeColor: "rose",
+    themeColor: "amber",
     difficulty_level: 1,
     level: 2,
     tags: ["#毛小孩", "#寵物心理", "#養狗日常", "#養貓技巧", "#寵物守護", "#寵物健康"],

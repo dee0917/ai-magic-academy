@@ -1,7 +1,7 @@
 export const insight = {
     id: 308,
     category: "生活實戰",
-    themeColor: "amber",
+    themeColor: "blue",
     difficulty_level: 1,
     level: 2,
     tags: ["#想晚餐", "#健康飲食", "#食譜建議", "#清空冰箱", "#營養均衡", "#煮飯靈感"],

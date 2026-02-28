@@ -1,7 +1,7 @@
 export const insight = {
     id: 301,
     category: "指令技巧",
-    themeColor: "yellow",
+    themeColor: "violet",
     difficulty_level: 2,
     level: 2,
     tags: ["#黃金法則", "#具體範例", "#給予範例法", "#學習模仿", "#高品質回答", "#舉例教學"],

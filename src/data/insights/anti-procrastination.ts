@@ -1,7 +1,7 @@
 export const insight = {
     id: 310,
     category: "生活實戰",
-    themeColor: "zinc",
+    themeColor: "blue",
     difficulty_level: 2,
     level: 2,
     tags: ["#戰勝拖延", "#行動清單", "#心理動力", "#目標管理", "#自律工具", "#效率提昇"],
