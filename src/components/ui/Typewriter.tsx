@@ -4,9 +4,10 @@ interface TypewriterProps {
     texts: string[];
     speed?: number;
     delay?: number;
+    className?: string;
 }
 
-const Typewriter: React.FC<TypewriterProps> = ({ texts, speed = 150, delay = 2000 }) => {
+const Typewriter: React.FC<TypewriterProps> = ({ texts, speed = 150, delay = 2000, className = "" }) => {
     const [currentTextIndex, setCurrentTextIndex] = useState(0);
     const [currentText, setCurrentText] = useState('');
     const [isDeleting, setIsDeleting] = useState(false);
@@ -33,9 +34,9 @@ const Typewriter: React.FC<TypewriterProps> = ({ texts, speed = 150, delay = 200
     }, [currentText, isDeleting, texts, currentTextIndex, speed, delay]);
 
     return (
-        <span className="text-emerald-500 inline-flex items-center">
+        <span className={`inline-flex items-center ${className}`}>
             {currentText}
-            <span className="animate-blink ml-1">|</span>
+            <span className="animate-blink ml-1 text-zinc-500">|</span>
         </span>
     );
 };

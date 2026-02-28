@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Gamepad2, MessageSquare, Zap, Sparkles, Coffee, Rocket } from 'lucide-react';
+import { ArrowRight, Gamepad2, MessageSquare, Zap, Sparkles, Coffee, Rocket, Shield, Trophy } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SEO from '../components/ui/SEO';
+import Typewriter from '../components/ui/Typewriter';
 import { CHAPTERS, MAIN_QUEST_ORDER, SIDE_QUEST_IDS } from '../data/insights';
 import { useEffect, useState } from 'react';
 
@@ -16,29 +17,58 @@ const Home = () => {
     }, []);
 
     const totalArticles = MAIN_QUEST_ORDER.length + SIDE_QUEST_IDS.length;
+    const playerLevel = Math.floor(completedCount / 1.5) + 1;
+    const xp = completedCount * 200;
 
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             <SEO path="/" />
 
-            {/* ═══════════ HERO — 遊戲開始畫面 ═══════════ */}
-            <section className="relative min-h-[85vh] flex items-center justify-center px-6 overflow-hidden">
-                {/* Background effects */}
+            {/* ═══════════ HERO — 遊戲開始畫面 (融合版) ═══════════ */}
+            <section className="relative min-h-[95vh] flex items-center justify-center px-6 overflow-hidden pt-20">
+                {/* Background effects (The "New Version" visuals) */}
                 <div className="absolute inset-0 pointer-events-none">
                     <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-emerald-500/[0.04] blur-[150px] rounded-full" />
                     <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-teal-500/[0.03] blur-[120px] rounded-full" />
-                    <motion.div animate={{ y: [0, -15, 0], x: [0, 8, 0] }} transition={{ duration: 10, repeat: Infinity }} className="absolute top-1/3 left-[15%] w-2 h-2 bg-emerald-500/20 rounded-full" />
-                    <motion.div animate={{ y: [0, 12, 0], x: [0, -5, 0] }} transition={{ duration: 8, repeat: Infinity, delay: 2 }} className="absolute top-1/2 right-[20%] w-1.5 h-1.5 bg-teal-400/25 rounded-full" />
+                    <motion.div animate={{ y: [0, -15, 0], x: [0, 8, 0] }} transition={{ duration: 10, repeat: Infinity }} className="absolute top-1/3 left-[10%] w-2 h-2 bg-emerald-500/20 rounded-full" />
+                    <motion.div animate={{ y: [0, 12, 0], x: [0, -5, 0] }} transition={{ duration: 8, repeat: Infinity, delay: 2 }} className="absolute top-1/2 right-[15%] w-1.5 h-1.5 bg-teal-400/25 rounded-full" />
                     <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 12, repeat: Infinity, delay: 4 }} className="absolute bottom-1/3 left-[60%] w-1 h-1 bg-emerald-400/30 rounded-full" />
-                    <motion.div animate={{ y: [0, 10, 0], x: [0, -6, 0] }} transition={{ duration: 9, repeat: Infinity, delay: 1 }} className="absolute top-[20%] right-[40%] w-1.5 h-1.5 bg-emerald-300/15 rounded-full" />
+                    <motion.div animate={{ y: [0, 10, 0], x: [0, -6, 0] }} transition={{ duration: 9, repeat: Infinity, delay: 1 }} className="absolute top-[15%] right-[40%] w-1.5 h-1.5 bg-emerald-300/15 rounded-full" />
                 </div>
 
                 <div className="relative z-10 text-center max-w-5xl mx-auto">
+                    {/* Beta Badge & Stats Display (Merging the "plain" Hero with "Game" Hero) */}
+                    <div className="flex flex-col items-center mb-12">
+                        <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
+                            className="inline-flex items-center gap-2 border border-emerald-500/30 bg-emerald-500/10 text-emerald-500 px-4 py-1.5 rounded-full text-xs font-medium relative group mb-8">
+                            <Rocket size={14} /> 讓 AI 成為你的好夥伴
+                            <span className="absolute -top-2 -right-12 px-2 py-0.5 bg-gradient-to-r from-amber-500 to-orange-600 text-white text-[10px] font-black rounded-lg shadow-lg shadow-orange-500/20 animate-pulse uppercase tracking-tighter">Beta</span>
+                        </motion.div>
+
+                        <div className="flex items-center gap-8 px-6 py-3 rounded-2xl bg-white/[0.03] border border-white/[0.05] backdrop-blur-sm">
+                            <div className="text-center">
+                                <p className="text-2xl font-black text-emerald-400">Lv.{playerLevel}</p>
+                                <p className="text-zinc-600 text-[9px] font-bold tracking-widest uppercase">Rank</p>
+                            </div>
+                            <div className="w-px h-8 bg-zinc-800" />
+                            <div className="text-center">
+                                <p className="text-xl font-black text-amber-400">{xp.toLocaleString()}</p>
+                                <p className="text-zinc-600 text-[9px] font-bold tracking-widest uppercase">XP</p>
+                            </div>
+                            <div className="w-px h-8 bg-zinc-800" />
+                            <div className="text-center">
+                                <p className="text-xl font-black text-white">{completedCount}/{totalArticles}</p>
+                                <p className="text-zinc-600 text-[9px] font-bold tracking-widest uppercase">Tasks</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* The靈魂文字 (From image, with Typewriter) */}
                     <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-                        className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-12 leading-[1.1] tracking-tight">
+                        className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-12 tracking-tight leading-[1.1]">
                         將繁瑣交給 AI，<br />
                         <span className="font-serif italic font-normal text-zinc-500 text-4xl md:text-6xl lg:text-7xl">
-                            把時間留給 <span className="text-[#4285F4] not-italic font-black">家人</span>
+                            把時間留給 <Typewriter texts={['家人', '思考', '生活', '創意']} className="text-[#4285F4] not-italic font-black" />
                         </span>
                     </motion.h1>
 
@@ -48,6 +78,10 @@ const Home = () => {
                             className="group inline-flex items-center gap-3 bg-emerald-500 text-black px-12 py-6 rounded-2xl font-black text-xl hover:bg-emerald-400 transition-all shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30 hover:-translate-y-0.5">
                             開始冒險
                             <ArrowRight size={22} className="group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                        <Link to="/about"
+                            className="inline-flex items-center gap-2 bg-white/5 text-white px-8 py-4 rounded-2xl font-bold text-base border border-white/10 hover:bg-white/10 transition-all">
+                            認識 Dee
                         </Link>
                     </motion.div>
                 </div>
@@ -62,7 +96,6 @@ const Home = () => {
                         <p className="text-zinc-500 max-w-lg mx-auto">從「AI 是什麼？」到「用 AI 搞定生活大小事」，每篇都有互動練習和小測驗。</p>
                     </motion.div>
 
-                    {/* Chapter timeline — horizontal scroll on mobile */}
                     <div className="overflow-x-auto pb-4 -mx-6 px-6 scrollbar-hide">
                         <div className="flex gap-4 min-w-max md:min-w-0 md:grid md:grid-cols-5">
                             {CHAPTERS.map((chapter, i) => (
@@ -82,7 +115,6 @@ const Home = () => {
                         </div>
                     </div>
 
-                    {/* Side quests mention */}
                     <motion.div {...fadeUp} className="text-center mt-8">
                         <span className="text-zinc-700 text-xs">+ 🎲 {SIDE_QUEST_IDS.length} 篇支線任務（育兒、寵物、投資⋯⋯）隨時可以探索</span>
                     </motion.div>
@@ -131,7 +163,7 @@ const Home = () => {
             </section>
 
             {/* ═══════════ Before / After ═══════════ */}
-            <section className="py-20 px-6 border-t border-white/5">
+            <section className="py-20 px-6 border-t border-white/5 bg-black/10">
                 <div className="max-w-4xl mx-auto">
                     <motion.div {...fadeUp} className="text-center mb-14">
                         <span className="text-emerald-500 font-bold tracking-[0.3em] text-[10px] uppercase mb-4 block">REAL RESULTS</span>
