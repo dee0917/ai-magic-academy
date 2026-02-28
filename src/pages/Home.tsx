@@ -24,9 +24,9 @@ const Home = () => {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             <SEO path="/" />
 
-            {/* ═══════════ HERO — 遊戲開始畫面 (融合版) ═══════════ */}
+            {/* ═══════════ HERO — 遊戲開始畫面 (融合說明版) ═══════════ */}
             <section className="relative min-h-[95vh] flex items-center justify-center px-6 overflow-hidden pt-20">
-                {/* Background effects (The "New Version" visuals) */}
+                {/* Background effects */}
                 <div className="absolute inset-0 pointer-events-none">
                     <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-emerald-500/[0.04] blur-[150px] rounded-full" />
                     <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-teal-500/[0.03] blur-[120px] rounded-full" />
@@ -37,15 +37,38 @@ const Home = () => {
                 </div>
 
                 <div className="relative z-10 text-center max-w-5xl mx-auto">
-                    {/* Beta Badge & Stats Display (Merging the "plain" Hero with "Game" Hero) */}
-                    <div className="flex flex-col items-center mb-12">
+                    {/* Header: Beta + Brain Emoji */}
+                    <div className="flex flex-col items-center mb-6">
                         <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
-                            className="inline-flex items-center gap-2 border border-emerald-500/30 bg-emerald-500/10 text-emerald-500 px-4 py-1.5 rounded-full text-xs font-medium relative group mb-8">
+                            className="inline-flex items-center gap-2 border border-emerald-500/30 bg-emerald-500/10 text-emerald-500 px-4 py-1.5 rounded-full text-xs mb-8 font-medium relative group">
                             <Rocket size={14} /> 讓 AI 成為你的好夥伴
                             <span className="absolute -top-2 -right-12 px-2 py-0.5 bg-gradient-to-r from-amber-500 to-orange-600 text-white text-[10px] font-black rounded-lg shadow-lg shadow-orange-500/20 animate-pulse uppercase tracking-tighter">Beta</span>
                         </motion.div>
+                        
+                        <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", delay: 0.2 }}>
+                            <span className="text-6xl md:text-7xl block mb-6">🧠</span>
+                        </motion.div>
+                    </div>
 
-                        <div className="flex items-center gap-8 px-6 py-3 rounded-2xl bg-white/[0.03] border border-white/[0.05] backdrop-blur-sm">
+                    {/* The靈魂文字 (From image, with Typewriter) */}
+                    <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+                        className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-10 tracking-tight leading-[1.1]">
+                        將繁瑣交給 AI，<br />
+                        <span className="font-serif italic font-normal text-zinc-500 text-4xl md:text-6xl lg:text-7xl">
+                            把時間留給 <Typewriter texts={['家人', '思考', '生活', '創意']} className="text-[#4285F4] not-italic font-black" />
+                        </span>
+                    </motion.h1>
+
+                    {/* THE CRITICAL SUBTITLE (Re-integrated for clarity) */}
+                    <motion.p initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}
+                        className="text-lg md:text-xl text-zinc-400 mb-8 leading-relaxed max-w-2xl mx-auto">
+                        用最白話的方式學 AI。<br />
+                        <span className="text-white font-bold">{totalArticles} 篇免費互動教學</span>，從完全不會到熟練運用。
+                    </motion.p>
+
+                    {/* Stats Card */}
+                    <div className="flex justify-center mb-12">
+                        <div className="flex items-center gap-8 px-8 py-4 rounded-3xl bg-white/[0.03] border border-white/[0.05] backdrop-blur-sm">
                             <div className="text-center">
                                 <p className="text-2xl font-black text-emerald-400">Lv.{playerLevel}</p>
                                 <p className="text-zinc-600 text-[9px] font-bold tracking-widest uppercase">Rank</p>
@@ -63,16 +86,7 @@ const Home = () => {
                         </div>
                     </div>
 
-                    {/* The靈魂文字 (From image, with Typewriter) */}
-                    <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-                        className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-12 tracking-tight leading-[1.1]">
-                        將繁瑣交給 AI，<br />
-                        <span className="font-serif italic font-normal text-zinc-500 text-4xl md:text-6xl lg:text-7xl">
-                            把時間留給 <Typewriter texts={['家人', '思考', '生活', '創意']} className="text-[#4285F4] not-italic font-black" />
-                        </span>
-                    </motion.h1>
-
-                    <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
+                    <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
                         className="flex flex-col sm:flex-row gap-5 justify-center items-center">
                         <Link to="/insights"
                             className="group inline-flex items-center gap-3 bg-emerald-500 text-black px-12 py-6 rounded-2xl font-black text-xl hover:bg-emerald-400 transition-all shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30 hover:-translate-y-0.5">
