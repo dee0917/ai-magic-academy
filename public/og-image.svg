@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" fill="none">
+  <rect width="1200" height="630" fill="#0a0a0a"/>
+  <rect x="0" y="0" width="1200" height="4" fill="#10b981"/>
+  <!-- Grid pattern -->
+  <g opacity="0.03" stroke="#fff" stroke-width="1">
+    <line x1="0" y1="100" x2="1200" y2="100"/>
+    <line x1="0" y1="200" x2="1200" y2="200"/>
+    <line x1="0" y1="300" x2="1200" y2="300"/>
+    <line x1="0" y1="400" x2="1200" y2="400"/>
+    <line x1="0" y1="500" x2="1200" y2="500"/>
+    <line x1="200" y1="0" x2="200" y2="630"/>
+    <line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="800" y1="0" x2="800" y2="630"/>
+    <line x1="1000" y1="0" x2="1000" y2="630"/>
+  </g>
+  <!-- Glow -->
+  <circle cx="900" cy="315" r="200" fill="#10b981" opacity="0.06"/>
+  <circle cx="300" cy="315" r="150" fill="#14b8a6" opacity="0.04"/>
+  <!-- Emoji -->
+  <text x="100" y="250" font-size="80" font-family="system-ui">🧠</text>
+  <!-- Title -->
+  <text x="100" y="350" font-size="56" font-weight="900" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif">Dee's AI Life Lab</text>
+  <!-- Subtitle -->
+  <text x="100" y="410" font-size="26" fill="#10b981" font-weight="700" font-family="system-ui, -apple-system, sans-serif">用最白話的方式學 AI</text>
+  <text x="100" y="455" font-size="22" fill="#71717a" font-family="system-ui, -apple-system, sans-serif">20 篇免費教學 · 從零開始到熟練運用</text>
+  <!-- Bottom bar -->
+  <rect x="100" y="520" width="60" height="3" rx="1.5" fill="#10b981"/>
+  <text x="175" y="528" font-size="14" fill="#52525b" font-weight="700" font-family="system-ui, monospace" letter-spacing="3">DEE-WEBSITE.VERCEL.APP</text>
+</svg>

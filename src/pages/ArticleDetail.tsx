@@ -111,6 +111,9 @@ const ArticleDetail = () => {
         const updated = [...stepsCompleted];
         updated[idx] = true;
         setStepsCompleted(updated);
+        // Trigger ripple animation
+        setRippleStep(idx);
+        setTimeout(() => setRippleStep(null), 800);
         
         if (idx < (article?.steps?.length || 0) - 1) {
             const nextIdx = idx + 1;
@@ -158,6 +161,7 @@ const ArticleDetail = () => {
 
     const [quizStars, setQuizStars] = useState(false);
     const [badgeGlow, setBadgeGlow] = useState(false);
+    const [rippleStep, setRippleStep] = useState<number | null>(null);
 
     const handleQuizSubmit = () => {
         if (quizAnswer === null) return;
@@ -317,8 +321,17 @@ const ArticleDetail = () => {
                                 <motion.div
                                     key={idx} ref={el => stepRefs.current[idx] = el}
                                     initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                                    className={`relative rounded-[2.5rem] border p-8 md:p-12 transition-all duration-500 ${isDone ? 'bg-white/[0.02] border-emerald-500/30' : isActive ? 'bg-white/5 border-white/20 shadow-xl' : 'border-white/5 opacity-10 pointer-events-none'}`}
+                                    className={`relative rounded-[2.5rem] border p-8 md:p-12 transition-all duration-500 overflow-hidden ${isDone ? 'bg-white/[0.02] border-emerald-500/30' : isActive ? 'bg-white/5 border-white/20 shadow-xl' : 'border-white/5 opacity-10 pointer-events-none'}`}
                                 >
+                                    {/* Ripple effect on step complete */}
+                                    {rippleStep === idx && (
+                                        <>
+                                            <motion.div initial={{ scale: 0, opacity: 0.5 }} animate={{ scale: 4, opacity: 0 }} transition={{ duration: 0.8, ease: 'easeOut' }}
+                                                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full bg-emerald-500/20 pointer-events-none z-20" />
+                                            <motion.div initial={{ scale: 0, opacity: 0.3 }} animate={{ scale: 3, opacity: 0 }} transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
+                                                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-emerald-400/15 pointer-events-none z-20" />
+                                        </>
+                                    )}
                                     <div className="flex flex-col md:flex-row items-start gap-8">
                                         <div className={`w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 text-xl font-black transition-all duration-500 ${isDone ? 'bg-emerald-500 text-black' : isActive ? 'bg-white text-black' : 'bg-white/5 text-zinc-700'}`}>
                                             {isDone ? '✓' : idx + 1}
