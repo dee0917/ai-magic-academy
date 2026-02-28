@@ -26,6 +26,7 @@ const ArticleDetail = () => {
     const [quizSubmitted, setQuizSubmitted] = useState(false);
     const [badgeEarned, setBadgeEarned] = useState(false);
     const [treasurePhase, setTreasurePhase] = useState<'locked' | 'falling' | 'impact' | 'exploding' | 'revealed'>('locked');
+    const [freeMode, setFreeMode] = useState(false);
     
     // Refs
     const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -64,8 +65,17 @@ const ArticleDetail = () => {
 
     useEffect(() => {
         if (article?.steps) {
-            setStepsCompleted(new Array(article.steps.length).fill(false));
-            setCurrentStep(0);
+            const isFree = localStorage.getItem('dee_view_preference') === 'free';
+            setFreeMode(isFree);
+            if (isFree) {
+                // Free mode: all steps pre-completed, treasure revealed
+                setStepsCompleted(new Array(article.steps.length).fill(true));
+                setCurrentStep(article.steps.length - 1);
+                setTreasurePhase('revealed');
+            } else {
+                setStepsCompleted(new Array(article.steps.length).fill(false));
+                setCurrentStep(0);
+            }
             stepRefs.current = new Array(article.steps.length).fill(null);
         }
         setQuizAnswer(null);
@@ -260,8 +270,8 @@ const ArticleDetail = () => {
                     <div className="space-y-10">
                         {article.steps.map((step: any, idx: number) => {
                             const isDone = stepsCompleted[idx];
-                            const isActive = idx === currentStep;
-                            const isFuture = idx > currentStep;
+                            const isActive = freeMode ? !isDone : idx === currentStep;
+                            const isFuture = freeMode ? false : idx > currentStep;
 
                             return (
                                 <motion.div
