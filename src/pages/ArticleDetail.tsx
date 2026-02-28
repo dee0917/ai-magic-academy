@@ -25,7 +25,7 @@ const ArticleDetail = () => {
     const [quizAnswer, setQuizAnswer] = useState<number | null>(null);
     const [quizSubmitted, setQuizSubmitted] = useState(false);
     const [badgeEarned, setBadgeEarned] = useState(false);
-    const [isTreasureUnlocking, setIsTreasureUnlocking] = useState(false);
+    const [treasurePhase, setTreasurePhase] = useState<'locked' | 'falling' | 'impact' | 'exploding' | 'revealed'>('locked');
     
     // Refs
     const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -72,7 +72,7 @@ const ArticleDetail = () => {
         setQuizSubmitted(false);
         setBadgeEarned(false);
         setCopied(false);
-        setIsTreasureUnlocking(false);
+        setTreasurePhase('locked');
     }, [article?.id, article?.steps?.length]);
 
     const fetchArticle = async (articleId: number) => {
@@ -113,7 +113,7 @@ const ArticleDetail = () => {
                 }
             }, 100);
         } else {
-            setIsTreasureUnlocking(true);
+            // Scroll to treasure area first
             setTimeout(() => {
                 const element = treasureRef.current;
                 if (element) {
@@ -121,15 +121,27 @@ const ArticleDetail = () => {
                     window.scrollTo({ top: y, behavior: 'smooth' });
                 }
                 
+                // Phase 1: Chest falls from sky
+                setTimeout(() => setTreasurePhase('falling'), 500);
+                
+                // Phase 2: Impact — bounce + screen shake + small burst
                 setTimeout(() => {
-                    confetti({ 
-                        particleCount: 200, 
-                        spread: 100, 
-                        origin: { y: 0.6 },
-                        colors: ['#fbbf24', '#f59e0b', '#10b981', '#ffffff'] 
-                    });
-                }, 400);
-            }, 300);
+                    setTreasurePhase('impact');
+                    confetti({ particleCount: 40, spread: 30, origin: { y: 0.55 }, colors: ['#fbbf24', '#f59e0b'] });
+                }, 1200);
+                
+                // Phase 3: Explosion — chest shatters + massive confetti
+                setTimeout(() => {
+                    setTreasurePhase('exploding');
+                    confetti({ particleCount: 300, spread: 160, origin: { y: 0.5 }, colors: ['#fbbf24', '#f59e0b', '#10b981', '#ffffff', '#a855f7', '#ec4899'] });
+                    // Second wave
+                    setTimeout(() => confetti({ particleCount: 150, spread: 120, origin: { y: 0.4, x: 0.3 }, colors: ['#10b981', '#14b8a6', '#fbbf24'] }), 200);
+                    setTimeout(() => confetti({ particleCount: 150, spread: 120, origin: { y: 0.4, x: 0.7 }, colors: ['#a855f7', '#ec4899', '#f59e0b'] }), 400);
+                }, 1800);
+                
+                // Phase 4: Content reveals
+                setTimeout(() => setTreasurePhase('revealed'), 2600);
+            }, 200);
         }
     };
 
@@ -174,8 +186,8 @@ const ArticleDetail = () => {
 
     return (
         <motion.div 
-            animate={isTreasureUnlocking && !allStepsDone ? { x: [-3, 3, -3, 3, 0], y: [-1, 1, -1, 1, 0] } : {}}
-            transition={{ duration: 0.1, repeat: 10 }}
+            animate={treasurePhase === 'impact' ? { x: [-4, 4, -4, 4, -2, 2, 0], y: [-2, 2, -2, 2, -1, 1, 0] } : {}}
+            transition={{ duration: 0.3 }}
             className="overflow-x-hidden"
         >
             <motion.div
@@ -300,22 +312,147 @@ const ArticleDetail = () => {
 
             {/* ═══════════ SECTION 4: THE TREASURE ═══════════ */}
             {!isNews && article.practice_kit && (
-                <section className="py-32 px-5 md:px-6 scroll-mt-32 text-left overflow-hidden min-h-screen flex flex-col justify-center" ref={treasureRef}>
+                <section className="py-32 px-5 md:px-6 scroll-mt-32 text-left overflow-hidden min-h-screen flex flex-col justify-center items-center relative" ref={treasureRef}>
+                    
+                    {/* Light beam background — appears during exploding+revealed */}
                     <AnimatePresence>
-                        {allStepsDone ? (
+                        {(treasurePhase === 'exploding' || treasurePhase === 'revealed') && (
                             <motion.div
-                                key="treasure-chest"
-                                initial={{ opacity: 0, scale: 0.5, y: -200, rotate: -20 }}
-                                animate={{ opacity: 1, scale: 1, y: 0, rotate: 0 }}
-                                transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                                className="max-w-3xl mx-auto w-full relative"
+                                key="light-beam"
+                                initial={{ opacity: 0, scaleY: 0 }}
+                                animate={{ opacity: 1, scaleY: 1 }}
+                                transition={{ duration: 0.8, ease: "easeOut" }}
+                                className="absolute inset-0 pointer-events-none origin-bottom"
                             >
-                                <div className="absolute -inset-20 bg-emerald-500/10 blur-[100px] rounded-full" />
+                                <div className="absolute left-1/2 -translate-x-1/2 bottom-0 w-40 md:w-60 h-full bg-gradient-to-t from-emerald-500/20 via-emerald-500/5 to-transparent blur-2xl" />
+                                <div className="absolute left-1/2 -translate-x-1/2 bottom-0 w-20 md:w-32 h-full bg-gradient-to-t from-emerald-400/30 via-emerald-400/10 to-transparent blur-xl" />
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+
+                    {/* Explosion particles */}
+                    <AnimatePresence>
+                        {treasurePhase === 'exploding' && (
+                            <>
+                                {Array.from({ length: 10 }, (_, i) => {
+                                    const angle = (i / 10) * Math.PI * 2;
+                                    const dist = 120 + Math.random() * 80;
+                                    const colors = ['#fbbf24', '#10b981', '#a855f7', '#f43f5e', '#3b82f6', '#f59e0b', '#ec4899', '#14b8a6', '#fff', '#fbbf24'];
+                                    return (
+                                        <motion.div
+                                            key={`particle-${i}`}
+                                            initial={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+                                            animate={{ 
+                                                opacity: 0, 
+                                                scale: 0,
+                                                x: Math.cos(angle) * dist,
+                                                y: Math.sin(angle) * dist
+                                            }}
+                                            transition={{ duration: 0.8, delay: i * 0.03, ease: "easeOut" }}
+                                            className="absolute z-30 rounded-full"
+                                            style={{ 
+                                                width: 8 + Math.random() * 14,
+                                                height: 8 + Math.random() * 14,
+                                                backgroundColor: colors[i],
+                                                boxShadow: `0 0 20px ${colors[i]}`,
+                                                top: '50%',
+                                                left: '50%',
+                                            }}
+                                        />
+                                    );
+                                })}
+                            </>
+                        )}
+                    </AnimatePresence>
+
+                    <AnimatePresence mode="wait">
+                        {/* STATE: LOCKED — ghostly chest waiting */}
+                        {treasurePhase === 'locked' && !allStepsDone && (
+                            <motion.div key="locked" className="max-w-3xl mx-auto py-32 border-2 border-dashed border-white/5 rounded-[3rem] flex flex-col items-center justify-center text-zinc-900 pointer-events-none w-full">
+                                <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 2.5 }}><Lock size={80} className="mb-8 opacity-5" /></motion.div>
+                                <p className="text-lg font-black uppercase tracking-[0.6em] opacity-10">完成所有步驟以解鎖</p>
+                            </motion.div>
+                        )}
+
+                        {/* STATE: FALLING — chest drops from sky */}
+                        {(treasurePhase === 'falling' || treasurePhase === 'impact') && (
+                            <motion.div
+                                key="falling-chest"
+                                initial={{ y: -400, rotate: -25, scale: 0.6, opacity: 0 }}
+                                animate={treasurePhase === 'impact' 
+                                    ? { y: 0, rotate: 0, scale: 1, opacity: 1 }
+                                    : { y: -50, rotate: -10, scale: 0.9, opacity: 1 }
+                                }
+                                transition={treasurePhase === 'impact' 
+                                    ? { type: "spring", stiffness: 300, damping: 12, mass: 1.2 }
+                                    : { duration: 0.5, ease: "easeIn" }
+                                }
+                                className="relative z-20 flex flex-col items-center"
+                            >
+                                <motion.div
+                                    animate={treasurePhase === 'impact' ? { scale: [1, 1.15, 0.95, 1.05, 1] } : {}}
+                                    transition={{ duration: 0.4 }}
+                                    className="relative"
+                                >
+                                    <div className="text-[120px] md:text-[160px] leading-none select-none drop-shadow-2xl">🎁</div>
+                                    {treasurePhase === 'impact' && (
+                                        <motion.div
+                                            initial={{ scale: 0, opacity: 0.8 }}
+                                            animate={{ scale: 3, opacity: 0 }}
+                                            transition={{ duration: 0.6 }}
+                                            className="absolute inset-0 rounded-full bg-emerald-500/30 blur-xl"
+                                        />
+                                    )}
+                                </motion.div>
+                                <motion.p
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: treasurePhase === 'impact' ? 1 : 0 }}
+                                    className="text-emerald-400 font-black text-2xl mt-6 tracking-widest"
+                                >
+                                    💥 咚！
+                                </motion.p>
+                            </motion.div>
+                        )}
+
+                        {/* STATE: EXPLODING — chest shatters, transition */}
+                        {treasurePhase === 'exploding' && (
+                            <motion.div
+                                key="exploding"
+                                initial={{ scale: 1, opacity: 1 }}
+                                animate={{ scale: 0, opacity: 0, rotate: 720 }}
+                                transition={{ duration: 0.5, ease: "easeIn" }}
+                                className="relative z-20"
+                            >
+                                <div className="text-[120px] md:text-[160px] leading-none select-none">🎁</div>
+                            </motion.div>
+                        )}
+
+                        {/* STATE: REVEALED — practice kit content rises */}
+                        {treasurePhase === 'revealed' && (
+                            <motion.div
+                                key="treasure-content"
+                                initial={{ opacity: 0, scale: 0.8, y: 60 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                                className="max-w-3xl mx-auto w-full relative z-10"
+                            >
+                                <div className="absolute -inset-20 bg-emerald-500/10 blur-[100px] rounded-full animate-pulse" />
                                 <div className="text-center mb-10 relative z-10">
-                                     <span className="transition-label !bg-white !text-black !border-white !animate-none px-6 py-2 text-[10px] font-black">UNLOCKED / 秘笈已現世</span>
+                                     <motion.span 
+                                        initial={{ width: 0 }}
+                                        animate={{ width: "auto" }}
+                                        className="transition-label !bg-white !text-black !border-white !animate-none px-6 py-2 text-[10px] font-black inline-block overflow-hidden whitespace-nowrap"
+                                     >
+                                        UNLOCKED / 秘笈已現世
+                                     </motion.span>
                                      <h2 className="text-3xl md:text-5xl font-black text-white mt-6 tracking-tight drop-shadow-glow">領取你的指令寶物</h2>
                                 </div>
-                                <div className={`bg-zinc-950 border-2 ${theme.border} rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden shadow-2xl border-emerald-500/40 z-10`}>
+                                <motion.div 
+                                    initial={{ opacity: 0, y: 30 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.3 }}
+                                    className={`bg-zinc-950 border-2 ${theme.border} rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden shadow-2xl border-emerald-500/40 z-10`}
+                                >
                                     <div className="relative z-10">
                                         <div className="flex items-center gap-6 mb-10">
                                             <motion.div animate={{ scale: [1, 1.2, 1], rotate: [0, -10, 10, 0] }} transition={{ duration: 1.5, repeat: Infinity }} className="w-16 h-16 bg-emerald-500/20 rounded-2xl flex items-center justify-center text-4xl shadow-inner">🎁</motion.div>
@@ -332,18 +469,13 @@ const ArticleDetail = () => {
                                         <motion.button
                                             whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
                                             onClick={() => handleCopy(article.practice_kit.command)}
-                                            className={`w-full flex items-center justify-center gap-4 py-6 rounded-2xl font-black text-xl transition-all ${copied ? 'bg-white text-black' : 'bg-emerald-500 text-black'}`}
+                                            className={`w-full flex items-center justify-center gap-4 py-6 rounded-2xl font-black text-xl transition-all ${copied ? 'bg-white text-black' : 'bg-emerald-500 text-black btn-glow'}`}
                                         >
                                             {copied ? <><Check size={28} strokeWidth={4} /> 複製成功！</> : <><Copy size={28} strokeWidth={3} /> 領取指令寶物</>}
                                         </motion.button>
                                     </div>
-                                </div>
+                                </motion.div>
                             </motion.div>
-                        ) : (
-                            <div className="max-w-3xl mx-auto py-32 border-2 border-dashed border-white/5 rounded-[3rem] flex flex-col items-center justify-center text-zinc-900 pointer-events-none">
-                                <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 2.5 }}><Lock size={80} className="mb-8 opacity-5" /></motion.div>
-                                <p className="text-lg font-black uppercase tracking-[0.6em] opacity-10">完成所有步驟以解鎖</p>
-                            </div>
                         )}
                     </AnimatePresence>
                 </section>
