@@ -13,109 +13,173 @@ import { CHAPTERS, MAIN_QUEST_ORDER, SIDE_QUEST_IDS } from '../data/insights';
    ONBOARDING
    ═══════════════════════════════════════════ */
 const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free', chapter?: number) => void }) => {
-    const [phase, setPhase] = useState<'welcome' | 'quiz' | 'result'>('welcome');
-    const [quizStep, setQuizStep] = useState(0);
-    const [answers, setAnswers] = useState<number[]>([]);
-    const [resultChapter, setResultChapter] = useState(1);
+    const [phase, setPhase] = useState<'welcome' | 'platform' | 'never-used' | 'experience' | 'result'>('welcome');
+    const [platform, setPlatform] = useState('');
+    const [resultChapter, setResultChapter] = useState(0);
 
-    const quizQuestions = [
-        { q: "你平常多久用一次 AI？", options: ["幾乎沒用過 🤷", "偶爾問問問題 🙂", "每天都在用 🚀"] },
-        { q: "你能分辨「好指令」和「爛指令」嗎？", options: ["什麼是指令？ 😅", "大概知道 🤔", "閉著眼都能寫 😎"] },
-        { q: "你用 AI 做過最複雜的事是？", options: ["問問天氣 🌤️", "寫過 email 或文章 📝", "建過自動化流程 ⚙️"] },
-    ];
-
-    const handleQuizAnswer = (idx: number) => {
-        const na = [...answers, idx];
-        setAnswers(na);
-        if (quizStep < quizQuestions.length - 1) {
-            setQuizStep(quizStep + 1);
+    const handlePlatform = (p: string) => {
+        setPlatform(p);
+        localStorage.setItem('dee_ai_platform', p);
+        if (p === 'none') {
+            setResultChapter(0); // Ch.0
+            setPhase('never-used');
         } else {
-            const avg = na.reduce((a, b) => a + b, 0) / na.length;
-            const ch = avg < 0.8 ? 1 : avg < 1.5 ? 2 : avg < 2 ? 3 : 4;
-            setResultChapter(ch);
-            setPhase('result');
+            setPhase('experience');
         }
     };
 
-    const chapterNames = ['', '🌱 Ch.1 認識 AI', '🔧 Ch.2 指令進化', '🎯 Ch.3 生活實戰', '🏆 Ch.4 進階挑戰'];
+    const handleExperience = (level: number) => {
+        // 0 = casual, 1 = medium, 2 = advanced
+        const ch = level === 0 ? 1 : level === 1 ? 2 : 3;
+        setResultChapter(ch);
+        setPhase('result');
+    };
+
+    const chapterEmojis: Record<number, string> = { 0: '🚀', 1: '🌱', 2: '🔧', 3: '🎯', 4: '🏆' };
+    const chapterNames: Record<number, string> = { 0: '🚀 Ch.0 出發準備', 1: '🌱 Ch.1 認識 AI', 2: '🔧 Ch.2 指令進化', 3: '🎯 Ch.3 生活實戰', 4: '🏆 Ch.4 進階挑戰' };
+    const chapterDescs: Record<number, string> = {
+        0: "沒關係，5 分鐘就能學會！我們先來認識三大 AI，完成你的第一段對話。",
+        1: "完美的起點！從最基本的 AI 思維開始，一步步帶你變強。",
+        2: "你有基礎了！直接學習結構化指令技巧。",
+        3: "不錯喔！直接用 AI 解決生活中的實際問題。",
+        4: "高手！直接挑戰最終的進階任務。"
+    };
+
+    const ModalShell = ({ children, kkey }: { children: React.ReactNode; kkey: string }) => (
+        <motion.div key={kkey} initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
+            className="bg-zinc-900/90 border border-white/10 p-8 md:p-12 rounded-[2.5rem] max-w-lg w-full shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-600" />
+            <div className="absolute -top-20 -right-20 w-40 h-40 bg-emerald-500/10 blur-3xl rounded-full" />
+            <div className="relative z-10">{children}</div>
+        </motion.div>
+    );
 
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="fixed inset-0 z-[100] flex items-center justify-center px-6 bg-black/90 backdrop-blur-xl">
             <AnimatePresence mode="wait">
+                {/* WELCOME */}
                 {phase === 'welcome' && (
-                    <motion.div key="w" initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
-                        className="bg-zinc-900/90 border border-white/10 p-8 md:p-12 rounded-[2.5rem] max-w-lg w-full shadow-2xl relative overflow-hidden">
-                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-600" />
-                        <div className="absolute -top-20 -right-20 w-40 h-40 bg-emerald-500/10 blur-3xl rounded-full" />
-                        <div className="relative z-10">
-                            <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2 }} className="text-center mb-10">
-                                <div className="text-6xl mb-6">👋</div>
-                                <h2 className="text-2xl md:text-3xl font-black text-white mb-3 tracking-tight">嗨！歡迎來到 Dee's AI Lab</h2>
-                                <p className="text-zinc-400 text-base md:text-lg leading-relaxed">我是 Dee，一個跟你一樣從零開始學 AI 的普通人。<br />這裡有 18 篇免費教學，帶你從入門到精通。</p>
-                            </motion.div>
-                            <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.5 }} className="space-y-4">
-                                <button onClick={() => { setAnswers([]); setQuizStep(0); setPhase('quiz'); }}
-                                    className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg flex items-center justify-center gap-3 hover:bg-emerald-400 transition-all shadow-lg shadow-emerald-500/20">
-                                    <Sparkles size={22} /> 我是新手，帶我逛逛
-                                </button>
-                                <button onClick={() => { setAnswers([]); setQuizStep(0); setPhase('quiz'); }}
-                                    className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/10 text-white font-bold text-lg flex items-center justify-center gap-3 hover:bg-white/10 transition-all">
-                                    <Gamepad2 size={22} /> 我有基礎，快速分級
-                                </button>
-                                <button onClick={() => onComplete('free')}
-                                    className="w-full py-5 px-6 rounded-2xl bg-transparent border border-white/5 text-zinc-500 font-bold text-base flex items-center justify-center gap-3 hover:text-white hover:border-white/20 transition-all">
-                                    <BookOpen size={20} /> 跳過教學，看全部文章
-                                </button>
-                            </motion.div>
-                        </div>
-                    </motion.div>
+                    <ModalShell kkey="w">
+                        <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="text-center mb-10">
+                            <div className="text-6xl mb-6">👋</div>
+                            <h2 className="text-2xl md:text-3xl font-black text-white mb-3 tracking-tight">嗨！歡迎來到 Dee's AI Lab</h2>
+                            <p className="text-zinc-400 text-base md:text-lg leading-relaxed">我是 Dee，一個跟你一樣從零開始學 AI 的普通人。<br />這裡有 20 篇免費教學，帶你輕鬆上手。</p>
+                        </motion.div>
+                        <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.3 }} className="space-y-4">
+                            <button onClick={() => setPhase('platform')}
+                                className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg flex items-center justify-center gap-3 hover:bg-emerald-400 transition-all shadow-lg shadow-emerald-500/20">
+                                <Sparkles size={22} /> 開始我的 AI 旅程
+                            </button>
+                            <button onClick={() => onComplete('free')}
+                                className="w-full py-4 px-6 rounded-2xl bg-transparent border border-white/5 text-zinc-500 font-bold text-base flex items-center justify-center gap-3 hover:text-white hover:border-white/20 transition-all">
+                                <BookOpen size={20} /> 跳過，直接看全部教學
+                            </button>
+                        </motion.div>
+                    </ModalShell>
                 )}
-                {phase === 'quiz' && (
-                    <motion.div key="q" initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
-                        className="bg-zinc-900/90 border border-white/10 p-8 md:p-10 rounded-[2.5rem] max-w-md w-full shadow-2xl relative overflow-hidden">
-                        <div className="absolute top-0 left-0 w-full h-1 bg-zinc-800">
-                            <motion.div className="h-full bg-emerald-500" animate={{ width: `${((quizStep + 1) / quizQuestions.length) * 100}%` }} />
+
+                {/* PLATFORM SELECTION */}
+                {phase === 'platform' && (
+                    <ModalShell kkey="p">
+                        <div className="text-center mb-8">
+                            <h3 className="text-xl md:text-2xl font-black text-white mb-2">你目前有在用哪個 AI 嗎？</h3>
+                            <p className="text-zinc-500 text-sm">選一個你最常用的，我們會根據你的經驗安排學習路線。</p>
                         </div>
-                        <div className="relative z-10">
-                            <p className="text-emerald-400 font-mono text-[10px] uppercase tracking-widest mb-6 text-center">Q{quizStep + 1} / {quizQuestions.length}</p>
-                            <h4 className="text-xl font-black text-white mb-8 text-center leading-tight">{quizQuestions[quizStep].q}</h4>
+                        <div className="space-y-3">
+                            <button onClick={() => handlePlatform('chatgpt')}
+                                className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-emerald-500/10 hover:border-emerald-500/30 text-white font-bold text-lg transition-all text-left flex items-center gap-4">
+                                <span className="text-2xl">🟢</span>
+                                <div><div className="font-black">ChatGPT</div><div className="text-zinc-500 text-xs">OpenAI · 全球最多人用</div></div>
+                            </button>
+                            <button onClick={() => handlePlatform('claude')}
+                                className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-violet-500/10 hover:border-violet-500/30 text-white font-bold text-lg transition-all text-left flex items-center gap-4">
+                                <span className="text-2xl">🟣</span>
+                                <div><div className="font-black">Claude</div><div className="text-zinc-500 text-xs">Anthropic · 最會聽話</div></div>
+                            </button>
+                            <button onClick={() => handlePlatform('gemini')}
+                                className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-blue-500/10 hover:border-blue-500/30 text-white font-bold text-lg transition-all text-left flex items-center gap-4">
+                                <span className="text-2xl">🔵</span>
+                                <div><div className="font-black">Gemini</div><div className="text-zinc-500 text-xs">Google · 搜尋最即時</div></div>
+                            </button>
+                            <button onClick={() => handlePlatform('none')}
+                                className="w-full py-5 px-6 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-amber-500/10 hover:border-amber-500/20 text-zinc-400 hover:text-white font-bold text-lg transition-all text-left flex items-center gap-4">
+                                <span className="text-2xl">😶</span>
+                                <div><div className="font-black">我還沒用過任何一個</div><div className="text-zinc-600 text-xs">完全沒關係，5 分鐘就能學會</div></div>
+                            </button>
+                        </div>
+                    </ModalShell>
+                )}
+
+                {/* NEVER USED AI */}
+                {phase === 'never-used' && (
+                    <ModalShell kkey="n">
+                        <div className="text-center">
+                            <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring" }} className="text-6xl mb-6">🚀</motion.div>
+                            <h3 className="text-2xl font-black text-white mb-3">太好了，從頭開始最棒！</h3>
+                            <p className="text-zinc-400 text-base mb-10 leading-relaxed">我們會先帶你認識三大聊天 AI，<br />然後手把手完成你的第一段 AI 對話。<br />只需要 5 分鐘！</p>
                             <div className="space-y-3">
-                                {quizQuestions[quizStep].options.map((opt, idx) => (
-                                    <motion.button key={idx} whileTap={{ scale: 0.97 }} onClick={() => handleQuizAnswer(idx)}
-                                        className="w-full py-4 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-emerald-500/10 hover:border-emerald-500/30 text-zinc-300 hover:text-white font-bold transition-all text-base text-left">
-                                        {opt}
-                                    </motion.button>
-                                ))}
+                                <button onClick={() => onComplete('guided', 0)}
+                                    className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg hover:bg-emerald-400 transition-all shadow-lg">
+                                    🎮 開始冒險模式
+                                </button>
+                                <button onClick={() => onComplete('free', 0)}
+                                    className="w-full py-4 px-6 rounded-2xl bg-white/5 border border-white/10 text-zinc-400 font-bold text-base hover:text-white transition-all">
+                                    📚 先看看全部教學
+                                </button>
                             </div>
                         </div>
-                    </motion.div>
+                    </ModalShell>
                 )}
-                {phase === 'result' && (
-                    <motion.div key="r" initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
-                        className="bg-zinc-900/90 border border-white/10 p-8 md:p-12 rounded-[2.5rem] max-w-md w-full shadow-2xl relative overflow-hidden text-center">
-                        <div className="absolute top-0 left-0 w-full h-1 bg-emerald-500" />
-                        <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", delay: 0.2 }} className="text-6xl mb-6">
-                            {resultChapter === 1 ? '🌱' : resultChapter === 2 ? '🔧' : resultChapter === 3 ? '🎯' : '🏆'}
-                        </motion.div>
-                        <h3 className="text-2xl font-black text-white mb-3">你的起始章節</h3>
-                        <p className="text-emerald-400 font-black text-xl mb-6">{chapterNames[resultChapter]}</p>
-                        <p className="text-zinc-400 text-base mb-10 leading-relaxed">
-                            {resultChapter === 1 && "完美的起點！從最基本的 AI 思維開始，一步步帶你變強。"}
-                            {resultChapter === 2 && "你有基礎了！直接進入指令技巧升級。"}
-                            {resultChapter === 3 && "不錯喔！直接挑戰生活實戰任務。"}
-                            {resultChapter === 4 && "高手！直接進最後的進階挑戰。"}
-                        </p>
+
+                {/* EXPERIENCE LEVEL */}
+                {phase === 'experience' && (
+                    <ModalShell kkey="e">
+                        <div className="text-center mb-8">
+                            <h3 className="text-xl md:text-2xl font-black text-white mb-2">你平常用 {platform === 'chatgpt' ? 'ChatGPT' : platform === 'claude' ? 'Claude' : 'Gemini'} 做什麼？</h3>
+                            <p className="text-zinc-500 text-sm">選最接近你的描述。</p>
+                        </div>
                         <div className="space-y-3">
-                            <button onClick={() => onComplete('guided', resultChapter)}
-                                className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg hover:bg-emerald-400 transition-all shadow-lg">
-                                🎮 開始冒險模式
+                            <button onClick={() => handleExperience(0)}
+                                className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-emerald-500/10 hover:border-emerald-500/30 text-white font-bold transition-all text-left">
+                                <div className="font-black mb-1">🌱 隨便聊聊、查查問題</div>
+                                <div className="text-zinc-500 text-xs">知道怎麼用，但不太確定怎麼問才能得到好答案</div>
                             </button>
-                            <button onClick={() => onComplete('free', resultChapter)}
-                                className="w-full py-4 px-6 rounded-2xl bg-white/5 border border-white/10 text-zinc-400 font-bold text-base hover:text-white transition-all">
-                                📚 改用自由模式
+                            <button onClick={() => handleExperience(1)}
+                                className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-emerald-500/10 hover:border-emerald-500/30 text-white font-bold transition-all text-left">
+                                <div className="font-black mb-1">🔧 寫文章、翻譯、整理資料</div>
+                                <div className="text-zinc-500 text-xs">已經用 AI 處理過實際任務，想學更有效率的方法</div>
+                            </button>
+                            <button onClick={() => handleExperience(2)}
+                                className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-emerald-500/10 hover:border-emerald-500/30 text-white font-bold transition-all text-left">
+                                <div className="font-black mb-1">🏆 已經很熟了，想學進階技巧</div>
+                                <div className="text-zinc-500 text-xs">每天都在用，想看看有什麼我還不知道的</div>
                             </button>
                         </div>
-                    </motion.div>
+                    </ModalShell>
+                )}
+
+                {/* RESULT */}
+                {phase === 'result' && (
+                    <ModalShell kkey="r">
+                        <div className="text-center">
+                            <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", delay: 0.2 }} className="text-6xl mb-6">
+                                {chapterEmojis[resultChapter] || '🌱'}
+                            </motion.div>
+                            <h3 className="text-2xl font-black text-white mb-3">你的起始章節</h3>
+                            <p className="text-emerald-400 font-black text-xl mb-4">{chapterNames[resultChapter]}</p>
+                            <p className="text-zinc-400 text-base mb-10 leading-relaxed">{chapterDescs[resultChapter]}</p>
+                            <div className="space-y-3">
+                                <button onClick={() => onComplete('guided', resultChapter)}
+                                    className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg hover:bg-emerald-400 transition-all shadow-lg">
+                                    🎮 開始冒險模式
+                                </button>
+                                <button onClick={() => onComplete('free', resultChapter)}
+                                    className="w-full py-4 px-6 rounded-2xl bg-white/5 border border-white/10 text-zinc-400 font-bold text-base hover:text-white transition-all">
+                                    📚 改用自由模式
+                                </button>
+                            </div>
+                        </div>
+                    </ModalShell>
                 )}
             </AnimatePresence>
         </motion.div>

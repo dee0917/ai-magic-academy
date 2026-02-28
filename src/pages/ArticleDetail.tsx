@@ -99,7 +99,7 @@ const ArticleDetail = () => {
     const handleCopy = (text: string) => {
         navigator.clipboard.writeText(text);
         setCopied(true);
-        confetti({ particleCount: 60, spread: 50, origin: { y: 0.7 }, colors: ['#ffffff', '#10b981'] });
+        // No confetti — just checkmark animation (handled in JSX)
         setTimeout(() => setCopied(false), 3000);
     };
 
@@ -156,11 +156,15 @@ const ArticleDetail = () => {
         }
     };
 
+    const [quizStars, setQuizStars] = useState(false);
+    const [badgeGlow, setBadgeGlow] = useState(false);
+
     const handleQuizSubmit = () => {
         if (quizAnswer === null) return;
         setQuizSubmitted(true);
         if (quizAnswer === article?.quiz?.answer) {
-            confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+            setQuizStars(true); // Trigger star burst instead of confetti
+            setTimeout(() => setQuizStars(false), 1500);
             setTimeout(() => {
                 rewardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }, 1000);
@@ -191,7 +195,9 @@ const ArticleDetail = () => {
                 }
             }
         }
-        confetti({ particleCount: 200, spread: 100, origin: { y: 0.5 }, colors: ['#fbbf24', '#f59e0b', '#d97706'] });
+        // Golden halo effect instead of confetti
+        setBadgeGlow(true);
+        setTimeout(() => setBadgeGlow(false), 3000);
     };
 
     if (loading) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-mono text-xs tracking-widest animate-pulse">SYNCING_DATA...</div>;
@@ -561,7 +567,24 @@ const ArticleDetail = () => {
                                     提交考核答案
                                 </motion.button>
                             ) : (
-                                <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className={`mt-8 p-8 rounded-2xl border ${quizAnswer === article.quiz.answer ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-amber-500/10 border-amber-500/20'}`}>
+                                <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className={`mt-8 p-8 rounded-2xl border relative overflow-hidden ${quizAnswer === article.quiz.answer ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-amber-500/10 border-amber-500/20'}`}>
+                                    {/* Star burst effect on correct answer */}
+                                    {quizStars && quizAnswer === article.quiz.answer && (
+                                        <>
+                                            {Array.from({ length: 8 }, (_, i) => {
+                                                const angle = (i / 8) * Math.PI * 2;
+                                                const dist = 60 + Math.random() * 50;
+                                                return (
+                                                    <motion.span key={`star-${i}`}
+                                                        initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+                                                        animate={{ x: Math.cos(angle) * dist, y: Math.sin(angle) * dist, opacity: 0, scale: 0 }}
+                                                        transition={{ duration: 0.7, delay: i * 0.04 }}
+                                                        className="absolute left-1/2 top-4 text-xl z-20 pointer-events-none"
+                                                    >⭐</motion.span>
+                                                );
+                                            })}
+                                        </>
+                                    )}
                                     <p className={`text-xl md:text-2xl font-black mb-4 ${quizAnswer === article.quiz.answer ? 'text-emerald-400' : 'text-amber-400'}`}>{quizAnswer === article.quiz.answer ? '🎉 完美答對！' : '💡 差一點點！'}</p>
                                     <p className="text-zinc-400 text-lg md:text-xl leading-relaxed font-bold">{article.quiz.explanation}</p>
                                 </motion.div>
@@ -584,6 +607,14 @@ const ArticleDetail = () => {
                     ) : (
                         <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring", damping: 10 }}>
                             <div className="inline-block bg-zinc-900 border-2 border-emerald-500/40 rounded-[3rem] p-12 md:p-16 shadow-2xl relative overflow-hidden">
+                                {/* Golden halo pulses */}
+                                {badgeGlow && (
+                                    <>
+                                        <motion.div initial={{ scale: 0, opacity: 0.6 }} animate={{ scale: 2.5, opacity: 0 }} transition={{ duration: 1.2 }} className="absolute inset-0 m-auto w-32 h-32 rounded-full border-4 border-amber-400 pointer-events-none" />
+                                        <motion.div initial={{ scale: 0, opacity: 0.5 }} animate={{ scale: 3, opacity: 0 }} transition={{ duration: 1.2, delay: 0.3 }} className="absolute inset-0 m-auto w-32 h-32 rounded-full border-4 border-amber-300 pointer-events-none" />
+                                        <motion.div initial={{ scale: 0, opacity: 0.4 }} animate={{ scale: 3.5, opacity: 0 }} transition={{ duration: 1.2, delay: 0.6 }} className="absolute inset-0 m-auto w-32 h-32 rounded-full border-4 border-yellow-400 pointer-events-none" />
+                                    </>
+                                )}
                                 <div className="absolute top-0 left-0 w-full h-2 bg-emerald-500" />
                                 <motion.p animate={{ scale: [1, 1.1, 1], rotate: [0, -5, 5, 0] }} transition={{ duration: 3, repeat: Infinity }} className="text-8xl mb-10">🏆</motion.p>
                                 <p className="text-emerald-500 font-black text-sm tracking-[0.6em] mb-4 uppercase">Mastery Achieved</p>
