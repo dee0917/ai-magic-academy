@@ -273,7 +273,7 @@ const Home = () => {
                                 </div>
 
                                 <div className="w-full lg:w-auto">
-                                    <a href="https://p.ecpay.com.tw/XXXXXX" target="_blank" rel="noopener noreferrer"
+                                    <a href="https://pay.ecpay.com.tw/CreditPayment/ExpressCredit?MerchantID=3378826" target="_blank" rel="noopener noreferrer"
                                         className="flex items-center justify-center gap-4 bg-amber-500 text-black px-12 py-6 rounded-[2rem] font-black text-xl hover:bg-amber-400 transition-all shadow-2xl shadow-amber-500/20 hover:-translate-y-1 group/btn">
                                         <Coffee size={24} className="group-hover/btn:rotate-12 transition-transform" />
                                         請 Dee 喝杯咖啡
