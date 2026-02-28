@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Gamepad2, MessageSquare, Zap, Sparkles, Coffee, Rocket, Shield, Trophy } from 'lucide-react';
+import { ArrowRight, Gamepad2, MessageSquare, Zap, Sparkles, Coffee, Rocket } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SEO from '../components/ui/SEO';
 import Typewriter from '../components/ui/Typewriter';
@@ -17,14 +17,12 @@ const Home = () => {
     }, []);
 
     const totalArticles = MAIN_QUEST_ORDER.length + SIDE_QUEST_IDS.length;
-    const playerLevel = Math.floor(completedCount / 1.5) + 1;
-    const xp = completedCount * 200;
 
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             <SEO path="/" />
 
-            {/* ═══════════ HERO — 遊戲開始畫面 (融合說明版) ═══════════ */}
+            {/* ═══════════ HERO — 遊戲開始畫面 ═══════════ */}
             <section className="relative min-h-[95vh] flex items-center justify-center px-6 overflow-hidden pt-20">
                 {/* Background effects */}
                 <div className="absolute inset-0 pointer-events-none">
@@ -59,32 +57,12 @@ const Home = () => {
                         </span>
                     </motion.h1>
 
-                    {/* THE CRITICAL SUBTITLE (Re-integrated for clarity) */}
+                    {/* THE CRITICAL SUBTITLE */}
                     <motion.p initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}
-                        className="text-lg md:text-xl text-zinc-400 mb-8 leading-relaxed max-w-2xl mx-auto">
+                        className="text-lg md:text-xl text-zinc-400 mb-12 leading-relaxed max-w-2xl mx-auto">
                         用最白話的方式學 AI。<br />
                         <span className="text-white font-bold">{totalArticles} 篇免費互動教學</span>，從完全不會到熟練運用。
                     </motion.p>
-
-                    {/* Stats Card */}
-                    <div className="flex justify-center mb-12">
-                        <div className="flex items-center gap-8 px-8 py-4 rounded-3xl bg-white/[0.03] border border-white/[0.05] backdrop-blur-sm">
-                            <div className="text-center">
-                                <p className="text-2xl font-black text-emerald-400">Lv.{playerLevel}</p>
-                                <p className="text-zinc-600 text-[9px] font-bold tracking-widest uppercase">Rank</p>
-                            </div>
-                            <div className="w-px h-8 bg-zinc-800" />
-                            <div className="text-center">
-                                <p className="text-xl font-black text-amber-400">{xp.toLocaleString()}</p>
-                                <p className="text-zinc-600 text-[9px] font-bold tracking-widest uppercase">XP</p>
-                            </div>
-                            <div className="w-px h-8 bg-zinc-800" />
-                            <div className="text-center">
-                                <p className="text-xl font-black text-white">{completedCount}/{totalArticles}</p>
-                                <p className="text-zinc-600 text-[9px] font-bold tracking-widest uppercase">Tasks</p>
-                            </div>
-                        </div>
-                    </div>
 
                     <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
                         className="flex flex-col sm:flex-row gap-5 justify-center items-center">
