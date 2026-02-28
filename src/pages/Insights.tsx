@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     ArrowRight, Star, BookOpen, Lock, CheckCircle2, Sparkles,
-    Zap, Gamepad2, Trophy
+    Zap, Gamepad2, Trophy, ChevronDown, ChevronRight, Filter,
+    Compass, Map, Shield
 } from 'lucide-react';
 import { INSIGHTS } from '../data/mock';
 import { CHAPTERS, MAIN_QUEST_ORDER, SIDE_QUEST_IDS } from '../data/insights';
@@ -258,7 +259,7 @@ const SkipChapterModal = ({ targetChapter, onPass, onClose }: { targetChapter: n
 };
 
 /* ═══════════════════════════════════════════
-   MAIN PAGE
+   MAIN PAGE — Phase D: Immersive Game UI
    ═══════════════════════════════════════════ */
 const Insights = () => {
     const [viewMode, setViewMode] = useState<'adventure' | 'free'>('adventure');
@@ -267,6 +268,8 @@ const Insights = () => {
     const [unlockedChapter, setUnlockedChapter] = useState(1);
     const [completedIds, setCompletedIds] = useState<number[]>([]);
     const [skipTarget, setSkipTarget] = useState<number | null>(null);
+    const [freeFilter, setFreeFilter] = useState<string>('全部');
+    const [expandedChapters, setExpandedChapters] = useState<Set<number>>(new Set());
 
     const allInsights = INSIGHTS.filter(i => i.category !== 'AI 新聞');
     const mainQuests = allInsights.filter(i => MAIN_QUEST_ORDER.includes(i.id));
@@ -286,6 +289,18 @@ const Insights = () => {
         if (comp) setCompletedIds(JSON.parse(comp));
         setLoading(false);
     }, []);
+
+    // Auto-expand current chapter in adventure mode
+    useEffect(() => {
+        const currentChapter = CHAPTERS.find(c => {
+            const items = c.articleIds;
+            const done = items.filter(id => completedIds.includes(id)).length;
+            return c.id <= unlockedChapter && done < items.length;
+        });
+        if (currentChapter) {
+            setExpandedChapters(new Set([currentChapter.id]));
+        }
+    }, [unlockedChapter, completedIds]);
 
     const handleOnboardingComplete = (mode: 'guided' | 'free', chapter?: number) => {
         const ch = chapter || 1;
@@ -309,189 +324,420 @@ const Insights = () => {
         setSkipTarget(null);
     };
 
-    if (loading) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-mono text-xs tracking-widest animate-pulse">LOADING...</div>;
+    const toggleChapter = (id: number) => {
+        setExpandedChapters(prev => {
+            const next = new Set(prev);
+            if (next.has(id)) next.delete(id);
+            else next.add(id);
+            return next;
+        });
+    };
+
+    if (loading) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-mono text-xs tracking-widest animate-pulse">SYNCING...</div>;
 
     const totalMain = MAIN_QUEST_ORDER.length;
     const completedMain = completedIds.filter(id => MAIN_QUEST_ORDER.includes(id)).length;
     const totalAll = allInsights.length;
+    const xp = completedIds.length * 200;
+    const playerLevel = Math.floor(completedIds.length / 1.5) + 1;
+    const progressPct = viewMode === 'adventure' ? (completedMain / totalMain) || 0 : (completedIds.length / totalAll) || 0;
+
+    // Smart recommendation for free mode
+    const nextRecommended = allInsights.find(i =>
+        !completedIds.includes(i.id) && MAIN_QUEST_ORDER.includes(i.id)
+    );
+
+    // Free mode filter
+    const filterTags = ['全部', '入門', '技巧', '實戰', '進階', '支線', '已完成', '未完成'];
+    const filteredInsights = allInsights.filter(i => {
+        if (freeFilter === '全部') return true;
+        if (freeFilter === '已完成') return completedIds.includes(i.id);
+        if (freeFilter === '未完成') return !completedIds.includes(i.id);
+        if (freeFilter === '入門') return i.category === '出發準備' || i.category === '入門心法';
+        if (freeFilter === '技巧') return i.category === '指令技巧';
+        if (freeFilter === '實戰') return i.category === '生活實戰';
+        if (freeFilter === '進階') return i.category === '進階挑戰';
+        if (freeFilter === '支線') return i.category === '支線任務';
+        return true;
+    });
 
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-32 pb-20 px-6 max-w-5xl mx-auto min-h-screen text-left">
-            <SEO title="免費 AI 實用教學" description="從新手到高手的 AI 學習旅程，18 篇免費教學" path="/insights" />
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-24 pb-20 min-h-screen text-left">
+            <SEO title="免費 AI 實用教學" description="從新手到高手的 AI 學習旅程，20 篇免費教學" path="/insights" />
 
             <AnimatePresence>{showOnboarding && <OnboardingScreen onComplete={handleOnboardingComplete} />}</AnimatePresence>
             <AnimatePresence>{skipTarget && <SkipChapterModal targetChapter={skipTarget} onPass={handleSkipPassed} onClose={() => setSkipTarget(null)} />}</AnimatePresence>
 
-            {/* HEADER */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-                <div>
-                    <span className="text-emerald-500 font-bold tracking-widest text-[10px] uppercase mb-4 block">
-                        {viewMode === 'adventure' ? `CHAPTER ${unlockedChapter} · ADVENTURE MODE` : 'FREE MODE · ALL UNLOCKED'}
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold font-serif text-white mb-4">AI 實踐教學</h1>
-                    <p className="text-zinc-500 text-lg max-w-xl leading-relaxed">
-                        {viewMode === 'adventure' ? '12 篇主線任務 + 6 篇支線。按章節順序學習，或挑戰跳級考試。' : '全部 18 篇已解鎖，自由選擇你感興趣的主題。'}
-                    </p>
+            {/* ═══════════ HERO AREA ═══════════ */}
+            <div className="relative overflow-hidden mb-12">
+                {/* Subtle particle/glow background */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                    <div className="absolute -top-24 -left-24 w-96 h-96 bg-emerald-500/5 blur-[120px] rounded-full" />
+                    <div className="absolute -bottom-24 -right-24 w-72 h-72 bg-teal-500/5 blur-[100px] rounded-full" />
+                    <motion.div animate={{ y: [0, -10, 0], x: [0, 5, 0] }} transition={{ duration: 8, repeat: Infinity }} className="absolute top-1/4 left-1/4 w-2 h-2 bg-emerald-500/20 rounded-full" />
+                    <motion.div animate={{ y: [0, 8, 0], x: [0, -3, 0] }} transition={{ duration: 6, repeat: Infinity, delay: 1 }} className="absolute top-1/3 right-1/3 w-1.5 h-1.5 bg-teal-400/20 rounded-full" />
+                    <motion.div animate={{ y: [0, -6, 0] }} transition={{ duration: 10, repeat: Infinity, delay: 2 }} className="absolute bottom-1/4 left-2/3 w-1 h-1 bg-emerald-400/30 rounded-full" />
                 </div>
-                <div className="flex bg-white/5 p-1 rounded-2xl border border-white/10 flex-shrink-0">
-                    <button onClick={() => handleModeSwitch('adventure')} className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${viewMode === 'adventure' ? 'bg-emerald-500 text-black shadow-lg' : 'text-zinc-500 hover:text-white'}`}>
-                        <Gamepad2 size={14} /> 冒險模式
-                    </button>
-                    <button onClick={() => handleModeSwitch('free')} className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${viewMode === 'free' ? 'bg-emerald-500 text-black shadow-lg' : 'text-zinc-500 hover:text-white'}`}>
-                        <BookOpen size={14} /> 自由模式
-                    </button>
+
+                <div className="relative z-10 px-6 max-w-5xl mx-auto">
+                    <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }}
+                        className="bg-gradient-to-br from-zinc-900/80 via-zinc-900/60 to-zinc-900/80 border border-white/[0.06] rounded-[2rem] p-8 md:p-12 backdrop-blur-sm">
+
+                        {/* Top row: Mode switcher */}
+                        <div className="flex items-center justify-between mb-8">
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                                    {viewMode === 'adventure' ? <Map size={18} className="text-emerald-400" /> : <Compass size={18} className="text-emerald-400" />}
+                                </div>
+                                <div>
+                                    <span className="text-emerald-400 font-mono text-[10px] tracking-[0.3em] uppercase block">
+                                        {viewMode === 'adventure' ? 'ADVENTURE MODE' : 'FREE EXPLORE'}
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="flex bg-black/40 p-1 rounded-2xl border border-white/5">
+                                <button onClick={() => handleModeSwitch('adventure')}
+                                    className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all ${viewMode === 'adventure' ? 'bg-emerald-500 text-black shadow-lg shadow-emerald-500/20' : 'text-zinc-600 hover:text-white'}`}>
+                                    <Gamepad2 size={14} /> 冒險
+                                </button>
+                                <button onClick={() => handleModeSwitch('free')}
+                                    className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all ${viewMode === 'free' ? 'bg-emerald-500 text-black shadow-lg shadow-emerald-500/20' : 'text-zinc-600 hover:text-white'}`}>
+                                    <BookOpen size={14} /> 自由
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Title + stats */}
+                        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-8">
+                            <div>
+                                <h1 className="text-3xl md:text-5xl font-black text-white mb-3 tracking-tight">🧠 AI 修煉之路</h1>
+                                <p className="text-zinc-500 text-sm md:text-base max-w-lg leading-relaxed">
+                                    {viewMode === 'adventure'
+                                        ? '14 篇主線任務 + 6 篇支線冒險。按章節推進，一步一腳印變成 AI 高手。'
+                                        : '全部 20 篇已解鎖，自由選擇你感興趣的主題深入探索。'}
+                                </p>
+                            </div>
+                            <div className="flex items-center gap-6 flex-shrink-0">
+                                <div className="text-center">
+                                    <motion.p animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 3, repeat: Infinity }} className="text-3xl md:text-4xl font-black text-emerald-400">
+                                        Lv.{playerLevel}
+                                    </motion.p>
+                                    <p className="text-zinc-600 text-[10px] font-bold tracking-widest uppercase">LEVEL</p>
+                                </div>
+                                <div className="w-px h-10 bg-zinc-800" />
+                                <div className="text-center">
+                                    <p className="text-2xl md:text-3xl font-black text-amber-400">{xp.toLocaleString()}</p>
+                                    <p className="text-zinc-600 text-[10px] font-bold tracking-widest uppercase">XP</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Large progress bar */}
+                        <div>
+                            <div className="flex items-center justify-between mb-2">
+                                <span className="text-zinc-500 text-xs font-bold">
+                                    {viewMode === 'adventure' ? `主線進度` : `總進度`}
+                                </span>
+                                <span className="text-emerald-400 text-xs font-mono font-bold">
+                                    {viewMode === 'adventure' ? `${completedMain} / ${totalMain}` : `${completedIds.length} / ${totalAll}`}
+                                    <span className="text-zinc-600 ml-2">{Math.round(progressPct * 100)}%</span>
+                                </span>
+                            </div>
+                            <div className="w-full h-3 bg-black/60 rounded-full overflow-hidden border border-white/5">
+                                <motion.div
+                                    className="h-full rounded-full bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-500 relative"
+                                    initial={{ width: 0 }}
+                                    animate={{ width: `${progressPct * 100}%` }}
+                                    transition={{ duration: 1, ease: "easeOut" }}
+                                >
+                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse" />
+                                </motion.div>
+                            </div>
+                        </div>
+                    </motion.div>
                 </div>
             </div>
 
-            {viewMode === 'adventure' ? (
-                <>
-                    {/* CHAPTERS */}
-                    <div className="space-y-20 relative">
-                        <div className="absolute left-8 top-12 bottom-12 w-0.5 bg-zinc-800/50 hidden md:block border-l border-dashed border-zinc-700" />
-                        {CHAPTERS.map(chapter => {
-                            const items = chapter.articleIds.map(id => mainQuests.find(i => i.id === id)).filter(Boolean);
-                            const done = items.filter(i => completedIds.includes(i!.id)).length;
-                            const isLocked = chapter.id > unlockedChapter;
-                            const isComplete = done >= items.length;
+            {/* ═══════════ CONTENT AREA ═══════════ */}
+            <div className="px-6 max-w-5xl mx-auto">
+                {viewMode === 'adventure' ? (
+                    <>
+                        {/* ═══════════ ADVENTURE: ROUTE MAP ═══════════ */}
+                        <div className="space-y-4 relative">
+                            {/* Vertical connecting line */}
+                            <div className="absolute left-[23px] top-6 bottom-6 w-px bg-gradient-to-b from-emerald-500/30 via-zinc-800/50 to-zinc-800/20 hidden md:block" />
 
-                            return (
-                                <ChapterSection
-                                    key={chapter.id}
-                                    chapter={chapter}
-                                    items={items as any[]}
-                                    completedIds={completedIds}
-                                    completedCount={done}
-                                    isLocked={isLocked}
-                                    isComplete={isComplete}
-                                    onSkip={chapter.id > unlockedChapter ? () => setSkipTarget(chapter.id) : undefined}
-                                />
-                            );
-                        })}
-                    </div>
+                            {CHAPTERS.map((chapter, ci) => {
+                                const items = chapter.articleIds.map(id => mainQuests.find(i => i.id === id)).filter(Boolean);
+                                const done = items.filter(i => completedIds.includes(i!.id)).length;
+                                const isLocked = chapter.id > unlockedChapter;
+                                const isComplete = done >= items.length;
+                                const isCurrent = chapter.id <= unlockedChapter && !isComplete;
+                                const isExpanded = expandedChapters.has(chapter.id);
 
-                    {/* SIDE QUESTS */}
-                    <div className="mt-24 pt-16 border-t border-white/5">
-                        <div className="mb-10">
-                            <span className="text-amber-500 font-bold tracking-widest text-[10px] uppercase mb-3 block">SIDE QUESTS · 支線任務</span>
-                            <h2 className="text-2xl font-bold text-white mb-2">🎲 特別篇</h2>
-                            <p className="text-zinc-500 text-sm">不在主線中，但一樣精彩。有小孩、養寵物、做投資的你，別錯過。</p>
+                                return (
+                                    <ChapterNode
+                                        key={chapter.id}
+                                        chapter={chapter}
+                                        items={items as any[]}
+                                        completedIds={completedIds}
+                                        completedCount={done}
+                                        isLocked={isLocked}
+                                        isComplete={isComplete}
+                                        isCurrent={isCurrent}
+                                        isExpanded={isExpanded}
+                                        onToggle={() => toggleChapter(chapter.id)}
+                                        onSkip={chapter.id > unlockedChapter ? () => setSkipTarget(chapter.id) : undefined}
+                                        index={ci}
+                                    />
+                                );
+                            })}
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {sideQuests.map((item, i) => (
+
+                        {/* SIDE QUESTS */}
+                        <div className="mt-16 pt-12 border-t border-white/5">
+                            <div className="mb-8 flex items-center gap-4">
+                                <div className="w-10 h-10 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
+                                    <Sparkles size={18} className="text-amber-400" />
+                                </div>
+                                <div>
+                                    <h2 className="text-xl font-black text-white">支線任務</h2>
+                                    <p className="text-zinc-600 text-xs">不受主線限制，隨時可以探索</p>
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                                {sideQuests.map((item, i) => (
+                                    <InsightCard key={item.id} insight={item} idx={i} completed={completedIds.includes(item.id)} />
+                                ))}
+                            </div>
+                        </div>
+                    </>
+                ) : (
+                    /* ═══════════ FREE MODE: FILTERED GRID ═══════════ */
+                    <div>
+                        {/* Smart recommendation */}
+                        {nextRecommended && (
+                            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
+                                <Link to={`/insights/${nextRecommended.id}`} className="group block">
+                                    <div className="bg-gradient-to-r from-emerald-500/[0.06] to-teal-500/[0.04] border border-emerald-500/10 hover:border-emerald-500/30 rounded-2xl p-5 md:p-6 transition-all">
+                                        <div className="flex items-center gap-3 mb-2">
+                                            <Compass size={16} className="text-emerald-400" />
+                                            <span className="text-emerald-400 text-[10px] font-bold tracking-widest uppercase">推薦下一篇</span>
+                                        </div>
+                                        <div className="flex items-center justify-between">
+                                            <div>
+                                                <h3 className="text-white font-bold text-lg group-hover:text-emerald-300 transition-colors">{nextRecommended.title}</h3>
+                                                <p className="text-zinc-500 text-xs mt-1">{nextRecommended.summary?.slice(0, 60)}...</p>
+                                            </div>
+                                            <ArrowRight size={20} className="text-zinc-700 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all flex-shrink-0" />
+                                        </div>
+                                    </div>
+                                </Link>
+                            </motion.div>
+                        )}
+
+                        {/* Filter tags */}
+                        <div className="flex flex-wrap gap-2 mb-8">
+                            <Filter size={14} className="text-zinc-600 mt-1.5 mr-1" />
+                            {filterTags.map(tag => (
+                                <button key={tag} onClick={() => setFreeFilter(tag)}
+                                    className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${freeFilter === tag
+                                        ? 'bg-emerald-500 text-black shadow-lg shadow-emerald-500/20'
+                                        : 'bg-white/[0.03] border border-white/5 text-zinc-500 hover:text-white hover:border-white/10'
+                                    }`}>
+                                    {tag}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                            {filteredInsights.map((item, i) => (
                                 <InsightCard key={item.id} insight={item} idx={i} completed={completedIds.includes(item.id)} />
                             ))}
                         </div>
-                    </div>
-                </>
-            ) : (
-                /* FREE MODE */
-                <div className="space-y-16">
-                    {CHAPTERS.map(chapter => {
-                        const items = chapter.articleIds.map(id => mainQuests.find(i => i.id === id)).filter(Boolean);
-                        return (
-                            <div key={chapter.id}>
-                                <h2 className="text-xl font-bold text-white mb-6">{chapter.emoji} {chapter.title}</h2>
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    {(items as any[]).map((item, i) => <InsightCard key={item.id} insight={item} idx={i} completed={completedIds.includes(item.id)} />)}
-                                </div>
+
+                        {filteredInsights.length === 0 && (
+                            <div className="text-center py-20">
+                                <p className="text-zinc-600 text-lg font-bold">沒有符合條件的文章</p>
+                                <button onClick={() => setFreeFilter('全部')} className="mt-4 text-emerald-400 text-sm font-bold hover:underline">查看全部</button>
                             </div>
-                        );
-                    })}
-                    <div>
-                        <h2 className="text-xl font-bold text-white mb-6">🎲 特別篇</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {sideQuests.map((item, i) => <InsightCard key={item.id} insight={item} idx={i} completed={completedIds.includes(item.id)} />)}
+                        )}
+                    </div>
+                )}
+
+                {/* ═══════════ TOTAL PROGRESS FOOTER ═══════════ */}
+                <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+                    className="mt-20 pt-10 border-t border-white/5 text-center">
+                    <div className="flex items-center justify-center gap-6 mb-6">
+                        <div className="flex items-center gap-2">
+                            <Shield size={14} className="text-emerald-500" />
+                            <span className="text-zinc-500 text-xs font-bold">Lv.{playerLevel}</span>
+                        </div>
+                        <div className="w-px h-4 bg-zinc-800" />
+                        <div className="flex items-center gap-2">
+                            <Trophy size={14} className="text-amber-500" />
+                            <span className="text-zinc-500 text-xs font-bold">{xp.toLocaleString()} XP</span>
+                        </div>
+                        <div className="w-px h-4 bg-zinc-800" />
+                        <div className="flex items-center gap-2">
+                            <CheckCircle2 size={14} className="text-emerald-500" />
+                            <span className="text-zinc-500 text-xs font-bold">{completedIds.length}/{totalAll} 完成</span>
                         </div>
                     </div>
-                </div>
-            )}
-
-            {/* TOTAL PROGRESS */}
-            <div className="mt-20 pt-10 border-t border-white/5 text-center">
-                <div className="flex items-center justify-center gap-3 mb-3">
-                    <Trophy size={18} className="text-emerald-500" />
-                    <span className="text-zinc-500 text-sm font-bold">
-                        {viewMode === 'adventure' ? `主線進度：${completedMain} / ${totalMain}` : `總進度：${completedIds.length} / ${totalAll}`}
-                    </span>
-                </div>
-                <div className="w-full max-w-xs mx-auto h-2 bg-zinc-800 rounded-full overflow-hidden">
-                    <motion.div className="h-full bg-emerald-500 rounded-full" initial={{ width: 0 }}
-                        animate={{ width: `${((viewMode === 'adventure' ? completedMain / totalMain : completedIds.length / totalAll) || 0) * 100}%` }}
-                        transition={{ duration: 0.8 }} />
-                </div>
+                    <p className="text-zinc-700 text-[10px] font-bold tracking-[0.5em] uppercase">Dee's AI Life Lab · 2026</p>
+                </motion.div>
             </div>
         </motion.div>
     );
 };
 
 /* ═══════════════════════════════════════════
-   CHAPTER SECTION
+   CHAPTER NODE — RPG-style route map node
    ═══════════════════════════════════════════ */
-const ChapterSection = ({ chapter, items, completedIds, completedCount, isLocked, isComplete, onSkip }: any) => (
-    <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className={`relative pl-0 md:pl-20 ${isLocked ? 'opacity-30' : ''}`}>
-        <div className={`hidden md:flex absolute left-4 top-0 w-10 h-10 rounded-full items-center justify-center border-2 z-10 transition-all ${isComplete ? 'bg-emerald-500 border-emerald-400 text-black shadow-lg shadow-emerald-500/30' : isLocked ? 'bg-zinc-900 border-zinc-800 text-zinc-700' : 'bg-emerald-500 border-emerald-400 text-black shadow-lg shadow-emerald-500/20'}`}>
-            {isLocked ? <Lock size={16} /> : isComplete ? <CheckCircle2 size={16} /> : <span className="font-bold text-sm">{chapter.id}</span>}
-        </div>
-        <div className="mb-8">
-            <div className="flex flex-wrap items-center gap-3 mb-2">
-                <h2 className="text-2xl font-bold text-white">{chapter.emoji} {chapter.title}</h2>
-                {isLocked && <span className="text-[10px] bg-zinc-800 text-zinc-500 px-2 py-0.5 rounded-full uppercase tracking-widest font-bold">未解鎖</span>}
-                {isComplete && <span className="text-[10px] bg-emerald-500/10 text-emerald-500 px-2 py-0.5 rounded-full uppercase tracking-widest font-bold">已完成 ✓</span>}
+const ChapterNode = ({ chapter, items, completedIds, completedCount, isLocked, isComplete, isCurrent, isExpanded, onToggle, onSkip, index }: any) => {
+    const statusColor = isComplete
+        ? 'border-emerald-500 bg-emerald-500 shadow-emerald-500/30'
+        : isCurrent
+        ? 'border-emerald-400 bg-emerald-500 shadow-emerald-500/20 animate-pulse'
+        : isLocked
+        ? 'border-zinc-800 bg-zinc-900'
+        : 'border-emerald-500/50 bg-emerald-500/50';
+
+    return (
+        <motion.div initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.06 }}
+            className={`relative pl-0 md:pl-16 ${isLocked ? 'opacity-40' : ''}`}>
+            {/* Node dot on timeline */}
+            <div className={`hidden md:flex absolute left-[11px] top-6 w-6 h-6 rounded-full items-center justify-center border-2 z-10 shadow-lg ${statusColor}`}>
+                {isLocked ? <Lock size={10} className="text-zinc-600" /> : isComplete ? <CheckCircle2 size={10} className="text-black" /> : <span className="w-2 h-2 bg-black rounded-full" />}
             </div>
-            <p className="text-zinc-500 text-sm mb-3">{chapter.subtitle}</p>
-            {!isLocked && (
-                <div className="flex items-center gap-4 mt-4">
-                    <div className="flex-1 max-w-xs">
-                        <span className="text-zinc-600 text-[10px] font-mono uppercase tracking-widest">{completedCount} / {items.length}</span>
-                        <div className="h-1.5 bg-zinc-800 rounded-full overflow-hidden mt-1">
-                            <motion.div className="h-full bg-emerald-500 rounded-full" animate={{ width: `${(completedCount / items.length) * 100}%` }} />
+
+            {/* Chapter card */}
+            <motion.div
+                className={`border rounded-2xl transition-all cursor-pointer group ${
+                    isCurrent ? 'border-emerald-500/30 bg-emerald-500/[0.03] shadow-lg shadow-emerald-500/5' :
+                    isComplete ? 'border-emerald-500/10 bg-emerald-500/[0.02]' :
+                    isLocked ? 'border-zinc-800/50 bg-zinc-900/30' :
+                    'border-white/5 bg-white/[0.02] hover:border-white/10'
+                }`}
+                onClick={isLocked ? undefined : onToggle}
+            >
+                {/* Header — always visible */}
+                <div className="p-5 md:p-6 flex items-center justify-between">
+                    <div className="flex items-center gap-4 flex-1 min-w-0">
+                        <span className="text-2xl flex-shrink-0">{chapter.emoji}</span>
+                        <div className="min-w-0">
+                            <div className="flex items-center gap-2 flex-wrap">
+                                <h2 className="text-lg md:text-xl font-black text-white truncate">{chapter.title}</h2>
+                                {isCurrent && <span className="text-[9px] bg-emerald-500 text-black px-2 py-0.5 rounded-full font-black uppercase tracking-wider animate-pulse">進行中</span>}
+                                {isComplete && <span className="text-[9px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded-full font-black uppercase tracking-wider">完成 ✓</span>}
+                                {isLocked && <span className="text-[9px] bg-zinc-800 text-zinc-600 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">🔒 未解鎖</span>}
+                            </div>
+                            <p className="text-zinc-600 text-xs mt-0.5 truncate">{chapter.subtitle}</p>
                         </div>
                     </div>
+                    <div className="flex items-center gap-4 flex-shrink-0 ml-4">
+                        {/* Article dots */}
+                        <div className="flex gap-1.5 items-center">
+                            {items.map((item: any) => (
+                                <div key={item.id} className={`w-3 h-3 rounded-full transition-all ${
+                                    completedIds.includes(item.id) ? 'bg-emerald-500 shadow-sm shadow-emerald-500/30' : isLocked ? 'bg-zinc-800' : 'bg-zinc-700'
+                                }`} />
+                            ))}
+                            <span className="text-zinc-600 text-[10px] font-mono ml-1">{completedCount}/{items.length}</span>
+                        </div>
+                        {!isLocked && (
+                            <motion.div animate={{ rotate: isExpanded ? 180 : 0 }} className="text-zinc-600 group-hover:text-zinc-400">
+                                <ChevronDown size={18} />
+                            </motion.div>
+                        )}
+                    </div>
                 </div>
-            )}
-            {isLocked && onSkip && (
-                <motion.button whileTap={{ scale: 0.95 }} onClick={onSkip}
-                    className="mt-4 flex items-center gap-2 text-amber-500 text-xs font-bold hover:text-amber-400 transition-colors bg-amber-500/10 px-4 py-2 rounded-xl border border-amber-500/20">
-                    <Zap size={14} /> 跳級考試
-                </motion.button>
-            )}
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {items.map((item: any, i: number) => <InsightCard key={item.id} insight={item} idx={i} completed={completedIds.includes(item.id)} locked={isLocked} />)}
-        </div>
-    </motion.div>
-);
+
+                {/* Skip exam button for locked chapters */}
+                {isLocked && onSkip && (
+                    <div className="px-5 pb-4">
+                        <motion.button whileTap={{ scale: 0.95 }} onClick={(e) => { e.stopPropagation(); onSkip(); }}
+                            className="flex items-center gap-2 text-amber-500 text-[11px] font-bold hover:text-amber-400 transition-colors bg-amber-500/10 px-4 py-2 rounded-xl border border-amber-500/20">
+                            <Zap size={13} /> 跳級考試
+                        </motion.button>
+                    </div>
+                )}
+
+                {/* Expandable article list */}
+                <AnimatePresence>
+                    {isExpanded && !isLocked && (
+                        <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3, ease: 'easeInOut' }} className="overflow-hidden">
+                            <div className="px-5 pb-5 border-t border-white/5 pt-4">
+                                <div className="space-y-2">
+                                    {items.map((item: any, i: number) => {
+                                        const isDone = completedIds.includes(item.id);
+                                        return (
+                                            <Link key={item.id} to={`/insights/${item.id}`}
+                                                className={`group/item flex items-center gap-4 p-3 rounded-xl transition-all ${isDone ? 'bg-emerald-500/[0.04] hover:bg-emerald-500/[0.08]' : 'hover:bg-white/[0.03]'}`}>
+                                                <div className={`w-8 h-8 rounded-xl flex items-center justify-center text-xs font-black flex-shrink-0 ${
+                                                    isDone ? 'bg-emerald-500 text-black' : 'bg-zinc-800 text-zinc-500'
+                                                }`}>
+                                                    {isDone ? <CheckCircle2 size={14} /> : i + 1}
+                                                </div>
+                                                <div className="flex-1 min-w-0">
+                                                    <h4 className="text-sm font-bold text-white truncate group-hover/item:text-emerald-300 transition-colors">{item.title}</h4>
+                                                    <p className="text-zinc-600 text-[10px] font-mono">⏱ {item.readTime || item.read_time}</p>
+                                                </div>
+                                                <ChevronRight size={14} className="text-zinc-700 group-hover/item:text-emerald-400 group-hover/item:translate-x-0.5 transition-all flex-shrink-0" />
+                                            </Link>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </motion.div>
+        </motion.div>
+    );
+};
 
 /* ═══════════════════════════════════════════
-   INSIGHT CARD
+   INSIGHT CARD — Enhanced with richer visuals
    ═══════════════════════════════════════════ */
 const InsightCard = ({ insight, idx, completed, locked }: any) => {
     const themes: Record<string, any> = {
-        emerald: { text: 'text-emerald-500', tag: 'bg-emerald-500/10 text-emerald-500', border: 'hover:border-emerald-500/30' },
-        yellow: { text: 'text-yellow-500', tag: 'bg-yellow-500/10 text-yellow-500', border: 'hover:border-yellow-500/30' },
-        amber: { text: 'text-amber-500', tag: 'bg-amber-500/10 text-amber-500', border: 'hover:border-amber-500/30' },
-        blue: { text: 'text-blue-500', tag: 'bg-blue-500/10 text-blue-500', border: 'hover:border-blue-500/30' },
-        violet: { text: 'text-violet-500', tag: 'bg-violet-500/10 text-violet-500', border: 'hover:border-violet-500/30' },
-        rose: { text: 'text-rose-500', tag: 'bg-rose-500/10 text-rose-500', border: 'hover:border-rose-500/30' },
-        teal: { text: 'text-teal-500', tag: 'bg-teal-500/10 text-teal-500', border: 'hover:border-teal-500/30' },
-        zinc: { text: 'text-zinc-300', tag: 'bg-white/5 text-zinc-400', border: 'hover:border-zinc-300/30' },
-        indigo: { text: 'text-indigo-500', tag: 'bg-indigo-500/10 text-indigo-500', border: 'hover:border-indigo-500/30' },
+        emerald: { text: 'text-emerald-500', tag: 'bg-emerald-500/10 text-emerald-500', border: 'hover:border-emerald-500/20', glow: 'group-hover:shadow-emerald-500/5' },
+        yellow: { text: 'text-yellow-500', tag: 'bg-yellow-500/10 text-yellow-500', border: 'hover:border-yellow-500/20', glow: 'group-hover:shadow-yellow-500/5' },
+        amber: { text: 'text-amber-500', tag: 'bg-amber-500/10 text-amber-500', border: 'hover:border-amber-500/20', glow: 'group-hover:shadow-amber-500/5' },
+        blue: { text: 'text-blue-500', tag: 'bg-blue-500/10 text-blue-500', border: 'hover:border-blue-500/20', glow: 'group-hover:shadow-blue-500/5' },
+        violet: { text: 'text-violet-500', tag: 'bg-violet-500/10 text-violet-500', border: 'hover:border-violet-500/20', glow: 'group-hover:shadow-violet-500/5' },
+        rose: { text: 'text-rose-500', tag: 'bg-rose-500/10 text-rose-500', border: 'hover:border-rose-500/20', glow: 'group-hover:shadow-rose-500/5' },
+        teal: { text: 'text-teal-500', tag: 'bg-teal-500/10 text-teal-500', border: 'hover:border-teal-500/20', glow: 'group-hover:shadow-teal-500/5' },
+        zinc: { text: 'text-zinc-300', tag: 'bg-white/5 text-zinc-400', border: 'hover:border-zinc-300/20', glow: '' },
+        indigo: { text: 'text-indigo-500', tag: 'bg-indigo-500/10 text-indigo-500', border: 'hover:border-indigo-500/20', glow: 'group-hover:shadow-indigo-500/5' },
     };
     const theme = themes[insight.themeColor || 'emerald'] || themes.emerald;
 
     const CardContent = (
-        <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.05 }} viewport={{ once: true }}
-            className={`bg-[#111] border border-white/5 ${locked ? '' : theme.border} p-6 rounded-3xl h-full flex flex-col relative transition-all duration-300 ${completed ? 'bg-emerald-500/[0.02] border-emerald-500/10' : ''}`}>
-            {completed && <div className="absolute -top-2 -right-2 bg-emerald-500 text-black p-1 rounded-full shadow-lg"><CheckCircle2 size={16} /></div>}
+        <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.04 }} viewport={{ once: true }}
+            className={`bg-[#111] border border-white/[0.04] ${locked ? '' : theme.border} p-5 md:p-6 rounded-2xl h-full flex flex-col relative transition-all duration-300 group-hover:shadow-xl ${theme.glow} ${completed ? 'bg-emerald-500/[0.02] border-emerald-500/10' : ''}`}>
+            {completed && (
+                <div className="absolute -top-1.5 -right-1.5 bg-emerald-500 text-black p-1 rounded-full shadow-lg shadow-emerald-500/30">
+                    <CheckCircle2 size={14} />
+                </div>
+            )}
             <div className="flex items-center justify-between mb-4">
-                <span className={`text-[10px] font-bold px-2 py-0.5 rounded-lg ${theme.tag}`}>{insight.category}</span>
-                <span className="text-zinc-700 text-[10px] font-mono">⏱ {insight.readTime || insight.read_time}</span>
+                <span className={`text-[10px] font-bold px-2.5 py-1 rounded-lg ${theme.tag}`}>{insight.category}</span>
+                <div className="flex items-center gap-2">
+                    <div className="flex gap-0.5">{[...Array(5)].map((_, i) => <Star key={i} size={7} className={i < (insight.difficulty_level || 1) ? theme.text : 'text-zinc-800/50'} fill="currentColor" />)}</div>
+                </div>
             </div>
-            <h4 className="text-lg font-bold text-white mb-3 line-clamp-2 leading-tight">{insight.title}</h4>
-            <p className="text-zinc-500 text-xs line-clamp-2 mb-6 leading-relaxed">{insight.summary}</p>
-            <div className="mt-auto flex items-center justify-between">
-                <div className="flex gap-0.5">{[...Array(5)].map((_, i) => <Star key={i} size={8} className={i < (insight.difficulty_level || 1) ? theme.text : 'text-zinc-800'} fill="currentColor" />)}</div>
-                <ArrowRight size={14} className="text-zinc-700 group-hover:text-emerald-500 transition-all" />
+            <h4 className="text-base md:text-lg font-bold text-white mb-2 line-clamp-2 leading-tight group-hover:text-emerald-100 transition-colors">{insight.title}</h4>
+            <p className="text-zinc-600 text-xs line-clamp-2 mb-5 leading-relaxed">{insight.summary}</p>
+            <div className="mt-auto flex items-center justify-between pt-3 border-t border-white/[0.03]">
+                <span className="text-zinc-700 text-[10px] font-mono flex items-center gap-1">⏱ {insight.readTime || insight.read_time}</span>
+                <div className="flex items-center gap-1 text-zinc-700 group-hover:text-emerald-400 transition-all">
+                    <span className="text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-opacity">開始</span>
+                    <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
+                </div>
             </div>
         </motion.div>
     );
