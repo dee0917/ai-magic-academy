@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { INSIGHTS } from '../data/mock';
 import { CHAPTERS, MAIN_QUEST_ORDER, SIDE_QUEST_IDS } from '../data/insights';
+import { ChatGPTLogo, ClaudeLogo, GeminiLogo } from '../components/AILogos';
 
 /* ═══════════════════════════════════════════
    ONBOARDING
@@ -88,17 +89,17 @@ const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free'
                         <div className="space-y-3">
                             <button onClick={() => handlePlatform('chatgpt')}
                                 className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-emerald-500/10 hover:border-emerald-500/30 text-white font-bold text-lg transition-all text-left flex items-center gap-4">
-                                <span className="text-2xl">🟢</span>
+                                <div className="w-9 h-9 rounded-xl bg-[#10a37f]/15 flex items-center justify-center flex-shrink-0"><ChatGPTLogo size={22} /></div>
                                 <div><div className="font-black">ChatGPT</div><div className="text-zinc-500 text-xs">OpenAI · 全球最多人用</div></div>
                             </button>
                             <button onClick={() => handlePlatform('claude')}
                                 className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-violet-500/10 hover:border-violet-500/30 text-white font-bold text-lg transition-all text-left flex items-center gap-4">
-                                <span className="text-2xl">🟣</span>
+                                <div className="w-9 h-9 rounded-xl bg-[#D97757]/15 flex items-center justify-center flex-shrink-0"><ClaudeLogo size={22} /></div>
                                 <div><div className="font-black">Claude</div><div className="text-zinc-500 text-xs">Anthropic · 最會聽話</div></div>
                             </button>
                             <button onClick={() => handlePlatform('gemini')}
                                 className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-blue-500/10 hover:border-blue-500/30 text-white font-bold text-lg transition-all text-left flex items-center gap-4">
-                                <span className="text-2xl">🔵</span>
+                                <div className="w-9 h-9 rounded-xl bg-[#1C7DEB]/15 flex items-center justify-center flex-shrink-0"><GeminiLogo size={22} /></div>
                                 <div><div className="font-black">Gemini</div><div className="text-zinc-500 text-xs">Google · 搜尋最即時</div></div>
                             </button>
                             <button onClick={() => handlePlatform('none')}
