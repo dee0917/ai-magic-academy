@@ -109,8 +109,8 @@ const ArticleDetail = () => {
         }
     };
 
-    const scrollToHook = () => {
-        hookRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const scrollToFirstStep = () => {
+        firstStepRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
 
     const handleStepComplete = (idx: number) => {
@@ -238,16 +238,16 @@ const ArticleDetail = () => {
                     </div>
                     <h1 className="text-4xl md:text-7xl font-black text-white mb-8 tracking-tight leading-[1.1]">{article.title}</h1>
                     <p className="text-xl md:text-2xl text-zinc-400 mb-12 max-w-2xl mx-auto leading-relaxed">{article.summary}</p>
-                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={scrollToHook}
+                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={scrollToFirstStep}
                         className="bg-white text-black font-black py-5 px-10 rounded-2xl text-lg flex items-center gap-3 mx-auto shadow-2xl hover:bg-emerald-500 transition-colors group">
-                        <Gamepad2 size={24} /> 進入挑戰 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                        <Gamepad2 size={24} /> 開始修煉 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                     </motion.button>
                 </motion.div>
 
                 <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-20"><ChevronDown size={32} /></div>
             </section>
 
-            <section className="py-32 px-5 md:px-6 bg-zinc-900/30" ref={hookRef}>
+            <section className="py-32 px-5 md:px-6 bg-zinc-900/30">
                 <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center mb-24">
                     <span className="transition-label">痛點切入</span>
                     <h2 className="text-3xl md:text-5xl font-black text-white mb-8 tracking-tight">你也正為了這件事煩惱嗎？</h2>
