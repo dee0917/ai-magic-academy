@@ -350,7 +350,7 @@ export default function MagicAcademyMVP() {
             onClick={() => { setSelectedCurse(null); setInputs({}); setShowPortal(false); setIsDropdownOpen(false); }}
           ></motion.div>
           
-          <motion.div layoutId={`card-${selectedCurse.id}`} className="w-full max-w-4xl bg-[#0a0a15] bg-gradient-to-br from-white/[0.08] to-transparent border border-purple-500/30 rounded-3xl p-6 md:p-8 backdrop-blur-2xl relative shadow-[0_40px_100px_rgba(0,0,0,0.8)] overflow-y-auto max-h-[90vh] custom-scrollbar">
+          <motion.div layoutId={`card-${selectedCurse.id}`} className="w-full max-w-4xl bg-[#0a0a15] bg-gradient-to-br from-white/[0.08] to-transparent border border-purple-500/30 rounded-3xl p-6 md:p-8 pb-32 md:pb-8 backdrop-blur-2xl relative shadow-[0_40px_100px_rgba(0,0,0,0.8)] overflow-y-auto max-h-[90vh] custom-scrollbar">
             <div className="flex justify-end gap-3 mb-6 relative z-20">
               <button onClick={handleShare} className="p-2.5 rounded-full bg-white/5 hover:bg-white/10 text-slate-400 hover:text-purple-400 transition-all border border-white/10 shadow-lg" title="分享咒語">
                 <Share2 className="w-5 h-5" />
