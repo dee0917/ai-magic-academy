@@ -1,4 +1,7 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Magic Academy
+
+> [!TIP]
+> **專案進度追蹤**: 本專案使用 [PROGRESS.md](./PROGRESS.md) 紀錄最新開發狀態與待辦事項。每一位開發代理人 (Agent) 在工作結束前應更新該文件。
 
 ## Getting Started
 
