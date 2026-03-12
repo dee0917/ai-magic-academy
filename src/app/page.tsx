@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { 
   Sparkles, Copy, ExternalLink, ChevronDown, X, Search, Check,
-  Brain, Bot, MessageSquare, Lock, Share2, AlertTriangle, ArrowRight
+  Brain, Bot, MessageSquare, Lock, Share2, AlertTriangle, ArrowRight, BookOpen
 } from "lucide-react";
 import { CURSES } from "./curses_data";
 import { motion, AnimatePresence } from "framer-motion";
@@ -350,145 +350,149 @@ export default function MagicAcademyMVP() {
             onClick={() => { setSelectedCurse(null); setInputs({}); setShowPortal(false); setIsDropdownOpen(false); }}
           ></motion.div>
           
-          <motion.div layoutId={`card-${selectedCurse.id}`} className="w-full max-w-4xl bg-[#0a0a15] bg-gradient-to-br from-white/[0.08] to-transparent border border-purple-500/30 rounded-3xl p-6 md:p-8 pb-32 md:pb-8 backdrop-blur-2xl relative shadow-[0_40px_100px_rgba(0,0,0,0.8)] overflow-y-auto max-h-[90vh] custom-scrollbar">
-            <div className="flex justify-end gap-3 mb-6 relative z-20">
-              <button onClick={handleShare} className="p-2.5 rounded-full bg-white/5 hover:bg-white/10 text-slate-400 hover:text-purple-400 transition-all border border-white/10 shadow-lg" title="分享咒語">
-                <Share2 className="w-5 h-5" />
-              </button>
-              <button onClick={() => { setSelectedCurse(null); setInputs({}); setShowPortal(false); setIsDropdownOpen(false); }} className="p-2.5 rounded-full bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-all border border-white/10 shadow-lg">
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="flex flex-col md:flex-row items-center md:items-start gap-6 mb-10 border-b border-white/10 pb-10">
-              <motion.div layoutId={`icon-${selectedCurse.id}`} className="flex-shrink-0 p-5 bg-black/40 rounded-2xl ring-1 ring-white/10 shadow-2xl overflow-hidden relative group" style={{ filter: `drop-shadow(0 0 15px ${getColorHex(selectedCurse.color)}60)` }}>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent group-hover:scale-110 transition-transform"></div>
-                <div className="scale-110 md:scale-125">
-                  {selectedCurse.icon}
-                </div>
-              </motion.div>
-              
-              <div className="flex-grow text-center md:text-left">
-                <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-4">
-                  <span className="text-[10px] font-black uppercase tracking-[0.15em] text-purple-400 bg-purple-500/10 px-3 py-1 rounded-lg border border-purple-500/20 shadow-[0_0_10px_rgba(168,85,247,0.1)] whitespace-nowrap">
-                    {selectedCurse.tab}
-                  </span>
-                  <span className="text-[10px] font-black uppercase tracking-[0.15em] text-pink-400 bg-pink-500/10 px-3 py-1 rounded-lg border border-pink-500/20 whitespace-nowrap">
-                    {selectedCurse.outputFormat || 'TEXT'}
-                  </span>
-                </div>
-                <h2 className="text-3xl md:text-4xl font-serif font-black text-white tracking-tight leading-tight mb-3">
-                  {selectedCurse.title}
-                </h2>
-                <p className="text-sm md:text-base text-slate-400 font-medium leading-relaxed max-w-2xl">
-                  {selectedCurse.desc}
-                </p>
+          <motion.div layoutId={`card-${selectedCurse.id}`} className="w-full max-w-4xl bg-[#0a0a15] bg-gradient-to-br from-white/[0.08] to-transparent border border-purple-500/30 rounded-3xl backdrop-blur-2xl relative shadow-[0_40px_100px_rgba(0,0,0,0.8)] flex flex-col max-h-[90vh] overflow-hidden z-50">
+            {/* Scroll Area */}
+            <div className="flex-1 overflow-y-auto p-6 md:p-8 custom-scrollbar">
+              <div className="flex justify-end gap-3 mb-6">
+                <button onClick={handleShare} className="p-2.5 rounded-full bg-white/5 hover:bg-white/10 text-slate-400 hover:text-purple-400 transition-all border border-white/10 shadow-lg" title="分享咒語">
+                  <Share2 className="w-5 h-5" />
+                </button>
+                <button onClick={() => { setSelectedCurse(null); setInputs({}); setShowPortal(false); setIsDropdownOpen(false); }} className="p-2.5 rounded-full bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-all border border-white/10 shadow-lg">
+                  <X className="w-5 h-5" />
+                </button>
               </div>
-            </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="space-y-6">
-                <h3 className="text-lg font-bold text-purple-300 flex items-center gap-2">
-                  <Sparkles className="w-5 h-5" /> 注入魔力 (Level 1)
-                </h3>
-                {selectedCurse.fields.map((f: any) => (
-                  <div key={f.id} className="group/field">
-                    <label className="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2 group-focus-within/field:text-purple-400 transition-colors">{f.label}</label>
-                    <input
-                      type="text"
-                      placeholder={f.placeholder}
-                      className="w-full bg-black/40 border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-500/50 focus:bg-purple-900/10 transition-all shadow-inner placeholder:text-slate-600"
-                      onChange={(e) => setInputs({ ...inputs, [f.id]: e.target.value })}
-                    />
+              <div className="flex flex-col md:flex-row items-center md:items-start gap-6 mb-10 border-b border-white/10 pb-10">
+                <motion.div layoutId={`icon-${selectedCurse.id}`} className="flex-shrink-0 p-5 bg-black/40 rounded-2xl ring-1 ring-white/10 shadow-2xl overflow-hidden relative group" style={{ filter: `drop-shadow(0 0 15px ${getColorHex(selectedCurse.color)}60)` }}>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent group-hover:scale-110 transition-transform"></div>
+                  <div className="scale-110 md:scale-125">
+                    {selectedCurse.icon}
                   </div>
-                ))}
+                </motion.div>
                 
-                {selectedCurse.tweak && (
-                  <div className="pt-6 border-t border-white/10">
-                    <label className="block text-xs font-black uppercase tracking-widest text-purple-300 mb-3">{selectedCurse.tweak.label} (Level 2)</label>
-                    <div className="flex flex-col gap-2 shrink-0 overflow-x-auto w-full max-w-full">
-                      <div className="flex items-center justify-between relative bg-black/40 p-1.5 rounded-2xl border border-white/10 min-w-max md:min-w-0 md:w-full">
-                        {selectedCurse.tweak.options.map((opt: string) => {
-                          const isSelected = (inputs[selectedCurse.tweak.id] || selectedCurse.tweak.options[0]) === opt;
-                          return (
-                            <button
-                              key={opt}
-                              className={`relative px-3 py-2 md:px-4 md:py-2 rounded-xl text-xs font-bold transition-all z-10 mx-0.5 flex-1 w-full text-center ${isSelected ? 'bg-purple-600 border border-purple-400/50 text-white shadow-[0_0_15px_rgba(168,85,247,0.4)]' : 'text-slate-400 hover:text-white hover:bg-white/10 border border-transparent'}`}
-                              onClick={() => setInputs({ ...inputs, [selectedCurse.tweak.id]: opt })}
-                            >
-                              <span className="whitespace-nowrap">{opt.split(' ')[0]}</span>
-                            </button>
-                          );
-                        })}
+                <div className="flex-grow text-center md:text-left">
+                  <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-4">
+                    <span className="text-[10px] font-black uppercase tracking-[0.15em] text-purple-400 bg-purple-500/10 px-3 py-1 rounded-lg border border-purple-500/20 shadow-[0_0_10px_rgba(168,85,247,0.1)] whitespace-nowrap">
+                      {selectedCurse.tab}
+                    </span>
+                    <span className="text-[10px] font-black uppercase tracking-[0.15em] text-pink-400 bg-pink-500/10 px-3 py-1 rounded-lg border border-pink-500/20 whitespace-nowrap">
+                      {selectedCurse.outputFormat || 'TEXT'}
+                    </span>
+                  </div>
+                  <h2 className="text-3xl md:text-4xl font-serif font-black text-white tracking-tight leading-tight mb-3">
+                    {selectedCurse.title}
+                  </h2>
+                  <p className="text-sm md:text-base text-slate-400 font-medium leading-relaxed max-w-2xl">
+                    {selectedCurse.desc}
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8 mb-10">
+                <div className="space-y-6">
+                  <h3 className="text-lg font-bold text-purple-300 flex items-center gap-2">
+                    <Sparkles className="w-5 h-5" /> 注入魔力 (Level 1)
+                  </h3>
+                  {selectedCurse.fields.map((f: any) => (
+                    <div key={f.id} className="group/field">
+                      <label className="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2 group-focus-within/field:text-purple-400 transition-colors">{f.label}</label>
+                      <input
+                        type="text"
+                        placeholder={f.placeholder}
+                        className="w-full bg-black/40 border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-500/50 focus:bg-purple-900/10 transition-all shadow-inner placeholder:text-slate-600"
+                        onChange={(e) => setInputs({ ...inputs, [f.id]: e.target.value })}
+                      />
+                    </div>
+                  ))}
+                  
+                  {selectedCurse.tweak && (
+                    <div className="pt-6 border-t border-white/10">
+                      <label className="block text-xs font-black uppercase tracking-widest text-purple-300 mb-3">{selectedCurse.tweak.label} (Level 2)</label>
+                      <div className="flex flex-col gap-2 shrink-0 overflow-x-auto w-full max-w-full">
+                        <div className="flex items-center justify-between relative bg-black/40 p-1.5 rounded-2xl border border-white/10 min-w-max md:min-w-0 md:w-full">
+                          {selectedCurse.tweak.options.map((opt: string) => {
+                            const isSelected = (inputs[selectedCurse.tweak.id] || selectedCurse.tweak.options[0]) === opt;
+                            return (
+                              <button
+                                key={opt}
+                                className={`relative px-3 py-2 md:px-4 md:py-2 rounded-xl text-xs font-bold transition-all z-10 mx-0.5 flex-1 w-full text-center ${isSelected ? 'bg-purple-600 border border-purple-400/50 text-white shadow-[0_0_15px_rgba(168,85,247,0.4)]' : 'text-slate-400 hover:text-white hover:bg-white/10 border border-transparent'}`}
+                                onClick={() => setInputs({ ...inputs, [selectedCurse.tweak.id]: opt })}
+                              >
+                                <span className="whitespace-nowrap">{opt.split(' ')[0]}</span>
+                              </button>
+                            );
+                          })}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )}
-              </div>
-
-              <div className="flex flex-col h-full space-y-4">
-                <div className="flex-grow bg-[#0a0a0a] rounded-xl p-5 border-l-4 border-l-emerald-500 text-emerald-400 font-mono shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] overflow-y-auto min-h-[350px]">
-                  <div className="flex items-center gap-2 mb-4 text-[10px] text-emerald-500/50 uppercase tracking-[0.2em]">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
-                    咒語預覽終端機 v4.0.1
-                  </div>
-                  {Object.keys(inputs).length === 0 ? (
-                    <div className="text-emerald-400 font-mono text-sm drop-shadow-[0_0_5px_rgba(52,211,153,0.5)]">
-                      等待魔力注入... <span className="animate-pulse">|</span>
-                    </div>
-                  ) : (
-                    <HighlightedPrompt text={selectedCurse.generate(getMergedInputs())} />
                   )}
                 </div>
-                
-                <label className="flex items-start gap-3 mb-4 cursor-pointer group">
-                  <div className="relative flex items-center justify-center pt-0.5">
-                    <input 
-                      type="checkbox" 
-                      className="w-4 h-4 appearance-none rounded border border-white/30 checked:bg-pink-500 checked:border-pink-500 transition-colors"
-                      checked={agreedToRisk}
-                      onChange={(e) => setAgreedToRisk(e.target.checked)}
-                    />
-                    {agreedToRisk && <Check className="w-3 h-3 text-white absolute pointer-events-none" />}
-                  </div>
-                  <span className="text-xs text-slate-400 group-hover:text-slate-300 leading-relaxed">
-                    <span className="font-bold text-slate-300">免責聲明：</span>我已知悉 AI 生成內容僅供參考，請依實際情況微調。如直接複製導致任何爭議或損失，風險由使用者自負。
-                  </span>
-                </label>
 
-                <div className="fixed md:static bottom-0 left-0 right-0 p-4 md:p-0 z-40 bg-black/60 backdrop-blur-xl md:bg-transparent md:backdrop-blur-none border-t border-white/10 md:border-none shadow-[0_-20px_40px_rgba(0,0,0,0.5)] md:shadow-none">
-                  <button 
-                    onClick={handleCopy}
-                    disabled={!agreedToRisk}
-                    className={`w-full py-5 rounded-2xl font-black uppercase tracking-wider flex items-center justify-center gap-3 transition-all transform active:scale-95 relative overflow-hidden ${
-                      !agreedToRisk 
-                        ? 'bg-white/5 text-slate-500 cursor-not-allowed border border-white/10' 
-                        : isCopied 
-                          ? 'bg-emerald-500 text-white shadow-[0_0_30px_rgba(16,185,129,0.5)]' 
-                          : 'bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-[length:200%_200%] animate-gradient-xy text-white hover:shadow-[0_0_40px_rgba(219,39,119,0.5)] border border-white/10 group/btn'
-                    }`}
-                  >
-                    {agreedToRisk && !isCopied && (
-                      <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent group-hover/btn:animate-[shimmer_1.5s_infinite] skew-x-[-45deg] z-10 w-[50%]"></div>
-                    )}
-                    <div className="relative z-20 flex items-center gap-3">
-                      {isCopied ? <><Check className="w-6 h-6"/> 密咒已封印</> : <><Sparkles className="w-6 h-6"/> {agreedToRisk ? '揮舞魔杖 (複製咒語)' : '等待注入魔力'}</>}
+                <div className="flex flex-col h-full space-y-4">
+                  <div className="flex-grow bg-[#0a0a0a] rounded-xl p-5 border-l-4 border-l-emerald-500 text-emerald-400 font-mono shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] overflow-y-auto min-h-[350px]">
+                    <div className="flex items-center gap-2 mb-4 text-[10px] text-emerald-500/50 uppercase tracking-[0.2em]">
+                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                      咒語預覽終端機 v4.0.1
                     </div>
-                  </button>
+                    {Object.keys(inputs).length === 0 ? (
+                      <div className="text-emerald-400 font-mono text-sm drop-shadow-[0_0_5px_rgba(52,211,153,0.5)]">
+                        等待魔力注入... <span className="animate-pulse">|</span>
+                      </div>
+                    ) : (
+                      <HighlightedPrompt text={selectedCurse.generate(getMergedInputs())} />
+                    )}
+                  </div>
+                  
+                  <label className="flex items-start gap-3 mb-4 cursor-pointer group">
+                    <div className="relative flex items-center justify-center pt-0.5">
+                      <input 
+                        type="checkbox" 
+                        className="w-4 h-4 appearance-none rounded border border-white/30 checked:bg-pink-500 checked:border-pink-500 transition-colors"
+                        checked={agreedToRisk}
+                        onChange={(e) => setAgreedToRisk(e.target.checked)}
+                      />
+                      {agreedToRisk && <Check className="w-3 h-3 text-white absolute pointer-events-none" />}
+                    </div>
+                    <span className="text-xs text-slate-400 group-hover:text-slate-300 leading-relaxed">
+                      <span className="font-bold text-slate-300">免責聲明：</span>我已知悉 AI 生成內容僅供參考，請依實際情況微調。如直接複製導致任何爭議或損失，風險由使用者自負。
+                    </span>
+                  </label>
                 </div>
               </div>
+
+              <details className="mt-8 group cursor-pointer border border-white/10 rounded-2xl overflow-hidden shadow-2xl bg-[#150a1c] pb-0">
+                <summary className="font-serif font-black text-purple-300 flex items-center p-6 md:p-8 outline-none marker:content-none select-none hover:bg-white/5 transition-colors">
+                  <BookOpen className="w-5 h-5 mr-3 text-yellow-500 group-open:text-yellow-400 group-open:drop-shadow-[0_0_8px_rgba(234,179,8,0.8)] transition-all" /> 
+                  <span className="italic text-lg tracking-wide border-b border-purple-500/30">大魔導師筆記 (Level 3 原理)</span>
+                  <span className="ml-auto text-yellow-500/50 group-open:rotate-180 transition-transform"><ChevronDown className="w-5 h-5"/></span>
+                </summary>
+                <div className="px-6 md:px-8 pb-6 md:pb-8 pt-0 text-yellow-100/80 italic text-sm md:text-base leading-relaxed border-t border-yellow-500/20 shadow-[inset_0_20px_20px_-20px_rgba(0,0,0,0.5)] mt-4">
+                  {selectedCurse.theory}
+                </div>
+              </details>
             </div>
 
-            <details className="mt-8 group cursor-pointer border border-white/10 rounded-2xl overflow-hidden shadow-2xl bg-[#150a1c] mb-12 md:mb-0 pb-0">
-              <summary className="font-serif font-black text-purple-300 flex items-center p-6 md:p-8 outline-none marker:content-none select-none hover:bg-white/5 transition-colors">
-                <BookOpen className="w-5 h-5 mr-3 text-yellow-500 group-open:text-yellow-400 group-open:drop-shadow-[0_0_8px_rgba(234,179,8,0.8)] transition-all" /> 
-                <span className="italic text-lg tracking-wide border-b border-purple-500/30">大魔導師筆記 (Level 3 原理)</span>
-                <span className="ml-auto text-yellow-500/50 group-open:rotate-180 transition-transform"><ChevronDown className="w-5 h-5"/></span>
-              </summary>
-              <div className="px-6 md:px-8 pb-6 md:pb-8 pt-0 text-yellow-100/80 italic text-sm md:text-base leading-relaxed border-t border-yellow-500/20 shadow-[inset_0_20px_20px_-20px_rgba(0,0,0,0.5)] mt-4">
-                {selectedCurse.theory}
-              </div>
-            </details>
+            {/* Action Bar (Sticky/Fixed to modal bottom) */}
+            <div className="shrink-0 p-4 md:p-6 bg-black/90 backdrop-blur-2xl border-t border-white/10 shadow-[0_-20px_40px_rgba(0,0,0,0.5)]">
+              <button 
+                onClick={handleCopy}
+                disabled={!agreedToRisk}
+                className={`w-full py-5 rounded-2xl font-black uppercase tracking-wider flex items-center justify-center gap-3 transition-all transform active:scale-95 relative overflow-hidden ${
+                  !agreedToRisk 
+                    ? 'bg-white/5 text-slate-500 cursor-not-allowed border border-white/10' 
+                    : isCopied 
+                      ? 'bg-emerald-500 text-white shadow-[0_0_30px_rgba(16,185,129,0.5)]' 
+                      : 'bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-[length:200%_200%] animate-gradient-xy text-white hover:shadow-[0_0_40px_rgba(219,39,119,0.5)] border border-white/10 group/btn'
+                }`}
+              >
+                {agreedToRisk && !isCopied && (
+                  <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent group-hover/btn:animate-[shimmer_1.5s_infinite] skew-x-[-45deg] z-10 w-[50%]"></div>
+                )}
+                <div className="relative z-20 flex items-center gap-3">
+                  {isCopied ? <><Check className="w-6 h-6"/> 密咒已封印</> : <><Sparkles className="w-6 h-6"/> {agreedToRisk ? '揮舞魔杖 (複製咒語)' : '等待注入魔力'}</>}
+                </div>
+              </button>
+            </div>
           </motion.div>
         </div>
       )}
@@ -582,10 +586,3 @@ export default function MagicAcademyMVP() {
     </div>
   );
 }
-
-// Ensure proper Lucide Icon matching
-const BookOpen = ({ className }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-  </svg>
-)
