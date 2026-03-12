@@ -269,7 +269,7 @@ export default function MagicAcademyMVP() {
           <motion.div 
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             className="absolute inset-0 bg-black/80 backdrop-blur-md" 
-            onClick={() => { setSelectedCurse(null); setInputs({}); setShowPortal(false); setIsDropdownOpen(false); }}
+            onClick={() => { setSelectedCurse(null); setInputs({}); setShowPortal(false); }}
           ></motion.div>
           
           <motion.div layoutId={`card-${selectedCurse.id}`} className="w-full max-w-4xl bg-[#0a0a15] bg-gradient-to-br from-white/[0.08] to-transparent border border-purple-500/30 rounded-3xl backdrop-blur-2xl relative shadow-[0_40px_100px_rgba(0,0,0,0.8)] flex flex-col max-h-[90vh] overflow-hidden z-10">
