@@ -39,14 +39,7 @@ export default function MagicAcademyMVP() {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    if (showPortal) {
-      const timer = setTimeout(() => {
-        handleDeepLink("https://gemini.google.com/app", "google-gemini://");
-      }, 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [showPortal]);
+  // Auto-portal timer removed to allow manual selection by user
 
   // Prevent body scroll when modal is open
   useEffect(() => {
@@ -415,22 +408,49 @@ export default function MagicAcademyMVP() {
       {showPortal && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[150] flex items-center justify-center p-4">
           <div className="bg-[#100820] border border-purple-500/50 p-8 rounded-3xl max-w-sm w-full text-center shadow-2xl">
-            <div className="w-20 h-20 mx-auto bg-purple-500/20 rounded-full flex items-center justify-center mb-6 animate-pulse">
-              <ExternalLink className="w-10 h-10 text-purple-400" />
+            <div className="w-16 h-16 mx-auto bg-purple-500/20 rounded-full flex items-center justify-center mb-6">
+              <ExternalLink className="w-8 h-8 text-purple-400" />
             </div>
-            <h3 className="text-2xl font-black text-white mb-2">異界通道已開啟</h3>
-            <p className="text-slate-400 mb-6 font-mono text-[10px] tracking-widest uppercase">傳送通道將在 5 秒後自動開啟...</p>
-            <div className="space-y-4">
-              <button onClick={() => handleDeepLink("https://gemini.google.com/app", "google-gemini://")} className="w-full bg-[#1a1025] hover:bg-[#251835] border border-white/10 p-4 rounded-2xl flex items-center gap-4 transition-all group">
-                <Sparkles className="w-6 h-6 text-blue-400 group-hover:scale-110 transition-transform" />
-                <div className="text-left"><h4 className="text-white font-bold">穿越星門</h4><p className="text-[10px] text-slate-500">Gemini</p></div>
-              </button>
-              <button onClick={() => handleDeepLink("https://chatgpt.com", "chatgpt://")} className="w-full bg-[#1a1025] hover:bg-[#251835] border border-white/10 p-4 rounded-2xl flex items-center gap-4 transition-all group">
+            <h3 className="text-2xl font-black text-white mb-2 italic">選擇傳送座標</h3>
+            <p className="text-slate-400 mb-6 text-xs font-medium">請選擇要施放咒語的異界模型</p>
+            
+            <div className="space-y-3">
+              <button onClick={() => handleDeepLink("https://chatgpt.com", "chatgpt://")} className="w-full bg-[#1a1025] hover:bg-emerald-500/10 border border-emerald-500/30 p-4 rounded-2xl flex items-center gap-4 transition-all group">
                 <Bot className="w-6 h-6 text-emerald-400 group-hover:scale-110 transition-transform" />
-                <div className="text-left"><h4 className="text-white font-bold">啟動萬象之扉</h4><p className="text-[10px] text-slate-500">ChatGPT</p></div>
+                <div className="text-left">
+                  <h4 className="text-white font-bold">啟動萬象之扉</h4>
+                  <p className="text-[10px] text-emerald-500/70 font-black tracking-widest uppercase">ChatGPT (OpenAI)</p>
+                </div>
+              </button>
+
+              <button onClick={() => handleDeepLink("https://claude.ai", "claude://")} className="w-full bg-[#1a1025] hover:bg-orange-500/10 border border-orange-500/30 p-4 rounded-2xl flex items-center gap-4 transition-all group">
+                <Brain className="w-6 h-6 text-orange-400 group-hover:scale-110 transition-transform" />
+                <div className="text-left">
+                  <h4 className="text-white font-bold">召喚平衡天秤</h4>
+                  <p className="text-[10px] text-orange-500/70 font-black tracking-widest uppercase">Claude (Anthropic)</p>
+                </div>
+              </button>
+
+              <button onClick={() => handleDeepLink("https://gemini.google.com/app", "google-gemini://")} className="w-full bg-[#1a1025] hover:bg-blue-500/10 border border-blue-500/30 p-4 rounded-2xl flex items-center gap-4 transition-all group">
+                <Sparkles className="w-6 h-6 text-blue-400 group-hover:scale-110 transition-transform" />
+                <div className="text-left">
+                  <h4 className="text-white font-bold">穿越星門</h4>
+                  <p className="text-[10px] text-blue-500/70 font-black tracking-widest uppercase">Gemini (Google)</p>
+                </div>
+              </button>
+
+              <button onClick={() => handleDeepLink("https://grok.com", "grok://")} className="w-full bg-[#1a1025] hover:bg-slate-300/10 border border-slate-300/30 p-4 rounded-2xl flex items-center gap-4 transition-all group">
+                <MessageSquare className="w-6 h-6 text-slate-300 group-hover:scale-110 transition-transform" />
+                <div className="text-left">
+                  <h4 className="text-white font-bold">洞悉真理之眼</h4>
+                  <p className="text-[10px] text-slate-300/70 font-black tracking-widest uppercase">Grok (xAI)</p>
+                </div>
               </button>
             </div>
-            <button onClick={() => setShowPortal(false)} className="mt-6 text-sm text-slate-500 hover:text-white">留在學院</button>
+            
+            <button onClick={() => setShowPortal(false)} className="mt-8 text-xs font-black uppercase tracking-widest text-slate-600 hover:text-white transition-colors">
+              [ 留在學院 ]
+            </button>
           </div>
         </div>
       )}
