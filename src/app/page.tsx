@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { CURSES } from "./curses_data";
 import { motion, AnimatePresence } from "framer-motion";
-import Fuse from "fuse.js";
+import Fuse from "fuse.js/dist/fuse.basic.js";
 
 // Helper: Highlight variables and remove special format strings in the UI display
 const HighlightedPrompt = ({ text }: { text: string }) => {
