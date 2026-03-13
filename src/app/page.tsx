@@ -130,6 +130,20 @@ export default function MagicAcademyMVP() {
     });
   };
 
+  const handleRiskAcceptAndCopy = () => {
+    setAgreedToRisk(true);
+    setShowRiskScroll(false);
+    
+    // Perform copy logic directly here
+    const spell = selectedCurse.generate(inputs);
+    const cleanSpell = spell.replace(/\[\[/g, '').replace(/\]\]/g, '');
+    navigator.clipboard.writeText(cleanSpell).then(() => {
+      setIsCopied(true);
+      setShowPortal(true);
+      setTimeout(() => setIsCopied(false), 3000);
+    });
+  };
+
   const handleShare = () => {
     const url = window.location.href;
     const text = `剛在【AI魔法學院】施放了「${selectedCurse.title}」咒語，太好用了！一起來提升職場生存力吧：`;
@@ -522,7 +536,7 @@ export default function MagicAcademyMVP() {
 
                 <div className="mt-10 space-y-4">
                   <button 
-                    onClick={() => { setAgreedToRisk(true); setShowRiskScroll(false); handleCopy(); }}
+                    onClick={handleRiskAcceptAndCopy}
                     className="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-black rounded-2xl shadow-[0_0_30px_rgba(168,85,247,0.5)] transition-all active:scale-95"
                   >
                     確認理解，正式簽署契約
@@ -568,7 +582,7 @@ export default function MagicAcademyMVP() {
                 </div>
               </button>
 
-              <button onClick={() => handleDeepLink("https://gemini.google.com/app", "google-gemini://app")} className="w-full bg-[#1a1025] hover:bg-blue-500/10 border border-blue-500/30 p-4 rounded-2xl flex items-center gap-4 transition-all group">
+              <button onClick={() => handleDeepLink("https://gemini.google.com/app", "google-gemini://")} className="w-full bg-[#1a1025] hover:bg-blue-500/10 border border-blue-500/30 p-4 rounded-2xl flex items-center gap-4 transition-all group">
                 <Sparkles className="w-6 h-6 text-blue-400 group-hover:scale-110 transition-transform" />
                 <div className="text-left">
                   <h4 className="text-white font-bold">穿越星門</h4>
@@ -576,7 +590,7 @@ export default function MagicAcademyMVP() {
                 </div>
               </button>
 
-              <button onClick={() => handleDeepLink("https://grok.com", "xai://grok")} className="w-full bg-[#1a1025] hover:bg-slate-300/10 border border-slate-300/30 p-4 rounded-2xl flex items-center gap-4 transition-all group">
+              <button onClick={() => handleDeepLink("https://grok.com", "grok://")} className="w-full bg-[#1a1025] hover:bg-slate-300/10 border border-slate-300/30 p-4 rounded-2xl flex items-center gap-4 transition-all group">
                 <MessageSquare className="w-6 h-6 text-slate-300 group-hover:scale-110 transition-transform" />
                 <div className="text-left">
                   <h4 className="text-white font-bold">洞悉真理之眼</h4>
