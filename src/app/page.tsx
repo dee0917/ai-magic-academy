@@ -39,6 +39,7 @@ export default function MagicAcademyMVP() {
   const [activeTab, setActiveTab] = useState("全部");
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showRiskScroll, setShowRiskScroll] = useState(false);
 
   // Initialize Fuse.js for fuzzy search
   const fuse = useMemo(() => {
@@ -117,7 +118,7 @@ export default function MagicAcademyMVP() {
 
   const handleCopy = () => {
     if (!agreedToRisk) {
-      alert("請勾選免責聲明以解鎖施咒。");
+      setShowRiskScroll(true);
       return;
     }
     const spell = selectedCurse.generate(inputs);
@@ -451,8 +452,8 @@ export default function MagicAcademyMVP() {
                       />
                       {agreedToRisk && <Check className="w-3 h-3 text-white absolute pointer-events-none" />}
                     </div>
-                    <span className="text-xs text-slate-400 group-hover:text-slate-300 leading-relaxed">
-                      免責聲明：我已知悉 AI 生成內容僅供參考，風險自負。
+                    <span className="text-xs text-slate-500 group-hover:text-slate-400 leading-relaxed italic">
+                      [ 已簽署魔法契約 ] 如需重新閱讀請點擊揮舞魔杖。
                     </span>
                   </label>
                 </div>
@@ -474,21 +475,70 @@ export default function MagicAcademyMVP() {
             <div className="shrink-0 p-4 md:p-6 bg-black/90 backdrop-blur-2xl border-t border-white/10">
               <button 
                 onClick={handleCopy}
-                disabled={!agreedToRisk}
                 className={`w-full py-5 rounded-2xl font-black uppercase tracking-wider flex items-center justify-center gap-3 transition-all active:scale-95 ${
-                  !agreedToRisk 
-                    ? 'bg-white/5 text-slate-500 cursor-not-allowed' 
-                    : isCopied 
-                      ? 'bg-emerald-500 text-white shadow-[0_0_30px_rgba(16,185,129,0.5)]' 
-                      : 'bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-[length:200%_200%] animate-gradient-xy text-white shadow-[0_0_40px_rgba(219,39,119,0.5)]'
+                  isCopied 
+                    ? 'bg-emerald-500 text-white shadow-[0_0_30px_rgba(16,185,129,0.5)]' 
+                    : 'bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-[length:200%_200%] animate-gradient-xy text-white shadow-[0_0_40px_rgba(219,39,119,0.5)]'
                 }`}
               >
-                {isCopied ? <><Check className="w-6 h-6"/> 密咒已封印</> : <><Sparkles className="w-6 h-6"/> {agreedToRisk ? '揮舞魔杖 (複製咒語)' : '等待注入魔力'}</>}
+                {isCopied ? <><Check className="w-6 h-6"/> 密咒已封印</> : <><Sparkles className="w-6 h-6"/> 揮舞魔杖 (複製咒語)</>}
               </button>
             </div>
           </motion.div>
         </div>
       )}
+      </AnimatePresence>
+
+      {/* 🔮 免責聲明魔法捲軸 (Risk Disclaimer Scroll) */}
+      <AnimatePresence>
+        {showRiskScroll && (
+          <div className="fixed inset-0 z-[300] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/90 backdrop-blur-xl"
+              onClick={() => setShowRiskScroll(false)}
+            />
+            <motion.div 
+              initial={{ scale: 0.9, y: 50, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.9, y: 50, opacity: 0 }}
+              className="relative w-full max-w-xl bg-[#1a0b2e] border-2 border-purple-500/50 rounded-3xl overflow-hidden shadow-[0_0_100px_rgba(168,85,247,0.4)]"
+            >
+              <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-transparent via-purple-400 to-transparent" />
+              <div className="p-8 md:p-12">
+                <div className="flex justify-center mb-6">
+                  <div className="p-4 bg-purple-500/20 rounded-full border border-purple-500/40 animate-pulse">
+                    <AlertTriangle className="w-10 h-10 text-purple-400" />
+                  </div>
+                </div>
+                <h3 className="text-3xl font-serif font-black text-center text-white mb-6 italic tracking-tighter">魔法使用契約：免責聲明</h3>
+                
+                <div className="space-y-4 text-sm md:text-base text-purple-100/80 leading-relaxed font-medium overflow-y-auto max-h-[40vh] pr-2 custom-scrollbar">
+                  <p className="border-l-2 border-purple-500/50 pl-4 bg-purple-500/5 py-2">1. 本學院提供之「咒語」（提示詞）僅供學術研究與溝通參考，生成內容之準確性、適法性或道德感取決於所使用之 AI 模型，本站不作任何形式之擔保。</p>
+                  <p className="border-l-2 border-purple-500/50 pl-4 bg-purple-500/5 py-2">2. 使用者在施放魔法（發送訊息）前，應完全理解其可能產生的社交、職涯或法律風險。若因使用本站咒語導致關係破裂、職位變動或任何法律糾紛，使用者需自負全責。</p>
+                  <p className="border-l-2 border-purple-500/50 pl-4 bg-purple-500/5 py-2">3. 部分咒語具備高度情緒張力（如：反擊、催債、離職），請務必審慎評估後再行使用，本學院不鼓勵任何惡意攻擊行為。</p>
+                  <p className="border-l-2 border-purple-500/50 pl-4 bg-purple-500/5 py-2">4. 點擊下方的「簽署契約」即代表您已年滿 18 歲（或具備完全行為能力），並同意放棄對本站及其開發者之法律追訴權。</p>
+                </div>
+
+                <div className="mt-10 space-y-4">
+                  <button 
+                    onClick={() => { setAgreedToRisk(true); setShowRiskScroll(false); handleCopy(); }}
+                    className="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-black rounded-2xl shadow-[0_0_30px_rgba(168,85,247,0.5)] transition-all active:scale-95"
+                  >
+                    確認理解，正式簽署契約
+                  </button>
+                  <button 
+                    onClick={() => setShowRiskScroll(false)}
+                    className="w-full py-4 bg-white/5 hover:bg-white/10 text-slate-500 hover:text-slate-300 font-bold rounded-2xl transition-all"
+                  >
+                    我還沒準備好，離開學院
+                  </button>
+                </div>
+              </div>
+              <div className="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-transparent via-purple-400 to-transparent" />
+            </motion.div>
+          </div>
+        )}
       </AnimatePresence>
 
       {/* 狀態三：傳送門 Modal */}
