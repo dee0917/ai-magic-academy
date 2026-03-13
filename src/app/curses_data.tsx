@@ -1128,6 +1128,112 @@ export const CURSES = [
 2. 發布一篇 Threads（脆）貼文，發起「一人一句激怒設計師/PM 的幹話」接龍。
 
 負向約束：LINE 回應禁止使用陳腔濫調的「我們沒辦法配合」；Threads 嚴禁點名特定廠商。`
+  },
+  {
+    id: "refuse_revenue_share_trap",
+    tab: "創業/斜槓",
+    isPro: true,
+    outputFormat: "專業談判稿",
+    icon: <CircleDollarSign className="w-8 h-8 text-emerald-500" />,
+    color: "emerald",
+    title: "分潤陷阱防禦咒語",
+    desc: "針對「先做事，賺錢再分你」的變相白工邀請。透過建立「職業門檻」與「風險對等」邏輯，將對話導向預付款或合規合約，拒絕情感勒索。",
+    tags: ["接案", "分潤", "談判", "避坑"],
+    fields: [
+      { id: "project_type", label: "項目類型", placeholder: "例如：App 開發、品牌設計、SEO 優化...", outputFormat: "項目細節描述" },
+      { id: "proposer_role", label: "提議者身份", placeholder: "例如：老同學、創業圈友人、前同事...", outputFormat: "人物關係定義" },
+      { id: "output_style", label: "輸出風格", placeholder: "委婉拒絕 / 專業談判 / 鋼鐵直言", outputFormat: "語氣情緒調整" }
+    ],
+    tweak: { 
+      id: "strategy", 
+      label: "對應流派", 
+      options: [
+        "專業化降維：強調時間與設備硬成本", 
+        "風險共擔對沖：要求保底費+分潤", 
+        "標準流程化：搬出工作室財務審核機制",
+        "資源交換反制：要求等值實體資源交換"
+      ] 
+    },
+    theory: "基於「損失規避 (Loss Aversion)」原理。當對方不支付現金時，他們對專業投入通常缺乏尊重。透過引入「保底預付」概念，將風險轉移回提案者，藉此篩選出真正的合作者。",
+    generate: (inputs: any) => `你現在是一位擁有 10 年經驗的商務談判專家。請針對 [[${inputs.proposer_role}]] 提出的 [[${inputs.project_type}]] 分潤合作案，撰寫一份風格為 [[${inputs.output_style}]] 的回覆。
+
+要求：
+1. 肯定項目的潛力，但明確指出專業產出的「硬性開發成本」。
+2. 採取【[[${inputs.strategy}]]】策略，提出「預付保底 + 後期分潤」的階梯式方案。
+3. 強調沒有財務承諾的合作會導致項目優先級過低。
+
+負向約束：嚴禁出現「不好意思」、「抱歉」等軟弱詞彙；禁止接受 0 預付款模式；不需過度解釋個人財務，專注於商務規則。`
+  },
+  {
+    id: "ai_scam_course_refund",
+    tab: "創業/斜槓",
+    isPro: true,
+    outputFormat: "維權申訴信",
+    icon: <ShieldAlert className="w-8 h-8 text-red-500" />,
+    color: "red",
+    title: "AI 割韭菜大師課反擊咒語",
+    desc: "針對內容空洞、承諾虛假的 AI 課程。利用消費者保護觀點、廣告不實證據與社群影響力向主辦方施壓，爭取全額退費。",
+    tags: ["割韭菜", "退費", "AI課程", "維權"],
+    fields: [
+      { id: "course_name", label: "課程名稱", placeholder: "例如：21天AI變現大師營", outputFormat: "受害標的名稱" },
+      { id: "scam_points", label: "痛點/不實之處", placeholder: "例如：內容全是官方文件、教學過時、群組禁言...", outputFormat: "證據事實羅列" },
+      { id: "channel", label: "溝通管道", placeholder: "私信客服 / 存證信函草稿 / 社群爆料文", outputFormat: "媒體渠道設定" }
+    ],
+    tweak: { 
+      id: "pressure_mode", 
+      label: "施壓等級", 
+      options: [
+        "法條施壓：引用消保法廣告不實條款", 
+        "證據羅列：比對大綱與實際內容落差", 
+        "輿論威脅：暗示具備社群傳播影響力",
+        "最後通牒：設定24小時退費期限"
+      ] 
+    },
+    theory: "利用「權力平衡 (Power Balancing)」策略。割韭菜者通常欺負學員怕麻煩。透過展現「高維證據收集」與「通路封殺」能力，讓對方意識到維持該客戶的負面成本高於退費成本。",
+    generate: (inputs: any) => `你是一位專精於消費糾紛的維權律師助理。請針對 [[${inputs.course_name}]] 的 [[${inputs.scam_points}]] 問題，產出一份 [[${inputs.channel}]]。
+
+要求：
+1. 採取【[[${inputs.pressure_mode}]]】等級，條列式陳述內容與銷售頁面承諾的嚴重偏離。
+2. 指出其行為可能違反定型化契約的法律風險。
+3. 明確要求在指定時間內完成原路退費。
+
+負向約束：禁止情緒化謾罵，保持冷靜且強應的法律語調；不接受「換課」或「延長權限」等緩兵之計；嚴禁討拍，只談契約義務。`
+  },
+  {
+    id: "micro_entrepreneur_family",
+    tab: "創業/斜槓",
+    isPro: false,
+    outputFormat: "深度對談大綱",
+    icon: <Users className="w-8 h-8 text-blue-500" />,
+    color: "blue",
+    title: "微創業家叛溝通咒語",
+    desc: "針對家人對斜槓的不理解。將創業語言轉化為家人聽得懂的「安全感」與「責任」語言，爭取心理空間與實質支持。",
+    tags: ["家人", "創業支持", "溝通", "理解"],
+    fields: [
+      { id: "family_member", label: "溝通對象", placeholder: "例如：保守的父母、焦慮的配偶...", outputFormat: "對象角色定義" },
+      { id: "business_model", label: "創業內容", placeholder: "例如：自媒體運營、團購電商...", outputFormat: "事業模式簡述" },
+      { id: "main_concern", label: "對方的核心擔憂", placeholder: "例如：收入不穩、沒勞健保、不顧小孩...", outputFormat: "阻力因素分析" }
+    ],
+    tweak: { 
+      id: "approach", 
+      label: "溝通策略", 
+      options: [
+        "財務可視化：展示止損線與收支預測", 
+        "階梯式過渡：強調副業試驗而非辭職", 
+        "外部背書：引用權威數據證明行業趨勢",
+        "家庭貢換論：描述成功後如何改善家境"
+      ] 
+    },
+    theory: "基於「溝通框架理論」。家人的反對源於「對失去控制的恐懼」。咒語核心是將「創業」重新框架為「為了家庭更好的投資」，並提供具體的「安全護欄」。",
+    generate: (inputs: any) => `你是一位擅長跨世代溝通的心理諮商師。請針對 [[${inputs.family_member}]] 對 [[${inputs.business_model}]] 的反對，特別是針對 [[${inputs.main_concern}]]，設計一套 [[${inputs.outputFormat || '對談大綱'}]]。
+
+要求：
+1. 採用【[[${inputs.approach}]]】策略。
+2. 同理心起手，承認對方的擔心是出於愛。
+3. 展現成熟度，主動揭露最壞打算與止損機制。
+4. 設定一個具體的「觀察期」，請求期間的心理停戰。
+
+負向約束：嚴禁使用「你們不懂」、「這就是趨勢」等對抗性語言；禁止畫大餅，必須有數據或行動支撐；避免單純解釋夢想。`
   }
 ];
 

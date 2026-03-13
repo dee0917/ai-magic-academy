@@ -52,6 +52,19 @@ export default function MagicAcademyMVP() {
   }, [selectedCurse]);
 
   const TABS = ["職場求生", "校園生存", "人際擋箭", "日常雜症", "創業/斜槓"];
+
+  const scrollToTab = (tabId: string) => {
+    const element = document.getElementById(tabId);
+    if (element) {
+      const offset = 100; // Account for any fixed headers
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
   
   // Group curses by tab
   const groupedCurses = useMemo(() => {
@@ -173,7 +186,7 @@ export default function MagicAcademyMVP() {
           應付奧客、推掉飯局、自動寫報告，你的無腦求生指南。
         </p>
 
-        <div className="max-w-xl mx-auto w-full relative z-10">
+        <div className="max-w-xl mx-auto w-full relative z-10 mb-8">
           <div className="relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/30 to-pink-500/30 rounded-2xl blur opacity-0 group-focus-within:opacity-100 transition duration-500"></div>
             <div className="relative flex items-center">
@@ -195,12 +208,25 @@ export default function MagicAcademyMVP() {
             </div>
           </div>
         </div>
+
+        {/* Quick Nav Tabs */}
+        <div className="flex flex-wrap justify-center gap-2 relative z-10">
+          {TABS.map(tab => (
+            <button
+              key={tab}
+              onClick={() => scrollToTab(tab)}
+              className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-bold text-slate-400 hover:bg-purple-500/20 hover:text-purple-300 hover:border-purple-500/30 transition-all active:scale-95"
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
       </header>
 
       {/* 方案三改良版：橫向魔法卷軸 (四列/分類) */}
       <main className="w-full max-w-7xl relative z-10 pb-20">
         {TABS.map(tab => (
-          <section key={tab} className="mb-12 md:mb-16 last:mb-0">
+          <section key={tab} id={tab} className="mb-12 md:mb-16 last:mb-0 scroll-mt-32">
             <div className="flex items-center justify-between px-4 mb-6">
               <div className="flex items-center gap-3">
                 <div className="w-1.5 h-8 bg-purple-600 rounded-full shadow-[0_0_15px_rgba(168,85,247,0.8)]"></div>
