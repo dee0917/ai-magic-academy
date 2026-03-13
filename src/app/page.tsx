@@ -576,7 +576,7 @@ export default function MagicAcademyMVP() {
                 </div>
               </button>
 
-              <button onClick={() => handleDeepLink("https://gemini.google.com/app", "google-gemini://")} className="w-full bg-[#1a1025] hover:bg-blue-500/10 border border-blue-500/30 p-4 rounded-2xl flex items-center gap-4 transition-all group">
+              <button onClick={() => window.open("https://gemini.google.com/app", "_blank")} className="w-full bg-[#1a1025] hover:bg-blue-500/10 border border-blue-500/30 p-4 rounded-2xl flex items-center gap-4 transition-all group">
                 <Sparkles className="w-6 h-6 text-blue-400 group-hover:scale-110 transition-transform" />
                 <div className="text-left">
                   <h4 className="text-white font-bold">穿越星門</h4>
@@ -584,7 +584,7 @@ export default function MagicAcademyMVP() {
                 </div>
               </button>
 
-              <button onClick={() => handleDeepLink("https://grok.com", "x-grok://")} className="w-full bg-[#1a1025] hover:bg-slate-300/10 border border-slate-300/30 p-4 rounded-2xl flex items-center gap-4 transition-all group">
+              <button onClick={() => window.open("https://grok.com", "_blank")} className="w-full bg-[#1a1025] hover:bg-slate-300/10 border border-slate-300/30 p-4 rounded-2xl flex items-center gap-4 transition-all group">
                 <MessageSquare className="w-6 h-6 text-slate-300 group-hover:scale-110 transition-transform" />
                 <div className="text-left">
                   <h4 className="text-white font-bold">洞悉真理之眼</h4>
