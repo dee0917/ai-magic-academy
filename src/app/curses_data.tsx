@@ -132,7 +132,7 @@ export const CURSES = [
       { id: "impact", tab: "生活瑣事", isPro: false, outputFormat: "具體困擾描述", label: "造成你什麼困擾？", placeholder: "例：害我筆電進水、無法睡覺" }
     ],
     tweak: { id: "level", tab: "生活瑣事", isPro: false, outputFormat: "威懾力道調整", label: "威懾等級", options: ["理性催告", "引用租賃專法暗示", "最後通牒"] },
-    theory: "採用「法理情遞進結構」。不是一開始就對罵，而是透過 AI 梳理客觀事實，暗示你具備法律常識（如民法修繕義務），讓對方不敢忽視。",
+    theory: "採用「法理情遞進結構」。不是一開始就對罵，而是透過 AI梳理客觀事實，暗示你具備法律常識（如民法修繕義務），讓對方不敢忽視。",
     generate: (inputs: any) => `你是一位深諳台灣《租賃住宅市場發展及管理條例》的專業律師。
 我的租屋處遇到問題：「[[${inputs.issue || '[報修事項]'}]]」，這導致了「[[${inputs.impact || '[造成困擾]'}]]」。房東一直消極處理。
 
@@ -331,7 +331,7 @@ export const CURSES = [
       { id: "target", tab: "生活瑣事", isPro: false, outputFormat: "目標對手資訊", label: "贊助商是誰？", placeholder: "例：學校對面的新開手搖飲店" }
     ],
     tweak: { id: "perk", tab: "生活瑣事", isPro: false, outputFormat: "贊助回饋機制", label: "回饋機制", options: ["社群強力曝光", "實體攤位導購", "聯名專屬優惠"] },
-    theory: "「價值主張對齊 (Value Proposition Alignment)」。打破學生「求贊助」的弱勢姿態，轉為「B2B 商業合作」視角，強調能為店家帶來多少實質的學生客源。",
+    theory: "「價值主張對齊 (Value Proposition Alignment)」。打破學生「求贊助」的弱勢姿態，轉為「B2B 商業合作」視側，強調能為店家帶來多少實質的學生客源。",
     generate: (inputs: any) => `你是一位頂尖的 B2B 商業開發 (BD) 總監。
 我是大學社團幹部，正在為「[[${inputs.event || '[活動]'}]]」尋找贊助。我想找「[[${inputs.target || '[店家]'}]]」合作。
 
@@ -805,7 +805,6 @@ export const CURSES = [
     title: "格擋術：推銷/人情保險閃現",
     desc: "很久沒聯絡的朋友突然找你喝咖啡談保險？用這招快速拒絕，且不傷彼此面子。",
     tags: ["拒絕", "推銷", "保險", "社交"],
-
     fields: [
       { id: "who", tab: "生活瑣事", isPro: false, outputFormat: "推銷來源描述", label: "誰想推銷你？", placeholder: "例：國中同學突然密我" }
     ],
@@ -932,7 +931,7 @@ export const CURSES = [
 負向約束：LINE 訊息中絕對不能出現「理所當然」的語氣；Threads 貼文避免純抱怨，需帶有荒謬自嘲感。`
   },
   {
-    id: "debt_recovery", tab: "校園生存", isPro: false, outputFormat: "LINE & Threads",
+    id: "debt_recovery_campus", tab: "校園生存", isPro: false, outputFormat: "LINE & Threads",
     icon: <CircleDollarSign className="w-8 h-8 text-emerald-500" />,
     color: "emerald",
     title: "金錢溯源：雷室友欠款催繳咒",
@@ -1098,7 +1097,7 @@ export const CURSES = [
     ],
     tweak: { id: "strategy", tab: "職場求生", isPro: false, outputFormat: "求職談判策略", label: "談判籌碼", options: ["外部競爭者暗示法", "忠誠度與即戰力展現法"] },
     theory: "執行「稟賦效應重構」。讓主管意識到「失去這個熟悉業務的現成人才」成本極高，藉此奪回談判籌碼。",
-    generate: (inputs: any) => `你是一位資深人資總監。我達成了「[[${inputs.achievement || '某項大功勞'}]]」，現在想跟老闆爭取「[[${inputs.goal || '更好的待遇'}]]」。
+    generate: (inputs: any) => `你是一位資深人資總監. 我達成了「[[${inputs.achievement || '某項大功勞'}]]」，現在想跟老闆爭取「[[${inputs.goal || '更好的待遇'}]]」。
 策略為：【[[${inputs.strategy || '忠誠度與即戰力展現法'}]]】。
 
 請幫我產出兩段內容：
@@ -1221,11 +1220,11 @@ export const CURSES = [
         "財務可視化：展示止損線與收支預測", 
         "階梯式過渡：強調副業試驗而非辭職", 
         "外部背書：引用權威數據證明行業趨勢",
-        "家庭貢換論：描述成功後如何改善家境"
+        "家庭貢獻論：描述成功後如何改善家境"
       ] 
     },
     theory: "基於「溝通框架理論」。家人的反對源於「對失去控制的恐懼」。咒語核心是將「創業」重新框架為「為了家庭更好的投資」，並提供具體的「安全護欄」。",
-    generate: (inputs: any) => `你是一位擅長跨世代溝通的心理諮商師。請針對 [[${inputs.family_member}]] 對 [[${inputs.business_model}]] 的反對，特別是針對 [[${inputs.main_concern}]]，設計一套 [[${inputs.outputFormat || '對談大綱'}]]。
+    generate: (inputs: any) => `你是一位擅長跨世代溝通的心理諮商師. 請針對 [[${inputs.family_member}]] 對 [[${inputs.business_model}]] 的反對，特別是針對 [[${inputs.main_concern}]]，設計一套 [[${inputs.outputFormat || '對談大綱'}]]。
 
 要求：
 1. 採用【[[${inputs.approach}]]】策略。
@@ -1234,7 +1233,7 @@ export const CURSES = [
 4. 設定一個具體的「觀察期」，請求期間的心理停戰。
 
 負向約束：嚴禁使用「你們不懂」、「這就是趨勢」等對抗性語言；禁止畫大餅，必須有數據或行動支撐；避免單純解釋夢想。`
-  }
+  },
   {
     id: "sea_patrol_defense",
     tab: "人際擋箭",
@@ -1272,4 +1271,3 @@ export const CURSES = [
 負向約束：嚴禁道歉或示弱；嚴禁使用死板的公關聲明稿；嚴禁與酸民對罵。`
   }
 ];
-
