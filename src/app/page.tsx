@@ -112,16 +112,33 @@ export default function MagicAcademyMVP() {
 
   const handleDeepLink = (webUrl: string, appScheme: string) => {
     const start = Date.now();
+    let isRedirected = false;
+
+    // Try to open the app scheme
     window.location.href = appScheme;
+
+    // Monitor if the page is hidden (meaning the app likely opened)
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        isRedirected = true;
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    // Timeout to check if we should fallback to web
     setTimeout(() => {
-      if (!document.hidden && document.hasFocus()) {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      
+      // If after 2.5s the document is still visible and focus hasn't shifted,
+      // it's highly likely the app didn't open.
+      if (!isRedirected && !document.hidden && document.hasFocus()) {
         const elapsed = Date.now() - start;
-        if (elapsed < 3000) {
+        if (elapsed < 3500) {
           window.open(webUrl, '_blank');
         }
       }
-    }, 2000);
-    setTimeout(() => setShowPortal(false), 5000);
+      setShowPortal(false);
+    }, 2500);
   };
 
   const getColorHex = (colorName: string) => {
@@ -431,7 +448,7 @@ export default function MagicAcademyMVP() {
                 </div>
               </button>
 
-              <button onClick={() => handleDeepLink("https://gemini.google.com/app", "google-gemini://")} className="w-full bg-[#1a1025] hover:bg-blue-500/10 border border-blue-500/30 p-4 rounded-2xl flex items-center gap-4 transition-all group">
+              <button onClick={() => handleDeepLink("https://gemini.google.com/app", "google-gemini://app")} className="w-full bg-[#1a1025] hover:bg-blue-500/10 border border-blue-500/30 p-4 rounded-2xl flex items-center gap-4 transition-all group">
                 <Sparkles className="w-6 h-6 text-blue-400 group-hover:scale-110 transition-transform" />
                 <div className="text-left">
                   <h4 className="text-white font-bold">穿越星門</h4>
@@ -439,7 +456,7 @@ export default function MagicAcademyMVP() {
                 </div>
               </button>
 
-              <button onClick={() => handleDeepLink("https://grok.com", "grok://")} className="w-full bg-[#1a1025] hover:bg-slate-300/10 border border-slate-300/30 p-4 rounded-2xl flex items-center gap-4 transition-all group">
+              <button onClick={() => handleDeepLink("https://grok.com", "xai://grok")} className="w-full bg-[#1a1025] hover:bg-slate-300/10 border border-slate-300/30 p-4 rounded-2xl flex items-center gap-4 transition-all group">
                 <MessageSquare className="w-6 h-6 text-slate-300 group-hover:scale-110 transition-transform" />
                 <div className="text-left">
                   <h4 className="text-white font-bold">洞悉真理之眼</h4>
