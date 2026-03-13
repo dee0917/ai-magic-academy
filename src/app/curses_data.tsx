@@ -11,6 +11,79 @@ import React from "react";
 
 export const CURSES = [
   {
+    id: "greedy_bill_splitter",
+    tab: "日常雜症",
+    isPro: false,
+    outputFormat: "LINE 群組尷尬化解文",
+    icon: <Receipt className="w-8 h-8 text-yellow-500" />,
+    color: "yellow",
+    title: "AA制防禦陣：專治點餐大戶分帳術",
+    desc: "聚餐有人狂點貴的卻想平攤？教你如何優雅地『精準拆帳』，讓對方自覺補錢，守護荷包且不傷友誼。",
+    tags: ["AA制", "聚餐", "帳單", "精打細算"],
+    fields: [
+      { id: "total_bill", label: "總金額與人數", placeholder: "例：5000元/5個人", outputFormat: "帳務事實背景" },
+      { id: "greedy_one", label: "那位大戶做了什麼？", placeholder: "例：他多點了三盤和牛跟兩杯調酒", outputFormat: "行為事實描述" }
+    ],
+    tweak: { 
+      id: "strategy", 
+      label: "收帳流派", 
+      options: [
+        "數據理性型：直接列出明細清單", 
+        "裝傻委婉型：假裝錢帶不夠求精算", 
+        "幽默調侃型：在笑話中點出價差",
+        "軟性勒索型：這次他多付下次換人"
+      ] 
+    },
+    theory: "基於『公平理論』。透過將總帳單『顆粒化』，打破集體平攤的心理定勢，將社會壓力從你身上轉移到那個過度消費的人身上。",
+    generate: (inputs: any) => `你是一位精通人情世故的記帳達人。
+聚餐總金額：[[${inputs.total_bill}]]。
+有個同學/朋友點了：[[${inputs.greedy_one}]]，導致其他人平攤很不划算。
+請採取【[[${inputs.strategy}]]】策略幫我寫一段傳到 LINE 群組的收錢訊息。
+
+要求：
+1. 語氣要自然，不要讓人覺得你很計較，但要讓大家看出來帳對不起來。
+2. 核心目標：讓那位大戶主動承擔他超額的部分。
+3. 提供 3 個不同「尷尬防禦力」的版本。
+
+負向約束：嚴禁直接開罵；嚴禁使用死板的記帳表格；文字要帶有台灣 LINE 聊天的碎念感（如：那個、哈哈、好像）。`
+  },
+  {
+    id: "haircut_sales_shield",
+    tab: "日常雜症",
+    isPro: false,
+    outputFormat: "理髮椅上的脫身話術",
+    icon: <Scissors className="w-8 h-8 text-pink-400" />,
+    color: "pink",
+    title: "洗頭結界：美髮店強迫推銷格擋術",
+    desc: "頭髮洗到一半被推銷三萬塊儲值卡？教你如何戴上『窮鬼濾鏡』或『專業防禦』，讓設計師閉嘴，安靜享受服務。",
+    tags: ["強迫推銷", "理髮", "拒絕", "生活"],
+    fields: [
+      { id: "sales_pitch", label: "他現在推銷你什麼？", placeholder: "例：要我買三萬的頭皮護理套餐", outputFormat: "推銷內容摘要" },
+      { id: "current_status", label: "你目前的處境", placeholder: "例：正在洗頭臉上蓋著毛巾、或是剪到一半走不掉", outputFormat: "場景束縛描述" }
+    ],
+    tweak: { 
+      id: "defense", 
+      label: "格擋戰術", 
+      options: [
+        "財務破產流：我連下餐都快沒錢了", 
+        "專業反駁流：我家裡已經有一打高級品", 
+        "冷漠斷聯流：戴上耳機進入禪修模式",
+        "公司報帳流：我只用公司配發的產品"
+      ] 
+    },
+    theory: "利用『情境權力不對稱』反制。推銷者利用你無法逃離（洗頭中）的脆弱點。本咒語透過構建一個『無法獲利的負面標籤』，讓推銷者瞬間喪失進攻動力。",
+    generate: (inputs: any) => `你是一位拒絕推銷的頂級大師。
+我現在 [[${inputs.current_status}]]，被設計師推銷 [[${inputs.sales_pitch}]]。
+請採取【[[${inputs.defense}]]】戰術撰寫應對台詞。
+
+要求：
+1. 台詞要短，因為我現在可能不方便講太多話。
+2. 語氣要堅定，不給對方『再試試看』的空間。
+3. 針對不同等級的煩人設計師，給出 3 種應對方案。
+
+負向約束：嚴禁大聲吵架（這會讓現場很尷尬）；嚴禁給出『下次看看』這種留有餘地的回答。`
+  },
+  {
     id: "boss_line", tab: "職場求生", isPro: true, outputFormat: "LINE 短訊",
     icon: <Flame className="w-8 h-8 text-orange-500" />,
     color: "orange",
