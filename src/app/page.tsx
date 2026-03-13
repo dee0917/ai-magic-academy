@@ -159,14 +159,8 @@ export default function MagicAcademyMVP() {
     const start = Date.now();
     let isRedirected = false;
 
-    // Direct location change for maximum reliability on non-iOS
+    // Use the same direct trigger method as successful ChatGPT/Claude links
     window.location.href = appScheme;
-
-    // Fallback for iOS/Safari using iframe to prevent "Invalid URL" popup
-    const iframe = document.createElement("iframe");
-    iframe.style.display = "none";
-    iframe.src = appScheme;
-    document.body.appendChild(iframe);
 
     const handleVisibilityChange = () => {
       if (document.hidden) isRedirected = true;
@@ -175,7 +169,6 @@ export default function MagicAcademyMVP() {
 
     setTimeout(() => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
-      if (document.body.contains(iframe)) document.body.removeChild(iframe);
       
       if (!isRedirected && !document.hidden && document.hasFocus()) {
         const elapsed = Date.now() - start;
@@ -591,7 +584,7 @@ export default function MagicAcademyMVP() {
                 </div>
               </button>
 
-              <button onClick={() => handleDeepLink("https://grok.com", "grok://")} className="w-full bg-[#1a1025] hover:bg-slate-300/10 border border-slate-300/30 p-4 rounded-2xl flex items-center gap-4 transition-all group">
+              <button onClick={() => handleDeepLink("https://grok.com", "x-grok://")} className="w-full bg-[#1a1025] hover:bg-slate-300/10 border border-slate-300/30 p-4 rounded-2xl flex items-center gap-4 transition-all group">
                 <MessageSquare className="w-6 h-6 text-slate-300 group-hover:scale-110 transition-transform" />
                 <div className="text-left">
                   <h4 className="text-white font-bold">洞悉真理之眼</h4>
