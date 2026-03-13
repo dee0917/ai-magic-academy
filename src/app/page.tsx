@@ -159,21 +159,17 @@ export default function MagicAcademyMVP() {
     const start = Date.now();
     let isRedirected = false;
 
-    // Use a hidden iframe for deep linking to avoid Safari's "Invalid Address" alert
+    // Direct location change for maximum reliability on non-iOS
+    window.location.href = appScheme;
+
+    // Fallback for iOS/Safari using iframe to prevent "Invalid URL" popup
     const iframe = document.createElement("iframe");
     iframe.style.display = "none";
     iframe.src = appScheme;
     document.body.appendChild(iframe);
 
-    // Also try direct location change as fallback for some browsers
-    setTimeout(() => {
-      window.location.href = appScheme;
-    }, 0);
-
     const handleVisibilityChange = () => {
-      if (document.hidden) {
-        isRedirected = true;
-      }
+      if (document.hidden) isRedirected = true;
     };
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
@@ -587,15 +583,15 @@ export default function MagicAcademyMVP() {
                 </div>
               </button>
 
-              <button onClick={() => handleDeepLink("https://gemini.google.com/app", "googleapp://")} className="w-full bg-[#1a1025] hover:bg-blue-500/10 border border-blue-500/30 p-4 rounded-2xl flex items-center gap-4 transition-all group">
+              <button onClick={() => handleDeepLink("https://gemini.google.com/app", "google-gemini://")} className="w-full bg-[#1a1025] hover:bg-blue-500/10 border border-blue-500/30 p-4 rounded-2xl flex items-center gap-4 transition-all group">
                 <Sparkles className="w-6 h-6 text-blue-400 group-hover:scale-110 transition-transform" />
                 <div className="text-left">
                   <h4 className="text-white font-bold">穿越星門</h4>
-                  <p className="text-[10px] text-blue-500/70 font-black tracking-widest uppercase">Gemini (Google App)</p>
+                  <p className="text-[10px] text-blue-500/70 font-black tracking-widest uppercase">Gemini (Google)</p>
                 </div>
               </button>
 
-              <button onClick={() => handleDeepLink("https://grok.com", "x-grok://")} className="w-full bg-[#1a1025] hover:bg-slate-300/10 border border-slate-300/30 p-4 rounded-2xl flex items-center gap-4 transition-all group">
+              <button onClick={() => handleDeepLink("https://grok.com", "grok://")} className="w-full bg-[#1a1025] hover:bg-slate-300/10 border border-slate-300/30 p-4 rounded-2xl flex items-center gap-4 transition-all group">
                 <MessageSquare className="w-6 h-6 text-slate-300 group-hover:scale-110 transition-transform" />
                 <div className="text-left">
                   <h4 className="text-white font-bold">洞悉真理之眼</h4>
