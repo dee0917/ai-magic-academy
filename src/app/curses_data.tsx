@@ -1136,8 +1136,8 @@ export const CURSES = [
     outputFormat: "專業談判稿",
     icon: <CircleDollarSign className="w-8 h-8 text-emerald-500" />,
     color: "emerald",
-    title: "分潤陷阱防禦咒語",
-    desc: "針對「先做事，賺錢再分你」的變相白工邀請。透過建立「職業門檻」與「風險對等」邏輯，將對話導向預付款或合規合約，拒絕情感勒索。",
+    title: "想空手套白狼？分潤餅乾退散陣",
+    desc: "「現在沒預算，賺錢再分你」？教你如何優雅地拆穿這塊畫不出來的大餅，把白工變定金，拒絕當創業工具人。",
     tags: ["接案", "分潤", "談判", "避坑"],
     fields: [
       { id: "project_type", label: "項目類型", placeholder: "例如：App 開發、品牌設計、SEO 優化...", outputFormat: "項目細節描述" },
@@ -1171,8 +1171,8 @@ export const CURSES = [
     outputFormat: "維權申訴信",
     icon: <ShieldAlert className="w-8 h-8 text-red-500" />,
     color: "red",
-    title: "AI 割韭菜大師課反擊咒語",
-    desc: "針對內容空洞、承諾虛假的 AI 課程。利用消費者保護觀點、廣告不實證據與社群影響力向主辦方施壓，爭取全額退費。",
+    title: "韭菜之怒：AI 大師課退費結界",
+    desc: "花了三萬買「咒語」卻發現是垃圾？啟動消費維權陣，用法律與輿論讓割韭菜的主辦方乖乖把錢吐出來。",
     tags: ["割韭菜", "退費", "AI課程", "維權"],
     fields: [
       { id: "course_name", label: "課程名稱", placeholder: "例如：21天AI變現大師營", outputFormat: "受害標的名稱" },
@@ -1197,7 +1197,7 @@ export const CURSES = [
 2. 指出其行為可能違反定型化契約的法律風險。
 3. 明確要求在指定時間內完成原路退費。
 
-負向約束：禁止情緒化謾罵，保持冷靜且強應的法律語調；不接受「換課」或「延長權限」等緩兵之計；嚴禁討拍，只談契約義務。`
+負向約束：禁止情緒化謾罵，保持冷靜且強硬的法律語調；不接受「換課」或「延長權限」等緩兵之計；嚴禁討拍，只談契約義務。`
   },
   {
     id: "micro_entrepreneur_family",
@@ -1206,8 +1206,8 @@ export const CURSES = [
     outputFormat: "深度對談大綱",
     icon: <Users className="w-8 h-8 text-blue-500" />,
     color: "blue",
-    title: "微創業家叛溝通咒語",
-    desc: "針對家人對斜槓的不理解。將創業語言轉化為家人聽得懂的「安全感」與「責任」語言，爭取心理空間與實質支持。",
+    title: "夢想守護者：長輩不務正業屏蔽術",
+    desc: "被長輩嗆「玩手機不找正經工作」？把斜槓包裝成「家庭抗風險投資」，用安全感塞住他們的嘴，換取安靜的創業空間。",
     tags: ["家人", "創業支持", "溝通", "理解"],
     fields: [
       { id: "family_member", label: "溝通對象", placeholder: "例如：保守的父母、焦慮的配偶...", outputFormat: "對象角色定義" },
