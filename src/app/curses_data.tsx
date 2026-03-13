@@ -5,7 +5,7 @@ import {
   Ghost, GraduationCap, Coins, Handshake, Trash2, HeartOff, PenTool, Send, Calendar, Megaphone, 
   Beer, ShieldCheck, UserPlus, Wallet, HelpCircle, ClipboardList, Clock, Receipt, Heart, Music,
   Dumbbell, Star, CircleDollarSign, VolumeX, Headset, ShieldX, Swords, Gift, Users,
-  Brain, Bot, MessageSquare, Lock
+  Brain, Bot, MessageSquare, Lock, Scissors
 } from "lucide-react";
 import React from "react";
 
