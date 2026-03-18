@@ -354,14 +354,14 @@ export default function MagicAcademyMVP() {
       {/* 狀態二：魔法工房 (彈出顯示) */}
       <AnimatePresence>
       {selectedCurse && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 lg:p-10">
+        <div className="fixed inset-0 z-[100] flex items-end md:items-center md:justify-center md:p-6 lg:p-10">
           <motion.div 
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             className="absolute inset-0 bg-black/80 backdrop-blur-md" 
             onClick={() => { setSelectedCurse(null); setInputs({}); setShowPortal(false); }}
           ></motion.div>
           
-          <motion.div layoutId={`card-${selectedCurse.id}`} className="w-full max-w-4xl bg-[#0a0a15] bg-gradient-to-br from-white/[0.08] to-transparent border border-purple-500/30 rounded-3xl backdrop-blur-2xl relative shadow-[0_40px_100px_rgba(0,0,0,0.8)] flex flex-col max-h-[90vh] overflow-hidden z-10">
+          <motion.div layoutId={`card-${selectedCurse.id}`} className="w-full max-w-4xl bg-[#0a0a15] bg-gradient-to-br from-white/[0.08] to-transparent md:border border-purple-500/30 rounded-t-3xl md:rounded-3xl backdrop-blur-2xl relative shadow-[0_40px_100px_rgba(0,0,0,0.8)] flex flex-col max-h-[95vh] md:max-h-[90vh] overflow-hidden z-10">
             {/* Scroll Area */}
             <div className="flex-1 overflow-y-auto p-6 md:p-8 custom-scrollbar">
               <div className="flex justify-end gap-3 mb-6">
