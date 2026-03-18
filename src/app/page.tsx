@@ -191,14 +191,14 @@ export default function MagicAcademyMVP() {
   };
 
   return (
-    <div className="min-h-screen w-full relative bg-[#050510] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/20 via-[#050510] to-[#050510] text-slate-200 font-sans selection:bg-purple-500/30 p-4 md:p-6 flex flex-col items-center overflow-x-hidden">
+    <div className="min-h-screen w-full relative bg-[#050510] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/20 via-[#050510] to-[#050510] text-slate-200 font-sans selection:bg-purple-500/30 flex flex-col items-center overflow-x-hidden">
       {/* Background Orbs */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <div className="w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-purple-600/10 blur-[120px] rounded-full animate-pulse absolute top-[-10%] left-[-10%]"></div>
         <div className="w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-indigo-600/10 blur-[120px] rounded-full animate-pulse absolute bottom-[-10%] right-[-10%]" style={{ animationDelay: '2s' }}></div>
       </div>
 
-      <header className="text-center max-w-4xl w-full mt-6 md:mt-16 mb-12 relative z-10 px-2 md:px-4">
+      <header className="text-center max-w-4xl w-full mt-6 md:mt-16 mb-12 relative z-10 px-4 md:px-6">
         <div className="inline-block px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-purple-400 mb-4 animate-pulse">
           Next-Gen AI Solution
         </div>
@@ -207,7 +207,7 @@ export default function MagicAcademyMVP() {
             {`{麻瓜專用AI外掛}`}
           </span>
         </h1>
-        <p className="text-xs md:text-xl text-slate-400 max-w-2xl mx-auto mb-6 md:mb-10 font-medium leading-relaxed px-2">
+        <p className="text-sm md:text-xl text-slate-400 max-w-2xl mx-auto mb-6 md:mb-10 font-medium leading-relaxed">
           將複雜的「提示詞」封裝成一鍵釋放的魔法。<br className="hidden md:block" />
           應付奧客、推掉飯局、自動寫報告，你的無腦求生指南。
         </p>
@@ -236,7 +236,7 @@ export default function MagicAcademyMVP() {
         </div>
 
         {/* Quick Nav Tabs */}
-        <div className="flex overflow-x-auto no-scrollbar justify-start md:justify-center gap-2 relative z-10 px-2 md:flex-wrap">
+        <div className="flex overflow-x-auto no-scrollbar justify-start md:justify-center gap-2 relative z-10 md:flex-wrap">
           <button
             onClick={() => {
               setSearchQuery("");
@@ -262,14 +262,14 @@ export default function MagicAcademyMVP() {
       </header>
 
       {/* 方案三改良版：橫向魔法卷軸 (四列/分類) */}
-      <main className="w-full max-w-7xl relative z-10 pb-20">
+      <main className="w-full max-w-7xl relative z-10 pb-20 px-4 md:px-6">
         {TABS.map(tab => {
           const tabCurses = groupedCurses[tab];
           if (searchQuery && tabCurses.length === 0) return null;
 
           return (
             <section key={tab} id={tab} className="mb-12 md:mb-16 last:mb-0 scroll-mt-32">
-              <div className="flex items-center justify-between px-4 mb-6">
+              <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
                   <div className="w-1.5 h-8 bg-purple-600 rounded-full shadow-[0_0_15px_rgba(168,85,247,0.8)]"></div>
                   <h2 className="text-2xl md:text-3xl font-serif font-black tracking-tight text-white italic">{tab}</h2>
@@ -288,7 +288,7 @@ export default function MagicAcademyMVP() {
                   </motion.div>
                 </div>
 
-                <div className="flex overflow-x-auto gap-4 md:gap-6 px-4 pb-8 no-scrollbar snap-x snap-mandatory scroll-smooth">
+                <div className="flex overflow-x-auto gap-4 md:gap-6 pb-8 no-scrollbar snap-x snap-mandatory scroll-smooth">
                   {tabCurses.map((curse: any) => (
                     <motion.button
                       layoutId={`card-${curse.id}`}
