@@ -279,7 +279,7 @@ export default function MagicAcademyMVP() {
                 </div>
               </div>
 
-              <div className="relative group/scroll">
+              <div className="relative group/scroll -mx-4 md:-mx-6">
                 {/* Scroll Indicators */}
                 <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-[#050510] to-transparent z-20 pointer-events-none opacity-0 group-hover/scroll:opacity-100 transition-opacity"></div>
                 <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-[#050510] to-transparent z-20 pointer-events-none opacity-100 transition-opacity flex items-center justify-end pr-2">
@@ -288,7 +288,7 @@ export default function MagicAcademyMVP() {
                   </motion.div>
                 </div>
 
-                <div className="flex overflow-x-auto gap-4 md:gap-6 pb-8 no-scrollbar snap-x snap-mandatory scroll-smooth">
+                <div className="flex overflow-x-auto gap-4 md:gap-6 px-4 md:px-6 pb-8 no-scrollbar snap-x snap-mandatory scroll-smooth">
                   {tabCurses.map((curse: any) => (
                     <motion.button
                       layoutId={`card-${curse.id}`}
