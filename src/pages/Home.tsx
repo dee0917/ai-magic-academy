@@ -15,7 +15,6 @@ const Home = () => {
             <SEO path="/" />
             <div className="grid-bg-magic" />
             
-            {/* 魔法符文背景動畫 */}
             <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-10">
                 {[...Array(15)].map((_, i) => (
                     <div 
@@ -31,7 +30,6 @@ const Home = () => {
                 ))}
             </div>
 
-            {/* HERO SECTION - 復古海報風格 */}
             <section className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden pt-20 border-b-6 border-magic-text">
                 <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
                     <div className="text-left space-y-8">
@@ -69,7 +67,7 @@ const Home = () => {
                     <motion.div initial={{ opacity: 0, rotate: 10, scale: 0.8 }} animate={{ opacity: 1, rotate: -2, scale: 1 }} transition={{ type: "spring", delay: 0.3 }}
                         className="relative hidden lg:block">
                         <div className="w-full aspect-square bg-magic-primary border-6 border-magic-text shadow-brutalist p-8 flex flex-col justify-between">
-                            <div className="text-8xl">🔮</div>
+                            <div className="text-8xl text-center">🔮</div>
                             <div className="space-y-4">
                                 <div className="h-4 bg-magic-text/20 w-3/4" />
                                 <div className="h-4 bg-magic-text/20 w-full" />
@@ -77,31 +75,29 @@ const Home = () => {
                             </div>
                             <div className="text-right font-display text-4xl text-magic-red">LV.99 MAGE</div>
                         </div>
-                        {/* 裝飾性元素 */}
                         <div className="absolute -top-10 -right-10 w-32 h-32 bg-magic-red border-6 border-magic-text rotate-12 -z-10 shadow-brutalist" />
-                    </div>
+                    </motion.div>
                 </div>
             </section>
 
-            {/* JOURNEY SECTION - 章節卡片牆 */}
             <section id="journey" className="py-32 px-6 bg-magic-teal parchment-texture">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-24">
                         <span className="bg-magic-primary text-magic-text px-6 py-2 border-4 border-magic-text font-display text-lg shadow-brutalist inline-block mb-8">LEARNING JOURNEY</span>
-                        <h2 className="text-5xl md:text-7xl font-display text-magic-bg tracking-tighter">5 大魔法領域，{totalArticles} 篇秘笈</h2>
+                        <h2 className="text-5xl md:text-7xl font-display text-magic-bg tracking-tighter text-center">5 大魔法領域，{totalArticles} 篇秘笈</h2>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
                         {CHAPTERS.map((chapter, i) => (
                             <motion.div key={chapter.id} {...fadeUp} transition={{ delay: i * 0.1 }}>
                                 <Link to="/insights" className="group block h-full bg-magic-bg border-4 border-magic-text shadow-brutalist hover:shadow-brutalist-hover hover:-translate-y-2 transition-all p-8 relative overflow-hidden">
-                                    <span className="text-6xl block mb-6">{chapter.emoji}</span>
-                                    <div className="flex items-center gap-3 mb-4">
+                                    <span className="text-6xl block mb-6 text-center">{chapter.emoji}</span>
+                                    <div className="flex items-center gap-3 mb-4 justify-center">
                                         <span className="bg-magic-text text-magic-bg px-3 py-1 text-xs font-black uppercase tracking-widest">CH.{chapter.id}</span>
                                         <span className="text-magic-teal text-xs font-black uppercase tracking-tight">{chapter.articleIds.length} 篇修行</span>
                                     </div>
-                                    <h3 className="text-2xl font-serif font-black text-magic-text mb-4 leading-tight group-hover:text-magic-red transition-colors">{chapter.title}</h3>
-                                    <p className="text-magic-text/60 text-sm leading-relaxed font-medium">{chapter.subtitle}</p>
+                                    <h3 className="text-2xl font-serif font-black text-magic-text mb-4 leading-tight group-hover:text-magic-red transition-colors text-center">{chapter.title}</h3>
+                                    <p className="text-magic-text/60 text-sm leading-relaxed font-medium text-center">{chapter.subtitle}</p>
                                     
                                     <div className="absolute -right-4 -bottom-4 text-magic-text/5 rotate-12 group-hover:rotate-0 transition-transform duration-700">
                                         <Scroll size={120} strokeWidth={1} />
@@ -113,7 +109,6 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* VALUE SECTION - 核心特點 */}
             <section className="py-32 px-6 border-b-6 border-magic-text">
                 <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12">
                     {[
@@ -139,21 +134,20 @@ const Home = () => {
                         <motion.div key={i} {...fadeUp} transition={{ delay: i * 0.15 }}
                             className="bg-white border-4 border-magic-text p-10 shadow-brutalist relative group overflow-hidden">
                             <div className="absolute top-0 left-0 w-full h-2 bg-magic-primary" />
-                            <span className="text-7xl block mb-8 group-hover:scale-110 transition-transform">{item.emoji}</span>
-                            <h3 className="text-3xl font-display text-magic-text mb-6">{item.title}</h3>
-                            <p className="text-magic-text/70 text-lg leading-relaxed mb-8 font-medium">{item.desc}</p>
-                            <span className="badge-magic">{item.detail}</span>
+                            <span className="text-7xl block mb-8 group-hover:scale-110 transition-transform text-center">{item.emoji}</span>
+                            <h3 className="text-3xl font-display text-magic-text mb-6 text-center">{item.title}</h3>
+                            <p className="text-magic-text/70 text-lg leading-relaxed mb-8 font-medium text-center">{item.desc}</p>
+                            <div className="text-center"><span className="badge-magic">{item.detail}</span></div>
                         </motion.div>
                     ))}
                 </div>
             </section>
 
-            {/* TRANSFORMATION SECTION - 學會之後 */}
             <section className="py-32 px-6 bg-magic-text parchment-texture relative">
                 <div className="max-w-4xl mx-auto text-center">
                     <motion.div {...fadeUp} className="mb-24">
                         <span className="bg-magic-red text-magic-bg px-6 py-2 border-4 border-magic-bg font-display text-lg shadow-[8px_8px_0px_#8B2626] inline-block mb-8">THE TRANSFORMATION</span>
-                        <h2 className="text-5xl md:text-7xl font-display text-magic-bg tracking-tight">從麻瓜到魔法師的蛻變</h2>
+                        <h2 className="text-5xl md:text-7xl font-display text-magic-bg tracking-tight text-center">從麻瓜到魔法師的蛻變</h2>
                     </motion.div>
 
                     <div className="space-y-12">
@@ -173,12 +167,12 @@ const Home = () => {
                                 className="grid grid-cols-1 md:grid-cols-[1fr_20px_1fr] items-center gap-8 bg-magic-bg border-4 border-magic-bg p-8 shadow-[12px_12px_0px_#1A5C5A]">
                                 <div className="bg-magic-red/10 p-8 border-4 border-dashed border-magic-red/30">
                                     <span className="text-magic-red font-display text-xs tracking-widest block mb-4">BEFORE 傳統操作</span>
-                                    <p className="text-magic-text/60 font-serif text-lg italic">{item.before}</p>
+                                    <p className="text-magic-text/60 font-serif text-lg italic text-center">{item.before}</p>
                                 </div>
-                                <div className="text-magic-teal font-display text-4xl hidden md:block">→</div>
-                                <div className="bg-magic-teal/10 p-8 border-4 border-magic-teal">
+                                <div className="text-magic-teal font-display text-4xl hidden md:block text-center">→</div>
+                                <div className="bg-magic-teal/10 p-8 border-4 border-magic-teal text-center">
                                     <span className="text-magic-teal font-display text-xs tracking-widest block mb-4">AFTER 魔法加持</span>
-                                    <p className="text-magic-text font-serif text-xl font-black">{item.after}</p>
+                                    <p className="text-magic-text font-serif text-xl font-black text-center">{item.after}</p>
                                 </div>
                             </motion.div>
                         ))}
@@ -186,11 +180,10 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* CTA SECTION */}
             <section className="py-40 px-6 border-t-6 border-magic-text text-center">
                 <motion.div {...fadeUp}>
                     <Sparkles size={64} className="text-magic-primary mx-auto mb-12 animate-pulse" />
-                    <h2 className="text-5xl md:text-8xl font-display text-magic-text mb-12 tracking-tighter leading-none">準備好翻開這本魔法書了嗎？</h2>
+                    <h2 className="text-5xl md:text-8xl font-display text-magic-text mb-12 tracking-tighter leading-none text-center">準備好翻開這本魔法書了嗎？</h2>
                     
                     <Link to="/insights"
                         className="btn-magic-red text-4xl px-20 py-10 shadow-[16px_16px_0px_#2A2723] hover:shadow-[20px_20px_0px_#2A2723] inline-flex items-center gap-6">
@@ -207,7 +200,7 @@ const Home = () => {
                                     </div>
                                     <h3 className="text-4xl md:text-5xl font-display text-magic-text">贊助實驗室進化</h3>
                                 </div>
-                                <p className="text-xl md:text-2xl text-magic-text/80 font-serif leading-relaxed italic">
+                                <p className="text-xl md:text-2xl text-magic-text/80 font-serif leading-relaxed italic text-left">
                                     教學將永遠保持免費。你的支持將轉化為魔藥材料，<br />
                                     助我研發更高階的咒語關卡。
                                 </p>
