@@ -1,43 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Rye&family=Chivo:wght@400;700&family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@400;700;900&family=La+Belle+Aurore&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
+  --magic-bg: #F4EED8;
+  --magic-text: #2A2723;
+  --magic-primary: #E8A838;
 }
 
 body {
-  @apply antialiased;
-  background-color: #0A0A0A;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  @apply antialiased bg-magic-bg text-magic-text font-sans;
+  background-color: var(--magic-bg);
 }
 
-/* 自訂捲軸樣式 */
+/* 復古紙張紋理感 */
+.parchment-texture {
+  background-image: url("https://www.transparenttextures.com/patterns/p6.png");
+}
+
+/* 粗野主義通用組件 */
+@layer components {
+  .btn-magic {
+    @apply border-4 border-magic-text bg-magic-primary text-magic-text font-display px-6 py-3 transition-all active:translate-x-1 active:translate-y-1 active:shadow-none shadow-brutalist uppercase tracking-widest text-lg;
+  }
+
+  .btn-magic-red {
+    @apply btn-magic bg-magic-red text-magic-bg;
+  }
+
+  .card-magic {
+    @apply border-4 border-magic-text bg-magic-bg shadow-brutalist transition-all hover:-translate-y-1 hover:shadow-brutalist-hover p-6;
+  }
+
+  .input-magic {
+    @apply border-4 border-magic-text bg-magic-primary px-4 py-3 outline-none font-serif text-xl placeholder:text-magic-text/40 shadow-brutalist-sm;
+  }
+
+  .badge-magic {
+    @apply border-2 border-magic-text bg-magic-teal text-magic-bg px-3 py-1 font-bold text-xs uppercase tracking-tighter;
+  }
+}
+
+/* 自訂捲軸樣式 (復古感) */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 12px;
 }
 ::-webkit-scrollbar-track {
-  background: #0A0A0A;
+  @apply bg-magic-bg border-l-4 border-magic-text;
 }
 ::-webkit-scrollbar-thumb {
-  background: #222;
-  border-radius: 10px;
+  @apply bg-magic-primary border-4 border-magic-text;
 }
 
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+/* 駭客任務程式碼流 -> 魔法符文流 */
+.magic-stream {
+  @apply absolute top-[-100%] w-[1px] bg-gradient-to-b from-transparent via-magic-teal/40 to-transparent;
+  height: 150px;
+  animation: matrix-fall linear infinite;
 }
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+
+@keyframes matrix-fall {
+  0% { transform: translateY(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(120vh); opacity: 0; }
 }
 
 /* 網格背景 */
-.grid-bg {
-  background-size: 50px 50px;
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+.grid-bg-magic {
+  background-size: 60px 60px;
+  background-image: linear-gradient(to right, rgba(42, 39, 35, 0.05) 2px, transparent 2px),
+    linear-gradient(to bottom, rgba(42, 39, 35, 0.05) 2px, transparent 2px);
   position: fixed;
   top: 0;
   left: 0;
@@ -47,74 +83,8 @@ body {
   pointer-events: none;
 }
 
-/* 玻璃擬態 */
-.glass-panel {
-  @apply bg-zinc-900/60 backdrop-blur-md border border-white/10 transition-all duration-300;
-}
-
-/* 回歸標準但清晰的字體比例 */
-.article-content p {
-  @apply font-sans mb-6 leading-relaxed text-zinc-300 text-lg md:text-xl font-light;
-}
-
-.article-content h1 {
-  @apply font-serif text-4xl md:text-6xl font-black text-white leading-tight mb-8;
-}
-
-.article-content h2 {
-  @apply font-sans text-2xl md:text-3xl font-bold mt-12 mb-6 text-white flex items-center gap-3;
-}
-
-.article-content h2::before {
-  content: '';
-  display: block;
-  width: 4px;
-  height: 24px;
-  background-color: #10b981;
-  border-radius: 2px;
-}
-
-/* 教學步驟清單樣式 - 清晰不擁擠 */
-.step-list {
-  @apply list-none pl-0 space-y-6;
-}
-
-.step-item {
-  @apply flex flex-col md:flex-row md:items-start gap-4 p-6 md:p-8 rounded-3xl bg-white/5 border border-white/10 transition-all duration-300;
-}
-
-.step-item.active-step {
-  @apply border-emerald-500/30 bg-emerald-500/5 shadow-[0_10px_30px_rgba(16,185,129,0.05)];
-}
-
-.step-number {
-  @apply font-mono text-sm font-black px-3 py-1 rounded-lg bg-white/10 text-white whitespace-nowrap self-start;
-}
-
-/* 高對比銜接標籤 - 保持清晰但尺寸適中 */
-.transition-label {
-  @apply inline-block text-[10px] font-black tracking-[0.3em] uppercase py-1.5 px-4 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-6;
-}
-
-.article-content ul {
-  @apply list-none pl-0 mb-8 space-y-3;
-}
-
-.article-content li {
-  @apply relative pl-6 text-zinc-300 text-lg md:text-xl font-light;
-}
-
-.article-content li::before {
-  content: '→';
-  @apply absolute left-0 text-emerald-500 font-bold;
-}
-
-.btn-glow {
-  @apply shadow-[0_0_20px_rgba(16,185,129,0.3)];
-  animation: glow 2s infinite ease-in-out;
-}
-
-@keyframes glow {
-  0%, 100% { box-shadow: 0 0 10px rgba(16,185,129,0.2); }
-  50% { box-shadow: 0 0 25px rgba(16,185,129,0.5); }
+/* 復古半色調網底效果 */
+.halftone-loading {
+  background-image: radial-gradient(#2A2723 1px, transparent 0);
+  background-size: 4px 4px;
 }

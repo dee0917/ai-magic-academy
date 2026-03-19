@@ -1,165 +1,170 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Copy, Check, ChevronDown, Lock, Sparkles, MousePointer2, Smartphone, Gamepad2, X } from 'lucide-react';
+import { 
+    ArrowLeft, ArrowRight, Copy, Check, ChevronDown, Sparkles, 
+    MousePointer2, X, Target, Send, Flame, BrainCircuit, Star, Scroll, Lightbulb
+} from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { api } from '../lib/supabase';
 import { INSIGHTS } from '../data/mock';
-import { MAIN_QUEST_ORDER, CHAPTERS, SIDE_QUEST_IDS } from '../data/insights';
 import SEO from '../components/ui/SEO';
 import { ChatGPTLogo, ClaudeLogo, GeminiLogo } from '../components/AILogos';
+import { useIdentity } from '../context/IdentityContext';
+import { judgeUserResponse } from '../lib/khojJudge';
+import DifficultyStars from '../components/ui/DifficultyStars';
 
 const fadeUp = {
     initial: { opacity: 0, y: 40 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-60px" },
-    transition: { duration: 0.5, ease: "easeOut" }
+    viewport: { once: true, margin: "-100px" },
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
 };
 
 const ArticleDetail = () => {
     const { id } = useParams();
     const [article, setArticle] = useState<any | null>(null);
     const [loading, setLoading] = useState(true);
-    const [copied, setCopied] = useState(false);
-    const [progress, setProgress] = useState(0);
     const [currentStep, setCurrentStep] = useState(0);
     const [stepsCompleted, setStepsCompleted] = useState<boolean[]>([]);
-    const [quizAnswer, setQuizAnswer] = useState<number | null>(null);
-    const [quizSubmitted, setQuizSubmitted] = useState(false);
     const [badgeEarned, setBadgeEarned] = useState(false);
     const [treasurePhase, setTreasurePhase] = useState<'locked' | 'falling' | 'impact' | 'exploding' | 'revealed'>('locked');
-    const [freeMode, setFreeMode] = useState(false);
-    const [rippleStep, setRippleStep] = useState<number | null>(null);
     const [showAiJumpModal, setShowAiJumpModal] = useState(false);
     
+    // 🎮 Practice Mode State
+    const [isPracticeMode, setIsPracticeMode] = useState(false);
+    const [messages, setMessages] = useState<{role: 'ai' | 'user', text: string}[]>([]);
+    const [userInput, setUserInput] = useState('');
+    const [practiceStep, setPracticeStep] = useState(0);
+    const [failCount, setFailCount] = useState(0);
+    const [showHint, setShowHint] = useState(false);
+    const [isJudging, setIsJudging] = useState(false);
+    const [currentHint, setCurrentHint] = useState('');
+    const [previousResponses, setPreviousResponses] = useState<string[]>([]);
+
     // Refs
     const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
     const treasureRef = useRef<HTMLDivElement>(null);
-    const quizRef = useRef<HTMLDivElement>(null);
-    const rewardRef = useRef<HTMLDivElement>(null);
     const hookRef = useRef<HTMLDivElement>(null);
+    const chatEndRef = useRef<HTMLDivElement>(null);
 
-    const getColorClasses = (themeColor: string) => {
-        const colors: Record<string, any> = {
-            emerald: { text: 'text-emerald-500', lightText: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20', gradient: 'from-emerald-500/20 to-teal-500/10', glow: 'shadow-emerald-500/20', solid: 'bg-emerald-500' },
-            yellow: { text: 'text-yellow-500', lightText: 'text-yellow-400', bg: 'bg-yellow-500/10', border: 'border-yellow-500/20', gradient: 'from-yellow-500/10 to-orange-500/10', glow: 'shadow-emerald-500/20', solid: 'bg-yellow-500' },
-            amber: { text: 'text-amber-500', lightText: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/20', gradient: 'from-amber-500/20 to-yellow-500/10', glow: 'shadow-amber-500/20', solid: 'bg-amber-500' },
-            blue: { text: 'text-blue-500', lightText: 'text-blue-400', bg: 'bg-blue-500/10', border: 'border-blue-500/20', gradient: 'from-blue-500/20 to-indigo-500/10', glow: 'shadow-blue-500/20', solid: 'bg-blue-500' },
-            violet: { text: 'text-violet-500', lightText: 'text-violet-400', bg: 'bg-violet-500/10', border: 'border-violet-500/20', gradient: 'from-violet-500/20 to-purple-500/10', glow: 'shadow-violet-500/20', solid: 'bg-violet-500' },
-            rose: { text: 'text-rose-500', lightText: 'text-rose-400', bg: 'bg-rose-500/10', border: 'border-rose-500/20', gradient: 'from-rose-500/20 to-pink-500/10', glow: 'shadow-rose-500/20', solid: 'bg-rose-500' },
-            teal: { text: 'text-teal-500', lightText: 'text-teal-400', bg: 'bg-teal-500/10', border: 'border-teal-500/20', gradient: 'from-teal-500/20 to-cyan-500/10', glow: 'shadow-teal-500/20', solid: 'bg-teal-500' },
-            zinc: { text: 'text-zinc-300', lightText: 'text-zinc-200', bg: 'bg-white/5', border: 'border-white/10', gradient: 'from-white/5 to-zinc-900', glow: 'shadow-white/10', solid: 'bg-zinc-500' }
-        };
-        return colors[themeColor] || colors.emerald;
+    const scrollToBottom = () => {
+        chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
     useEffect(() => {
-        const handler = () => {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            setProgress(docHeight > 0 ? scrollTop / docHeight : 0);
-        };
-        window.addEventListener('scroll', handler, { passive: true });
-        return () => window.removeEventListener('scroll', handler);
-    }, []);
+        if (isPracticeMode) scrollToBottom();
+    }, [messages, isJudging]);
 
     useEffect(() => {
         if (id) fetchArticle(parseInt(id));
     }, [id]);
 
-    useEffect(() => {
-        if (article?.steps) {
-            const isFree = localStorage.getItem('dee_view_preference') === 'free';
-            setFreeMode(isFree);
-            if (isFree) {
-                setStepsCompleted(new Array(article.steps.length).fill(true));
-                setCurrentStep(article.steps.length - 1);
-                setTreasurePhase('revealed');
-            } else {
-                setStepsCompleted(new Array(article.steps.length).fill(false));
-                setCurrentStep(0);
-            }
-            stepRefs.current = new Array(article.steps.length).fill(null);
-        }
-        setQuizAnswer(null);
-        setQuizSubmitted(false);
-        setBadgeEarned(false);
-        setCopied(false);
-        setTreasurePhase('locked');
-        setShowAiJumpModal(false);
-    }, [article?.id, article?.steps?.length]);
-
     const fetchArticle = async (articleId: number) => {
-        setLoading(true);
-        const localArticle = INSIGHTS.find(i => i.id === articleId);
-        const dbData = await api.getInsightById(articleId);
-        if (localArticle) setArticle({ ...dbData, ...localArticle });
-        else if (dbData) setArticle(dbData);
-        else setArticle(null);
-        setLoading(false);
+        try {
+            setLoading(true);
+            const localArticle = INSIGHTS.find(i => i.id === articleId);
+            const dbData = await api.getInsightById(articleId);
+            const finalData = localArticle ? { ...dbData, ...localArticle } : dbData;
+            setArticle(finalData);
+            
+            setMessages([
+                { 
+                    role: 'ai', 
+                    text: `我是您的 AI 助教。本關修行目標：\n「${finalData.practice_kit?.title}」\n\n具體任務：${finalData.practice_kit?.description}\n\n這關需要獲得我兩次的認可。請告訴我，您的第一步實體操作會是什麼？（例如：我會先開啟...）` 
+                }
+            ]);
+
+            if (finalData.steps) {
+                setStepsCompleted(new Array(finalData.steps.length).fill(false));
+            }
+        } catch (e) {
+            setArticle(null);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            handleSendMessage();
+        }
+    };
+
+    const handleSendMessage = async () => {
+        if (!userInput.trim() || isJudging) return;
+        
+        const text = userInput;
+        const newMessages = [...messages, { role: 'user', text }];
+        setMessages(newMessages as any);
+        setUserInput('');
+        setIsJudging(true);
+        
+        try {
+            const historyContext = previousResponses.slice(-3).join('|');
+            const result = await judgeUserResponse(
+                article?.title || '', 
+                text, 
+                `${article?.practice_kit?.description} (歷史紀錄：${historyContext})`
+            );
+            
+            setMessages(prev => [...prev, { role: 'ai', text: result.feedback }] as any);
+            setPreviousResponses(prev => [...prev, result.feedback]);
+            
+            if (result.passed) {
+                const nextStepCount = practiceStep + 1;
+                setPracticeStep(nextStepCount);
+                setFailCount(0);
+                setShowHint(false);
+                
+                if (nextStepCount < 2) {
+                    setTimeout(() => {
+                        setMessages(prev => [...prev, { 
+                            role: 'ai', 
+                            text: `✨ 第一階段認可達成！\n\n【下一步引導】：現在你已經知道如何開始了，請接著說明：你會如何下達具體的『咒語指令』來完成任務？（你可以參考右側任務手冊中的提示喔！）` 
+                        }] as any);
+                    }, 800);
+                } else {
+                    triggerSuccess();
+                }
+            } else {
+                setFailCount(prev => prev + 1);
+                if (result.hint) setCurrentHint(result.hint);
+                if (failCount >= 0) setShowHint(true);
+            }
+        } catch (error) {
+            setMessages(prev => [...prev, { role: 'ai', text: "魔力連線不穩，請再次詠唱。" }] as any);
+        } finally {
+            setIsJudging(false);
+        }
+    };
+
+    const triggerSuccess = () => {
+        setTreasurePhase('falling');
+        setTimeout(() => {
+            setTreasurePhase('impact');
+            confetti({ particleCount: 60, spread: 45, origin: { y: 0.6 }, colors: ['#E8A838', '#2A2723'] });
+        }, 800);
+        setTimeout(() => {
+            setTreasurePhase('exploding');
+            confetti({ particleCount: 250, spread: 160, origin: { y: 0.5 }, colors: ['#8B2626', '#E8A838', '#1A5C5A'] });
+        }, 1500);
+        setTimeout(() => {
+            setTreasurePhase('revealed');
+            treasureRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 2200);
+
+        setMessages(prev => [...prev, { 
+            role: 'ai', 
+            text: `🎉 恭喜！修行大圓滿！\n\n我已經幫您開啟了下方的【咒語寶箱】。這是您應得的秘術，請領取後繼續點擊底部的【修行印章】來完成本卷軸。` 
+        }] as any);
     };
 
     const handleClaimCommand = () => {
         if (article?.practice_kit?.command) {
             navigator.clipboard.writeText(article.practice_kit.command);
-            setCopied(true);
-            setTimeout(() => setCopied(false), 3000);
-            setTimeout(() => setShowAiJumpModal(true), 500);
-        }
-    };
-
-    const scrollToHook = () => {
-        hookRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    };
-
-    const handleStepComplete = (idx: number) => {
-        const updated = [...stepsCompleted];
-        updated[idx] = true;
-        setStepsCompleted(updated);
-        setRippleStep(idx);
-        setTimeout(() => setRippleStep(null), 800);
-        
-        if (idx < (article?.steps?.length || 0) - 1) {
-            const nextIdx = idx + 1;
-            setCurrentStep(nextIdx);
-            setTimeout(() => {
-                const element = stepRefs.current[nextIdx];
-                if (element) {
-                    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-            }, 100);
-        } else {
-            setTimeout(() => {
-                const element = treasureRef.current;
-                if (element) {
-                    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-                setTimeout(() => setTreasurePhase('falling'), 500);
-                setTimeout(() => {
-                    setTreasurePhase('impact');
-                    confetti({ particleCount: 40, spread: 30, origin: { y: 0.55 }, colors: ['#fbbf24', '#f59e0b'] });
-                }, 1200);
-                setTimeout(() => {
-                    setTreasurePhase('exploding');
-                    confetti({ particleCount: 300, spread: 160, origin: { y: 0.5 }, colors: ['#fbbf24', '#f59e0b', '#10b981', '#ffffff', '#a855f7', '#ec4899'] });
-                }, 1800);
-                setTimeout(() => setTreasurePhase('revealed'), 2600);
-            }, 200);
-        }
-    };
-
-    const [quizStars, setQuizStars] = useState(false);
-    const [badgeGlow, setBadgeGlow] = useState(false);
-
-    const handleQuizSubmit = () => {
-        if (quizAnswer === null) return;
-        setQuizSubmitted(true);
-        if (quizAnswer === article?.quiz?.answer) {
-            setQuizStars(true);
-            setTimeout(() => setQuizStars(false), 1500);
-            setTimeout(() => {
-                rewardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 1000);
+            setShowAiJumpModal(true);
         }
     };
 
@@ -172,357 +177,315 @@ const ArticleDetail = () => {
                 completed.push(article.id);
                 localStorage.setItem('dee_ai_completed', JSON.stringify(completed));
             }
-            const currentChapter = CHAPTERS.find(c => c.articleIds.includes(article.id));
-            if (currentChapter) {
-                const chapterArticles = currentChapter.articleIds;
-                const allChapterDone = chapterArticles.every((id: number) => completed.includes(id));
-                if (allChapterDone) {
-                    const nextChapterId = currentChapter.id + 1;
-                    const savedLevel = localStorage.getItem('dee_ai_level');
-                    const currentLevel = savedLevel ? parseInt(savedLevel) : 1;
-                    if (nextChapterId > currentLevel) {
-                        localStorage.setItem('dee_ai_level', nextChapterId.toString());
-                    }
-                }
-            }
         }
-        setBadgeGlow(true);
-        setTimeout(() => setBadgeGlow(false), 3000);
     };
 
-    if (loading) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-mono text-xs tracking-widest animate-pulse">SYNCING_DATA...</div>;
-    if (!article) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-bold">404</div>;
-
-    const theme = getColorClasses(article.themeColor || 'emerald');
-    const hasSteps = article.steps && article.steps.length > 0;
-    const hasQuiz = article.quiz && article.quiz.question;
-    const allStepsDone = stepsCompleted.every(s => s === true);
-
-    const mainIndex = MAIN_QUEST_ORDER.indexOf(article.id);
-    const isMainQuest = mainIndex !== -1;
-    const isSideQuest = SIDE_QUEST_IDS.includes(article.id);
-    const nextArticleId = isMainQuest ? MAIN_QUEST_ORDER[mainIndex + 1] : null;
-    const nextArticle = nextArticleId ? INSIGHTS.find(i => i.id === nextArticleId) : null;
-    const isFinale = isMainQuest && mainIndex === MAIN_QUEST_ORDER.length - 1;
-
-    let nextLabelText = "下一篇教學";
-    if (nextArticle) {
-        const nextChapter = CHAPTERS.find(c => c.articleIds.includes(nextArticle.id));
-        const currentChapter = CHAPTERS.find(c => c.articleIds.includes(article.id));
-        if (nextChapter && currentChapter && nextChapter.id > currentChapter.id) {
-            nextLabelText = `🎉 進入新章節：${nextChapter.title}`;
+    const handleStepComplete = (idx: number) => {
+        const updated = [...stepsCompleted];
+        updated[idx] = true;
+        setStepsCompleted(updated);
+        
+        if (idx < (article?.steps?.length || 0) - 1) {
+            const nextIdx = idx + 1;
+            setCurrentStep(nextIdx);
+            setTimeout(() => {
+                const element = stepRefs.current[nextIdx];
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    const middle = rect.top + window.pageYOffset - (window.innerHeight / 2) + (rect.height / 2);
+                    window.scrollTo({ top: middle, behavior: 'smooth' });
+                }
+            }, 300);
+        } else {
+            setTreasurePhase('revealed');
+            setTimeout(() => {
+                treasureRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 200);
         }
-    }
+    };
+
+    if (loading) return (
+        <div className="min-h-screen bg-magic-bg parchment-texture flex items-center justify-center">
+            <div className="text-center space-y-8">
+                <div className="text-9xl animate-spin halftone-loading rounded-full p-8">🔮</div>
+                <h2 className="text-4xl font-display text-magic-text animate-pulse tracking-[0.5em]">秘笈展開中...</h2>
+            </div>
+        </div>
+    );
+
+    if (!article) return <div className="min-h-screen bg-magic-bg flex items-center justify-center font-display text-4xl">404 NOT FOUND</div>;
+
+    const hasSteps = article.steps && article.steps.length > 0;
 
     return (
-        <div className="min-h-screen bg-[#0a0a0a] text-zinc-300 selection:bg-emerald-500/30">
+        <div className="min-h-screen bg-magic-bg text-magic-text parchment-texture">
             <SEO title={article.title} description={article.summary} path={`/insights/${article.id}`} />
-            <div className="fixed top-0 left-0 w-full h-1 z-[60] bg-white/5">
-                <motion.div className="h-full bg-emerald-500" style={{ width: `${progress * 100}%` }} />
-            </div>
-
-            <section className="relative min-h-[90vh] flex flex-col items-center justify-center px-6 overflow-hidden">
-                <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b ${theme.gradient} opacity-20 pointer-events-none`} />
-                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 pointer-events-none" />
+            
+            {/* HERO - 復古滿版海報風格 */}
+            <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden pt-32 border-b-6 border-magic-text">
+                <div className="absolute inset-0 bg-magic-teal opacity-10 halftone-loading" />
                 
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-4xl w-full text-center relative z-10">
-                    <Link to="/insights" className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors mb-12 group">
-                        <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> 離開修煉
+                <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="max-w-5xl w-full text-center relative z-10">
+                    <Link to="/insights" className="inline-flex items-center gap-4 bg-magic-text text-magic-bg px-6 py-2 border-4 border-magic-text shadow-brutalist mb-16 font-display text-xs tracking-widest hover:bg-magic-red transition-all">
+                        <ArrowLeft size={16} strokeWidth={3} /> 返回圖書館
                     </Link>
-                    <div className="flex items-center justify-center gap-3 mb-6">
-                        <span className={`text-xs font-black px-3 py-1 rounded-full uppercase tracking-widest ${theme.bg} ${theme.text} border ${theme.border}`}>{article.category}</span>
-                        <div className="flex gap-1">{[...Array(5)].map((_, i) => <StarIcon key={i} size={10} className={i < (article.difficulty_level || 1) ? theme.text : 'text-zinc-800'} fill="currentColor" />)}</div>
+
+                    <div className="flex items-center justify-center gap-4 mb-8">
+                        <span className="badge-magic text-sm px-6 py-2">{article.category}</span>
+                        <DifficultyStars level={article.difficulty_level || 1} />
                     </div>
-                    <h1 className="text-4xl md:text-7xl font-black text-white mb-8 tracking-tight leading-[1.1]">{article.title}</h1>
-                    <p className="text-xl md:text-2xl text-zinc-400 mb-12 max-w-2xl mx-auto leading-relaxed">{article.summary}</p>
-                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={scrollToHook}
-                        className="bg-white text-black font-black py-5 px-10 rounded-2xl text-lg flex items-center gap-3 mx-auto shadow-2xl hover:bg-emerald-500 transition-colors group">
-                        <Gamepad2 size={24} /> 開始修煉 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-                    </motion.button>
-                </motion.div>
 
-                <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-20"><ChevronDown size={32} /></div>
-            </section>
-
-            <section className="py-32 px-5 md:px-6 bg-zinc-900/30" ref={hookRef}>
-                <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center mb-24">
-                    <span className="transition-label">痛點切入</span>
-                    <h2 className="text-3xl md:text-5xl font-black text-white mb-8 tracking-tight">你也正為了這件事煩惱嗎？</h2>
-                    <p className="text-zinc-400 text-xl md:text-2xl leading-relaxed">{article.pain_point}</p>
-                </motion.div>
-
-                <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-10">
-                    <motion.div {...fadeUp} className="bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-10 relative overflow-hidden group">
-                        <div className="text-white/5 text-9xl font-black absolute -right-6 -bottom-6 rotate-12">❌</div>
-                        <span className="text-zinc-600 font-black text-[10px] block mb-4 uppercase tracking-[0.3em]">過去的你</span>
-                        <p className="text-zinc-400 text-lg md:text-xl leading-relaxed relative z-10">{article.example?.wrong}</p>
-                    </motion.div>
-                    <motion.div {...fadeUp} transition={{ delay: 0.1 }} className="bg-emerald-500/[0.03] border border-emerald-500/20 rounded-[2.5rem] p-10 relative overflow-hidden group shadow-[0_0_50px_rgba(16,185,129,0.05)]">
-                        <div className="text-emerald-500/10 text-9xl font-black absolute -right-6 -bottom-6 -rotate-12">✅</div>
-                        <span className="text-emerald-400 font-black text-[10px] block mb-4 uppercase tracking-[0.3em]">現在的你</span>
-                        <p className="text-white text-lg md:text-xl leading-relaxed font-bold relative z-10">{article.example?.right}</p>
-                    </motion.div>
-                </div>
-            </section>
-
-            {hasSteps && (
-                <section className="py-32 px-5 md:px-6 text-left max-w-4xl mx-auto">
-                    <div className="text-center mb-24">
-                        <span className="transition-label">實戰演練</span>
-                        <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">一步一步跟著做</h2>
+                    <h1 className="text-6xl md:text-9xl font-display text-magic-text mb-16 tracking-tighter leading-[0.8]">
+                        {article.title}
+                    </h1>
+                    
+                    <div className="flex items-center justify-center gap-0 bg-magic-text p-1 shadow-brutalist w-fit mx-auto mb-20">
+                        <button onClick={() => setIsPracticeMode(false)} 
+                            className={`px-10 py-4 font-display text-xl transition-all ${!isPracticeMode ? 'bg-magic-primary text-magic-text' : 'text-magic-bg/40 hover:text-magic-bg'}`}>
+                            研讀秘笈
+                        </button>
+                        <button onClick={() => setIsPracticeMode(true)} 
+                            className={`px-10 py-4 font-display text-xl transition-all ${isPracticeMode ? 'bg-magic-primary text-magic-text' : 'text-magic-bg/40 hover:text-magic-bg'} flex items-center gap-3`}>
+                            <Flame size={20} /> 實戰詠唱
+                        </button>
                     </div>
-                    <div className="space-y-12">
-                        {article.steps.map((step: any, idx: number) => {
-                            const isDone = stepsCompleted[idx];
-                            const isActive = freeMode ? !isDone : idx === currentStep;
-                            const isFuture = freeMode ? false : idx > currentStep;
-                            return (
-                                <motion.div key={idx} ref={el => stepRefs.current[idx] = el}
-                                    initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                                    className={`relative rounded-[3rem] border p-8 md:p-14 transition-all duration-500 overflow-hidden ${isDone ? 'bg-white/[0.01] border-emerald-500/20' : isActive ? 'bg-zinc-900 border-white/20 shadow-2xl scale-[1.02]' : 'border-white/5 opacity-10 pointer-events-none'}`}>
-                                    {rippleStep === idx && (
-                                        <>
-                                            <motion.div initial={{ scale: 0, opacity: 0.5 }} animate={{ scale: 4, opacity: 0 }} transition={{ duration: 0.8, ease: 'easeOut' }}
-                                                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full bg-emerald-500/20 pointer-events-none z-20" />
-                                            <motion.div initial={{ scale: 0, opacity: 0.3 }} animate={{ scale: 3, opacity: 0 }} transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
-                                                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-emerald-400/15 pointer-events-none z-20" />
-                                        </>
-                                    )}
-                                    <div className="flex flex-col md:flex-row items-start gap-10">
-                                        <div className={`w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0 text-2xl font-black transition-all duration-500 ${isDone ? 'bg-emerald-500 text-black' : isActive ? 'bg-white text-black' : 'bg-white/5 text-zinc-700'}`}>
-                                            {isDone ? '✓' : idx + 1}
-                                        </div>
-                                        <div className="flex-1">
-                                            <h3 className={`text-2xl md:text-4xl font-black mb-6 tracking-tight ${isDone ? 'text-emerald-400' : 'text-white'}`}>{step.title}</h3>
-                                            <p className="text-zinc-300 text-lg md:text-xl leading-relaxed mb-10 font-medium">{step.body}</p>
-                                            {step.external_links && step.external_links.length > 0 && (
-                                                <div className="flex flex-wrap gap-4 mb-10">
-                                                    {step.external_links.map((link: any, lidx: number) => (
-                                                        <a key={lidx} href={link.url} target="_blank" rel="noopener noreferrer"
-                                                            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 border border-white/10 text-white font-bold hover:bg-white/20 transition-all">
-                                                            {link.label} <ArrowRight size={16} />
-                                                        </a>
-                                                    ))}
-                                                </div>
-                                            )}
-                                            {step.dee_tip && (
-                                                <div className="bg-emerald-500/5 border-l-4 border-emerald-500 p-8 rounded-r-[2rem] mb-10">
-                                                    <p className="text-emerald-400 text-lg md:text-xl italic font-black leading-relaxed">💡 Dee's Tip: {step.dee_tip}</p>
-                                                </div>
-                                            )}
-                                            {isActive && !isDone && (
-                                                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={() => handleStepComplete(idx)}
-                                                    className="relative group py-5 px-10 rounded-2xl bg-emerald-500 text-black font-black text-xl shadow-xl transition-all overflow-hidden flex items-center gap-3">
-                                                    我了解了，下一個 <MousePointer2 size={24} className="animate-bounce" />
-                                                </motion.button>
-                                            )}
+
+                    {isPracticeMode ? (
+                        <div className="w-full max-w-3xl mx-auto bg-magic-bg border-6 border-magic-text shadow-[16px_16px_0px_#2A2723] relative overflow-hidden">
+                            <div className="bg-magic-text p-6 flex items-center justify-between">
+                                <div className="flex items-center gap-6 text-left">
+                                    <div className="w-12 h-12 bg-magic-primary border-2 border-magic-bg flex items-center justify-center text-magic-text">
+                                        <BrainCircuit size={24} />
+                                    </div>
+                                    <div>
+                                        <span className="text-[10px] font-black text-magic-bg/50 uppercase tracking-[0.3em] block mb-1">判官審核中</span>
+                                        <h4 className="text-magic-bg font-display text-lg tracking-widest uppercase">修煉進度 ({practiceStep}/2)</h4>
+                                    </div>
+                                </div>
+                                <div className="flex gap-2">
+                                    {[...Array(2)].map((_, i) => (
+                                        <div key={i} className={`w-4 h-4 border-2 border-magic-bg ${i < practiceStep ? 'bg-magic-primary' : 'bg-transparent'}`} />
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="h-[450px] overflow-y-auto p-10 space-y-10 text-left bg-zinc-900/5 parchment-texture">
+                                {messages.map((m, i) => (
+                                    <div key={i} className={`flex ${m.role === 'ai' ? 'justify-start' : 'justify-end'}`}>
+                                        <div className={`max-w-[85%] p-8 border-4 border-magic-text text-lg leading-relaxed shadow-brutalist-sm ${
+                                            m.role === 'ai' ? 'bg-magic-bg text-magic-text' : 'bg-magic-teal text-magic-bg'
+                                        }`}>
+                                            {m.text.split('\n').map((line, li) => <p key={li} className="mb-4 last:mb-0 font-serif">{line}</p>)}
                                         </div>
                                     </div>
-                                    {isFuture && (
-                                        <div className="absolute inset-0 z-10 bg-black/40 backdrop-blur-[4px] flex items-center justify-center pointer-events-none">
-                                            <Lock size={48} className="text-white/10" />
-                                        </div>
-                                    )}
-                                </motion.div>
-                            );
-                        })}
-                    </div>
-                </section>
-            )}
-
-            <section className="py-40 px-5 md:px-6 text-center border-t border-white/5 relative overflow-hidden" ref={treasureRef}>
-                <div className={`absolute inset-0 bg-gradient-to-b ${theme.gradient} opacity-5 pointer-events-none`} />
-                <motion.div {...fadeUp} className="max-w-3xl mx-auto relative z-10">
-                    {treasurePhase === 'locked' && (
-                        <div className="flex flex-col items-center gap-12 py-20 grayscale opacity-30">
-                            <div className="text-9xl">🎁</div>
-                            <h2 className="text-2xl font-black text-white uppercase tracking-[0.5em]">Treasure Locked</h2>
-                            <p className="text-zinc-500">完成所有步驟以開啟寶箱</p>
-                        </div>
-                    )}
-
-                    {(treasurePhase === 'falling' || treasurePhase === 'impact') && (
-                        <motion.div initial={{ y: -500, rotate: -20 }} animate={{ y: 0, rotate: 0 }} transition={{ type: "spring", damping: 12, stiffness: 100 }} className="text-9xl py-20 relative">
-                            🎁
-                            <div className="absolute -inset-10 bg-amber-500/20 blur-[100px] rounded-full animate-pulse" />
-                        </motion.div>
-                    )}
-
-                    {treasurePhase === 'exploding' && (
-                        <motion.div animate={{ scale: [1, 1.5, 0], rotate: [0, 10, -10, 0], opacity: [1, 1, 0] }} transition={{ duration: 0.6 }} className="text-9xl py-20">
-                            💥
-                        </motion.div>
-                    )}
-
-                    {treasurePhase === 'revealed' && (
-                        <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring" }}>
-                            <div className="bg-zinc-900 border-2 border-emerald-500/30 rounded-[3rem] p-10 md:p-20 shadow-2xl relative overflow-hidden mb-16">
-                                <div className="absolute top-0 left-0 w-full h-2 bg-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.5)]" />
-                                <span className="text-emerald-500 font-black text-sm tracking-[0.8em] mb-10 block uppercase opacity-60">Ready to execute</span>
-                                <h2 className="text-3xl md:text-6xl font-black text-white mb-10 tracking-tight leading-tight">{article.practice_kit?.title}</h2>
-                                <p className="text-zinc-400 text-xl md:text-2xl mb-12 leading-relaxed">{article.practice_kit?.description}</p>
-                                <div className="bg-black/50 border border-white/5 rounded-[2rem] p-8 md:p-12 mb-12 text-left relative group">
-                                    <pre className="text-zinc-300 text-base md:text-lg whitespace-pre-wrap font-mono leading-relaxed">{article.practice_kit?.command}</pre>
-                                </div>
-
-                                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={handleClaimCommand}
-                                    className="bg-emerald-500 text-black font-black py-6 px-12 rounded-2xl text-xl flex items-center gap-3 mx-auto shadow-2xl hover:bg-emerald-400 transition-colors btn-glow">
-                                    <Copy size={24} /> 領取指令寶箱
-                                </motion.button>
-                            </div>
-                        </motion.div>
-                    )}
-                </motion.div>
-            </section>
-
-            {hasQuiz && (
-                <section className="py-40 px-5 md:px-6 bg-zinc-900/20 border-t border-white/5" ref={quizRef}>
-                    <motion.div {...fadeUp} className="max-w-3xl mx-auto">
-                        <div className="text-center mb-20">
-                            <span className="transition-label">終極考驗</span>
-                            <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">驗收你的修行成果</h2>
-                        </div>
-                        <div className="bg-zinc-900 border border-white/10 rounded-[3rem] p-8 md:p-16 shadow-2xl relative">
-                            <p className="text-2xl md:text-3xl font-black text-white mb-12 leading-tight">{article.quiz.question}</p>
-                            <div className="space-y-4">
-                                {article.quiz.options.map((opt: string, i: number) => (
-                                    <motion.button key={i} whileHover={{ x: 5 }} whileTap={{ scale: 0.98 }} disabled={quizSubmitted} onClick={() => setQuizAnswer(i)}
-                                        className={`w-full py-6 px-8 rounded-2xl text-left text-lg font-bold transition-all border ${quizAnswer === i ? 'border-emerald-500 bg-emerald-500/10 text-white shadow-lg' : 'border-white/5 bg-white/[0.02] text-zinc-400 hover:border-white/20'}`}>
-                                        <div className="flex items-center gap-4">
-                                            <span className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-black ${quizAnswer === i ? 'bg-emerald-500 text-black' : 'bg-zinc-800 text-zinc-500'}`}>{String.fromCharCode(65 + i)}</span>
-                                            {opt}
-                                        </div>
-                                    </motion.button>
                                 ))}
-                            </div>
-                            {!quizSubmitted ? (
-                                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={handleQuizSubmit} disabled={quizAnswer === null}
-                                    className="w-full mt-12 py-6 rounded-2xl bg-white text-black font-black text-xl shadow-xl disabled:opacity-20 hover:bg-emerald-500 transition-colors">
-                                    確認答案
-                                </motion.button>
-                            ) : (
-                                <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className={`mt-12 p-10 rounded-[2rem] border relative overflow-hidden ${quizAnswer === article.quiz.answer ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-amber-500/10 border-amber-500/20'}`}>
-                                    {quizStars && quizAnswer === article.quiz.answer && (
-                                        <div className="absolute inset-0 pointer-events-none">
-                                            {Array.from({ length: 12 }, (_, i) => {
-                                                const angle = (i / 12) * Math.PI * 2;
-                                                const dist = 100 + Math.random() * 80;
-                                                return (
-                                                    <motion.span key={`star-${i}`} initial={{ x: 0, y: 0, opacity: 1, scale: 1 }} animate={{ x: Math.cos(angle) * dist, y: Math.sin(angle) * dist, opacity: 0, scale: 0 }} transition={{ duration: 0.8, delay: i * 0.03 }} className="absolute left-1/2 top-1/2 text-2xl">⭐</motion.span>
-                                                );
-                                            })}
+                                {isJudging && (
+                                    <div className="flex justify-start">
+                                        <div className="bg-magic-text text-magic-bg p-4 flex items-center gap-4 shadow-brutalist-sm">
+                                            <div className="animate-pulse font-display text-xs">COMMUNING WITH SPIRITS...</div>
                                         </div>
-                                    )}
-                                    <p className={`text-2xl md:text-3xl font-black mb-6 ${quizAnswer === article.quiz.answer ? 'text-emerald-400' : 'text-amber-400'}`}>{quizAnswer === article.quiz.answer ? '🎉 完美答對！' : '💡 差一點點！'}</p>
-                                    <p className="text-zinc-300 text-lg md:text-xl leading-relaxed font-black">{article.quiz.explanation}</p>
-                                </motion.div>
-                            )}
-                        </div>
-                    </motion.div>
-                </section>
-            )}
-
-            <section className="py-40 px-5 md:px-6 text-center" ref={rewardRef}>
-                <motion.div {...fadeUp} className="max-w-xl mx-auto">
-                    {badgeEarned ? (
-                        <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring", damping: 10 }}>
-                            <div className="inline-block bg-zinc-900 border-2 border-emerald-500/40 rounded-[4rem] p-12 md:p-20 shadow-2xl relative overflow-hidden">
-                                {badgeGlow && (
-                                    <>
-                                        <motion.div initial={{ scale: 0, opacity: 0.6 }} animate={{ scale: 3, opacity: 0 }} transition={{ duration: 1.5 }} className="absolute inset-0 m-auto w-32 h-32 rounded-full border-4 border-amber-400 pointer-events-none" />
-                                        <motion.div initial={{ scale: 0, opacity: 0.4 }} animate={{ scale: 4, opacity: 0 }} transition={{ duration: 1.5, delay: 0.3 }} className="absolute inset-0 m-auto w-32 h-32 rounded-full border-4 border-amber-300 pointer-events-none" />
-                                    </>
-                                )}
-                                <div className="absolute top-0 left-0 w-full h-2 bg-emerald-500 shadow-[0_0_30px_rgba(16,185,129,0.4)]" />
-                                <motion.p animate={{ scale: [1, 1.1, 1], rotate: [0, -5, 5, 0] }} transition={{ duration: 3, repeat: Infinity }} className="text-9xl mb-12">🏆</motion.p>
-                                <p className="text-emerald-500 font-black text-sm tracking-[0.8em] mb-6 uppercase opacity-60">Quest Mastered</p>
-                                <p className="text-white text-3xl md:text-5xl font-black mb-12 tracking-tight">{article.skill_badge || article.title}</p>
-                                <div className="pt-12 border-t border-white/10 flex flex-col items-center gap-8">
-                                    <p className="text-zinc-600 text-[11px] uppercase tracking-[0.6em] font-black">Dee's AI Life Lab · 2026</p>
-                                    <div className="flex gap-6">
-                                        <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                                        <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/40" />
-                                        <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/10" />
                                     </div>
+                                )}
+                                <div ref={chatEndRef} />
+                            </div>
+
+                            <AnimatePresence>
+                                {showHint && (
+                                    <motion.div initial={{ y: 50 }} animate={{ y: 0 }} className="bg-magic-red text-magic-bg p-6 border-t-4 border-magic-text flex items-start gap-4">
+                                        <Lightbulb className="flex-shrink-0" size={24} />
+                                        <p className="text-sm font-black italic">{currentHint}</p>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+
+                            <div className="p-8 bg-magic-primary border-t-4 border-magic-text">
+                                <div className="flex gap-4">
+                                    <textarea 
+                                        value={userInput}
+                                        onChange={(e) => setUserInput(e.target.value)}
+                                        onKeyDown={handleKeyDown}
+                                        placeholder="請描述您的修行策略..."
+                                        className="flex-1 bg-magic-bg border-4 border-magic-text p-6 text-xl font-serif outline-none focus:bg-white transition-colors h-32 resize-none"
+                                    />
+                                    <button onClick={handleSendMessage} disabled={!userInput.trim() || isJudging}
+                                        className="btn-magic bg-magic-red text-magic-bg flex items-center justify-center w-24">
+                                        <Send size={32} strokeWidth={3} />
+                                    </button>
                                 </div>
                             </div>
-                        </motion.div>
+                        </div>
                     ) : (
-                        <motion.button whileTap={{ scale: 0.95 }} onClick={handleEarnBadge} disabled={!allStepsDone || (hasQuiz && !quizSubmitted)}
-                            className="bg-emerald-500 text-black font-black py-8 px-16 rounded-[2rem] text-2xl shadow-2xl hover:scale-105 transition-all disabled:opacity-20 disabled:grayscale btn-glow">
-                            🏆 領取修行勳章
-                        </motion.button>
+                        <div className="max-w-3xl mx-auto">
+                            <p className="text-3xl md:text-4xl text-magic-text/80 font-serif italic mb-20 leading-snug">
+                                "{article.summary}"
+                            </p>
+                            <button onClick={() => hookRef.current?.scrollIntoView({ behavior: 'smooth' })}
+                                className="btn-magic bg-magic-text text-magic-bg text-3xl px-16 py-8">
+                                翻開第一章
+                            </button>
+                        </div>
                     )}
                 </motion.div>
+                <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-magic-text opacity-40"><ChevronDown size={64} /></div>
             </section>
 
-            <section className="pb-48 px-5 md:px-6">
-                <div className="max-w-4xl mx-auto border-t border-white/10 pt-32">
-                    {isFinale ? (
-                        <motion.div {...fadeUp} className="text-center py-20 bg-emerald-500/5 rounded-[4rem] border border-emerald-500/10">
-                            <div className="text-8xl mb-10">🎓</div>
-                            <h2 className="text-4xl md:text-6xl font-black text-white mb-8 tracking-tight">恭喜大圓滿！</h2>
-                            <p className="text-zinc-400 text-xl md:text-2xl mb-14 max-w-lg mx-auto leading-relaxed font-medium">你已經完成了所有主線任務。現在的你，已經具備了駕馭 AI 的核心靈魂。</p>
-                            <Link to="/insights" className="inline-flex items-center gap-4 bg-emerald-500 text-black font-black py-6 px-12 rounded-[2rem] text-2xl hover:bg-emerald-400 transition-all shadow-2xl">
-                                🗺️ 探索更多支線
-                            </Link>
-                        </motion.div>
-                    ) : nextArticle ? (
-                        <div className="space-y-8">
-                            <span className="text-zinc-500 text-xs font-black uppercase tracking-[0.5em] block font-mono">{nextLabelText}</span>
-                            <Link to={`/insights/${nextArticle.id}`} className="group block bg-zinc-900 border border-white/5 hover:border-emerald-500/40 p-8 md:p-14 rounded-[3rem] transition-all shadow-2xl hover:-translate-y-2 overflow-hidden">
-                                <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
-                                    <div className="min-w-0 flex-1">
-                                        <span className="text-emerald-500/60 font-black text-xs uppercase tracking-[0.4em] mb-4 block font-mono">{isMainQuest ? `STAGE ${mainIndex + 2} / 12` : 'NEXT LEVEL'}</span>
-                                        <h3 className="text-2xl md:text-4xl font-black text-white mb-4 tracking-tight leading-tight group-hover:text-emerald-400 transition-colors truncate">{nextArticle.title}</h3>
-                                        <p className="text-zinc-400 text-base md:text-lg line-clamp-2 font-medium leading-relaxed">{nextArticle.summary}</p>
-                                    </div>
-                                    <div className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-emerald-500/10 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-black transition-all flex-shrink-0 shadow-lg border border-emerald-500/20">
-                                        <ArrowRight size={28} />
-                                    </div>
+            {/* CONTENT - 左右對開海報設計 */}
+            <section className="relative min-h-screen py-32 px-6">
+                <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-0 border-6 border-magic-text shadow-[24px_24px_0px_#2A2723]">
+                    
+                    {/* 左側：痛點與視覺 */}
+                    <div className="bg-magic-teal p-12 md:p-24 text-magic-bg border-b-6 lg:border-b-0 lg:border-r-6 border-magic-text" ref={hookRef}>
+                        <motion.div {...fadeUp} className="space-y-12">
+                            <span className="bg-magic-bg text-magic-teal px-6 py-2 border-4 border-magic-text font-display text-lg shadow-brutalist-sm inline-block">HISTORY</span>
+                            <h2 className="text-5xl md:text-7xl font-display tracking-tight leading-none italic">
+                                修行之始：<br />打破現狀的枷鎖
+                            </h2>
+                            <p className="text-2xl font-serif leading-relaxed text-magic-bg/80 border-l-8 border-magic-primary pl-8 italic">
+                                {article.pain_point}
+                            </p>
+                            
+                            <div className="pt-12 space-y-8">
+                                <div className="bg-magic-red/20 border-4 border-magic-red p-8 shadow-brutalist-sm">
+                                    <div className="text-4xl mb-4 text-magic-red font-display">THE WRONG WAY</div>
+                                    <p className="text-xl font-serif">{article.example?.wrong}</p>
                                 </div>
-                            </Link>
+                                <div className="bg-magic-bg/10 border-4 border-magic-bg p-8">
+                                    <div className="text-4xl mb-4 text-magic-primary font-display">THE RIGHT WAY</div>
+                                    <p className="text-xl font-serif font-black">{article.example?.right}</p>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+
+                    {/* 右側：修煉步驟與任務手冊 */}
+                    <div className="bg-magic-bg p-12 md:p-24 space-y-16">
+                        <div className="text-left mb-16">
+                            <span className="bg-magic-primary text-magic-text px-6 py-2 border-4 border-magic-text font-display text-lg shadow-brutalist-sm inline-block mb-8">SCROLL STEPS</span>
+                            <h2 className="text-5xl md:text-6xl font-display text-magic-text tracking-tighter">詠唱路徑圖</h2>
+                        </div>
+
+                        {hasSteps && (
+                            <div className="space-y-8">
+                                {article.steps.map((step: any, idx: number) => {
+                                    const isDone = stepsCompleted[idx];
+                                    const isActive = idx === currentStep;
+                                    return (
+                                        <motion.div key={idx} ref={el => stepRefs.current[idx] = el}
+                                            className={`p-10 border-4 border-magic-text transition-all ${isDone ? 'bg-magic-teal/10' : isActive ? 'bg-magic-primary shadow-brutalist scale-[1.02]' : 'opacity-20 grayscale'}`}>
+                                            <div className="flex gap-8">
+                                                <div className={`w-16 h-16 border-4 border-magic-text flex items-center justify-center text-3xl font-display flex-shrink-0 ${isDone ? 'bg-magic-teal text-magic-bg' : 'bg-magic-text text-magic-bg'}`}>
+                                                    {isDone ? '✓' : idx + 1}
+                                                </div>
+                                                <div className="space-y-6">
+                                                    <h3 className="text-3xl font-display text-magic-text leading-tight">{step.title}</h3>
+                                                    <p className="text-xl font-serif leading-relaxed">{step.body}</p>
+                                                    {isActive && !isDone && (
+                                                        <button onClick={() => handleStepComplete(idx)}
+                                                            className="btn-magic bg-magic-text text-magic-bg text-lg flex items-center gap-3">
+                                                            我已領悟 <MousePointer2 size={24} />
+                                                        </button>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </motion.div>
+                                    );
+                                })}
+                            </div>
+                        )}
+
+                        {/* 任務手冊區塊 */}
+                        <div className="mt-24 bg-magic-text text-magic-bg p-12 border-4 border-magic-text shadow-brutalist relative overflow-hidden group">
+                            <div className="absolute top-0 right-0 p-8 halftone-loading w-40 h-40 opacity-10" />
+                            <h3 className="text-4xl font-display mb-10 flex items-center gap-4">
+                                <Target size={32} className="text-magic-primary" /> 當前修行任務
+                            </h3>
+                            <div className="space-y-8">
+                                <div className="border-l-4 border-magic-primary pl-8">
+                                    <span className="text-magic-primary font-display text-xs tracking-widest block mb-4 uppercase">Target Objective</span>
+                                    <p className="text-2xl font-serif italic">「{article.practice_kit?.description}」</p>
+                                </div>
+                                
+                                <div className={`pt-12 border-t border-magic-bg/20 text-center ${treasurePhase === 'revealed' ? 'opacity-100' : 'opacity-30'}`} ref={treasureRef}>
+                                    <AnimatePresence mode="wait">
+                                        {treasurePhase === 'locked' && (
+                                            <div className="space-y-6 flex flex-col items-center">
+                                                <div className="text-9xl grayscale">🔒</div>
+                                                <p className="font-display text-sm tracking-widest text-magic-bg/40 uppercase">請先通過助教邏輯判定</p>
+                                            </div>
+                                        )}
+                                        {treasurePhase === 'revealed' && (
+                                            <motion.div initial={{ scale: 0.8 }} animate={{ scale: 1 }} className="space-y-8 flex flex-col items-center w-full">
+                                                <div className="text-9xl drop-shadow-[0_0_30px_rgba(232,168,56,0.5)]">🔓</div>
+                                                <button onClick={handleClaimCommand} className="btn-magic w-full py-8 text-2xl">
+                                                    領取修行寶箱
+                                                </button>
+                                            </motion.div>
+                                        )}
+                                        {(['falling', 'impact', 'exploding'].includes(treasurePhase)) && (
+                                            <div className="text-9xl">🎁</div>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* BADGE SECTION - 勳章領取 */}
+            <section className="py-60 px-6 text-center border-t-6 border-magic-text relative overflow-hidden">
+                <div className="absolute inset-0 bg-magic-teal/5 halftone-loading" />
+                <motion.div {...fadeUp} className="max-w-2xl mx-auto relative z-10">
+                    {badgeEarned ? (
+                        <div className="bg-magic-bg border-6 border-magic-text p-20 shadow-[32px_32px_0px_#1A5C5A] relative">
+                            <motion.div animate={{ rotate: [0, -10, 10, 0] }} transition={{ repeat: Infinity, duration: 4 }} className="text-[12rem] mb-12">🏆</motion.div>
+                            <p className="font-display text-2xl text-magic-teal tracking-[0.8em] mb-8 uppercase">QUEST MASTERED</p>
+                            <h2 className="text-5xl md:text-7xl font-display text-magic-text leading-tight">{article.skill_badge || article.title}</h2>
+                            <div className="mt-16 pt-8 border-t-4 border-magic-text/10">
+                                <Link to="/insights" className="text-magic-red font-display text-2xl hover:underline underline-offset-8">
+                                    繼續下一段冒險 →
+                                </Link>
+                            </div>
                         </div>
                     ) : (
-                        <div className="text-center py-20">
-                            <Link to="/insights" className="inline-flex items-center gap-3 text-emerald-500 font-black text-xl hover:underline group">
-                                <ArrowLeft size={24} className="group-hover:-translate-x-2 transition-transform" /> 返回冒險地圖
-                            </Link>
-                        </div>
+                        <button onClick={handleEarnBadge} disabled={treasurePhase !== 'revealed'}
+                            className="btn-magic-red text-5xl px-20 py-10 shadow-[24px_24px_0px_#2A2723] hover:shadow-[30px_30px_0px_#2A2723] disabled:opacity-20 disabled:grayscale">
+                            🏆 蓋上修行印章
+                        </button>
                     )}
-                </div>
+                </motion.div>
             </section>
 
             <AnimatePresence>
                 {showAiJumpModal && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center px-6 bg-black/90 backdrop-blur-xl">
-                        <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-zinc-900 border border-white/10 p-8 md:p-10 rounded-[2rem] max-w-sm w-full shadow-2xl relative overflow-hidden">
-                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-blue-500" />
-                            <button onClick={() => setShowAiJumpModal(false)} className="absolute top-6 right-6 text-zinc-500 hover:text-white transition-colors"><XIcon size={24} /></button>
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center px-6 bg-magic-text/95 parchment-texture backdrop-blur-sm">
+                        <motion.div initial={{ scale: 0.9, rotate: -2 }} animate={{ scale: 1, rotate: 0 }} exit={{ scale: 0.9, rotate: 2 }} 
+                            className="bg-magic-bg border-6 border-magic-text p-16 max-w-lg w-full shadow-[32px_32px_0px_#1A5C5A] relative overflow-hidden text-center">
+                            <button onClick={() => setShowAiJumpModal(false)} className="absolute top-8 right-8 text-magic-text hover:text-magic-red transition-colors">
+                                <X size={48} strokeWidth={3} />
+                            </button>
                             
-                            <div className="text-center mb-8">
-                                <div className="w-14 h-14 bg-emerald-500/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                                    <Smartphone className="text-emerald-400" size={28} />
+                            <div className="text-center mb-12">
+                                <div className="w-24 h-24 bg-magic-primary border-4 border-magic-text flex items-center justify-center mx-auto mb-8 shadow-brutalist-sm rotate-6">
+                                    <Scroll className="text-magic-text" size={48} strokeWidth={2} />
                                 </div>
-                                <h3 className="text-xl md:text-2xl font-black text-white mb-2 tracking-tight">指令已複製！</h3>
-                                <p className="text-zinc-500 text-sm font-medium">選一個工具直接貼上</p>
+                                <h3 className="text-4xl font-display text-magic-text mb-6 tracking-tighter uppercase leading-none">咒語已寫入卷軸！</h3>
+                                <p className="text-xl font-serif italic text-magic-text/60">修行成功，請至大釜進行詠唱。</p>
                             </div>
 
-                            <div className="flex justify-center gap-4">
+                            <div className="grid grid-cols-1 gap-6">
                                 {[
-                                    { name: 'GPT', logo: ChatGPTLogo, app: 'chatgpt://', web: 'https://chat.openai.com', color: 'hover:bg-[#10a37f]/10' },
-                                    { name: 'Claude', logo: ClaudeLogo, app: 'claude://', web: 'https://claude.ai', color: 'hover:bg-[#D97757]/10' },
-                                    { name: 'Gemini', logo: GeminiLogo, app: 'googleapp://', web: 'https://gemini.google.com', color: 'hover:bg-[#1C7DEB]/10' }
+                                    { name: 'CHATGTP 大釜', logo: ChatGPTLogo, web: 'https://chat.openai.com' },
+                                    { name: 'CLAUDE 大釜', logo: ClaudeLogo, web: 'https://claude.ai' },
+                                    { name: 'GEMINI 大釜', logo: GeminiLogo, web: 'https://gemini.google.com' }
                                 ].map((ai, i) => (
-                                    <a key={i} href={ai.web} target="_blank" rel="noopener noreferrer" onClick={(e) => {
-                                        e.preventDefault();
-                                        const timer = setTimeout(() => { window.location.href = ai.web; }, 500);
-                                        window.location.href = ai.app;
-                                        clearTimeout(timer);
-                                        setShowAiJumpModal(false);
-                                    }} className={`flex flex-col items-center gap-2 p-3 rounded-2xl bg-white/[0.03] border border-white/5 transition-all group flex-1 ${ai.color}`}>
-                                        <ai.logo size={28} />
-                                        <span className="text-white font-black text-[10px] uppercase tracking-tighter">{ai.name}</span>
+                                    <a key={i} href={ai.web} target="_blank" rel="noopener noreferrer" 
+                                        className="flex items-center justify-between p-8 border-4 border-magic-text bg-white shadow-brutalist hover:bg-magic-primary hover:shadow-brutalist-hover transition-all group">
+                                        <div className="flex items-center gap-6">
+                                            <ai.logo size={40} />
+                                            <span className="font-display text-xl tracking-widest">{ai.name}</span>
+                                        </div>
+                                        <ArrowRight size={24} strokeWidth={3} className="group-hover:translate-x-2 transition-transform" />
                                     </a>
                                 ))}
                             </div>
@@ -533,18 +496,5 @@ const ArticleDetail = () => {
         </div>
     );
 };
-
-const XIcon = ({ size, className }: any) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={className}>
-        <line x1="18" y1="6" x2="6" y2="18"></line>
-        <line x1="6" y1="6" x2="18" y2="18"></line>
-    </svg>
-);
-
-const StarIcon = ({ size, className, fill }: any) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill={fill} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-    </svg>
-);
 
 export default ArticleDetail;

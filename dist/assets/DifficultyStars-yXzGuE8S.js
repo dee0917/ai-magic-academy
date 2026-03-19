@@ -1,0 +1,1 @@
+import{j as r}from"./vendor-motion-vtbswP71.js";import{b as a}from"./index-C6fhNmbM.js";const o=({level:e,max:s=5})=>r.jsx("div",{className:"flex items-center gap-1.5",children:[...Array(s)].map((i,t)=>r.jsx(a,{size:14,className:`${t<e?"text-emerald-400 fill-emerald-400":"text-zinc-800 fill-zinc-800"} transition-colors`,strokeWidth:1},t))});export{o as D};
