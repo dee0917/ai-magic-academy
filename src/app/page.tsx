@@ -3,7 +3,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import {
   Sparkles, Copy, ExternalLink, ChevronDown, X, Search, Check,
   Brain, Bot, MessageSquare, Lock, Share2, AlertTriangle, ArrowRight, BookOpen,
-  ArrowLeft
+  ArrowLeft, RefreshCw
 } from "lucide-react";
 import { CURSES } from "./curses_data";
 import { motion, AnimatePresence } from "framer-motion";
@@ -403,7 +403,7 @@ export default function MagicAcademyMVP() {
       </section>
 
       {/* ── MAIN LIBRARY ── */}
-      <main className="w-full max-w-7xl mx-auto relative z-10 pb-20 px-0">
+      <main className="w-full max-w-6xl mx-auto relative z-10 pb-20 px-4">
         {TABS.map(tab => {
           const tabCurses = groupedCurses[tab];
           if (searchQuery && tabCurses.length === 0) return null;
@@ -411,7 +411,7 @@ export default function MagicAcademyMVP() {
           return (
             <section key={tab} id={tab} className="mb-12 md:mb-16 last:mb-0 scroll-mt-32">
               {/* Section header */}
-              <div className="flex items-center gap-0 px-4 mb-6">
+              <div className="flex items-center gap-0 mb-6">
                 <div
                   className="px-5 py-3"
                   style={{
@@ -429,88 +429,93 @@ export default function MagicAcademyMVP() {
                   className="flex-1 h-4"
                   style={{ borderTop: '4px solid var(--ink)', borderBottom: '4px solid var(--ink)', background: 'var(--mustard)', opacity: 0.5 }}
                 />
-                <div className="flex items-center gap-2 px-4 text-[10px] font-black uppercase tracking-[0.2em]" style={{ color: 'var(--ink)', opacity: 0.4, fontFamily: 'var(--font-chivo)' }}>
-                  Scroll <ArrowRight className="w-3 h-3" />
-                </div>
               </div>
 
-              {/* Horizontal card row */}
-              <div className="relative">
-                <div className="absolute right-0 top-0 bottom-0 w-16 pointer-events-none z-20" style={{ background: 'linear-gradient(to left, var(--parchment), transparent)' }} />
+              {/* Card grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                {tabCurses.map((curse: any, idx: number) => (
+                  <motion.button
+                    key={curse.id}
+                    onClick={() => handleCardClick(curse)}
+                    className="magic-card text-left p-0 flex flex-col relative overflow-hidden"
+                    whileHover={{ y: -2 }}
+                  >
+                    {/* Card header area */}
+                    <div className="p-5 pb-3 relative">
+                      {/* Big background number */}
+                      <span
+                        className="absolute top-2 right-3 text-7xl font-black leading-none select-none pointer-events-none"
+                        style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.06 }}
+                      >
+                        {String(idx + 1).padStart(2, '0')}
+                      </span>
 
-                <div className="flex overflow-x-auto gap-5 px-4 pb-8 no-scrollbar snap-x snap-mandatory scroll-smooth tab-scroll-container">
-                  {tabCurses.map((curse: any) => (
-                    <motion.button
-                      layoutId={`card-${curse.id}`}
-                      key={curse.id}
-                      onClick={() => handleCardClick(curse)}
-                      className="magic-card flex-shrink-0 w-[260px] md:w-[320px] snap-start text-left p-5 flex flex-col"
-                      style={{ minHeight: '280px' }}
-                    >
-                      {/* Card top: icon + badge */}
-                      <div className="flex justify-between items-start mb-5">
+                      {/* Category tag + icon */}
+                      <div className="flex items-start justify-between mb-3 relative z-10">
                         <div
-                          className="p-3 text-2xl"
-                          style={{ border: '3px solid var(--ink)', background: 'var(--mustard)' }}
+                          className="text-[10px] font-black px-2 py-1"
+                          style={{ background: 'var(--mustard)', border: '2px solid var(--ink)', fontFamily: 'var(--font-chivo)', color: 'var(--ink)' }}
                         >
-                          {curse.icon}
+                          {curse.tab}
                         </div>
                         {curse.isPro && !isLoggedIn ? (
-                          <div
-                            className="flex items-center gap-1 text-[10px] font-black uppercase tracking-wider px-2 py-1"
-                            style={{ border: '2px solid var(--dark-red)', background: 'var(--dark-red)', color: 'var(--parchment)', fontFamily: 'var(--font-chivo)' }}
-                          >
+                          <div className="flex items-center gap-1 text-[10px] font-black px-2 py-1"
+                            style={{ background: 'var(--dark-red)', border: '2px solid var(--ink)', color: 'var(--parchment)', fontFamily: 'var(--font-chivo)' }}>
                             <Lock className="w-3 h-3" /> PRO
                           </div>
                         ) : (
-                          <div
-                            className="text-[10px] font-black uppercase tracking-wider px-2 py-1"
-                            style={{ border: '2px solid var(--teal)', color: 'var(--teal)', fontFamily: 'var(--font-chivo)' }}
-                          >
-                            {curse.outputFormat?.split(' ')[0] || 'TEXT'}
+                          <div className="text-lg" style={{ color: 'var(--ink)', opacity: 0.5 }}>
+                            {curse.icon}
                           </div>
                         )}
                       </div>
 
-                      {/* Title */}
+                      {/* Title — large bold */}
                       <h3
-                        className="text-lg md:text-xl mb-2 leading-tight line-clamp-1"
-                        style={{ fontFamily: 'var(--font-rye)', color: 'var(--ink)' }}
+                        className="text-xl md:text-2xl leading-tight mb-0 relative z-10"
+                        style={{ fontFamily: 'var(--font-noto-serif-tc)', fontWeight: 900, color: 'var(--ink)' }}
                       >
-                        {curse.title.replace(/【|】/g, '')}
+                        {curse.title.replace(/【|】/g, '').replace(/\n/g, '')}
                       </h3>
+                    </div>
 
-                      {/* Desc */}
+                    {/* Description area with top border */}
+                    <div className="px-5 py-3 flex-1" style={{ borderTop: '3px solid var(--ink)' }}>
                       <p
-                        className="text-sm leading-relaxed line-clamp-3 mb-4 flex-1"
+                        className="text-sm leading-relaxed line-clamp-3"
                         style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.75 }}
                       >
                         {curse.desc}
                       </p>
+                    </div>
 
-                      {/* Tags */}
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {(curse.tags || []).slice(0, 3).map((tag: string) => (
-                          <span
-                            key={tag}
-                            className="text-[10px] font-bold px-2 py-0.5"
-                            style={{ border: '2px solid var(--ink)', fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.6 }}
-                          >
-                            #{tag}
-                          </span>
-                        ))}
-                      </div>
+                    {/* Dashed divider */}
+                    <div className="mx-5" style={{ borderTop: '2px dashed var(--ink)', opacity: 0.3 }} />
 
-                      {/* Footer */}
-                      <div className="flex items-center justify-between pt-3" style={{ borderTop: '2px solid var(--ink)' }}>
-                        <span className="text-[10px] font-black uppercase tracking-tight" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--teal)' }}>
-                          立即解構咒語
-                        </span>
-                        <ArrowRight className="w-4 h-4" style={{ color: 'var(--ink)' }} />
-                      </div>
-                    </motion.button>
-                  ))}
-                  <div className="flex-shrink-0 w-8 md:w-20" />
+                    {/* Footer */}
+                    <div className="flex items-center justify-between px-5 py-3">
+                      <span className="text-xs font-bold" style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.5 }}>
+                        所需參數: {curse.fields?.length || 0}
+                      </span>
+                      <span className="flex items-center gap-1 text-xs font-black" style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--teal)' }}>
+                        詠唱 <ArrowRight className="w-3 h-3" />
+                      </span>
+                    </div>
+                  </motion.button>
+                ))}
+
+                {/* 魔力凝結中... placeholder card */}
+                <div
+                  className="magic-card flex flex-col items-center justify-center text-center p-6"
+                  style={{ minHeight: '260px', opacity: 0.7 }}
+                >
+                  <RefreshCw className="w-10 h-10 mb-4 animate-spin" style={{ color: 'var(--ink)', opacity: 0.3, animationDuration: '3s' }} />
+                  <div
+                    className="text-sm font-black px-4 py-2"
+                    style={{ background: 'var(--mustard)', border: '3px solid var(--ink)', fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)' }}
+                  >
+                    魔力凝結中...
+                  </div>
                 </div>
               </div>
             </section>
