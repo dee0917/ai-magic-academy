@@ -191,14 +191,14 @@ export default function MagicAcademyMVP() {
   };
 
   return (
-    <div className="min-h-screen w-full relative bg-[#050510] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/20 via-[#050510] to-[#050510] text-slate-200 font-sans selection:bg-purple-500/30 p-4 md:p-6 flex flex-col items-center">
+    <div className="min-h-screen w-full relative bg-[#050510] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/20 via-[#050510] to-[#050510] text-slate-200 font-sans selection:bg-purple-500/30 flex flex-col items-center overflow-x-hidden">
       {/* Background Orbs */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="w-[500px] h-[500px] bg-purple-600/10 blur-[120px] rounded-full animate-pulse absolute top-[-10%] left-[-10%]"></div>
-        <div className="w-[500px] h-[500px] bg-indigo-600/10 blur-[120px] rounded-full animate-pulse absolute bottom-[-10%] right-[-10%]" style={{ animationDelay: '2s' }}></div>
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div className="w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-purple-600/10 blur-[120px] rounded-full animate-pulse absolute top-[-10%] left-[-10%]"></div>
+        <div className="w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-indigo-600/10 blur-[120px] rounded-full animate-pulse absolute bottom-[-10%] right-[-10%]" style={{ animationDelay: '2s' }}></div>
       </div>
 
-      <header className="text-center max-w-4xl mt-6 md:mt-16 mb-12 relative z-10 px-4">
+      <header className="text-center max-w-4xl w-full mt-6 md:mt-16 mb-12 relative z-10 px-4 md:px-6">
         <div className="inline-block px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-purple-400 mb-4 animate-pulse">
           Next-Gen AI Solution
         </div>
@@ -236,13 +236,13 @@ export default function MagicAcademyMVP() {
         </div>
 
         {/* Quick Nav Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 relative z-10">
+        <div className="flex overflow-x-auto no-scrollbar justify-start md:justify-center gap-2 relative z-10 md:flex-wrap">
           <button
             onClick={() => {
               setSearchQuery("");
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
-            className="px-4 py-2 rounded-full bg-purple-500/20 border border-purple-500/30 text-xs font-bold text-purple-300 transition-all active:scale-95"
+            className="flex-shrink-0 px-4 py-2 rounded-full bg-purple-500/20 border border-purple-500/30 text-xs font-bold text-purple-300 transition-all active:scale-95"
           >
             全部
           </button>
@@ -253,7 +253,7 @@ export default function MagicAcademyMVP() {
                 setSearchQuery(""); // Clear search to see all tabs
                 setTimeout(() => scrollToTab(tab), 100);
               }}
-              className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-bold text-slate-400 hover:bg-purple-500/20 hover:text-purple-300 hover:border-purple-500/30 transition-all active:scale-95"
+              className="flex-shrink-0 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-bold text-slate-400 hover:bg-purple-500/20 hover:text-purple-300 hover:border-purple-500/30 transition-all active:scale-95"
             >
               {tab}
             </button>
@@ -262,14 +262,14 @@ export default function MagicAcademyMVP() {
       </header>
 
       {/* 方案三改良版：橫向魔法卷軸 (四列/分類) */}
-      <main className="w-full max-w-7xl relative z-10 pb-20">
+      <main className="w-full max-w-7xl relative z-10 pb-20 px-4 md:px-6">
         {TABS.map(tab => {
           const tabCurses = groupedCurses[tab];
           if (searchQuery && tabCurses.length === 0) return null;
 
           return (
             <section key={tab} id={tab} className="mb-12 md:mb-16 last:mb-0 scroll-mt-32">
-              <div className="flex items-center justify-between px-4 mb-6">
+              <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
                   <div className="w-1.5 h-8 bg-purple-600 rounded-full shadow-[0_0_15px_rgba(168,85,247,0.8)]"></div>
                   <h2 className="text-2xl md:text-3xl font-serif font-black tracking-tight text-white italic">{tab}</h2>
@@ -279,7 +279,7 @@ export default function MagicAcademyMVP() {
                 </div>
               </div>
 
-              <div className="relative group/scroll">
+              <div className="relative group/scroll -mx-4 md:-mx-6">
                 {/* Scroll Indicators */}
                 <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-[#050510] to-transparent z-20 pointer-events-none opacity-0 group-hover/scroll:opacity-100 transition-opacity"></div>
                 <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-[#050510] to-transparent z-20 pointer-events-none opacity-100 transition-opacity flex items-center justify-end pr-2">
@@ -288,7 +288,7 @@ export default function MagicAcademyMVP() {
                   </motion.div>
                 </div>
 
-                <div className="flex overflow-x-auto gap-4 md:gap-6 px-4 pb-8 no-scrollbar snap-x snap-mandatory scroll-smooth">
+                <div className="flex overflow-x-auto gap-4 md:gap-6 px-4 md:px-6 pb-8 no-scrollbar snap-x snap-mandatory scroll-smooth">
                   {tabCurses.map((curse: any) => (
                     <motion.button
                       layoutId={`card-${curse.id}`}
@@ -354,14 +354,14 @@ export default function MagicAcademyMVP() {
       {/* 狀態二：魔法工房 (彈出顯示) */}
       <AnimatePresence>
       {selectedCurse && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 lg:p-10">
+        <div className="fixed inset-0 z-[100] flex items-end md:items-center md:justify-center md:p-6 lg:p-10">
           <motion.div 
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             className="absolute inset-0 bg-black/80 backdrop-blur-md" 
             onClick={() => { setSelectedCurse(null); setInputs({}); setShowPortal(false); }}
           ></motion.div>
           
-          <motion.div layoutId={`card-${selectedCurse.id}`} className="w-full max-w-4xl bg-[#0a0a15] bg-gradient-to-br from-white/[0.08] to-transparent border border-purple-500/30 rounded-3xl backdrop-blur-2xl relative shadow-[0_40px_100px_rgba(0,0,0,0.8)] flex flex-col max-h-[90vh] overflow-hidden z-10">
+          <motion.div layoutId={`card-${selectedCurse.id}`} className="w-full max-w-4xl bg-[#0a0a15] bg-gradient-to-br from-white/[0.08] to-transparent md:border border-purple-500/30 rounded-t-3xl md:rounded-3xl backdrop-blur-2xl relative shadow-[0_40px_100px_rgba(0,0,0,0.8)] flex flex-col max-h-[95vh] md:max-h-[90vh] overflow-hidden z-10">
             {/* Scroll Area */}
             <div className="flex-1 overflow-y-auto p-6 md:p-8 custom-scrollbar">
               <div className="flex justify-end gap-3 mb-6">
