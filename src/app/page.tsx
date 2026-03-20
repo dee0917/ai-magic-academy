@@ -57,11 +57,11 @@ const TerminalPrompt = ({ text }: { text: string }) => {
 
         // Numbered rules: lines starting with number + dot or dash
         const numberedMatch = trimmed.match(/^(\d+)[.、．]\s*(.*)/);
-        const dashMatch = !numberedMatch && trimmed.match(/^[-–—]\s*(.*)/);
+        const dashMatchResult = !numberedMatch ? trimmed.match(/^[-–—]\s*(.*)/) : null;
 
-        if (numberedMatch || dashMatch) {
+        if (numberedMatch || dashMatchResult) {
           ruleCounter++;
-          const content = numberedMatch ? numberedMatch[2] : dashMatch![1];
+          const content = numberedMatch ? numberedMatch[2] : (dashMatchResult ? dashMatchResult[1] : '');
           return (
             <div key={lineIdx} className="flex gap-3 mb-3 text-sm leading-relaxed">
               <span className="flex-shrink-0 font-black text-base"
