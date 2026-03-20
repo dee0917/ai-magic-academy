@@ -6,7 +6,8 @@ import {
   Beer, ShieldCheck, UserPlus, Wallet, HelpCircle, ClipboardList, Clock, Receipt, Heart, Music,
   Dumbbell, Star, CircleDollarSign, VolumeX, Headset, ShieldX, Swords, Gift, Users,
   Brain, Bot, MessageSquare, Lock, Scissors, Coffee, HeartCrack, PiggyBank,
-  Languages, Timer, HeartHandshake, Building, Moon, Eye, Phone, Sword, Mic, RefreshCcw
+  Languages, Timer, HeartHandshake, Building, Moon, Eye, Phone, Sword, Mic, RefreshCcw,
+  Film, Magnet, Newspaper, Wand2, Video
 } from "lucide-react";
 import React from "react";
 
@@ -885,5 +886,254 @@ export const CURSES = [
     },
     theory: "基於世代認知基模 (Generational Schema Theory) 與精緻化可能性模型 (ELM)：跨世代溝通失敗的根源是「你用 2024 年的概念去撞 1970 年的認知框架，框架不匹配所以所有資訊都被自動彈回」。本咒語運用「基模嫁接技術」——不強塞新概念，而是把新概念接在長輩已有的舊基模上。",
     generate: (inputs: any) => `你是一位專門幫台灣年輕人「翻譯」現代生活方式給長輩聽的跨世代溝通顧問。你的超能力是：把任何 Gen Z 的概念用菜市場阿嬤都懂的方式講清楚。\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我想讓長輩理解一件他們不認同的事：\n- 我要解釋的事：[[${inputs.thing_to_explain}]]\n- 長輩通常的反應：[[${inputs.elder_reaction}]]\n- 最低理解目標：[[${inputs.min_goal}]]\n- 長輩背景：[[${inputs.elder_bg}]]\n\n請輸出：\n① 【世代翻譯】——用一段 100 字以內、長輩聽得懂的方式解釋（必須包含至少一個他們那個年代的類比）\n② 【權威背書彈藥】——3 個「長輩會信的資訊來源」的論點\n③ 【故事植入法】——一個「別人家小孩」的故事版本\n④ 【地雷詞彙表】——解釋時絕對不能用的 5 個詞和替代用語\n⑤ 【Threads 世代笑話】——一則「跟爸媽解釋 XXX」主題的 Threads 短文（80 字內）\n\n【規則】\n1. 類比必須用長輩的「母語」——公務員就用公務體系的比喻。\n2. 嚴禁出現任何帶有「你們那個年代不懂」潛台詞的語句。\n3. 權威背書要具體到「某某公司」「某某政策」。\n4. 故事植入法的故事不能太完美——要用「普通人稍微改善」的等級。\n5. Threads 文必須同時讓年輕人笑、讓看到的長輩若有所思。`
+  },
+  {
+    id: "idea_engine",
+    tab: "創業/斜槓",
+    isPro: false,
+    outputFormat: "30 天選題日曆 + 爆款分析",
+    icon: <Lightbulb className="w-8 h-8 text-yellow-500" />,
+    color: "yellow",
+    title: "靈感永動機",
+    desc: "解決「今天又要發文了但完全不知道要發什麼，盯著螢幕 2 小時只想到一個爛點子」的創作者靈感枯竭症。",
+    tags: ["選題", "自媒體", "爆款公式"],
+    fields: [
+      { id: "niche", label: "你的領域", placeholder: "例：職場成長 / 穿搭 / 理財 / 料理" },
+      { id: "audience", label: "目標受眾", placeholder: "例：25-35 歲台灣女性上班族" },
+      { id: "top_content", label: "近期表現好的內容", placeholder: "例：「月薪三萬如何存到第一桶金」那篇 Reels 破 10 萬觀看" },
+      { id: "flop_content", label: "近期表現差的內容", placeholder: "例：「推薦五本理財書」幾乎沒人看" },
+      { id: "bottleneck", label: "目前的瓶頸", placeholder: "例：同類型內容做太多，觀眾開始膩了" }
+    ],
+    tweak: { id: "strat", label: "選題策略", options: [
+      "爆款逆向工程型：分析你的爆款「為什麼爆」，提取公式後套用到新主題。",
+      "跨界嫁接型：從完全不同的領域借靈感，製造「這跟理財有什麼關係？」的好奇心。",
+      "時事寄生型：抓住當週熱門話題，用你的專業角度切入，蹭流量但不掉格調。"
+    ]},
+    theory: "基於創造力的聯想理論 (Mednick) 與資訊落差理論 (Loewenstein)：靈感枯竭的深層問題不是「沒東西可寫」，而是「大腦已經在同一個領域裡建立了太強的路徑依賴」。本咒語強制啟動「遠距聯想」迴路，同時用資訊落差原理設計選題。",
+    generate: (inputs: any) => `你是一位操盤過 10 個以上百萬粉帳號的自媒體內容策略師。你的核心方法論是：「爆款不是靈感，是公式 × 時機 × 情緒。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我的帳號陷入靈感枯竭，請幫我完成一次「選題大補帖」：\n- 領域：[[${inputs.niche}]]\n- 受眾：[[${inputs.audience}]]\n- 近期爆款：[[${inputs.top_content}]]\n- 近期撲街：[[${inputs.flop_content}]]\n- 瓶頸：[[${inputs.bottleneck}]]\n\n請輸出：\n① 【爆款解剖】——分析爆款內容為什麼爆，提取 3 個可複製的「爆款因子」\n② 【撲街驗屍】——分析撲街內容死在哪裡，精確到「標題缺乏資訊落差」這個層級\n③ 【30 天選題日曆】——30 個選題，分四類配置：🔴爆款型(40%) 🟡權威型(25%) 🟢互動型(20%) 🔵轉化型(15%)\n④ 【每題附標題】——每個選題附上一個「會被點擊」的標題，標注用了什麼標題技法\n\n【規則】\n1. 至少 5 個必須是「跨界嫁接」型。\n2. 標題嚴禁使用「你一定要知道的 X 件事」「看完這篇你就懂了」等過期句型。\n3. 爆款型選題必須在標題裡就引發情緒。\n4. 每個選題附上「適合哪個平台」標注。\n5. 最後附上【選題自檢表】——5 個問題快速判斷「這題值不值得做」。`
+  },
+  {
+    id: "hook_master",
+    tab: "創業/斜槓",
+    isPro: false,
+    outputFormat: "短影音完整腳本",
+    icon: <Film className="w-8 h-8 text-red-500" />,
+    color: "red",
+    title: "鉤魂首行",
+    desc: "解決「拍了一支 Reels/Shorts 但前 3 秒留不住人，完播率慘到不忍看」的短影音開頭致死率。",
+    tags: ["短影音", "Reels", "完播率"],
+    fields: [
+      { id: "topic", label: "影片主題", placeholder: "例：小資族外食也能一個月存 8,000 元的方法" },
+      { id: "duration", label: "影片長度", placeholder: "例：60 秒" },
+      { id: "platform", label: "平台", placeholder: "例：IG Reels" },
+      { id: "style", label: "你的表演風格", placeholder: "例：講話快、會用手勢、偶爾自嘲" },
+      { id: "audience", label: "目標受眾", placeholder: "例：月薪 3-5 萬的外食族" }
+    ],
+    tweak: { id: "strat", label: "開場策略", options: [
+      "衝突開場型：前 3 秒拋出一個違反常識的論點，讓人「不同意所以看下去」。",
+      "痛點直擊型：前 3 秒描述觀眾正在經歷的痛苦，讓人「被說中所以看下去」。",
+      "數據震撼型：前 3 秒丟一個讓人嚇到的數字，讓人「想知道為什麼所以看下去」。"
+    ]},
+    theory: "基於注意力經濟學 (Davenport) 與認知中斷理論：短影音完播率低的核心問題是「你的前 3 秒沒有製造足夠的認知中斷——觀眾的拇指滑過你的影片時，大腦沒有收到『停下來』的信號」。本咒語專門製造前 3 秒的「認知中斷彈」。",
+    generate: (inputs: any) => `你是一位專門幫創作者寫腳本的短影音編劇，你寫過的腳本累計超過 5 億次觀看。你的核心信仰是：「一支短影音的命運在前 3 秒就決定了。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n幫我寫一支短影音的完整腳本：\n- 主題：[[${inputs.topic}]]\n- 長度：[[${inputs.duration}]]\n- 平台：[[${inputs.platform}]]\n- 我的風格：[[${inputs.style}]]\n- 受眾：[[${inputs.audience}]]\n\n請輸出：\n① 【3 版開場鉤子】——衝突開場、痛點直擊、數據震撼各一版前 3 秒台詞\n② 【完整腳本】——選最強的鉤子寫完整腳本：🪝鉤子(0-3秒) → 📌定錨(3-8秒) → 🥩肉(8-45秒) → 🎯CTA(最後5-10秒)\n③ 【畫面指示】——每段台詞旁標注「鏡頭該拍什麼」\n④ 【封面文字建議】——一行會讓人停下來的封面標題（8 字以內）\n\n【規則】\n1. 前 3 秒嚴禁以「大家好今天要跟你們分享」開頭。\n2. 腳本必須是口語稿，唸起來像跟朋友說話。\n3. 每 10 秒必須有一次節奏轉換。\n4. CTA 嚴禁「如果你覺得有用就按個讚」——要給互動的理由。\n5. 封面文字必須通過「縮圖測試」——手機上縮到指甲大小還看得清楚。`
+  },
+  {
+    id: "follower_magnet",
+    tab: "創業/斜槓",
+    isPro: true,
+    outputFormat: "帳號診斷 + 90天漲粉計畫",
+    icon: <Magnet className="w-8 h-8 text-pink-600" />,
+    color: "pink",
+    title: "萬磁王",
+    desc: "解決「內容品質不差但追蹤數就是不動，像在對著空氣表演」的自媒體隱形人症候群。",
+    tags: ["漲粉", "演算法", "擴散機制"],
+    fields: [
+      { id: "current_stats", label: "帳號現況", placeholder: "例：2,300 粉，平均按讚 50-80" },
+      { id: "niche", label: "領域", placeholder: "例：居家佈置 / 租屋改造" },
+      { id: "unique", label: "你的獨特性", placeholder: "例：專門做「預算 3,000 以內」的改造" },
+      { id: "goal", label: "目標", placeholder: "例：三個月內破萬粉" },
+      { id: "tried", label: "試過但沒用的方法", placeholder: "例：互追、hashtag 研究、固定發文時間" }
+    ],
+    tweak: { id: "strat", label: "成長策略", options: [
+      "爆文衝刺型：設計 3 篇「為漲粉而生」的戰略型內容，犧牲深度換擴散力。",
+      "人設強化型：重新定位你的帳號人設和 bio，讓路人一秒理解「追蹤你能得到什麼」。",
+      "協作槓桿型：設計可以 tag 其他帳號、被轉發、或引發 UGC 的合作型內容。"
+    ]},
+    theory: "基於網絡效應理論與社會認同理論 (Cialdini)：漲粉困境的深層問題不是「內容不好」，而是「好內容被困在同溫層裡，沒有觸發演算法的擴散機制」。本咒語運用「擴散觸發器設計」——在內容裡植入讓人「不得不」分享、留言、tag 朋友的機制。",
+    generate: (inputs: any) => `你是一位專門幫中小型帳號突破停滯期的自媒體成長駭客。你的方法論：「粉絲不是追來的，是被你的內容結構推過來的。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我的帳號卡在成長停滯期：\n- 現況：[[${inputs.current_stats}]]\n- 領域：[[${inputs.niche}]]\n- 獨特性：[[${inputs.unique}]]\n- 目標：[[${inputs.goal}]]\n- 試過但沒用的：[[${inputs.tried}]]\n\n請輸出：\n① 【帳號健檢報告】——人設清晰度、內容擴散力、追蹤轉換率 三維度診斷\n② 【Bio 重寫】——用「我幫___解決___」結構，附 3 個版本\n③ 【3 篇戰略型爆文企劃】——每篇設計「擴散觸發器」，附標題、大綱、CTA\n④ 【漲粉飛輪模型】——可重複執行的「內容→互動→擴散→漲粉」SOP\n⑤ 【90 天里程碑】——三個 30 天階段的重點任務和預期成果\n\n【規則】\n1. 診斷必須殘酷但建設性。\n2. 爆文企劃必須包含一個「分享觸發器」。\n3. Bio 嚴禁 emoji 堆疊超過 3 個。\n4. 漲粉策略嚴禁包含「互追」「買粉」。\n5. 90 天計畫必須考慮創作者一天只有 2 小時做內容的現實。`
+  },
+  {
+    id: "monetize_shield",
+    tab: "創業/斜槓",
+    isPro: true,
+    outputFormat: "報價計算 + 回覆信模板",
+    icon: <CircleDollarSign className="w-8 h-8 text-emerald-600" />,
+    color: "emerald",
+    title: "變現結界",
+    desc: "解決「品牌來信問報價但你不知道怎麼開價，開太高怕嚇跑、開太低怕被當盤子」的自媒體定價恐慌。",
+    tags: ["業配報價", "品牌合作", "KOL定價"],
+    fields: [
+      { id: "brand", label: "品牌名稱", placeholder: "例：某保養品牌" },
+      { id: "collab_content", label: "合作內容", placeholder: "例：一則 IG 圖文 + 限時動態三則" },
+      { id: "my_stats", label: "你的帳號數據", placeholder: "例：1.2 萬粉，互動率 4.5%" },
+      { id: "niche", label: "你的領域", placeholder: "例：美妝保養" },
+      { id: "their_offer", label: "對方開的條件", placeholder: "例：提供產品 + 稿費，想了解您的報價" }
+    ],
+    tweak: { id: "strat", label: "報價策略", options: [
+      "數據定價型：用公式算出合理報價區間，讓你開價有依據。",
+      "套裝方案型：不只回覆報價，直接提供「三個合作方案」讓品牌選，掌握主動權。",
+      "回覆信模板型：生成一封專業的品牌合作回覆信，語氣讓人覺得「這個創作者很專業」。"
+    ]},
+    theory: "基於錨定效應與 BATNA 談判理論：業配定價恐懼的深層心理是「我不知道自己值多少錢」。這是一種將「商業報價」與「自我價值」混為一談的認知扭曲。錨定效應告訴我們：誰先出價誰就設定了談判的心理錨點。本咒語給你「先出價的勇氣」和「定價的邏輯依據」。",
+    generate: (inputs: any) => `你是一位專門代理台灣中小型 KOL 的經紀人，經手過 500+ 件品牌合作案。你的定價哲學是：「你的報價不是在賣貼文，是在賣你的受眾注意力。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n有品牌來找我合作：\n- 品牌：[[${inputs.brand}]]\n- 合作內容：[[${inputs.collab_content}]]\n- 我的數據：[[${inputs.my_stats}]]\n- 我的領域：[[${inputs.niche}]]\n- 對方開的條件：[[${inputs.their_offer}]]\n\n請輸出：\n① 【報價計算】——用公式算出建議報價：底線價 / 合理價 / 理想價\n② 【三檔合作方案】——A基本款 / B推薦款 / C旗艦款\n③ 【回覆信】——一封可直接寄出的專業回覆\n④ 【談判紅線清單】——5 件絕對不能接受的條件\n\n【規則】\n1. 報價計算必須有具體數字，精確到千元級。\n2. 回覆信語氣「專業但不傲慢」。\n3. 三檔方案運用「誘餌效應」。\n4. 嚴禁建議「先免費合作累積作品集」。\n5. 附上【合作前必確認清單】——審核次數、修改次數、授權範圍、付款時間、上刊日期。`
+  },
+  {
+    id: "troll_shield",
+    tab: "創業/斜槓",
+    isPro: false,
+    outputFormat: "酸民應對策略 + 神回覆",
+    icon: <ShieldAlert className="w-8 h-8 text-orange-500" />,
+    color: "orange",
+    title: "毒舌護盾",
+    desc: "解決「被酸民留言攻擊，刪掉怕被說玻璃心、回嘴怕越吵越大、不理又氣得睡不著」的創作者心理戰損。",
+    tags: ["酸民處理", "負評", "神回覆"],
+    fields: [
+      { id: "troll_comment", label: "酸民的留言", placeholder: "例：又一個假掰的生活分享，有錢人的世界我們不懂" },
+      { id: "my_content", label: "你的內容", placeholder: "例：我分享自己改造租屋空間的圖文" },
+      { id: "account_size", label: "帳號大小", placeholder: "例：8,000 粉" },
+      { id: "my_emotion", label: "你的情緒", placeholder: "例：委屈，因為我真的是小資改造" },
+      { id: "preference", label: "你想怎麼處理", placeholder: "例：想回但不想吵架" }
+    ],
+    tweak: { id: "strat", label: "應對策略", options: [
+      "神回覆型：用一句讓旁觀者拍手叫好的話回擊，把酸言變成你的舞台。",
+      "借力打力型：把這則負評變成一則新內容的靈感，把攻擊轉化成流量。",
+      "靜默防禦型：不回覆，但教你怎麼調整心態，以及什麼情況該刪、該回、該無視。"
+    ]},
+    theory: "基於線上去抑制效應 (Suler) 與情緒感染理論：酸民攻擊對創作者的深層傷害是「一百則正面留言抵不過一則負面留言」。本咒語的核心功能是做你的「情緒隔離層」——在你和酸民之間插入一層理性分析。",
+    generate: (inputs: any) => `你是一位專門訓練公眾人物處理網路輿情的危機公關顧問。你的心法是：「酸民是免費的互動率。問題不是要不要回，是怎麼回才能讓你加分。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我被酸了：\n- 酸民的留言：[[${inputs.troll_comment}]]\n- 留言位置：[[${inputs.my_content}]]\n- 帳號大小：[[${inputs.account_size}]]\n- 我的情緒：[[${inputs.my_emotion}]]\n- 我的傾向：[[${inputs.preference}]]\n\n請輸出：\n① 【酸民類型鑑定】——路過型 / 嫉妒型 / 挑釁型 / 正當批評型\n② 【該不該回？決策樹】——根據類型、帳號大小、貼文熱度判斷最佳策略\n③ 【神回覆】——3 版：幽默化解版、高格調版、反將一軍版\n④ 【轉化企劃】——把酸言變成一則新內容的具體企劃\n⑤ 【心理復原處方】——3 句話幫你切換回「這是生意不是人生」的心態\n\n【規則】\n1. 如果是「正當批評型」，必須誠實告訴使用者「這不是酸，這是反饋」。\n2. 回覆嚴禁「謝謝你的意見❤️」「你行你上」、截圖公審。\n3. 幽默化解版必須獨立存在也是好內容。\n4. 轉化企劃讓使用者從「被攻擊」變成「主動創造話題」。\n5. 心理復原處方嚴禁雞湯——提供認知重構框架。`
+  },
+  {
+    id: "content_splitter",
+    tab: "創業/斜槓",
+    isPro: true,
+    outputFormat: "多平台裂變內容包",
+    icon: <Copy className="w-8 h-8 text-cyan-500" />,
+    color: "cyan",
+    title: "裂變器",
+    desc: "解決「辛辛苦苦做了一支 YT 影片，但沒有力氣再拆成 IG、Threads、部落格版本」的一魚多吃癱瘓症。",
+    tags: ["跨平台", "一魚多吃", "內容裂變"],
+    fields: [
+      { id: "original", label: "原始內容", placeholder: "例：一支 10 分鐘的 YouTube 影片，主題是「如何跟室友設立界線」" },
+      { id: "original_platform", label: "原始平台", placeholder: "例：YouTube" },
+      { id: "target_platforms", label: "要改寫到哪些平台", placeholder: "例：IG 圖文、IG Reels、Threads、部落格" },
+      { id: "tone_diff", label: "各平台的帳號調性", placeholder: "例：YT 正經、IG 比較輕鬆、Threads 最毒舌" }
+    ],
+    tweak: { id: "strat", label: "裂變模式", options: [
+      "全自動裂變型：直接把一份內容拆成各平台的完整版本，複製貼上即可。",
+      "鉤子矩陣型：同一個主題用不同角度切入每個平台，讓跨平台粉絲都覺得是「新內容」。",
+      "導流漏斗型：每個平台的內容設計成「只講一半」，把人導回主平台看完整版。"
+    ]},
+    theory: "基於長尾理論與內容複利效應：一魚多吃不是偷懶，是「用一份創作成本取得多份平台曝光」的策略性資源配置。關鍵在於每個平台版本必須「原生化」——不是縮短版而是「該平台的語法」重寫版。",
+    generate: (inputs: any) => `你是一位一人公司的內容營運長，你的方法論叫「1→10 裂變法」：一份核心內容，裂變成多個平台版本。\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我已經做好一份內容，請幫我裂變：\n- 原始內容：[[${inputs.original}]]\n- 原始平台：[[${inputs.original_platform}]]\n- 目標平台：[[${inputs.target_platforms}]]\n- 各平台調性：[[${inputs.tone_diff}]]\n\n請針對每個目標平台輸出：\n① 【IG 圖文版】——封面標題(8字內) + 5-7張輪播內容 + CTA + Hashtag(5個)\n② 【IG Reels 版】——30秒腳本(含鉤子+核心+CTA) + 封面文字 + 音樂風格建議\n③ 【Threads 版】——3 則不同角度的短文(每則100字內)\n④ 【部落格 SEO 版】——SEO標題 + Meta description + 文章大綱(H2/H3) + 前200字草稿\n\n【規則】\n1. 每個平台版本必須「獨立成立」——沒看過原始內容也能理解。\n2. Threads 版必須跟 IG 版有不同切入角度。\n3. 部落格版必須考慮 SEO。\n4. 嚴禁寫「完整版請看我的 YouTube」——用更巧妙的方式引導。\n5. 每個版本附上【最佳發布時間】和【發布順序建議】。`
+  },
+  {
+    id: "title_wizard",
+    tab: "創業/斜槓",
+    isPro: false,
+    outputFormat: "10 個標題 + TOP 3 推薦",
+    icon: <PenTool className="w-8 h-8 text-indigo-500" />,
+    color: "indigo",
+    title: "通靈標題師",
+    desc: "解決「內容做完了但想不出好標題，隨便取一個結果觸及率只有平常的一半」的標題廢物困境。",
+    tags: ["標題技法", "封面文字", "CTR優化"],
+    fields: [
+      { id: "content_topic", label: "內容主題", placeholder: "例：大學生如何用 Notion 管理時間" },
+      { id: "platform", label: "平台", placeholder: "例：IG 圖文" },
+      { id: "audience", label: "目標受眾", placeholder: "例：大學生、研究生" },
+      { id: "best_part", label: "內容中最勁爆的點", placeholder: "例：用了一個模板後每天多出 2 小時" },
+      { id: "brand_tone", label: "你的品牌調性", placeholder: "例：實用但帶點幽默" }
+    ],
+    tweak: { id: "strat", label: "標題策略", options: [
+      "數據衝擊型：用數字 + 結果當鉤子。",
+      "爭議製造型：用一個會讓人「不同意」的觀點當標題。",
+      "身份認同型：讓目標受眾在標題裡看到自己。"
+    ]},
+    theory: "基於選擇性注意理論與雞尾酒效應：標題的功能不是「描述內容」，是「在資訊洪流中搶到 0.3 秒的注意力」。好標題讓人在滑過的瞬間產生「跟我有關」或「不可能吧？」的反應。",
+    generate: (inputs: any) => `你是一位「標題黑手」——專門幫自媒體創作者把 30 分的標題改成 90 分。你改過的標題平均讓觸及率提升 2.5 倍。\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n幫我這篇內容想標題：\n- 主題：[[${inputs.content_topic}]]\n- 平台：[[${inputs.platform}]]\n- 受眾：[[${inputs.audience}]]\n- 最有料的點：[[${inputs.best_part}]]\n- 品牌調性：[[${inputs.brand_tone}]]\n\n請輸出：\n① 【10 個標題】——每個標注：技法名稱、點擊吸引力(★-★★★★★)、最適合的平台\n② 【TOP 3 推薦】——說明為什麼這 3 個最可能爆\n③ 【封面視覺建議】——TOP 3 標題搭配的封面設計建議\n④ 【A/B 測試計畫】——怎麼用限動投票或 Threads 測試哪個標題最強\n\n【規則】\n1. 10 個標題不能有任何兩個使用相同的技法。\n2. 嚴禁過期句型：「X 個你不知道的___」「建議收藏」。\n3. 每個標題 15 個中文字以內。\n4. 至少 2 個必須「反直覺」。\n5. 標題嚴禁比內容精彩（標題黨）。`
+  },
+  {
+    id: "golden_voice",
+    tab: "創業/斜槓",
+    isPro: true,
+    outputFormat: "Podcast 完整腳本大綱",
+    icon: <Mic className="w-8 h-8 text-amber-500" />,
+    color: "amber",
+    title: "金嗓術",
+    desc: "解決「錄 Podcast 或口播影片時講話沒重點、容易離題、聽眾聽到一半就跳出」的音頻內容失焦症。",
+    tags: ["Podcast", "口播腳本", "敘事結構"],
+    fields: [
+      { id: "topic", label: "主題", placeholder: "例：為什麼你應該在 25 歲前離職至少一次" },
+      { id: "format", label: "節目形式", placeholder: "例：獨白 / 對談 / 訪問" },
+      { id: "target_length", label: "目標長度", placeholder: "例：15 分鐘" },
+      { id: "speaking_style", label: "你的口條風格", placeholder: "例：容易歪樓、會講故事但收不回來" },
+      { id: "audience", label: "目標受眾", placeholder: "例：22-30 歲的職場新鮮人" }
+    ],
+    tweak: { id: "strat", label: "腳本結構", options: [
+      "故事脊椎型：整集用一個故事撐起來，穿插觀點，讓人聽故事的同時被說服。",
+      "問題清單型：用 3-5 個問題當骨架，每個問題就是一段，結構清晰不失焦。",
+      "辯論體型：先提出一個爭議觀點，然後自己當正反方辯論，製造張力。"
+    ]},
+    theory: "基於敘事運輸理論 (Green & Brock) 與系列位置效應：音頻失焦的核心問題是「你知道要說什麼，但不知道什麼順序說效果最好」。人一旦被「運輸」進故事，批判性思維會自動降低。本咒語將隨機漫談重組為「有記憶錨點的敘事結構」。",
+    generate: (inputs: any) => `你是一位曾在 Apple Podcast 台灣排行榜 Top 10 待過的 Podcast 製作人。你的剪輯台上有一張紙條：「好的 Podcast 不是你想說什麼，是聽眾需要用什麼順序聽。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n幫我規劃一集完整腳本大綱：\n- 主題：[[${inputs.topic}]]\n- 形式：[[${inputs.format}]]\n- 長度：[[${inputs.target_length}]]\n- 我的口條：[[${inputs.speaking_style}]]\n- 受眾：[[${inputs.audience}]]\n\n請輸出：\n① 【開場 90 秒腳本】——完整逐字稿，從按下錄音鍵的第一秒開始\n② 【段落結構】——拆成 3-5 段，每段標注：標題、時間長度、核心論點、故事/例子、過渡句\n③ 【結尾 60 秒腳本】——收束觀點 + CTA\n④ 【節目筆記 (Show Notes)】——可直接貼到 Podcast 平台的文字版重點摘要\n⑤ 【金句候選】——3 句「可以做成 IG 圖卡」的金句\n\n【規則】\n1. 開場嚴禁「哈囉大家好歡迎收聽」——先丟鉤子。\n2. 每段設計「過渡句」——不是「好，接下來」這種機械轉場。\n3. 針對「容易歪樓」的特性，每段設計一個「歪樓保險句」。\n4. 結尾 CTA 嚴禁「幫我按五星」——給聽眾有價值的行動。\n5. 金句必須通過「圖卡測試」——單獨看也有衝擊力。`
+  },
+  {
+    id: "newsletter_mint",
+    tab: "創業/斜槓",
+    isPro: true,
+    outputFormat: "電子報完整規劃 + 範本",
+    icon: <Newspaper className="w-8 h-8 text-sky-500" />,
+    color: "sky",
+    title: "印鈔術",
+    desc: "解決「想開電子報或經營鐵粉社群但不知道寫什麼、怎麼寫、怎麼讓人持續開信」的私域流量冷啟動障礙。",
+    tags: ["電子報", "會員經營", "私域流量"],
+    fields: [
+      { id: "niche", label: "你的領域", placeholder: "例：自由工作者的接案生存術" },
+      { id: "reader", label: "目標讀者", placeholder: "例：想成為自由工作者或剛起步的人" },
+      { id: "frequency", label: "發報頻率", placeholder: "例：每週一次" },
+      { id: "goal", label: "你的目標", placeholder: "例：建立個人品牌 + 未來推課程" },
+      { id: "struggle", label: "你的困境", placeholder: "例：寫了三期就不知道要寫什麼了" }
+    ],
+    tweak: { id: "strat", label: "經營模式", options: [
+      "固定欄目型：設計 3-4 個固定欄目，每期只需「填空」，降低創作壓力。",
+      "策展人型：不全部自己寫，用「蒐集 + 評論」的模式做內容策展。",
+      "連載故事型：把電子報設計成有連續性的「每週連載」，讓讀者期待下一期。"
+    ]},
+    theory: "基於習慣迴路理論 (Duhigg) 與預期效用理論：電子報斷更的深層問題是「每一期都是從零開始，沒有慣性」。本咒語同時設計「創作端的生產 SOP」和「讀者端的期待機制」。",
+    generate: (inputs: any) => `你是一位經營電子報訂閱數超過 5 萬人的個人品牌專家。你的秘訣：「電子報不是文章，是一封寫給朋友的信。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我想認真經營電子報：\n- 領域：[[${inputs.niche}]]\n- 目標讀者：[[${inputs.reader}]]\n- 頻率：[[${inputs.frequency}]]\n- 經營目標：[[${inputs.goal}]]\n- 困境：[[${inputs.struggle}]]\n\n請輸出：\n① 【電子報定位宣言】——一句話告訴潛在訂戶「訂閱你能得到什麼」\n② 【固定欄目設計】——3-4 個每期固定欄目，說明名稱、內容、讀者為什麼期待\n③ 【前 12 期選題規劃】——前三個月的每期主題\n④ 【第一期完整範本】——示範版，包含開場、各欄目、結尾 CTA\n⑤ 【成長漏斗】——從「陌生人→訂閱→開信→鐵粉→付費」的轉換策略\n\n【規則】\n1. 欄目設計考慮「每期寫作不超過 3 小時」。\n2. 開場嚴禁「本週精選」「本期目錄」——第一段就是故事或觀察。\n3. 每期必須有一個「只有電子報才看得到」的獨家內容。\n4. CTA 不能每期都叫人「轉發給朋友」——要設計不同互動機制輪替。\n5. 成長漏斗必須包含「從 IG/Threads 導入電子報」的具體方法。`
+  },
+  {
+    id: "emperor_cut",
+    tab: "創業/斜槓",
+    isPro: true,
+    outputFormat: "影片全流程生產計畫",
+    icon: <Video className="w-8 h-8 text-red-600" />,
+    color: "red",
+    title: "帝王剪輯令",
+    desc: "解決「想做 YouTube 長影片但從企劃、腳本、拍攝到剪輯全部卡住，結果一支影片拖三週」的全流程癱瘓症。",
+    tags: ["YouTube", "影片企劃", "剪輯流程"],
+    fields: [
+      { id: "video_topic", label: "影片主題", placeholder: "例：我離職後的第一個月發生了什麼事" },
+      { id: "video_length", label: "影片長度", placeholder: "例：12-15 分鐘" },
+      { id: "channel_style", label: "頻道定位", placeholder: "例：Vlog 風格帶觀點輸出" },
+      { id: "equipment", label: "你的設備", placeholder: "例：iPhone + 基本燈光 + 剪映" },
+      { id: "weakness", label: "你的弱項", placeholder: "例：開頭不知道怎麼拍、B-roll 素材不夠" }
+    ],
+    tweak: { id: "strat", label: "製作模式", options: [
+      "全流程 SOP 型：從企劃到上傳每一步都幫你排好，照著做就好。",
+      "模板套用型：給你一個「爆款影片結構模板」，只需把你的內容填進去。",
+      "極簡主義型：用最少的鏡頭、最簡單的剪輯完成一支有品質的影片。"
+    ]},
+    theory: "基於帕金森定律與最小可行產品理論 (MVP)：影片拖延的深層問題是「你以為一支好影片需要完美的企劃、完美的拍攝、完美的剪輯——所以你永遠在等自己準備好」。MVP 理論證明：先做出「60 分但完整」的版本比「追求 100 分但永遠沒上架」的版本有價值一萬倍。",
+    generate: (inputs: any) => `你是一位幫 YouTube 創作者做「影片加速器」的製作顧問。你的核心理念是：「一支影片的價值不在製作水準，在它有沒有被上傳。磁碟裡的完美影片，價值是零。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我想做一支 YouTube 影片但整個流程都卡住了：\n- 主題：[[${inputs.video_topic}]]\n- 長度：[[${inputs.video_length}]]\n- 頻道定位：[[${inputs.channel_style}]]\n- 設備：[[${inputs.equipment}]]\n- 弱項：[[${inputs.weakness}]]\n\n請輸出：\n① 【企劃表（1 頁）】——一句話概括 + 目標觀眾看完後的改變 + 影片結構時間軸\n② 【腳本大綱】——開場鉤子(前30秒逐字稿) + 每段 bullet points + 結尾CTA\n③ 【拍攝清單 (Shot List)】——每個畫面要拍什麼、角度、B-roll 需求\n④ 【剪輯指南】——節奏設計 + 音樂風格 + 縮圖設計建議\n⑤ 【3 天完成時間表】——Day1企劃+腳本(2hr) → Day2拍攝(3hr) → Day3剪輯+上傳(4hr)\n\n【規則】\n1. 所有建議適配使用者的設備。\n2. 腳本大綱只給 bullet points——逐字稿會讓 Vlog 聽起來像背書。\n3. 3 天時間表必須真的做得完。\n4. 開場嚴禁「嗨大家好我是 XXX」——直接丟炸彈。\n5. 縮圖建議必須具體到「臉要多大、文字放哪邊、背景什麼顏色」。`
   }
 ];
