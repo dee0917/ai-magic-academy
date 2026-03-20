@@ -1,0 +1,17 @@
+{
+  "name": "AI 魔法學院",
+  "short_name": "AI 魔法",
+  "description": "提升職場生存力的 AI 咒語圖書館",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f081c",
+  "theme_color": "#a855f7",
+  "icons": [
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
