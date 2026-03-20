@@ -1,76 +1,110 @@
 "use client";
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { ChevronDown, Sparkles, Fingerprint, Hexagon, Zap, Orbit, Flame } from "lucide-react";
+import { MoveDown, Stamp, Asterisk } from "lucide-react";
 
-const h1Text = "麻瓜專用AI外掛";
-const h2Text = "一鍵封裝複雜提示詞。應付奧客、自動報告，你的無腦求生指南。";
-const ctaText = "抽取你的本命符咒";
+const h1_top = "麻瓜專用";
+const h1_bottom = "魔法外掛";
+const desc = "將複雜的「提示詞」封裝成一鍵釋放的魔法。應付奧客、推掉飯局、自動寫報告，你的無腦求生指南。";
+
+const paperBg = "bg-[#f4f2ea] relative text-slate-900 font-serif overflow-hidden";
+const dotPattern = "absolute inset-0 opacity-40 pointer-events-none bg-[radial-gradient(#94a3b8_1px,transparent_1px)] [background-size:24px_24px]";
 
 const versions = [
-  { id: 1, name: "01. 賽博神龕", desc: "Cyber Shrine — 巨大發光框線，視線集中" },
-  { id: 2, name: "02. 深淵法陣", desc: "Void Portal — 深紫光暈，極致神秘" },
-  { id: 3, name: "03. 終端機道士", desc: "Terminal Hacker — 等寬字體，打字機光標" },
-  { id: 4, name: "04. 兩極陰陽", desc: "Yin-Yang Split — 直書+橫書張力" },
-  { id: 5, name: "05. 黑曜石祭壇", desc: "Obsidian Altar — 毛玻璃 SaaS 風" },
-  { id: 6, name: "06. 靈魂印記", desc: "Biometric Seal — 巨大指紋科幻感" },
-  { id: 7, name: "07. 絕對極簡", desc: "Brutalist Minimal — 純粹大字負空間" },
-  { id: 8, name: "08. 星軌核心", desc: "Orbiting Core — 動態星軌環繞" },
-  { id: 9, name: "09. 禁忌血咒", desc: "Forbidden Curse — 暗紅職場腹黑風" },
-  { id: 10, name: "10. 幻影錯位", desc: "Glitch Illusion — 駭客文字錯位衝擊" },
+  { id: 1, name: "01. 原汁原味", desc: "The Classic Ticket — 車票/老舊說明書排版" },
+  { id: 2, name: "02. 復古報紙頭版", desc: "The Broadsheet — 報紙排版，權威感" },
+  { id: 3, name: "03. 機密檔案夾", desc: "The Classified Dossier — 政府機密文件感" },
+  { id: 4, name: "04. 古籍字典", desc: "The Dictionary Entry — 學術感與諷刺" },
+  { id: 5, name: "05. 老藥局標籤", desc: "Vintage Apothecary — 華麗復古外框" },
+  { id: 6, name: "06. 打字機草稿", desc: "The Typewriter Draft — 極簡粗糙草稿感" },
+  { id: 7, name: "07. 劇院入場券", desc: "The Theatre Stub — 左右分割票根" },
+  { id: 8, name: "08. 包浩斯網格", desc: "Bauhaus Grid — 幾何色塊現代復古" },
+  { id: 9, name: "09. 東方古籍", desc: "The Oriental Scroll — 全直書排版" },
+  { id: 10, name: "10. 極簡說明書", desc: "The Minimal Manual — 無印良品風格" },
 ];
 
 function V01() {
   return (
-    <header className="relative w-full max-w-4xl mx-auto flex flex-col items-center text-center py-24 border-x border-purple-900/30">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-[1px] bg-gradient-to-r from-transparent via-purple-500 to-transparent shadow-[0_0_15px_rgba(168,85,247,1)]" />
-      <Flame className="w-8 h-8 text-purple-500 mb-6 animate-pulse" />
-      <h1 className="text-5xl md:text-7xl font-black text-white tracking-widest drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] mb-6">{h1Text}</h1>
-      <p className="text-purple-200/60 max-w-xl text-lg mb-12">{h2Text}</p>
-      <motion.div animate={{ y: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 2 }} className="flex flex-col items-center text-purple-400">
-        <span className="text-sm tracking-widest mb-2 uppercase opacity-70">{ctaText}</span>
-        <ChevronDown className="w-6 h-6" />
-      </motion.div>
+    <header className={`${paperBg} w-full border-[12px] border-[#2c2c2c] shadow-2xl`}>
+      <div className={dotPattern}></div>
+      <div className="bg-[#1f4e5b] text-white/80 text-xs px-6 py-2 flex justify-between tracking-widest font-sans">
+        <span>版本 E — 雙行裝飾</span>
+        <span>標題分兩行加裝飾符號，副標在虛線框 ▼</span>
+      </div>
+      <div className="p-10 relative z-10">
+        <div className="flex justify-between text-xs tracking-[0.2em] text-slate-500 border-b-2 border-slate-800 pb-3 mb-16 uppercase font-bold">
+          <span>VOL. I — 現代魔法法典</span>
+          <span>EST. 2026</span>
+        </div>
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center gap-6 mb-4">
+            <div className="w-12 h-[2px] bg-red-700"></div>
+            <h1 className="text-5xl md:text-6xl font-light tracking-[0.2em] text-[#2c2c2c]">{h1_top}</h1>
+            <div className="w-12 h-[2px] bg-red-700"></div>
+          </div>
+          <div className="bg-[#2c2c2c] text-[#eab308] py-4 px-12 inline-block shadow-md">
+            <h1 className="text-6xl md:text-8xl font-black tracking-widest">{h1_bottom}</h1>
+          </div>
+        </div>
+        <div className="border-2 border-dashed border-[#2c2c2c] p-6 max-w-2xl mx-auto text-center">
+          <p className="text-[#4a4a4a] text-lg leading-loose tracking-wider">{desc}</p>
+        </div>
+      </div>
     </header>
   );
 }
 
 function V02() {
   return (
-    <header className="relative w-full text-center flex flex-col items-center justify-center py-20">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-purple-900/20 blur-[100px] rounded-full pointer-events-none" />
-      <h1 className="relative text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-purple-900 mb-6 z-10">{h1Text}</h1>
-      <p className="relative text-slate-400 max-w-2xl text-lg z-10 mb-10">{h2Text}</p>
-      <div className="relative z-10 w-[1px] h-24 bg-gradient-to-b from-purple-500 to-transparent opacity-50" />
+    <header className={`${paperBg} w-full p-10 border border-slate-300 shadow-xl`}>
+      <div className="border-t-[6px] border-b-[2px] border-slate-900 py-4 mb-10 text-center">
+        <h1 className="text-7xl md:text-9xl font-black tracking-tighter uppercase text-slate-900" style={{ transform: 'scaleY(1.2)' }}>
+          {h1_top}{h1_bottom}
+        </h1>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-slate-700 text-justify leading-relaxed">
+        <div className="col-span-2 text-xl font-medium border-r-0 md:border-r-2 border-slate-900 pr-0 md:pr-8">
+          <span className="text-4xl float-left mr-2 font-black">將</span>{desc.substring(1)}
+        </div>
+        <div className="col-span-1 flex flex-col items-center justify-center border-2 border-slate-900 p-4">
+          <Asterisk className="w-12 h-12 text-red-700 mb-2" />
+          <p className="text-center font-bold tracking-widest text-sm">無腦求生<br/>唯一指定指南</p>
+        </div>
+      </div>
     </header>
   );
 }
 
 function V03() {
   return (
-    <header className="w-full max-w-3xl mx-auto text-left border border-emerald-900/30 bg-[#020804] p-8 md:p-12 relative">
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-transparent" />
-      <div className="flex items-center gap-2 mb-8 text-emerald-500 font-mono text-sm opacity-50">
-        <Zap className="w-4 h-4" /> System.Init(Magic_Protocol)
+    <header className={`${paperBg} w-full p-12 border border-[#d6d3c4] shadow-md rounded-tr-[4rem]`}>
+      <div className="absolute top-8 right-8 text-red-700 border-4 border-red-700 p-2 transform rotate-12 opacity-80 z-20">
+        <span className="text-2xl font-black tracking-widest">TOP SECRET</span>
       </div>
-      <h1 className="text-4xl md:text-6xl font-mono font-bold text-emerald-400 mb-6 border-r-4 border-emerald-400 pr-2 animate-[pulse_1s_infinite]">
-        {h1Text}
-      </h1>
-      <p className="text-emerald-100/50 font-mono mb-12">{`> ${h2Text}`}</p>
-      <p className="text-emerald-500 text-sm font-mono tracking-widest animate-pulse">↓ {ctaText} ↓</p>
+      <div className="font-mono text-sm tracking-widest text-slate-500 mb-8 border-b border-slate-400 pb-2">
+        FILE NO. 001 / SUBJECT: AI SURVIVAL
+      </div>
+      <h1 className="text-6xl md:text-8xl font-bold text-slate-900 mb-2">{h1_bottom}</h1>
+      <h2 className="text-2xl md:text-3xl font-mono bg-slate-900 text-white inline-block px-4 py-1 mb-10">{h1_top}</h2>
+      <div className="max-w-xl bg-[#e8e5d5] p-6 border-l-4 border-slate-900 font-mono text-slate-700 leading-loose">
+        {desc}
+      </div>
     </header>
   );
 }
 
 function V04() {
   return (
-    <header className="w-full flex flex-col md:flex-row items-center justify-center gap-8 py-20 relative max-w-4xl mx-auto">
-      <h1 className="text-7xl md:text-9xl font-black text-white/5 md:absolute md:left-4 md:top-0 -z-10" style={{ writingMode: 'vertical-rl' as any }}>AI外掛</h1>
-      <div className="text-center md:text-left z-10">
-        <h2 className="text-5xl md:text-7xl font-black text-white mb-6 drop-shadow-lg">{h1Text}</h2>
-        <p className="text-slate-400 max-w-xl text-lg mb-8">{h2Text}</p>
-        <div className="inline-flex items-center gap-2 text-white/50 border border-white/10 rounded-full px-6 py-2">
-          <ChevronDown className="w-4 h-4 animate-bounce" /> <span className="text-sm tracking-widest">{ctaText}</span>
+    <header className={`${paperBg} w-full p-16 border-l-[16px] border-slate-900 shadow-xl`}>
+      <div className={dotPattern}></div>
+      <div className="relative z-10">
+        <div className="flex items-baseline gap-4 mb-8 flex-wrap">
+          <h1 className="text-6xl md:text-8xl font-black text-slate-900">{h1_bottom}</h1>
+          <span className="text-xl md:text-2xl text-slate-500 italic font-serif">/ {h1_top} /</span>
+        </div>
+        <div className="space-y-4 text-lg">
+          <p className="font-bold text-slate-800">名詞 (Noun)</p>
+          <div className="pl-6 border-l-[3px] border-red-700">
+            <p className="text-slate-700 leading-relaxed"><span className="font-bold text-red-700 mr-2">1.</span> {desc}</p>
+          </div>
         </div>
       </div>
     </header>
@@ -79,11 +113,20 @@ function V04() {
 
 function V05() {
   return (
-    <header className="relative w-full flex justify-center py-20">
-      <div className="relative z-10 flex flex-col items-center text-center p-12 md:p-16 rounded-[3rem] bg-white/[0.02] backdrop-blur-2xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_1px_0_0_rgba(255,255,255,0.1)]">
-        <Sparkles className="w-10 h-10 text-pink-400 mb-6" />
-        <h1 className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-slate-500 mb-6">{h1Text}</h1>
-        <p className="text-slate-400 max-w-lg mb-8">{h2Text}</p>
+    <header className={`${paperBg} w-full p-6 shadow-2xl`}>
+      <div className="border-[8px] border-double border-slate-900 p-12 text-center relative h-full">
+        <p className="uppercase tracking-[0.3em] text-sm font-bold text-slate-600 mb-6">Guaranteed Cure For Workplace Anxiety</p>
+        <div className="flex justify-center items-center gap-4 mb-4">
+          <span className="w-16 h-[1px] bg-slate-900"></span>
+          <h2 className="text-2xl italic font-serif text-red-800">{h1_top}</h2>
+          <span className="w-16 h-[1px] bg-slate-900"></span>
+        </div>
+        <h1 className="text-7xl md:text-9xl font-black uppercase tracking-tighter text-slate-900 mb-10" style={{ transform: 'scaleY(1.1)' }}>
+          {h1_bottom}
+        </h1>
+        <div className="w-full max-w-md mx-auto border-t-2 border-slate-900 pt-6">
+          <p className="text-slate-700 text-lg leading-relaxed font-medium">{desc}</p>
+        </div>
       </div>
     </header>
   );
@@ -91,60 +134,83 @@ function V05() {
 
 function V06() {
   return (
-    <header className="relative w-full text-center flex flex-col items-center py-24">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-5 pointer-events-none -z-10">
-        <Fingerprint className="w-[400px] h-[400px] text-pink-500" />
+    <header className={`${paperBg} w-full p-16 shadow-md`}>
+      <div className="font-mono text-slate-800 max-w-2xl">
+        <div className="mb-12">
+          <span className="bg-red-700 text-white px-2 py-1 text-sm font-bold tracking-widest">DRAFT_01</span>
+        </div>
+        <h1 className="text-5xl md:text-7xl font-black mb-4 leading-tight">
+          {h1_top} <br/>
+          <span className="underline decoration-4 underline-offset-8 decoration-red-700">{h1_bottom}</span>
+        </h1>
+        <p className="text-xl leading-loose mt-12 bg-white/50 p-6 border border-slate-300 shadow-sm">
+          {desc}
+        </p>
       </div>
-      <div className="px-4 py-1 mb-6 rounded-full border border-pink-500/30 text-pink-400 text-xs tracking-[0.2em] bg-pink-500/10">VERIFIED MAGIC</div>
-      <h1 className="text-5xl md:text-7xl font-black text-white mb-6 drop-shadow-[0_0_20px_rgba(244,114,182,0.3)]">{h1Text}</h1>
-      <p className="text-pink-100/40 max-w-xl text-lg">{h2Text}</p>
     </header>
   );
 }
 
 function V07() {
   return (
-    <header className="w-full text-center py-32">
-      <h1 className="text-6xl md:text-8xl font-black text-white tracking-tighter mb-8 uppercase">{h1Text}</h1>
-      <p className="text-slate-500 text-xl max-w-2xl mx-auto font-light leading-relaxed">{h2Text}</p>
+    <header className={`${paperBg} w-full flex flex-col md:flex-row shadow-2xl overflow-hidden`}>
+      <div className="md:w-1/3 bg-slate-900 text-[#f4f2ea] p-10 flex flex-col justify-between border-r-[4px] border-dashed border-[#f4f2ea] min-h-[300px]">
+        <div className="font-mono text-sm tracking-widest opacity-60">ADMIT ONE</div>
+        <h2 className="text-5xl font-black md:[writing-mode:vertical-rl]">{h1_top}</h2>
+        <div className="font-mono text-sm opacity-60">NO. 009942</div>
+      </div>
+      <div className="md:w-2/3 p-12 flex flex-col justify-center relative">
+        <div className={dotPattern}></div>
+        <h1 className="text-6xl md:text-8xl font-black text-slate-900 mb-8 relative z-10">{h1_bottom}</h1>
+        <p className="text-lg text-slate-700 leading-loose border-l-4 border-red-700 pl-6 relative z-10">{desc}</p>
+      </div>
     </header>
   );
 }
 
 function V08() {
   return (
-    <header className="relative w-full text-center flex flex-col items-center py-20">
-      <motion.div animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className="mb-8 text-cyan-500/30">
-        <Orbit className="w-24 h-24" />
-      </motion.div>
-      <h1 className="text-5xl md:text-7xl font-black text-cyan-50 drop-shadow-[0_0_15px_rgba(6,182,212,0.5)] mb-6">{h1Text}</h1>
-      <p className="text-cyan-200/50 max-w-xl">{h2Text}</p>
+    <header className={`${paperBg} w-full border-[10px] border-slate-900 shadow-xl flex flex-col`}>
+      <div className="flex flex-col md:flex-row border-b-[10px] border-slate-900">
+        <div className="md:w-1/2 p-12 bg-red-700 text-[#f4f2ea] flex items-center">
+          <h1 className="text-6xl md:text-7xl font-black tracking-tighter">{h1_top}</h1>
+        </div>
+        <div className="md:w-1/2 p-12 bg-slate-900 text-[#f4f2ea] flex items-center">
+          <h1 className="text-6xl md:text-7xl font-black tracking-widest">{h1_bottom}</h1>
+        </div>
+      </div>
+      <div className="p-10 bg-[#f4f2ea] text-center">
+        <p className="text-xl font-medium text-slate-800 tracking-wider max-w-2xl mx-auto">{desc}</p>
+      </div>
     </header>
   );
 }
 
 function V09() {
   return (
-    <header className="w-full text-center py-20 relative">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-32 bg-gradient-to-b from-red-600 to-transparent" />
-      <h1 className="text-6xl md:text-8xl font-black text-red-600 mt-20 mb-6 drop-shadow-[0_0_30px_rgba(220,38,38,0.4)] tracking-wider">
-        {h1Text}
+    <header className={`${paperBg} w-full p-16 border-y-[8px] border-slate-900 shadow-lg flex justify-end`} style={{ writingMode: 'vertical-rl' as any }}>
+      <h1 className="text-7xl md:text-9xl font-black text-slate-900 tracking-widest mb-12">
+        {h1_bottom}
       </h1>
-      <p className="text-red-200/30 max-w-2xl mx-auto">{h2Text}</p>
+      <div className="border-l-2 border-red-700 pl-8 mb-8">
+        <h2 className="text-3xl font-bold text-red-700 tracking-[0.3em] mb-4">{h1_top}</h2>
+      </div>
+      <p className="text-lg text-slate-700 leading-loose tracking-widest">{desc}</p>
     </header>
   );
 }
 
 function V10() {
   return (
-    <header className="w-full text-center py-20">
-      <h1
-        className="text-6xl md:text-8xl font-black text-white mb-6"
-        style={{ textShadow: "-4px 0 #0ff, 4px 0 #f0f" }}
-      >
-        {h1Text}
-      </h1>
-      <p className="text-slate-400 max-w-xl mx-auto bg-white/5 py-2 px-4 rounded border border-white/10">{h2Text}</p>
+    <header className={`${paperBg} w-full p-16 shadow-sm border border-slate-200`}>
+      <div className="w-full h-[1px] bg-slate-900 mb-2"></div>
+      <div className="w-full h-[3px] bg-slate-900 mb-16"></div>
+      <h2 className="text-xl font-bold text-slate-500 tracking-[0.5em] mb-4 uppercase">{h1_top}</h2>
+      <h1 className="text-6xl md:text-8xl font-black text-slate-900 tracking-tighter mb-12">{h1_bottom}</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 border-t border-slate-300 pt-8">
+        <div className="text-sm font-bold text-slate-400 uppercase tracking-widest">Description //</div>
+        <p className="text-slate-700 leading-loose">{desc}</p>
+      </div>
     </header>
   );
 }
@@ -152,20 +218,17 @@ function V10() {
 const COMPONENTS = [V01, V02, V03, V04, V05, V06, V07, V08, V09, V10];
 
 export default function HeroVersions() {
-  const [selected, setSelected] = useState<number | null>(null);
-
   return (
-    <div className="min-h-screen bg-[#050510] text-white font-sans overflow-x-hidden">
+    <div className="min-h-screen bg-zinc-200 font-serif">
       {/* Top bar */}
-      <div className="sticky top-0 z-50 bg-[#050510]/95 backdrop-blur border-b border-white/10 px-4 py-3 flex items-center justify-between">
-        <span className="text-sm font-black tracking-wider text-purple-400">HERO 版型預覽 — 共 10 款</span>
+      <div className="sticky top-0 z-50 bg-[#2c2c2c] px-6 py-3 flex items-center justify-between">
+        <span className="text-sm font-black tracking-wider text-[#eab308]">HERO 版型預覽 — 復古印刷品系列</span>
         <a href="/" className="text-xs text-white/40 hover:text-white/70 transition">← 返回主站</a>
       </div>
 
-      {/* Instructions */}
-      <div className="bg-gradient-to-r from-purple-900/40 to-pink-900/40 border-b border-white/10 px-6 py-3">
-        <p className="text-sm text-purple-200/80 font-medium text-center">
-          下方 10 種設計皆可預覽。決定後回傳「我選版本 XX」即可套用到正式網站。
+      <div className="bg-[#eab308] border-b-2 border-[#2c2c2c] px-6 py-3">
+        <p className="text-sm text-[#2c2c2c] font-bold text-center">
+          紙質米黃底色 + 襯線體 + 黑灰紅配色。決定後回傳「我選版本 XX」即可套用。
         </p>
       </div>
 
@@ -174,28 +237,18 @@ export default function HeroVersions() {
           const Component = COMPONENTS[idx];
           return (
             <div key={v.id}>
-              {/* Version label */}
               <div className="flex items-center gap-4 mb-4 px-2">
-                <div className="flex items-center gap-3">
-                  <span className="text-lg font-black text-white/90">{v.name}</span>
-                  <span className="text-xs text-white/30 tracking-wider">{v.desc}</span>
-                </div>
+                <span className="text-lg font-black text-slate-800">{v.name}</span>
+                <span className="text-xs text-slate-500 tracking-wider">{v.desc}</span>
               </div>
-
-              {/* Preview card */}
-              <div className="border border-white/10 rounded-2xl overflow-hidden bg-[#050510] relative">
-                {/* Simulated dark background */}
-                <div className="w-full overflow-hidden">
-                  <Component />
-                </div>
-              </div>
+              <Component />
             </div>
           );
         })}
       </div>
 
       <div className="text-center pb-16">
-        <p className="text-xs text-white/20">此為臨時預覽頁，決定後將刪除。路徑：/hero-versions</p>
+        <p className="text-xs text-slate-400">此為臨時預覽頁，決定後將刪除。路徑：/hero-versions</p>
       </div>
     </div>
   );
