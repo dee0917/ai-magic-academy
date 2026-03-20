@@ -865,6 +865,26 @@ export default function MagicAcademyMVP() {
                         已簽署魔法契約，自負施法風險。
                       </span>
                     </label>
+
+                    {/* 大魔導師筆記 */}
+                    {selectedCurse.theory && (
+                      <div className="mt-4" style={{ border: '3px solid var(--ink)', background: 'rgba(26,92,90,0.06)' }}>
+                        <div className="flex items-center gap-2 px-4 py-2"
+                          style={{ background: 'var(--teal)', borderBottom: '3px solid var(--ink)' }}>
+                          <BookOpen className="w-4 h-4" style={{ color: 'var(--mustard)' }} />
+                          <span className="text-xs font-black uppercase tracking-wider"
+                            style={{ fontFamily: 'var(--font-chivo)', color: 'var(--parchment)' }}>
+                            大魔導師筆記
+                          </span>
+                        </div>
+                        <div className="p-4">
+                          <p className="text-xs leading-relaxed italic"
+                            style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.7 }}>
+                            {selectedCurse.theory}
+                          </p>
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                   {/* Mobile terminal preview — inline, not accordion */}
@@ -1058,6 +1078,26 @@ export default function MagicAcademyMVP() {
                       已簽署魔法契約，自負施法風險。
                     </span>
                   </label>
+
+                  {/* 大魔導師筆記 — desktop */}
+                  {selectedCurse.theory && (
+                    <div className="mt-4" style={{ border: '3px solid var(--ink)', background: 'rgba(26,92,90,0.06)' }}>
+                      <div className="flex items-center gap-2 px-4 py-2"
+                        style={{ background: 'var(--teal)', borderBottom: '3px solid var(--ink)' }}>
+                        <BookOpen className="w-4 h-4" style={{ color: 'var(--mustard)' }} />
+                        <span className="text-xs font-black uppercase tracking-wider"
+                          style={{ fontFamily: 'var(--font-chivo)', color: 'var(--parchment)' }}>
+                          大魔導師筆記
+                        </span>
+                      </div>
+                      <div className="p-4">
+                        <p className="text-xs leading-relaxed italic"
+                          style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.7 }}>
+                          {selectedCurse.theory}
+                        </p>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Cast button — desktop */}
