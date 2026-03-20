@@ -743,8 +743,31 @@ export default function MagicAcademyMVP() {
 
                 {/* Scrollable: form + terminal preview all in one */}
                 <div className="flex-1 overflow-y-auto no-scrollbar pb-24">
+                  {/* Spell title + description */}
+                  <div className="px-5 pt-5 pb-3">
+                    <div className="flex items-start gap-3 mb-2">
+                      <div className="p-2 flex-shrink-0" style={{ background: 'var(--mustard)', border: '2px solid var(--ink)' }}>
+                        {selectedCurse.icon}
+                      </div>
+                      <div>
+                        <div className="text-[10px] font-black uppercase tracking-wider mb-1"
+                          style={{ fontFamily: 'var(--font-chivo)', color: getTabColor(selectedCurse.tab) }}>
+                          {selectedCurse.tab}
+                        </div>
+                        <h2 className="text-xl font-black leading-tight"
+                          style={{ fontFamily: 'var(--font-noto-serif-tc)', color: 'var(--ink)' }}>
+                          {selectedCurse.title.replace(/【|】/g, '')}
+                        </h2>
+                      </div>
+                    </div>
+                    <p className="text-sm leading-relaxed mt-2"
+                      style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.65 }}>
+                      {selectedCurse.desc}
+                    </p>
+                  </div>
+
                   {/* Form area */}
-                  <div className="p-5">
+                  <div className="p-5 pt-2">
                     <div style={{ border: '2px dashed var(--ink)', padding: '20px', opacity: 0.9 }}>
                       {/* Level selector */}
                       <div className="mb-5">
@@ -906,6 +929,29 @@ export default function MagicAcademyMVP() {
 
                 {/* Scrollable form */}
                 <div className="flex-1 overflow-y-auto no-scrollbar p-5">
+                  {/* Spell title + description */}
+                  <div className="mb-4">
+                    <div className="flex items-start gap-3 mb-2">
+                      <div className="p-2 flex-shrink-0" style={{ background: 'var(--mustard)', border: '2px solid var(--ink)' }}>
+                        {selectedCurse.icon}
+                      </div>
+                      <div>
+                        <div className="text-[10px] font-black uppercase tracking-wider mb-1"
+                          style={{ fontFamily: 'var(--font-chivo)', color: getTabColor(selectedCurse.tab) }}>
+                          {selectedCurse.tab}
+                        </div>
+                        <h2 className="text-xl font-black leading-tight"
+                          style={{ fontFamily: 'var(--font-noto-serif-tc)', color: 'var(--ink)' }}>
+                          {selectedCurse.title.replace(/【|】/g, '')}
+                        </h2>
+                      </div>
+                    </div>
+                    <p className="text-sm leading-relaxed mt-2"
+                      style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.65 }}>
+                      {selectedCurse.desc}
+                    </p>
+                  </div>
+
                   <div style={{ border: '2px dashed var(--ink)', padding: '20px', opacity: 0.9 }}>
                     {/* Level selector */}
                     <div className="mb-5">
