@@ -244,11 +244,11 @@ export default function MagicAcademyMVP() {
               </h1>
             </div>
 
-            {/* Subtitle in dashed border */}
-            <div style={{ border: '2px dashed var(--ink)', padding: '10px 20px', maxWidth: '500px', margin: '0 auto' }}>
+            {/* Subtitle in mustard stamp box */}
+            <div style={{ background: 'var(--mustard)', border: '4px solid var(--ink)', boxShadow: '6px 6px 0px var(--ink)', padding: '12px 24px', maxWidth: '500px', margin: '0 auto', display: 'inline-block' }}>
               <p
                 className="text-sm md:text-base leading-relaxed"
-                style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.8, margin: 0, lineHeight: 1.75 }}
+                style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', fontWeight: 700, margin: 0, lineHeight: 1.75 }}
               >
                 將複雜的「提示詞」封裝成一鍵釋放的魔法。<br />
                 應付奧客、推掉飯局、自動寫報告，你的無腦求生指南。
