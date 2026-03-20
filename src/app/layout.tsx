@@ -1,25 +1,33 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Noto_Serif_TC } from "next/font/google";
+import { Rye, Chivo, Noto_Serif_TC, Noto_Sans_TC } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const rye = Rye({
+  variable: "--font-rye",
   subsets: ["latin"],
+  weight: "400",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const chivo = Chivo({
+  variable: "--font-chivo",
   subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
 const notoSerifTC = Noto_Serif_TC({
   variable: "--font-noto-serif-tc",
   subsets: ["latin"],
-  weight: ["200", "400", "700", "900"],
+  weight: ["400", "700", "900"],
+});
+
+const notoSansTC = Noto_Sans_TC({
+  variable: "--font-noto-sans-tc",
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
 });
 
 export const viewport: Viewport = {
-  themeColor: "#0f081c",
+  themeColor: "#E8A838",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -27,13 +35,13 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "麻瓜專用 AI 外掛 | 你的無腦求生指南",
-  description: "將複雜的「提示詞」封裝成一鍵釋放的魔法。應付奧客、推掉飯局、自動寫報告，解救所有不擅長 AI 的麻瓜。",
+  title: "麻瓜專用魔法外掛 | 現代魔法書",
+  description: "將複雜的「提示詞」封裝成一鍵釋放的魔法。應付奧客、推掉飯局、自動寫報告，你的無腦求生指南。",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "麻瓜專用 AI 外掛",
+    title: "麻瓜專用魔法外掛",
   },
   icons: {
     apple: "/icon-512x512.png",
@@ -46,23 +54,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="zh-TW">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${notoSerifTC.variable} antialiased overflow-x-hidden`}
+        className={`${rye.variable} ${chivo.variable} ${notoSerifTC.variable} ${notoSansTC.variable} antialiased overflow-x-hidden`}
       >
         {children}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               if ('serviceWorker' in navigator) {
-                // Ensure only one reload per session to prevent loops
                 let refreshing = false;
                 navigator.serviceWorker.addEventListener('controllerchange', () => {
                   if (refreshing) return;
                   refreshing = true;
                   window.location.reload();
                 });
-
                 window.addEventListener('load', function() {
                   navigator.serviceWorker.register('/sw.js').then(registration => {
                     registration.onupdatefound = () => {
@@ -71,8 +77,6 @@ export default function RootLayout({
                         installingWorker.onstatechange = () => {
                           if (installingWorker.state === 'installed') {
                             if (navigator.serviceWorker.controller) {
-                              // New version installed, skipWaiting is handled in sw.js
-                              // controllerchange will trigger the reload
                               console.log('New content available, refreshing...');
                             } else {
                               console.log('Content is cached for offline use.');
@@ -89,7 +93,6 @@ export default function RootLayout({
             `,
           }}
         />
-
       </body>
     </html>
   );

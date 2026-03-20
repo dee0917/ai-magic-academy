@@ -1,18 +1,38 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --parchment: #F4EED8;
+  --ink: #2A2723;
+  --mustard: #E8A838;
+  --teal: #1A5C5A;
+  --dark-red: #8B2626;
+  --border: 4px solid #2A2723;
+  --shadow: 8px 8px 0px #2A2723;
+  --shadow-hover: 12px 12px 0px #2A2723;
+  --shadow-sm: 4px 4px 0px #2A2723;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-serif: var(--font-noto-serif-tc);
+  --color-parchment: var(--parchment);
+  --color-ink: var(--ink);
+  --color-mustard: var(--mustard);
+  --color-teal: var(--teal);
+  --color-darkred: var(--dark-red);
 
-  --animate-gradient-xy: gradient-xy 3s ease infinite;
+  --font-display: var(--font-rye);
+  --font-serif: var(--font-noto-serif-tc);
+  --font-sans: var(--font-chivo);
+  --font-body-zh: var(--font-noto-sans-tc);
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0) rotate(0deg); }
+    15%       { transform: translateX(-5px) rotate(-1deg); }
+    30%       { transform: translateX(5px) rotate(1deg); }
+    45%       { transform: translateX(-4px) rotate(-0.5deg); }
+    60%       { transform: translateX(4px) rotate(0.5deg); }
+    75%       { transform: translateX(-2px); }
+    90%       { transform: translateX(2px); }
+  }
 
   @keyframes gradient-xy {
     0%, 100% {
@@ -26,54 +46,121 @@
   }
 
   @keyframes shimmer {
-    0% { transform: translateX(-100%) skewX(-45deg); }
+    0%   { transform: translateX(-100%) skewX(-45deg); }
     100% { transform: translateX(200%) skewX(-45deg); }
   }
 
   @keyframes progress {
-    0% { width: 0%; }
-    100% {  }
+    0%   { width: 0%; }
+    100% { }
+  }
+
+  @keyframes stamp-in {
+    0%   { transform: scale(1.5) rotate(-8deg); opacity: 0; }
+    60%  { transform: scale(0.92) rotate(2deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
   }
 }
 
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
+/* ─── Base ──────────────────────────────────────── */
 html, body {
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: var(--font-chivo), Arial, Helvetica, sans-serif;
   overflow-x: hidden !important;
-  position: relative;
   width: 100%;
-  
-  touch-action: pan-y; /* 只允許垂直捲動 */
+  position: relative;
+  touch-action: pan-y;
 }
 
-/* 修復 Tab 滾動區域不影響整頁 */
+/* ─── Scrollbars ─────────────────────────────────── */
+.no-scrollbar::-webkit-scrollbar { display: none !important; }
+.no-scrollbar { -ms-overflow-style: none !important; scrollbar-width: none !important; }
+
 .tab-scroll-container {
   -webkit-overflow-scrolling: touch;
-  touch-action: pan-x; /* 允許橫向捲動 */
+  touch-action: pan-x;
 }
 
-.no-scrollbar::-webkit-scrollbar { display: none !important; }
-.no-scrollbar { -ms-overflow-style: none !important; scrollbar-width: none !important; }
-
-html, body {
-  overflow-x: hidden !important;
-  width: 100%;
+/* ─── Brutalist utilities ────────────────────────── */
+.magic-card {
+  border: 4px solid var(--ink);
+  box-shadow: var(--shadow);
+  border-radius: 0;
+  background: var(--parchment);
+  transition: box-shadow 0.12s ease, transform 0.12s ease;
 }
-.no-scrollbar::-webkit-scrollbar { display: none !important; }
-.no-scrollbar { -ms-overflow-style: none !important; scrollbar-width: none !important; }
+.magic-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translate(-2px, -2px);
+}
+
+.magic-btn {
+  border: 3px solid var(--ink);
+  box-shadow: var(--shadow-sm);
+  border-radius: 0;
+  background: var(--mustard);
+  color: var(--ink);
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  transition: box-shadow 0.1s ease, transform 0.1s ease;
+}
+.magic-btn:active,
+.magic-btn:focus-visible {
+  box-shadow: none;
+  transform: translate(4px, 4px);
+  outline: none;
+}
+
+.magic-input {
+  border: 3px solid var(--ink);
+  border-radius: 0;
+  background: #FEFAF0;
+  color: var(--ink);
+  padding: 0.75rem 1rem;
+  font-family: var(--font-noto-sans-tc), Arial, sans-serif;
+  font-size: 0.9rem;
+  box-shadow: inset 2px 2px 0px rgba(42,39,35,0.12);
+  transition: box-shadow 0.1s;
+}
+.magic-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--mustard), inset 2px 2px 0px rgba(42,39,35,0.12);
+}
+
+/* Shake utility */
+.animate-shake {
+  animation: shake 0.55s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+/* Stamp-in animation */
+.animate-stamp {
+  animation: stamp-in 0.35s ease forwards;
+}
+
+/* Striped parchment texture overlay (subtle) */
+.parchment-bg {
+  background-color: var(--parchment);
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 28px,
+      rgba(42,39,35,0.04) 28px,
+      rgba(42,39,35,0.04) 29px
+    );
+}
+
+/* Halftone dot pattern for decorative areas */
+.halftone-bg {
+  background-image: radial-gradient(circle, var(--ink) 1px, transparent 1px);
+  background-size: 10px 10px;
+  opacity: 0.06;
+}
+
+/* Section divider */
+.ink-divider {
+  border: none;
+  border-top: 3px solid var(--ink);
+  margin: 0;
+}

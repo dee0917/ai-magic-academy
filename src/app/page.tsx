@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useMemo } from "react";
-import { 
+import {
   Sparkles, Copy, ExternalLink, ChevronDown, X, Search, Check,
   Brain, Bot, MessageSquare, Lock, Share2, AlertTriangle, ArrowRight, BookOpen,
   ArrowLeft
@@ -9,16 +9,16 @@ import { CURSES } from "./curses_data";
 import { motion, AnimatePresence } from "framer-motion";
 import Fuse from "fuse.js";
 
-// Helper: Highlight variables and remove special format strings in the UI display
+// Helper: Highlight variables in the spell preview
 const HighlightedPrompt = ({ text }: { text: string }) => {
   const parts = text.split(/(\[\[.*?\]\])/g);
   return (
-    <div className="whitespace-pre-wrap font-mono text-sm leading-relaxed text-emerald-400 drop-shadow-[0_0_5px_rgba(52,211,153,0.5)]">
+    <div className="whitespace-pre-wrap text-sm leading-relaxed" style={{ fontFamily: 'var(--font-noto-sans-tc), monospace', color: 'var(--ink)' }}>
       {parts.map((part, i) => {
         if (part.startsWith('[[') && part.endsWith(']]')) {
           const content = part.slice(2, -2);
           return (
-            <span key={i} className="text-yellow-400 font-bold border-b border-yellow-500/30 pb-0.5 mx-0.5 transition-colors">
+            <span key={i} className="font-bold px-1 mx-0.5" style={{ background: 'var(--mustard)', border: '2px solid var(--ink)', color: 'var(--ink)' }}>
               {content}
             </span>
           );
@@ -71,12 +71,11 @@ export default function MagicAcademyMVP() {
     });
   };
 
-
   // Initialize Fuse.js for fuzzy search
   const fuse = useMemo(() => {
     return new Fuse(CURSES, {
       keys: ["title", "desc", "tags", "tab"],
-      threshold: 0.4, // Lower is stricter, 0.4 is a good balance
+      threshold: 0.4,
       ignoreLocation: true,
       useExtendedSearch: true
     });
@@ -103,16 +102,13 @@ export default function MagicAcademyMVP() {
   const scrollToTab = (tabId: string) => {
     const element = document.getElementById(tabId);
     if (element) {
-      const offset = 100; // Account for any fixed headers
+      const offset = 100;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
+      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
     }
   };
-  
+
   // Group curses by tab
   const groupedCurses = useMemo(() => {
     const groups: { [key: string]: any[] } = {};
@@ -149,8 +145,6 @@ export default function MagicAcademyMVP() {
   const handleRiskAcceptAndCopy = () => {
     setAgreedToRisk(true);
     setShowRiskScroll(false);
-    
-    // Perform copy logic directly here
     const autoInputs: any = {}; selectedCurse.fields.forEach((f: any, idx: number) => { const isVisible = spellLevel === "高級" || (spellLevel === "初級" && idx < 2) || (spellLevel === "中級" && idx < 3); autoInputs[f.id] = isVisible ? (inputs[f.id] || "「尚未輸入內容」") : "（由 AI 根據情境自動填充）"; }); const spell = selectedCurse.generate({ ...autoInputs, [selectedCurse.tweak?.id]: inputs[selectedCurse.tweak?.id] || selectedCurse.tweak?.options[0] });
     const cleanSpell = spell.replace(/\[\[/g, '').replace(/\]\]/g, '');
     navigator.clipboard.writeText(cleanSpell).then(() => {
@@ -198,197 +192,298 @@ export default function MagicAcademyMVP() {
       amber: '#f59e0b', emerald: '#10b981', purple: '#a855f7', cyan: '#06b6d4',
       rose: '#f43f5e', neutral: '#737373', sky: '#0ea5e9'
     };
-    return map[colorName] || '#a855f7';
+    return map[colorName] || '#E8A838';
   };
 
   return (
-    <div className="min-h-screen w-full relative bg-[#050510] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/20 via-[#050510] to-[#050510] text-slate-200 font-sans selection:bg-purple-500/30 p-4 md:p-6 flex flex-col items-center">
-      {/* Background Orbs */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="w-[500px] h-[500px] bg-purple-600/10 blur-[120px] rounded-full animate-pulse absolute top-[-10%] left-[-10%]"></div>
-        <div className="w-[500px] h-[500px] bg-indigo-600/10 blur-[120px] rounded-full animate-pulse absolute bottom-[-10%] right-[-10%]" style={{ animationDelay: '2s' }}></div>
-      </div>
+    <div className="min-h-screen w-full parchment-bg" style={{ color: 'var(--ink)' }}>
 
-      <header className="text-center max-w-4xl mt-6 md:mt-16 mb-12 relative z-10 px-4">
-        <div className="inline-block px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-purple-400 mb-4 animate-pulse">
-          Next-Gen AI Solution
-        </div>
-        <h1 className="text-3xl sm:text-4xl md:text-7xl font-serif font-black mb-3 md:mb-6 leading-tight tracking-tighter break-words px-2">
-          <span className="bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/40">
-            {`{麻瓜專用AI外掛}`}
-          </span>
-        </h1>
-        <p className="text-sm md:text-xl text-slate-400 max-w-[90%] md:max-w-2xl mx-auto mb-6 md:mb-10 font-medium leading-relaxed text-center">
-          將複雜的「提示詞」封裝成一鍵釋放的魔法。<br className="hidden md:block" />
-          應付奧客、推掉飯局、自動寫報告，你的無腦求生指南。
-        </p>
+      {/* ── HEADER / MASTHEAD ── */}
+      <header className="w-full pt-8 pb-0 px-4 md:px-8 relative z-10">
+        <div className="max-w-5xl mx-auto">
 
-        <div className="max-w-xl mx-auto w-full relative z-10 mb-8 px-4">
-          <div className="relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/30 to-pink-500/30 rounded-2xl blur opacity-0 group-focus-within:opacity-100 transition duration-500"></div>
-            <div className="relative flex items-center">
-              <div className="absolute left-4 pointer-events-none">
-                <Search className="w-4 h-4 md:w-5 md:h-5 text-purple-400 opacity-50 group-focus-within:opacity-100 transition-opacity" />
-              </div>
-              <input 
+          {/* Top masthead bar */}
+          <div className="flex items-center justify-between border-b-4 pb-2 mb-4" style={{ borderColor: 'var(--ink)' }}>
+            <span className="text-[10px] font-black uppercase tracking-[0.3em]" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--teal)' }}>
+              Vol. I — 現代魔法法典
+            </span>
+            <span className="text-[10px] font-black uppercase tracking-[0.2em]" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.5 }}>
+              Est. 2025
+            </span>
+          </div>
+
+          {/* Main title */}
+          <div className="text-center border-b-4 pb-6 mb-6" style={{ borderColor: 'var(--ink)' }}>
+            <h1
+              className="text-4xl sm:text-5xl md:text-7xl leading-tight mb-3 tracking-tight"
+              style={{ fontFamily: 'var(--font-rye)', color: 'var(--ink)' }}
+            >
+              麻瓜專用<br className="md:hidden" />魔法外掛
+            </h1>
+            <p
+              className="text-sm md:text-base max-w-xl mx-auto leading-relaxed mt-4"
+              style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.75 }}
+            >
+              將複雜的「提示詞」封裝成一鍵釋放的魔法。<br />
+              應付奧客、推掉飯局、自動寫報告，你的無腦求生指南。
+            </p>
+          </div>
+
+          {/* Search bar */}
+          <div className="max-w-xl mx-auto mb-6">
+            <div className="relative flex items-center" style={{ border: '3px solid var(--ink)', background: '#FEFAF0', boxShadow: '4px 4px 0px var(--ink)' }}>
+              <Search className="absolute left-4 w-4 h-4" style={{ color: 'var(--ink)', opacity: 0.5 }} />
+              <input
                 type="text"
                 placeholder="搜尋全站魔法..."
-                className="w-full bg-black/60 backdrop-blur-2xl border border-white/10 rounded-2xl py-3.5 md:py-4 pl-11 md:pl-12 pr-11 md:pr-12 text-sm md:text-base text-white placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-purple-500/40 focus:border-purple-400/50 transition-all shadow-2xl"
+                className="w-full py-3 pl-11 pr-10 text-sm bg-transparent focus:outline-none"
+                style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)' }}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
               {searchQuery && (
-                <button onClick={() => setSearchQuery("")} className="absolute right-4 text-slate-500 hover:text-white p-1 rounded-full hover:bg-white/10">
+                <button onClick={() => setSearchQuery("")} className="absolute right-3 p-1" style={{ color: 'var(--ink)', opacity: 0.5 }}>
                   <X className="w-4 h-4" />
                 </button>
               )}
             </div>
           </div>
-        </div>
 
-        <div className="flex flex-nowrap md:flex-wrap overflow-x-auto no-scrollbar justify-start md:justify-center gap-2 relative z-10 px-4 md:px-0 whitespace-nowrap tab-scroll-container">
-          <button
-            onClick={() => { setSearchQuery(""); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-            className="flex-shrink-0 px-4 py-2 rounded-full bg-purple-500/20 border border-purple-500/30 text-xs font-bold text-purple-300 transition-all active:scale-95"
-          >
-            全部
-          </button>
-          {TABS.map(tab => (
+          {/* Tab navigation */}
+          <div className="flex flex-nowrap overflow-x-auto no-scrollbar gap-2 pb-6 tab-scroll-container justify-start md:justify-center">
             <button
-              key={tab}
-              onClick={() => { setSearchQuery(""); setTimeout(() => scrollToTab(tab), 100); }}
-              className="flex-shrink-0 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-bold text-slate-400 hover:bg-purple-500/20 hover:text-purple-300 hover:border-purple-500/30 transition-all active:scale-95"
+              onClick={() => { setSearchQuery(""); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+              className="flex-shrink-0 px-4 py-2 text-xs font-black uppercase tracking-wide transition-all active:translate-x-1 active:translate-y-1"
+              style={{
+                fontFamily: 'var(--font-chivo)',
+                border: '3px solid var(--ink)',
+                boxShadow: '3px 3px 0px var(--ink)',
+                background: 'var(--mustard)',
+                color: 'var(--ink)',
+              }}
             >
-              {tab}
+              全部
             </button>
-          ))}
+            {TABS.map(tab => (
+              <button
+                key={tab}
+                onClick={() => { setSearchQuery(""); setTimeout(() => scrollToTab(tab), 100); }}
+                className="flex-shrink-0 px-4 py-2 text-xs font-black uppercase tracking-wide transition-all active:translate-x-1 active:translate-y-1 hover:bg-[var(--mustard)]"
+                style={{
+                  fontFamily: 'var(--font-chivo)',
+                  border: '3px solid var(--ink)',
+                  boxShadow: '3px 3px 0px var(--ink)',
+                  background: 'var(--parchment)',
+                  color: 'var(--ink)',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
         </div>
       </header>
 
-      {/* Free Trial Section */}
-      <section className="w-full max-w-4xl mx-auto mb-16 relative z-10 px-4">
+      {/* ── FREE TRIAL SECTION ── */}
+      <section className="w-full max-w-4xl mx-auto mb-16 px-4 relative z-10">
         <div className="text-center mb-8">
-          <h2 className="text-xl md:text-2xl font-black text-white mb-2 italic">先施放一道，再決定要不要留下</h2>
-          <p className="text-sm text-slate-500 font-bold">免費咒語・無需登入・直接複製使用</p>
+          <div style={{ border: '4px solid var(--ink)', boxShadow: 'var(--shadow)', background: 'var(--teal)', display: 'inline-block', padding: '6px 20px', marginBottom: '12px' }}>
+            <span className="font-black text-xs uppercase tracking-[0.3em]" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--parchment)' }}>
+              免費試咒 · 無需登入
+            </span>
+          </div>
+          <h2
+            className="text-xl md:text-2xl font-black"
+            style={{ fontFamily: 'var(--font-noto-serif-tc)', color: 'var(--ink)', fontWeight: 900 }}
+          >
+            先施放一道，再決定要不要留下
+          </h2>
         </div>
 
+        {/* Trial selector buttons */}
         <div className="flex flex-wrap justify-center gap-3 mb-6">
           {TRIAL_DATA.map((item, idx) => (
             <button
               key={idx}
               onClick={() => setActiveTrial(idx)}
-              className={`px-4 py-2 rounded-full border transition-all text-sm font-bold ${activeTrial === idx ? 'bg-purple-600 border-purple-400 text-white shadow-[0_0_15px_rgba(168,85,247,0.5)]' : 'bg-white/5 border-white/10 text-slate-400 hover:border-purple-500/50'}`}
+              className="px-4 py-2 text-sm font-black transition-all active:translate-x-1 active:translate-y-1"
+              style={{
+                fontFamily: 'var(--font-noto-sans-tc)',
+                border: '3px solid var(--ink)',
+                boxShadow: activeTrial === idx ? 'none' : '4px 4px 0px var(--ink)',
+                background: activeTrial === idx ? 'var(--mustard)' : 'var(--parchment)',
+                color: 'var(--ink)',
+                transform: activeTrial === idx ? 'translate(4px, 4px)' : undefined,
+              }}
             >
               {item.emoji} {item.label}
             </button>
           ))}
         </div>
 
-                <motion.div 
+        {/* Trial prompt box */}
+        <motion.div
           key={activeTrial}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="rounded-3xl bg-[#0a0a15] border border-purple-500/30 shadow-[0_0_50px_rgba(168,85,247,0.15)] overflow-hidden"
+          style={{ border: '4px solid var(--ink)', boxShadow: 'var(--shadow)', background: '#FEFAF0' }}
         >
-          {/* 上方：提示詞文字區 */}
           <div className="p-6 md:p-8 pb-4">
-            <div className="font-mono text-sm md:text-base text-emerald-300/90 leading-relaxed whitespace-pre-line">
+            <div
+              className="text-sm md:text-base leading-relaxed whitespace-pre-line"
+              style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)' }}
+            >
               {TRIAL_DATA[activeTrial].prompt}
             </div>
           </div>
 
-          {/* 分隔線 */}
-          <div className="border-t border-white/10 mx-6 md:mx-8" />
+          <div className="border-t-4 mx-0" style={{ borderColor: 'var(--ink)' }} />
 
-          {/* 下方：操作列 */}
-          <div className="flex items-center justify-between px-6 md:px-8 py-4 bg-white/[0.02]">
-            <span className="text-xs text-slate-500 font-medium">
+          <div className="flex items-center justify-between px-6 md:px-8 py-4" style={{ background: 'rgba(42,39,35,0.04)' }}>
+            <span className="text-xs font-bold" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.6 }}>
               點擊右側按鈕即可複製
             </span>
-            <button 
+            <button
               onClick={() => handleTrialCopy(TRIAL_DATA[activeTrial].prompt)}
-              className={`px-5 py-2 rounded-full text-sm font-bold transition-all flex items-center gap-2 ${isTrialCopied ? 'bg-green-600 text-white shadow-[0_0_15px_rgba(22,163,74,0.4)]' : 'bg-purple-600 text-white hover:bg-purple-500 shadow-[0_0_15px_rgba(168,85,247,0.4)]'}`}
+              className="px-5 py-2 text-sm font-black flex items-center gap-2 transition-all active:translate-x-1 active:translate-y-1"
+              style={{
+                fontFamily: 'var(--font-chivo)',
+                border: '3px solid var(--ink)',
+                boxShadow: isTrialCopied ? 'none' : '4px 4px 0px var(--ink)',
+                background: isTrialCopied ? '#2D6A4F' : 'var(--mustard)',
+                color: isTrialCopied ? '#FEFAF0' : 'var(--ink)',
+                transform: isTrialCopied ? 'translate(4px, 4px)' : undefined,
+              }}
             >
-              {isTrialCopied ? <><Check className="w-4 h-4" /> 已複製</> : <><Copy className="w-4 h-4" /> 複製咒語</>}
+              {isTrialCopied
+                ? <><Check className="w-4 h-4" /> 已複製</>
+                : <><Copy className="w-4 h-4" /> 複製咒語</>
+              }
             </button>
           </div>
         </motion.div>
 
         <div className="mt-8 text-center">
-          <button 
+          <button
             onClick={() => document.getElementById('職場求生')?.scrollIntoView({ behavior: 'smooth' })}
-            className="text-sm font-black text-purple-400 hover:text-purple-300 transition-colors flex items-center justify-center gap-2 mx-auto"
+            className="text-sm font-black flex items-center justify-center gap-2 mx-auto transition-all hover:gap-4"
+            style={{ fontFamily: 'var(--font-chivo)', color: 'var(--teal)' }}
           >
             還有 {CURSES.length} 道進階咒語等你解鎖 <ArrowRight className="w-4 h-4" />
           </button>
         </div>
       </section>
 
-
-      <main className="w-full max-w-7xl relative z-10 pb-20">
+      {/* ── MAIN LIBRARY ── */}
+      <main className="w-full max-w-7xl mx-auto relative z-10 pb-20 px-0">
         {TABS.map(tab => {
           const tabCurses = groupedCurses[tab];
           if (searchQuery && tabCurses.length === 0) return null;
 
           return (
             <section key={tab} id={tab} className="mb-12 md:mb-16 last:mb-0 scroll-mt-32">
-              <div className="flex items-center justify-between px-4 mb-6">
-                <div className="flex items-center gap-3">
-                  <div className="w-1.5 h-8 bg-purple-600 rounded-full shadow-[0_0_15px_rgba(168,85,247,0.8)]"></div>
-                  <h2 className="text-2xl md:text-3xl font-serif font-black tracking-tight text-white italic">{tab}</h2>
+              {/* Section header */}
+              <div className="flex items-center gap-0 px-4 mb-6">
+                <div
+                  className="px-5 py-3"
+                  style={{
+                    fontFamily: 'var(--font-noto-serif-tc)',
+                    fontWeight: 900,
+                    fontSize: '1.3rem',
+                    color: 'var(--parchment)',
+                    background: 'var(--ink)',
+                    border: '4px solid var(--ink)',
+                  }}
+                >
+                  {tab}
                 </div>
-                <div className="flex items-center gap-2 text-purple-400/60 text-[10px] font-black uppercase tracking-[0.2em] animate-pulse">
-                  Swipe Magic <ArrowRight className="w-3 h-3" />
+                <div
+                  className="flex-1 h-4"
+                  style={{ borderTop: '4px solid var(--ink)', borderBottom: '4px solid var(--ink)', background: 'var(--mustard)', opacity: 0.5 }}
+                />
+                <div className="flex items-center gap-2 px-4 text-[10px] font-black uppercase tracking-[0.2em]" style={{ color: 'var(--ink)', opacity: 0.4, fontFamily: 'var(--font-chivo)' }}>
+                  Scroll <ArrowRight className="w-3 h-3" />
                 </div>
               </div>
 
-              <div className="relative group/scroll">
-                <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-[#050510] to-transparent z-20 pointer-events-none opacity-100 transition-opacity flex items-center justify-end pr-2">
-                  <motion.div animate={{ x: [0, 5, 0] }} transition={{ repeat: Infinity, duration: 1.5 }} className="w-8 h-8 rounded-full bg-purple-600/20 border border-purple-500/30 flex items-center justify-center backdrop-blur-md md:hidden">
-                    <ArrowRight className="w-4 h-4 text-purple-400" />
-                  </motion.div>
-                </div>
+              {/* Horizontal card row */}
+              <div className="relative">
+                <div className="absolute right-0 top-0 bottom-0 w-16 pointer-events-none z-20" style={{ background: 'linear-gradient(to left, var(--parchment), transparent)' }} />
 
-                <div className="flex overflow-x-auto gap-4 md:gap-6 px-4 pb-8 no-scrollbar snap-x snap-mandatory scroll-smooth w-full">
+                <div className="flex overflow-x-auto gap-5 px-4 pb-8 no-scrollbar snap-x snap-mandatory scroll-smooth tab-scroll-container">
                   {tabCurses.map((curse: any) => (
                     <motion.button
                       layoutId={`card-${curse.id}`}
                       key={curse.id}
                       onClick={() => handleCardClick(curse)}
-                      style={{ '--card-color': getColorHex(curse.color) } as React.CSSProperties}
-                      className="flex-shrink-0 w-[280px] md:w-[350px] snap-start group/card relative text-left p-6 rounded-3xl bg-gradient-to-br from-white/[0.05] to-transparent backdrop-blur-xl border border-white/10 border-t-2 border-t-[var(--card-color)] shadow-2xl hover:-translate-y-2 transition-all duration-300 overflow-hidden"
+                      className="magic-card flex-shrink-0 w-[260px] md:w-[320px] snap-start text-left p-5 flex flex-col"
+                      style={{ minHeight: '280px' }}
                     >
-                      <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-pink-500 blur opacity-0 group-hover/card:opacity-10 transition duration-500"></div>
-                      <div className="flex justify-between items-start mb-6">
-                        <div className="p-3 bg-black/40 rounded-2xl ring-1 ring-white/10 shadow-xl group-hover/card:scale-110 transition-transform" style={{ filter: `drop-shadow(0 0 12px ${getColorHex(curse.color)}80)` }}>
+                      {/* Card top: icon + badge */}
+                      <div className="flex justify-between items-start mb-5">
+                        <div
+                          className="p-3 text-2xl"
+                          style={{ border: '3px solid var(--ink)', background: 'var(--mustard)' }}
+                        >
                           {curse.icon}
                         </div>
                         {curse.isPro && !isLoggedIn ? (
-                          <div className="flex items-center gap-1 text-[10px] font-black uppercase tracking-wider text-amber-400 bg-amber-500/10 px-2 py-1 rounded-md border border-amber-500/20 shadow-[0_0_10px_rgba(245,158,11,0.2)]">
+                          <div
+                            className="flex items-center gap-1 text-[10px] font-black uppercase tracking-wider px-2 py-1"
+                            style={{ border: '2px solid var(--dark-red)', background: 'var(--dark-red)', color: 'var(--parchment)', fontFamily: 'var(--font-chivo)' }}
+                          >
                             <Lock className="w-3 h-3" /> PRO
                           </div>
                         ) : (
-                          <div className="text-[10px] font-black uppercase tracking-wider text-purple-300 bg-purple-500/10 px-2 py-1 rounded-md border border-purple-500/20">
+                          <div
+                            className="text-[10px] font-black uppercase tracking-wider px-2 py-1"
+                            style={{ border: '2px solid var(--teal)', color: 'var(--teal)', fontFamily: 'var(--font-chivo)' }}
+                          >
                             {curse.outputFormat?.split(' ')[0] || 'TEXT'}
                           </div>
                         )}
                       </div>
-                      <h3 className="text-xl md:text-2xl font-serif font-bold text-white mb-2 group-hover/card:text-purple-300 transition-colors line-clamp-1">
+
+                      {/* Title */}
+                      <h3
+                        className="text-lg md:text-xl mb-2 leading-tight line-clamp-1"
+                        style={{ fontFamily: 'var(--font-rye)', color: 'var(--ink)' }}
+                      >
                         {curse.title.replace(/【|】/g, '')}
                       </h3>
-                      <p className="text-sm text-slate-400 leading-relaxed line-clamp-3 mb-6 min-h-[4.5rem]">{curse.desc}</p>
-                      <div className="flex flex-wrap gap-2 mb-6">
+
+                      {/* Desc */}
+                      <p
+                        className="text-sm leading-relaxed line-clamp-3 mb-4 flex-1"
+                        style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.75 }}
+                      >
+                        {curse.desc}
+                      </p>
+
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-2 mb-4">
                         {(curse.tags || []).slice(0, 3).map((tag: string) => (
-                          <span key={tag} className="text-[10px] font-bold text-slate-500 bg-white/5 px-2 py-0.5 rounded-lg border border-white/5">#{tag}</span>
+                          <span
+                            key={tag}
+                            className="text-[10px] font-bold px-2 py-0.5"
+                            style={{ border: '2px solid var(--ink)', fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.6 }}
+                          >
+                            #{tag}
+                          </span>
                         ))}
                       </div>
-                      <div className="pt-4 border-t border-white/5 flex items-center justify-between text-purple-400 group-hover/card:text-pink-400 transition-colors">
-                        <span className="text-[10px] font-black uppercase tracking-tighter">立即解構咒語</span>
-                        <ArrowRight className="w-4 h-4" />
+
+                      {/* Footer */}
+                      <div className="flex items-center justify-between pt-3" style={{ borderTop: '2px solid var(--ink)' }}>
+                        <span className="text-[10px] font-black uppercase tracking-tight" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--teal)' }}>
+                          立即解構咒語
+                        </span>
+                        <ArrowRight className="w-4 h-4" style={{ color: 'var(--ink)' }} />
                       </div>
                     </motion.button>
                   ))}
-                  <div className="flex-shrink-0 w-8 md:w-20"></div>
+                  <div className="flex-shrink-0 w-8 md:w-20" />
                 </div>
               </div>
             </section>
@@ -396,118 +491,342 @@ export default function MagicAcademyMVP() {
         })}
       </main>
 
+      {/* ── SPELL DETAIL MODAL ── */}
       <AnimatePresence>
-      {selectedCurse && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 lg:p-10">
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-black/80 backdrop-blur-md" onClick={() => setSelectedCurse(null)}></motion.div>
-          <motion.div layoutId={`card-${selectedCurse.id}`} className="w-full max-w-4xl bg-[#0a0a15] bg-gradient-to-br from-white/[0.08] to-transparent border border-purple-500/30 rounded-3xl backdrop-blur-2xl relative shadow-[0_40px_100px_rgba(0,0,0,0.8)] flex flex-col max-h-[90vh] overflow-hidden z-10">
-            <div className="flex-1 overflow-y-auto p-6 md:p-8 custom-scrollbar">
-              <div className="flex justify-end gap-3 mb-6">
-                <button onClick={handleShare} className="p-2.5 rounded-full bg-white/5 hover:bg-white/10 text-slate-400 hover:text-purple-400 transition-all border border-white/10 shadow-lg"><Share2 className="w-5 h-5" /></button>
-                <button onClick={() => setSelectedCurse(null)} className="p-2.5 rounded-full bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-all border border-white/10 shadow-lg"><X className="w-5 h-5" /></button>
-              </div>
-              <div className="flex flex-col md:flex-row items-center md:items-start gap-6 mb-10 border-b border-white/10 pb-10">
-                <div className="flex-shrink-0 p-5 bg-black/40 rounded-2xl ring-1 ring-white/10 shadow-2xl" style={{ filter: `drop-shadow(0 0 15px ${getColorHex(selectedCurse.color)}60)` }}>{selectedCurse.icon}</div>
-                <div className="flex-grow text-center md:text-left">
-                  <span className="text-[10px] font-black uppercase tracking-[0.15em] text-purple-400 bg-purple-500/10 px-3 py-1 rounded-lg border border-purple-500/20 mb-4 inline-block">{selectedCurse.tab}</span>
-                  <h2 className="text-3xl md:text-4xl font-serif font-black text-white tracking-tight mb-3">{selectedCurse.title.replace(/|/g, '')}</h2>
-                  <p className="text-sm md:text-base text-slate-400 leading-relaxed max-w-2xl">{selectedCurse.desc}</p>
-                </div>
-              </div>
-              <div className="grid md:grid-cols-2 gap-8 mb-10">
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between mb-6"><h3 className="text-lg font-bold text-purple-300 flex items-center gap-2"><Sparkles className="w-5 h-5" /> 注入魔力</h3><div className="flex bg-black/40 p-1.5 rounded-2xl border border-white/20 shadow-inner">{['初級', '中級', '高級'].map((l) => (<button key={l} type="button" onClick={() => setSpellLevel(l as any)} className={'px-5 py-2.5 rounded-xl text-xs font-black transition-all ' + (spellLevel === l ? 'bg-purple-600 text-white shadow-lg' : 'text-slate-500 hover:text-slate-300')}>{l}</button>))}</div></div>
-                  {selectedCurse.fields.filter((_f: any, idx: number) => (spellLevel === '高級' || (spellLevel === '初級' && idx < 2) || (spellLevel === '中級' && idx < 3))).map((f: any) => (
-                    <div key={f.id}><label className="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2">{f.label}</label>
-                      <input type="text" placeholder={f.placeholder} className="w-full bg-black/40 border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-purple-400 transition-all shadow-inner" onChange={(e) => setInputs({ ...inputs, [f.id]: e.target.value })} />
+        {selectedCurse && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 md:p-6">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0"
+              style={{ background: 'rgba(42,39,35,0.85)' }}
+              onClick={() => setSelectedCurse(null)}
+            />
+
+            {/* Modal panel */}
+            <motion.div
+              layoutId={`card-${selectedCurse.id}`}
+              className="w-full max-w-4xl relative z-10 flex flex-col"
+              style={{
+                border: '4px solid var(--ink)',
+                boxShadow: '12px 12px 0px var(--ink)',
+                background: 'var(--parchment)',
+                maxHeight: '92vh',
+                overflow: 'hidden',
+              }}
+            >
+              {/* Modal layout: left teal panel + right parchment panel */}
+              <div className="flex flex-col md:flex-row flex-1 min-h-0">
+
+                {/* LEFT PANEL — teal */}
+                <div
+                  className="md:w-[38%] flex-shrink-0 p-6 md:p-8 flex flex-col gap-6"
+                  style={{ background: 'var(--teal)', borderRight: '4px solid var(--ink)' }}
+                >
+                  {/* Top actions */}
+                  <div className="flex justify-between items-center">
+                    <button
+                      onClick={() => setSelectedCurse(null)}
+                      className="flex items-center gap-2 text-xs font-black uppercase"
+                      style={{ fontFamily: 'var(--font-chivo)', color: 'var(--parchment)', opacity: 0.8 }}
+                    >
+                      <ArrowLeft className="w-4 h-4" /> 返回
+                    </button>
+                    <button
+                      onClick={handleShare}
+                      className="p-2"
+                      style={{ border: '2px solid var(--parchment)', color: 'var(--parchment)' }}
+                    >
+                      <Share2 className="w-4 h-4" />
+                    </button>
+                  </div>
+
+                  {/* Spell icon */}
+                  <div
+                    className="text-4xl p-5 self-start"
+                    style={{ border: '4px solid var(--parchment)', background: 'rgba(244,238,216,0.15)', boxShadow: '4px 4px 0px rgba(244,238,216,0.3)' }}
+                  >
+                    {selectedCurse.icon}
+                  </div>
+
+                  {/* Category badge */}
+                  <div>
+                    <div
+                      className="inline-block text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1 mb-3"
+                      style={{ fontFamily: 'var(--font-chivo)', border: '2px solid var(--parchment)', color: 'var(--parchment)' }}
+                    >
+                      {selectedCurse.tab}
                     </div>
-                  ))}
-                  {selectedCurse.tweak && (
-                    <div className="pt-6 border-t border-white/10">
-                      <label className="block text-xs font-black uppercase tracking-widest text-purple-300 mb-3">{selectedCurse.tweak.label}</label>
-                      
-                      {/* Desktop View: Original Grid */}
-                      <div className="hidden md:flex flex-wrap gap-2 p-1.5 bg-black/40 rounded-2xl border border-white/10">
-                        {selectedCurse.tweak.options.map((opt: string) => (
-                          <button key={opt.split('：')[0]} className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex-1 ${ (inputs[selectedCurse.tweak.id] || selectedCurse.tweak.options[0]) === opt ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/30' : 'text-slate-400 hover:text-white'}`} onClick={() => setInputs({ ...inputs, [selectedCurse.tweak.id]: opt })}>{opt.split(' ')[0]}</button>
+                    <h2
+                      className="text-2xl md:text-3xl leading-tight mb-3"
+                      style={{ fontFamily: 'var(--font-rye)', color: 'var(--parchment)' }}
+                    >
+                      {selectedCurse.title.replace(/|/g, '')}
+                    </h2>
+                    <p
+                      className="text-sm leading-relaxed"
+                      style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--parchment)', opacity: 0.85 }}
+                    >
+                      {selectedCurse.desc}
+                    </p>
+                  </div>
+
+                  {/* Master's notes (collapsible) */}
+                  <details className="group cursor-pointer mt-auto" style={{ borderTop: '2px solid rgba(244,238,216,0.3)', paddingTop: '1rem' }}>
+                    <summary
+                      className="flex items-center gap-2 text-sm font-black select-none list-none"
+                      style={{ fontFamily: 'var(--font-noto-serif-tc)', color: 'var(--parchment)', fontWeight: 700 }}
+                    >
+                      <BookOpen className="w-4 h-4 flex-shrink-0" style={{ color: 'var(--mustard)' }} />
+                      大魔導師筆記
+                    </summary>
+                    <div
+                      className="mt-3 text-xs leading-relaxed"
+                      style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--parchment)', opacity: 0.8, fontStyle: 'italic' }}
+                    >
+                      {selectedCurse.theory}
+                    </div>
+                  </details>
+                </div>
+
+                {/* RIGHT PANEL — parchment, scrollable */}
+                <div className="flex-1 flex flex-col min-h-0">
+                  <div className="flex-1 overflow-y-auto p-5 md:p-7 no-scrollbar">
+
+                    {/* Spell level selector */}
+                    <div className="flex items-center justify-between mb-6">
+                      <h3
+                        className="text-base font-black flex items-center gap-2"
+                        style={{ fontFamily: 'var(--font-noto-serif-tc)', color: 'var(--ink)', fontWeight: 900 }}
+                      >
+                        <Sparkles className="w-4 h-4" style={{ color: 'var(--mustard)' }} />
+                        注入魔力
+                      </h3>
+                      <div className="flex gap-0" style={{ border: '3px solid var(--ink)' }}>
+                        {['初級', '中級', '高級'].map((l, i) => (
+                          <button
+                            key={l}
+                            type="button"
+                            onClick={() => setSpellLevel(l as any)}
+                            className="px-4 py-2 text-xs font-black uppercase transition-all"
+                            style={{
+                              fontFamily: 'var(--font-chivo)',
+                              background: spellLevel === l ? 'var(--ink)' : 'transparent',
+                              color: spellLevel === l ? 'var(--parchment)' : 'var(--ink)',
+                              borderLeft: i > 0 ? '3px solid var(--ink)' : 'none',
+                            }}
+                          >
+                            {l}
+                          </button>
                         ))}
                       </div>
-
-                      {/* Mobile View: Bottom Sheet Trigger */}
-                      <button 
-                        onClick={() => setShowTweakSheet(true)}
-                        className="md:hidden w-full flex items-center justify-between p-4 bg-purple-500/10 border border-purple-500/30 rounded-xl text-sm font-bold text-purple-300"
-                      >
-                        <span>{(inputs[selectedCurse.tweak.id] || selectedCurse.tweak.options[0]).split('：')[0]}</span>
-                        <ChevronDown className="w-4 h-4" />
-                      </button>
                     </div>
-                  )}
-                </div>
-                <div className="flex flex-col h-full space-y-4">
-                  <div className="flex-grow bg-[#0a0a15] rounded-xl p-5 border-l-4 border-l-emerald-500 text-emerald-400 font-mono shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] overflow-y-auto min-h-[350px]">
-                    <div className="flex items-center gap-2 mb-4 text-[10px] text-emerald-500/50 uppercase tracking-[0.2em]"><div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>咒語預覽終端機</div>
-                    {(() => { const baseInputs: any = {}; selectedCurse.fields.forEach((f: any, idx: number) => { const isVisible = spellLevel === "高級" || (spellLevel === "初級" && idx < 2) || (spellLevel === "中級" && idx < 3); baseInputs[f.id] = isVisible ? (inputs[f.id] || "「尚未輸入內容」") : "（由 AI 根據情境自動填充）"; }); const finalInputs = { ...baseInputs, [selectedCurse.tweak?.id]: (inputs[selectedCurse.tweak?.id] || selectedCurse.tweak?.options[0]) }; return <HighlightedPrompt text={selectedCurse.generate(finalInputs)} />; })()}
+
+                    {/* Input fields */}
+                    <div className="space-y-4 mb-6">
+                      {selectedCurse.fields
+                        .filter((_f: any, idx: number) =>
+                          spellLevel === '高級' ||
+                          (spellLevel === '初級' && idx < 2) ||
+                          (spellLevel === '中級' && idx < 3)
+                        )
+                        .map((f: any) => (
+                          <div key={f.id}>
+                            <label
+                              className="block text-[11px] font-black uppercase tracking-widest mb-2"
+                              style={{ fontFamily: 'var(--font-chivo)', color: 'var(--teal)' }}
+                            >
+                              {f.label}
+                            </label>
+                            <input
+                              type="text"
+                              placeholder={f.placeholder}
+                              className="magic-input w-full"
+                              onChange={(e) => setInputs({ ...inputs, [f.id]: e.target.value })}
+                            />
+                          </div>
+                        ))}
+                    </div>
+
+                    {/* Tweak selector */}
+                    {selectedCurse.tweak && (
+                      <div className="mb-6" style={{ borderTop: '3px solid var(--ink)', paddingTop: '1.25rem' }}>
+                        <label
+                          className="block text-[11px] font-black uppercase tracking-widest mb-3"
+                          style={{ fontFamily: 'var(--font-chivo)', color: 'var(--teal)' }}
+                        >
+                          {selectedCurse.tweak.label}
+                        </label>
+
+                        {/* Desktop: inline grid */}
+                        <div className="hidden md:flex flex-wrap gap-2">
+                          {selectedCurse.tweak.options.map((opt: string) => (
+                            <button
+                              key={opt.split('：')[0]}
+                              className="px-4 py-2 text-xs font-bold flex-1 transition-all active:translate-x-0.5 active:translate-y-0.5"
+                              style={{
+                                fontFamily: 'var(--font-chivo)',
+                                border: '3px solid var(--ink)',
+                                boxShadow: (inputs[selectedCurse.tweak.id] || selectedCurse.tweak.options[0]) === opt ? 'none' : '3px 3px 0px var(--ink)',
+                                background: (inputs[selectedCurse.tweak.id] || selectedCurse.tweak.options[0]) === opt ? 'var(--mustard)' : 'var(--parchment)',
+                                color: 'var(--ink)',
+                                transform: (inputs[selectedCurse.tweak.id] || selectedCurse.tweak.options[0]) === opt ? 'translate(3px,3px)' : undefined,
+                              }}
+                              onClick={() => setInputs({ ...inputs, [selectedCurse.tweak.id]: opt })}
+                            >
+                              {opt.split(' ')[0]}
+                            </button>
+                          ))}
+                        </div>
+
+                        {/* Mobile: bottom sheet trigger */}
+                        <button
+                          onClick={() => setShowTweakSheet(true)}
+                          className="md:hidden w-full flex items-center justify-between p-4 text-sm font-bold"
+                          style={{
+                            border: '3px solid var(--ink)',
+                            boxShadow: '4px 4px 0px var(--ink)',
+                            fontFamily: 'var(--font-chivo)',
+                            color: 'var(--ink)',
+                            background: 'var(--parchment)',
+                          }}
+                        >
+                          <span>{(inputs[selectedCurse.tweak.id] || selectedCurse.tweak.options[0]).split('：')[0]}</span>
+                          <ChevronDown className="w-4 h-4" />
+                        </button>
+                      </div>
+                    )}
+
+                    {/* Spell preview */}
+                    <div
+                      className="p-5 mb-4"
+                      style={{ border: '3px solid var(--ink)', background: '#FEFAF0', boxShadow: 'inset 2px 2px 0px rgba(42,39,35,0.1)' }}
+                    >
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: 'var(--teal)' }} />
+                        <span className="text-[10px] font-black uppercase tracking-[0.2em]" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--teal)' }}>
+                          咒語預覽
+                        </span>
+                      </div>
+                      {(() => {
+                        const baseInputs: any = {};
+                        selectedCurse.fields.forEach((f: any, idx: number) => {
+                          const isVisible = spellLevel === "高級" || (spellLevel === "初級" && idx < 2) || (spellLevel === "中級" && idx < 3);
+                          baseInputs[f.id] = isVisible ? (inputs[f.id] || "「尚未輸入內容」") : "（由 AI 根據情境自動填充）";
+                        });
+                        const finalInputs = { ...baseInputs, [selectedCurse.tweak?.id]: (inputs[selectedCurse.tweak?.id] || selectedCurse.tweak?.options[0]) };
+                        return <HighlightedPrompt text={selectedCurse.generate(finalInputs)} />;
+                      })()}
+                    </div>
+
+                    {/* Risk agreement checkbox */}
+                    <label className="flex items-start gap-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        className="mt-1 w-4 h-4 accent-[var(--mustard)]"
+                        checked={agreedToRisk}
+                        onChange={(e) => setAgreedToRisk(e.target.checked)}
+                        style={{ border: '2px solid var(--ink)' }}
+                      />
+                      <span
+                        className="text-xs italic"
+                        style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.6 }}
+                      >
+                        已簽署魔法契約，自負施法風險。
+                      </span>
+                    </label>
                   </div>
-                  <label className="flex items-start gap-3 mb-4 cursor-pointer group">
-                    <input type="checkbox" className="mt-1" checked={agreedToRisk} onChange={(e) => setAgreedToRisk(e.target.checked)} />
-                    <span className="text-xs text-slate-500 italic">已簽署魔法契約，自負施法風險。</span>
-                  </label>
+
+                  {/* CAST BUTTON — bottom sticky */}
+                  <div className="shrink-0 p-4 md:p-5" style={{ borderTop: '4px solid var(--ink)', background: 'var(--parchment)' }}>
+                    <button
+                      onClick={handleCopy}
+                      className="w-full py-4 text-base font-black uppercase tracking-wider flex items-center justify-center gap-3 transition-all hover:animate-shake"
+                      style={{
+                        fontFamily: 'var(--font-rye)',
+                        border: '4px solid var(--ink)',
+                        boxShadow: isCopied ? 'none' : 'var(--shadow)',
+                        background: isCopied ? '#2D6A4F' : 'var(--mustard)',
+                        color: isCopied ? 'var(--parchment)' : 'var(--ink)',
+                        transform: isCopied ? 'translate(8px, 8px)' : undefined,
+                        letterSpacing: '0.1em',
+                      }}
+                    >
+                      {isCopied
+                        ? <><Check className="w-5 h-5" /> 密咒已封印</>
+                        : <><Sparkles className="w-5 h-5" /> 揮舞魔杖 · 複製咒語</>
+                      }
+                    </button>
+                  </div>
                 </div>
               </div>
-              <details className="mt-8 group cursor-pointer border border-white/10 rounded-2xl overflow-hidden bg-[#150a1c]">
-                <summary className="p-6 font-serif font-black text-purple-300 flex items-center outline-none select-none hover:bg-white/5 transition-colors"><BookOpen className="w-5 h-5 mr-3 text-yellow-500" /> <span className="italic text-lg">大魔導師筆記 (Level 3 原理)</span></summary>
-                <div className="px-6 pb-6 text-yellow-100/80 italic text-sm leading-relaxed border-t border-yellow-500/20 pt-4">{selectedCurse.theory}</div>
-              </details>
-            </div>
-            <div className="shrink-0 p-4 md:p-6 bg-black/90 border-t border-white/10">
-              <button onClick={handleCopy} className={`w-full py-5 rounded-2xl font-black uppercase tracking-wider flex items-center justify-center gap-3 transition-all ${isCopied ? 'bg-emerald-500 shadow-[0_0_30px_rgba(16,185,129,0.5)]' : 'bg-gradient-to-r from-purple-600 to-pink-600 shadow-[0_0_40px_rgba(219,39,119,0.5)]'} text-white`}>
-                {isCopied ? <><Check className="w-6 h-6"/> 密咒已封印</> : <><Sparkles className="w-6 h-6"/> 揮舞魔杖 (複製咒語)</>}
-              </button>
-            </div>
-          </motion.div>
-        </div>
-      )}
+            </motion.div>
+          </div>
+        )}
       </AnimatePresence>
 
-      {/* Bottom Sheet for Tweaks (Mobile) */}
+      {/* ── TWEAK BOTTOM SHEET (Mobile) ── */}
       <AnimatePresence>
         {showTweakSheet && selectedCurse?.tweak && (
           <div className="fixed inset-0 z-[250] flex items-end justify-center">
-            <motion.div 
-              initial={{ opacity: 0 }} 
-              animate={{ opacity: 1 }} 
-              exit={{ opacity: 0 }} 
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0"
+              style={{ background: 'rgba(42,39,35,0.7)' }}
               onClick={() => setShowTweakSheet(false)}
             />
-            <motion.div 
-              initial={{ y: "100%" }} 
-              animate={{ y: 0 }} 
-              exit={{ y: "100%" }} 
+            <motion.div
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="relative w-full bg-[#100820] border-t border-purple-500/30 rounded-t-[32px] p-6 pb-12 shadow-[0_-20px_40px_rgba(0,0,0,0.5)] z-10"
+              className="relative w-full p-6 pb-10 z-10"
+              style={{ background: 'var(--parchment)', borderTop: '4px solid var(--ink)', boxShadow: '0 -8px 0px var(--ink)' }}
             >
-              <div className="w-12 h-1.5 bg-white/10 rounded-full mx-auto mb-8" />
-              <h3 className="text-xl font-black text-white mb-6 italic px-2">{selectedCurse.tweak.label}</h3>
+              <div className="w-12 h-1.5 rounded-full mx-auto mb-6" style={{ background: 'var(--ink)', opacity: 0.3 }} />
+              <h3
+                className="text-xl font-black mb-6 px-2"
+                style={{ fontFamily: 'var(--font-noto-serif-tc)', color: 'var(--ink)', fontWeight: 900 }}
+              >
+                {selectedCurse.tweak.label}
+              </h3>
               <div className="space-y-3">
                 {selectedCurse.tweak.options.map((opt: string) => (
-                  <button 
+                  <button
                     key={opt}
                     onClick={() => {
                       setInputs({ ...inputs, [selectedCurse.tweak.id]: opt });
                       setShowTweakSheet(false);
                     }}
-                    className={`w-full p-5 rounded-2xl text-left font-bold transition-all flex items-center justify-between ${ (inputs[selectedCurse.tweak.id] || selectedCurse.tweak.options[0]) === opt ? 'bg-purple-600 text-white shadow-xl shadow-purple-900/40' : 'bg-white/5 text-slate-300 border border-white/5'}`}
+                    className="w-full p-4 text-left font-bold flex items-center justify-between transition-all"
+                    style={{
+                      fontFamily: 'var(--font-chivo)',
+                      border: '3px solid var(--ink)',
+                      boxShadow: (inputs[selectedCurse.tweak.id] || selectedCurse.tweak.options[0]) === opt ? 'none' : '4px 4px 0px var(--ink)',
+                      background: (inputs[selectedCurse.tweak.id] || selectedCurse.tweak.options[0]) === opt ? 'var(--mustard)' : 'var(--parchment)',
+                      color: 'var(--ink)',
+                      transform: (inputs[selectedCurse.tweak.id] || selectedCurse.tweak.options[0]) === opt ? 'translate(4px,4px)' : undefined,
+                    }}
                   >
                     <span>{opt.split('：')[0]}</span>
-                    {(inputs[selectedCurse.tweak.id] || selectedCurse.tweak.options[0]) === opt && <Check className="w-5 h-5" />}
+                    {(inputs[selectedCurse.tweak.id] || selectedCurse.tweak.options[0]) === opt && <Check className="w-4 h-4" />}
                   </button>
                 ))}
               </div>
-              <button 
+              <button
                 onClick={() => setShowTweakSheet(false)}
-                className="w-full mt-6 py-4 rounded-xl bg-white/5 text-slate-500 font-bold"
+                className="w-full mt-6 py-3 font-bold text-sm"
+                style={{
+                  fontFamily: 'var(--font-chivo)',
+                  border: '3px solid var(--ink)',
+                  color: 'var(--ink)',
+                  background: 'transparent',
+                  opacity: 0.5,
+                }}
               >
                 取消
               </button>
@@ -516,63 +835,157 @@ export default function MagicAcademyMVP() {
         )}
       </AnimatePresence>
 
+      {/* ── RISK SCROLL MODAL ── */}
       <AnimatePresence>
         {showRiskScroll && (
           <div className="fixed inset-0 z-[300] flex items-center justify-center p-4">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-black/90 backdrop-blur-xl" onClick={() => setShowRiskScroll(false)} />
-            <motion.div initial={{ scale: 0.9, y: 50, opacity: 0 }} animate={{ scale: 1, y: 0, opacity: 1 }} exit={{ scale: 0.9, y: 50, opacity: 0 }} className="relative w-full max-w-xl bg-[#1a0b2e] border-2 border-purple-500/50 rounded-3xl p-8 md:p-12 shadow-[0_0_100px_rgba(168,85,247,0.4)]">
-                <AlertTriangle className="w-12 h-12 text-purple-400 mx-auto mb-6 animate-pulse" />
-                <h3 className="text-3xl font-serif font-black text-center text-white mb-6 italic">魔法使用契約</h3>
-                <div className="space-y-4 text-sm text-purple-100/80 leading-relaxed max-h-[40vh] overflow-y-auto pr-2 custom-scrollbar">
-                  <p>1. 咒語內容僅供參考，生成結果之適法性由使用者自負。</p>
-                  <p>2. 施法前應評估社交與職涯風險。</p>
-                  <p>3. 點擊簽署即表示您已年滿 18 歲且同意放棄法律追訴權。</p>
-                </div>
-                <button onClick={handleRiskAcceptAndCopy} className="w-full py-4 mt-10 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-black rounded-2xl shadow-[0_0_30px_rgba(168,85,247,0.5)] active:scale-95 transition-all">確認理解，正式簽署契約</button>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0"
+              style={{ background: 'rgba(42,39,35,0.92)' }}
+              onClick={() => setShowRiskScroll(false)}
+            />
+            <motion.div
+              initial={{ scale: 0.9, y: 50, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.9, y: 50, opacity: 0 }}
+              className="relative w-full max-w-md p-8 md:p-12"
+              style={{
+                border: '4px solid var(--ink)',
+                boxShadow: 'var(--shadow-hover)',
+                background: '#FEFAF0',
+              }}
+            >
+              {/* Decorative corner lines */}
+              <div className="absolute top-3 left-3 w-6 h-6" style={{ borderTop: '3px solid var(--dark-red)', borderLeft: '3px solid var(--dark-red)' }} />
+              <div className="absolute top-3 right-3 w-6 h-6" style={{ borderTop: '3px solid var(--dark-red)', borderRight: '3px solid var(--dark-red)' }} />
+              <div className="absolute bottom-3 left-3 w-6 h-6" style={{ borderBottom: '3px solid var(--dark-red)', borderLeft: '3px solid var(--dark-red)' }} />
+              <div className="absolute bottom-3 right-3 w-6 h-6" style={{ borderBottom: '3px solid var(--dark-red)', borderRight: '3px solid var(--dark-red)' }} />
+
+              <AlertTriangle className="w-10 h-10 mx-auto mb-5 animate-pulse" style={{ color: 'var(--dark-red)' }} />
+              <h3
+                className="text-2xl text-center mb-6"
+                style={{ fontFamily: 'var(--font-rye)', color: 'var(--dark-red)' }}
+              >
+                魔法使用契約
+              </h3>
+              <div
+                className="space-y-3 text-sm leading-relaxed max-h-[40vh] overflow-y-auto pr-1 mb-8"
+                style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', borderTop: '2px solid var(--ink)', borderBottom: '2px solid var(--ink)', paddingTop: '1rem', paddingBottom: '1rem' }}
+              >
+                <p>1. 咒語內容僅供參考，生成結果之適法性由使用者自負。</p>
+                <p>2. 施法前應評估社交與職涯風險。</p>
+                <p>3. 點擊簽署即表示您已年滿 18 歲且同意放棄法律追訴權。</p>
+              </div>
+              <button
+                onClick={handleRiskAcceptAndCopy}
+                className="w-full py-4 font-black uppercase tracking-wider transition-all active:translate-x-1 active:translate-y-1"
+                style={{
+                  fontFamily: 'var(--font-rye)',
+                  border: '4px solid var(--ink)',
+                  boxShadow: 'var(--shadow)',
+                  background: 'var(--dark-red)',
+                  color: 'var(--parchment)',
+                  letterSpacing: '0.1em',
+                  fontSize: '0.85rem',
+                }}
+              >
+                確認理解，正式簽署契約
+              </button>
             </motion.div>
           </div>
         )}
       </AnimatePresence>
 
+      {/* ── PORTAL MODAL (AI selector) ── */}
       {showPortal && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[150] flex items-center justify-center p-4">
-          <div className="bg-[#100820] border border-purple-500/50 p-8 rounded-3xl max-w-sm w-full text-center shadow-2xl">
-            <h3 className="text-2xl font-black text-white mb-6 italic">選擇傳送座標</h3>
+        <div className="fixed inset-0 z-[150] flex items-center justify-center p-4" style={{ background: 'rgba(42,39,35,0.85)' }}>
+          <div
+            className="max-w-sm w-full text-center p-8"
+            style={{ border: '4px solid var(--ink)', boxShadow: 'var(--shadow-hover)', background: 'var(--parchment)' }}
+          >
+            <h3
+              className="text-xl mb-6"
+              style={{ fontFamily: 'var(--font-rye)', color: 'var(--ink)' }}
+            >
+              選擇傳送座標
+            </h3>
             <div className="space-y-3">
-              <button onClick={() => handleDeepLink("https://chatgpt.com", "chatgpt://")} className="w-full bg-[#1a1025] hover:bg-emerald-500/10 border border-emerald-500/30 p-4 rounded-2xl flex items-center gap-4 transition-all">
-                <Bot className="w-6 h-6 text-emerald-400" />
-                <div className="text-left"><h4 className="text-white font-bold">ChatGPT</h4><p className="text-[10px] text-emerald-500/70 font-black">OPENAI</p></div>
-              </button>
-              <button onClick={() => handleDeepLink("https://claude.ai", "claude://")} className="w-full bg-[#1a1025] hover:bg-orange-500/10 border border-orange-500/30 p-4 rounded-2xl flex items-center gap-4 transition-all">
-                <Brain className="w-6 h-6 text-orange-400" />
-                <div className="text-left"><h4 className="text-white font-bold">Claude</h4><p className="text-[10px] text-orange-500/70 font-black">ANTHROPIC</p></div>
-              </button>
-              <button onClick={() => window.open("https://gemini.google.com/app", "_blank")} className="w-full bg-[#1a1025] hover:bg-blue-500/10 border border-blue-500/30 p-4 rounded-2xl flex items-center gap-4 transition-all">
-                <Sparkles className="w-6 h-6 text-blue-400" />
-                <div className="text-left"><h4 className="text-white font-bold">Gemini</h4><p className="text-[10px] text-blue-500/70 font-black">GOOGLE</p></div>
-              </button>
-              <button onClick={() => window.open("https://grok.com", "_blank")} className="w-full bg-[#1a1025] hover:bg-slate-300/10 border border-slate-300/30 p-4 rounded-2xl flex items-center gap-4 transition-all">
-                <MessageSquare className="w-6 h-6 text-slate-300" />
-                <div className="text-left"><h4 className="text-white font-bold">Grok</h4><p className="text-[10px] text-slate-300/70 font-black">XAI</p></div>
-              </button>
-              <button onClick={() => handleDeepLink("https://chat.deepseek.com", "deepseek://")} className="w-full bg-[#1a1025] hover:bg-blue-400/10 border border-blue-400/30 p-4 rounded-2xl flex items-center gap-4 transition-all">
-                <div className="w-6 h-6 flex items-center justify-center bg-blue-600 rounded-lg text-[10px] font-black text-white">DS</div>
-                <div className="text-left"><h4 className="text-white font-bold">DeepSeek</h4><p className="text-[10px] text-blue-400/70 font-black">DEEPSEEK</p></div>
-              </button>
+              {[
+                { label: 'ChatGPT', sub: 'OPENAI', icon: <Bot className="w-5 h-5" />, color: '#2D6A4F', web: "https://chatgpt.com", scheme: "chatgpt://" },
+                { label: 'Claude', sub: 'ANTHROPIC', icon: <Brain className="w-5 h-5" />, color: '#D4692C', web: "https://claude.ai", scheme: "claude://" },
+                { label: 'Gemini', sub: 'GOOGLE', icon: <Sparkles className="w-5 h-5" />, color: '#1A5C5A', web: "https://gemini.google.com/app", scheme: null },
+                { label: 'Grok', sub: 'XAI', icon: <MessageSquare className="w-5 h-5" />, color: '#2A2723', web: "https://grok.com", scheme: null },
+                { label: 'DeepSeek', sub: 'DEEPSEEK', icon: <div className="w-5 h-5 flex items-center justify-center text-[9px] font-black text-white" style={{ background: '#1a5fcc' }}>DS</div>, color: '#1a5fcc', web: "https://chat.deepseek.com", scheme: "deepseek://" },
+              ].map(({ label, sub, icon, color, web, scheme }) => (
+                <button
+                  key={label}
+                  onClick={() => scheme ? handleDeepLink(web, scheme) : window.open(web, '_blank')}
+                  className="w-full p-4 flex items-center gap-4 transition-all active:translate-x-1 active:translate-y-1"
+                  style={{
+                    border: '3px solid var(--ink)',
+                    boxShadow: '4px 4px 0px var(--ink)',
+                    background: 'var(--parchment)',
+                    color: 'var(--ink)',
+                    textAlign: 'left',
+                  }}
+                >
+                  <div className="p-2" style={{ background: color, color: '#fff', border: '2px solid var(--ink)' }}>
+                    {icon}
+                  </div>
+                  <div>
+                    <h4 className="font-black text-sm" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)' }}>{label}</h4>
+                    <p className="text-[10px] font-black uppercase" style={{ fontFamily: 'var(--font-chivo)', color, opacity: 0.8 }}>{sub}</p>
+                  </div>
+                </button>
+              ))}
             </div>
-            <button onClick={() => setShowPortal(false)} className="mt-8 text-xs font-black uppercase text-slate-600 hover:text-white transition-colors">[ 留在學院 ]</button>
+            <button
+              onClick={() => setShowPortal(false)}
+              className="mt-6 text-xs font-black uppercase"
+              style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.4 }}
+            >
+              [ 留在學院 ]
+            </button>
           </div>
         </div>
       )}
 
+      {/* ── AUTH MODAL ── */}
       {showAuthModal && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] flex items-center justify-center p-4">
-           <div className="bg-[#100820] border border-amber-500/50 p-8 rounded-3xl max-w-sm w-full text-center">
-              <Lock className="w-12 h-12 text-amber-500 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-6">解鎖高級咒語</h3>
-              <button onClick={() => { setIsLoggedIn(true); setShowAuthModal(false); }} className="w-full bg-amber-500 hover:bg-amber-400 text-black font-bold py-3 rounded-xl transition">快速認證 (展示通道)</button>
-              <button onClick={() => setShowAuthModal(false)} className="mt-4 text-sm text-slate-500">取消</button>
-           </div>
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4" style={{ background: 'rgba(42,39,35,0.85)' }}>
+          <div
+            className="max-w-sm w-full text-center p-8"
+            style={{ border: '4px solid var(--ink)', boxShadow: 'var(--shadow-hover)', background: 'var(--parchment)' }}
+          >
+            <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center" style={{ border: '4px solid var(--ink)', background: 'var(--mustard)', boxShadow: 'var(--shadow-sm)' }}>
+              <Lock className="w-6 h-6" style={{ color: 'var(--ink)' }} />
+            </div>
+            <h3 className="text-xl mb-2" style={{ fontFamily: 'var(--font-rye)', color: 'var(--ink)' }}>解鎖高級咒語</h3>
+            <p className="text-sm mb-6" style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.65 }}>此咒語需要學院認證才能使用</p>
+            <button
+              onClick={() => { setIsLoggedIn(true); setShowAuthModal(false); }}
+              className="w-full py-3 font-black uppercase transition-all active:translate-x-1 active:translate-y-1 mb-3"
+              style={{
+                fontFamily: 'var(--font-chivo)',
+                border: '3px solid var(--ink)',
+                boxShadow: 'var(--shadow-sm)',
+                background: 'var(--mustard)',
+                color: 'var(--ink)',
+              }}
+            >
+              快速認證（展示通道）
+            </button>
+            <button
+              onClick={() => setShowAuthModal(false)}
+              className="text-sm font-bold"
+              style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.4 }}
+            >
+              取消
+            </button>
+          </div>
         </div>
       )}
     </div>
