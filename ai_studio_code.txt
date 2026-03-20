@@ -1,0 +1,167 @@
+"use client";
+import { useState } from "react";
+import { Sparkles, Flame, Droplets, Wind, Copy, ExternalLink, ChevronDown, X } from "lucide-react";
+
+// 1. 資料解耦：未來新增咒語只需在這裡加一筆
+const CURSES =[
+  {
+    id: "boss_line",
+    icon: <Flame className="w-8 h-8 text-orange-500" />,
+    color: "orange",
+    title: "深夜老闆 LINE 突襲",
+    desc: "下班後老闆傳 LINE 交辦事項，教你如何高情商推遲到明天。",
+    fields:[
+      { id: "boss_msg", label: "老闆傳了什麼？", placeholder: "例：明早開會的簡報你今晚趕一下給我" },
+      { id: "true_thought", label: "你心裡真正的想法？", placeholder: "例：我已經躺平了，明天早上再弄" }
+    ],
+    tweak: { id: "tone", label: "奴性微調 (語氣)", options:["卑微狗腿", "專業得體", "不卑不亢 (立界線)"] },
+    theory: "使用「意圖包裝」與「選項轉移法」。AI 會先安撫老闆情緒，然後提出『明天一早處理效果更好』的替代方案，避免直接拒絕。",
+    generate: (inputs: any) => `你是一位精通台灣職場生存學的高階秘書。
+老闆剛剛在 LINE 傳了：「${inputs.boss_msg || '[請填寫老闆訊息]'}」
+我心裡真正的想法是：「${inputs.true_thought || '[請填寫真實想法]'}」
+
+請幫我把我的真實想法，包裝成可以立刻回覆老闆的 LINE 訊息。
+要求：
+1. 語氣必須是：【${inputs.tone || '專業得體'}】。
+2. 要有「收到並重視」的態度，但巧妙地將實際行動推遲到明天上班時間。
+3. 給我 3 個不同長短的版本讓我挑選。字數簡短，符合台灣 LINE 聊天習慣。`
+  }
+  // 未來在這裡新增第二個、第三個詛咒...
+];
+
+export default function MagicAcademyMVP() {
+  const[selectedCurse, setSelectedCurse] = useState<any>(null);
+  const [inputs, setInputs] = useState<any>({});
+  const [isCopied, setIsCopied] = useState(false);
+  const[showPortal, setShowPortal] = useState(false);
+
+  // 施法邏輯
+  const handleCopy = () => {
+    const spell = selectedCurse.generate(inputs);
+    navigator.clipboard.writeText(spell).then(() => {
+      setIsCopied(true);
+      setShowPortal(true);
+      setTimeout(() => setIsCopied(false), 3000);
+    });
+  };
+
+  return (
+    <div className="min-h-screen bg-[#050510] text-slate-200 font-sans selection:bg-purple-500/30 p-6 flex flex-col items-center">
+      {/* 英雄區 */}
+      <header className="text-center max-w-3xl mt-12 mb-16">
+        <h1 className="text-4xl md:text-5xl font-black mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 drop-shadow-[0_0_10px_rgba(168,85,247,0.5)]">
+          AI 魔法學院
+        </h1>
+        <p className="text-lg text-slate-400">選擇你想解除的職場詛咒，一鍵生成防禦咒語。</p>
+      </header>
+
+      {/* 狀態一：詛咒看板 (未選擇時顯示) */}
+      {!selectedCurse && (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl">
+          {CURSES.map((curse) => (
+            <button
+              key={curse.id}
+              onClick={() => setSelectedCurse(curse)}
+              className="group text-left p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-500/50 hover:bg-white/10 transition-all hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(168,85,247,0.2)] backdrop-blur-md"
+            >
+              <div className="mb-4">{curse.icon}</div>
+              <h3 className="text-xl font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">{curse.title}</h3>
+              <p className="text-sm text-slate-400">{curse.desc}</p>
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* 狀態二：魔法工房 (已選擇時顯示) */}
+      {selectedCurse && (
+        <div className="w-full max-w-4xl bg-white/5 border border-purple-500/30 rounded-3xl p-6 md:p-8 backdrop-blur-xl relative animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <button onClick={() => { setSelectedCurse(null); setInputs({}); setShowPortal(false); }} className="absolute top-6 right-6 text-slate-500 hover:text-white">
+            <X className="w-6 h-6" />
+          </button>
+          
+          <div className="flex items-center gap-4 mb-8 border-b border-white/10 pb-6">
+            {selectedCurse.icon}
+            <div>
+              <h2 className="text-2xl font-bold text-white">{selectedCurse.title}</h2>
+              <p className="text-sm text-slate-400">{selectedCurse.desc}</p>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* 左側：鷹架輸入區 */}
+            <div className="space-y-6">
+              <h3 className="text-lg font-bold text-purple-300 flex items-center gap-2">
+                <Sparkles className="w-5 h-5" /> 注入魔力 (Level 1)
+              </h3>
+              {selectedCurse.fields.map((f: any) => (
+                <div key={f.id}>
+                  <label className="block text-sm text-slate-400 mb-2">{f.label}</label>
+                  <input
+                    type="text"
+                    placeholder={f.placeholder}
+                    className="w-full bg-black/50 border border-purple-500/30 rounded-xl p-3 text-white focus:outline-none focus:border-pink-500 focus:ring-1 focus:ring-pink-500 transition"
+                    onChange={(e) => setInputs({ ...inputs, [f.id]: e.target.value })}
+                  />
+                </div>
+              ))}
+              
+              {/* 微調區 */}
+              <div className="pt-4 border-t border-white/10">
+                <label className="block text-sm text-purple-300 mb-2 font-bold">{selectedCurse.tweak.label} (Level 2)</label>
+                <select 
+                  className="w-full bg-black/50 border border-purple-500/30 rounded-xl p-3 text-white focus:outline-none focus:border-pink-500"
+                  onChange={(e) => setInputs({ ...inputs, [selectedCurse.tweak.id]: e.target.value })}
+                >
+                  {selectedCurse.tweak.options.map((opt: string) => <option key={opt} value={opt}>{opt}</option>)}
+                </select>
+              </div>
+            </div>
+
+            {/* 右側：咒語預覽與施放區 */}
+            <div className="flex flex-col">
+              <div className="flex-grow bg-black/50 rounded-xl p-5 border border-white/5 font-mono text-sm text-emerald-400 whitespace-pre-wrap overflow-y-auto min-h-[250px] shadow-inner">
+                {selectedCurse.generate(inputs)}
+              </div>
+              
+              <button 
+                onClick={handleCopy}
+                className={`mt-4 w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all ${isCopied ? 'bg-emerald-500 text-white shadow-[0_0_20px_rgba(16,185,129,0.5)]' : 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:opacity-90 shadow-[0_0_20px_rgba(219,39,119,0.3)]'}`}
+              >
+                {isCopied ? <><Sparkles className="w-5 h-5"/> 魔力已封印於剪貼簿</> : <><Copy className="w-5 h-5"/> 揮舞魔杖 (複製咒語)</>}
+              </button>
+            </div>
+          </div>
+
+          {/* 原理揭密區 */}
+          <div className="mt-8 pt-6 border-t border-white/10 text-sm text-slate-500">
+            <p className="font-bold text-slate-400 mb-1">📖 大魔導師筆記 (Level 3 原理)</p>
+            <p>{selectedCurse.theory}</p>
+          </div>
+        </div>
+      )}
+
+      {/* 狀態三：傳送門 Modal (點擊複製後出現) */}
+      {showPortal && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
+          <div className="bg-[#100820] border border-purple-500/50 p-8 rounded-3xl max-w-sm w-full text-center shadow-[0_0_50px_rgba(168,85,247,0.2)]">
+            <div className="w-20 h-20 mx-auto bg-purple-500/20 rounded-full flex items-center justify-center mb-6 animate-pulse">
+              <ExternalLink className="w-10 h-10 text-purple-400" />
+            </div>
+            <h3 className="text-2xl font-black text-white mb-2">異界通道已開啟</h3>
+            <p className="text-slate-400 mb-8">帶著你的咒語，前往 Gemini 釋放魔力吧。</p>
+            <a 
+              href="https://gemini.google.com/app" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              onClick={() => setShowPortal(false)}
+              className="block w-full bg-white text-purple-900 font-black py-4 rounded-xl hover:scale-105 transition-transform"
+            >
+              穿越星門 (開啟 Gemini)
+            </a>
+            <button onClick={() => setShowPortal(false)} className="mt-4 text-sm text-slate-500 hover:text-white">留在學院</button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
