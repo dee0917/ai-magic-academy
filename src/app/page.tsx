@@ -68,7 +68,12 @@ export default function MagicAcademyMVP() {
   const handleTrialCopy = (text: string) => {
     navigator.clipboard.writeText(text).then(() => {
       setIsTrialCopied(true);
-      setTimeout(() => setIsTrialCopied(false), 2000);
+      setShowBrewing(true);
+      setTimeout(() => {
+        setShowBrewing(false);
+        setIsTrialCopied(false);
+        setShowPortal(true);
+      }, 2000);
     });
   };
 
