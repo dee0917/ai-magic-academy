@@ -84,7 +84,9 @@
 
 /* ─── Base ──────────────────────────────────────── */
 html, body {
-  background: var(--parchment);
+  background-color: var(--parchment);
+  background-image: radial-gradient(circle, rgba(42,39,35,0.18) 1px, transparent 1px);
+  background-size: 18px 18px;
   color: var(--ink);
   font-family: var(--font-chivo), Arial, Helvetica, sans-serif;
   overflow-x: hidden !important;
@@ -164,24 +166,18 @@ html, body {
   animation: stamp-in 0.35s ease forwards;
 }
 
-/* Striped parchment texture overlay (subtle) */
+/* Dot halftone pattern — used on both main page and brewing overlay */
 .parchment-bg {
   background-color: var(--parchment);
-  background-image:
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 28px,
-      rgba(42,39,35,0.04) 28px,
-      rgba(42,39,35,0.04) 29px
-    );
+  background-image: radial-gradient(circle, rgba(42,39,35,0.18) 1px, transparent 1px);
+  background-size: 18px 18px;
 }
 
-/* Halftone dot pattern for decorative areas */
+/* Halftone alias (kept for overlay div inside brewing) */
 .halftone-bg {
-  background-image: radial-gradient(circle, var(--ink) 1px, transparent 1px);
-  background-size: 10px 10px;
-  opacity: 0.06;
+  background-image: radial-gradient(circle, rgba(42,39,35,0.18) 1px, transparent 1px);
+  background-size: 18px 18px;
+  opacity: 1;
 }
 
 /* Section divider */
