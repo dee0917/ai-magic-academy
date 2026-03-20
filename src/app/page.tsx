@@ -3,7 +3,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import {
   Sparkles, Copy, ExternalLink, ChevronDown, X, Search, Check,
   Brain, Bot, MessageSquare, Lock, Share2, AlertTriangle, ArrowRight, BookOpen,
-  ArrowLeft, RefreshCw
+  ArrowLeft, RefreshCw, Zap
 } from "lucide-react";
 import { CURSES } from "./curses_data";
 import { motion, AnimatePresence } from "framer-motion";
