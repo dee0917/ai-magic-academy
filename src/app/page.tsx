@@ -283,8 +283,9 @@ export default function MagicAcademyMVP() {
   // Group curses by tab
   const groupedCurses = useMemo(() => {
     const groups: { [key: string]: any[] } = {};
+    const reversed = [...filteredCurses].reverse();
     TABS.forEach(tab => {
-      groups[tab] = filteredCurses.filter(c => c.tab === tab);
+      groups[tab] = reversed.filter(c => c.tab === tab);
     });
     return groups;
   }, [filteredCurses]);
