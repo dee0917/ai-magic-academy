@@ -404,59 +404,6 @@ export default function MagicAcademyMVP() {
             </p>
           </div>
 
-          {/* Search bar */}
-          <div className="max-w-xl mx-auto mb-6">
-            <div className="relative flex items-center" style={{ border: '3px solid var(--ink)', background: '#FEFAF0', boxShadow: '4px 4px 0px var(--ink)' }}>
-              <Search className="absolute left-4 w-4 h-4" style={{ color: 'var(--ink)', opacity: 0.5 }} />
-              <input
-                type="text"
-                placeholder="搜尋全站魔法..."
-                className="w-full py-3 pl-11 pr-10 text-sm bg-transparent focus:outline-none"
-                style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)' }}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              {searchQuery && (
-                <button onClick={() => setSearchQuery("")} className="absolute right-3 p-1" style={{ color: 'var(--ink)', opacity: 0.5 }}>
-                  <X className="w-4 h-4" />
-                </button>
-              )}
-            </div>
-          </div>
-
-          {/* Tab navigation */}
-          <div className="flex flex-nowrap overflow-x-auto no-scrollbar gap-2 pb-6 tab-scroll-container justify-start md:justify-center">
-            <button
-              onClick={() => { setSearchQuery(""); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-              className="flex-shrink-0 px-4 py-2 text-xs font-black uppercase tracking-wide transition-all active:translate-x-1 active:translate-y-1"
-              style={{
-                fontFamily: 'var(--font-chivo)',
-                border: '3px solid var(--ink)',
-                boxShadow: '3px 3px 0px var(--ink)',
-                background: 'var(--mustard)',
-                color: 'var(--ink)',
-              }}
-            >
-              全部
-            </button>
-            {TABS.map(tab => (
-              <button
-                key={tab}
-                onClick={() => { setSearchQuery(""); setTimeout(() => scrollToTab(tab), 100); }}
-                className="flex-shrink-0 px-4 py-2 text-xs font-black uppercase tracking-wide transition-all active:translate-x-1 active:translate-y-1 hover:bg-[var(--mustard)]"
-                style={{
-                  fontFamily: 'var(--font-chivo)',
-                  border: '3px solid var(--ink)',
-                  boxShadow: '3px 3px 0px var(--ink)',
-                  background: 'var(--parchment)',
-                  color: 'var(--ink)',
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
         </div>
       </header>
 
@@ -549,6 +496,63 @@ export default function MagicAcademyMVP() {
           </button>
         </div>
       </section>
+
+      {/* ── SEARCH + TAB NAV ── */}
+      <div className="w-full max-w-5xl mx-auto px-4 mb-8 relative z-10">
+        {/* Search bar */}
+        <div className="max-w-xl mx-auto mb-6">
+          <div className="relative flex items-center" style={{ border: '3px solid var(--ink)', background: '#FEFAF0', boxShadow: '4px 4px 0px var(--ink)' }}>
+            <Search className="absolute left-4 w-4 h-4" style={{ color: 'var(--ink)', opacity: 0.5 }} />
+            <input
+              type="text"
+              placeholder="搜尋全站魔法..."
+              className="w-full py-3 pl-11 pr-10 text-sm bg-transparent focus:outline-none"
+              style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)' }}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            {searchQuery && (
+              <button onClick={() => setSearchQuery("")} className="absolute right-3 p-1" style={{ color: 'var(--ink)', opacity: 0.5 }}>
+                <X className="w-4 h-4" />
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Tab navigation */}
+        <div className="flex flex-nowrap overflow-x-auto no-scrollbar gap-2 pb-2 tab-scroll-container justify-start md:justify-center">
+          <button
+            onClick={() => { setSearchQuery(""); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+            className="flex-shrink-0 px-4 py-2 text-xs font-black uppercase tracking-wide transition-all active:translate-x-1 active:translate-y-1"
+            style={{
+              fontFamily: 'var(--font-chivo)',
+              border: '3px solid var(--ink)',
+              boxShadow: '3px 3px 0px var(--ink)',
+              background: 'var(--mustard)',
+              color: 'var(--ink)',
+            }}
+          >
+            全部
+          </button>
+          {TABS.map(tab => (
+            <button
+              key={tab}
+              onClick={() => { setSearchQuery(""); setTimeout(() => scrollToTab(tab), 100); }}
+              className="flex-shrink-0 px-4 py-2 text-xs font-black uppercase tracking-wide transition-all active:translate-x-1 active:translate-y-1 hover:bg-[var(--mustard)]"
+              style={{
+                fontFamily: 'var(--font-chivo)',
+                border: '3px solid var(--ink)',
+                boxShadow: '3px 3px 0px var(--ink)',
+                background: 'var(--parchment)',
+                color: 'var(--ink)',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+      </div>
 
       {/* ── MAIN LIBRARY ── */}
       <main className="w-full max-w-7xl mx-auto relative z-10 pb-20 px-0">
