@@ -44,6 +44,7 @@ export default function MagicAcademyMVP() {
   const [showTweakSheet, setShowTweakSheet] = useState(false);
   const [activeTrial, setActiveTrial] = useState(0);
   const [isTrialCopied, setIsTrialCopied] = useState(false);
+  const [showBrewing, setShowBrewing] = useState(false);
 
   const TRIAL_DATA = [
     {
@@ -128,30 +129,32 @@ export default function MagicAcademyMVP() {
     setInputs({});
   };
 
+  const brewAndCopy = () => {
+    const autoInputs: any = {}; selectedCurse.fields.forEach((f: any, idx: number) => { const isVisible = spellLevel === "高級" || (spellLevel === "初級" && idx < 2) || (spellLevel === "中級" && idx < 3); autoInputs[f.id] = isVisible ? (inputs[f.id] || "「尚未輸入內容」") : "（由 AI 根據情境自動填充）"; }); const spell = selectedCurse.generate({ ...autoInputs, [selectedCurse.tweak?.id]: inputs[selectedCurse.tweak?.id] || selectedCurse.tweak?.options[0] });
+    const cleanSpell = spell.replace(/\[\[/g, '').replace(/\]\]/g, '');
+    navigator.clipboard.writeText(cleanSpell).then(() => {
+      setShowBrewing(true);
+      setTimeout(() => {
+        setShowBrewing(false);
+        setIsCopied(true);
+        setShowPortal(true);
+        setTimeout(() => setIsCopied(false), 3000);
+      }, 2000);
+    });
+  };
+
   const handleCopy = () => {
     if (!agreedToRisk) {
       setShowRiskScroll(true);
       return;
     }
-    const autoInputs: any = {}; selectedCurse.fields.forEach((f: any, idx: number) => { const isVisible = spellLevel === "高級" || (spellLevel === "初級" && idx < 2) || (spellLevel === "中級" && idx < 3); autoInputs[f.id] = isVisible ? (inputs[f.id] || "「尚未輸入內容」") : "（由 AI 根據情境自動填充）"; }); const spell = selectedCurse.generate({ ...autoInputs, [selectedCurse.tweak?.id]: inputs[selectedCurse.tweak?.id] || selectedCurse.tweak?.options[0] });
-    const cleanSpell = spell.replace(/\[\[/g, '').replace(/\]\]/g, '');
-    navigator.clipboard.writeText(cleanSpell).then(() => {
-      setIsCopied(true);
-      setShowPortal(true);
-      setTimeout(() => setIsCopied(false), 3000);
-    });
+    brewAndCopy();
   };
 
   const handleRiskAcceptAndCopy = () => {
     setAgreedToRisk(true);
     setShowRiskScroll(false);
-    const autoInputs: any = {}; selectedCurse.fields.forEach((f: any, idx: number) => { const isVisible = spellLevel === "高級" || (spellLevel === "初級" && idx < 2) || (spellLevel === "中級" && idx < 3); autoInputs[f.id] = isVisible ? (inputs[f.id] || "「尚未輸入內容」") : "（由 AI 根據情境自動填充）"; }); const spell = selectedCurse.generate({ ...autoInputs, [selectedCurse.tweak?.id]: inputs[selectedCurse.tweak?.id] || selectedCurse.tweak?.options[0] });
-    const cleanSpell = spell.replace(/\[\[/g, '').replace(/\]\]/g, '');
-    navigator.clipboard.writeText(cleanSpell).then(() => {
-      setIsCopied(true);
-      setShowPortal(true);
-      setTimeout(() => setIsCopied(false), 3000);
-    });
+    brewAndCopy();
   };
 
   const handleShare = () => {
@@ -1099,6 +1102,84 @@ export default function MagicAcademyMVP() {
           </div>
         </div>
       )}
+
+      {/* ── BREWING ANIMATION OVERLAY ── */}
+      <AnimatePresence>
+        {showBrewing && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[400] flex flex-col items-center justify-center"
+            style={{ background: 'var(--parchment)' }}
+          >
+            {/* Halftone dot pattern */}
+            <div className="absolute inset-0 halftone-bg pointer-events-none" />
+
+            {/* Cauldron SVG */}
+            <div style={{ animation: 'cauldron-bob 0.6s ease-in-out infinite' }}>
+              <svg width="130" height="120" viewBox="0 0 130 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* Glow beneath */}
+                <ellipse cx="65" cy="108" rx="38" ry="10" fill="#E8A838" opacity="0.35" style={{ animation: 'glow-flicker 0.8s ease-in-out infinite' }} />
+                {/* Legs */}
+                <rect x="30" y="95" width="10" height="18" fill="#1a1a1a" />
+                <rect x="90" y="95" width="10" height="18" fill="#1a1a1a" />
+                {/* Body */}
+                <path d="M20 40 L30 100 L100 100 L110 40 Z" fill="#1a1a1a" />
+                {/* Rim / handles */}
+                <rect x="14" y="35" width="102" height="12" rx="0" fill="#2A2723" />
+                <rect x="4" y="30" width="18" height="10" rx="0" fill="#2A2723" />
+                <rect x="108" y="30" width="18" height="10" rx="0" fill="#2A2723" />
+                {/* Liquid surface */}
+                <path d="M22 47 L108 47 L100 100 L30 100 Z" fill="#E8A838" opacity="0.9" />
+                {/* Liquid shine */}
+                <rect x="35" y="50" width="20" height="4" rx="0" fill="#F4EED8" opacity="0.25" />
+                {/* Bubbles - static positions, animated via CSS */}
+                <circle cx="55" cy="42" r="5" fill="#E8A838" opacity="0.8" style={{ animation: 'bubble-rise 1.1s ease-out infinite' }} />
+                <circle cx="72" cy="36" r="4" fill="#E8A838" opacity="0.7" style={{ animation: 'bubble-rise 0.9s ease-out infinite 0.3s' }} />
+                <circle cx="85" cy="40" r="3" fill="#E8A838" opacity="0.6" style={{ animation: 'bubble-rise 1.3s ease-out infinite 0.6s' }} />
+                <circle cx="60" cy="38" r="2.5" fill="#F4EED8" opacity="0.5" style={{ animation: 'bubble-rise 1s ease-out infinite 0.15s' }} />
+              </svg>
+            </div>
+
+            {/* Label */}
+            <p
+              className="mt-4 text-xl font-black"
+              style={{ fontFamily: 'var(--font-noto-serif-tc)', color: 'var(--ink)', fontWeight: 900 }}
+            >
+              研磨草藥中...
+            </p>
+
+            {/* Progress bar */}
+            <div
+              className="mt-6 w-56 overflow-hidden"
+              style={{ border: '3px solid var(--ink)', height: '22px', background: 'var(--parchment)', boxShadow: '4px 4px 0px var(--ink)' }}
+            >
+              <div
+                style={{
+                  height: '100%',
+                  width: '0%',
+                  background: 'repeating-linear-gradient(45deg, var(--teal) 0px, var(--teal) 8px, #1A4A48 8px, #1A4A48 16px)',
+                  animation: 'brew-fill 2s linear forwards',
+                }}
+              />
+            </div>
+
+            {/* Warning text */}
+            <p
+              className="mt-5 text-[11px] font-bold px-4 py-2"
+              style={{
+                fontFamily: 'var(--font-chivo)',
+                color: 'var(--dark-red)',
+                border: '2px solid var(--dark-red)',
+                background: 'rgba(139,38,38,0.05)',
+              }}
+            >
+              ▲ 施法期間請勿關閉視窗，以免造成法術逆火 ▲
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ── AUTH MODAL ── */}
       {showAuthModal && (
