@@ -1,1 +1,72 @@
-{"data":"InVzZSBjbGllbnQiOwppbXBvcnQgeyBtb3Rpb24gfSBmcm9tICJmcmFtZXItbW90aW9uIjsKaW1wb3J0IHsgSGV4YWdvbiwgQXJyb3dMZWZ0IH0gZnJvbSAibHVjaWRlLXJlYWN0IjsKaW1wb3J0IExpbmsgZnJvbSAibmV4dC9saW5rIjsKCmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIEVwaWNNYWdpY0hlcm9lcygpIHsKICBjb25zdCB0aXRsZSA9ICLpurvnk5zlsIjnlKhBSeWkluaOmyI7CiAgY29uc3Qgc3VidGl0bGUgPSAi5bCH6KSH6Zuc55qE44CM5o+Q56S66Kme44CN5bCB6KOd5oiQ5LiA6Y216YeL5pS+55qE6a2U5rOV44CC5oeJ5LuY5aWn5a6i44CB5o6o5o6J6aOv5bGA44CB6Ieq5YuV5a+r5aCx5ZGK77yM5L2g55qE54Sh6IWm5rGC55Sf5oyH5Y2X44CCIjsKCiAgcmV0dXJuICgKICAgIDxkaXYgY2xhc3NOYW1lPSJtaW4taC1zY3JlZW4gYmctWyMwMzAxMDhdIGZsZXggZmxleC1jb2wgaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIHAtNCBmb250LXNlcmlmIG92ZXJmbG93LWhpZGRlbiI+CiAgICAgIHsvKiBCYWNrIHRvIEhvbWUgKi99CiAgICAgIDxMaW5rIGhyZWY9Ii8iIGNsYXNzTmFtZT0iZml4ZWQgdG9wLTYgbGVmdC02IHotNTAgZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTIgcHgtNCBweS0yIHJvdW5kZWQtZnVsbCBiZy13aGl0ZS81IGJvcmRlciBib3JkZXItd2hpdGUvMTAgaG92ZXI6YmctcHVycGxlLTUwMC8yMCB0cmFuc2l0aW9uLWFsbCB0ZXh0LXhzIGZvbnQtYm9sZCB0ZXh0LXB1cnBsZS0zMDAgZm9udC1zYW5zIj4KICAgICAgICA8QXJyb3dMZWZ0IGNsYXNzTmFtZT0idy00IGgtNCIgLz4g6L+U5Zue5a246Zmi6aaW6aCBCiAgICAgIDwvTGluaz4KCiAgICAgIHsvKiDwn5SuIOaWueahiCAx77ya5aSn6LOi6ICF55qE6a2U5rOV6ZmjIChUaGUgQXJjYW5lIFN1bW1vbmluZyBDaXJjbGUpICovfQogICAgICA8aGVhZGVyIGNsYXNzTmFtZT0icmVsYXRpdmUgdGV4dC1jZW50ZXIgZmxleCBmbGV4LWNvbCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgcHktNDAgdy1mdWxsIG1pbi1oLVs2MDBweF0iPgogICAgICAgIHsvKiDog4zmma/ml4vovYnprZTms5XpmaMgLSDlop7liqDlsI3mr5TluqboiIfnmbzlhYkgKi99CiAgICAgICAgPGRpdiBjbGFzc05hbWU9ImFic29sdXRlIGluc2V0LTAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgcG9pbnRlci1ldmVudHMtbm9uZSI+CiAgICAgICAgICA8bW90aW9uLmRpdiAKICAgICAgICAgICAgYW5pbWF0ZT17eyByb3RhdGU6IDM2MCB9fSAKICAgICAgICAgICAgdHJhbnNpdGlvbj17eyBkdXJhdGlvbjogMzAsIHJlcGVhdDogSW5maW5pdHksIGVhc2U6ICJsaW5lYXIiIH19CiAgICAgICAgICAgIGNsYXNzTmFtZT0icmVsYXRpdmUgdy1bMzUwcHhdIGgtWzM1MHB4XSBtZDp3LVs2MDBweF0gbWQ6aC1bNjAwcHhdIGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIgogICAgICAgICAgPgogICAgICAgICAgICB7Lyog5pyA5aSW5bGk5YWJ55KwICovfQogICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0iYWJzb2x1dGUgaW5zZXQtMCBib3JkZXItWzJweF0gYm9yZGVyLXB1cnBsZS01MDAvNDAgcm91bmRlZC1mdWxsIHNoYWRvdy1bMF8wXzUwcHhfcmdiYSgxNjgsODUsMjQ3LDAuMyldIj48L2Rpdj4KICAgICAgICAgICAgCiAgICAgICAgICAgIHsvKiDkuK3lsaTomZvnt5rnkrAgKi99CiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSJhYnNvbHV0ZSB3LVs5MiVdIGgtWzkyJV0gYm9yZGVyLVsxcHhdIGJvcmRlci1wdXJwbGUtNDAwLzMwIGJvcmRlci1kYXNoZWQgcm91bmRlZC1mdWxsIj48L2Rpdj4KICAgICAgICAgICAgCiAgICAgICAgICAgIHsvKiDlhaflsaTlha3op5LlvaIgLSDlvLfliLbpq5jlsI3mr5QgKi99CiAgICAgICAgICAgIDxIZXhhZ29uIGNsYXNzTmFtZT0iYWJzb2x1dGUgdy1bODAlXSBoLVs4MCVdIHRleHQtcHVycGxlLTUwMC80MCBzdHJva2UtWzFdIiAvPgogICAgICAgICAgICAKICAgICAgICAgICAgey8qIOacgOWFp+WxpOaguOW/g+eSsCAqL30KICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9ImFic29sdXRlIHctWzYwJV0gaC1bNjAlXSBib3JkZXItWzFweF0gYm9yZGVyLXB1cnBsZS01MDAvNTAgcm91bmRlZC1mdWxsIj48L2Rpdj4KICAgICAgICAgICAgCiAgICAgICAgICAgIHsvKiDpoY3lpJboo53po77vvJrlm5vop5LlrprkvY3nrKYgKi99CiAgICAgICAgICAgIHtbMCwgOTAsIDE4MCwgMjcwXS5tYXAoKGFuZ2xlKSA9PiAoCiAgICAgICAgICAgICAgPGRpdiAKICAgICAgICAgICAgICAgIGtleT17YW5nbGV9CiAgICAgICAgICAgICAgICBzdHlsZT17eyB0cmFuc2Zvcm06IGByb3RhdGUoJHthbmdsZX1kZWcpIHRyYW5zbGF0ZVkoLTUwJSlgIH19CiAgICAgICAgICAgICAgICBjbGFzc05hbWU9ImFic29sdXRlIHRvcC0xLzIgdy00IGgtMSBiZy1wdXJwbGUtNDAwLzYwIHNoYWRvdy1bMF8wXzEwcHhfcmdiYSgxNjgsODUsMjQ3LDAuOCldIgogICAgICAgICAgICAgID48L2Rpdj4KICAgICAgICAgICAgKSl9CiAgICAgICAgICA8L21vdGlvbi5kaXY+CiAgICAgICAgPC9kaXY+CgogICAgICAgIHsvKiDmqJnpoYzmloflrZcgLSDlvLfljJbmvLjlsaToiIfnmbzlhYkgKi99CiAgICAgICAgPG1vdGlvbi5oMSAKICAgICAgICAgIGluaXRpYWw9e3sgc2NhbGU6IDAuOSwgb3BhY2l0eTogMCB9fQogICAgICAgICAgYW5pbWF0ZT17eyBzY2FsZTogMSwgb3BhY2l0eTogMSB9fQogICAgICAgICAgY2xhc3NOYW1lPSJ0ZXh0LTZ4bCBtZDp0ZXh0LTl4bCBmb250LWJsYWNrIHRleHQtdHJhbnNwYXJlbnQgYmctY2xpcC10ZXh0IGJnLWdyYWRpZW50LXRvLWIgZnJvbS13aGl0ZSB2aWEtcHVycGxlLTIwMCB0by1wdXJwbGUtNjAwIGRyb3Atc2hhZG93LVswXzBfNDBweF9yZ2JhKDE2OCw4NSwyNDcsMSldIHRyYWNraW5nLXRpZ2h0ZXIgbWItOCByZWxhdGl2ZSB6LTIwIgogICAgICAgID4KICAgICAgICAgIHt0aXRsZX0KICAgICAgICA8L21vdGlvbi5oMT4KICAgICAgICAKICAgICAgICA8bW90aW9uLnAgCiAgICAgICAgICBpbml0aWFsPXt7IHk6IDIwLCBvcGFjaXR5OiAwIH19CiAgICAgICAgICBhbmltYXRlPXt7IHk6IDAsIG9wYWNpdHk6IDEgfX0KICAgICAgICAgIHRyYW5zaXRpb249e3sgZGVsYXk6IDAuMyB9fQogICAgICAgICAgY2xhc3NOYW1lPSJ0ZXh0LXB1cnBsZS0xMDAvODAgbWF4LXctMnhsIHRleHQteGwgZm9udC1zYW5zIHJlbGF0aXZlIHotMjAgcHgtNCBsZWFkaW5nLXJlbGF4ZWQiCiAgICAgICAgPgogICAgICAgICAge3N1YnRpdGxlfQogICAgICAgIDwvbW90aW9uLnA+CgogICAgICAgIHsvKiDlupXpg6jnmbzlhYnln7rluqcgKi99CiAgICAgICAgPGRpdiBjbGFzc05hbWU9ImFic29sdXRlIGJvdHRvbS0wIGxlZnQtMS8yIC10cmFuc2xhdGUteC0xLzIgdy1mdWxsIGgtWzIwMHB4XSBiZy1ncmFkaWVudC10by10IGZyb20tcHVycGxlLTkwMC8yMCB0by10cmFuc3BhcmVudCBwb2ludGVyLWV2ZW50cy1ub25lIj48L2Rpdj4KICAgICAgPC9oZWFkZXI+CiAgICA8L2Rpdj4KICApOwp9Cg=="}
+"use client";
+import { motion } from "framer-motion";
+import { Hexagon, ArrowLeft } from "lucide-react";
+import Link from "next/link";
+
+export default function EpicMagicHeroes() {
+  const title = "麻瓜專用AI外掛";
+  const subtitle = "將複雜的「提示詞」封裝成一鍵釋放的魔法。應付奧客、推掉飯局、自動寫報告，你的無腦求生指南。";
+
+  return (
+    <div className="min-h-screen bg-[#030108] flex flex-col items-center justify-center p-4 font-serif overflow-hidden">
+      {/* Back to Home */}
+      <Link href="/" className="fixed top-6 left-6 z-50 flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 hover:bg-purple-500/20 transition-all text-xs font-bold text-purple-300 font-sans">
+        <ArrowLeft className="w-4 h-4" /> 返回學院首頁
+      </Link>
+
+      {/* 🔮 方案 1：大賢者的魔法陣 (The Arcane Summoning Circle) */}
+      <header className="relative text-center flex flex-col items-center justify-center py-40 w-full min-h-[600px]">
+        {/* 背景旋轉魔法陣 - 增加對比度與發光 */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <motion.div 
+            animate={{ rotate: 360 }} 
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            className="relative w-[350px] h-[350px] md:w-[600px] md:h-[600px] flex items-center justify-center"
+          >
+            {/* 最外層光環 */}
+            <div className="absolute inset-0 border-[2px] border-purple-500/40 rounded-full shadow-[0_0_50px_rgba(168,85,247,0.3)]"></div>
+            
+            {/* 中層虛線環 */}
+            <div className="absolute w-[92%] h-[92%] border-[1px] border-purple-400/30 border-dashed rounded-full"></div>
+            
+            {/* 內層六角形 - 強制高對比 */}
+            <Hexagon className="absolute w-[80%] h-[80%] text-purple-500/40 stroke-[1]" />
+            
+            {/* 最內層核心環 */}
+            <div className="absolute w-[60%] h-[60%] border-[1px] border-purple-500/50 rounded-full"></div>
+            
+            {/* 額外裝飾：四角定位符 */}
+            {[0, 90, 180, 270].map((angle) => (
+              <div 
+                key={angle}
+                style={{ transform: `rotate(${angle}deg) translateY(-50%)` }}
+                className="absolute top-1/2 w-4 h-1 bg-purple-400/60 shadow-[0_0_10px_rgba(168,85,247,0.8)]"
+              ></div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* 標題文字 - 強化漸層與發光 */}
+        <motion.h1 
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className="text-6xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-purple-200 to-purple-600 drop-shadow-[0_0_40px_rgba(168,85,247,1)] tracking-tighter mb-8 relative z-20"
+        >
+          {title}
+        </motion.h1>
+        
+        <motion.p 
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="text-purple-100/80 max-w-2xl text-xl font-sans relative z-20 px-4 leading-relaxed"
+        >
+          {subtitle}
+        </motion.p>
+
+        {/* 底部發光基座 */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[200px] bg-gradient-to-t from-purple-900/20 to-transparent pointer-events-none"></div>
+      </header>
+    </div>
+  );
+}

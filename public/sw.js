@@ -1,1 +1,60 @@
-{"data":"Y29uc3QgQ0FDSEVfTkFNRSA9ICJhaS1tYWdpYy12MyI7IC8vIEluY3JlbWVudCB2ZXJzaW9uCgpzZWxmLmFkZEV2ZW50TGlzdGVuZXIoImluc3RhbGwiLCAoZXZlbnQpID0+IHsKICBzZWxmLnNraXBXYWl0aW5nKCk7Cn0pOwoKc2VsZi5hZGRFdmVudExpc3RlbmVyKCJhY3RpdmF0ZSIsIChldmVudCkgPT4gewogIGV2ZW50LndhaXRVbnRpbCgKICAgIGNhY2hlcy5rZXlzKCkudGhlbigoY2FjaGVOYW1lcykgPT4gewogICAgICByZXR1cm4gUHJvbWlzZS5hbGwoCiAgICAgICAgY2FjaGVOYW1lcy5tYXAoKGNhY2hlTmFtZSkgPT4gewogICAgICAgICAgaWYgKGNhY2hlTmFtZSAhPT0gQ0FDSEVfTkFNRSkgewogICAgICAgICAgICBjb25zb2xlLmxvZygiW1NXXSBEZWxldGluZyBvbGQgY2FjaGU6IiwgY2FjaGVOYW1lKTsKICAgICAgICAgICAgcmV0dXJuIGNhY2hlcy5kZWxldGUoY2FjaGVOYW1lKTsKICAgICAgICAgIH0KICAgICAgICB9KQogICAgICApOwogICAgfSkKICApOwogIHNlbGYuY2xpZW50cy5jbGFpbSgpOwp9KTsKCnNlbGYuYWRkRXZlbnRMaXN0ZW5lcigiZmV0Y2giLCAoZXZlbnQpID0+IHsKICBpZiAoZXZlbnQucmVxdWVzdC5tZXRob2QgIT09ICdHRVQnKSByZXR1cm47CgogIC8vIE9wdGltaXplZCBzdHJhdGVneSBmb3IgbmF2aWdhdGlvbiAoSFRNTCBwYWdlcykKICBpZiAoZXZlbnQucmVxdWVzdC5tb2RlID09PSAnbmF2aWdhdGUnKSB7CiAgICBldmVudC5yZXNwb25kV2l0aCgKICAgICAgZmV0Y2goZXZlbnQucmVxdWVzdCwgeyBjYWNoZTogJ25vLXN0b3JlJyB9KQogICAgICAgIC50aGVuKChyZXNwb25zZSkgPT4gewogICAgICAgICAgLy8gRG8gTk9UIGNhY2hlIHRoZSBuYXZpZ2F0aW9uIHJlc3BvbnNlIHBlcm1hbmVudGx5IHRvIGVuc3VyZSBsYXRlc3QgdmVyc2lvbgogICAgICAgICAgcmV0dXJuIHJlc3BvbnNlOwogICAgICAgIH0pCiAgICAgICAgLmNhdGNoKCgpID0+IHsKICAgICAgICAgIC8vIE9ubHkgaWYgb2ZmbGluZSwgZmFsbCBiYWNrIHRvIHRoZSBsYXN0IGNhY2hlZCB2ZXJzaW9uIG9mIHRoZSBwYWdlCiAgICAgICAgICByZXR1cm4gY2FjaGVzLm1hdGNoKGV2ZW50LnJlcXVlc3QpOwogICAgICAgIH0pCiAgICApOwogICAgcmV0dXJuOwogIH0KCiAgLy8gU3RhbmRhcmQgTmV0d29yay1GaXJzdCBzdHJhdGVneSBmb3Igb3RoZXIgYXNzZXRzIChKUywgQ1NTLCBJbWFnZXMpCiAgZXZlbnQucmVzcG9uZFdpdGgoCiAgICBmZXRjaChldmVudC5yZXF1ZXN0KQogICAgICAudGhlbigocmVzcG9uc2UpID0+IHsKICAgICAgICBpZiAocmVzcG9uc2UgJiYgcmVzcG9uc2Uuc3RhdHVzID09PSAyMDAgJiYgcmVzcG9uc2UudHlwZSA9PT0gJ2Jhc2ljJykgewogICAgICAgICAgY29uc3QgcmVzcG9uc2VUb0NhY2hlID0gcmVzcG9uc2UuY2xvbmUoKTsKICAgICAgICAgIGNhY2hlcy5vcGVuKENBQ0hFX05BTUUpLnRoZW4oKGNhY2hlKSA9PiB7CiAgICAgICAgICAgIGNhY2hlLnB1dChldmVudC5yZXF1ZXN0LCByZXNwb25zZVRvQ2FjaGUpOwogICAgICAgICAgfSk7CiAgICAgICAgfQogICAgICAgIHJldHVybiByZXNwb25zZTsKICAgICAgfSkKICAgICAgLmNhdGNoKCgpID0+IHsKICAgICAgICByZXR1cm4gY2FjaGVzLm1hdGNoKGV2ZW50LnJlcXVlc3QpOwogICAgICB9KQogICk7Cn0pOwoKCg=="}
+const CACHE_NAME = "ai-magic-v3"; // Increment version
+
+self.addEventListener("install", (event) => {
+  self.skipWaiting();
+});
+
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          if (cacheName !== CACHE_NAME) {
+            console.log("[SW] Deleting old cache:", cacheName);
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
+  );
+  self.clients.claim();
+});
+
+self.addEventListener("fetch", (event) => {
+  if (event.request.method !== 'GET') return;
+
+  // Optimized strategy for navigation (HTML pages)
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request, { cache: 'no-store' })
+        .then((response) => {
+          // Do NOT cache the navigation response permanently to ensure latest version
+          return response;
+        })
+        .catch(() => {
+          // Only if offline, fall back to the last cached version of the page
+          return caches.match(event.request);
+        })
+    );
+    return;
+  }
+
+  // Standard Network-First strategy for other assets (JS, CSS, Images)
+  event.respondWith(
+    fetch(event.request)
+      .then((response) => {
+        if (response && response.status === 200 && response.type === 'basic') {
+          const responseToCache = response.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
+        }
+        return response;
+      })
+      .catch(() => {
+        return caches.match(event.request);
+      })
+  );
+});
+
+

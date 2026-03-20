@@ -1,1 +1,18 @@
-{"data":"aW1wb3J0IHR5cGUgeyBOZXh0Q29uZmlnIH0gZnJvbSAibmV4dCI7Cgpjb25zdCBuZXh0Q29uZmlnOiBOZXh0Q29uZmlnID0gewogIC8qIGNvbmZpZyBvcHRpb25zIGhlcmUgKi8KICBoZWFkZXJzOiBhc3luYyAoKSA9PiBbCiAgICB7CiAgICAgIHNvdXJjZTogJy86cGF0aConLAogICAgICBoZWFkZXJzOiBbCiAgICAgICAgewogICAgICAgICAga2V5OiAnQ2FjaGUtQ29udHJvbCcsCiAgICAgICAgICB2YWx1ZTogJ25vLWNhY2hlLCBuby1zdG9yZSwgbWF4LWFnZT0wLCBtdXN0LXJldmFsaWRhdGUnLAogICAgICAgIH0sCiAgICAgIF0sCiAgICB9LAogIF0sCn07CgpleHBvcnQgZGVmYXVsdCBuZXh0Q29uZmlnOwo="}
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  /* config options here */
+  headers: async () => [
+    {
+      source: '/:path*',
+      headers: [
+        {
+          key: 'Cache-Control',
+          value: 'no-cache, no-store, max-age=0, must-revalidate',
+        },
+      ],
+    },
+  ],
+};
+
+export default nextConfig;

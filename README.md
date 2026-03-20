@@ -1,1 +1,39 @@
-{"data":"IyBBSSBNYWdpYyBBY2FkZW15Cgo+IFshVElQXQo+ICoq5bCI5qGI6YCy5bqm6L+96LmkKio6IOacrOWwiOahiOS9v+eUqCBbUFJPR1JFU1MubWRdKC4vUFJPR1JFU1MubWQpIOe0gOmMhOacgOaWsOmWi+eZvOeLgOaFi+iIh+W+hei+puS6i+mgheOAguavj+S4gOS9jemWi+eZvOS7o+eQhuS6uiAoQWdlbnQpIOWcqOW3peS9nOe1kOadn+WJjeaHieabtOaWsOipsuaWh+S7tuOAggoKIyMgR2V0dGluZyBTdGFydGVkCgpGaXJzdCwgcnVuIHRoZSBkZXZlbG9wbWVudCBzZXJ2ZXI6CgpgYGBiYXNoCm5wbSBydW4gZGV2CiMgb3IKeWFybiBkZXYKIyBvcgpwbnBtIGRldgojIG9yCmJ1biBkZXYKYGBgCgpPcGVuIFtodHRwOi8vbG9jYWxob3N0OjMwMDBdKGh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCkgd2l0aCB5b3VyIGJyb3dzZXIgdG8gc2VlIHRoZSByZXN1bHQuCgpZb3UgY2FuIHN0YXJ0IGVkaXRpbmcgdGhlIHBhZ2UgYnkgbW9kaWZ5aW5nIGBhcHAvcGFnZS50c3hgLiBUaGUgcGFnZSBhdXRvLXVwZGF0ZXMgYXMgeW91IGVkaXQgdGhlIGZpbGUuCgpUaGlzIHByb2plY3QgdXNlcyBbYG5leHQvZm9udGBdKGh0dHBzOi8vbmV4dGpzLm9yZy9kb2NzL2FwcC9idWlsZGluZy15b3VyLWFwcGxpY2F0aW9uL29wdGltaXppbmcvZm9udHMpIHRvIGF1dG9tYXRpY2FsbHkgb3B0aW1pemUgYW5kIGxvYWQgW0dlaXN0XShodHRwczovL3ZlcmNlbC5jb20vZm9udCksIGEgbmV3IGZvbnQgZmFtaWx5IGZvciBWZXJjZWwuCgojIyBMZWFybiBNb3JlCgpUbyBsZWFybiBtb3JlIGFib3V0IE5leHQuanMsIHRha2UgYSBsb29rIGF0IHRoZSBmb2xsb3dpbmcgcmVzb3VyY2VzOgoKLSBbTmV4dC5qcyBEb2N1bWVudGF0aW9uXShodHRwczovL25leHRqcy5vcmcvZG9jcykgLSBsZWFybiBhYm91dCBOZXh0LmpzIGZlYXR1cmVzIGFuZCBBUEkuCi0gW0xlYXJuIE5leHQuanNdKGh0dHBzOi8vbmV4dGpzLm9yZy9sZWFybikgLSBhbiBpbnRlcmFjdGl2ZSBOZXh0LmpzIHR1dG9yaWFsLgoKWW91IGNhbiBjaGVjayBvdXQgW3RoZSBOZXh0LmpzIEdpdEh1YiByZXBvc2l0b3J5XShodHRwczovL2dpdGh1Yi5jb20vdmVyY2VsL25leHQuanMpIC0geW91ciBmZWVkYmFjayBhbmQgY29udHJpYnV0aW9ucyBhcmUgd2VsY29tZSEKCiMjIERlcGxveSBvbiBWZXJjZWwKClRoZSBlYXNpZXN0IHdheSB0byBkZXBsb3kgeW91ciBOZXh0LmpzIGFwcCBpcyB0byB1c2UgdGhlIFtWZXJjZWwgUGxhdGZvcm1dKGh0dHBzOi8vdmVyY2VsLmNvbS9uZXc/dXRtX21lZGl1bT1kZWZhdWx0LXRlbXBsYXRlJmZpbHRlcj1uZXh0LmpzJnV0bV9zb3VyY2U9Y3JlYXRlLW5leHQtYXBwJnV0bV9jYW1wYWlnbj1jcmVhdGUtbmV4dC1hcHAtcmVhZG1lKSBmcm9tIHRoZSBjcmVhdG9ycyBvZiBOZXh0LmpzLgoKQ2hlY2sgb3V0IG91ciBbTmV4dC5qcyBkZXBsb3ltZW50IGRvY3VtZW50YXRpb25dKGh0dHBzOi8vbmV4dGpzLm9yZy9kb2NzL2FwcC9idWlsZGluZy15b3VyLWFwcGxpY2F0aW9uL2RlcGxveWluZykgZm9yIG1vcmUgZGV0YWlscy4K"}
+# AI Magic Academy
+
+> [!TIP]
+> **專案進度追蹤**: 本專案使用 [PROGRESS.md](./PROGRESS.md) 紀錄最新開發狀態與待辦事項。每一位開發代理人 (Agent) 在工作結束前應更新該文件。
+
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

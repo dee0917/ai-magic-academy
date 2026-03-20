@@ -1,1 +1,14 @@
-{"data":"Y29uc3QgZnMgPSByZXF1aXJlKCdmcycpOwpsZXQgY29kZSA9IGZzLnJlYWRGaWxlU3luYygnc3JjL2FwcC9wYWdlLnRzeCcsICd1dGY4Jyk7CgovLyBUaGUgcmVnZXggd2lsbCBtYXRjaDogXCR7aW5wdXRzLltwcm9wZXJ0eU5hbWVdIHx8ICdmYWxsYmFjayd9Ci8vIGFjY291bnRpbmcgZm9yIGFueSBzcGFjaW5nIGluc2lkZSB0aGUgJHt9CmNvZGUgPSBjb2RlLnJlcGxhY2UoL1wkXHtccyppbnB1dHNcLlthLXpBLVowLTlfXStccypcfFx8XHMqJ1teJ10rJ1xzKlx9L2csICdceDAxJCZceDAyJyk7CmNvZGUgPSBjb2RlLnJlcGxhY2UoL1wkXHtccyppbnB1dHNcLlthLXpBLVowLTlfXStccypcfFx8XHMqXCJbXlwiXStcIlxzKlx9L2csICdceDAxJCZceDAyJyk7CmNvZGUgPSBjb2RlLnJlcGxhY2UoL1wkXHtccyppbnB1dHNcLlthLXpBLVowLTlfXStccypcfS9nLCAnXHgwMSQmXHgwMicpOwoKLy8gQ2xlYW4gdXAgZG91YmxlIGNoYXJhY3RlcnMgaWYgYW55CmNvZGUgPSBjb2RlLnJlcGxhY2UoL1x4MDFceDAxL2csICdceDAxJykucmVwbGFjZSgvXHgwMlx4MDIvZywgJ1x4MDInKTsKCmZzLndyaXRlRmlsZVN5bmMoJ3NyYy9hcHAvcGFnZS50c3gnLCBjb2RlKTsKY29uc29sZS5sb2coJ1JlZ2V4IGFwcGxpZWQgcHJvcGVybHknKTsK"}
+const fs = require('fs');
+let code = fs.readFileSync('src/app/page.tsx', 'utf8');
+
+// The regex will match: \${inputs.[propertyName] || 'fallback'}
+// accounting for any spacing inside the ${}
+code = code.replace(/\$\{\s*inputs\.[a-zA-Z0-9_]+\s*\|\|\s*'[^']+'\s*\}/g, '\x01$&\x02');
+code = code.replace(/\$\{\s*inputs\.[a-zA-Z0-9_]+\s*\|\|\s*\"[^\"]+\"\s*\}/g, '\x01$&\x02');
+code = code.replace(/\$\{\s*inputs\.[a-zA-Z0-9_]+\s*\}/g, '\x01$&\x02');
+
+// Clean up double characters if any
+code = code.replace(/\x01\x01/g, '\x01').replace(/\x02\x02/g, '\x02');
+
+fs.writeFileSync('src/app/page.tsx', code);
+console.log('Regex applied properly');

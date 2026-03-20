@@ -1,1 +1,17 @@
-{"data":"ewogICJuYW1lIjogIkFJIOmtlOazleWtuOmZoiIsCiAgInNob3J0X25hbWUiOiAiQUkg6a2U5rOVIiwKICAiZGVzY3JpcHRpb24iOiAi5o+Q5Y2H6IG35aC055Sf5a2Y5Yqb55qEIEFJIOWSkuiqnuWcluabuOmkqCIsCiAgInN0YXJ0X3VybCI6ICIvIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjMGYwODFjIiwKICAidGhlbWVfY29sb3IiOiAiI2E4NTVmNyIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogIi9pY29uLTUxMng1MTIucG5nIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciLAogICAgICAicHVycG9zZSI6ICJhbnkgbWFza2FibGUiCiAgICB9CiAgXQp9Cg=="}
+{
+  "name": "AI 魔法學院",
+  "short_name": "AI 魔法",
+  "description": "提升職場生存力的 AI 咒語圖書館",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f081c",
+  "theme_color": "#a855f7",
+  "icons": [
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

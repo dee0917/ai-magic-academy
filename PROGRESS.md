@@ -1,1 +1,61 @@
-{"data":"IyBBSSBNYWdpYyBBY2FkZW15IC0g5bCI5qGI6YCy5bqm6L+96LmkIChQcm9ncmVzcyBUcmFja2luZykKCj4gWyFJTVBPUlRBTlRdCj4gKirntaYgQUkg5Luj55CG5Lq655qE5oyH5LukIChBZ2VudCBDb21tYW5kcykqKjoKPiDmr4/mrKHlrozmiJDlt6XkvZzpmo7mrrXlvozvvIzoq4vli5nlv4Xmm7TmlrDmraTmqpTmoYjnmoTjgIzmnIDmlrDpgLLluqbjgI3oiIfjgIzlvoXovqbmuIXllq7jgI3vvIzku6Xnorrkv53kuI3lkIzpmo7mrrXnmoTku6PnkIbkurrog73nhKHnuKvmjqXou4zjgIIKCi0tLQoKIyMg8J+agCDmnIDmlrDpgLLluqYgKEN1cnJlbnQgU3RhdHVzKQoqKuacgOW+jOabtOaWsOaZgumWkyoqOiAyMDI2LTAzLTEyIDAyOjM1IChDU1QpCioq5pu05paw5Luj55CG5Lq6Kio6IEFudGlncmF2aXR5CgojIyMgMS4g5rex5bqm5L+u5b6p54CP6Ka95Zmo5b+r5Y+W5ZWP6aGMIChFbmhhbmNlZCBDYWNoZSBJbnZhbGlkYXRpb24pIC0g5bey5YSq5YyWCi0gKirop6PmsbrmlrnmoYgqKjoKICAgIC0gKipTVyDpgo/ovK/lhKrljJYqKjog5Yqg5YWlIGBjYWNoZTogJ25vLXN0b3JlJ2Ag6IiHIGBhaS1tYWdpYy12M2Ag54mI5pys5o6n5Yi244CCCiAgICAtICoq5YmN56uv6YeN6LyJ5qmf5Yi2Kio6IOebo+iBvSBgY29udHJvbGxlcmNoYW5nZWAg5a+m54++54Sh5oSf6Ieq5YuV5pu05paw44CCCgojIyMgMi4gVUkg6KaW6Ka65aSn5pS554mIIChQcmVtaXVtIFVJIE92ZXJoYXVsKSAtIOW3suWujOaIkAotICoq5aSn5rCj5bGk54ef6YCgKio6IOWKoOWFpemggumDqOe0q+iJsumtlOazleWFieaaiCAoUmFkaWFsIEdyYWRpZW50KSDoiIfog4zmma/lsaTmrKHmhJ/jgIIKLSAqKuWcluaomeWWmumGkioqOiDngrrmiYDmnInprZTms5UgSWNvbiDliqDlhaXli5XmhYvnmbzlhYkgKEdsb3cvRHJvcCBTaGFkb3cpIOiIh+aHuOa1ruaUvuWkp+eJueaViOOAggotICoq6a2U5rOV5ruR6bygKio6IOWvpuS9nOiHquWumue+qeOAjOmtlOazlea4uOaomeOAje+8jOWFt+WCmeW5s+a7kei3n+maqOOAgeaHuOa1ruaUvuWkp+OAgem7nuaTiue4ruaUvuiIh+WklueZvOWFieaViOaenO+8jOWujOWFqOWPluS7o+ezu+e1semgkOiorea4uOaomeOAggotICoq5aGU576F54mM6YeN5aGRKio6IAogICAgLSDlr6bnj77nq4vpq5TnjrvnkoPmk6zmhYsgKFRydWUgR2xhc3Ntb3JwaGlzbSkg6IiH5YWn6Zmw5b2x44CCCiAgICAtIOWKoOWFpeWFg+e0oOihgOiEiCAoVG9wIEJvcmRlciBBY2NlbnQpIOWNgOWIhumtlOazleWxrOaAp+OAggogICAgLSDlvLfljJbmh7jmta7lj43ppYsgKEFnZ3Jlc3NpdmUgSG92ZXIpIOS9v+WNoeeJjOWFt+WCmeeUn+WRveWKm+OAggoKLSAqKue0sOevgOWEquWMlioqOgogICAgLSAqKldvcmtzaG9wKio6IOiLsembhOWkp+Wtl+WinuW8t+mck+iZueaumOW9seOAgei8uOWFpeahhuWKoOWFpemtlOWKm+WFheiDvSAoRm9jdXMgQXVyYSnjgIIKICAgIC0gKirmlr3ms5XmjInpiJUqKjog5bCO5YWl5ZG85ZC45oSf5ry45bGk5YuV55WrIChCdXR0b24gUHVsc2Up44CCCiAgICAtICoq5ZKS6Kqe57WC56uv5qmfKio6IOmgkOimveWNgOmHjeWhkeeCuumnreWuouS7u+WLmemiqOagvOeahOiouuaWt+e1guerr+OAggoKLS0tCgojIyDpoIXnm67mqqLmn6XooaggKENoZWNrbGlzdCkKCiMjIyAzLiDli5XmhYvnhrHploDmqJnnsaQgKER5bmFtaWMgSG90IFRhZ3MpIC0g5bey5a6M5oiQCi0gKirmj5Dlj5bmqZ/liLYqKjog5ZyoIGBjdXJzZXNfZGF0YS50c3hgIOWwjuWFpSBgdGFnc2Ag5bGs5oCn77yM5Lim5ZyoIGBwYWdlLnRzeGAg5L2/55SoIGB1c2VNZW1vYCDoh6rli5XoqIjnrpfmnIDpq5jpoLvmqJnnsaTjgIIKLSAqKum7nuaTiuihjOeCuioqOiDkv67mraPkuobpu57mk4rmqJnnsaTnhKHlj43mh4nnmoTllY/poYzvvIznj77lnKjpu57pgbggYCPliqDolqpg44CBYCPlpaflrqJgIOetieaomeexpOacg+eyvua6lumBjua/vuWwjeaHieeahOmtlOazleOAggoKLS0tCgojIyDpoIXnm67mqqLmn6XooaggKENoZWNrbGlzdCkKCiMjIyDinIUg5bey5a6M5oiQIChDb21wbGV0ZWQpCi0gW3hdIOaVuOaTmuino+iApiAoYGN1cnNlc19kYXRhLnRzeGApCi0gW3hdIOWIhumggeWwjuimvSAoVGFiIE5hdmlnYXRpb24pCi0gW3hdIOWLleaFi+aomeexpOaPkOWPluiIh+mBjua/viAoRHluYW1pYyBUYWdzKQotIFt4XSDli5XmhYvlj4PmlbjntoHlrproiIfpq5jkuq4gKER5bmFtaWMgVmFyaWFibGVzKQotIFt4XSAqKltORVddKiog6Kej5rG654CP6Ka95Zmo5b+r5Y+WIChOZXR3b3JrLUZpcnN0ICsgQXV0by1SZWxvYWQpCi0gW3hdICoqW05FV10qKiBVSSDoppboprrlpKfmlLnniYggKE1hZ2ljYWwgQXRtb3NwaGVyZSAmIFByZW1pdW0gRGVzaWduKQotIFt4XSBHaXQg6Lqr5YiG6YWN572u6IiHIEdpdEh1YiDpg6jnvbIKLSBbeF0g5oCn6IO96aCQ5YSq5YyWIChUYWlsd2luZCA0IOW8leaTjuWEquWMlikKLSBbIF0g6LO854mp6LuK6IiH57WQ5biz5rWB56iL6IiHIFVJIOino+iApiAoU3RhdGUgTWFuYWdlbWVudCBzZXBhcmF0aW9uKQotIFsgXSDph5HpoY3lvoznq6/pqZforYnpgo/ovK8gKFBIUC9XUCBzaWRlIHZlcmlmaWNhdGlvbikKLSBbIF0g5pSv5o+05aSa6Kqe6KiA5ZKS6Kqe5YiH5o+bIChNdWx0aS1sYW5ndWFnZSBwcm9tcHRzKQoKLS0tCgojIyDwn5ug77iPIOmWi+eZvOWCmeiouyAoRGV2IE5vdGVzKQotIOeVtuWJjeeahOW/q+WPluetlueVpeeCuuWEquWFiOipouWVj+e2sui3r++8jOiLpeaWt+e2suWJh+Wwi+aJvuW/q+WPlu+8jOmBqeWQiOmgu+e5geabtOaWsOeahOaHieeUqOOAggotIOavj+asoeS/ruaUuSBgc3cuanNgIOaZgu+8jOW7uuitsOWwhyBgQ0FDSEVfTkFNRWAg55qE54mI5pys6JmfICjlpoIgYHYxYCDoroogYHYyYCkg6YGe5aKe44CCCg=="}
+# AI Magic Academy - 專案進度追蹤 (Progress Tracking)
+
+> [!IMPORTANT]
+> **給 AI 代理人的指令 (Agent Commands)**:
+> 每次完成工作階段後，請務必更新此檔案的「最新進度」與「待辦清單」，以確保不同階段的代理人能無縫接軌。
+
+---
+
+## 🚀 最新進度 (Current Status)
+**最後更新時間**: 2026-03-12 02:35 (CST)
+**更新代理人**: Antigravity
+
+### 1. 深度修復瀏覽器快取問題 (Enhanced Cache Invalidation) - 已優化
+- **解決方案**:
+    - **SW 邏輯優化**: 加入 `cache: 'no-store'` 與 `ai-magic-v3` 版本控制。
+    - **前端重載機制**: 監聽 `controllerchange` 實現無感自動更新。
+
+### 2. UI 視覺大改版 (Premium UI Overhaul) - 已完成
+- **大氣層營造**: 加入頂部紫色魔法光暈 (Radial Gradient) 與背景層次感。
+- **圖標喚醒**: 為所有魔法 Icon 加入動態發光 (Glow/Drop Shadow) 與懸浮放大特效。
+- **魔法滑鼠**: 實作自定義「魔法游標」，具備平滑跟隨、懸浮放大、點擊縮放與外發光效果，完全取代系統預設游標。
+- **塔羅牌重塑**: 
+    - 實現立體玻璃擬態 (True Glassmorphism) 與內陰影。
+    - 加入元素血脈 (Top Border Accent) 區分魔法屬性。
+    - 強化懸浮反饋 (Aggressive Hover) 使卡牌具備生命力。
+
+- **細節優化**:
+    - **Workshop**: 英雄大字增強霓虹殘影、輸入框加入魔力充能 (Focus Aura)。
+    - **施法按鈕**: 導入呼吸感漸層動畫 (Button Pulse)。
+    - **咒語終端機**: 預覽區重塑為駭客任務風格的診斷終端。
+
+---
+
+## 項目檢查表 (Checklist)
+
+### 3. 動態熱門標籤 (Dynamic Hot Tags) - 已完成
+- **提取機制**: 在 `curses_data.tsx` 導入 `tags` 屬性，並在 `page.tsx` 使用 `useMemo` 自動計算最高頻標籤。
+- **點擊行為**: 修正了點擊標籤無反應的問題，現在點選 `#加薪`、`#奧客` 等標籤會精準過濾對應的魔法。
+
+---
+
+## 項目檢查表 (Checklist)
+
+### ✅ 已完成 (Completed)
+- [x] 數據解耦 (`curses_data.tsx`)
+- [x] 分頁導覽 (Tab Navigation)
+- [x] 動態標籤提取與過濾 (Dynamic Tags)
+- [x] 動態參數綁定與高亮 (Dynamic Variables)
+- [x] **[NEW]** 解決瀏覽器快取 (Network-First + Auto-Reload)
+- [x] **[NEW]** UI 視覺大改版 (Magical Atmosphere & Premium Design)
+- [x] Git 身分配置與 GitHub 部署
+- [x] 性能預優化 (Tailwind 4 引擎優化)
+- [ ] 購物車與結帳流程與 UI 解耦 (State Management separation)
+- [ ] 金額後端驗證邏輯 (PHP/WP side verification)
+- [ ] 支援多語言咒語切換 (Multi-language prompts)
+
+---
+
+## 🛠️ 開發備註 (Dev Notes)
+- 當前的快取策略為優先詢問網路，若斷網則尋找快取，適合頻繁更新的應用。
+- 每次修改 `sw.js` 時，建議將 `CACHE_NAME` 的版本號 (如 `v1` 變 `v2`) 遞增。

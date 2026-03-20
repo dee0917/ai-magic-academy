@@ -1,1 +1,5 @@
-{"data":"ewogICJmcmFtZXdvcmsiOiAibmV4dGpzIiwKICAiYnVpbGRDb21tYW5kIjogIm5leHQgYnVpbGQiLAogICJvdXRwdXREaXJlY3RvcnkiOiAiLm5leHQiCn0="}
+{
+  "framework": "nextjs",
+  "buildCommand": "next build",
+  "outputDirectory": ".next"
+}

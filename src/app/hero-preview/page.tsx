@@ -1,1 +1,123 @@
-{"data":"InVzZSBjbGllbnQiOwppbXBvcnQgeyBtb3Rpb24gfSBmcm9tICJmcmFtZXItbW90aW9uIjsKaW1wb3J0IHsgRmxhbWUsIEdob3N0LCBTaGllbGQsIFphcCwgU2t1bGwsIFNwYXJrbGVzLCBIZXhhZ29uLCBFeWUsIEZpbmdlcnByaW50LCBDcm93biB9IGZyb20gImx1Y2lkZS1yZWFjdCI7CmltcG9ydCBSZWFjdCBmcm9tICJyZWFjdCI7CgovLyDnrKblkpLnmoTmoLjlv4PniannkIbpmZDliLbvvJrmpbXnqoQgKDEyMHB4KeOAgealtemVtyAoMzgwcHgpCmNvbnN0IGJhc2VUYWxpc21hbkNsYXNzID0gInJlbGF0aXZlIG1pbi13LVsxMjBweF0gdy1bMTIwcHhdIGgtWzM4MHB4XSBmbGV4IGZsZXgtY29sIGl0ZW1zLWNlbnRlciBweS02IHB4LTIgcm91bmRlZC1zbSBjdXJzb3ItcG9pbnRlciBvdmVyZmxvdy1oaWRkZW4gZ3JvdXAgc2hyaW5rLTAgc25hcC1jZW50ZXIiOwoKLy8g57Wx5LiA55qE55u05pu45o6S54mI5byV5pOOICjpgJnmrrXmmK/pnYjprYLvvIzorpPmloflrZflvp7lj7PliLDlt6bnm7TmjpIpCmNvbnN0IFZlcnRpY2FsVGV4dEVuZ2luZSA9ICh7IHQsIGQsIHRpdGxlQ29sb3IsIGRlc2NDb2xvciB9OiB7IHQ6IHN0cmluZywgZDogc3RyaW5nLCB0aXRsZUNvbG9yOiBzdHJpbmcsIGRlc2NDb2xvcjogc3RyaW5nIH0pID0+ICgKICA8ZGl2IAogICAgY2xhc3NOYW1lPSJmbGV4LTEgdy1mdWxsIGZsZXgganVzdGlmeS1jZW50ZXIgbXQtNCByZWxhdGl2ZSB6LTEwIgogICAgc3R5bGU9e3sgd3JpdGluZ01vZGU6ICd2ZXJ0aWNhbC1ybCcsIHRleHRPcmllbnRhdGlvbjogJ3VwcmlnaHQnIH19CiAgPgogICAgey8qIOespuiGvSAo5Li75qiZ6aGMKe+8muWtl+mrlOWkp+OAgeWtl+i3nealteWvrCAqL30KICAgIDxoMyBjbGFzc05hbWU9e2B0ZXh0LTJ4bCBtZDp0ZXh0LTN4bCBmb250LWJsYWNrICR7dGl0bGVDb2xvcn0gdHJhY2tpbmctWzAuNGVtXSBsZWFkaW5nLW5vbmUgZHJvcC1zaGFkb3ctc21gfT4KICAgICAge3R9CiAgICA8L2gzPgogICAgey8qIOespuiFsyAo5Ymv5qiZ6aGMKe+8muWtl+mrlOWwj+OAgeWcqOS4u+aomemhjOW3puWBtCAo55u05pu455qE5b6M6Z2iKSAqL30KICAgIDxwIGNsYXNzTmFtZT17YHRleHQtWzEwcHhdIGZvbnQtbWVkaXVtICR7ZGVzY0NvbG9yfSB0cmFja2luZy13aWRlc3QgbGVhZGluZy10aWdodCBtbC0yIG9wYWNpdHktOTAgbWF4LWgtWzMwMHB4XSBvdmVyZmxvdy1oaWRkZW5gfT4KICAgICAge2R9CiAgICA8L3A+CiAgPC9kaXY+Cik7Cgpjb25zdCBUYWxpc21hbjEgPSAoeyB0aXRsZSwgZGVzYyB9OiB7IHRpdGxlOiBzdHJpbmcsIGRlc2M6IHN0cmluZyB9KSA9PiAoCiAgPG1vdGlvbi5kaXYgd2hpbGVIb3Zlcj17eyB5OiAtMTAgfX0gY2xhc3NOYW1lPXtgJHtiYXNlVGFsaXNtYW5DbGFzc30gYmctWyNlYWIzMDhdIGJvcmRlci0yIGJvcmRlci1bI2I0NTMwOV0gc2hhZG93LVswXzBfMjBweF9yZ2JhKDIwMiwxMzgsNCwwLjQpXWB9PgogICAgPGRpdiBjbGFzc05hbWU9ImFic29sdXRlIGluc2V0LTAgb3BhY2l0eS0xMCBiZy1bdXJsKCdodHRwczovL3d3dy50cmFuc3BhcmVudHRleHR1cmVzLmNvbS9wYXR0ZXJucy9yaWNlLXBhcGVyLTIucG5nJyldIj48L2Rpdj4KICAgIDxGbGFtZSBjbGFzc05hbWU9InctOCBoLTggdGV4dC1bIzk5MWIxYl0gei0xMCIgLz4KICAgIDxWZXJ0aWNhbFRleHRFbmdpbmUgdD17dGl0bGV9IGQ9e2Rlc2N9IHRpdGxlQ29sb3I9InRleHQtWyM3ZjFkMWRdIiBkZXNjQ29sb3I9InRleHQtWyM5OTFiMWJdIiAvPgogIDwvbW90aW9uLmRpdj4KKTsKCmNvbnN0IFRhbGlzbWFuMiA9ICh7IHRpdGxlLCBkZXNjIH06IHsgdGl0bGU6IHN0cmluZywgZGVzYzogc3RyaW5nIH0pID0+ICgKICA8bW90aW9uLmRpdiB3aGlsZUhvdmVyPXt7IHk6IC0xMCB9fSBjbGFzc05hbWU9e2Ake2Jhc2VUYWxpc21hbkNsYXNzfSBiZy1ibGFjayBib3JkZXIgYm9yZGVyLXB1cnBsZS01MDAvNTAgc2hhZG93LVswXzBfMzBweF9yZ2JhKDE2OCw4NSwyNDcsMC4zKV1gfT4KICAgIDxkaXYgY2xhc3NOYW1lPSJhYnNvbHV0ZSBpbnNldC0wIGJnLWdyYWRpZW50LXRvLWIgZnJvbS1wdXJwbGUtOTAwLzIwIHRvLXRyYW5zcGFyZW50Ij48L2Rpdj4KICAgIDxHaG9zdCBjbGFzc05hbWU9InctOCBoLTggdGV4dC1wdXJwbGUtNDAwIHotMTAgYW5pbWF0ZS1wdWxzZSIgLz4KICAgIDxWZXJ0aWNhbFRleHRFbmdpbmUgdD17dGl0bGV9IGQ9e2Rlc2N9IHRpdGxlQ29sb3I9InRleHQtcHVycGxlLTMwMCBkcm9wLXNoYWRvdy1bMF8wXzhweF9yZ2JhKDIxNiwxODAsMjU0LDAuOCldIiBkZXNjQ29sb3I9InRleHQtcHVycGxlLTUwMCIgLz4KICA8L21vdGlvbi5kaXY+Cik7Cgpjb25zdCBUYWxpc21hbjMgPSAoeyB0aXRsZSwgZGVzYyB9OiB7IHRpdGxlOiBzdHJpbmcsIGRlc2M6IHN0cmluZyB9KSA9PiAoCiAgPG1vdGlvbi5kaXYgd2hpbGVIb3Zlcj17eyB5OiAtMTAgfX0gY2xhc3NOYW1lPXtgJHtiYXNlVGFsaXNtYW5DbGFzc30gYmctWyMzZjBmMGZdIGJvcmRlciBib3JkZXItcmVkLTYwMCBzaGFkb3ctW2luc2V0XzBfMF8zMHB4X3JnYmEoMTg1LDI4LDI4LDAuNCldYH0+CiAgICA8U2t1bGwgY2xhc3NOYW1lPSJ3LTggaC04IHRleHQtcmVkLTUwMCB6LTEwIGRyb3Atc2hhZG93LVswXzBfOHB4X3JnYmEoMjIwLDM4LDM4LDAuOCldIiAvPgogICAgPFZlcnRpY2FsVGV4dEVuZ2luZSB0PXt0aXRsZX0gZD17ZGVzY30gdGl0bGVDb2xvcj0idGV4dC1yZWQtNDAwIHRyYWNraW5nLVswLjVlbV0iIGRlc2NDb2xvcj0idGV4dC1yZWQtNjAwLzgwIiAvPgogIDwvbW90aW9uLmRpdj4KKTsKCmNvbnN0IFRhbGlzbWFuNCA9ICh7IHRpdGxlLCBkZXNjIH06IHsgdGl0bGU6IHN0cmluZywgZGVzYzogc3RyaW5nIH0pID0+ICgKICA8bW90aW9uLmRpdiB3aGlsZUhvdmVyPXt7IHk6IC0xMCB9fSBjbGFzc05hbWU9e2Ake2Jhc2VUYWxpc21hbkNsYXNzfSBiZy1lbWVyYWxkLTk1MC80MCBiYWNrZHJvcC1ibHVyLW1kIGJvcmRlciBib3JkZXItZW1lcmFsZC01MDAvNTAgc2hhZG93LVswXzBfMjBweF9yZ2JhKDE2LDE4NSwxMjksMC4yKV1gfT4KICAgIDxIZXhhZ29uIGNsYXNzTmFtZT0idy04IGgtOCB0ZXh0LWVtZXJhbGQtNDAwIHotMTAiIC8+CiAgICA8VmVydGljYWxUZXh0RW5naW5lIHQ9e3RpdGxlfSBkPXtkZXNjfSB0aXRsZUNvbG9yPSJ0ZXh0LWVtZXJhbGQtMjAwIGRyb3Atc2hhZG93LVswXzBfNXB4X3JnYmEoMTEwLDIzMSwxODMsMC44KV0iIGRlc2NDb2xvcj0idGV4dC1lbWVyYWxkLTUwMCIgLz4KICA8L21vdGlvbi5kaXY+Cik7Cgpjb25zdCBUYWxpc21hbjUgPSAoeyB0aXRsZSwgZGVzYyB9OiB7IHRpdGxlOiBzdHJpbmcsIGRlc2M6IHN0cmluZyB9KSA9PiAoCiAgPG1vdGlvbi5kaXYgd2hpbGVIb3Zlcj17eyB5OiAtMTAgfX0gY2xhc3NOYW1lPXtgJHtiYXNlVGFsaXNtYW5DbGFzc30gYmctc2xhdGUtOTAwIGJvcmRlci1sLTIgYm9yZGVyLWN5YW4tNTAwIGJvcmRlci1yLTIgYm9yZGVyLXBpbmstNTAwYH0+CiAgICA8WmFwIGNsYXNzTmFtZT0idy04IGgtOCB0ZXh0LWN5YW4tNDAwIHotMTAiIC8+CiAgICA8VmVydGljYWxUZXh0RW5naW5lIHQ9e3RpdGxlfSBkPXtkZXNjfSB0aXRsZUNvbG9yPSJ0ZXh0LXdoaXRlIGZvbnQtbW9ubyBtaXgtYmxlbmQtZGlmZmVyZW5jZSIgZGVzY0NvbG9yPSJ0ZXh0LWN5YW4tNDAwIGZvbnQtbW9ubyIgLz4KICA8L21vdGlvbi5kaXY+Cik7Cgpjb25zdCBUYWxpc21hbjYgPSAoeyB0aXRsZSwgZGVzYyB9OiB7IHRpdGxlOiBzdHJpbmcsIGRlc2M6IHN0cmluZyB9KSA9PiAoCiAgPG1vdGlvbi5kaXYgd2hpbGVIb3Zlcj17eyB5OiAtMTAgfX0gY2xhc3NOYW1lPXtgJHtiYXNlVGFsaXNtYW5DbGFzc30gYmctc2xhdGUtMTAwIGJvcmRlciBib3JkZXItc2xhdGUtNDAwIHNoYWRvdy1bMF8wXzIwcHhfcmdiYSgyNTUsMjU1LDI1NSwwLjEpXWB9PgogICAgPFNoaWVsZCBjbGFzc05hbWU9InctOCBoLTggdGV4dC1zbGF0ZS04MDAgei0xMCIgLz4KICAgIDxWZXJ0aWNhbFRleHRFbmdpbmUgdD17dGl0bGV9IGQ9e2Rlc2N9IHRpdGxlQ29sb3I9InRleHQtc2xhdGUtOTAwIiBkZXNjQ29sb3I9InRleHQtc2xhdGUtNTAwIiAvPgogIDwvbW90aW9uLmRpdj4KKTsKCmNvbnN0IFRhbGlzbWFuNyA9ICh7IHRpdGxlLCBkZXNjIH06IHsgdGl0bGU6IHN0cmluZywgZGVzYzogc3RyaW5nIH0pID0+ICgKICA8bW90aW9uLmRpdiB3aGlsZUhvdmVyPXt7IHk6IC0xMCB9fSBjbGFzc05hbWU9e2Ake2Jhc2VUYWxpc21hbkNsYXNzfSBiZy1ibHVlLTk1MCBib3JkZXIgYm9yZGVyLWJsdWUtNDAwLzUwIHNoYWRvdy1baW5zZXRfMF8wXzE1cHhfcmdiYSg5NiwxNjUsMjUwLDAuMyldYH0+CiAgICA8RXllIGNsYXNzTmFtZT0idy04IGgtOCB0ZXh0LWJsdWUtMzAwIHotMTAiIC8+CiAgICA8VmVydGljYWxUZXh0RW5naW5lIHQ9e3RpdGxlfSBkPXtkZXNjfSB0aXRsZUNvbG9yPSJ0ZXh0LWJsdWUtMTAwIGRyb3Atc2hhZG93LVswXzBfNXB4X3JnYmEoMTQ3LDE5NywyNTMsMC44KV0iIGRlc2NDb2xvcj0idGV4dC1ibHVlLTQwMCIgLz4KICA8L21vdGlvbi5kaXY+Cik7Cgpjb25zdCBUYWxpc21hbjggPSAoeyB0aXRsZSwgZGVzYyB9OiB7IHRpdGxlOiBzdHJpbmcsIGRlc2M6IHN0cmluZyB9KSA9PiAoCiAgPG1vdGlvbi5kaXYgd2hpbGVIb3Zlcj17eyB5OiAtMTAgfX0gY2xhc3NOYW1lPXtgJHtiYXNlVGFsaXNtYW5DbGFzc30gYmctdHJhbnNwYXJlbnQgYmFja2Ryb3AtYmx1ci1zbSBib3JkZXItWzAuNXB4XSBib3JkZXItd2hpdGUvMjAgc2hhZG93LVswXzBfMTVweF9yZ2JhKDI1NSwyNTUsMjU1LDAuMDUpXWB9PgogICAgPFNwYXJrbGVzIGNsYXNzTmFtZT0idy04IGgtOCB0ZXh0LXdoaXRlIHotMTAgYW5pbWF0ZS1wdWxzZSIgLz4KICAgIDxWZXJ0aWNhbFRleHRFbmdpbmUgdD17dGl0bGV9IGQ9e2Rlc2N9IHRpdGxlQ29sb3I9InRleHQtd2hpdGUgZHJvcC1zaGFkb3ctWzBfMF8xMHB4X3JnYmEoMjU1LDI1NSwyNTUsMC44KV0iIGRlc2NDb2xvcj0idGV4dC13aGl0ZS81MCIgLz4KICA8L21vdGlvbi5kaXY+Cik7Cgpjb25zdCBUYWxpc21hbjkgPSAoeyB0aXRsZSwgZGVzYyB9OiB7IHRpdGxlOiBzdHJpbmcsIGRlc2M6IHN0cmluZyB9KSA9PiAoCiAgPG1vdGlvbi5kaXYgd2hpbGVIb3Zlcj17eyB5OiAtMTAgfX0gY2xhc3NOYW1lPXtgJHtiYXNlVGFsaXNtYW5DbGFzc30gYmctWyMwYTBhMGFdIGJvcmRlciBib3JkZXIteWVsbG93LTYwMCBzaGFkb3ctWzBfMF8yNXB4X3JnYmEoMjAyLDEzOCw0LDAuMildYH0+CiAgICA8Q3Jvd24gY2xhc3NOYW1lPSJ3LTggaC04IHRleHQteWVsbG93LTUwMCB6LTEwIiAvPgogICAgPFZlcnRpY2FsVGV4dEVuZ2luZSB0PXt0aXRsZX0gZD17ZGVzY30gdGl0bGVDb2xvcj0idGV4dC10cmFuc3BhcmVudCBiZy1jbGlwLXRleHQgYmctZ3JhZGllbnQtdG8tYiBmcm9tLXllbGxvdy0yMDAgdG8teWVsbG93LTYwMCIgZGVzY0NvbG9yPSJ0ZXh0LXllbGxvdy03MDAiIC8+CiAgPC9tb3Rpb24uZGl2PgopOwoKY29uc3QgVGFsaXNtYW4xMCA9ICh7IHRpdGxlLCBkZXNjIH06IHsgdGl0bGU6IHN0cmluZywgZGVzYzogc3RyaW5nIH0pID0+ICgKICA8bW90aW9uLmRpdiB3aGlsZUhvdmVyPXt7IHk6IC0xMCB9fSBjbGFzc05hbWU9e2Ake2Jhc2VUYWxpc21hbkNsYXNzfSBiZy1zbGF0ZS05NTAgYm9yZGVyIGJvcmRlci1waW5rLTUwMC8zMCBzaGFkb3ctWzBfMF8yMHB4X3JnYmEoMjM2LDcyLDE1MywwLjE1KV1gfT4KICAgIDxGaW5nZXJwcmludCBjbGFzc05hbWU9InctOCBoLTggdGV4dC1waW5rLTUwMCB6LTEwIiAvPgogICAgPFZlcnRpY2FsVGV4dEVuZ2luZSB0PXt0aXRsZX0gZD17ZGVzY30gdGl0bGVDb2xvcj0idGV4dC1waW5rLTIwMCBkcm9wLXNoYWRvdy1bMF8wXzVweF9yZ2JhKDI0NCwxMTQsMTgyLDAuOCldIiBkZXNjQ29sb3I9InRleHQtcGluay02MDAiIC8+CiAgPC9tb3Rpb24uZGl2PgopOwoKZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gTmFycm93Q3liZXJUYWxpc21hbnMoKSB7CiAgY29uc3QgdGl0bGUgPSAi5rex5aSc6ICB6ZeG56qB6KWyIjsKICBjb25zdCBkZXNjID0gIuS4i+ePrUxJTkXkuqTovqbvvIzpq5jmg4XllYbmjqjpgbLooZMiOwoKICByZXR1cm4gKAogICAgPGRpdiBjbGFzc05hbWU9Im1pbi1oLXNjcmVlbiBiZy1bIzA1MDUxMF0gcHktMjAgcHgtNCBmb250LXNlcmlmIGZsZXggZmxleC1jb2wgaXRlbXMtY2VudGVyIj4KICAgICAgPGRpdiBjbGFzc05hbWU9InctZnVsbCBtYXgtdy01eGwgZmxleCBnYXAtNiBvdmVyZmxvdy14LWF1dG8gc25hcC14IHBiLTEyIHB4LTEwIGhpZGUtc2Nyb2xsYmFyIiBzdHlsZT17eyBzY3JvbGxiYXJXaWR0aDogJ25vbmUnIH19PgogICAgICAgIDxUYWxpc21hbjEgdGl0bGU9e3RpdGxlfSBkZXNjPXtkZXNjfSAvPgogICAgICAgIDxUYWxpc21hbjIgdGl0bGU9e3RpdGxlfSBkZXNjPXtkZXNjfSAvPgogICAgICAgIDxUYWxpc21hbjMgdGl0bGU9e3RpdGxlfSBkZXNjPXtkZXNjfSAvPgogICAgICAgIDxUYWxpc21hbjQgdGl0bGU9e3RpdGxlfSBkZXNjPXtkZXNjfSAvPgogICAgICAgIDxUYWxpc21hbjUgdGl0bGU9e3RpdGxlfSBkZXNjPXtkZXNjfSAvPgogICAgICAgIDxUYWxpc21hbjYgdGl0bGU9e3RpdGxlfSBkZXNjPXtkZXNjfSAvPgogICAgICAgIDxUYWxpc21hbjcgdGl0bGU9e3RpdGxlfSBkZXNjPXtkZXNjfSAvPgogICAgICAgIDxUYWxpc21hbjggdGl0bGU9e3RpdGxlfSBkZXNjPXtkZXNjfSAvPgogICAgICAgIDxUYWxpc21hbjkgdGl0bGU9e3RpdGxlfSBkZXNjPXtkZXNjfSAvPgogICAgICAgIDxUYWxpc21hbjEwIHRpdGxlPXt0aXRsZX0gZGVzYz17ZGVzY30gLz4KICAgICAgPC9kaXY+CiAgICA8L2Rpdj4KICApOwp9CgpleHBvcnQgY29uc3QgVGFsaXNtYW5zID0gewogIFRhbGlzbWFuMSwgVGFsaXNtYW4yLCBUYWxpc21hbjMsIFRhbGlzbWFuNCwgVGFsaXNtYW41LAogIFRhbGlzbWFuNiwgVGFsaXNtYW43LCBUYWxpc21hbjgsIFRhbGlzbWFuOSwgVGFsaXNtYW4xMAp9Owo="}
+"use client";
+import { motion } from "framer-motion";
+import { Flame, Ghost, Shield, Zap, Skull, Sparkles, Hexagon, Eye, Fingerprint, Crown } from "lucide-react";
+import React from "react";
+
+// 符咒的核心物理限制：極窄 (120px)、極長 (380px)
+const baseTalismanClass = "relative min-w-[120px] w-[120px] h-[380px] flex flex-col items-center py-6 px-2 rounded-sm cursor-pointer overflow-hidden group shrink-0 snap-center";
+
+// 統一的直書排版引擎 (這段是靈魂，讓文字從右到左直排)
+const VerticalTextEngine = ({ t, d, titleColor, descColor }: { t: string, d: string, titleColor: string, descColor: string }) => (
+  <div 
+    className="flex-1 w-full flex justify-center mt-4 relative z-10"
+    style={{ writingMode: 'vertical-rl', textOrientation: 'upright' }}
+  >
+    {/* 符膽 (主標題)：字體大、字距極寬 */}
+    <h3 className={`text-2xl md:text-3xl font-black ${titleColor} tracking-[0.4em] leading-none drop-shadow-sm`}>
+      {t}
+    </h3>
+    {/* 符腳 (副標題)：字體小、在主標題左側 (直書的後面) */}
+    <p className={`text-[10px] font-medium ${descColor} tracking-widest leading-tight ml-2 opacity-90 max-h-[300px] overflow-hidden`}>
+      {d}
+    </p>
+  </div>
+);
+
+const Talisman1 = ({ title, desc }: { title: string, desc: string }) => (
+  <motion.div whileHover={{ y: -10 }} className={`${baseTalismanClass} bg-[#eab308] border-2 border-[#b45309] shadow-[0_0_20px_rgba(202,138,4,0.4)]`}>
+    <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/rice-paper-2.png')]"></div>
+    <Flame className="w-8 h-8 text-[#991b1b] z-10" />
+    <VerticalTextEngine t={title} d={desc} titleColor="text-[#7f1d1d]" descColor="text-[#991b1b]" />
+  </motion.div>
+);
+
+const Talisman2 = ({ title, desc }: { title: string, desc: string }) => (
+  <motion.div whileHover={{ y: -10 }} className={`${baseTalismanClass} bg-black border border-purple-500/50 shadow-[0_0_30px_rgba(168,85,247,0.3)]`}>
+    <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 to-transparent"></div>
+    <Ghost className="w-8 h-8 text-purple-400 z-10 animate-pulse" />
+    <VerticalTextEngine t={title} d={desc} titleColor="text-purple-300 drop-shadow-[0_0_8px_rgba(216,180,254,0.8)]" descColor="text-purple-500" />
+  </motion.div>
+);
+
+const Talisman3 = ({ title, desc }: { title: string, desc: string }) => (
+  <motion.div whileHover={{ y: -10 }} className={`${baseTalismanClass} bg-[#3f0f0f] border border-red-600 shadow-[inset_0_0_30px_rgba(185,28,28,0.4)]`}>
+    <Skull className="w-8 h-8 text-red-500 z-10 drop-shadow-[0_0_8px_rgba(220,38,38,0.8)]" />
+    <VerticalTextEngine t={title} d={desc} titleColor="text-red-400 tracking-[0.5em]" descColor="text-red-600/80" />
+  </motion.div>
+);
+
+const Talisman4 = ({ title, desc }: { title: string, desc: string }) => (
+  <motion.div whileHover={{ y: -10 }} className={`${baseTalismanClass} bg-emerald-950/40 backdrop-blur-md border border-emerald-500/50 shadow-[0_0_20px_rgba(16,185,129,0.2)]`}>
+    <Hexagon className="w-8 h-8 text-emerald-400 z-10" />
+    <VerticalTextEngine t={title} d={desc} titleColor="text-emerald-200 drop-shadow-[0_0_5px_rgba(110,231,183,0.8)]" descColor="text-emerald-500" />
+  </motion.div>
+);
+
+const Talisman5 = ({ title, desc }: { title: string, desc: string }) => (
+  <motion.div whileHover={{ y: -10 }} className={`${baseTalismanClass} bg-slate-900 border-l-2 border-cyan-500 border-r-2 border-pink-500`}>
+    <Zap className="w-8 h-8 text-cyan-400 z-10" />
+    <VerticalTextEngine t={title} d={desc} titleColor="text-white font-mono mix-blend-difference" descColor="text-cyan-400 font-mono" />
+  </motion.div>
+);
+
+const Talisman6 = ({ title, desc }: { title: string, desc: string }) => (
+  <motion.div whileHover={{ y: -10 }} className={`${baseTalismanClass} bg-slate-100 border border-slate-400 shadow-[0_0_20px_rgba(255,255,255,0.1)]`}>
+    <Shield className="w-8 h-8 text-slate-800 z-10" />
+    <VerticalTextEngine t={title} d={desc} titleColor="text-slate-900" descColor="text-slate-500" />
+  </motion.div>
+);
+
+const Talisman7 = ({ title, desc }: { title: string, desc: string }) => (
+  <motion.div whileHover={{ y: -10 }} className={`${baseTalismanClass} bg-blue-950 border border-blue-400/50 shadow-[inset_0_0_15px_rgba(96,165,250,0.3)]`}>
+    <Eye className="w-8 h-8 text-blue-300 z-10" />
+    <VerticalTextEngine t={title} d={desc} titleColor="text-blue-100 drop-shadow-[0_0_5px_rgba(147,197,253,0.8)]" descColor="text-blue-400" />
+  </motion.div>
+);
+
+const Talisman8 = ({ title, desc }: { title: string, desc: string }) => (
+  <motion.div whileHover={{ y: -10 }} className={`${baseTalismanClass} bg-transparent backdrop-blur-sm border-[0.5px] border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.05)]`}>
+    <Sparkles className="w-8 h-8 text-white z-10 animate-pulse" />
+    <VerticalTextEngine t={title} d={desc} titleColor="text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]" descColor="text-white/50" />
+  </motion.div>
+);
+
+const Talisman9 = ({ title, desc }: { title: string, desc: string }) => (
+  <motion.div whileHover={{ y: -10 }} className={`${baseTalismanClass} bg-[#0a0a0a] border border-yellow-600 shadow-[0_0_25px_rgba(202,138,4,0.2)]`}>
+    <Crown className="w-8 h-8 text-yellow-500 z-10" />
+    <VerticalTextEngine t={title} d={desc} titleColor="text-transparent bg-clip-text bg-gradient-to-b from-yellow-200 to-yellow-600" descColor="text-yellow-700" />
+  </motion.div>
+);
+
+const Talisman10 = ({ title, desc }: { title: string, desc: string }) => (
+  <motion.div whileHover={{ y: -10 }} className={`${baseTalismanClass} bg-slate-950 border border-pink-500/30 shadow-[0_0_20px_rgba(236,72,153,0.15)]`}>
+    <Fingerprint className="w-8 h-8 text-pink-500 z-10" />
+    <VerticalTextEngine t={title} d={desc} titleColor="text-pink-200 drop-shadow-[0_0_5px_rgba(244,114,182,0.8)]" descColor="text-pink-600" />
+  </motion.div>
+);
+
+export default function NarrowCyberTalismans() {
+  const title = "深夜老闆突襲";
+  const desc = "下班LINE交辦，高情商推遲術";
+
+  return (
+    <div className="min-h-screen bg-[#050510] py-20 px-4 font-serif flex flex-col items-center">
+      <div className="w-full max-w-5xl flex gap-6 overflow-x-auto snap-x pb-12 px-10 hide-scrollbar" style={{ scrollbarWidth: 'none' }}>
+        <Talisman1 title={title} desc={desc} />
+        <Talisman2 title={title} desc={desc} />
+        <Talisman3 title={title} desc={desc} />
+        <Talisman4 title={title} desc={desc} />
+        <Talisman5 title={title} desc={desc} />
+        <Talisman6 title={title} desc={desc} />
+        <Talisman7 title={title} desc={desc} />
+        <Talisman8 title={title} desc={desc} />
+        <Talisman9 title={title} desc={desc} />
+        <Talisman10 title={title} desc={desc} />
+      </div>
+    </div>
+  );
+}
+
+export const Talismans = {
+  Talisman1, Talisman2, Talisman3, Talisman4, Talisman5,
+  Talisman6, Talisman7, Talisman8, Talisman9, Talisman10
+};

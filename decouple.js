@@ -1,1 +1,82 @@
-{"data":"Y29uc3QgZnMgPSByZXF1aXJlKCdmcycpOwoKbGV0IHBhZ2VDb2RlID0gZnMucmVhZEZpbGVTeW5jKCdzcmMvYXBwL3BhZ2UudHN4JywgJ3V0ZjgnKTsKCi8vIFRoZSBDVVJTRVMgYXJyYXkgc3RhcnRzIGF0ICdjb25zdCBDVVJTRVMgPSBbJyBhbmQgZW5kcyBhdCAnZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gTWFnaWNBY2FkZW15TVZQKCknCmNvbnN0IGN1cnNlc1N0YXJ0ID0gcGFnZUNvZGUuaW5kZXhPZignY29uc3QgQ1VSU0VTID0gWycpOwpjb25zdCBjdXJzZXNFbmQgPSBwYWdlQ29kZS5pbmRleE9mKCdleHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBNYWdpY0FjYWRlbXlNVlAoKScpOwoKLy8gRXh0cmFjdCB0aGUgQ1VSU0VTIGFycmF5IHN0cmluZwpsZXQgY3Vyc2VzQ29kZSA9IHBhZ2VDb2RlLnN1YnN0cmluZyhjdXJzZXNTdGFydCwgY3Vyc2VzRW5kKTsKCi8vIFJlcGxhY2UgXHgwMSBhbmQgXHgwMiB3aXRoIFtbIGFuZCBdXSBnbG9iYWxseSBpZiB0aGV5IGV4aXN0IChvciBhZGQgdGhlbSBpZiBzb21lIGFyZSBtaXNzaW5nKQpjdXJzZXNDb2RlID0gY3Vyc2VzQ29kZS5yZXBsYWNlKC9ceDAxL2csICdbWycpLnJlcGxhY2UoL1x4MDIvZywgJ11dJyk7CgovLyBBZGQgInRhYiIgYW5kICJpc1BybyIgYW5kICJvdXRwdXRGb3JtYXQiIHByb3BlcnRpZXMKbGV0IHRhYk1hcCA9IHsKICBib3NzX2xpbmU6ICflkJHkuIrnrqHnkIYnLAogIHJlc2lnbmF0aW9uX3ByOiAn5ZCR5LiK566h55CGJywKICBzYWxhcnlfbmVnb3RpYXRpb246ICflkJHkuIrnrqHnkIYnLAogIGRlbGF5X2Fwb2xvZ3k6ICflkJHkuIrnrqHnkIYnLAogIGtwaV9pbmZsYXRpb246ICflkJHkuIrnrqHnkIYnLAogIAogIHJlamVjdF9wZW9wbGVfcGxlYXNlcjogJ+W5s+e0muWNlOS9nCcsCiAgZGVhZF90ZWFtbWF0ZTogJ+W5s+e0muWNlOS9nCcsCiAgY3JlZGl0X3N0ZWFsZXI6ICflubPntJrljZTkvZwnLAogIG1lZXRpbmdfc3VtbWFyeTogJ+W5s+e0muWNlOS9nCcsCiAgY3Jvc3NfZGVwdF9yZXNvdXJjZTogJ+W5s+e0muWNlOS9nCcsCiAgY3JlYXRpdmVfaWRlYTogJ+W5s+e0muWNlOS9nCcsCiAgCiAgY3Jpc2lzX3ByOiAn5aSW6YOo5YWs6ZecJywKICBkZWNsaW5lX29mZmVyOiAn5aSW6YOo5YWs6ZecJywKICB2ZW5kb3JfbmVnb3RpYXRpb246ICflpJbpg6jlhazpl5wnLAogIGN1c3RvbWVyX2NvbXBsYWludDogJ+WklumDqOWFrOmXnCcsCiAgZnJlZWxhbmNlX3F1b3RlOiAn5aSW6YOo5YWs6ZecJywKfTsKCmxldCBvdXRwdXRNYXAgPSB7CiAgYm9zc19saW5lOiAnTElORSDnn63oqIonLAogIGNyaXNpc19wcjogJ+ato+W8jyBFbWFpbCcsCiAgcmVqZWN0X3Blb3BsZV9wbGVhc2VyOiAnTElORS9TbGFjaycsCiAgd2VkZGluZ19ib21iOiAnTElORSDlqYnmi5InLAogIGtwaV9pbmZsYXRpb246ICc1MDDlrZfloLHlkYonLAogIGxhbmRsb3JkX2JhdHRsZTogJ0xJTkUg5Zq05q2j6YCa55+lJywKICBzaG9wZWVfY29weXdyaXRpbmc6ICc1MDDlrZfmi43os6PmlocnLAogIHRyYXZlbF9ndWlkZTogJ01hcmtkb3duIOihjOeoiycsCiAgcmVzaWduYXRpb25fcHI6ICfmraPlvI8gRW1haWwnLAogIGNyZWF0aXZlX2lkZWE6ICfmop3liJflvI/pu57lrZAnLAogIHZlbnRfcHVyaWZpZXI6ICdJRyDpmZDli5XmlofmoYgnCn07CgpjdXJzZXNDb2RlID0gY3Vyc2VzQ29kZS5yZXBsYWNlKC9pZDogIihbXHdfXSspIiwvZywgKG1hdGNoLCBwMSkgPT4gewogIGxldCB0YWJOYW1lID0gdGFiTWFwW3AxXSB8fCAn55Sf5rS755Gj5LqLJzsKICAvLyByYW5kb21seSBtYWtlIHNvbWUgaGlnaC1yaXNrIHN0dWZmIHBybwogIGxldCBpc1BybyA9ICh0YWJOYW1lID09PSAn5ZCR5LiK566h55CGJyB8fCB0YWJOYW1lID09PSAn5aSW6YOo5YWs6ZecJyB8fCBwMSA9PT0gJ2NyaXNpc19wcicpID8gJ3RydWUnIDogJ2ZhbHNlJzsKICBsZXQgZm9ybWF0ID0gb3V0cHV0TWFwW3AxXSB8fCAn6Z2I5rS76ZW35bqm5paH5pysJzsKICByZXR1cm4gYGlkOiAiJHtwMX0iLCB0YWI6ICIke3RhYk5hbWV9IiwgaXNQcm86ICR7aXNQcm99LCBvdXRwdXRGb3JtYXQ6ICIke2Zvcm1hdH0iLGA7Cn0pOwoKLy8gVXBkYXRlIHRoZSBleHBvcnQgb2YgQ1VSU0VTCmN1cnNlc0NvZGUgPSBgaW1wb3J0IHsgCiAgU3BhcmtsZXMsIEZsYW1lLCBEcm9wbGV0cywgV2luZCwgQ29weSwgRXh0ZXJuYWxMaW5rLCBDaGV2cm9uRG93biwgWCwgU2VhcmNoLCBDaGVjaywKICBTaGllbGRBbGVydCwgSGFuZCwgTWFpbCwgVHJlbmRpbmdVcCwgR2F2ZWwsIFNob3BwaW5nQmFnLCBNYXAsIExvZ091dCwgTGlnaHRidWxiLCBTbWlsZSwKICBBbGVydFRyaWFuZ2xlLCBCYW4sIEJhckNoYXJ0LCBIb21lLCBIYW1tZXIsIE5hdmlnYXRpb24sIEZpbGVUZXh0LCBaYXAsCiAgR2hvc3QsIEdyYWR1YXRpb25DYXAsIENvaW5zLCBIYW5kc2hha2UsIFRyYXNoMiwgSGVhcnRPZmYsIFBlblRvb2wsIFNlbmQsIENhbGVuZGFyLCBNZWdhcGhvbmUsIAogIEJlZXIsIFNoaWVsZENoZWNrLCBVc2VyUGx1cywgV2FsbGV0LCBIZWxwQ2lyY2xlLCBDbGlwYm9hcmRMaXN0LCBDbG9jaywgUmVjZWlwdCwgSGVhcnQsIE11c2ljLAogIER1bWJiZWxsLCBTdGFyLCBDaXJjbGVEb2xsYXJTaWduLCBWb2x1bWVYLCBIZWFkc2V0LCBTaGllbGRYLCBTd29yZHMsIEdpZnQsIFVzZXJzLAogIEJyYWluLCBCb3QsIE1lc3NhZ2VTcXVhcmUsIExvY2sKfSBmcm9tICJsdWNpZGUtcmVhY3QiO1xuaW1wb3J0IFJlYWN0IGZyb20gInJlYWN0IjtcblxuYCArIGN1cnNlc0NvZGUucmVwbGFjZSgnY29uc3QgQ1VSU0VTID0nLCAnZXhwb3J0IGNvbnN0IENVUlNFUyA9Jyk7Cgpmcy53cml0ZUZpbGVTeW5jKCdzcmMvYXBwL2N1cnNlc19kYXRhLnRzeCcsIGN1cnNlc0NvZGUpOwoKLy8gUmVtb3ZlIENVUlNFUyBmcm9tIHBhZ2UudHN4IGFuZCBhZGQgaW1wb3J0CnBhZ2VDb2RlID0gcGFnZUNvZGUuc3Vic3RyaW5nKDAsIGN1cnNlc1N0YXJ0KSArIHBhZ2VDb2RlLnN1YnN0cmluZyhjdXJzZXNFbmQpOwpwYWdlQ29kZSA9IHBhZ2VDb2RlLnJlcGxhY2UoCiAgYGltcG9ydCB7IHVzZVN0YXRlIH0gZnJvbSAicmVhY3QiO2AsCiAgYGltcG9ydCB7IHVzZVN0YXRlIH0gZnJvbSAicmVhY3QiO1xuaW1wb3J0IHsgQ1VSU0VTIH0gZnJvbSAiLi9jdXJzZXNfZGF0YSI7YAopOwoKZnMud3JpdGVGaWxlU3luYygnc3JjL2FwcC9wYWdlLnRzeCcsIHBhZ2VDb2RlKTsKCi8vIE9wdGlvbmFsOiBmaXggdGhlIGR5bmFtaWMgaGlnaGxpZ2h0aW5nIHBhcnNpbmcgbGF0ZXIKY29uc29sZS5sb2coJ0RlY291cGxlZCBDVVJTRVMgc3VjY2Vzc2Z1bGx5Jyk7Cg=="}
+const fs = require('fs');
+
+let pageCode = fs.readFileSync('src/app/page.tsx', 'utf8');
+
+// The CURSES array starts at 'const CURSES = [' and ends at 'export default function MagicAcademyMVP()'
+const cursesStart = pageCode.indexOf('const CURSES = [');
+const cursesEnd = pageCode.indexOf('export default function MagicAcademyMVP()');
+
+// Extract the CURSES array string
+let cursesCode = pageCode.substring(cursesStart, cursesEnd);
+
+// Replace \x01 and \x02 with [[ and ]] globally if they exist (or add them if some are missing)
+cursesCode = cursesCode.replace(/\x01/g, '[[').replace(/\x02/g, ']]');
+
+// Add "tab" and "isPro" and "outputFormat" properties
+let tabMap = {
+  boss_line: '向上管理',
+  resignation_pr: '向上管理',
+  salary_negotiation: '向上管理',
+  delay_apology: '向上管理',
+  kpi_inflation: '向上管理',
+  
+  reject_people_pleaser: '平級協作',
+  dead_teammate: '平級協作',
+  credit_stealer: '平級協作',
+  meeting_summary: '平級協作',
+  cross_dept_resource: '平級協作',
+  creative_idea: '平級協作',
+  
+  crisis_pr: '外部公關',
+  decline_offer: '外部公關',
+  vendor_negotiation: '外部公關',
+  customer_complaint: '外部公關',
+  freelance_quote: '外部公關',
+};
+
+let outputMap = {
+  boss_line: 'LINE 短訊',
+  crisis_pr: '正式 Email',
+  reject_people_pleaser: 'LINE/Slack',
+  wedding_bomb: 'LINE 婉拒',
+  kpi_inflation: '500字報告',
+  landlord_battle: 'LINE 嚴正通知',
+  shopee_copywriting: '500字拍賣文',
+  travel_guide: 'Markdown 行程',
+  resignation_pr: '正式 Email',
+  creative_idea: '條列式點子',
+  vent_purifier: 'IG 限動文案'
+};
+
+cursesCode = cursesCode.replace(/id: "([\w_]+)",/g, (match, p1) => {
+  let tabName = tabMap[p1] || '生活瑣事';
+  // randomly make some high-risk stuff pro
+  let isPro = (tabName === '向上管理' || tabName === '外部公關' || p1 === 'crisis_pr') ? 'true' : 'false';
+  let format = outputMap[p1] || '靈活長度文本';
+  return `id: "${p1}", tab: "${tabName}", isPro: ${isPro}, outputFormat: "${format}",`;
+});
+
+// Update the export of CURSES
+cursesCode = `import { 
+  Sparkles, Flame, Droplets, Wind, Copy, ExternalLink, ChevronDown, X, Search, Check,
+  ShieldAlert, Hand, Mail, TrendingUp, Gavel, ShoppingBag, Map, LogOut, Lightbulb, Smile,
+  AlertTriangle, Ban, BarChart, Home, Hammer, Navigation, FileText, Zap,
+  Ghost, GraduationCap, Coins, Handshake, Trash2, HeartOff, PenTool, Send, Calendar, Megaphone, 
+  Beer, ShieldCheck, UserPlus, Wallet, HelpCircle, ClipboardList, Clock, Receipt, Heart, Music,
+  Dumbbell, Star, CircleDollarSign, VolumeX, Headset, ShieldX, Swords, Gift, Users,
+  Brain, Bot, MessageSquare, Lock
+} from "lucide-react";\nimport React from "react";\n\n` + cursesCode.replace('const CURSES =', 'export const CURSES =');
+
+fs.writeFileSync('src/app/curses_data.tsx', cursesCode);
+
+// Remove CURSES from page.tsx and add import
+pageCode = pageCode.substring(0, cursesStart) + pageCode.substring(cursesEnd);
+pageCode = pageCode.replace(
+  `import { useState } from "react";`,
+  `import { useState } from "react";\nimport { CURSES } from "./curses_data";`
+);
+
+fs.writeFileSync('src/app/page.tsx', pageCode);
+
+// Optional: fix the dynamic highlighting parsing later
+console.log('Decoupled CURSES successfully');

@@ -1,1 +1,29 @@
-{"data":"ewogICJuYW1lIjogInRlbXBfYXBwIiwKICAidmVyc2lvbiI6ICIwLjEuMCIsCiAgInByaXZhdGUiOiB0cnVlLAogICJzY3JpcHRzIjogewogICAgImRldiI6ICJuZXh0IGRldiIsCiAgICAiYnVpbGQiOiAibmV4dCBidWlsZCIsCiAgICAic3RhcnQiOiAibmV4dCBzdGFydCIsCiAgICAibGludCI6ICJlc2xpbnQiCiAgfSwKICAiZGVwZW5kZW5jaWVzIjogewogICAgImZyYW1lci1tb3Rpb24iOiAiXjEyLjM1LjIiLAogICAgImZ1c2UuanMiOiAiXjcuMS4wIiwKICAgICJsdWNpZGUtcmVhY3QiOiAiXjAuNTc3LjAiLAogICAgIm5leHQiOiAiMTYuMS42IiwKICAgICJyZWFjdCI6ICIxOS4yLjMiLAogICAgInJlYWN0LWRvbSI6ICIxOS4yLjMiCiAgfSwKICAiZGV2RGVwZW5kZW5jaWVzIjogewogICAgIkB0YWlsd2luZGNzcy9wb3N0Y3NzIjogIl40IiwKICAgICJAdHlwZXMvbm9kZSI6ICJeMjAiLAogICAgIkB0eXBlcy9yZWFjdCI6ICJeMTkiLAogICAgIkB0eXBlcy9yZWFjdC1kb20iOiAiXjE5IiwKICAgICJlc2xpbnQiOiAiXjkiLAogICAgImVzbGludC1jb25maWctbmV4dCI6ICIxNi4xLjYiLAogICAgInRhaWx3aW5kY3NzIjogIl40IiwKICAgICJ0eXBlc2NyaXB0IjogIl41IgogIH0KfQo="}
+{
+  "name": "temp_app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "framer-motion": "^12.35.2",
+    "fuse.js": "^7.1.0",
+    "lucide-react": "^0.577.0",
+    "next": "16.1.6",
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.6",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

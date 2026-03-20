@@ -1,1 +1,25 @@
-{"data":"Y29uc3QgZnMgPSByZXF1aXJlKCdmcycpOwpsZXQgY29kZSA9IGZzLnJlYWRGaWxlU3luYygnc3JjL2FwcC9wYWdlLnRzeCcsICd1dGY4Jyk7CgovLyBSZXBsYWNlIFwkey4uLn0gd2l0aCBceDAxXCR7Li4ufVx4MDIgaW5zaWRlIHRlbXBsYXRlIGxpdGVyYWxzLgpjb2RlID0gY29kZS5yZXBsYWNlKC9cJFx7aW5wdXRzXC5bXn1dK1x9L2csICdceDAxJCZceDAyJyk7CgovLyBDbGVhbnVwIGRvdWJsZSByZXBsYWNlbWVudHMganVzdCBpbiBjYXNlCmNvZGUgPSBjb2RlLnJlcGxhY2UoL1x4MDFceDAxL2csICdceDAxJykucmVwbGFjZSgvXHgwMlx4MDIvZywgJ1x4MDInKTsKCi8vIFVwZGF0ZSBib3NzX2xpbmUgdG8gaW5jbHVkZSByb2xlCmNvZGUgPSBjb2RlLnJlcGxhY2UoCiAgYHsgaWQ6ICJib3NzX21zZyIsIGxhYmVsOiAi6ICB6ZeG5YKz5LqG5LuA6bq877yfIiwgcGxhY2Vob2xkZXI6ICLkvovvvJrmmI7ml6nplovmnIPnmoTnsKHloLHkvaDku4rmmZrotpXkuIDkuIvntabmiJEiIH0sYCwKICBgeyBpZDogIm15X3JvbGUiLCBsYWJlbDogIuS9oOeahOiBt+S9jSIsIHBsYWNlaG9sZGVyOiAi5L6L77ya5Z+65bGk5bel56iL5birIC8g6KaW6Ka66Kit6KiI5birIiB9LAogICAgICB7IGlkOiAiYm9zc19yb2xlIiwgbGFiZWw6ICLlsI3mlrnogbfntJov5L2g6IiH5LuW55qE6Zec5L+CIiwgcGxhY2Vob2xkZXI6ICLkvovvvJrnm7TlsazkuLvnrqEgLyDlhazlj7jlibXovqbkuroiIH0sCiAgICAgIHsgaWQ6ICJib3NzX21zZyIsIGxhYmVsOiAi5LuW5YKz5LqG5LuA6bq877yfIiwgcGxhY2Vob2xkZXI6ICLkvovvvJrmmI7ml6nplovmnIPnmoTnsKHloLHkvaDku4rmmZrotpXkuIDkuIvntabmiJEiIH0sYAopOwoKY29kZSA9IGNvZGUucmVwbGFjZSgKICBg5L2g5piv5LiA5L2N57K+6YCa5Y+w54Gj6IG35aC055Sf5a2Y5a2455qE6auY6ZqO56eY5pu444CCYCwKICBg5L2g5piv5LiA5L2N5YW35YKZ6YKK55WM5oSf55qE6auY5oOF5ZWG6IG35aC05bCI5qWt5Lq65aOr77yI6IG35L2N77yaXHgwMVwke2lucHV0cy5teV9yb2xlIHx8ICfln7rlsaTlk6Hlt6UnfVx4MDLvvInjgIIK5bCN5pa55piv5oiR55qE77ya44CMXHgwMVwke2lucHV0cy5ib3NzX3JvbGUgfHwgJ+iAgemXhid9XHgwMuOAjeOAgmAKKTsKCmZzLndyaXRlRmlsZVN5bmMoJ3NyYy9hcHAvcGFnZS50c3gnLCBjb2RlKTsKY29uc29sZS5sb2coJ0RvbmUgcmVwbGFjZW1lbnQnKTsK"}
+const fs = require('fs');
+let code = fs.readFileSync('src/app/page.tsx', 'utf8');
+
+// Replace \${...} with \x01\${...}\x02 inside template literals.
+code = code.replace(/\$\{inputs\.[^}]+\}/g, '\x01$&\x02');
+
+// Cleanup double replacements just in case
+code = code.replace(/\x01\x01/g, '\x01').replace(/\x02\x02/g, '\x02');
+
+// Update boss_line to include role
+code = code.replace(
+  `{ id: "boss_msg", label: "老闆傳了什麼？", placeholder: "例：明早開會的簡報你今晚趕一下給我" },`,
+  `{ id: "my_role", label: "你的職位", placeholder: "例：基層工程師 / 視覺設計師" },
+      { id: "boss_role", label: "對方職級/你與他的關係", placeholder: "例：直屬主管 / 公司創辦人" },
+      { id: "boss_msg", label: "他傳了什麼？", placeholder: "例：明早開會的簡報你今晚趕一下給我" },`
+);
+
+code = code.replace(
+  `你是一位精通台灣職場生存學的高階秘書。`,
+  `你是一位具備邊界感的高情商職場專業人士（職位：\x01\${inputs.my_role || '基層員工'}\x02）。
+對方是我的：「\x01\${inputs.boss_role || '老闆'}\x02」。`
+);
+
+fs.writeFileSync('src/app/page.tsx', code);
+console.log('Done replacement');

@@ -1,1 +1,96 @@
-{"data":"aW1wb3J0IHR5cGUgeyBNZXRhZGF0YSwgVmlld3BvcnQgfSBmcm9tICJuZXh0IjsKaW1wb3J0IHsgR2Vpc3QsIEdlaXN0X01vbm8sIE5vdG9fU2VyaWZfVEMgfSBmcm9tICJuZXh0L2ZvbnQvZ29vZ2xlIjsKaW1wb3J0ICIuL2dsb2JhbHMuY3NzIjsKCmNvbnN0IGdlaXN0U2FucyA9IEdlaXN0KHsKICB2YXJpYWJsZTogIi0tZm9udC1nZWlzdC1zYW5zIiwKICBzdWJzZXRzOiBbImxhdGluIl0sCn0pOwoKY29uc3QgZ2Vpc3RNb25vID0gR2Vpc3RfTW9ubyh7CiAgdmFyaWFibGU6ICItLWZvbnQtZ2Vpc3QtbW9ubyIsCiAgc3Vic2V0czogWyJsYXRpbiJdLAp9KTsKCmNvbnN0IG5vdG9TZXJpZlRDID0gTm90b19TZXJpZl9UQyh7CiAgdmFyaWFibGU6ICItLWZvbnQtbm90by1zZXJpZi10YyIsCiAgc3Vic2V0czogWyJsYXRpbiJdLAogIHdlaWdodDogWyIyMDAiLCAiNDAwIiwgIjcwMCIsICI5MDAiXSwKfSk7CgpleHBvcnQgY29uc3Qgdmlld3BvcnQ6IFZpZXdwb3J0ID0gewogIHRoZW1lQ29sb3I6ICIjMGYwODFjIiwKICB3aWR0aDogImRldmljZS13aWR0aCIsCiAgaW5pdGlhbFNjYWxlOiAxLAogIG1heGltdW1TY2FsZTogMSwKICB1c2VyU2NhbGFibGU6IGZhbHNlLAp9OwoKZXhwb3J0IGNvbnN0IG1ldGFkYXRhOiBNZXRhZGF0YSA9IHsKICB0aXRsZTogIum6u+eTnOWwiOeUqCBBSSDlpJbmjpsgfCDkvaDnmoTnhKHohabmsYLnlJ/mjIfljZciLAogIGRlc2NyaXB0aW9uOiAi5bCH6KSH6Zuc55qE44CM5o+Q56S66Kme44CN5bCB6KOd5oiQ5LiA6Y216YeL5pS+55qE6a2U5rOV44CC5oeJ5LuY5aWn5a6i44CB5o6o5o6J6aOv5bGA44CB6Ieq5YuV5a+r5aCx5ZGK77yM6Kej5pWR5omA5pyJ5LiN5pOF6ZW3IEFJIOeahOm6u+eTnOOAgiIsCiAgbWFuaWZlc3Q6ICIvbWFuaWZlc3QuanNvbiIsCiAgYXBwbGVXZWJBcHA6IHsKICAgIGNhcGFibGU6IHRydWUsCiAgICBzdGF0dXNCYXJTdHlsZTogImJsYWNrLXRyYW5zbHVjZW50IiwKICAgIHRpdGxlOiAi6bq755Oc5bCI55SoIEFJIOWkluaOmyIsCiAgfSwKICBpY29uczogewogICAgYXBwbGU6ICIvaWNvbi01MTJ4NTEyLnBuZyIsCiAgfSwKfTsKCmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIFJvb3RMYXlvdXQoewogIGNoaWxkcmVuLAp9OiBSZWFkb25seTx7CiAgY2hpbGRyZW46IFJlYWN0LlJlYWN0Tm9kZTsKfT4pIHsKICByZXR1cm4gKAogICAgPGh0bWwgbGFuZz0iZW4iPgogICAgICA8Ym9keQogICAgICAgIGNsYXNzTmFtZT17YCR7Z2Vpc3RTYW5zLnZhcmlhYmxlfSAke2dlaXN0TW9uby52YXJpYWJsZX0gJHtub3RvU2VyaWZUQy52YXJpYWJsZX0gYW50aWFsaWFzZWQgb3ZlcmZsb3cteC1oaWRkZW5gfQogICAgICA+CiAgICAgICAge2NoaWxkcmVufQogICAgICAgIDxzY3JpcHQKICAgICAgICAgIGRhbmdlcm91c2x5U2V0SW5uZXJIVE1MPXt7CiAgICAgICAgICAgIF9faHRtbDogYAogICAgICAgICAgICAgIGlmICgnc2VydmljZVdvcmtlcicgaW4gbmF2aWdhdG9yKSB7CiAgICAgICAgICAgICAgICAvLyBFbnN1cmUgb25seSBvbmUgcmVsb2FkIHBlciBzZXNzaW9uIHRvIHByZXZlbnQgbG9vcHMKICAgICAgICAgICAgICAgIGxldCByZWZyZXNoaW5nID0gZmFsc2U7CiAgICAgICAgICAgICAgICBuYXZpZ2F0b3Iuc2VydmljZVdvcmtlci5hZGRFdmVudExpc3RlbmVyKCdjb250cm9sbGVyY2hhbmdlJywgKCkgPT4gewogICAgICAgICAgICAgICAgICBpZiAocmVmcmVzaGluZykgcmV0dXJuOwogICAgICAgICAgICAgICAgICByZWZyZXNoaW5nID0gdHJ1ZTsKICAgICAgICAgICAgICAgICAgd2luZG93LmxvY2F0aW9uLnJlbG9hZCgpOwogICAgICAgICAgICAgICAgfSk7CgogICAgICAgICAgICAgICAgd2luZG93LmFkZEV2ZW50TGlzdGVuZXIoJ2xvYWQnLCBmdW5jdGlvbigpIHsKICAgICAgICAgICAgICAgICAgbmF2aWdhdG9yLnNlcnZpY2VXb3JrZXIucmVnaXN0ZXIoJy9zdy5qcycpLnRoZW4ocmVnaXN0cmF0aW9uID0+IHsKICAgICAgICAgICAgICAgICAgICByZWdpc3RyYXRpb24ub251cGRhdGVmb3VuZCA9ICgpID0+IHsKICAgICAgICAgICAgICAgICAgICAgIGNvbnN0IGluc3RhbGxpbmdXb3JrZXIgPSByZWdpc3RyYXRpb24uaW5zdGFsbGluZzsKICAgICAgICAgICAgICAgICAgICAgIGlmIChpbnN0YWxsaW5nV29ya2VyKSB7CiAgICAgICAgICAgICAgICAgICAgICAgIGluc3RhbGxpbmdXb3JrZXIub25zdGF0ZWNoYW5nZSA9ICgpID0+IHsKICAgICAgICAgICAgICAgICAgICAgICAgICBpZiAoaW5zdGFsbGluZ1dvcmtlci5zdGF0ZSA9PT0gJ2luc3RhbGxlZCcpIHsKICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmIChuYXZpZ2F0b3Iuc2VydmljZVdvcmtlci5jb250cm9sbGVyKSB7CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vIE5ldyB2ZXJzaW9uIGluc3RhbGxlZCwgc2tpcFdhaXRpbmcgaXMgaGFuZGxlZCBpbiBzdy5qcwogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAvLyBjb250cm9sbGVyY2hhbmdlIHdpbGwgdHJpZ2dlciB0aGUgcmVsb2FkCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbnNvbGUubG9nKCdOZXcgY29udGVudCBhdmFpbGFibGUsIHJlZnJlc2hpbmcuLi4nKTsKICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0gZWxzZSB7CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbnNvbGUubG9nKCdDb250ZW50IGlzIGNhY2hlZCBmb3Igb2ZmbGluZSB1c2UuJyk7CiAgICAgICAgICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgICAgICAgICB9OwogICAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgICAgIH07CiAgICAgICAgICAgICAgICAgIH0pLmNhdGNoKGVycm9yID0+IHsKICAgICAgICAgICAgICAgICAgICBjb25zb2xlLmVycm9yKCdTZXJ2aWNlIHdvcmtlciByZWdpc3RyYXRpb24gZmFpbGVkOicsIGVycm9yKTsKICAgICAgICAgICAgICAgICAgfSk7CiAgICAgICAgICAgICAgICB9KTsKICAgICAgICAgICAgICB9CiAgICAgICAgICAgIGAsCiAgICAgICAgICB9fQogICAgICAgIC8+CgogICAgICA8L2JvZHk+CiAgICA8L2h0bWw+CiAgKTsKfQo="}
+import type { Metadata, Viewport } from "next";
+import { Geist, Geist_Mono, Noto_Serif_TC } from "next/font/google";
+import "./globals.css";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const notoSerifTC = Noto_Serif_TC({
+  variable: "--font-noto-serif-tc",
+  subsets: ["latin"],
+  weight: ["200", "400", "700", "900"],
+});
+
+export const viewport: Viewport = {
+  themeColor: "#0f081c",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
+export const metadata: Metadata = {
+  title: "麻瓜專用 AI 外掛 | 你的無腦求生指南",
+  description: "將複雜的「提示詞」封裝成一鍵釋放的魔法。應付奧客、推掉飯局、自動寫報告，解救所有不擅長 AI 的麻瓜。",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "麻瓜專用 AI 外掛",
+  },
+  icons: {
+    apple: "/icon-512x512.png",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} ${notoSerifTC.variable} antialiased overflow-x-hidden`}
+      >
+        {children}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                // Ensure only one reload per session to prevent loops
+                let refreshing = false;
+                navigator.serviceWorker.addEventListener('controllerchange', () => {
+                  if (refreshing) return;
+                  refreshing = true;
+                  window.location.reload();
+                });
+
+                window.addEventListener('load', function() {
+                  navigator.serviceWorker.register('/sw.js').then(registration => {
+                    registration.onupdatefound = () => {
+                      const installingWorker = registration.installing;
+                      if (installingWorker) {
+                        installingWorker.onstatechange = () => {
+                          if (installingWorker.state === 'installed') {
+                            if (navigator.serviceWorker.controller) {
+                              // New version installed, skipWaiting is handled in sw.js
+                              // controllerchange will trigger the reload
+                              console.log('New content available, refreshing...');
+                            } else {
+                              console.log('Content is cached for offline use.');
+                            }
+                          }
+                        };
+                      }
+                    };
+                  }).catch(error => {
+                    console.error('Service worker registration failed:', error);
+                  });
+                });
+              }
+            `,
+          }}
+        />
+
+      </body>
+    </html>
+  );
+}
