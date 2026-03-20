@@ -358,54 +358,50 @@ export default function MagicAcademyMVP() {
   return (
     <div className="min-h-screen w-full parchment-bg" style={{ color: 'var(--ink)' }}>
 
-      {/* ── HEADER / MASTHEAD ── */}
-      <header className="w-full pt-8 pb-0 px-4 md:px-8 relative z-10">
-        <div className="max-w-5xl mx-auto">
+      {/* ── HEADER / MASTHEAD — Classic Ticket ── */}
+      <header className="w-full relative z-10">
+        <div className="max-w-5xl mx-auto px-4 md:px-8">
 
-          {/* Top masthead bar */}
-          <div className="flex items-center justify-between border-b-4 pb-2 mb-4" style={{ borderColor: 'var(--ink)' }}>
-            <span className="text-[10px] font-black uppercase tracking-[0.3em]" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--teal)' }}>
-              Vol. I — 現代魔法法典
-            </span>
-            <span className="text-[10px] font-black uppercase tracking-[0.2em]" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.5 }}>
-              Est. 2025
-            </span>
+          {/* Top meta info bar */}
+          <div className="flex justify-between text-xs tracking-[0.2em] uppercase font-bold pt-8 pb-3 mb-12 md:mb-16"
+            style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.45, borderBottom: '2px solid var(--ink)' }}>
+            <span>VOL. I — 現代魔法法典</span>
+            <span>EST. 2026</span>
           </div>
 
-          {/* Main title — Version E 雙行裝飾 */}
-          <div className="text-center pb-6 mb-6" style={{ borderBottom: '4px solid var(--ink)' }}>
-            {/* Line 1: 麻瓜專用 with decorative bars */}
-            <div className="flex items-center justify-center gap-3 mb-1">
-              <div style={{ height: '3px', width: '40px', background: 'var(--dark-red)' }} />
+          {/* Main title — Classic Ticket */}
+          <div className="text-center mb-10 md:mb-12">
+            {/* Line 1: 麻瓜專用 with red decorative bars */}
+            <div className="flex items-center justify-center gap-4 md:gap-6 mb-4">
+              <div style={{ height: '2px', width: '48px', background: 'var(--dark-red)' }} />
               <h1
-                className="text-4xl sm:text-5xl md:text-7xl leading-tight tracking-tight"
-                style={{ fontFamily: 'var(--font-rye)', color: 'var(--ink)' }}
+                className="text-4xl sm:text-5xl md:text-6xl tracking-[0.2em]"
+                style={{ fontFamily: 'var(--font-noto-serif-tc)', fontWeight: 300, color: 'var(--ink)' }}
               >
                 麻瓜專用
               </h1>
-              <div style={{ height: '3px', width: '40px', background: 'var(--dark-red)' }} />
+              <div style={{ height: '2px', width: '48px', background: 'var(--dark-red)' }} />
             </div>
 
-            {/* Line 2: 魔法外掛 on black strip */}
-            <div style={{ background: 'var(--ink)', padding: '4px 0', marginBottom: '16px' }}>
+            {/* Line 2: 魔法外掛 on black strip with gold text */}
+            <div className="inline-block shadow-md" style={{ background: 'var(--ink)', padding: '16px 48px' }}>
               <h1
-                className="text-4xl sm:text-5xl md:text-7xl leading-tight tracking-tight"
-                style={{ fontFamily: 'var(--font-rye)', color: 'var(--mustard)' }}
+                className="text-5xl sm:text-6xl md:text-8xl tracking-widest"
+                style={{ fontFamily: 'var(--font-noto-serif-tc)', fontWeight: 900, color: 'var(--mustard)' }}
               >
                 魔法外掛
               </h1>
             </div>
+          </div>
 
-            {/* Subtitle in mustard stamp box */}
-            <div style={{ background: 'var(--mustard)', border: '4px solid var(--ink)', boxShadow: '6px 6px 0px var(--ink)', padding: '12px 24px', maxWidth: '500px', margin: '0 auto', display: 'inline-block' }}>
-              <p
-                className="text-sm md:text-base leading-relaxed"
-                style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', fontWeight: 700, margin: 0, lineHeight: 1.75 }}
-              >
-                將複雜的「提示詞」封裝成一鍵釋放的魔法。<br />
-                應付奧客、推掉飯局、自動寫報告，你的無腦求生指南。
-              </p>
-            </div>
+          {/* Subtitle in dashed border box */}
+          <div className="mb-10 md:mb-12" style={{ border: '2px dashed var(--ink)', padding: '24px', maxWidth: '640px', margin: '0 auto' }}>
+            <p
+              className="text-base md:text-lg leading-loose tracking-wider text-center"
+              style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.75, margin: 0 }}
+            >
+              將複雜的「提示詞」封裝成一鍵釋放的魔法。應付奧客、推掉飯局、自動寫報告，你的無腦求生指南。
+            </p>
           </div>
 
           {/* Search bar */}
