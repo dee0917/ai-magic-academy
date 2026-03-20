@@ -395,7 +395,7 @@ export default function MagicAcademyMVP() {
           </div>
 
           {/* Subtitle in dashed border box */}
-          <div className="mb-10 md:mb-12" style={{ border: '2px dashed var(--ink)', padding: '24px', maxWidth: '640px', margin: '0 auto' }}>
+          <div className="mb-16 md:mb-20" style={{ border: '2px dashed var(--ink)', padding: '24px', maxWidth: '640px', margin: '0 auto' }}>
             <p
               className="text-base md:text-lg leading-loose tracking-wider text-center"
               style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.75, margin: 0 }}
