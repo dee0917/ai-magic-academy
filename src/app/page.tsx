@@ -9,7 +9,7 @@ import { CURSES } from "./curses_data";
 import { motion, AnimatePresence } from "framer-motion";
 import Fuse from "fuse.js";
 
-// Helper: Highlight variables in the spell preview
+// Helper: Highlight variables in the spell preview (parchment style)
 const HighlightedPrompt = ({ text }: { text: string }) => {
   const parts = text.split(/(\[\[.*?\]\])/g);
   return (
@@ -27,6 +27,92 @@ const HighlightedPrompt = ({ text }: { text: string }) => {
       })}
     </div>
   );
+};
+
+// Helper: Terminal-style spell preview with structured formatting
+const TerminalPrompt = ({ text }: { text: string }) => {
+  // Split text into lines, then parse each line for structure
+  const lines = text.split('\n');
+  let ruleCounter = 0;
+
+  return (
+    <div style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'rgba(244,238,216,0.85)' }}>
+      {lines.map((line, lineIdx) => {
+        const trimmed = line.trim();
+        if (!trimmed) return <div key={lineIdx} className="h-3" />;
+
+        // Section headers like 【任務】【規則】【角色】etc.
+        const sectionMatch = trimmed.match(/^【(.+?)】/);
+        if (sectionMatch && trimmed === `【${sectionMatch[1]}】`) {
+          ruleCounter = 0;
+          return (
+            <div key={lineIdx} className="mt-5 mb-3 first:mt-0">
+              <span className="inline-block text-sm font-black px-3 py-1"
+                style={{ background: 'var(--mustard)', border: '2px solid rgba(232,168,56,0.6)', color: 'var(--ink)', fontFamily: 'var(--font-noto-serif-tc)' }}>
+                【{sectionMatch[1]}】
+              </span>
+            </div>
+          );
+        }
+
+        // Numbered rules: lines starting with number + dot or dash
+        const numberedMatch = trimmed.match(/^(\d+)[.、．]\s*(.*)/);
+        const dashMatch = !numberedMatch && trimmed.match(/^[-–—]\s*(.*)/);
+
+        if (numberedMatch || dashMatch) {
+          ruleCounter++;
+          const content = numberedMatch ? numberedMatch[2] : dashMatch![1];
+          return (
+            <div key={lineIdx} className="flex gap-3 mb-3 text-sm leading-relaxed">
+              <span className="flex-shrink-0 font-black text-base"
+                style={{ color: 'var(--dark-red)', fontFamily: 'var(--font-chivo)', minWidth: '32px' }}>
+                {String(ruleCounter).padStart(2, '0')}.
+              </span>
+              <span>{renderTerminalVariables(content)}</span>
+            </div>
+          );
+        }
+
+        // Regular text line
+        return (
+          <div key={lineIdx} className="text-sm leading-relaxed mb-2">
+            {renderTerminalVariables(trimmed)}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+// Highlight [[variables]] in terminal style
+const renderTerminalVariables = (text: string) => {
+  const parts = text.split(/(\[\[.*?\]\])/g);
+  return parts.map((part, i) => {
+    if (part.startsWith('[[') && part.endsWith(']]')) {
+      return (
+        <span key={i} className="font-bold px-1"
+          style={{ color: '#E8A838', background: 'rgba(232,168,56,0.15)', border: '1px solid rgba(232,168,56,0.3)' }}>
+          [{part.slice(2, -2)}]
+        </span>
+      );
+    }
+    // Also highlight inline 【section】 headers within text
+    const sectionParts = part.split(/(【.+?】)/g);
+    if (sectionParts.length > 1) {
+      return sectionParts.map((sp, j) => {
+        if (sp.startsWith('【') && sp.endsWith('】')) {
+          return (
+            <span key={`${i}-${j}`} className="inline-block text-sm font-black px-2 py-0.5 mx-1"
+              style={{ background: 'var(--mustard)', border: '2px solid rgba(232,168,56,0.6)', color: 'var(--ink)', fontFamily: 'var(--font-noto-serif-tc)' }}>
+              {sp}
+            </span>
+          );
+        }
+        return <span key={`${i}-${j}`}>{sp}</span>;
+      });
+    }
+    return <span key={i}>{part}</span>;
+  });
 };
 
 export default function MagicAcademyMVP() {
@@ -735,22 +821,7 @@ export default function MagicAcademyMVP() {
                       baseInputs[f.id] = isVisible ? (inputs[f.id] || "「尚未輸入內容」") : "（由 AI 根據情境自動填充）";
                     });
                     const finalInputs = { ...baseInputs, [selectedCurse.tweak?.id]: (inputs[selectedCurse.tweak?.id] || selectedCurse.tweak?.options[0]) };
-                    const spellText = selectedCurse.generate(finalInputs);
-                    const parts = spellText.split(/(\[\[.*?\]\])/g);
-                    return (
-                      <div className="whitespace-pre-wrap text-sm leading-relaxed"
-                        style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'rgba(244,238,216,0.85)' }}>
-                        {parts.map((part: string, i: number) => {
-                          if (part.startsWith('[[') && part.endsWith(']]')) {
-                            return <span key={i} className="font-bold px-1"
-                              style={{ color: '#E8A838', background: 'rgba(232,168,56,0.15)', border: '1px solid rgba(232,168,56,0.3)' }}>
-                              [{part.slice(2, -2)}]
-                            </span>;
-                          }
-                          return <span key={i}>{part}</span>;
-                        })}
-                      </div>
-                    );
+                    return <TerminalPrompt text={selectedCurse.generate(finalInputs)} />;
                   })()}
                 </div>
 
@@ -793,22 +864,7 @@ export default function MagicAcademyMVP() {
                       baseInputs[f.id] = isVisible ? (inputs[f.id] || "「尚未輸入內容」") : "（由 AI 根據情境自動填充）";
                     });
                     const finalInputs = { ...baseInputs, [selectedCurse.tweak?.id]: (inputs[selectedCurse.tweak?.id] || selectedCurse.tweak?.options[0]) };
-                    const spellText = selectedCurse.generate(finalInputs);
-                    const parts = spellText.split(/(\[\[.*?\]\])/g);
-                    return (
-                      <div className="whitespace-pre-wrap text-sm leading-relaxed"
-                        style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'rgba(244,238,216,0.85)' }}>
-                        {parts.map((part: string, i: number) => {
-                          if (part.startsWith('[[') && part.endsWith(']]')) {
-                            return <span key={i} className="font-bold px-1"
-                              style={{ color: '#E8A838', background: 'rgba(232,168,56,0.15)', border: '1px solid rgba(232,168,56,0.3)' }}>
-                              [{part.slice(2, -2)}]
-                            </span>;
-                          }
-                          return <span key={i}>{part}</span>;
-                        })}
-                      </div>
-                    );
+                    return <TerminalPrompt text={selectedCurse.generate(finalInputs)} />;
                   })()}
                 </div>
               </details>
