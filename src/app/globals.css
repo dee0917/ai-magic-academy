@@ -93,6 +93,12 @@ html, body {
   touch-action: pan-y;
 }
 
+/* ─── Global keyframes (outside @theme so they work in inline styles) ─── */
+@keyframes brew-fill {
+  0%   { width: 0%; }
+  100% { width: 100%; }
+}
+
 /* ─── Scrollbars ─────────────────────────────────── */
 .no-scrollbar::-webkit-scrollbar { display: none !important; }
 .no-scrollbar { -ms-overflow-style: none !important; scrollbar-width: none !important; }

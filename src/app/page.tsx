@@ -1113,54 +1113,113 @@ export default function MagicAcademyMVP() {
             className="fixed inset-0 z-[400] flex flex-col items-center justify-center"
             style={{ background: 'var(--parchment)' }}
           >
-            {/* Halftone dot pattern */}
+            {/* Halftone dot pattern bg */}
             <div className="absolute inset-0 halftone-bg pointer-events-none" />
 
-            {/* Cauldron SVG */}
-            <div style={{ animation: 'cauldron-bob 0.6s ease-in-out infinite' }}>
-              <svg width="130" height="120" viewBox="0 0 130 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* Glow beneath */}
-                <ellipse cx="65" cy="108" rx="38" ry="10" fill="#E8A838" opacity="0.35" style={{ animation: 'glow-flicker 0.8s ease-in-out infinite' }} />
-                {/* Legs */}
-                <rect x="30" y="95" width="10" height="18" fill="#1a1a1a" />
-                <rect x="90" y="95" width="10" height="18" fill="#1a1a1a" />
-                {/* Body */}
-                <path d="M20 40 L30 100 L100 100 L110 40 Z" fill="#1a1a1a" />
-                {/* Rim / handles */}
-                <rect x="14" y="35" width="102" height="12" rx="0" fill="#2A2723" />
-                <rect x="4" y="30" width="18" height="10" rx="0" fill="#2A2723" />
-                <rect x="108" y="30" width="18" height="10" rx="0" fill="#2A2723" />
-                {/* Liquid surface */}
-                <path d="M22 47 L108 47 L100 100 L30 100 Z" fill="#E8A838" opacity="0.9" />
-                {/* Liquid shine */}
-                <rect x="35" y="50" width="20" height="4" rx="0" fill="#F4EED8" opacity="0.25" />
-                {/* Bubbles - static positions, animated via CSS */}
-                <circle cx="55" cy="42" r="5" fill="#E8A838" opacity="0.8" style={{ animation: 'bubble-rise 1.1s ease-out infinite' }} />
-                <circle cx="72" cy="36" r="4" fill="#E8A838" opacity="0.7" style={{ animation: 'bubble-rise 0.9s ease-out infinite 0.3s' }} />
-                <circle cx="85" cy="40" r="3" fill="#E8A838" opacity="0.6" style={{ animation: 'bubble-rise 1.3s ease-out infinite 0.6s' }} />
-                <circle cx="60" cy="38" r="2.5" fill="#F4EED8" opacity="0.5" style={{ animation: 'bubble-rise 1s ease-out infinite 0.15s' }} />
-              </svg>
+            {/* ── Cauldron + bubbles group ── */}
+            <div style={{ position: 'relative', width: 160, height: 200, display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}>
+
+              {/* Bubble 1 — large mustard, centre */}
+              <motion.div
+                style={{ position: 'absolute', left: '44%', bottom: '76%', width: 20, height: 20, borderRadius: '50%', background: '#E8A838', border: '3px solid #1a1a1a', zIndex: 2 }}
+                animate={{ y: [0, -90], opacity: [1, 0], scale: [1, 0.3] }}
+                transition={{ duration: 1.3, repeat: Infinity, ease: 'easeOut', repeatDelay: 0.1 }}
+              />
+              {/* Bubble 2 — small dark, right */}
+              <motion.div
+                style={{ position: 'absolute', left: '62%', bottom: '80%', width: 12, height: 12, borderRadius: '50%', background: 'transparent', border: '3px solid #1a1a1a', zIndex: 2 }}
+                animate={{ y: [0, -70], opacity: [1, 0], scale: [1, 0.2] }}
+                transition={{ duration: 1.1, repeat: Infinity, ease: 'easeOut', delay: 0.4, repeatDelay: 0.2 }}
+              />
+              {/* Bubble 3 — medium dark, left */}
+              <motion.div
+                style={{ position: 'absolute', left: '28%', bottom: '82%', width: 15, height: 15, borderRadius: '50%', background: 'transparent', border: '3px solid #1a1a1a', zIndex: 2 }}
+                animate={{ y: [0, -80], opacity: [1, 0], scale: [1, 0.25] }}
+                transition={{ duration: 1.2, repeat: Infinity, ease: 'easeOut', delay: 0.7, repeatDelay: 0.15 }}
+              />
+
+              {/* Bobbing cauldron */}
+              <motion.div
+                animate={{ y: [0, -7, 0] }}
+                transition={{ duration: 0.85, repeat: Infinity, ease: 'easeInOut' }}
+                style={{ position: 'relative', zIndex: 1 }}
+              >
+                <svg width="150" height="140" viewBox="0 0 150 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {/* === Wide flat rim === */}
+                  <rect x="15" y="46" width="120" height="14" fill="#2A2723" />
+                  {/* Left handle knob */}
+                  <rect x="4"  y="41" width="16" height="13" rx="2" fill="#2A2723" />
+                  {/* Right handle knob */}
+                  <rect x="130" y="41" width="16" height="13" rx="2" fill="#2A2723" />
+
+                  {/* === Liquid overflowing at rim === */}
+                  {/* Flat mustard liquid inside rim */}
+                  <rect x="17" y="48" width="116" height="11" fill="#E8A838" />
+                  {/* Liquid hump in centre */}
+                  <ellipse cx="75" cy="46" rx="22" ry="9" fill="#E8A838" />
+                  {/* Liquid shine */}
+                  <rect x="30" y="50" width="28" height="4" fill="#F4EED8" opacity="0.28" />
+
+                  {/* === Cauldron body === */}
+                  {/* Outer body (rounded bottom) */}
+                  <path d="M22 58 Q18 130 75 132 Q132 130 128 58 Z" fill="#232323" />
+                  {/* Body highlight band */}
+                  <path d="M30 58 Q27 110 75 112 Q123 110 120 58 Z" fill="#1a1a1a" />
+                  {/* Centre groove / indent */}
+                  <path d="M38 80 Q75 84 112 80 L114 92 Q75 97 36 92 Z" fill="#111111" />
+
+                  {/* === Feet / legs === */}
+                  <ellipse cx="52"  cy="131" rx="13" ry="9" fill="#1a1a1a" />
+                  <ellipse cx="98"  cy="131" rx="13" ry="9" fill="#1a1a1a" />
+                </svg>
+
+                {/* Fire glow beneath (pulsing via Framer) */}
+                <motion.div
+                  animate={{ opacity: [0.45, 0.85, 0.45], scaleX: [1, 1.25, 1] }}
+                  transition={{ duration: 0.75, repeat: Infinity, ease: 'easeInOut' }}
+                  style={{
+                    position: 'absolute',
+                    bottom: 2,
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    width: 90,
+                    height: 24,
+                    borderRadius: '50%',
+                    background: 'radial-gradient(ellipse, rgba(220,90,70,0.75) 0%, rgba(220,90,70,0) 70%)',
+                    filter: 'blur(6px)',
+                    pointerEvents: 'none',
+                  }}
+                />
+              </motion.div>
             </div>
 
             {/* Label */}
             <p
-              className="mt-4 text-xl font-black"
+              className="text-2xl font-black mt-3 mb-6"
               style={{ fontFamily: 'var(--font-noto-serif-tc)', color: 'var(--ink)', fontWeight: 900 }}
             >
               研磨草藥中...
             </p>
 
-            {/* Progress bar */}
+            {/* Progress bar — Framer animated width */}
             <div
-              className="mt-6 w-56 overflow-hidden"
-              style={{ border: '3px solid var(--ink)', height: '22px', background: 'var(--parchment)', boxShadow: '4px 4px 0px var(--ink)' }}
+              style={{
+                width: 240,
+                height: 24,
+                border: '3px solid var(--ink)',
+                boxShadow: '4px 4px 0px var(--ink)',
+                background: 'var(--parchment)',
+                overflow: 'hidden',
+                position: 'relative',
+              }}
             >
-              <div
+              <motion.div
+                initial={{ width: '0%' }}
+                animate={{ width: '100%' }}
+                transition={{ duration: 2, ease: 'linear' }}
                 style={{
                   height: '100%',
-                  width: '0%',
-                  background: 'repeating-linear-gradient(45deg, var(--teal) 0px, var(--teal) 8px, #1A4A48 8px, #1A4A48 16px)',
-                  animation: 'brew-fill 2s linear forwards',
+                  background: 'repeating-linear-gradient(45deg, #1A5C5A 0px, #1A5C5A 8px, #134A48 8px, #134A48 16px)',
                 }}
               />
             </div>
@@ -1172,7 +1231,7 @@ export default function MagicAcademyMVP() {
                 fontFamily: 'var(--font-chivo)',
                 color: 'var(--dark-red)',
                 border: '2px solid var(--dark-red)',
-                background: 'rgba(139,38,38,0.05)',
+                background: 'rgba(139,38,38,0.04)',
               }}
             >
               ▲ 施法期間請勿關閉視窗，以免造成法術逆火 ▲
