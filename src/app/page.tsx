@@ -118,7 +118,7 @@ const renderTerminalVariables = (text: string) => {
 export default function MagicAcademyMVP() {
   const [selectedCurse, setSelectedCurse] = useState<any>(null);
   const [inputs, setInputs] = useState<any>({});
-  const [spellLevel, setSpellLevel] = useState<"初級" | "中級" | "高級">("高級");
+  const [spellLevel, setSpellLevel] = useState<"初級" | "中級" | "高級">("初級");
   const [isCopied, setIsCopied] = useState(false);
   const [showPortal, setShowPortal] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -896,13 +896,13 @@ export default function MagicAcademyMVP() {
                     style={{
                       fontFamily: 'var(--font-rye)', border: '4px solid var(--ink)',
                       boxShadow: isCopied ? 'none' : 'var(--shadow)',
-                      background: isCopied ? '#2D6A4F' : 'var(--mustard)',
-                      color: isCopied ? 'var(--parchment)' : 'var(--ink)',
+                      background: isCopied ? '#2D6A4F' : 'var(--dark-red)',
+                      color: 'var(--parchment)',
                       transform: isCopied ? 'translate(8px, 8px)' : undefined,
                     }}>
                     {isCopied
                       ? <><Check className="w-5 h-5" /> 密咒已封印</>
-                      : <><Sparkles className="w-5 h-5" /> 施放咒語術式</>
+                      : <><Zap className="w-5 h-5" /> 施放咒語術式</>
                     }
                   </button>
                 </div>
@@ -1046,13 +1046,13 @@ export default function MagicAcademyMVP() {
                     style={{
                       fontFamily: 'var(--font-rye)', border: '4px solid var(--ink)',
                       boxShadow: isCopied ? 'none' : 'var(--shadow)',
-                      background: isCopied ? '#2D6A4F' : 'var(--mustard)',
-                      color: isCopied ? 'var(--parchment)' : 'var(--ink)',
+                      background: isCopied ? '#2D6A4F' : 'var(--dark-red)',
+                      color: 'var(--parchment)',
                       transform: isCopied ? 'translate(8px, 8px)' : undefined,
                     }}>
                     {isCopied
                       ? <><Check className="w-5 h-5" /> 密咒已封印</>
-                      : <><Sparkles className="w-5 h-5" /> 施放咒語術式</>
+                      : <><Zap className="w-5 h-5" /> 施放咒語術式</>
                     }
                   </button>
                 </div>
