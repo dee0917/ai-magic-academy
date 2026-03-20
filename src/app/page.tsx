@@ -220,21 +220,40 @@ export default function MagicAcademyMVP() {
             </span>
           </div>
 
-          {/* Main title */}
-          <div className="text-center border-b-4 pb-6 mb-6" style={{ borderColor: 'var(--ink)' }}>
-            <h1
-              className="text-4xl sm:text-5xl md:text-7xl leading-tight mb-3 tracking-tight"
-              style={{ fontFamily: 'var(--font-rye)', color: 'var(--ink)' }}
-            >
-              麻瓜專用<br className="md:hidden" />魔法外掛
-            </h1>
-            <p
-              className="text-sm md:text-base max-w-xl mx-auto leading-relaxed mt-4"
-              style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.75 }}
-            >
-              將複雜的「提示詞」封裝成一鍵釋放的魔法。<br />
-              應付奧客、推掉飯局、自動寫報告，你的無腦求生指南。
-            </p>
+          {/* Main title — Version E 雙行裝飾 */}
+          <div className="text-center pb-6 mb-6" style={{ borderBottom: '4px solid var(--ink)' }}>
+            {/* Line 1: 麻瓜專用 with decorative bars */}
+            <div className="flex items-center justify-center gap-3 mb-1">
+              <div style={{ height: '3px', width: '40px', background: 'var(--dark-red)' }} />
+              <h1
+                className="text-4xl sm:text-5xl md:text-7xl leading-tight tracking-tight"
+                style={{ fontFamily: 'var(--font-rye)', color: 'var(--ink)' }}
+              >
+                麻瓜專用
+              </h1>
+              <div style={{ height: '3px', width: '40px', background: 'var(--dark-red)' }} />
+            </div>
+
+            {/* Line 2: 魔法外掛 on black strip */}
+            <div style={{ background: 'var(--ink)', padding: '4px 0', marginBottom: '16px' }}>
+              <h1
+                className="text-4xl sm:text-5xl md:text-7xl leading-tight tracking-tight"
+                style={{ fontFamily: 'var(--font-rye)', color: 'var(--mustard)' }}
+              >
+                魔法外掛
+              </h1>
+            </div>
+
+            {/* Subtitle in dashed border */}
+            <div style={{ border: '2px dashed var(--ink)', padding: '10px 20px', maxWidth: '500px', margin: '0 auto' }}>
+              <p
+                className="text-sm md:text-base leading-relaxed"
+                style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.8, margin: 0, lineHeight: 1.75 }}
+              >
+                將複雜的「提示詞」封裝成一鍵釋放的魔法。<br />
+                應付奧客、推掉飯局、自動寫報告，你的無腦求生指南。
+              </p>
+            </div>
           </div>
 
           {/* Search bar */}
