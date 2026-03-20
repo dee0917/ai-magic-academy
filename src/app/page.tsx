@@ -191,6 +191,17 @@ export default function MagicAcademyMVP() {
 
   const TABS = ["職場求生", "校園生存", "人際擋箭", "日常雜症", "創業/斜槓"];
 
+  const getTabColor = (tab: string) => {
+    const map: Record<string, string> = {
+      '職場求生': '#1A5C5A',
+      '校園生存': '#2D6A4F',
+      '人際擋箭': '#8B2626',
+      '日常雜症': '#B8860B',
+      '創業/斜槓': '#4A3580',
+    };
+    return map[tab] || '#1A5C5A';
+  };
+
   const scrollToTab = (tabId: string) => {
     const element = document.getElementById(tabId);
     if (element) {
@@ -532,12 +543,23 @@ export default function MagicAcademyMVP() {
                 <div className="absolute right-0 top-0 bottom-0 w-16 pointer-events-none z-20" style={{ background: 'linear-gradient(to left, var(--parchment), transparent)' }} />
 
                 <div className="flex overflow-x-auto gap-5 px-4 pb-8 no-scrollbar snap-x snap-mandatory scroll-smooth tab-scroll-container">
-                  {tabCurses.map((curse: any, idx: number) => (
+                  {tabCurses.map((curse: any, idx: number) => {
+                    const tabColor = getTabColor(curse.tab);
+                    return (
                     <motion.button
                       key={curse.id}
                       onClick={() => handleCardClick(curse)}
-                      className="magic-card flex-shrink-0 w-[260px] md:w-[300px] snap-start text-left p-0 flex flex-col relative overflow-hidden"
+                      className="flex-shrink-0 w-[260px] md:w-[300px] snap-start text-left p-0 flex flex-col relative overflow-hidden"
+                      style={{
+                        border: '4px solid var(--ink)',
+                        boxShadow: 'var(--shadow)',
+                        background: '#FEFAF0',
+                        transition: 'box-shadow 0.12s ease, transform 0.12s ease',
+                      }}
                     >
+                      {/* Colored top stripe */}
+                      <div style={{ height: '6px', background: tabColor }} />
+
                       {/* Card header area */}
                       <div className="p-5 pb-3 relative">
                         {/* Big background number */}
@@ -552,7 +574,7 @@ export default function MagicAcademyMVP() {
                         <div className="flex items-start justify-between mb-3 relative z-10">
                           <div
                             className="text-[10px] font-black px-2 py-1"
-                            style={{ background: 'var(--mustard)', border: '2px solid var(--ink)', fontFamily: 'var(--font-chivo)', color: 'var(--ink)' }}
+                            style={{ background: tabColor, fontFamily: 'var(--font-chivo)', color: '#FEFAF0' }}
                           >
                             {curse.tab}
                           </div>
@@ -562,7 +584,7 @@ export default function MagicAcademyMVP() {
                               <Lock className="w-3 h-3" /> PRO
                             </div>
                           ) : (
-                            <div className="text-lg" style={{ color: 'var(--ink)', opacity: 0.5 }}>
+                            <div className="text-lg" style={{ color: 'var(--ink)', opacity: 0.4 }}>
                               {curse.icon}
                             </div>
                           )}
@@ -577,14 +599,16 @@ export default function MagicAcademyMVP() {
                         </h3>
                       </div>
 
-                      {/* Description area with top border */}
-                      <div className="px-5 py-3 flex-1" style={{ borderTop: '3px solid var(--ink)' }}>
-                        <p
-                          className="text-sm leading-relaxed line-clamp-3"
-                          style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.75 }}
-                        >
-                          {curse.desc}
-                        </p>
+                      {/* Description area with left accent border */}
+                      <div className="px-5 py-3 flex-1">
+                        <div style={{ borderLeft: `3px solid ${tabColor}`, paddingLeft: '12px' }}>
+                          <p
+                            className="text-sm leading-relaxed line-clamp-3"
+                            style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.75 }}
+                          >
+                            {curse.desc}
+                          </p>
+                        </div>
                       </div>
 
                       {/* Dashed divider */}
@@ -595,12 +619,13 @@ export default function MagicAcademyMVP() {
                         <span className="text-xs font-bold" style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.5 }}>
                           所需參數: {curse.fields?.length || 0}
                         </span>
-                        <span className="flex items-center gap-1 text-xs font-black" style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--teal)' }}>
+                        <span className="flex items-center gap-1 text-xs font-black" style={{ fontFamily: 'var(--font-noto-sans-tc)', color: tabColor }}>
                           詠唱 <ArrowRight className="w-3 h-3" />
                         </span>
                       </div>
                     </motion.button>
-                  ))}
+                    );
+                  })}
 
                   {/* 魔力凝結中... placeholder card */}
                   <div
