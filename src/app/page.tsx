@@ -643,15 +643,176 @@ export default function MagicAcademyMVP() {
                 overflow: 'hidden',
               }}
             >
-              {/* ── LEFT PANEL: Form inputs ── */}
-              <div className="md:w-[45%] flex-shrink-0 flex flex-col" style={{ maxHeight: '96vh' }}>
+              {/* ── MOBILE LAYOUT: single scrollable page + floating CTA ── */}
+              <div className="md:hidden flex flex-col" style={{ maxHeight: '96vh' }}>
                 {/* Header */}
                 <div className="flex-shrink-0 flex items-center justify-between px-5 py-3" style={{ borderBottom: '4px solid var(--ink)' }}>
-                  <button
-                    onClick={() => setSelectedCurse(null)}
+                  <button onClick={() => setSelectedCurse(null)}
                     className="flex items-center gap-2 text-xs font-black uppercase"
-                    style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.6 }}
-                  >
+                    style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.6 }}>
+                    <ArrowLeft className="w-4 h-4" /> 返回
+                  </button>
+                  <h3 className="text-base font-black flex items-center gap-2"
+                    style={{ fontFamily: 'var(--font-noto-serif-tc)', color: 'var(--ink)', fontWeight: 900 }}>
+                    <Sparkles className="w-4 h-4" style={{ color: 'var(--mustard)' }} /> 注入魔力
+                  </h3>
+                  <button onClick={handleShare} style={{ color: 'var(--ink)', opacity: 0.5 }}>
+                    <Share2 className="w-4 h-4" />
+                  </button>
+                </div>
+
+                {/* Scrollable: form + terminal preview all in one */}
+                <div className="flex-1 overflow-y-auto no-scrollbar pb-24">
+                  {/* Form area */}
+                  <div className="p-5">
+                    <div style={{ border: '2px dashed var(--ink)', padding: '20px', opacity: 0.9 }}>
+                      {/* Level selector */}
+                      <div className="mb-5">
+                        <label className="block text-[10px] font-black uppercase tracking-[0.15em] mb-2"
+                          style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)' }}>
+                          魔力等級 MAGIC GRADE
+                        </label>
+                        <div className="flex gap-0" style={{ border: '3px solid var(--ink)' }}>
+                          {['初級', '中級', '高級'].map((l, i) => (
+                            <button key={l} type="button"
+                              onClick={() => setSpellLevel(l as any)}
+                              className="flex-1 px-3 py-2 text-xs font-black uppercase"
+                              style={{
+                                fontFamily: 'var(--font-chivo)',
+                                background: spellLevel === l ? 'var(--mustard)' : 'transparent',
+                                color: 'var(--ink)',
+                                borderLeft: i > 0 ? '3px solid var(--ink)' : 'none',
+                              }}>
+                              {l}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Input fields */}
+                      {selectedCurse.fields
+                        .filter((_f: any, idx: number) =>
+                          spellLevel === '高級' ||
+                          (spellLevel === '初級' && idx < 2) ||
+                          (spellLevel === '中級' && idx < 3)
+                        )
+                        .map((f: any) => (
+                          <div key={f.id} className="mb-5">
+                            <label className="block text-[10px] font-black uppercase tracking-[0.15em] mb-2"
+                              style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)' }}>
+                              {f.label} {f.id.toUpperCase().replace(/_/g, ' ')}
+                            </label>
+                            <input type="text" placeholder={f.placeholder}
+                              className="w-full py-3 px-4 text-sm"
+                              style={{
+                                border: '3px solid var(--ink)', background: 'var(--mustard)',
+                                fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)',
+                              }}
+                              onChange={(e) => setInputs({ ...inputs, [f.id]: e.target.value })}
+                            />
+                          </div>
+                        ))}
+
+                      {/* Tweak */}
+                      {selectedCurse.tweak && (
+                        <div className="mb-2">
+                          <label className="block text-[10px] font-black uppercase tracking-[0.15em] mb-2"
+                            style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)' }}>
+                            {selectedCurse.tweak.label}
+                          </label>
+                          <button
+                            onClick={() => setShowTweakSheet(true)}
+                            className="w-full flex items-center justify-between p-3 text-sm font-bold"
+                            style={{ border: '3px solid var(--ink)', boxShadow: '4px 4px 0px var(--ink)', fontFamily: 'var(--font-chivo)', color: 'var(--ink)', background: 'var(--parchment)' }}>
+                            <span>{(inputs[selectedCurse.tweak.id] || selectedCurse.tweak.options[0]).split('：')[0]}</span>
+                            <ChevronDown className="w-4 h-4" />
+                          </button>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Risk checkbox */}
+                    <label className="flex items-start gap-3 cursor-pointer mt-4 mb-2">
+                      <input type="checkbox" className="mt-1 w-4 h-4"
+                        checked={agreedToRisk}
+                        onChange={(e) => setAgreedToRisk(e.target.checked)} />
+                      <span className="text-xs italic"
+                        style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.6 }}>
+                        已簽署魔法契約，自負施法風險。
+                      </span>
+                    </label>
+                  </div>
+
+                  {/* Mobile terminal preview — inline, not accordion */}
+                  <div style={{ background: '#1a1f2e', borderTop: '4px solid var(--ink)' }}>
+                    <div className="flex items-center gap-2 px-4 py-3"
+                      style={{ borderBottom: '2px solid rgba(255,255,255,0.1)' }}>
+                      <div className="flex gap-1.5">
+                        <div className="w-2.5 h-2.5 rounded-full" style={{ background: '#ff5f57' }} />
+                        <div className="w-2.5 h-2.5 rounded-full" style={{ background: '#febc2e' }} />
+                        <div className="w-2.5 h-2.5 rounded-full" style={{ background: '#28c840' }} />
+                      </div>
+                      <span className="text-xs font-black tracking-[0.15em] ml-2"
+                        style={{ fontFamily: 'var(--font-chivo)', color: 'rgba(255,255,255,0.5)' }}>
+                        咒語預覽終端機 PREVIEW_TERMINAL
+                      </span>
+                    </div>
+                    <div className="p-4">
+                      {(() => {
+                        const baseInputs: any = {};
+                        selectedCurse.fields.forEach((f: any, idx: number) => {
+                          const isVisible = spellLevel === "高級" || (spellLevel === "初級" && idx < 2) || (spellLevel === "中級" && idx < 3);
+                          baseInputs[f.id] = isVisible ? (inputs[f.id] || "「尚未輸入內容」") : "（由 AI 根據情境自動填充）";
+                        });
+                        const finalInputs = { ...baseInputs, [selectedCurse.tweak?.id]: (inputs[selectedCurse.tweak?.id] || selectedCurse.tweak?.options[0]) };
+                        return <TerminalPrompt text={selectedCurse.generate(finalInputs)} />;
+                      })()}
+                    </div>
+                    {/* Terminal footer */}
+                    <div className="px-4 py-3" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+                      <p className="text-xs mb-2" style={{ fontFamily: 'monospace', color: 'rgba(26,92,90,0.7)' }}>
+                        {'>'} 等待注入魔力數據中...
+                      </p>
+                      <div className="flex gap-2">
+                        {['META_DATA: V2.4', 'STRENGTH: HIGH', `PARAMS: ${selectedCurse.fields?.length || 0}`].map(tag => (
+                          <span key={tag} className="text-[9px] font-bold px-2 py-1"
+                            style={{ fontFamily: 'var(--font-chivo)', border: '1px solid rgba(139,38,38,0.5)', color: 'rgba(139,38,38,0.8)', background: 'rgba(139,38,38,0.1)' }}>
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating CTA button */}
+                <div className="fixed bottom-0 left-0 right-0 z-[110] p-3"
+                  style={{ background: 'linear-gradient(to top, var(--parchment) 70%, transparent)' }}>
+                  <button onClick={handleCopy}
+                    className="w-full py-4 text-base font-black uppercase tracking-wider flex items-center justify-center gap-3 transition-all"
+                    style={{
+                      fontFamily: 'var(--font-rye)', border: '4px solid var(--ink)',
+                      boxShadow: isCopied ? 'none' : 'var(--shadow)',
+                      background: isCopied ? '#2D6A4F' : 'var(--mustard)',
+                      color: isCopied ? 'var(--parchment)' : 'var(--ink)',
+                      transform: isCopied ? 'translate(8px, 8px)' : undefined,
+                    }}>
+                    {isCopied
+                      ? <><Check className="w-5 h-5" /> 密咒已封印</>
+                      : <><Sparkles className="w-5 h-5" /> 施放咒語術式</>
+                    }
+                  </button>
+                </div>
+              </div>
+
+              {/* ── DESKTOP LAYOUT: Left form + Right terminal ── */}
+              {/* LEFT PANEL: Form inputs */}
+              <div className="hidden md:flex md:w-[45%] flex-shrink-0 flex-col" style={{ maxHeight: '96vh' }}>
+                {/* Header */}
+                <div className="flex-shrink-0 flex items-center justify-between px-5 py-3" style={{ borderBottom: '4px solid var(--ink)' }}>
+                  <button onClick={() => setSelectedCurse(null)}
+                    className="flex items-center gap-2 text-xs font-black uppercase"
+                    style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.6 }}>
                     <ArrowLeft className="w-4 h-4" /> 返回
                   </button>
                   <h3 className="text-base font-black flex items-center gap-2"
@@ -666,7 +827,6 @@ export default function MagicAcademyMVP() {
                 {/* Scrollable form */}
                 <div className="flex-1 overflow-y-auto no-scrollbar p-5">
                   <div style={{ border: '2px dashed var(--ink)', padding: '20px', opacity: 0.9 }}>
-
                     {/* Level selector */}
                     <div className="mb-5">
                       <label className="block text-[10px] font-black uppercase tracking-[0.15em] mb-2"
@@ -721,16 +881,7 @@ export default function MagicAcademyMVP() {
                           style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)' }}>
                           {selectedCurse.tweak.label}
                         </label>
-                        {/* Mobile: bottom sheet trigger */}
-                        <button
-                          onClick={() => setShowTweakSheet(true)}
-                          className="md:hidden w-full flex items-center justify-between p-3 text-sm font-bold"
-                          style={{ border: '3px solid var(--ink)', boxShadow: '4px 4px 0px var(--ink)', fontFamily: 'var(--font-chivo)', color: 'var(--ink)', background: 'var(--parchment)' }}>
-                          <span>{(inputs[selectedCurse.tweak.id] || selectedCurse.tweak.options[0]).split('：')[0]}</span>
-                          <ChevronDown className="w-4 h-4" />
-                        </button>
-                        {/* Desktop: inline buttons */}
-                        <div className="hidden md:flex flex-wrap gap-2">
+                        <div className="flex flex-wrap gap-2">
                           {selectedCurse.tweak.options.map((opt: string) => (
                             <button key={opt.split('：')[0]}
                               className="px-3 py-2 text-xs font-bold flex-1 transition-all"
@@ -762,10 +913,10 @@ export default function MagicAcademyMVP() {
                   </label>
                 </div>
 
-                {/* Cast button */}
+                {/* Cast button — desktop */}
                 <div className="flex-shrink-0 p-4" style={{ borderTop: '4px solid var(--ink)', background: 'var(--parchment)' }}>
                   <button onClick={handleCopy}
-                    className="w-full py-4 text-base font-black uppercase tracking-wider flex items-center justify-center gap-3 transition-all"
+                    className="w-full py-4 text-base font-black uppercase tracking-wider flex items-center justify-center gap-3 transition-all hover:animate-shake"
                     style={{
                       fontFamily: 'var(--font-rye)', border: '4px solid var(--ink)',
                       boxShadow: isCopied ? 'none' : 'var(--shadow)',
@@ -781,7 +932,7 @@ export default function MagicAcademyMVP() {
                 </div>
               </div>
 
-              {/* ── RIGHT PANEL: Terminal preview ── */}
+              {/* RIGHT PANEL: Terminal preview (desktop only) */}
               <div className="hidden md:flex md:flex-1 flex-col min-h-0"
                 style={{ background: '#1a1f2e', borderLeft: '4px solid var(--ink)' }}>
                 {/* Terminal header bar */}
@@ -844,30 +995,6 @@ export default function MagicAcademyMVP() {
                   </div>
                 </div>
               </div>
-
-              {/* ── MOBILE: spell preview as accordion below form ── */}
-              <details className="md:hidden" style={{ borderTop: '4px solid var(--ink)', background: '#1a1f2e' }}>
-                <summary className="flex items-center gap-2 px-4 py-3 text-xs font-black uppercase cursor-pointer select-none list-none"
-                  style={{ fontFamily: 'var(--font-chivo)', color: 'rgba(255,255,255,0.5)' }}>
-                  <div className="flex gap-1.5">
-                    <div className="w-2.5 h-2.5 rounded-full" style={{ background: '#ff5f57' }} />
-                    <div className="w-2.5 h-2.5 rounded-full" style={{ background: '#febc2e' }} />
-                    <div className="w-2.5 h-2.5 rounded-full" style={{ background: '#28c840' }} />
-                  </div>
-                  <span className="ml-2">咒語預覽終端機</span>
-                </summary>
-                <div className="p-4 max-h-[40vh] overflow-y-auto no-scrollbar">
-                  {(() => {
-                    const baseInputs: any = {};
-                    selectedCurse.fields.forEach((f: any, idx: number) => {
-                      const isVisible = spellLevel === "高級" || (spellLevel === "初級" && idx < 2) || (spellLevel === "中級" && idx < 3);
-                      baseInputs[f.id] = isVisible ? (inputs[f.id] || "「尚未輸入內容」") : "（由 AI 根據情境自動填充）";
-                    });
-                    const finalInputs = { ...baseInputs, [selectedCurse.tweak?.id]: (inputs[selectedCurse.tweak?.id] || selectedCurse.tweak?.options[0]) };
-                    return <TerminalPrompt text={selectedCurse.generate(finalInputs)} />;
-                  })()}
-                </div>
-              </details>
             </motion.div>
           </div>
         )}
