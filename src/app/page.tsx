@@ -260,27 +260,30 @@ export default function MagicAcademyMVP() {
   };
 
   const handleDeepLink = (webUrl: string, appScheme: string) => {
-    // Use an invisible iframe to try the app scheme — avoids page navigation
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = appScheme;
-    document.body.appendChild(iframe);
+    setShowPortal(false);
 
+    // For schemes that are actually https universal links (like Gemini),
+    // just open them directly — iOS/Android will intercept and open the app
+    if (appScheme.startsWith('https://')) {
+      window.open(appScheme, '_blank');
+      return;
+    }
+
+    // For custom URL schemes (chatgpt://, claude://, etc.)
+    // Use window.location.href to trigger app — iframe doesn't work on iOS
     let didLeave = false;
     const onVisibility = () => { if (document.hidden) didLeave = true; };
     document.addEventListener("visibilitychange", onVisibility);
 
-    // Clean up after 2.5s: if user didn't leave, open the web version
+    window.location.href = appScheme;
+
+    // After 2s: if app didn't open (user still here), fallback to web
     setTimeout(() => {
       document.removeEventListener("visibilitychange", onVisibility);
-      document.body.removeChild(iframe);
-      if (!didLeave && !document.hidden) {
-        // App didn't open — fall back to web
+      if (!didLeave && !document.hidden && document.hasFocus()) {
         window.open(webUrl, '_blank');
       }
-      // Always close the portal
-      setShowPortal(false);
-    }, 2500);
+    }, 2000);
   };
 
   const getColorHex = (colorName: string) => {
@@ -1153,7 +1156,7 @@ export default function MagicAcademyMVP() {
               {[
                 { label: 'ChatGPT', sub: 'OPENAI', icon: <Bot className="w-5 h-5" />, color: '#2D6A4F', web: "https://chatgpt.com", scheme: "chatgpt://" },
                 { label: 'Claude', sub: 'ANTHROPIC', icon: <Brain className="w-5 h-5" />, color: '#D4692C', web: "https://claude.ai", scheme: "claude://" },
-                { label: 'Gemini', sub: 'GOOGLE', icon: <Sparkles className="w-5 h-5" />, color: '#1A5C5A', web: "https://gemini.google.com/app", scheme: "googlegemini://" },
+                { label: 'Gemini', sub: 'GOOGLE', icon: <Sparkles className="w-5 h-5" />, color: '#1A5C5A', web: "https://gemini.google.com/app", scheme: "https://gemini.google.com/app" },
                 { label: 'Grok', sub: 'XAI', icon: <MessageSquare className="w-5 h-5" />, color: '#2A2723', web: "https://grok.com", scheme: "grok://" },
                 { label: 'DeepSeek', sub: 'DEEPSEEK', icon: <div className="w-5 h-5 flex items-center justify-center text-[9px] font-black text-white" style={{ background: '#1a5fcc' }}>DS</div>, color: '#1a5fcc', web: "https://chat.deepseek.com", scheme: "deepseek://" },
               ].map(({ label, sub, icon, color, web, scheme }) => (
