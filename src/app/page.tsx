@@ -406,21 +406,21 @@ export default function MagicAcademyMVP() {
   return (
     <div className="min-h-screen w-full parchment-bg" style={{ color: 'var(--ink)' }}>
 
-      {/* ── HEADER / MASTHEAD — Classic Ticket ── */}
-      <header className="w-full relative z-10">
+      {/* ── §01 HEADER / MASTHEAD — Classic Ticket ── */}
+      <header className="w-full relative z-10 pb-24">
         <div className="max-w-5xl mx-auto px-6 md:px-8">
 
           {/* Top meta info bar */}
-          <div className="flex justify-between text-[10px] tracking-[0.25em] uppercase font-bold pt-10 md:pt-14 pb-3 mb-16 md:mb-20"
+          <div className="flex justify-between text-[10px] tracking-[0.25em] uppercase font-bold pt-12 md:pt-16 pb-3 mb-8"
             style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.4, borderBottom: '1.5px solid var(--ink)' }}>
             <span>VOL. I — 現代魔法法典</span>
             <span>EST. 2026</span>
           </div>
 
           {/* Main title — Classic Ticket */}
-          <div className="text-center mb-14 md:mb-16">
+          <div className="text-center">
             {/* Line 1: 麻瓜專用 with red decorative bars */}
-            <div className="flex items-center justify-center gap-5 md:gap-8 mb-6">
+            <div className="flex items-center justify-center gap-5 md:gap-8 mb-8">
               <div style={{ height: '2px', width: '56px', background: 'var(--dark-red)' }} />
               <h1
                 className="text-[2.5rem] sm:text-5xl md:text-6xl tracking-[0.25em]"
@@ -442,7 +442,7 @@ export default function MagicAcademyMVP() {
             </div>
 
             {/* Tagline */}
-            <p className="mt-6 mb-0 text-sm md:text-base tracking-wider"
+            <p className="mt-8 mb-0 text-sm md:text-base tracking-wider"
               style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.5 }}>
               別人花 3 小時學 AI，你只需要 3 秒鐘施法。
             </p>
@@ -453,7 +453,7 @@ export default function MagicAcademyMVP() {
 
       {/* ── §02 TRUST BAR ── */}
       <section className="w-full relative z-10" style={{ background: '#FEFAF0', borderTop: '3px solid var(--ink)', borderBottom: '3px solid var(--ink)' }}>
-        <div className="max-w-4xl mx-auto py-8 md:py-10 px-6">
+        <div className="max-w-4xl mx-auto py-16 px-6">
           {/* Stats */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-0 mb-5">
             {[
@@ -494,9 +494,9 @@ export default function MagicAcademyMVP() {
         </div>
       </section>
 
-      {/* ── FREE TRIAL SECTION ── */}
-      <section className="w-full max-w-4xl mx-auto mb-16 px-4 pt-4 relative z-10">
-        <div className="text-center mb-10">
+      {/* ── §03 FREE TRIAL SECTION ── */}
+      <section className="w-full max-w-4xl mx-auto px-4 py-24 relative z-10">
+        <div className="text-center mb-8">
           <div style={{ border: '4px solid var(--ink)', boxShadow: 'var(--shadow)', background: 'var(--teal)', display: 'inline-block', padding: '6px 20px', marginBottom: '12px' }}>
             <span className="font-black text-xs uppercase tracking-[0.3em]" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--parchment)' }}>
               免費試咒 · 無需登入
@@ -585,7 +585,7 @@ export default function MagicAcademyMVP() {
       </section>
 
       {/* ── §04 TESTIMONIALS MARQUEE ── */}
-      <section className="w-full relative z-10 overflow-hidden py-10 md:py-14"
+      <section className="w-full relative z-10 overflow-hidden py-16"
         style={{ background: '#FEFAF0', borderTop: '3px solid var(--ink)', borderBottom: '3px solid var(--ink)' }}>
         <div className="text-center mb-8">
           <span className="text-[10px] font-black uppercase tracking-[0.3em]"
@@ -618,8 +618,8 @@ export default function MagicAcademyMVP() {
         </div>
       </section>
 
-      {/* ── SEARCH + TAB NAV ── */}
-      <div className="w-full max-w-5xl mx-auto px-4 mb-8 relative z-10">
+      {/* ── §05 SEARCH + TAB NAV ── */}
+      <div className="w-full max-w-5xl mx-auto px-4 pt-24 mb-8 relative z-10">
         {/* Search bar */}
         <div className="max-w-xl mx-auto mb-6">
           <div className="relative flex items-center" style={{ border: '3px solid var(--ink)', background: '#FEFAF0', boxShadow: '4px 4px 0px var(--ink)' }}>
@@ -676,7 +676,7 @@ export default function MagicAcademyMVP() {
       </div>
 
       {/* ── MAIN LIBRARY ── */}
-      <main className="w-full max-w-7xl mx-auto relative z-10 pb-20 px-0">
+      <main className="w-full max-w-7xl mx-auto relative z-10 pb-24 px-0">
         {TABS.map(tab => {
           const tabCurses = groupedCurses[tab];
           if (searchQuery && tabCurses.length === 0) return null;
