@@ -455,49 +455,6 @@ export default function MagicAcademyMVP() {
         </div>
       </header>
 
-      {/* ── §02 TRUST BAR ── */}
-      <section className="w-full relative z-10" style={{ background: '#FEFAF0', borderTop: '3px solid var(--ink)', borderBottom: '3px solid var(--ink)' }}>
-        <div className="max-w-4xl mx-auto py-16 px-6">
-          {/* Stats */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-0 mb-5">
-            {[
-              { number: '40+', label: '道咒語' },
-              { number: '5', label: '大生存場景' },
-              { number: 'counter', label: '次施放' },
-            ].map((stat, i) => (
-              <div key={i} className="flex items-center gap-2 sm:gap-0">
-                {i > 0 && <span className="hidden sm:block mx-6 text-lg" style={{ color: 'var(--ink)', opacity: 0.2 }}>｜</span>}
-                <div className="text-center">
-                  {stat.number === 'counter' ? (
-                    <span className="text-2xl md:text-3xl font-black" style={{ fontFamily: 'var(--font-rye)', color: 'var(--ink)' }}>
-                      <CountUp />
-                    </span>
-                  ) : (
-                    <span className="text-2xl md:text-3xl font-black" style={{ fontFamily: 'var(--font-rye)', color: 'var(--ink)' }}>
-                      {stat.number}
-                    </span>
-                  )}
-                  <span className="text-xs ml-2" style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.6 }}>
-                    {stat.label}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-          {/* Brand line */}
-          <div className="text-center">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] mr-2"
-              style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.35 }}>
-              支援一鍵跳轉
-            </span>
-            <span className="text-[10px] font-bold uppercase tracking-[0.15em]"
-              style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.25 }}>
-              ChatGPT ・ Claude ・ Gemini ・ Grok ・ DeepSeek
-            </span>
-          </div>
-        </div>
-      </section>
-
       {/* ── §03 FREE TRIAL SECTION ── */}
       <section className="w-full max-w-4xl mx-auto px-4 py-24 relative z-10">
         <div className="text-center mb-8">
