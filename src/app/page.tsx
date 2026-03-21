@@ -369,15 +369,7 @@ export default function MagicAcademyMVP() {
   const handleDeepLink = (webUrl: string, appScheme: string) => {
     setShowPortal(false);
 
-    // For schemes that are actually https universal links (like Gemini),
-    // just open them directly — iOS/Android will intercept and open the app
-    if (appScheme.startsWith('https://')) {
-      window.open(appScheme, '_blank');
-      return;
-    }
-
-    // For custom URL schemes (chatgpt://, claude://, etc.)
-    // Use window.location.href to trigger app — iframe doesn't work on iOS
+    // Try custom URL scheme to open app, fallback to web if app not installed
     let didLeave = false;
     const onVisibility = () => { if (document.hidden) didLeave = true; };
     document.addEventListener("visibilitychange", onVisibility);
@@ -1414,8 +1406,8 @@ export default function MagicAcademyMVP() {
               {[
                 { label: 'ChatGPT', sub: 'OPENAI', icon: <Bot className="w-5 h-5" />, color: '#2D6A4F', web: "https://chatgpt.com", scheme: "chatgpt://" },
                 { label: 'Claude', sub: 'ANTHROPIC', icon: <Brain className="w-5 h-5" />, color: '#D4692C', web: "https://claude.ai", scheme: "claude://" },
-                { label: 'Gemini', sub: 'GOOGLE', icon: <Sparkles className="w-5 h-5" />, color: '#1A5C5A', web: "https://gemini.google.com/app", scheme: "https://gemini.google.com/app" },
-                { label: 'Grok', sub: 'XAI', icon: <MessageSquare className="w-5 h-5" />, color: '#2A2723', web: "https://grok.com", scheme: "https://grok.com" },
+                { label: 'Gemini', sub: 'GOOGLE', icon: <Sparkles className="w-5 h-5" />, color: '#1A5C5A', web: "https://gemini.google.com/app", scheme: "gemini://" },
+                { label: 'Grok', sub: 'XAI', icon: <MessageSquare className="w-5 h-5" />, color: '#2A2723', web: "https://grok.com", scheme: "grok://" },
                 { label: 'DeepSeek', sub: 'DEEPSEEK', icon: <div className="w-5 h-5 flex items-center justify-center text-[9px] font-black text-white" style={{ background: '#1a5fcc' }}>DS</div>, color: '#1a5fcc', web: "https://chat.deepseek.com", scheme: "deepseek://" },
               ].map(({ label, sub, icon, color, web, scheme }) => (
                 <button
