@@ -158,6 +158,7 @@ export default function MagicAcademyMVP() {
   const [isTrialCopied, setIsTrialCopied] = useState(false);
   const [showBrewing, setShowBrewing] = useState(false);
   const [expandedTabs, setExpandedTabs] = useState<Record<string, boolean>>({});
+  const [showCopyToast, setShowCopyToast] = useState(false);
 
   const TRIAL_DATA = [
     {
@@ -234,6 +235,8 @@ export default function MagicAcademyMVP() {
         setShowBrewing(false);
         setIsTrialCopied(false);
         setShowPortal(true);
+        setShowCopyToast(true);
+        setTimeout(() => setShowCopyToast(false), 6000);
       }, 2000);
     });
   };
@@ -336,7 +339,9 @@ export default function MagicAcademyMVP() {
         setShowBrewing(false);
         setIsCopied(true);
         setShowPortal(true);
+        setShowCopyToast(true);
         setTimeout(() => setIsCopied(false), 3000);
+        setTimeout(() => setShowCopyToast(false), 6000);
       }, 2000);
     });
   };
@@ -1615,6 +1620,41 @@ export default function MagicAcademyMVP() {
           </div>
         </div>
       )}
+
+      {/* Copy Toast */}
+      {showCopyToast && (
+        <div
+          style={{
+            position: 'fixed',
+            bottom: 24,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 500,
+            background: 'var(--ink)',
+            color: 'var(--parchment)',
+            border: '3px solid var(--dark-red)',
+            boxShadow: '4px 4px 0 var(--dark-red)',
+            padding: '14px 24px',
+            fontFamily: 'var(--font-chivo)',
+            fontWeight: 700,
+            fontSize: '15px',
+            textAlign: 'center' as const,
+            maxWidth: 360,
+            width: '90vw',
+            animation: 'toastSlideUp 0.4s ease-out',
+          }}
+        >
+          <span style={{ marginRight: 8 }}>📋</span>
+          咒語已複製！開啟 AI 對話框，<span style={{ color: 'var(--mustard)' }}>貼上即可施法</span>
+        </div>
+      )}
+
+      <style jsx>{`
+        @keyframes toastSlideUp {
+          from { opacity: 0; transform: translateX(-50%) translateY(30px); }
+          to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+      `}</style>
     </div>
   );
 }
