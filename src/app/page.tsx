@@ -381,34 +381,34 @@ export default function MagicAcademyMVP() {
 
       {/* ── HEADER / MASTHEAD — Classic Ticket ── */}
       <header className="w-full relative z-10">
-        <div className="max-w-5xl mx-auto px-4 md:px-8">
+        <div className="max-w-5xl mx-auto px-6 md:px-8">
 
           {/* Top meta info bar */}
-          <div className="flex justify-between text-xs tracking-[0.2em] uppercase font-bold pt-8 pb-3 mb-12 md:mb-16"
-            style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.45, borderBottom: '2px solid var(--ink)' }}>
+          <div className="flex justify-between text-[10px] tracking-[0.25em] uppercase font-bold pt-10 md:pt-14 pb-3 mb-16 md:mb-20"
+            style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.4, borderBottom: '1.5px solid var(--ink)' }}>
             <span>VOL. I — 現代魔法法典</span>
             <span>EST. 2026</span>
           </div>
 
           {/* Main title — Classic Ticket */}
-          <div className="text-center mb-10 md:mb-12">
+          <div className="text-center mb-14 md:mb-16">
             {/* Line 1: 麻瓜專用 with red decorative bars */}
-            <div className="flex items-center justify-center gap-4 md:gap-6 mb-4">
-              <div style={{ height: '2px', width: '48px', background: 'var(--dark-red)' }} />
+            <div className="flex items-center justify-center gap-5 md:gap-8 mb-6">
+              <div style={{ height: '2px', width: '56px', background: 'var(--dark-red)' }} />
               <h1
-                className="text-4xl sm:text-5xl md:text-6xl tracking-[0.2em]"
-                style={{ fontFamily: 'var(--font-noto-serif-tc)', fontWeight: 300, color: 'var(--ink)' }}
+                className="text-[2.5rem] sm:text-5xl md:text-6xl tracking-[0.25em]"
+                style={{ fontFamily: 'var(--font-noto-serif-tc)', fontWeight: 300, color: 'var(--ink)', lineHeight: 1.2 }}
               >
                 麻瓜專用
               </h1>
-              <div style={{ height: '2px', width: '48px', background: 'var(--dark-red)' }} />
+              <div style={{ height: '2px', width: '56px', background: 'var(--dark-red)' }} />
             </div>
 
             {/* Line 2: 魔法外掛 on black strip with gold text */}
-            <div className="inline-block shadow-md" style={{ background: 'var(--ink)', padding: '16px 48px' }}>
+            <div className="inline-block shadow-md" style={{ background: 'var(--ink)', padding: '20px 56px' }}>
               <h1
-                className="text-5xl sm:text-6xl md:text-8xl tracking-widest"
-                style={{ fontFamily: 'var(--font-noto-serif-tc)', fontWeight: 900, color: 'var(--mustard)' }}
+                className="text-[3rem] sm:text-6xl md:text-8xl tracking-widest"
+                style={{ fontFamily: 'var(--font-noto-serif-tc)', fontWeight: 900, color: 'var(--mustard)', lineHeight: 1.1 }}
               >
                 魔法外掛
               </h1>
@@ -416,12 +416,12 @@ export default function MagicAcademyMVP() {
           </div>
 
           {/* Subtitle in dashed border box */}
-          <div className="mb-16 md:mb-20" style={{ border: '2px dashed var(--ink)', padding: '24px', maxWidth: '640px', margin: '0 auto' }}>
+          <div className="mb-20 md:mb-28" style={{ border: '2px dashed var(--ink)', padding: '28px 32px', maxWidth: '580px', margin: '0 auto', opacity: 0.85 }}>
             <p
-              className="text-base md:text-lg leading-loose tracking-wider text-center"
-              style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.75, margin: 0 }}
+              className="text-[15px] md:text-lg leading-[2] tracking-wider text-center"
+              style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', margin: 0 }}
             >
-              將複雜的「提示詞」封裝成一鍵釋放的魔法。應付奧客、推掉飯局、自動寫報告，你的無腦求生指南。
+              將複雜的「提示詞」封裝成一鍵釋放的魔法。<br className="hidden sm:inline" />應付奧客、推掉飯局、自動寫報告，你的無腦求生指南。
             </p>
           </div>
 
