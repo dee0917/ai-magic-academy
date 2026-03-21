@@ -432,47 +432,20 @@ export default function MagicAcademyMVP() {
             </div>
 
             {/* Line 2: AI魔法外掛 on black strip with gold text */}
-            <div className="inline-block shadow-md" style={{ background: 'var(--ink)', padding: '20px 56px' }}>
+            <div className="inline-block shadow-md" style={{ background: 'var(--ink)', padding: '16px 24px', maxWidth: '100%' }}>
               <h1
-                className="text-[3rem] sm:text-6xl md:text-8xl tracking-widest"
-                style={{ fontFamily: 'var(--font-noto-serif-tc)', fontWeight: 900, color: 'var(--mustard)', lineHeight: 1.1 }}
+                className="text-[2.8rem] sm:text-5xl md:text-7xl tracking-[0.08em]"
+                style={{ fontFamily: 'var(--font-noto-serif-tc)', fontWeight: 900, color: 'var(--mustard)', lineHeight: 1.15 }}
               >
                 AI魔法外掛
               </h1>
             </div>
 
             {/* Tagline */}
-            <p className="mt-6 text-sm md:text-base tracking-wider"
+            <p className="mt-6 mb-0 text-sm md:text-base tracking-wider"
               style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.5 }}>
               別人花 3 小時學 AI，你只需要 3 秒鐘施法。
             </p>
-          </div>
-
-          {/* Subtitle in dashed border box */}
-          <div className="mb-12 md:mb-14" style={{ border: '2px dashed var(--ink)', padding: '28px 32px', maxWidth: '580px', margin: '0 auto', opacity: 0.85 }}>
-            <p
-              className="text-[15px] md:text-lg leading-[2] tracking-wider text-center"
-              style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', margin: 0 }}
-            >
-              職場被凹、親戚逼問、已讀不回——<br className="hidden sm:inline" />每個煩人場景都有一道咒語。<br />選好、按下、直接帶你到 AI 施法。
-            </p>
-          </div>
-
-          {/* 3-step guide */}
-          <div className="flex items-center justify-center gap-3 md:gap-5 mb-16 md:mb-20 flex-wrap">
-            {[
-              { icon: '🎯', text: '選場景' },
-              { icon: '⚡', text: '按施放' },
-              { icon: '🚀', text: '跳轉 AI 直接用' },
-            ].map((step, i) => (
-              <div key={i} className="flex items-center gap-3 md:gap-5">
-                <div className="flex items-center gap-2 px-4 py-2"
-                  style={{ border: '2px solid var(--ink)', background: '#FEFAF0', fontFamily: 'var(--font-noto-sans-tc)', fontSize: '13px', fontWeight: 700 }}>
-                  <span>{step.icon}</span> {step.text}
-                </div>
-                {i < 2 && <span style={{ color: 'var(--ink)', opacity: 0.3, fontSize: '18px' }}>→</span>}
-              </div>
-            ))}
           </div>
 
         </div>
