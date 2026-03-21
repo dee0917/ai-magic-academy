@@ -115,6 +115,32 @@ const renderTerminalVariables = (text: string) => {
   });
 };
 
+// Live counter that simulates real-time usage
+const CountUp = () => {
+  const [count, setCount] = useState(12847);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCount(c => c + Math.floor(Math.random() * 3) + 1);
+    }, 3000 + Math.random() * 4000);
+    return () => clearInterval(interval);
+  }, []);
+  return <>{count.toLocaleString()}</>;
+};
+
+// Testimonials data
+const TESTIMONIALS = [
+  { emoji: '👩‍💼', name: 'Jia', role: '行銷企劃', quote: '用了婉拒加班咒語，老闆居然說沒問題 😂', spell: '軟刀斷尾' },
+  { emoji: '👨‍🎓', name: '阿凱', role: '大學生', quote: '期末報告拖到最後一天，時間咒印救了我一命', spell: '時間咒印' },
+  { emoji: '👩‍🍳', name: '小魚', role: '自由接案', quote: '業配報價一直不敢開口，變現結界直接幫我算好', spell: '變現結界' },
+  { emoji: '👨‍💻', name: 'Wayne', role: '工程師', quote: '人體翻譯機翻出主管的弦外之音，太準了吧', spell: '人體翻譯機' },
+  { emoji: '👩‍🎨', name: '小圓', role: 'IG 經營者', quote: '靈感永動機一次給我 30 天選題，再也不用盯著螢幕發呆', spell: '靈感永動機' },
+  { emoji: '🧑‍🏫', name: '阿翔', role: '補習班老師', quote: '被家長已讀不回，用了渡口擺渡人傳的道歉訊息秒回', spell: '渡口擺渡人' },
+  { emoji: '👩‍⚕️', name: 'Mia', role: '護理師', quote: '過年被親戚問到崩潰，荒謬核彈型回覆讓全桌笑翻', spell: '社交防禦咒' },
+  { emoji: '👨‍🍳', name: '大雄', role: '餐飲業', quote: '幫我寫的負評優雅到朋友以為是專業美食家寫的', spell: '幫我寫負評' },
+  { emoji: '👩‍💼', name: 'Yuki', role: 'PM', quote: '電梯裡遇到老闆，黃金 60 秒讓我 30 秒講完進度', spell: '黃金 60 秒' },
+  { emoji: '🧑‍🎤', name: '小豪', role: 'YouTuber', quote: '鉤魂首行寫的開場，完播率直接從 20% 跳到 45%', spell: '鉤魂首行' },
+];
+
 export default function MagicAcademyMVP() {
   const [selectedCurse, setSelectedCurse] = useState<any>(null);
   const [inputs, setInputs] = useState<any>({});
@@ -131,6 +157,7 @@ export default function MagicAcademyMVP() {
   const [activeTrial, setActiveTrial] = useState(0);
   const [isTrialCopied, setIsTrialCopied] = useState(false);
   const [showBrewing, setShowBrewing] = useState(false);
+  const [expandedTabs, setExpandedTabs] = useState<Record<string, boolean>>({});
 
   const TRIAL_DATA = [
     {
@@ -404,29 +431,95 @@ export default function MagicAcademyMVP() {
               <div style={{ height: '2px', width: '56px', background: 'var(--dark-red)' }} />
             </div>
 
-            {/* Line 2: 魔法外掛 on black strip with gold text */}
+            {/* Line 2: AI魔法外掛 on black strip with gold text */}
             <div className="inline-block shadow-md" style={{ background: 'var(--ink)', padding: '20px 56px' }}>
               <h1
                 className="text-[3rem] sm:text-6xl md:text-8xl tracking-widest"
                 style={{ fontFamily: 'var(--font-noto-serif-tc)', fontWeight: 900, color: 'var(--mustard)', lineHeight: 1.1 }}
               >
-                魔法外掛
+                AI魔法外掛
               </h1>
             </div>
+
+            {/* Tagline */}
+            <p className="mt-6 text-sm md:text-base tracking-wider"
+              style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.5 }}>
+              別人花 3 小時學 AI，你只需要 3 秒鐘施法。
+            </p>
           </div>
 
           {/* Subtitle in dashed border box */}
-          <div className="mb-24 md:mb-32" style={{ border: '2px dashed var(--ink)', padding: '28px 32px', maxWidth: '580px', margin: '0 auto', opacity: 0.85 }}>
+          <div className="mb-12 md:mb-14" style={{ border: '2px dashed var(--ink)', padding: '28px 32px', maxWidth: '580px', margin: '0 auto', opacity: 0.85 }}>
             <p
               className="text-[15px] md:text-lg leading-[2] tracking-wider text-center"
               style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', margin: 0 }}
             >
-              將複雜的「提示詞」封裝成一鍵釋放的魔法。<br className="hidden sm:inline" />應付奧客、推掉飯局、自動寫報告，你的無腦求生指南。
+              職場被凹、親戚逼問、已讀不回——<br className="hidden sm:inline" />每個煩人場景都有一道咒語。<br />選好、按下、直接帶你到 AI 施法。
             </p>
+          </div>
+
+          {/* 3-step guide */}
+          <div className="flex items-center justify-center gap-3 md:gap-5 mb-16 md:mb-20 flex-wrap">
+            {[
+              { icon: '🎯', text: '選場景' },
+              { icon: '⚡', text: '按施放' },
+              { icon: '🚀', text: '跳轉 AI 直接用' },
+            ].map((step, i) => (
+              <div key={i} className="flex items-center gap-3 md:gap-5">
+                <div className="flex items-center gap-2 px-4 py-2"
+                  style={{ border: '2px solid var(--ink)', background: '#FEFAF0', fontFamily: 'var(--font-noto-sans-tc)', fontSize: '13px', fontWeight: 700 }}>
+                  <span>{step.icon}</span> {step.text}
+                </div>
+                {i < 2 && <span style={{ color: 'var(--ink)', opacity: 0.3, fontSize: '18px' }}>→</span>}
+              </div>
+            ))}
           </div>
 
         </div>
       </header>
+
+      {/* ── §02 TRUST BAR ── */}
+      <section className="w-full relative z-10" style={{ background: '#FEFAF0', borderTop: '3px solid var(--ink)', borderBottom: '3px solid var(--ink)' }}>
+        <div className="max-w-4xl mx-auto py-8 md:py-10 px-6">
+          {/* Stats */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-0 mb-5">
+            {[
+              { number: '40+', label: '道咒語' },
+              { number: '5', label: '大生存場景' },
+              { number: 'counter', label: '次施放' },
+            ].map((stat, i) => (
+              <div key={i} className="flex items-center gap-2 sm:gap-0">
+                {i > 0 && <span className="hidden sm:block mx-6 text-lg" style={{ color: 'var(--ink)', opacity: 0.2 }}>｜</span>}
+                <div className="text-center">
+                  {stat.number === 'counter' ? (
+                    <span className="text-2xl md:text-3xl font-black" style={{ fontFamily: 'var(--font-rye)', color: 'var(--ink)' }}>
+                      <CountUp />
+                    </span>
+                  ) : (
+                    <span className="text-2xl md:text-3xl font-black" style={{ fontFamily: 'var(--font-rye)', color: 'var(--ink)' }}>
+                      {stat.number}
+                    </span>
+                  )}
+                  <span className="text-xs ml-2" style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.6 }}>
+                    {stat.label}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+          {/* Brand line */}
+          <div className="text-center">
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] mr-2"
+              style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.35 }}>
+              支援一鍵跳轉
+            </span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.15em]"
+              style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.25 }}>
+              ChatGPT ・ Claude ・ Gemini ・ Grok ・ DeepSeek
+            </span>
+          </div>
+        </div>
+      </section>
 
       {/* ── FREE TRIAL SECTION ── */}
       <section className="w-full max-w-4xl mx-auto mb-16 px-4 pt-4 relative z-10">
@@ -515,6 +608,40 @@ export default function MagicAcademyMVP() {
           >
             還有 {CURSES.length} 道進階咒語等你解鎖 <ArrowRight className="w-4 h-4" />
           </button>
+        </div>
+      </section>
+
+      {/* ── §04 TESTIMONIALS MARQUEE ── */}
+      <section className="w-full relative z-10 overflow-hidden py-10 md:py-14"
+        style={{ background: '#FEFAF0', borderTop: '3px solid var(--ink)', borderBottom: '3px solid var(--ink)' }}>
+        <div className="text-center mb-8">
+          <span className="text-[10px] font-black uppercase tracking-[0.3em]"
+            style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.3 }}>
+            §04 — 施法者回報
+          </span>
+        </div>
+        {/* Marquee track */}
+        <div className="relative">
+          <div className="flex gap-5 animate-marquee" style={{ width: 'max-content' }}>
+            {[...TESTIMONIALS, ...TESTIMONIALS].map((t, i) => (
+              <div key={i} className="flex-shrink-0 w-[280px] p-4 flex flex-col gap-2"
+                style={{ border: '3px solid var(--ink)', background: 'var(--parchment)', boxShadow: '4px 4px 0px var(--ink)' }}>
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">{t.emoji}</span>
+                  <div>
+                    <span className="text-sm font-black" style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)' }}>{t.name}</span>
+                    <span className="text-[10px] ml-2" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--teal)', opacity: 0.8 }}>{t.role}</span>
+                  </div>
+                </div>
+                <p className="text-sm leading-relaxed" style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)' }}>
+                  「{t.quote}」
+                </p>
+                <span className="text-[10px] font-bold" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--dark-red)' }}>
+                  —— 使用：{t.spell}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -612,7 +739,7 @@ export default function MagicAcademyMVP() {
                 <div className="absolute right-0 top-0 bottom-0 w-16 pointer-events-none z-20" style={{ background: 'linear-gradient(to left, var(--parchment), transparent)' }} />
 
                 <div className="flex overflow-x-auto gap-5 px-4 pb-8 no-scrollbar snap-x snap-mandatory scroll-smooth tab-scroll-container">
-                  {tabCurses.map((curse: any, idx: number) => {
+                  {(expandedTabs[tab] || searchQuery ? tabCurses : tabCurses.slice(0, 3)).map((curse: any, idx: number) => {
                     const tabColor = getTabColor(curse.tab);
                     return (
                     <motion.button
@@ -695,6 +822,23 @@ export default function MagicAcademyMVP() {
                     </motion.button>
                     );
                   })}
+
+                  {/* 查看全部咒語 button */}
+                  {!expandedTabs[tab] && !searchQuery && tabCurses.length > 3 && (
+                    <button
+                      onClick={() => setExpandedTabs(prev => ({ ...prev, [tab]: true }))}
+                      className="flex-shrink-0 w-[260px] md:w-[300px] snap-start flex flex-col items-center justify-center text-center p-6 transition-all active:translate-x-1 active:translate-y-1"
+                      style={{ border: '4px solid var(--ink)', boxShadow: 'var(--shadow)', background: 'var(--mustard)' }}
+                    >
+                      <Sparkles className="w-8 h-8 mb-3" style={{ color: 'var(--ink)' }} />
+                      <span className="text-base font-black" style={{ fontFamily: 'var(--font-noto-serif-tc)', color: 'var(--ink)' }}>
+                        查看全部咒語 →
+                      </span>
+                      <span className="text-xs mt-2" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.5 }}>
+                        還有 {tabCurses.length - 3} 道
+                      </span>
+                    </button>
+                  )}
 
                   {/* 魔力凝結中... placeholder card */}
                   <div
