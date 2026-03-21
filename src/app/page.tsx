@@ -407,7 +407,7 @@ export default function MagicAcademyMVP() {
     <div className="min-h-screen w-full parchment-bg" style={{ color: 'var(--ink)' }}>
 
       {/* ── §01 HEADER / MASTHEAD — Classic Ticket ── */}
-      <header className="w-full relative z-10 pb-12">
+      <header className="w-full relative z-10 pb-0">
         <div className="max-w-5xl mx-auto px-6 md:px-8">
 
           {/* Top meta info bar */}
@@ -456,7 +456,7 @@ export default function MagicAcademyMVP() {
       </header>
 
       {/* ── §03 FREE TRIAL SECTION ── */}
-      <section className="w-full max-w-4xl mx-auto px-4 pt-16 pb-24 relative z-10">
+      <section className="w-full max-w-4xl mx-auto px-4 pt-6 pb-24 relative z-10">
         <div className="text-center mb-12">
           <div style={{ border: '4px solid var(--ink)', boxShadow: 'var(--shadow)', background: 'var(--teal)', display: 'inline-block', padding: '6px 20px', marginBottom: '12px' }}>
             <span className="font-black text-xs uppercase tracking-[0.3em]" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--parchment)' }}>
