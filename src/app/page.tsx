@@ -416,7 +416,7 @@ export default function MagicAcademyMVP() {
           </div>
 
           {/* Subtitle in dashed border box */}
-          <div className="mb-20 md:mb-28" style={{ border: '2px dashed var(--ink)', padding: '28px 32px', maxWidth: '580px', margin: '0 auto', opacity: 0.85 }}>
+          <div className="mb-24 md:mb-32" style={{ border: '2px dashed var(--ink)', padding: '28px 32px', maxWidth: '580px', margin: '0 auto', opacity: 0.85 }}>
             <p
               className="text-[15px] md:text-lg leading-[2] tracking-wider text-center"
               style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', margin: 0 }}
@@ -429,8 +429,8 @@ export default function MagicAcademyMVP() {
       </header>
 
       {/* ── FREE TRIAL SECTION ── */}
-      <section className="w-full max-w-4xl mx-auto mb-16 px-4 relative z-10">
-        <div className="text-center mb-8">
+      <section className="w-full max-w-4xl mx-auto mb-16 px-4 pt-4 relative z-10">
+        <div className="text-center mb-10">
           <div style={{ border: '4px solid var(--ink)', boxShadow: 'var(--shadow)', background: 'var(--teal)', display: 'inline-block', padding: '6px 20px', marginBottom: '12px' }}>
             <span className="font-black text-xs uppercase tracking-[0.3em]" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--parchment)' }}>
               免費試咒 · 無需登入
