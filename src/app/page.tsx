@@ -442,9 +442,13 @@ export default function MagicAcademyMVP() {
             </div>
 
             {/* Tagline */}
-            <p className="mt-8 mb-0 text-sm md:text-base tracking-wider"
-              style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.5 }}>
-              別人花 3 小時學 AI，你只需要 3 秒鐘施法。
+            <p className="mt-8 mb-0 text-base md:text-lg tracking-wider"
+              style={{ fontFamily: 'var(--font-noto-serif-tc)', color: 'var(--ink)', opacity: 0.7, fontWeight: 700, fontStyle: 'italic' }}>
+              「別人花 3 小時學 AI，你只需要一鍵施法。」<br />
+              <span className="text-xs md:text-sm tracking-[0.2em] not-italic"
+                style={{ fontFamily: 'var(--font-chivo)', opacity: 0.5 }}>
+                —— 大魔導師
+              </span>
             </p>
           </div>
 
