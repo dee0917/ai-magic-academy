@@ -19,6 +19,20 @@ export const CAST_LEVELS = [
   { id: "full", label: "全力詠唱", mpBase: 3, fieldsRatio: 1.0, unlocksCard: true },
 ] as const;
 
+// 魔法編號系統
+const TIER_CODE: Record<string, string> = { apprentice: 'Ⅰ', adept: 'Ⅱ', master: 'Ⅲ', archmage: 'Ⅳ', forbidden: 'Ⅴ' };
+const TAB_CODE: Record<string, string> = { '人際擋箭': 'AR', '職場求生': 'SV', '日常雜症': 'DX', '創業/斜槓': 'BZ' };
+
+export function getSpellCode(curse: { tier: string; tab: string; id: string }): string {
+  const tierSymbol = TIER_CODE[curse.tier] || 'Ⅰ';
+  const tabCode = TAB_CODE[curse.tab] || 'XX';
+  // 用 CURSES 中同 tier+tab 的索引作序號
+  const sameGroup = CURSES.filter(c => c.tier === curse.tier && c.tab === curse.tab);
+  const idx = sameGroup.findIndex(c => c.id === curse.id);
+  const seq = String(idx + 1).padStart(3, '0');
+  return `${tierSymbol}-${tabCode}-${seq}`;
+}
+
 export const CURSES = [
   // ━━━ 📜 見習咒文 | 日常雜症 | Free ━━━
   {
