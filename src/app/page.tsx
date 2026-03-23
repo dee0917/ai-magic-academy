@@ -5,7 +5,7 @@ import {
   Brain, Bot, MessageSquare, Lock, Share2, AlertTriangle, ArrowRight, BookOpen,
   ArrowLeft, RefreshCw, Zap
 } from "lucide-react";
-import { CURSES } from "./curses_data";
+import { CURSES, TIER_CONFIG } from "./curses_data";
 import { motion, AnimatePresence } from "framer-motion";
 import Fuse from "fuse.js";
 
@@ -765,14 +765,14 @@ export default function MagicAcademyMVP() {
                       onClick={() => handleCardClick(curse)}
                       className="flex-shrink-0 w-[260px] md:w-[300px] snap-start text-left p-0 flex flex-col relative overflow-hidden"
                       style={{
-                        border: '4px solid var(--ink)',
+                        border: `4px solid ${curse.tier && TIER_CONFIG[curse.tier] ? TIER_CONFIG[curse.tier].borderColor : 'var(--ink)'}`,
                         boxShadow: 'var(--shadow)',
-                        background: '#FEFAF0',
+                        background: curse.tier && TIER_CONFIG[curse.tier] ? TIER_CONFIG[curse.tier].bgGlow : '#FEFAF0',
                         transition: 'box-shadow 0.12s ease, transform 0.12s ease',
                       }}
                     >
                       {/* Colored top stripe */}
-                      <div style={{ height: '6px', background: tabColor }} />
+                      <div style={{ height: '6px', background: curse.tier && TIER_CONFIG[curse.tier] ? TIER_CONFIG[curse.tier].color : tabColor }} />
 
                       {/* Card header area */}
                       <div className="p-5 pb-3 relative">
@@ -784,13 +784,28 @@ export default function MagicAcademyMVP() {
                           {String(idx + 1).padStart(2, '0')}
                         </span>
 
-                        {/* Category tag + icon */}
+                        {/* Category tag + tier badge + icon */}
                         <div className="flex items-start justify-between mb-3 relative z-10">
-                          <div
-                            className="text-[10px] font-black px-2 py-1"
-                            style={{ background: tabColor, fontFamily: 'var(--font-chivo)', color: '#FEFAF0' }}
-                          >
-                            {curse.tab}
+                          <div className="flex items-center gap-1.5">
+                            <div
+                              className="text-[10px] font-black px-2 py-1"
+                              style={{ background: tabColor, fontFamily: 'var(--font-chivo)', color: '#FEFAF0' }}
+                            >
+                              {curse.tab}
+                            </div>
+                            {curse.tier && TIER_CONFIG[curse.tier] && (
+                              <div
+                                className="text-[9px] font-black px-2 py-1 tracking-wider"
+                                style={{
+                                  fontFamily: 'var(--font-chivo)',
+                                  color: curse.tier === 'forbidden' ? '#D4AF37' : TIER_CONFIG[curse.tier].color,
+                                  border: `2px solid ${curse.tier === 'forbidden' ? '#D4AF37' : TIER_CONFIG[curse.tier].color}`,
+                                  background: curse.tier === 'forbidden' ? '#1F2937' : 'transparent',
+                                }}
+                              >
+                                {TIER_CONFIG[curse.tier].label}
+                              </div>
+                            )}
                           </div>
                           {curse.isPro && !isLoggedIn ? (
                             <div className="flex items-center gap-1 text-[10px] font-black px-2 py-1"
