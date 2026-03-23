@@ -5,7 +5,7 @@ import {
   Brain, Bot, MessageSquare, Lock, Share2, AlertTriangle, ArrowRight, BookOpen,
   ArrowLeft, RefreshCw, Zap
 } from "lucide-react";
-import { CURSES, TIER_CONFIG } from "./curses_data";
+import { CURSES, TIER_CONFIG, CAST_LEVELS } from "./curses_data";
 import { motion, AnimatePresence } from "framer-motion";
 import Fuse from "fuse.js";
 
@@ -144,7 +144,21 @@ const TESTIMONIALS = [
 export default function MagicAcademyMVP() {
   const [selectedCurse, setSelectedCurse] = useState<any>(null);
   const [inputs, setInputs] = useState<any>({});
-  const [spellLevel, setSpellLevel] = useState<"初級" | "中級" | "高級">("初級");
+  const [castLevel, setCastLevel] = useState<"quick" | "standard" | "full">("quick");
+  const [mp, setMp] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('magic-mp');
+      return saved ? parseInt(saved) : 10;
+    }
+    return 10;
+  });
+  const [collectedCards, setCollectedCards] = useState<string[]>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('magic-collection');
+      return saved ? JSON.parse(saved) : [];
+    }
+    return [];
+  });
   const [isCopied, setIsCopied] = useState(false);
   const [showPortal, setShowPortal] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -320,18 +334,49 @@ export default function MagicAcademyMVP() {
     return groups;
   }, [filteredCurses]);
 
+  // 計算欄位可見性
+  const getFieldVisibility = (totalFields: number, castLevelId: string) => {
+    const cl = CAST_LEVELS.find(c => c.id === castLevelId);
+    if (!cl) return 2;
+    return Math.max(2, Math.ceil(totalFields * cl.fieldsRatio));
+  };
+
+  // 計算 MP 消耗
+  const getMpCost = (curse: any, castLevelId: string) => {
+    const cl = CAST_LEVELS.find(c => c.id === castLevelId);
+    const tier = TIER_CONFIG[curse?.tier || 'apprentice'];
+    if (!cl || !tier) return 1;
+    return cl.mpBase * tier.mpMultiplier;
+  };
+
+  // 保存 MP 和收集到 localStorage
+  const saveMp = (newMp: number) => {
+    setMp(newMp);
+    if (typeof window !== 'undefined') localStorage.setItem('magic-mp', String(newMp));
+  };
+
+  const saveCollection = (cards: string[]) => {
+    setCollectedCards(cards);
+    if (typeof window !== 'undefined') localStorage.setItem('magic-collection', JSON.stringify(cards));
+  };
+
   const handleCardClick = (curse: any) => {
-    if (curse.isPro && !isLoggedIn) {
-      setShowAuthModal(true);
-      return;
-    }
     setSelectedCurse(curse);
     setAgreedToRisk(false);
     setInputs({});
   };
 
   const brewAndCopy = () => {
-    const autoInputs: any = {}; selectedCurse.fields.forEach((f: any, idx: number) => { const isVisible = spellLevel === "高級" || (spellLevel === "初級" && idx < 2) || (spellLevel === "中級" && idx < 3); autoInputs[f.id] = isVisible ? (inputs[f.id] || "「尚未輸入內容」") : "（由 AI 根據情境自動填充）"; }); const spell = selectedCurse.generate({ ...autoInputs, [selectedCurse.tweak?.id]: inputs[selectedCurse.tweak?.id] || selectedCurse.tweak?.options[0] });
+    const cost = getMpCost(selectedCurse, castLevel);
+    if (mp < cost) { alert(`魔力不足！需要 ${cost} MP，目前只有 ${mp} MP`); return; }
+    const visibleCount = getFieldVisibility(selectedCurse.fields.length, castLevel);
+    const autoInputs: any = {}; selectedCurse.fields.forEach((f: any, idx: number) => { const isVisible = idx < visibleCount; autoInputs[f.id] = isVisible ? (inputs[f.id] || "「尚未輸入內容」") : "（由 AI 根據情境自動填充）"; }); const spell = selectedCurse.generate({ ...autoInputs, [selectedCurse.tweak?.id]: inputs[selectedCurse.tweak?.id] || selectedCurse.tweak?.options[0] });
+    // 扣除 MP
+    saveMp(mp - cost);
+    // 全力詠唱解鎖卡片
+    if (castLevel === 'full' && !collectedCards.includes(selectedCurse.id)) {
+      saveCollection([...collectedCards, selectedCurse.id]);
+    }
     const cleanSpell = spell.replace(/\[\[/g, '').replace(/\]\]/g, '');
     navigator.clipboard.writeText(cleanSpell).then(() => {
       setShowBrewing(true);
@@ -967,35 +1012,46 @@ export default function MagicAcademyMVP() {
                   {/* Form area */}
                   <div className="p-5 pt-2">
                     <div style={{ border: '2px dashed var(--ink)', padding: '20px', opacity: 0.9 }}>
-                      {/* Level selector */}
+                      {/* Cast level selector — 魔力消耗 */}
                       <div className="mb-5">
                         <label className="block text-[10px] font-black uppercase tracking-[0.15em] mb-2"
                           style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)' }}>
-                          魔力等級 MAGIC GRADE
+                          魔力消耗 MP COST
                         </label>
                         <div className="flex gap-0" style={{ border: '3px solid var(--ink)' }}>
-                          {['初級', '中級', '高級'].map((l, i) => (
-                            <button key={l} type="button"
-                              onClick={() => setSpellLevel(l as any)}
-                              className="flex-1 px-3 py-2 text-xs font-black uppercase"
+                          {CAST_LEVELS.map((cl, i) => {
+                            const cost = getMpCost(selectedCurse, cl.id);
+                            return (
+                            <button key={cl.id} type="button"
+                              onClick={() => setCastLevel(cl.id as any)}
+                              className="flex-1 px-2 py-2 text-[10px] font-black"
                               style={{
                                 fontFamily: 'var(--font-chivo)',
-                                background: spellLevel === l ? 'var(--mustard)' : 'transparent',
+                                background: castLevel === cl.id ? 'var(--mustard)' : 'transparent',
                                 color: 'var(--ink)',
                                 borderLeft: i > 0 ? '3px solid var(--ink)' : 'none',
                               }}>
-                              {l}
+                              {cl.label}
+                              <span className="block text-[9px] opacity-60">{cost} MP</span>
                             </button>
-                          ))}
+                          )})}
+                        </div>
+                        <div className="flex items-center justify-between mt-2">
+                          <span className="text-[10px] font-bold" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.5 }}>
+                            目前魔力：{mp} MP
+                          </span>
+                          {castLevel === 'full' && (
+                            <span className="text-[9px] font-black px-2 py-0.5" style={{ background: 'var(--teal)', color: 'var(--parchment)', fontFamily: 'var(--font-chivo)' }}>
+                              ★ 可收集卡片
+                            </span>
+                          )}
                         </div>
                       </div>
 
                       {/* Input fields */}
                       {selectedCurse.fields
                         .filter((_f: any, idx: number) =>
-                          spellLevel === '高級' ||
-                          (spellLevel === '初級' && idx < 2) ||
-                          (spellLevel === '中級' && idx < 3)
+                          idx < getFieldVisibility(selectedCurse.fields.length, castLevel)
                         )
                         .map((f: any) => (
                           <div key={f.id} className="mb-5">
@@ -1063,7 +1119,7 @@ export default function MagicAcademyMVP() {
                       {(() => {
                         const baseInputs: any = {};
                         selectedCurse.fields.forEach((f: any, idx: number) => {
-                          const isVisible = spellLevel === "高級" || (spellLevel === "初級" && idx < 2) || (spellLevel === "中級" && idx < 3);
+                          const isVisible = idx < getFieldVisibility(selectedCurse.fields.length, castLevel);
                           baseInputs[f.id] = isVisible ? (inputs[f.id] || "「尚未輸入內容」") : "（由 AI 根據情境自動填充）";
                         });
                         const finalInputs = { ...baseInputs, [selectedCurse.tweak?.id]: (inputs[selectedCurse.tweak?.id] || selectedCurse.tweak?.options[0]) };
@@ -1172,35 +1228,45 @@ export default function MagicAcademyMVP() {
                   </div>
 
                   <div style={{ border: '2px dashed var(--ink)', padding: '20px', opacity: 0.9 }}>
-                    {/* Level selector */}
+                    {/* Cast level selector — desktop */}
                     <div className="mb-5">
                       <label className="block text-[10px] font-black uppercase tracking-[0.15em] mb-2"
                         style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)' }}>
-                        魔力等級 MAGIC GRADE
+                        魔力消耗 MP COST
                       </label>
                       <div className="flex gap-0" style={{ border: '3px solid var(--ink)' }}>
-                        {['初級', '中級', '高級'].map((l, i) => (
-                          <button key={l} type="button"
-                            onClick={() => setSpellLevel(l as any)}
-                            className="flex-1 px-3 py-2 text-xs font-black uppercase"
+                        {CAST_LEVELS.map((cl, i) => {
+                          const cost = getMpCost(selectedCurse, cl.id);
+                          return (
+                          <button key={cl.id} type="button"
+                            onClick={() => setCastLevel(cl.id as any)}
+                            className="flex-1 px-3 py-2 text-xs font-black"
                             style={{
                               fontFamily: 'var(--font-chivo)',
-                              background: spellLevel === l ? 'var(--mustard)' : 'transparent',
+                              background: castLevel === cl.id ? 'var(--mustard)' : 'transparent',
                               color: 'var(--ink)',
                               borderLeft: i > 0 ? '3px solid var(--ink)' : 'none',
                             }}>
-                            {l}
+                            {cl.label} <span className="opacity-60">({cost}MP)</span>
                           </button>
-                        ))}
+                        )})}
+                      </div>
+                      <div className="flex items-center justify-between mt-2">
+                        <span className="text-[10px] font-bold" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.5 }}>
+                          目前魔力：{mp} MP
+                        </span>
+                        {castLevel === 'full' && (
+                          <span className="text-[9px] font-black px-2 py-0.5" style={{ background: 'var(--teal)', color: 'var(--parchment)', fontFamily: 'var(--font-chivo)' }}>
+                            ★ 可收集卡片
+                          </span>
+                        )}
                       </div>
                     </div>
 
                     {/* Input fields */}
                     {selectedCurse.fields
                       .filter((_f: any, idx: number) =>
-                        spellLevel === '高級' ||
-                        (spellLevel === '初級' && idx < 2) ||
-                        (spellLevel === '中級' && idx < 3)
+                        idx < getFieldVisibility(selectedCurse.fields.length, castLevel)
                       )
                       .map((f: any) => (
                         <div key={f.id} className="mb-5">
@@ -1297,7 +1363,7 @@ export default function MagicAcademyMVP() {
                     <button onClick={() => {
                       const baseInputs: any = {};
                       selectedCurse.fields.forEach((f: any, idx: number) => {
-                        const isVisible = spellLevel === "高級" || (spellLevel === "初級" && idx < 2) || (spellLevel === "中級" && idx < 3);
+                        const isVisible = idx < getFieldVisibility(selectedCurse.fields.length, castLevel);
                         baseInputs[f.id] = isVisible ? (inputs[f.id] || "「尚未輸入內容」") : "（由 AI 根據情境自動填充）";
                       });
                       const finalInputs = { ...baseInputs, [selectedCurse.tweak?.id]: (inputs[selectedCurse.tweak?.id] || selectedCurse.tweak?.options[0]) };
@@ -1314,7 +1380,7 @@ export default function MagicAcademyMVP() {
                   {(() => {
                     const baseInputs: any = {};
                     selectedCurse.fields.forEach((f: any, idx: number) => {
-                      const isVisible = spellLevel === "高級" || (spellLevel === "初級" && idx < 2) || (spellLevel === "中級" && idx < 3);
+                      const isVisible = idx < getFieldVisibility(selectedCurse.fields.length, castLevel);
                       baseInputs[f.id] = isVisible ? (inputs[f.id] || "「尚未輸入內容」") : "（由 AI 根據情境自動填充）";
                     });
                     const finalInputs = { ...baseInputs, [selectedCurse.tweak?.id]: (inputs[selectedCurse.tweak?.id] || selectedCurse.tweak?.options[0]) };
@@ -1699,7 +1765,7 @@ export default function MagicAcademyMVP() {
             <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center" style={{ border: '4px solid var(--ink)', background: 'var(--mustard)', boxShadow: 'var(--shadow-sm)' }}>
               <Lock className="w-6 h-6" style={{ color: 'var(--ink)' }} />
             </div>
-            <h3 className="text-xl mb-2" style={{ fontFamily: 'var(--font-rye)', color: 'var(--ink)' }}>解鎖高級咒語</h3>
+            <h3 className="text-xl mb-2" style={{ fontFamily: 'var(--font-rye)', color: 'var(--ink)' }}>購買魔力水晶</h3>
             <p className="text-sm mb-6" style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.65 }}>此咒語需要學院認證才能使用</p>
             <button
               onClick={() => { setIsLoggedIn(true); setShowAuthModal(false); }}
