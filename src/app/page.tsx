@@ -898,7 +898,7 @@ export default function MagicAcademyMVP() {
                           className="absolute top-2 right-3 text-7xl font-black leading-none select-none pointer-events-none"
                           style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.06 }}
                         >
-                          {String(idx + 1).padStart(2, '0')}
+                          {getSpellCode(curse).split('-').pop()}
                         </span>
 
                         {/* Category tag + tier badge + icon */}
