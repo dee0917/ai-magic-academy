@@ -129,16 +129,16 @@ const CountUp = () => {
 
 // Testimonials data
 const TESTIMONIALS = [
-  { emoji: '👩‍💼', name: 'Jia', role: '行銷企劃', quote: '用了婉拒加班咒語，老闆居然說沒問題 😂', spell: '軟刀斷尾' },
-  { emoji: '👨‍🎓', name: '阿凱', role: '大學生', quote: '期末報告拖到最後一天，時間咒印救了我一命', spell: '時間咒印' },
-  { emoji: '👩‍🍳', name: '小魚', role: '自由接案', quote: '業配報價一直不敢開口，變現結界直接幫我算好', spell: '變現結界' },
-  { emoji: '👨‍💻', name: 'Wayne', role: '工程師', quote: '人體翻譯機翻出主管的弦外之音，太準了吧', spell: '人體翻譯機' },
-  { emoji: '👩‍🎨', name: '小圓', role: 'IG 經營者', quote: '靈感永動機一次給我 30 天選題，再也不用盯著螢幕發呆', spell: '靈感永動機' },
-  { emoji: '🧑‍🏫', name: '阿翔', role: '補習班老師', quote: '被家長已讀不回，用了渡口擺渡人傳的道歉訊息秒回', spell: '渡口擺渡人' },
-  { emoji: '👩‍⚕️', name: 'Mia', role: '護理師', quote: '過年被親戚問到崩潰，荒謬核彈型回覆讓全桌笑翻', spell: '社交防禦咒' },
-  { emoji: '👨‍🍳', name: '大雄', role: '餐飲業', quote: '幫我寫的負評優雅到朋友以為是專業美食家寫的', spell: '幫我寫負評' },
-  { emoji: '👩‍💼', name: 'Yuki', role: 'PM', quote: '電梯裡遇到老闆，黃金 60 秒讓我 30 秒講完進度', spell: '黃金 60 秒' },
-  { emoji: '🧑‍🎤', name: '小豪', role: 'YouTuber', quote: '鉤魂首行寫的開場，完播率直接從 20% 跳到 45%', spell: '鉤魂首行' },
+  { emoji: '👩‍💼', name: 'Jia', role: '行銷企劃', quote: '用了婉拒加班咒語，老闆居然說沒問題 😂', spell: '軟刀斷尾', stars: 5, daysAgo: 2 },
+  { emoji: '👨‍🎓', name: '阿凱', role: '大學生', quote: '期末報告拖到最後一天，時間咒印救了我一命', spell: '時間咒印', stars: 5, daysAgo: 5 },
+  { emoji: '👩‍🍳', name: '小魚', role: '自由接案', quote: '業配報價一直不敢開口，變現結界直接幫我算好', spell: '變現結界', stars: 4, daysAgo: 3 },
+  { emoji: '👨‍💻', name: 'Wayne', role: '工程師', quote: '人體翻譯機翻出主管的弦外之音，太準了吧', spell: '人體翻譯機', stars: 5, daysAgo: 1 },
+  { emoji: '👩‍🎨', name: '小圓', role: 'IG 經營者', quote: '靈感永動機一次給我 30 天選題，再也不用盯著螢幕發呆', spell: '靈感永動機', stars: 5, daysAgo: 7 },
+  { emoji: '🧑‍🏫', name: '阿翔', role: '補習班老師', quote: '被家長已讀不回，用了渡口擺渡人傳的道歉訊息秒回', spell: '渡口擺渡人', stars: 4, daysAgo: 4 },
+  { emoji: '👩‍⚕️', name: 'Mia', role: '護理師', quote: '過年被親戚問到崩潰，荒謬核彈型回覆讓全桌笑翻', spell: '社交防禦咒', stars: 5, daysAgo: 6 },
+  { emoji: '👨‍🍳', name: '大雄', role: '餐飲業', quote: '幫我寫的負評優雅到朋友以為是專業美食家寫的', spell: '幫我寫負評', stars: 4, daysAgo: 10 },
+  { emoji: '👩‍💼', name: 'Yuki', role: 'PM', quote: '電梯裡遇到老闆，黃金 60 秒讓我 30 秒講完進度', spell: '黃金 60 秒', stars: 5, daysAgo: 8 },
+  { emoji: '🧑‍🎤', name: '小豪', role: 'YouTuber', quote: '鉤魂首行寫的開場，完播率直接從 20% 跳到 45%', spell: '鉤魂首行', stars: 5, daysAgo: 3 },
 ];
 
 export default function MagicAcademyMVP() {
@@ -542,10 +542,10 @@ export default function MagicAcademyMVP() {
         </div>
       </section>
 
-      {/* ── §04 TESTIMONIALS MARQUEE ── */}
-      <section className="w-full relative z-10 overflow-hidden py-16"
+      {/* ── §04 TESTIMONIALS — 魔法卷軸 ── */}
+      <section className="w-full relative z-10 overflow-hidden py-20"
         style={{ background: '#FEFAF0', borderTop: '3px solid var(--ink)', borderBottom: '3px solid var(--ink)' }}>
-        <div className="text-center mb-8">
+        <div className="text-center mb-12">
           <span className="text-[10px] font-black uppercase tracking-[0.3em]"
             style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.3 }}>
             §04 — 施法者回報
@@ -553,24 +553,111 @@ export default function MagicAcademyMVP() {
         </div>
         {/* Marquee track */}
         <div className="relative">
-          <div className="flex gap-5 animate-marquee" style={{ width: 'max-content' }}>
+          <div className="flex gap-6 animate-marquee" style={{ width: 'max-content' }}>
             {[...TESTIMONIALS, ...TESTIMONIALS].map((t, i) => (
-              <div key={i} className="flex-shrink-0 w-[280px] p-4 flex flex-col gap-2"
-                style={{ border: '3px solid var(--ink)', background: 'var(--parchment)', boxShadow: '4px 4px 0px var(--ink)' }}>
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl">{t.emoji}</span>
-                  <div>
-                    <span className="text-sm font-black" style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)' }}>{t.name}</span>
-                    <span className="text-[10px] ml-2" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--teal)', opacity: 0.8 }}>{t.role}</span>
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, rotateX: -90 }}
+                whileInView={{ opacity: 1, rotateX: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: (i % TESTIMONIALS.length) * 0.08 }}
+                whileHover={{ scale: 1.04, y: -4 }}
+                className="flex-shrink-0 w-[300px] relative"
+                style={{ perspective: '800px' }}
+              >
+                {/* Scroll top rod */}
+                <div className="w-full h-3 rounded-t-sm relative z-10"
+                  style={{
+                    background: 'linear-gradient(180deg, #8B6F47 0%, #6B5535 40%, #A0855C 60%, #8B6F47 100%)',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.3)',
+                    border: '1px solid #5A4628',
+                  }} />
+                {/* Scroll body */}
+                <div className="p-5 flex flex-col gap-3 relative"
+                  style={{
+                    background: 'linear-gradient(135deg, #FDF6E3 0%, #F5E6C8 50%, #FDF6E3 100%)',
+                    border: '2px solid var(--ink)',
+                    borderTop: 'none',
+                    borderBottom: 'none',
+                    boxShadow: 'inset 0 0 30px rgba(139,111,71,0.1), 4px 4px 0px var(--ink)',
+                  }}>
+                  {/* Burnt edge decorations */}
+                  <div className="absolute top-0 right-0 w-8 h-8 pointer-events-none"
+                    style={{
+                      background: 'radial-gradient(ellipse at top right, rgba(139,90,43,0.15) 0%, transparent 70%)',
+                    }} />
+                  <div className="absolute bottom-0 left-0 w-6 h-6 pointer-events-none"
+                    style={{
+                      background: 'radial-gradient(ellipse at bottom left, rgba(139,90,43,0.12) 0%, transparent 70%)',
+                    }} />
+
+                  {/* Header: emoji orb + name + role */}
+                  <div className="flex items-center gap-3">
+                    <div className="relative">
+                      <motion.span
+                        className="text-2xl block"
+                        animate={{ y: [0, -3, 0] }}
+                        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: (i % TESTIMONIALS.length) * 0.3 }}
+                        style={{
+                          filter: 'drop-shadow(0 0 6px rgba(212,105,44,0.4))',
+                        }}
+                      >
+                        {t.emoji}
+                      </motion.span>
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-sm font-black" style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)' }}>{t.name}</span>
+                      <span className="text-[10px]" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--teal)', opacity: 0.8 }}>{t.role}</span>
+                    </div>
+                  </div>
+
+                  {/* Stars */}
+                  <div className="flex gap-0.5">
+                    {Array.from({ length: 5 }).map((_, si) => (
+                      <span key={si} className="text-xs" style={{ color: si < t.stars ? '#D4692C' : '#D4C5A9' }}>★</span>
+                    ))}
+                    <span className="text-[9px] ml-1.5 self-center" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.35 }}>
+                      {t.daysAgo}天前
+                    </span>
+                  </div>
+
+                  {/* Quote with decorative marks */}
+                  <div className="relative px-2">
+                    <span className="absolute -left-1 -top-1 text-2xl leading-none select-none" style={{ fontFamily: 'Georgia, serif', color: 'var(--dark-red)', opacity: 0.25 }}>「</span>
+                    <p className="text-sm leading-relaxed pl-3" style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)' }}>
+                      {t.quote}
+                    </p>
+                    <span className="absolute -right-1 bottom-0 text-2xl leading-none select-none" style={{ fontFamily: 'Georgia, serif', color: 'var(--dark-red)', opacity: 0.25 }}>」</span>
+                  </div>
+
+                  {/* Spell badge — clickable */}
+                  <div className="flex items-center gap-1.5 mt-1">
+                    <button
+                      onClick={() => {
+                        const curse = CURSES.find((c: any) => c.title?.includes(t.spell));
+                        if (curse) handleCardClick(curse);
+                      }}
+                      className="inline-flex items-center gap-1 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider cursor-pointer transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none active:scale-95"
+                      style={{
+                        fontFamily: 'var(--font-chivo)',
+                        color: 'var(--parchment)',
+                        background: 'linear-gradient(135deg, var(--dark-red), #8B2500)',
+                        border: '1.5px solid var(--ink)',
+                        boxShadow: '2px 2px 0 var(--ink)',
+                      }}>
+                      <Sparkles className="w-2.5 h-2.5" />
+                      {t.spell}
+                    </button>
                   </div>
                 </div>
-                <p className="text-sm leading-relaxed" style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)' }}>
-                  「{t.quote}」
-                </p>
-                <span className="text-[10px] font-bold" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--dark-red)' }}>
-                  —— 使用：{t.spell}
-                </span>
-              </div>
+                {/* Scroll bottom rod */}
+                <div className="w-full h-3 rounded-b-sm relative z-10"
+                  style={{
+                    background: 'linear-gradient(0deg, #8B6F47 0%, #6B5535 40%, #A0855C 60%, #8B6F47 100%)',
+                    boxShadow: '0 -1px 4px rgba(0,0,0,0.2)',
+                    border: '1px solid #5A4628',
+                  }} />
+              </motion.div>
             ))}
           </div>
         </div>
@@ -941,25 +1028,6 @@ export default function MagicAcademyMVP() {
                       </span>
                     </label>
 
-                    {/* 大魔導師筆記 */}
-                    {selectedCurse.theory && (
-                      <div className="mt-4" style={{ border: '3px solid var(--ink)', background: 'rgba(26,92,90,0.06)' }}>
-                        <div className="flex items-center gap-2 px-4 py-2"
-                          style={{ background: 'var(--teal)', borderBottom: '3px solid var(--ink)' }}>
-                          <BookOpen className="w-4 h-4" style={{ color: 'var(--mustard)' }} />
-                          <span className="text-xs font-black uppercase tracking-wider"
-                            style={{ fontFamily: 'var(--font-chivo)', color: 'var(--parchment)' }}>
-                            大魔導師筆記
-                          </span>
-                        </div>
-                        <div className="p-4">
-                          <p className="text-xs leading-relaxed italic"
-                            style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.7 }}>
-                            {selectedCurse.theory}
-                          </p>
-                        </div>
-                      </div>
-                    )}
                   </div>
 
                   {/* Mobile terminal preview — inline, not accordion */}
@@ -1002,6 +1070,26 @@ export default function MagicAcademyMVP() {
                       </div>
                     </div>
                   </div>
+
+                  {/* 大魔導師筆記 — below terminal preview */}
+                  {selectedCurse.theory && (
+                    <div style={{ border: '3px solid var(--ink)', borderTop: 'none', background: 'rgba(26,92,90,0.06)' }}>
+                      <div className="flex items-center gap-2 px-4 py-2"
+                        style={{ background: 'var(--teal)', borderTop: '3px solid var(--ink)', borderBottom: '3px solid var(--ink)' }}>
+                        <BookOpen className="w-4 h-4" style={{ color: 'var(--mustard)' }} />
+                        <span className="text-xs font-black uppercase tracking-wider"
+                          style={{ fontFamily: 'var(--font-chivo)', color: 'var(--parchment)' }}>
+                          大魔導師筆記
+                        </span>
+                      </div>
+                      <div className="p-4">
+                        <p className="text-xs leading-relaxed italic"
+                          style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.7 }}>
+                          {selectedCurse.theory}
+                        </p>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Floating CTA button */}
@@ -1154,25 +1242,6 @@ export default function MagicAcademyMVP() {
                     </span>
                   </label>
 
-                  {/* 大魔導師筆記 — desktop */}
-                  {selectedCurse.theory && (
-                    <div className="mt-4" style={{ border: '3px solid var(--ink)', background: 'rgba(26,92,90,0.06)' }}>
-                      <div className="flex items-center gap-2 px-4 py-2"
-                        style={{ background: 'var(--teal)', borderBottom: '3px solid var(--ink)' }}>
-                        <BookOpen className="w-4 h-4" style={{ color: 'var(--mustard)' }} />
-                        <span className="text-xs font-black uppercase tracking-wider"
-                          style={{ fontFamily: 'var(--font-chivo)', color: 'var(--parchment)' }}>
-                          大魔導師筆記
-                        </span>
-                      </div>
-                      <div className="p-4">
-                        <p className="text-xs leading-relaxed italic"
-                          style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.7 }}>
-                          {selectedCurse.theory}
-                        </p>
-                      </div>
-                    </div>
-                  )}
                 </div>
 
                 {/* Cast button — desktop */}
@@ -1256,6 +1325,26 @@ export default function MagicAcademyMVP() {
                     ))}
                   </div>
                 </div>
+
+                {/* 大魔導師筆記 — desktop, below terminal */}
+                {selectedCurse.theory && (
+                  <div className="hidden md:block" style={{ borderLeft: '4px solid var(--ink)', background: 'rgba(26,92,90,0.06)' }}>
+                    <div className="flex items-center gap-2 px-5 py-2"
+                      style={{ background: 'var(--teal)', borderTop: '3px solid var(--ink)', borderBottom: '3px solid var(--ink)' }}>
+                      <BookOpen className="w-4 h-4" style={{ color: 'var(--mustard)' }} />
+                      <span className="text-xs font-black uppercase tracking-wider"
+                        style={{ fontFamily: 'var(--font-chivo)', color: 'var(--parchment)' }}>
+                        大魔導師筆記
+                      </span>
+                    </div>
+                    <div className="p-5">
+                      <p className="text-xs leading-relaxed italic"
+                        style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.7 }}>
+                        {selectedCurse.theory}
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
             </motion.div>
           </div>
