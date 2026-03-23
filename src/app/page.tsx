@@ -893,12 +893,12 @@ export default function MagicAcademyMVP() {
 
                       {/* Card header area */}
                       <div className="p-5 pb-3 relative">
-                        {/* Spell code watermark */}
+                        {/* Big background number */}
                         <span
-                          className="absolute top-2 right-3 text-[11px] font-black leading-none select-none pointer-events-none tracking-wider"
-                          style={{ fontFamily: 'var(--font-chivo)', color: curse.tier && TIER_CONFIG[curse.tier] ? TIER_CONFIG[curse.tier].color : 'var(--ink)', opacity: 0.35 }}
+                          className="absolute top-2 right-3 text-7xl font-black leading-none select-none pointer-events-none"
+                          style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.06 }}
                         >
-                          {getSpellCode(curse)}
+                          {String(idx + 1).padStart(2, '0')}
                         </span>
 
                         {/* Category tag + tier badge + icon */}
@@ -962,8 +962,16 @@ export default function MagicAcademyMVP() {
 
                       {/* Footer */}
                       <div className="flex items-center justify-between px-5 py-3">
-                        <span className="text-xs font-bold" style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.5 }}>
-                          所需參數: {curse.fields?.length || 0}
+                        {/* Stamp-style spell code */}
+                        <span className="text-[9px] font-black px-1.5 py-0.5 tracking-wider select-none"
+                          style={{
+                            fontFamily: 'var(--font-chivo)',
+                            color: 'var(--dark-red)',
+                            border: '1.5px solid var(--dark-red)',
+                            opacity: 0.45,
+                            transform: 'rotate(-2deg)',
+                          }}>
+                          {getSpellCode(curse)}
                         </span>
                         <span className="flex items-center gap-1 text-xs font-black" style={{ fontFamily: 'var(--font-noto-sans-tc)', color: tabColor }}>
                           詠唱 <ArrowRight className="w-3 h-3" />
