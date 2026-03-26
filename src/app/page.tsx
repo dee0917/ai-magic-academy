@@ -166,6 +166,7 @@ export default function MagicAcademyMVP() {
   const [showSpellBook, setShowSpellBook] = useState(false);
   const [showSpellCard, setShowSpellCard] = useState(false);
   const [lastCastLevel, setLastCastLevel] = useState("standard");
+  const [lastCastCurse, setLastCastCurse] = useState<any>(null);
 
   const TRIAL_DATA = [
     {
@@ -374,13 +375,15 @@ export default function MagicAcademyMVP() {
     // Filter out lines with hidden params so copied spell only contains visible params
     const visibleSpell = cleanSpell.split('\n').filter((l: string) => !l.includes(HIDDEN_MARKER)).join('\n');
     setLastCastLevel(castLevel);
+    setLastCastCurse(selectedCurse);
     // Try clipboard, but don't block the flow if it fails
     try { navigator.clipboard.writeText(visibleSpell).catch(() => {}); } catch {}
     setShowBrewing(true);
     setTimeout(() => {
       setShowBrewing(false);
       setIsCopied(true);
-      setShowSpellCard(true);
+      setShowPortal(false); // ensure portal is closed first
+      setTimeout(() => setShowSpellCard(true), 100); // slight delay to avoid conflict
       setShowCopyToast(true);
       setTimeout(() => setIsCopied(false), 3000);
       setTimeout(() => setShowCopyToast(false), 6000);
@@ -1713,9 +1716,9 @@ export default function MagicAcademyMVP() {
 
       {/* ── SPELL CARD (after casting) ── */}
       <AnimatePresence>
-        {showSpellCard && selectedCurse && (
+        {showSpellCard && lastCastCurse && (
           <SpellCard
-            curse={selectedCurse}
+            curse={lastCastCurse}
             castLevel={lastCastLevel}
             onClose={() => {
               setShowSpellCard(false);
