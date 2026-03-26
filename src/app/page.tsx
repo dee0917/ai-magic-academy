@@ -167,6 +167,9 @@ export default function MagicAcademyMVP() {
   const [showSpellCard, setShowSpellCard] = useState(false);
   const [lastCastLevel, setLastCastLevel] = useState("standard");
   const [lastCastCurse, setLastCastCurse] = useState<any>(null);
+  const [showSharePreview, setShowSharePreview] = useState(false);
+  const [shareText, setShareText] = useState("");
+  const [shareImageUrl, setShareImageUrl] = useState("");
 
   const TRIAL_DATA = [
     {
@@ -1590,19 +1593,10 @@ export default function MagicAcademyMVP() {
                     if (!el) return;
                     const html2canvas = (await import('html2canvas')).default;
                     const canvas = await html2canvas(el, { scale: 2, backgroundColor: null, useCORS: true });
-                    canvas.toBlob(async (blob) => {
-                      if (!blob) return;
-                      const tc = TIER_CONFIG[lastCastCurse.tier];
-                      if (navigator.share && navigator.canShare) {
-                        const file = new File([blob], `spell.png`, { type: 'image/png' });
-                        const data = { title: 'AI 魔法學院', text: `我在【AI 魔法學院】施放了${tc.label}級咒語「${lastCastCurse.title}」⚡`, url: 'https://ai-magic-academy.vercel.app', files: [file] };
-                        if (navigator.canShare(data)) { await navigator.share(data); return; }
-                      }
-                      const link = document.createElement('a');
-                      link.download = `spell.png`;
-                      link.href = URL.createObjectURL(blob);
-                      link.click();
-                    }, 'image/png');
+                    setShareImageUrl(canvas.toDataURL('image/png'));
+                    const tc = TIER_CONFIG[lastCastCurse.tier];
+                    setShareText(`剛在 AI 魔法學院施放了${tc.label}級咒語【${lastCastCurse.title}】⚡ 30 秒搞定原本要想 10 分鐘的事。\n\n你也來試試 → ai-magic-academy.vercel.app`);
+                    setShowSharePreview(true);
                   }}
                   className="flex-1 flex items-center justify-center gap-2 py-2 text-xs font-bold transition-all active:translate-x-0.5 active:translate-y-0.5"
                   style={{ background: 'var(--teal)', color: 'var(--parchment)', border: '3px solid var(--ink)', boxShadow: '3px 3px 0px var(--ink)', fontFamily: 'var(--font-noto-sans-tc)' }}
@@ -1798,6 +1792,139 @@ export default function MagicAcademyMVP() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* ── SHARE PREVIEW MODAL ── */}
+      {showSharePreview && (
+        <div className="fixed inset-0 z-[300] flex items-center justify-center p-4" style={{ background: 'rgba(42,39,35,0.92)' }}>
+          <div className="max-w-sm w-full" style={{ maxHeight: '90vh', overflowY: 'auto' }}>
+            {/* Preview header */}
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-base font-black" style={{ color: 'var(--mustard)', fontFamily: 'var(--font-noto-serif-tc)' }}>
+                分享預覽
+              </h3>
+              <button onClick={() => setShowSharePreview(false)}>
+                <X className="w-5 h-5" style={{ color: 'rgba(244,238,216,0.5)' }} />
+              </button>
+            </div>
+
+            {/* Card image preview */}
+            {shareImageUrl && (
+              <div className="mb-3" style={{ border: '3px solid var(--ink)', boxShadow: 'var(--shadow-sm)' }}>
+                <img src={shareImageUrl} alt="施法紀錄" className="w-full block" />
+              </div>
+            )}
+
+            {/* Editable text */}
+            <div className="mb-3">
+              <label className="block text-[10px] font-bold mb-1" style={{ color: 'rgba(244,238,216,0.4)', fontFamily: 'var(--font-chivo)', letterSpacing: '0.1em' }}>
+                貼文內容（可編輯）
+              </label>
+              <textarea
+                value={shareText}
+                onChange={(e) => setShareText(e.target.value)}
+                rows={4}
+                className="w-full p-3 text-sm resize-none"
+                style={{
+                  background: 'var(--parchment)',
+                  color: 'var(--ink)',
+                  border: '3px solid var(--ink)',
+                  boxShadow: '3px 3px 0px var(--ink)',
+                  fontFamily: 'var(--font-noto-sans-tc)',
+                  outline: 'none',
+                  lineHeight: 1.6,
+                }}
+              />
+            </div>
+
+            {/* Platform buttons */}
+            <div className="grid grid-cols-2 gap-2 mb-3">
+              {/* Threads */}
+              <button
+                onClick={() => {
+                  const url = `https://www.threads.net/intent/post?text=${encodeURIComponent(shareText)}`;
+                  window.open(url, '_blank');
+                }}
+                className="flex items-center justify-center gap-2 py-2.5 text-xs font-bold transition-all active:translate-x-0.5 active:translate-y-0.5"
+                style={{ background: '#000', color: '#fff', border: '3px solid var(--ink)', boxShadow: '3px 3px 0px var(--ink)', fontFamily: 'var(--font-noto-sans-tc)' }}
+              >
+                ◎ Threads
+              </button>
+
+              {/* LINE */}
+              <button
+                onClick={() => {
+                  const url = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent('https://ai-magic-academy.vercel.app')}&text=${encodeURIComponent(shareText)}`;
+                  window.open(url, '_blank');
+                }}
+                className="flex items-center justify-center gap-2 py-2.5 text-xs font-bold transition-all active:translate-x-0.5 active:translate-y-0.5"
+                style={{ background: '#06C755', color: '#fff', border: '3px solid var(--ink)', boxShadow: '3px 3px 0px var(--ink)', fontFamily: 'var(--font-noto-sans-tc)' }}
+              >
+                💬 LINE
+              </button>
+
+              {/* Copy text + image */}
+              <button
+                onClick={async () => {
+                  try { await navigator.clipboard.writeText(shareText); } catch {}
+                  alert('文案已複製！再搭配下載的卡片圖一起發佈效果更好');
+                }}
+                className="flex items-center justify-center gap-2 py-2.5 text-xs font-bold transition-all active:translate-x-0.5 active:translate-y-0.5"
+                style={{ background: 'var(--mustard)', color: 'var(--ink)', border: '3px solid var(--ink)', boxShadow: '3px 3px 0px var(--ink)', fontFamily: 'var(--font-noto-sans-tc)' }}
+              >
+                📋 複製文案
+              </button>
+
+              {/* Download image */}
+              <button
+                onClick={() => {
+                  if (!shareImageUrl) return;
+                  const link = document.createElement('a');
+                  link.download = `spell-${lastCastCurse?.id || 'card'}.png`;
+                  link.href = shareImageUrl;
+                  link.click();
+                }}
+                className="flex items-center justify-center gap-2 py-2.5 text-xs font-bold transition-all active:translate-x-0.5 active:translate-y-0.5"
+                style={{ background: 'var(--parchment)', color: 'var(--ink)', border: '3px solid var(--ink)', boxShadow: '3px 3px 0px var(--ink)', fontFamily: 'var(--font-noto-sans-tc)' }}
+              >
+                📸 下載圖片
+              </button>
+            </div>
+
+            {/* Native share (mobile) */}
+            <button
+              onClick={async () => {
+                try {
+                  const res = await fetch(shareImageUrl);
+                  const blob = await res.blob();
+                  const file = new File([blob], 'spell.png', { type: 'image/png' });
+                  const data = { title: 'AI 魔法學院', text: shareText, url: 'https://ai-magic-academy.vercel.app', files: [file] };
+                  if (navigator.share && navigator.canShare && navigator.canShare(data)) {
+                    await navigator.share(data);
+                  } else {
+                    try { await navigator.clipboard.writeText(shareText); } catch {}
+                    alert('文案已複製！');
+                  }
+                } catch {
+                  try { await navigator.clipboard.writeText(shareText); } catch {}
+                  alert('文案已複製！');
+                }
+              }}
+              className="w-full flex items-center justify-center gap-2 py-3 text-sm font-bold transition-all active:translate-x-0.5 active:translate-y-0.5"
+              style={{ background: 'var(--teal)', color: 'var(--parchment)', border: '3px solid var(--ink)', boxShadow: '4px 4px 0px var(--ink)', fontFamily: 'var(--font-noto-sans-tc)' }}
+            >
+              ✦ 使用手機分享
+            </button>
+
+            <button
+              onClick={() => setShowSharePreview(false)}
+              className="w-full mt-3 text-[10px] font-black uppercase text-center"
+              style={{ fontFamily: 'var(--font-chivo)', color: 'rgba(244,238,216,0.3)' }}
+            >
+              [ 返回 ]
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* ── AUTH MODAL ── */}
       {showAuthModal && (
