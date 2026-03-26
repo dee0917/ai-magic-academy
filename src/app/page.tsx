@@ -1612,46 +1612,47 @@ export default function MagicAcademyMVP() {
               </div>
             )}
 
-            {/* ── AI Platform selector (bottom half) ── */}
+            {/* ── AI Platform selector (horizontal icons) ── */}
             <div
-              className="text-center p-6"
+              className="text-center p-5"
               style={{ border: '4px solid var(--ink)', boxShadow: 'var(--shadow)', background: 'var(--parchment)' }}
             >
               <h3
-                className="text-lg mb-4"
+                className="text-base mb-1"
                 style={{ fontFamily: 'var(--font-rye)', color: 'var(--ink)' }}
               >
                 選擇傳送座標
               </h3>
-              <p className="text-xs mb-4" style={{ color: 'rgba(42,39,35,0.5)', fontFamily: 'var(--font-noto-sans-tc)' }}>
+              <p className="text-[10px] mb-4" style={{ color: 'rgba(42,39,35,0.45)', fontFamily: 'var(--font-noto-sans-tc)' }}>
                 咒語已複製，選擇 AI 平台貼上即可施法
               </p>
-              <div className="space-y-2">
+              <div className="flex justify-center gap-3">
                 {[
-                  { label: 'ChatGPT', sub: 'OPENAI', icon: <Bot className="w-4 h-4" />, color: '#2D6A4F', web: "https://chatgpt.com", scheme: "chatgpt://" },
-                  { label: 'Claude', sub: 'ANTHROPIC', icon: <Brain className="w-4 h-4" />, color: '#D4692C', web: "https://claude.ai", scheme: "claude://" },
-                  { label: 'Gemini', sub: 'GOOGLE', icon: <Sparkles className="w-4 h-4" />, color: '#1A5C5A', web: "https://gemini.google.com/app", scheme: null },
-                  { label: 'Grok', sub: 'XAI', icon: <MessageSquare className="w-4 h-4" />, color: '#2A2723', web: "https://grok.com", scheme: null },
-                  { label: 'DeepSeek', sub: 'DEEPSEEK', icon: <div className="w-4 h-4 flex items-center justify-center text-[8px] font-black text-white" style={{ background: '#1a5fcc' }}>DS</div>, color: '#1a5fcc', web: "https://chat.deepseek.com", scheme: "deepseek://" },
-                ].map(({ label, sub, icon, color, web, scheme }) => (
+                  { label: 'ChatGPT', icon: <Bot className="w-5 h-5" />, color: '#2D6A4F', web: "https://chatgpt.com", scheme: "chatgpt://" },
+                  { label: 'Claude', icon: <Brain className="w-5 h-5" />, color: '#D4692C', web: "https://claude.ai", scheme: "claude://" },
+                  { label: 'Gemini', icon: <Sparkles className="w-5 h-5" />, color: '#1A5C5A', web: "https://gemini.google.com/app", scheme: null },
+                  { label: 'Grok', icon: <MessageSquare className="w-5 h-5" />, color: '#2A2723', web: "https://grok.com", scheme: null },
+                  { label: 'DS', icon: <div className="w-5 h-5 flex items-center justify-center text-[9px] font-black text-white">DS</div>, color: '#1a5fcc', web: "https://chat.deepseek.com", scheme: "deepseek://" },
+                ].map(({ label, icon, color, web, scheme }) => (
                   <button
                     key={label}
                     onClick={() => { if (scheme) { handleDeepLink(web, scheme); } else { setShowPortal(false); window.open(web, '_blank'); } }}
-                    className="w-full p-3 flex items-center gap-3 transition-all active:translate-x-0.5 active:translate-y-0.5"
-                    style={{ border: '2px solid var(--ink)', boxShadow: '3px 3px 0px var(--ink)', background: 'var(--parchment)', color: 'var(--ink)', textAlign: 'left' }}
+                    className="flex flex-col items-center gap-1 transition-all active:scale-95"
                   >
-                    <div className="p-1.5" style={{ background: color, color: '#fff', border: '2px solid var(--ink)' }}>{icon}</div>
-                    <div>
-                      <h4 className="font-black text-xs" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)' }}>{label}</h4>
-                      <p className="text-[9px] font-black uppercase" style={{ fontFamily: 'var(--font-chivo)', color, opacity: 0.7 }}>{sub}</p>
+                    <div
+                      className="w-12 h-12 flex items-center justify-center"
+                      style={{ background: color, color: '#fff', border: '3px solid var(--ink)', boxShadow: '3px 3px 0px var(--ink)' }}
+                    >
+                      {icon}
                     </div>
+                    <span className="text-[9px] font-black" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)' }}>{label}</span>
                   </button>
                 ))}
               </div>
               <button
                 onClick={() => setShowPortal(false)}
-                className="mt-4 text-xs font-black uppercase"
-                style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.35 }}
+                className="mt-4 text-[10px] font-black uppercase"
+                style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.3 }}
               >
                 [ 留在學院 ]
               </button>
