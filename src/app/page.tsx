@@ -375,17 +375,17 @@ export default function MagicAcademyMVP() {
     // Filter out lines with hidden params so copied spell only contains visible params
     const visibleSpell = cleanSpell.split('\n').filter((l: string) => !l.includes(HIDDEN_MARKER)).join('\n');
     setLastCastLevel(castLevel);
-    navigator.clipboard.writeText(visibleSpell).then(() => {
-      setShowBrewing(true);
-      setTimeout(() => {
-        setShowBrewing(false);
-        setIsCopied(true);
-        setShowSpellCard(true);
-        setShowCopyToast(true);
-        setTimeout(() => setIsCopied(false), 3000);
-        setTimeout(() => setShowCopyToast(false), 6000);
-      }, 2000);
-    });
+    // Try clipboard, but don't block the flow if it fails
+    try { navigator.clipboard.writeText(visibleSpell).catch(() => {}); } catch {}
+    setShowBrewing(true);
+    setTimeout(() => {
+      setShowBrewing(false);
+      setIsCopied(true);
+      setShowSpellCard(true);
+      setShowCopyToast(true);
+      setTimeout(() => setIsCopied(false), 3000);
+      setTimeout(() => setShowCopyToast(false), 6000);
+    }, 2000);
   };
 
   const handleCopy = () => {
