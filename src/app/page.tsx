@@ -235,17 +235,16 @@ export default function MagicAcademyMVP() {
   ];
 
   const handleTrialCopy = (text: string) => {
-    navigator.clipboard.writeText(text).then(() => {
-      setIsTrialCopied(true);
-      setShowBrewing(true);
-      setTimeout(() => {
-        setShowBrewing(false);
-        setIsTrialCopied(false);
-        setShowPortal(true);
-        setShowCopyToast(true);
-        setTimeout(() => setShowCopyToast(false), 6000);
-      }, 2000);
-    });
+    try { navigator.clipboard.writeText(text).catch(() => {}); } catch {}
+    setIsTrialCopied(true);
+    setShowBrewing(true);
+    setTimeout(() => {
+      setShowBrewing(false);
+      setIsTrialCopied(false);
+      setShowPortal(true);
+      setShowCopyToast(true);
+      setTimeout(() => setShowCopyToast(false), 6000);
+    }, 2000);
   };
 
   // Initialize Fuse.js for fuzzy search
