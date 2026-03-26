@@ -382,8 +382,7 @@ export default function MagicAcademyMVP() {
     setTimeout(() => {
       setShowBrewing(false);
       setIsCopied(true);
-      setShowPortal(false); // ensure portal is closed first
-      setTimeout(() => setShowSpellCard(true), 100); // slight delay to avoid conflict
+      setShowPortal(true);
       setShowCopyToast(true);
       setTimeout(() => setIsCopied(false), 3000);
       setTimeout(() => setShowCopyToast(false), 6000);
@@ -1523,56 +1522,141 @@ export default function MagicAcademyMVP() {
         )}
       </AnimatePresence>
 
-      {/* ── PORTAL MODAL (AI selector) ── */}
+      {/* ── PORTAL MODAL (Spell Card + AI selector merged) ── */}
       {showPortal && (
-        <div className="fixed inset-0 z-[150] flex items-center justify-center p-4" style={{ background: 'rgba(42,39,35,0.85)' }}>
-          <div
-            className="max-w-sm w-full text-center p-8"
-            style={{ border: '4px solid var(--ink)', boxShadow: 'var(--shadow-hover)', background: 'var(--parchment)' }}
-          >
-            <h3
-              className="text-xl mb-6"
-              style={{ fontFamily: 'var(--font-rye)', color: 'var(--ink)' }}
-            >
-              選擇傳送座標
-            </h3>
-            <div className="space-y-3">
-              {[
-                { label: 'ChatGPT', sub: 'OPENAI', icon: <Bot className="w-5 h-5" />, color: '#2D6A4F', web: "https://chatgpt.com", scheme: "chatgpt://" },
-                { label: 'Claude', sub: 'ANTHROPIC', icon: <Brain className="w-5 h-5" />, color: '#D4692C', web: "https://claude.ai", scheme: "claude://" },
-                { label: 'Gemini', sub: 'GOOGLE', icon: <Sparkles className="w-5 h-5" />, color: '#1A5C5A', web: "https://gemini.google.com/app", scheme: null },
-                { label: 'Grok', sub: 'XAI', icon: <MessageSquare className="w-5 h-5" />, color: '#2A2723', web: "https://grok.com", scheme: null },
-                { label: 'DeepSeek', sub: 'DEEPSEEK', icon: <div className="w-5 h-5 flex items-center justify-center text-[9px] font-black text-white" style={{ background: '#1a5fcc' }}>DS</div>, color: '#1a5fcc', web: "https://chat.deepseek.com", scheme: "deepseek://" },
-              ].map(({ label, sub, icon, color, web, scheme }) => (
+        <div className="fixed inset-0 z-[150] flex items-center justify-center p-4" style={{ background: 'rgba(42,39,35,0.88)', overflowY: 'auto' }}>
+          <div className="max-w-sm w-full my-8">
+
+            {/* ── SPELL CARD (top half) ── */}
+            {lastCastCurse && (() => {
+              const tc = TIER_CONFIG[lastCastCurse.tier];
+              const ci = CAST_LEVELS.find((c: any) => c.id === lastCastLevel);
+              const code = getSpellCode(lastCastCurse);
+              const tierBg: Record<string, string> = { apprentice: "#6B7280", adept: "#2563EB", master: "#7C3AED", archmage: "#DC2626", forbidden: "#B8860B" };
+              return (
+                <div className="mb-4" id="spell-card-capture" style={{ border: '4px solid var(--ink)', boxShadow: 'var(--shadow)', background: 'var(--parchment)', position: 'relative', overflow: 'hidden' }}>
+                  <div className="halftone-bg" style={{ position: 'absolute', inset: 0, opacity: 0.25, pointerEvents: 'none' }} />
+                  <div style={{ height: 6, background: tierBg[lastCastCurse.tier] || '#6B7280' }} />
+                  <div style={{ padding: '20px 24px 16px', position: 'relative' }}>
+                    {/* Code + Badge */}
+                    <div className="flex items-center justify-between mb-2">
+                      <span style={{ fontFamily: 'var(--font-chivo)', fontSize: 9, fontWeight: 700, letterSpacing: '0.15em', color: 'rgba(42,39,35,0.35)' }}>{code}</span>
+                      <span style={{ background: tierBg[lastCastCurse.tier], color: '#fff', fontSize: 10, fontWeight: 900, fontFamily: 'var(--font-noto-serif-tc)', padding: '2px 10px' }}>{tc.label}級</span>
+                    </div>
+                    {/* Title */}
+                    <h3 style={{ fontFamily: 'var(--font-noto-serif-tc)', fontSize: 22, fontWeight: 900, color: 'var(--ink)', lineHeight: 1.3, marginBottom: 8 }}>{lastCastCurse.title}</h3>
+                    <div style={{ height: 2, background: 'var(--ink)', marginBottom: 10 }} />
+                    {/* Cast info + tags */}
+                    <div className="flex items-center justify-between mb-3">
+                      <span style={{ fontFamily: 'var(--font-chivo)', fontSize: 11, fontWeight: 700, color: 'var(--teal)', border: '2px solid var(--teal)', padding: '1px 8px' }}>⚡ {ci?.label || '標準詠唱'}</span>
+                      <div className="flex gap-1">
+                        {lastCastCurse.tags?.slice(0, 3).map((tag: string) => (
+                          <span key={tag} style={{ fontSize: 9, fontWeight: 700, fontFamily: 'var(--font-chivo)', color: 'var(--ink)', background: 'rgba(232,168,56,0.2)', border: '1.5px solid rgba(232,168,56,0.5)', padding: '1px 6px' }}>{tag}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  {/* Bottom brand bar */}
+                  <div style={{ background: 'var(--ink)', padding: '8px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontFamily: 'var(--font-rye, var(--font-display))', fontSize: 11, color: 'var(--mustard)', fontWeight: 700 }}>AI 魔法學院</span>
+                    <span style={{ fontFamily: 'var(--font-chivo)', fontSize: 8, color: 'rgba(244,238,216,0.35)', letterSpacing: '0.1em' }}>ai-magic-academy.vercel.app</span>
+                  </div>
+                </div>
+              );
+            })()}
+
+            {/* ── Share buttons ── */}
+            {lastCastCurse && (
+              <div className="flex gap-2 mb-4">
                 <button
-                  key={label}
-                  onClick={() => { if (scheme) { handleDeepLink(web, scheme); } else { setShowPortal(false); window.open(web, '_blank'); } }}
-                  className="w-full p-4 flex items-center gap-4 transition-all active:translate-x-1 active:translate-y-1"
-                  style={{
-                    border: '3px solid var(--ink)',
-                    boxShadow: '4px 4px 0px var(--ink)',
-                    background: 'var(--parchment)',
-                    color: 'var(--ink)',
-                    textAlign: 'left',
+                  onClick={async () => {
+                    const el = document.getElementById('spell-card-capture');
+                    if (!el) return;
+                    const html2canvas = (await import('html2canvas')).default;
+                    const canvas = await html2canvas(el, { scale: 2, backgroundColor: null, useCORS: true });
+                    const link = document.createElement('a');
+                    link.download = `spell-${lastCastCurse.id}.png`;
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
                   }}
+                  className="flex-1 flex items-center justify-center gap-2 py-2 text-xs font-bold transition-all active:translate-x-0.5 active:translate-y-0.5"
+                  style={{ background: 'var(--mustard)', color: 'var(--ink)', border: '3px solid var(--ink)', boxShadow: '3px 3px 0px var(--ink)', fontFamily: 'var(--font-noto-sans-tc)' }}
                 >
-                  <div className="p-2" style={{ background: color, color: '#fff', border: '2px solid var(--ink)' }}>
-                    {icon}
-                  </div>
-                  <div>
-                    <h4 className="font-black text-sm" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)' }}>{label}</h4>
-                    <p className="text-[10px] font-black uppercase" style={{ fontFamily: 'var(--font-chivo)', color, opacity: 0.8 }}>{sub}</p>
-                  </div>
+                  📸 下載卡片
                 </button>
-              ))}
-            </div>
-            <button
-              onClick={() => setShowPortal(false)}
-              className="mt-6 text-xs font-black uppercase"
-              style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.4 }}
+                <button
+                  onClick={async () => {
+                    const el = document.getElementById('spell-card-capture');
+                    if (!el) return;
+                    const html2canvas = (await import('html2canvas')).default;
+                    const canvas = await html2canvas(el, { scale: 2, backgroundColor: null, useCORS: true });
+                    canvas.toBlob(async (blob) => {
+                      if (!blob) return;
+                      const tc = TIER_CONFIG[lastCastCurse.tier];
+                      if (navigator.share && navigator.canShare) {
+                        const file = new File([blob], `spell.png`, { type: 'image/png' });
+                        const data = { title: 'AI 魔法學院', text: `我在【AI 魔法學院】施放了${tc.label}級咒語「${lastCastCurse.title}」⚡`, url: 'https://ai-magic-academy.vercel.app', files: [file] };
+                        if (navigator.canShare(data)) { await navigator.share(data); return; }
+                      }
+                      const link = document.createElement('a');
+                      link.download = `spell.png`;
+                      link.href = URL.createObjectURL(blob);
+                      link.click();
+                    }, 'image/png');
+                  }}
+                  className="flex-1 flex items-center justify-center gap-2 py-2 text-xs font-bold transition-all active:translate-x-0.5 active:translate-y-0.5"
+                  style={{ background: 'var(--teal)', color: 'var(--parchment)', border: '3px solid var(--ink)', boxShadow: '3px 3px 0px var(--ink)', fontFamily: 'var(--font-noto-sans-tc)' }}
+                >
+                  ✦ 分享到社群
+                </button>
+              </div>
+            )}
+
+            {/* ── AI Platform selector (bottom half) ── */}
+            <div
+              className="text-center p-6"
+              style={{ border: '4px solid var(--ink)', boxShadow: 'var(--shadow)', background: 'var(--parchment)' }}
             >
-              [ 留在學院 ]
-            </button>
+              <h3
+                className="text-lg mb-4"
+                style={{ fontFamily: 'var(--font-rye)', color: 'var(--ink)' }}
+              >
+                選擇傳送座標
+              </h3>
+              <p className="text-xs mb-4" style={{ color: 'rgba(42,39,35,0.5)', fontFamily: 'var(--font-noto-sans-tc)' }}>
+                咒語已複製，選擇 AI 平台貼上即可施法
+              </p>
+              <div className="space-y-2">
+                {[
+                  { label: 'ChatGPT', sub: 'OPENAI', icon: <Bot className="w-4 h-4" />, color: '#2D6A4F', web: "https://chatgpt.com", scheme: "chatgpt://" },
+                  { label: 'Claude', sub: 'ANTHROPIC', icon: <Brain className="w-4 h-4" />, color: '#D4692C', web: "https://claude.ai", scheme: "claude://" },
+                  { label: 'Gemini', sub: 'GOOGLE', icon: <Sparkles className="w-4 h-4" />, color: '#1A5C5A', web: "https://gemini.google.com/app", scheme: null },
+                  { label: 'Grok', sub: 'XAI', icon: <MessageSquare className="w-4 h-4" />, color: '#2A2723', web: "https://grok.com", scheme: null },
+                  { label: 'DeepSeek', sub: 'DEEPSEEK', icon: <div className="w-4 h-4 flex items-center justify-center text-[8px] font-black text-white" style={{ background: '#1a5fcc' }}>DS</div>, color: '#1a5fcc', web: "https://chat.deepseek.com", scheme: "deepseek://" },
+                ].map(({ label, sub, icon, color, web, scheme }) => (
+                  <button
+                    key={label}
+                    onClick={() => { if (scheme) { handleDeepLink(web, scheme); } else { setShowPortal(false); window.open(web, '_blank'); } }}
+                    className="w-full p-3 flex items-center gap-3 transition-all active:translate-x-0.5 active:translate-y-0.5"
+                    style={{ border: '2px solid var(--ink)', boxShadow: '3px 3px 0px var(--ink)', background: 'var(--parchment)', color: 'var(--ink)', textAlign: 'left' }}
+                  >
+                    <div className="p-1.5" style={{ background: color, color: '#fff', border: '2px solid var(--ink)' }}>{icon}</div>
+                    <div>
+                      <h4 className="font-black text-xs" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)' }}>{label}</h4>
+                      <p className="text-[9px] font-black uppercase" style={{ fontFamily: 'var(--font-chivo)', color, opacity: 0.7 }}>{sub}</p>
+                    </div>
+                  </button>
+                ))}
+              </div>
+              <button
+                onClick={() => setShowPortal(false)}
+                className="mt-4 text-xs font-black uppercase"
+                style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.35 }}
+              >
+                [ 留在學院 ]
+              </button>
+            </div>
+
           </div>
         </div>
       )}
@@ -1711,20 +1795,6 @@ export default function MagicAcademyMVP() {
               ▲ 施法期間請勿關閉視窗，以免造成法術逆火 ▲
             </p>
           </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* ── SPELL CARD (after casting) ── */}
-      <AnimatePresence>
-        {showSpellCard && lastCastCurse && (
-          <SpellCard
-            curse={lastCastCurse}
-            castLevel={lastCastLevel}
-            onClose={() => {
-              setShowSpellCard(false);
-              setShowPortal(true);
-            }}
-          />
         )}
       </AnimatePresence>
 
