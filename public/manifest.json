@@ -4,8 +4,8 @@
   "description": "提升職場生存力的 AI 咒語圖書館",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0f081c",
-  "theme_color": "#a855f7",
+  "background_color": "#F4EED8",
+  "theme_color": "#E8A838",
   "icons": [
     {
       "src": "/icon-512x512.png",

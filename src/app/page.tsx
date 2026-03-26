@@ -8,32 +8,17 @@ import {
 import { CURSES, TIER_CONFIG, CAST_LEVELS, getSpellCode } from "./curses_data";
 import { motion, AnimatePresence } from "framer-motion";
 import Fuse from "fuse.js";
-
-// Helper: Highlight variables in the spell preview (parchment style)
-const HighlightedPrompt = ({ text }: { text: string }) => {
-  const parts = text.split(/(\[\[.*?\]\])/g);
-  return (
-    <div className="whitespace-pre-wrap text-sm leading-relaxed" style={{ fontFamily: 'var(--font-noto-sans-tc), monospace', color: 'var(--ink)' }}>
-      {parts.map((part, i) => {
-        if (part.startsWith('[[') && part.endsWith(']]')) {
-          const content = part.slice(2, -2);
-          return (
-            <span key={i} className="font-bold px-1 mx-0.5" style={{ background: 'var(--mustard)', border: '2px solid var(--ink)', color: 'var(--ink)' }}>
-              {content}
-            </span>
-          );
-        }
-        return <span key={i}>{part}</span>;
-      })}
-    </div>
-  );
-};
+import SpellCard from "./SpellCard";
 
 // Helper: Terminal-style spell preview with structured formatting
+const HIDDEN_MARKER = "（由 AI 根據情境自動填充）";
+
 const TerminalPrompt = ({ text }: { text: string }) => {
   // Split text into lines, then parse each line for structure
   const lines = text.split('\n');
   let ruleCounter = 0;
+  // Track consecutive hidden lines to show a single lock hint
+  let hiddenGroupShown = false;
 
   return (
     <div style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'rgba(244,238,216,0.85)' }}>
@@ -41,10 +26,14 @@ const TerminalPrompt = ({ text }: { text: string }) => {
         const trimmed = line.trim();
         if (!trimmed) return <div key={lineIdx} className="h-3" />;
 
+        // Check if this line contains a locked parameter
+        const isHiddenParam = trimmed.includes(HIDDEN_MARKER);
+
         // Section headers like 【任務】【規則】【角色】etc.
         const sectionMatch = trimmed.match(/^【(.+?)】/);
         if (sectionMatch && trimmed === `【${sectionMatch[1]}】`) {
           ruleCounter = 0;
+          hiddenGroupShown = false;
           return (
             <div key={lineIdx} className="mt-5 mb-3 first:mt-0">
               <span className="inline-block text-sm font-black px-3 py-1"
@@ -62,6 +51,20 @@ const TerminalPrompt = ({ text }: { text: string }) => {
         if (numberedMatch || dashMatchResult) {
           ruleCounter++;
           const content = numberedMatch ? numberedMatch[2] : (dashMatchResult ? dashMatchResult[1] : '');
+          if (isHiddenParam) {
+            if (!hiddenGroupShown) {
+              hiddenGroupShown = true;
+              return (
+                <div key={lineIdx} className="my-3 py-3 px-4 text-center" style={{ border: '1px dashed rgba(232,168,56,0.4)', background: 'rgba(232,168,56,0.05)' }}>
+                  <span className="text-xs font-black tracking-wider" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--mustard)' }}>
+                    🔒 提升詠唱等級以解鎖更多參數
+                  </span>
+                </div>
+              );
+            }
+            return null;
+          }
+          hiddenGroupShown = false;
           return (
             <div key={lineIdx} className="flex gap-3 mb-3 text-sm leading-relaxed">
               <span className="flex-shrink-0 font-black text-base"
@@ -73,7 +76,22 @@ const TerminalPrompt = ({ text }: { text: string }) => {
           );
         }
 
-        // Regular text line
+        // Regular text line with hidden param
+        if (isHiddenParam) {
+          if (!hiddenGroupShown) {
+            hiddenGroupShown = true;
+            return (
+              <div key={lineIdx} className="my-3 py-3 px-4 text-center" style={{ border: '1px dashed rgba(232,168,56,0.4)', background: 'rgba(232,168,56,0.05)' }}>
+                <span className="text-xs font-black tracking-wider" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--mustard)' }}>
+                  🔒 提升詠唱等級以解鎖更多參數
+                </span>
+              </div>
+            );
+          }
+          return null;
+        }
+
+        hiddenGroupShown = false;
         return (
           <div key={lineIdx} className="text-sm leading-relaxed mb-2">
             {renderTerminalVariables(trimmed)}
@@ -115,37 +133,22 @@ const renderTerminalVariables = (text: string) => {
   });
 };
 
-// Live counter that simulates real-time usage
-const CountUp = () => {
-  const [count, setCount] = useState(12847);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCount(c => c + Math.floor(Math.random() * 3) + 1);
-    }, 3000 + Math.random() * 4000);
-    return () => clearInterval(interval);
-  }, []);
-  return <>{count.toLocaleString()}</>;
-};
-
 // Testimonials data
 export default function MagicAcademyMVP() {
   const [selectedCurse, setSelectedCurse] = useState<any>(null);
   const [inputs, setInputs] = useState<any>({});
   const [castLevel, setCastLevel] = useState<"quick" | "standard" | "full">("quick");
   const [mp, setMp] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('magic-mp');
-      return saved ? parseInt(saved) : 10;
-    }
-    return 10;
+    // TODO: 測試模式 — 魔力值滿，正式上線時還原
+    return 30;
   });
-  const [collectedCards, setCollectedCards] = useState<string[]>(() => {
-    if (typeof window !== 'undefined') {
+  const [collectedCards, setCollectedCards] = useState<string[]>([]);
+  useEffect(() => {
+    try {
       const saved = localStorage.getItem('magic-collection');
-      return saved ? JSON.parse(saved) : [];
-    }
-    return [];
-  });
+      if (saved) setCollectedCards(JSON.parse(saved));
+    } catch { /* corrupted data, keep default */ }
+  }, []);
   const [isCopied, setIsCopied] = useState(false);
   const [showPortal, setShowPortal] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -161,6 +164,8 @@ export default function MagicAcademyMVP() {
   const [expandedTabs, setExpandedTabs] = useState<Record<string, boolean>>({});
   const [showCopyToast, setShowCopyToast] = useState(false);
   const [showSpellBook, setShowSpellBook] = useState(false);
+  const [showSpellCard, setShowSpellCard] = useState(false);
+  const [lastCastLevel, setLastCastLevel] = useState("standard");
 
   const TRIAL_DATA = [
     {
@@ -356,22 +361,26 @@ export default function MagicAcademyMVP() {
 
   const brewAndCopy = () => {
     const cost = getMpCost(selectedCurse, castLevel);
-    if (mp < cost) { alert(`魔力不足！需要 ${cost} MP，目前只有 ${mp} MP`); return; }
+    // TODO: 測試模式 — 跳過 MP 不足檢查和扣除，正式上線時還原
+    // if (mp < cost) { alert(`魔力不足！需要 ${cost} MP，目前只有 ${mp} MP`); return; }
     const visibleCount = getFieldVisibility(selectedCurse.fields.length, castLevel);
-    const autoInputs: any = {}; selectedCurse.fields.forEach((f: any, idx: number) => { const isVisible = idx < visibleCount; autoInputs[f.id] = isVisible ? (inputs[f.id] || "「尚未輸入內容」") : "（由 AI 根據情境自動填充）"; }); const spell = selectedCurse.generate({ ...autoInputs, [selectedCurse.tweak?.id]: inputs[selectedCurse.tweak?.id] || selectedCurse.tweak?.options[0] });
-    // 扣除 MP
-    saveMp(mp - cost);
+    const autoInputs: any = {}; selectedCurse.fields.forEach((f: any, idx: number) => { const isVisible = idx < visibleCount; autoInputs[f.id] = isVisible ? (inputs[f.id] || "「尚未輸入內容」") : HIDDEN_MARKER; }); const spell = selectedCurse.generate({ ...autoInputs, [selectedCurse.tweak?.id]: inputs[selectedCurse.tweak?.id] || selectedCurse.tweak?.options[0] });
+    // TODO: 測試模式 — 暫停扣除 MP，正式上線時還原
+    // saveMp(mp - cost);
     // 全力詠唱解鎖卡片
     if (castLevel === 'full' && !collectedCards.includes(selectedCurse.id)) {
       saveCollection([...collectedCards, selectedCurse.id]);
     }
     const cleanSpell = spell.replace(/\[\[/g, '').replace(/\]\]/g, '');
-    navigator.clipboard.writeText(cleanSpell).then(() => {
+    // Filter out lines with hidden params so copied spell only contains visible params
+    const visibleSpell = cleanSpell.split('\n').filter((l: string) => !l.includes(HIDDEN_MARKER)).join('\n');
+    setLastCastLevel(castLevel);
+    navigator.clipboard.writeText(visibleSpell).then(() => {
       setShowBrewing(true);
       setTimeout(() => {
         setShowBrewing(false);
         setIsCopied(true);
-        setShowPortal(true);
+        setShowSpellCard(true);
         setShowCopyToast(true);
         setTimeout(() => setIsCopied(false), 3000);
         setTimeout(() => setShowCopyToast(false), 6000);
@@ -395,7 +404,7 @@ export default function MagicAcademyMVP() {
 
   const handleShare = () => {
     const url = window.location.href;
-    const text = `我在【AI 魔法學院】解鎖了「${selectedCurse.title.replace(/|/g, '')}」禁忌咒語。這不是普通的提示詞，這是物理級的生存武裝。進來領取你的法典：`;
+    const text = `我在【AI 魔法學院】解鎖了「${selectedCurse.title.replace(/\|/g, '')}」禁忌咒語。這不是普通的提示詞，這是物理級的生存武裝。進來領取你的法典：`;
     if (navigator.share) {
       navigator.share({ title: 'AI 魔法學院', text, url }).catch(console.error);
     } else {
@@ -421,16 +430,6 @@ export default function MagicAcademyMVP() {
         window.open(webUrl, '_blank');
       }
     }, 2000);
-  };
-
-  const getColorHex = (colorName: string) => {
-    const map: any = {
-      orange: '#f97316', red: '#ef4444', blue: '#3b82f6', pink: '#ec4899',
-      yellow: '#eab308', slate: '#64748b', green: '#22c55e', indigo: '#6366f1',
-      amber: '#f59e0b', emerald: '#10b981', purple: '#a855f7', cyan: '#06b6d4',
-      rose: '#f43f5e', neutral: '#737373', sky: '#0ea5e9'
-    };
-    return map[colorName] || '#E8A838';
   };
 
   return (
@@ -647,7 +646,7 @@ export default function MagicAcademyMVP() {
       </section>
 
       {/* ── §05 SEARCH + TAB NAV ── */}
-      <div className="w-full max-w-5xl mx-auto px-4 pt-24 mb-8 relative z-10">
+      <div className="w-full max-w-5xl mx-auto px-4 pt-8 mb-8 relative z-10">
         {/* Search bar */}
         <div className="max-w-xl mx-auto mb-6">
           <div className="relative flex items-center" style={{ border: '3px solid var(--ink)', background: '#FEFAF0', boxShadow: '4px 4px 0px var(--ink)' }}>
@@ -743,10 +742,16 @@ export default function MagicAcademyMVP() {
                   {(expandedTabs[tab] || searchQuery ? tabCurses : tabCurses.slice(0, 3)).map((curse: any, idx: number) => {
                     const tabColor = getTabColor(curse.tab);
                     return (
-                    <motion.button
+                    <div
                       key={curse.id}
-                      onClick={() => handleCardClick(curse)}
-                      className="flex-shrink-0 w-[260px] md:w-[300px] snap-start text-left p-0 flex flex-col relative overflow-hidden"
+                      onPointerDown={(e) => { (e.currentTarget as any)._startX = e.clientX; (e.currentTarget as any)._startY = e.clientY; (e.currentTarget as any)._startT = Date.now(); }}
+                      onPointerUp={(e) => {
+                        const dx = Math.abs(e.clientX - ((e.currentTarget as any)._startX || 0));
+                        const dy = Math.abs(e.clientY - ((e.currentTarget as any)._startY || 0));
+                        const dt = Date.now() - ((e.currentTarget as any)._startT || 0);
+                        if (dx < 15 && dy < 15 && dt < 300) handleCardClick(curse);
+                      }}
+                      className="flex-shrink-0 w-[260px] md:w-[300px] snap-start text-left p-0 flex flex-col relative overflow-hidden cursor-pointer"
                       style={{
                         border: `4px solid ${curse.tier && TIER_CONFIG[curse.tier] ? TIER_CONFIG[curse.tier].borderColor : 'var(--ink)'}`,
                         boxShadow: 'var(--shadow)',
@@ -843,7 +848,7 @@ export default function MagicAcademyMVP() {
                           詠唱 <ArrowRight className="w-3 h-3" />
                         </span>
                       </div>
-                    </motion.button>
+                    </div>
                     );
                   })}
 
@@ -889,12 +894,13 @@ export default function MagicAcademyMVP() {
       {/* ── SPELL DETAIL MODAL ── */}
       <AnimatePresence>
         {selectedCurse && (
-          <div className="fixed inset-0 z-[100] flex items-end md:items-center justify-center md:p-6">
+          <div className="fixed inset-0 top-12 z-[100] flex items-end md:items-center justify-center md:p-6">
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
               className="absolute inset-0"
               style={{ background: 'rgba(42,39,35,0.85)' }}
               onClick={() => setSelectedCurse(null)}
@@ -902,18 +908,21 @@ export default function MagicAcademyMVP() {
 
             {/* Modal panel */}
             <motion.div
-              layoutId={`card-${selectedCurse.id}`}
+              initial={{ y: '100%', opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: '100%', opacity: 0 }}
+              transition={{ type: 'spring', damping: 28, stiffness: 300, mass: 0.8 }}
               className="w-full md:max-w-5xl relative z-10 flex flex-col md:flex-row"
               style={{
                 border: '4px solid var(--ink)',
                 boxShadow: '12px 12px 0px var(--ink)',
                 background: 'var(--parchment)',
-                maxHeight: '96vh',
+                maxHeight: 'calc(100vh - 3rem)',
                 overflow: 'hidden',
               }}
             >
               {/* ── MOBILE LAYOUT: single scrollable page + floating CTA ── */}
-              <div className="md:hidden flex flex-col" style={{ maxHeight: '96vh' }}>
+              <div className="md:hidden flex flex-col" style={{ maxHeight: 'calc(100vh - 3rem)' }}>
                 {/* Header */}
                 <div className="flex-shrink-0 flex items-center justify-between px-5 py-3" style={{ borderBottom: '4px solid var(--ink)' }}>
                   <button onClick={() => setSelectedCurse(null)}
@@ -1310,11 +1319,13 @@ export default function MagicAcademyMVP() {
                       const baseInputs: any = {};
                       selectedCurse.fields.forEach((f: any, idx: number) => {
                         const isVisible = idx < getFieldVisibility(selectedCurse.fields.length, castLevel);
-                        baseInputs[f.id] = isVisible ? (inputs[f.id] || "「尚未輸入內容」") : "（由 AI 根據情境自動填充）";
+                        baseInputs[f.id] = isVisible ? (inputs[f.id] || "「尚未輸入內容」") : HIDDEN_MARKER;
                       });
                       const finalInputs = { ...baseInputs, [selectedCurse.tweak?.id]: (inputs[selectedCurse.tweak?.id] || selectedCurse.tweak?.options[0]) };
                       const spell = selectedCurse.generate(finalInputs).replace(/\[\[/g, '').replace(/\]\]/g, '');
-                      navigator.clipboard.writeText(spell);
+                      // Filter out lines containing hidden marker before copying
+                      const visibleSpell = spell.split('\n').filter((l: string) => !l.includes(HIDDEN_MARKER)).join('\n');
+                      navigator.clipboard.writeText(visibleSpell);
                     }} className="p-1.5" style={{ border: '1px solid rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.4)' }}>
                       <Copy className="w-3 h-3" />
                     </button>
@@ -1698,6 +1709,20 @@ export default function MagicAcademyMVP() {
               ▲ 施法期間請勿關閉視窗，以免造成法術逆火 ▲
             </p>
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ── SPELL CARD (after casting) ── */}
+      <AnimatePresence>
+        {showSpellCard && selectedCurse && (
+          <SpellCard
+            curse={selectedCurse}
+            castLevel={lastCastLevel}
+            onClose={() => {
+              setShowSpellCard(false);
+              setShowPortal(true);
+            }}
+          />
         )}
       </AnimatePresence>
 
