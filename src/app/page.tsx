@@ -1853,7 +1853,7 @@ export default function MagicAcademyMVP() {
               {/* LINE */}
               <button
                 onClick={() => {
-                  const url = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent('https://ai-magic-academy.vercel.app')}&text=${encodeURIComponent(shareText)}`;
+                  const url = `https://line.me/R/share?text=${encodeURIComponent(shareText + '\nhttps://ai-magic-academy.vercel.app')}`;
                   window.open(url, '_blank');
                 }}
                 className="flex items-center justify-center gap-2 py-2.5 text-xs font-bold transition-all active:translate-x-0.5 active:translate-y-0.5"
