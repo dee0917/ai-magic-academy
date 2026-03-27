@@ -9,6 +9,7 @@ import { CURSES, TIER_CONFIG, CAST_LEVELS, getSpellCode } from "./curses_data";
 import { motion, AnimatePresence } from "framer-motion";
 import Fuse from "fuse.js";
 import SpellCard from "./SpellCard";
+import FusionSystem from "./FusionSystem";
 
 // Helper: Terminal-style spell preview with structured formatting
 const HIDDEN_MARKER = "（由 AI 根據情境自動填充）";
@@ -164,6 +165,7 @@ export default function MagicAcademyMVP() {
   const [expandedTabs, setExpandedTabs] = useState<Record<string, boolean>>({});
   const [showCopyToast, setShowCopyToast] = useState(false);
   const [showSpellBook, setShowSpellBook] = useState(false);
+  const [showFusion, setShowFusion] = useState(false);
   const [showSpellCard, setShowSpellCard] = useState(false);
   const [lastCastLevel, setLastCastLevel] = useState("standard");
   const [lastCastCurse, setLastCastCurse] = useState<any>(null);
@@ -370,8 +372,8 @@ export default function MagicAcademyMVP() {
     const autoInputs: any = {}; selectedCurse.fields.forEach((f: any, idx: number) => { const isVisible = idx < visibleCount; autoInputs[f.id] = isVisible ? (inputs[f.id] || "「尚未輸入內容」") : HIDDEN_MARKER; }); const spell = selectedCurse.generate({ ...autoInputs, [selectedCurse.tweak?.id]: inputs[selectedCurse.tweak?.id] || selectedCurse.tweak?.options[0] });
     // TODO: 測試模式 — 暫停扣除 MP，正式上線時還原
     // saveMp(mp - cost);
-    // 全力詠唱解鎖卡片
-    if (castLevel === 'full' && !collectedCards.includes(selectedCurse.id)) {
+    // 全力詠唱解鎖卡片（允許重複收集）
+    if (castLevel === 'full') {
       saveCollection([...collectedCards, selectedCurse.id]);
     }
     const cleanSpell = spell.replace(/\[\[/g, '').replace(/\]\]/g, '');
@@ -487,6 +489,21 @@ export default function MagicAcademyMVP() {
               <span className="text-[9px] px-1 font-black" style={{ background: 'var(--mustard)', color: 'var(--ink)' }}>
                 {collectedCards.length}
               </span>
+            </button>
+
+            {/* Fusion button */}
+            <button
+              className="flex items-center gap-1 px-2.5 py-1 text-[10px] font-black transition-all hover:translate-x-0.5 hover:translate-y-0.5"
+              style={{
+                fontFamily: 'var(--font-chivo)',
+                border: '2px solid var(--ink)',
+                boxShadow: '2px 2px 0 var(--ink)',
+                background: 'var(--mustard)',
+                color: 'var(--ink)',
+              }}
+              onClick={() => setShowFusion(true)}
+            >
+              <Zap className="w-3 h-3" /> <span className="hidden sm:inline">融合爐</span>
             </button>
 
             {/* Login button */}
@@ -2111,6 +2128,45 @@ export default function MagicAcademyMVP() {
                   </div>
                 </div>
               </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* ── FUSION SYSTEM MODAL ── */}
+      <AnimatePresence>
+        {showFusion && (
+          <div className="fixed inset-0 z-[400] flex items-start justify-center overflow-y-auto">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/70"
+              onClick={() => setShowFusion(false)}
+            />
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 50 }}
+              transition={{ type: "spring", damping: 22, stiffness: 260 }}
+              className="relative w-full max-w-2xl mx-4 my-8 z-10"
+              style={{ background: 'var(--parchment)', border: '4px solid var(--ink)', boxShadow: '8px 8px 0 var(--ink)' }}
+            >
+              {/* Close button overlaid */}
+              <button
+                onClick={() => setShowFusion(false)}
+                className="absolute top-4 right-4 z-20"
+                style={{ color: 'var(--parchment)', opacity: 0.6 }}
+              >
+                <X className="w-5 h-5" />
+              </button>
+              <FusionSystem
+                collection={collectedCards}
+                allCurses={CURSES as any[]}
+                onCollectionChange={saveCollection}
+                onMpChange={(delta) => saveMp(mp + delta)}
+                currentMp={mp}
+              />
             </motion.div>
           </div>
         )}

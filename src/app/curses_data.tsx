@@ -343,32 +343,32 @@ export const CURSES = [
 
   // ━━━ 📜 見習咒文 | 日常雜症 | Free ━━━
   {
-    id: "excuse_generator",
+    id: "social_radar",
     tab: "日常雜症",
     isPro: false,
     tier: "apprentice",
-    outputFormat: "量身訂做的完美藉口",
-    icon: <Shield className="w-8 h-8 text-gray-500" />,
+    outputFormat: "社交場景讀心分析 + 避雷話術",
+    icon: <Eye className="w-8 h-8 text-gray-500" />,
     color: "gray",
-    title: "藉口產生器：萬用擋駕術",
-    desc: "被拉去不想參加的聚會、被要求做不想做的事？『我那天有事』太假，『我不想去』太直接。產生一個天衣無縫的藉口，讓對方完全理解還幫你擔心。",
-    tags: ["拒絕", "藉口", "社交防禦"],
+    title: "讀空氣：察言觀色術",
+    desc: "飯局上突然安靜了是因為你說錯話嗎？主管笑著說『沒關係』是真的沒關係嗎？這個咒語幫你解讀社交場景的「空氣」，告訴你什麼該說、什麼千萬別說。",
+    tags: ["讀空氣", "察言觀色", "社交洞察"],
     fields: [
-      { id: "event", label: "不想參加/做的事", placeholder: "例：前同事的直銷聚會 / 週末搬家幫忙 / 部門團建烤肉" },
-      { id: "requester", label: "誰邀請/要求的", placeholder: "例：大學同學阿華 / 隔壁部門主管 / 男友的媽" },
-      { id: "relationship", label: "你們的關係", placeholder: "例：不太熟但不好拒絕 / 很好的朋友但這次真的不想 / 上司" },
-      { id: "timing", label: "什麼時候要用", placeholder: "例：今晚就要回覆 / 下週六的活動 / 明天的飯局" },
+      { id: "scene", label: "場景描述", placeholder: "例：部門聚餐，主管剛被老闆罵完 / 朋友聚會，有人剛分手" },
+      { id: "people", label: "在場的人", placeholder: "例：主管+3個同事 / 5個大學好友" },
+      { id: "tension", label: "你感受到的氛圍", placeholder: "例：突然安靜 / 有人表情僵硬 / 氣氛莫名尷尬" },
+      { id: "your_role", label: "你的角色", placeholder: "例：新人 / 主辦人 / 純粹赴約的朋友" },
     ],
     tweak: {
       id: "strat",
-      label: "藉口類型",
+      label: "讀心模式",
       options: [
-        "不可抗力型：突發狀況讓你「不得不」缺席，語氣帶著遺憾但無法改變",
-        "已有安排型：時間衝突讓你「很想去但去不了」，同時暗示你的時間很珍貴",
+        "氣氛偵測型：分析場上每個人的情緒狀態和潛在地雷，告訴你哪些話題安全、哪些會爆炸",
+        "主動導航型：不只讀空氣，還教你怎麼「換空氣」——用話題轉換和氣氛調節把場面救回來",
       ]
     },
-    theory: "基於 Brown & Levinson 面子威脅理論（Face-Threatening Acts）：直接拒絕會同時威脅對方的「正面面子」（被接納的需求）和自己的「負面面子」（不被強迫的需求）。結合認知失調理論——好的藉口讓對方自動合理化你的缺席，從而避免關係損傷。",
-    generate: (inputs: any) => `你是一位專精社交場景的心理策略師，被朋友封為「藉口之神」，過去十年幫超過 500 人優雅脫身各種不想參加的場合。你的信條：「好的拒絕不會消耗關係，壞的勉強才會。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我需要一個完美的藉口來推掉一件不想做的事，但不能傷害關係或讓對方起疑。\n- 不想做的事：[[${inputs.event}]]\n- 邀請/要求者：[[${inputs.requester}]]\n- 關係：[[${inputs.relationship}]]\n- 時間點：[[${inputs.timing}]]\n\n請輸出：\n① 【主藉口】— 完整的推辭訊息，60 字以內，包含理由 + 遺憾語氣 + 替代方案暗示\n② 【細節補丁】— 如果對方追問「什麼事啊」，準備好的 2 句補充說明，每句 25 字以內\n③ 【感情修復句】— 拒絕後馬上補的一句話，讓對方覺得你很在意這段關係，20 字以內\n④ 【未來保險】— 如果同一個人下次又邀約，可以用的不同藉口備案\n\n【規則】\n1. 藉口必須具體到有細節，但細節不能多到容易穿幫——最佳平衡是「一個核心理由 + 一個小細節」。\n2. 嚴禁使用：「我那天可能有事」「我再看看」「應該不行」——模糊拒絕比直接拒絕更傷關係，因為對方會一直追問。\n3. 運用面子理論：藉口必須同時保護你的面子（不是不想去）和對方的面子（你的活動很棒但我真的沒辦法），雙方都有台階下。\n4. 語氣像「一個忙碌但重感情的人在做時間管理」，而非「一個社恐在找逃跑路線」。\n5. 測謊測試：這個藉口如果被對方事後發現是假的，造成的傷害程度必須低於「被發現你只是不想去」。`
+    theory: "基於 Hall 的高語境溝通理論（High-Context Communication）與 Goleman 的社會智能模型：在華人文化中，70% 的重要訊息不在話語本身，而在語氣、表情、沉默和時機裡。本咒語訓練你的「社交雷達」——不是讀心術，而是讀「空氣」術：察覺那些沒說出口但所有人都感覺得到的東西。",
+    generate: (inputs: any) => `你是一位社交場景分析師，結合了微表情專家和高語境文化顧問的能力。你在華人社交圈摸爬滾打 15 年，最擅長的就是「讀懂房間裡沒人說出口的那句話」。你的信條：「會說話是本事，知道什麼時候不說話是智慧。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我正在（或即將進入）一個社交場景，需要你幫我讀懂「空氣」。\n- 場景：[[${inputs.scene}]]\n- 在場的人：[[${inputs.people}]]\n- 感受到的氛圍：[[${inputs.tension}]]\n- 我的角色：[[${inputs.your_role}]]\n\n請輸出：\n① 【空氣解讀報告】— 分析場上目前的情緒溫度、可能的地雷區、每個人大概在想什麼，100 字以內\n② 【安全話題清單】— 3 個現在可以聊的安全話題，每個附一句開場白，各 20 字以內\n③ 【地雷清單】— 3 個現在千萬不能碰的話題或行為，每個 15 字以內\n④ 【救場話術】— 如果氣氛已經凝結了，一句話破冰，20 字以內\n⑤ 【觀察指南】— 教你接下來 10 分鐘觀察哪些信號（表情/動作/語氣），判斷情勢是否好轉\n\n【規則】\n1. 分析必須基於場景合理推測，不能太玄學——是社會心理學不是算命。\n2. 嚴禁使用：「你想太多了」「應該沒什麼」「別在意」——使用者的直覺通常是對的，你的工作是幫他驗證和應對。\n3. 安全話題必須真的安全——不能推薦「聊工作」然後場上有人剛被裁員。\n4. 語氣像一個坐在你旁邊的社交達人在耳邊小聲提醒你——溫暖、實用、即時。\n5. 文化測試：所有建議必須在華人社交場景中適用，考慮面子文化和潛規則。`
   },
 
   // ━━━ 📜 見習咒文 | 職場求生 | Free ━━━
@@ -443,6 +443,7 @@ export const CURSES = [
     desc: "遲到、說錯話、打翻咖啡、叫錯名字——社交出包人人都會，但高手能把災難現場變成個人魅力秀。不只化解尷尬，還讓全場對你印象更深。",
     tags: ["社交急救", "尷尬化解", "印象管理", "危機反轉"],
     fused_from: ["late_smoke_screen", "awkward_heal"],
+    fragments_needed: 3,
     unlock_method: "fusion_only",
     fields: [
       { id: "situation", label: "出包場景", placeholder: "例：在客戶面前打翻整杯咖啡 / 叫錯主管名字 / 簡報時螢幕當機" },
@@ -475,6 +476,7 @@ export const CURSES = [
     desc: "說服不是靠嘴砲，是靠讀心。先解析對方的決策模式和在意的事，再用量身打造的話術精準命中。像狙擊手一樣，一句話解決戰鬥。",
     tags: ["說服術", "心理分析", "談判", "精準溝通"],
     fused_from: ["persuasion_dart", "price_scout"],
+    fragments_needed: 3,
     unlock_method: "fusion_only",
     fields: [
       { id: "target", label: "說服對象", placeholder: "例：直屬主管 Lisa / 潛在客戶王總 / 投資人 David" },
@@ -508,6 +510,7 @@ export const CURSES = [
     desc: "朋友借錢、同事推工作、親戚介紹對象、前任要復合——說不是必要的，但怎麼說不才是藝術。讓對方被拒絕後反而覺得你很體貼、很有原則。",
     tags: ["拒絕話術", "人際邊界", "溫柔堅定", "關係維護"],
     fused_from: ["polite_refusal", "apology_craft"],
+    fragments_needed: 3,
     unlock_method: "fusion_only",
     fields: [
       { id: "request", label: "對方要求", placeholder: "例：借我三萬 / 幫我加班趕報告 / 我媽介紹的對象你見一下" },
@@ -541,6 +544,7 @@ export const CURSES = [
     desc: "說好的加薪沒下文、答應要還的錢裝死、承諾的資源突然縮水——別人的嘴最不可靠，但你可以讓他自己說過的話變成逃不掉的鎖鏈。",
     tags: ["承諾追蹤", "口頭協議", "防反悔", "契約精神"],
     fused_from: ["promise_seal", "polite_refusal"],
+    fragments_needed: 3,
     unlock_method: "fusion_only",
     fields: [
       { id: "promiser", label: "反悔者", placeholder: "例：主管阿國 / 合作夥伴老張 / 借錢的朋友小李" },
@@ -573,7 +577,8 @@ export const CURSES = [
     title: "煙幕撤退：全身而退術",
     desc: "被拉進無聊飯局、被點名做不想做的事、被困在永無止盡的會議——你需要的不是拒絕，是一套讓你「不知不覺就消失了」的脫身計畫。",
     tags: ["脫身術", "藉口生成", "會議逃脫", "戰略撤退"],
-    fused_from: ["excuse_generator", "meeting_shield"],
+    fused_from: ["social_radar", "meeting_shield"],
+    fragments_needed: 3,
     unlock_method: "fusion_only",
     fields: [
       { id: "situation", label: "想脫身的場景", placeholder: "例：同事揪的假日團建 / 主管臨時加的週五晚會議 / 親戚的直銷說明會" },
@@ -608,6 +613,7 @@ export const CURSES = [
     desc: "面對可能有惡意的人，光防禦不夠、光觀察也不夠。這個融合咒語同時啟動「看穿意圖」和「防禦部署」，讓你在讀懂對方底牌的同時，早一步築好防線。",
     tags: ["讀心", "防禦", "談判", "融合咒語"],
     fused_from: ["price_scout", "meeting_shield"],
+    fragments_needed: 3,
     unlock_method: "收集「比價偵察術」與「會議護盾術」後在融合爐中合成",
     fields: [
       { id: "opponent", label: "對手", placeholder: "例：新來的部門主管 / 合作方的業務代表" },
@@ -641,6 +647,7 @@ export const CURSES = [
     desc: "想加薪升遷但不知道怎麼開口？融合煉金話術的包裝力與讀心說服的洞察力，讓老闆覺得升你是他自己的英明決策，而不是你在邀功。",
     tags: ["加薪", "升遷", "職場策略", "融合咒語"],
     fused_from: ["allowance_alchemy", "mind_reader_persuasion"],
+    fragments_needed: 5,
     unlock_method: "收集「零用錢翻倍術」與「讀心說服術」後在融合爐中合成",
     fields: [
       { id: "current_role", label: "目前職位", placeholder: "例：行銷專員 / 資深工程師 / 副理" },
@@ -674,6 +681,7 @@ export const CURSES = [
     desc: "吵架不是問題，吵完關係倒退才是。融合圓場力的修復技巧與優雅拒絕的邊界功力，不只修復衝突到原狀，還讓每次吵架都變成關係升級的催化劑。",
     tags: ["關係修復", "衝突處理", "溝通", "融合咒語"],
     fused_from: ["smooth_operator", "graceful_no"],
+    fragments_needed: 5,
     unlock_method: "收集「圓場術」與「優雅拒絕術」後在融合爐中合成",
     fields: [
       { id: "conflict", label: "衝突內容", placeholder: "例：我忘了紀念日對方大爆炸 / 室友覺得我太吵" },
@@ -707,6 +715,7 @@ export const CURSES = [
     desc: "檯面上笑嘻嘻，檯面下各懷鬼胎？當多方利益糾纏，正面衝突只會兩敗俱傷。這個融合咒語讓你在幕後佈局，不動聲色地讓結果往你要的方向傾斜。",
     tags: ["幕後操作", "多方博弈", "策略", "融合咒語"],
     fused_from: ["tactical_retreat", "mind_reader_persuasion"],
+    fragments_needed: 5,
     unlock_method: "收集「戰術撤退術」與「讀心說服術」後在融合爐中合成",
     fields: [
       { id: "parties", label: "涉及哪些人", placeholder: "例：我、主管A、同事B、客戶C" },
@@ -740,6 +749,7 @@ export const CURSES = [
     desc: "長期被 PUA、道德綁架、情緒勒索，但對方偏偏是你切不斷的人？融合讀心洞察與優雅拒絕，建立一道不可突破的心理邊界——不是逃跑，是在關係裡站穩腳跟。",
     tags: ["心理邊界", "PUA防禦", "長期保護", "融合咒語"],
     fused_from: ["know_thy_enemy", "graceful_no"],
+    fragments_needed: 5,
     unlock_method: "收集「知己知彼術」與「優雅拒絕術」後在融合爐中合成",
     fields: [
       { id: "aggressor", label: "誰在侵犯邊界", placeholder: "例：控制狂媽媽 / PUA 型主管 / 情緒勒索的伴侶" },
@@ -773,6 +783,7 @@ export const CURSES = [
     desc: "不是一次搶功、一次打壓，而是系統性的不公——長期被壓榨、邊緣化、功勞被吞。融合搶功反殺的證據力與契約守護的法律效力，讓天秤重新平衡。",
     tags: ["職場不公", "系統性壓榨", "證據鏈", "融合咒語"],
     fused_from: ["credit_thief_slayer", "agreement_guardian"],
+    fragments_needed: 8,
     unlock_method: "收集「搶功反殺術」與「契約守護術」後在融合爐中合成",
     fields: [
       { id: "injustice_type", label: "不公類型", placeholder: "例：功勞永遠歸主管 / 同工不同酬 / 升遷永遠輪不到我" },
@@ -806,6 +817,7 @@ export const CURSES = [
     desc: "薪資談判、合約重談、離職談判——輸不起的局，不能靠運氣。融合升遷煉金的包裝力與搶功反殺的攻擊力，在高風險談判中把底牌打出最大價值。",
     tags: ["高風險談判", "底牌", "薪資", "融合咒語"],
     fused_from: ["career_alchemy", "credit_thief_slayer"],
+    fragments_needed: 8,
     unlock_method: "收集「升遷加速術」與「搶功反殺術」後在融合爐中合成",
     fields: [
       { id: "negotiation_subject", label: "談判主題", placeholder: "例：年度調薪 / 離職條件談判 / 合約續約價格" },
@@ -839,6 +851,7 @@ export const CURSES = [
     desc: "婚前協議太冰冷？合夥契約太法律？這個禁忌融合咒語為你最重要的關係打造一部「關係憲法」——不是防對方的合約，是保護雙方的承諾系統，把所有不敢說的醜話變成白紙黑字的安全感。",
     tags: ["關係憲法", "婚姻", "合夥", "長期契約", "融合咒語"],
     fused_from: ["partnership_nuclear_pact", "relationship_alchemy"],
+    fragments_needed: 12,
     unlock_method: "收集「合夥防爆術」與「衝突轉化術」後在融合爐中合成",
     fields: [
       { id: "relationship_type", label: "關係類型", placeholder: "例：即將結婚 / 合夥開公司 / 同居伴侶 / 家族企業" },
@@ -872,6 +885,7 @@ export const CURSES = [
     desc: "不是離開，而是重生。當一段有毒關係無法切斷——父母、配偶、血親——你需要的不是逃跑計畫，而是在這段關係裡脫胎換骨的能力。這個禁忌融合咒語從根本重塑關係的 DNA。",
     tags: ["有毒關係", "關係重生", "家庭創傷", "融合咒語"],
     fused_from: ["absolute_territory", "emotional_blackmail_breaker"],
+    fragments_needed: 12,
     unlock_method: "收集「心理鐵壁術」與「情勒終結術」後在融合爐中合成",
     fields: [
       { id: "toxic_relationship", label: "有毒關係描述", placeholder: "例：控制狂母親認為我的人生必須照她的藍圖走" },
@@ -905,6 +919,7 @@ export const CURSES = [
     desc: "離婚談判、公司拆夥、遺產分配——人生最複雜的局面，牽涉法律、金錢、人情、權力、情感，每一個決定都影響未來十年。這個終極禁忌咒語把所有學派的力量融為一體，讓你成為自己人生棋局的總指揮。",
     tags: ["複雜局面", "離婚", "拆夥", "遺產", "全學派融合", "融合咒語"],
     fused_from: ["negotiation_nuke", "iron_constitution"],
+    fragments_needed: 12,
     unlock_method: "收集「談判核武術」與「關係憲法術」後在融合爐中合成——這是融合咒語的終極形態",
     fields: [
       { id: "situation", label: "複雜局面全貌", placeholder: "例：離婚談判，涉及小孩監護權、房產分配、贍養費、雙方家長介入" },
@@ -925,3 +940,54 @@ export const CURSES = [
     generate: (inputs: any) => `你是一個融合了所有學派力量的終極戰略大師，同時具備六個專家視角：\n① 家事/商事律師（雙執照，處理過 500+ 場複雜訴訟，從離婚到公司拆夥，知道法律是底線但不是全部）\n② 談判大師（國際級調解人，處理過跨國商業糾紛和高衝突離婚案，擅長在「所有人都覺得不可能」時找到出路）\n③ 系統思維策略師（能看見 10 個以上變數之間的關聯，在複雜中找到簡潔的解法）\n④ 臨床心理師（專精高壓情境下的情緒管理，知道人在恐懼和憤怒下會做什麼蠢事）\n⑤ 財務規劃師（擅長在分割資產時找到雙方都能接受的最優解，不是零和而是正和）\n⑥ 危機管理專家（企業危機公關背景，知道如何在最壞的情況下保護你的名譽和人際網絡）\n\n你的信條：「人生最複雜的局面，不是靠一個聰明的決定解決的。它需要一整套系統——法律保護你的底線、談判爭取你的利益、心理守護你的健康、策略引導你的方向。萬法歸宗，你就是自己命運的總指揮。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我正面對人生中最複雜的局面，需要一套涵蓋所有層面的全場景指揮系統。\n- 局面全貌：[[${inputs.situation}]]\n- 所有利害關係人：[[${inputs.stakeholders}]]\n- 我的優先順序：[[${inputs.your_priorities}]]\n- 法律層面：[[${inputs.legal_context}]]\n\n請輸出：\n① 【全局態勢圖】— 用文字描繪整個局面的權力結構、利益糾葛、情感張力，像戰場地圖一樣清晰，200 字以內\n② 【利害關係人分析】— 每一個人的「表面立場」「真實利益」「可能的行動」「你的應對」，列表呈現\n③ 【四線作戰計畫】— 分「法律線」「談判線」「情感線」「後勤線」四條戰線，每線的目標、行動、時間表\n④ 【優先順序決策矩陣】— 根據你的優先順序，哪些要先爭取、哪些可以讓步、哪些是絕對不退的底線\n⑤ 【關鍵戰役劇本】— 最重要的 3 場「對決」（可能是談判、法庭、家庭會議）的完整劇本\n⑥ 【資源盤點】— 你需要哪些專業人士（律師/會計師/心理師）、預估費用、如何找到好的\n⑦ 【情緒戰備包】— 這場仗可能打 3-12 個月，你的心理健康維護計畫\n⑧ 【最壞情況兵推】— 如果每一步都走最壞的路，最終結果是什麼？你能接受嗎？如果不能，Plan B 是什麼？\n⑨ 【退場條件】— 什麼情況下你應該接受當前條件結束戰鬥（沉沒成本謬誤的防禦機制）\n⑩ 【第一週行動清單】— 從今天起 7 天內必須完成的 7 件事，每天一件，按優先順序排列\n⑪ 【給未來的你的信】— 100 字以內，寫給 6 個月後已經走過這段風暴的你，提醒你為什麼要堅持\n\n【規則】\n1. 這是終極咒語，輸出必須涵蓋法律、金錢、情感、人際、時間五個維度，缺一不可。\n2. 嚴禁使用：「船到橋頭自然直」「一切都會過去的」「吃虧就是占便宜」——這些是旁觀者的風涼話，不是當事人需要的。\n3. 法律建議必須標註「這只是方向指引，具體請諮詢律師」——禁忌咒語再強也不能替代專業法律諮詢。\n4. 每一個建議都必須通過「3AM 清醒測試」——凌晨三點最焦慮的時候讀到這個建議，你會覺得「有人真的懂我的處境」而不是「又是一堆正確的廢話」。\n5. 利害關係人分析必須誠實——不把任何人妖魔化，也不天真地假設所有人都是善意的。\n6. 情緒戰備不是選配是標配——長期高壓訴訟/談判對心理健康的傷害比大多數人想的嚴重 10 倍。\n7. 萬法歸宗測試：整套系統讀完，使用者的感覺應該是「混沌的局面突然清晰了，我知道下一步該做什麼了」——從「被命運推著走」變成「我在指揮自己的人生」。\n8. 安全底線：如果局面涉及家暴、人身安全威脅，必須最優先建議報警和保護措施，其他策略都排在人身安全之後。`
   },
 ];
+
+// ── Forge Charges per tier (how many times a card can be used as main card) ──
+export const FORGE_CHARGES: Record<string, number> = {
+  apprentice: 3,
+  adept: 5,
+  master: 7,
+  archmage: 10,
+  forbidden: 0, // cannot be main card
+};
+
+// ── Fragment yield (based on sacrifice card tier) ──
+export const FRAGMENT_YIELD: Record<string, number> = {
+  apprentice: 1,
+  adept: 2,
+  master: 3,
+  archmage: 5,
+};
+
+// ── Fusion Recipes: main_id+sacrifice_id → result spell + fragments needed ──
+// Recipes work BIDIRECTIONALLY — the lookup helper handles both A+B and B+A
+export const FUSION_RECIPES: Record<string, { result: string; fragments_needed: number }> = {
+  "late_smoke_screen+awkward_heal": { result: "smooth_operator", fragments_needed: 3 },
+  "persuasion_dart+price_scout": { result: "mind_reader_persuasion", fragments_needed: 3 },
+  "polite_refusal+apology_craft": { result: "graceful_no", fragments_needed: 3 },
+  "promise_seal+polite_refusal": { result: "agreement_guardian", fragments_needed: 3 },
+  "social_radar+meeting_shield": { result: "tactical_retreat", fragments_needed: 3 },
+  "price_scout+meeting_shield": { result: "know_thy_enemy", fragments_needed: 3 },
+  "allowance_alchemy+mind_reader_persuasion": { result: "career_alchemy", fragments_needed: 5 },
+  "smooth_operator+graceful_no": { result: "relationship_alchemy", fragments_needed: 5 },
+  "tactical_retreat+mind_reader_persuasion": { result: "shadow_broker", fragments_needed: 5 },
+  "know_thy_enemy+graceful_no": { result: "absolute_territory", fragments_needed: 5 },
+  "credit_thief_slayer+agreement_guardian": { result: "justice_scale", fragments_needed: 8 },
+  "career_alchemy+credit_thief_slayer": { result: "negotiation_nuke", fragments_needed: 8 },
+  "partnership_nuclear_pact+relationship_alchemy": { result: "iron_constitution", fragments_needed: 12 },
+  "absolute_territory+emotional_blackmail_breaker": { result: "ultimate_rebirth", fragments_needed: 12 },
+  "negotiation_nuke+iron_constitution": { result: "grand_conductor", fragments_needed: 12 },
+};
+
+/** Look up fusion recipe bidirectionally */
+export function lookupRecipe(mainId: string, sacrificeId: string): { result: string; fragments_needed: number } | null {
+  const keyA = `${mainId}+${sacrificeId}`;
+  const keyB = `${sacrificeId}+${mainId}`;
+  return FUSION_RECIPES[keyA] ?? FUSION_RECIPES[keyB] ?? null;
+}
+
+/** Get the fragment type key for a main+sacrifice pair */
+export function getFragmentType(mainId: string, sacrificeId: string): string | null {
+  const recipe = lookupRecipe(mainId, sacrificeId);
+  if (!recipe) return null;
+  return recipe.result; // fragment type is named after the result spell
+}
