@@ -336,12 +336,14 @@ export function AcademyProvider({ children }: { children: React.ReactNode }) {
   };
 
   const handleShare = () => {
-    const url = window.location.href;
+    const spellUrl = selectedCurse?.id
+      ? `https://ai-magic-academy.vercel.app/spell/${selectedCurse.id}`
+      : window.location.href;
     const text = `我在【AI 魔法學院】解鎖了「${selectedCurse.title.replace(/\|/g, '')}」禁忌咒語。這不是普通的提示詞，這是物理級的生存武裝。進來領取你的法典：`;
     if (navigator.share) {
-      navigator.share({ title: 'AI 魔法學院', text, url }).catch(console.error);
+      navigator.share({ title: 'AI 魔法學院', text, url: spellUrl }).catch(console.error);
     } else {
-      navigator.clipboard.writeText(`${text} ${url}`);
+      navigator.clipboard.writeText(`${text} ${spellUrl}`);
       alert("已複製專屬魔法分享連結！快去社群擴散吧。");
     }
   };

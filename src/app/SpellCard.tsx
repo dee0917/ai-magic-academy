@@ -63,10 +63,11 @@ export default function SpellCard({ curse, castLevel, onClose }: SpellCardProps)
         if (!blob) return;
         if (navigator.share && navigator.canShare) {
           const file = new File([blob], `spell-${curse.id}.png`, { type: "image/png" });
+          const spellUrl = `https://ai-magic-academy.vercel.app/spell/${curse.id}`;
           const shareData = {
             title: "AI 魔法學院",
-            text: `我在【AI 魔法學院】施放了${tierConfig.label}級咒語「${curse.title}」⚡`,
-            url: "https://ai-magic-academy.vercel.app",
+            text: `我在【AI 魔法學院】施放了${tierConfig.label}級咒語「${curse.title}」⚡\n${spellUrl}`,
+            url: spellUrl,
             files: [file],
           };
           if (navigator.canShare(shareData)) {
