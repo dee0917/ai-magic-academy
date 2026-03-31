@@ -2,6 +2,9 @@
 import React, { createContext, useContext, useState, useMemo, useEffect } from "react";
 import { useSpellCollection } from "../hooks/useSpellCollection";
 import { useMPSystem } from "../hooks/useMPSystem";
+import { useQuestSystem, QuestCompletionEvent } from "../hooks/useQuestSystem";
+import { SchoolType } from "../curses_data";
+import { Quest } from "../lib/quests";
 import {
   CURSES, CAST_LEVELS, TIER_CONFIG, TABS,
   HIDDEN_MARKER, getFieldVisibility, getMpCost,
@@ -77,11 +80,20 @@ interface AcademyContextType {
   activeSchool: string;
   setActiveSchool: (v: string) => void;
 
+  // Quest system
+  completedQuests: string[];
+  earnedTitles: string[];
+  getSchoolProgress: (school: SchoolType) => { completed: number; total: number };
+  getActiveQuests: () => Quest[];
+  getRequirementStatus: (quest: Quest, collectedCards: string[]) => string;
+  questToast: QuestCompletionEvent | null;
+
   // Derived data
   filteredCurses: any[];
   groupedCurses: { [key: string]: any[] };
 
   // Actions
+  handleFusionComplete: (mainSchool: string, sacrificeSchool: string) => void;
   handleCardClick: (curse: any) => void;
   handleTrialCopy: (text: string) => void;
   brewAndCopy: () => void;
@@ -103,6 +115,11 @@ export function AcademyProvider({ children }: { children: React.ReactNode }) {
   // Hooks
   const { collectedCards, saveCollection } = useSpellCollection();
   const { mp, saveMp, checkMilestoneRewards } = useMPSystem();
+  const {
+    completedQuests, earnedTitles,
+    checkQuestProgress, getSchoolProgress, getActiveQuests, getRequirementStatus,
+  } = useQuestSystem();
+  const [questToast, setQuestToast] = useState<QuestCompletionEvent | null>(null);
 
   // State
   const [selectedCurse, setSelectedCurse] = useState<any>(null);
@@ -192,6 +209,30 @@ export function AcademyProvider({ children }: { children: React.ReactNode }) {
     return groups;
   }, [filteredCurses]);
 
+  // Fusion quest handler
+  const handleFusionComplete = (mainSchool: string, sacrificeSchool: string) => {
+    const schools = new Set([mainSchool, sacrificeSchool].filter(Boolean));
+    const allResults: QuestCompletionEvent[] = [];
+    for (const school of schools) {
+      const results = checkQuestProgress('fuse', { fuseSchool: school as SchoolType });
+      allResults.push(...results);
+    }
+    // Grant MP rewards
+    let questMpBonus = 0;
+    for (const event of allResults) {
+      if (event.quest.reward.type === 'mp') {
+        questMpBonus += event.quest.reward.value as number;
+      }
+    }
+    if (questMpBonus > 0) {
+      saveMp(mp + questMpBonus);
+    }
+    if (allResults.length > 0) {
+      setQuestToast(allResults[0]);
+      setTimeout(() => setQuestToast(null), 3000);
+    }
+  };
+
   // Actions
   const handleCardClick = (curse: any) => {
     setSelectedCurse(curse);
@@ -223,6 +264,14 @@ export function AcademyProvider({ children }: { children: React.ReactNode }) {
     const visibleCount = getFieldVisibility(selectedCurse.fields.length, castLevel);
     const autoInputs: any = {}; selectedCurse.fields.forEach((f: any, idx: number) => { const isVisible = idx < visibleCount; autoInputs[f.id] = isVisible ? (inputs[f.id] || "「尚未輸入內容」") : HIDDEN_MARKER; }); const spell = selectedCurse.generate({ ...autoInputs, [selectedCurse.tweak?.id]: inputs[selectedCurse.tweak?.id] || selectedCurse.tweak?.options[0] });
     saveMp(mp - cost);
+
+    // Quest check: cast action
+    const castResults = checkQuestProgress('cast', {
+      spellId: selectedCurse.id,
+      school: selectedCurse.school as SchoolType,
+      castLevel,
+    });
+
     // 全力詠唱解鎖卡片（允許重複收集）
     if (castLevel === 'full') {
       const newCollection = [...collectedCards, selectedCurse.id];
@@ -230,6 +279,29 @@ export function AcademyProvider({ children }: { children: React.ReactNode }) {
       // Check milestone rewards
       const uniqueCount = [...new Set(newCollection)].length;
       checkMilestoneRewards(uniqueCount);
+
+      // Quest check: collect action
+      const collectResults = checkQuestProgress('collect', {
+        collectedCards: newCollection,
+      });
+      castResults.push(...collectResults);
+    }
+
+    // Grant MP rewards from completed quests
+    let questMpBonus = 0;
+    for (const event of castResults) {
+      if (event.quest.reward.type === 'mp') {
+        questMpBonus += event.quest.reward.value as number;
+      }
+    }
+    if (questMpBonus > 0) {
+      saveMp(mp - cost + questMpBonus);
+    }
+
+    // Show toast for first completed quest
+    if (castResults.length > 0) {
+      setQuestToast(castResults[0]);
+      setTimeout(() => setQuestToast(null), 3000);
     }
     const cleanSpell = spell.replace(/\[\[/g, '').replace(/\]\]/g, '');
     // Filter out lines with hidden params so copied spell only contains visible params
@@ -322,8 +394,15 @@ export function AcademyProvider({ children }: { children: React.ReactNode }) {
     shareText, setShareText,
     shareImageUrl, setShareImageUrl,
     activeSchool, setActiveSchool,
+    completedQuests,
+    earnedTitles,
+    getSchoolProgress,
+    getActiveQuests,
+    getRequirementStatus,
+    questToast,
     filteredCurses,
     groupedCurses,
+    handleFusionComplete,
     handleCardClick,
     handleTrialCopy,
     brewAndCopy,

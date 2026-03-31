@@ -7,6 +7,7 @@ import SpellBrowser from "./components/SpellBrowser";
 import CastingModal from "./components/CastingModal";
 import SpellBookModal from "./components/SpellBookModal";
 import PortalOverlay from "./components/PortalOverlay";
+import QuestToast from "./components/QuestToast";
 
 export default function MagicAcademyMVP() {
   return (
@@ -18,6 +19,7 @@ export default function MagicAcademyMVP() {
         <CastingModal />
         <SpellBookModal />
         <PortalOverlay />
+        <QuestToast />
 
         <style jsx>{`
           @keyframes toastSlideUp {

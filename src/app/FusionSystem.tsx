@@ -36,6 +36,7 @@ interface FusionSystemProps {
   allCurses: Curse[];
   onCollectionChange: (newCollection: string[]) => void;
   onMpChange?: (delta: number) => void;
+  onFusionComplete?: (mainSchool: string, sacrificeSchool: string) => void;
   currentMp?: number;
 }
 
@@ -71,6 +72,7 @@ export default function FusionSystem({
   allCurses,
   onCollectionChange,
   onMpChange,
+  onFusionComplete,
   currentMp = 0,
 }: FusionSystemProps) {
   // ── State ──
@@ -182,6 +184,9 @@ export default function FusionSystem({
       const sacrificeIdx = newCollection.indexOf(sacrificeCard.id);
       if (sacrificeIdx !== -1) newCollection.splice(sacrificeIdx, 1);
       onCollectionChange(newCollection);
+
+      // Notify quest system about fusion
+      onFusionComplete?.((mainCard as any).school ?? '', (sacrificeCard as any).school ?? '');
 
       // 2. Deduct forge charge from main card
       const currentCharges = getCharges(mainCard.id);
