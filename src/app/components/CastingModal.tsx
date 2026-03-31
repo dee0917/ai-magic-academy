@@ -11,6 +11,7 @@ import {
   getFieldVisibility, getMpCost, getTabColor,
 } from "../lib/constants";
 import TerminalPrompt from "./shared/TerminalPrompt";
+import SpellModules from "./SpellModules";
 
 export default function CastingModal() {
   const {
@@ -99,6 +100,17 @@ export default function CastingModal() {
                       {selectedCurse.desc}
                     </p>
                   </div>
+
+                  {/* Spell Modules - mobile (default collapsed) */}
+                  {selectedCurse.modules && selectedCurse.modules.length > 0 && (
+                    <div className="px-5 pb-2">
+                      <SpellModules
+                        modules={selectedCurse.modules}
+                        totalFields={selectedCurse.fields?.length || 0}
+                        defaultExpanded={false}
+                      />
+                    </div>
+                  )}
 
                   {/* Form area */}
                   <div className="p-5 pt-2">
@@ -317,6 +329,15 @@ export default function CastingModal() {
                       {selectedCurse.desc}
                     </p>
                   </div>
+
+                  {/* Spell Modules - desktop (default expanded) */}
+                  {selectedCurse.modules && selectedCurse.modules.length > 0 && (
+                    <SpellModules
+                      modules={selectedCurse.modules}
+                      totalFields={selectedCurse.fields?.length || 0}
+                      defaultExpanded={true}
+                    />
+                  )}
 
                   <div style={{ border: '2px dashed var(--ink)', padding: '20px', opacity: 0.9 }}>
                     {/* Cast level selector — desktop */}

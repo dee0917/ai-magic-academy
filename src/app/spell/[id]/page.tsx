@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { CURSES, TIER_CONFIG, SCHOOL_CONFIG } from "../../lib/constants";
 import { SchoolType } from "../../curses_data";
+import { SpellModulesStatic } from "../../components/SpellModules";
 
 interface SpellPageProps {
   params: Promise<{ id: string }>;
@@ -230,6 +231,11 @@ export default async function SpellPage({ params }: SpellPageProps) {
                 {spell.theory}
               </p>
             </div>
+          )}
+
+          {/* Spell Modules - prompt structure analysis */}
+          {(spell as any).modules && (spell as any).modules.length > 0 && (
+            <SpellModulesStatic modules={(spell as any).modules} />
           )}
 
           {/* CTA Button */}
