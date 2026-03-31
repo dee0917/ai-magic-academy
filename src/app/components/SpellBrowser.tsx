@@ -2,13 +2,17 @@
 import React from "react";
 import { Sparkles, X, Search, Lock, ArrowRight, RefreshCw } from "lucide-react";
 import { useAcademy } from "../context/AcademyContext";
-import { TABS, TIER_CONFIG, getSpellCode, getTabColor, scrollToTab, CURSES } from "../lib/constants";
+import { TABS, TIER_CONFIG, getSpellCode, getTabColor, scrollToTab, CURSES, SCHOOL_CONFIG } from "../lib/constants";
+import type { SchoolType } from "../curses_data";
+
+const SCHOOL_KEYS: SchoolType[] = ['defense', 'attack', 'healing', 'illusion', 'contract', 'insight'];
 
 export default function SpellBrowser() {
   const {
     searchQuery, setSearchQuery,
     groupedCurses, expandedTabs, setExpandedTabs,
     isLoggedIn, handleCardClick,
+    activeSchool, setActiveSchool,
   } = useAcademy();
 
   return (
@@ -68,6 +72,46 @@ export default function SpellBrowser() {
             </button>
           ))}
         </div>
+
+        {/* School filter pills */}
+        <div className="flex flex-nowrap overflow-x-auto no-scrollbar gap-2 pt-3 pb-1 tab-scroll-container justify-start md:justify-center">
+          <button
+            onClick={() => setActiveSchool("all")}
+            className="flex-shrink-0 px-3 py-1.5 text-[11px] font-black tracking-wide transition-all active:translate-x-0.5 active:translate-y-0.5"
+            style={{
+              fontFamily: 'var(--font-noto-sans-tc)',
+              border: `2px solid ${activeSchool === 'all' ? 'var(--ink)' : 'rgba(0,0,0,0.2)'}`,
+              boxShadow: activeSchool === 'all' ? '2px 2px 0px var(--ink)' : 'none',
+              background: activeSchool === 'all' ? 'var(--mustard)' : 'transparent',
+              color: 'var(--ink)',
+              opacity: activeSchool === 'all' ? 1 : 0.6,
+            }}
+          >
+            全流派
+          </button>
+          {SCHOOL_KEYS.map(key => {
+            const school = SCHOOL_CONFIG[key];
+            const isActive = activeSchool === key;
+            return (
+              <button
+                key={key}
+                onClick={() => setActiveSchool(isActive ? "all" : key)}
+                className="flex-shrink-0 px-3 py-1.5 text-[11px] font-black tracking-wide transition-all active:translate-x-0.5 active:translate-y-0.5"
+                style={{
+                  fontFamily: 'var(--font-noto-sans-tc)',
+                  border: `2px solid ${isActive ? school.color : 'rgba(0,0,0,0.2)'}`,
+                  boxShadow: isActive ? `2px 2px 0px ${school.color}` : 'none',
+                  background: isActive ? `${school.color}18` : 'transparent',
+                  color: isActive ? school.color : 'var(--ink)',
+                  opacity: isActive ? 1 : 0.6,
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {school.emoji} {school.label}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* ── MAIN LIBRARY ── */}
@@ -75,6 +119,7 @@ export default function SpellBrowser() {
         {TABS.map(tab => {
           const tabCurses = groupedCurses[tab];
           if (searchQuery && tabCurses.length === 0) return null;
+          if (activeSchool !== "all" && tabCurses.length === 0) return null;
 
           return (
             <section key={tab} id={tab} className="mb-12 md:mb-16 last:mb-0 scroll-mt-32">
@@ -107,8 +152,9 @@ export default function SpellBrowser() {
                 <div className="absolute right-0 top-0 bottom-0 w-16 pointer-events-none z-20" style={{ background: 'linear-gradient(to left, var(--parchment), transparent)' }} />
 
                 <div className="flex overflow-x-auto gap-5 px-4 pb-8 no-scrollbar snap-x snap-mandatory scroll-smooth tab-scroll-container">
-                  {(expandedTabs[tab] || searchQuery ? tabCurses : tabCurses.slice(0, 3)).map((curse: any, idx: number) => {
+                  {(expandedTabs[tab] || searchQuery || activeSchool !== "all" ? tabCurses : tabCurses.slice(0, 3)).map((curse: any, idx: number) => {
                     const tabColor = getTabColor(curse.tab);
+                    const schoolInfo = curse.school && SCHOOL_CONFIG[curse.school as SchoolType] ? SCHOOL_CONFIG[curse.school as SchoolType] : null;
                     return (
                     <div
                       key={curse.id}
@@ -140,9 +186,9 @@ export default function SpellBrowser() {
 
                       {/* Card header area */}
                       <div className="p-5 pb-3 relative">
-                        {/* Category tag + tier badge + icon */}
+                        {/* Category tag + tier badge + school icon + icon */}
                         <div className="flex items-start justify-between mb-3 relative z-10">
-                          <div className="flex items-center gap-1.5">
+                          <div className="flex items-center gap-1.5 flex-wrap">
                             <div
                               className="text-[10px] font-black px-2 py-1"
                               style={{ background: tabColor, fontFamily: 'var(--font-chivo)', color: '#FEFAF0' }}
@@ -160,6 +206,20 @@ export default function SpellBrowser() {
                                 }}
                               >
                                 {TIER_CONFIG[curse.tier].label}
+                              </div>
+                            )}
+                            {schoolInfo && (
+                              <div
+                                className="text-[10px] font-black px-1.5 py-0.5"
+                                style={{
+                                  fontFamily: 'var(--font-noto-sans-tc)',
+                                  color: schoolInfo.color,
+                                  border: `1.5px solid ${schoolInfo.color}`,
+                                  opacity: 0.8,
+                                }}
+                                title={`${schoolInfo.emoji} ${schoolInfo.label}流派`}
+                              >
+                                {schoolInfo.emoji}
                               </div>
                             )}
                           </div>
@@ -221,7 +281,7 @@ export default function SpellBrowser() {
                   })}
 
                   {/* 查看全部咒語 button */}
-                  {!expandedTabs[tab] && !searchQuery && tabCurses.length > 3 && (
+                  {!expandedTabs[tab] && !searchQuery && activeSchool === "all" && tabCurses.length > 3 && (
                     <button
                       onClick={() => setExpandedTabs(prev => ({ ...prev, [tab]: true }))}
                       className="flex-shrink-0 w-[260px] md:w-[300px] snap-start flex flex-col items-center justify-center text-center p-6 transition-all active:translate-x-1 active:translate-y-1"

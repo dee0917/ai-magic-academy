@@ -20,6 +20,8 @@ interface AcademyContextType {
   // MP
   mp: number;
   saveMp: (newMp: number) => void;
+  mpBlocked: boolean;
+  mpBlockMessage: string;
 
   // Collection
   collectedCards: string[];
@@ -71,6 +73,10 @@ interface AcademyContextType {
   shareImageUrl: string;
   setShareImageUrl: (v: string) => void;
 
+  // School filter
+  activeSchool: string;
+  setActiveSchool: (v: string) => void;
+
   // Derived data
   filteredCurses: any[];
   groupedCurses: { [key: string]: any[] };
@@ -96,7 +102,7 @@ export function useAcademy() {
 export function AcademyProvider({ children }: { children: React.ReactNode }) {
   // Hooks
   const { collectedCards, saveCollection } = useSpellCollection();
-  const { mp, saveMp } = useMPSystem();
+  const { mp, saveMp, checkMilestoneRewards } = useMPSystem();
 
   // State
   const [selectedCurse, setSelectedCurse] = useState<any>(null);
@@ -124,6 +130,9 @@ export function AcademyProvider({ children }: { children: React.ReactNode }) {
   const [showSharePreview, setShowSharePreview] = useState(false);
   const [shareText, setShareText] = useState("");
   const [shareImageUrl, setShareImageUrl] = useState("");
+  const [activeSchool, setActiveSchool] = useState("all");
+  const [mpBlocked, setMpBlocked] = useState(false);
+  const [mpBlockMessage, setMpBlockMessage] = useState("");
 
   // Fuse.js for fuzzy search
   const fuse = useMemo(() => {
@@ -136,9 +145,12 @@ export function AcademyProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const filteredCurses = useMemo(() => {
-    if (!searchQuery.trim()) return CURSES;
-    return fuse.search(searchQuery).map(result => result.item);
-  }, [searchQuery, fuse]);
+    let results = !searchQuery.trim() ? CURSES : fuse.search(searchQuery).map(result => result.item);
+    if (activeSchool !== "all") {
+      results = results.filter((c: any) => c.school === activeSchool || c.subSchool === activeSchool);
+    }
+    return results;
+  }, [searchQuery, fuse, activeSchool]);
 
   // Prevent body scroll when modal is open (iOS-safe)
   useEffect(() => {
@@ -202,15 +214,22 @@ export function AcademyProvider({ children }: { children: React.ReactNode }) {
 
   const brewAndCopy = () => {
     const cost = getMpCost(selectedCurse, castLevel);
-    // TODO: 測試模式 — 跳過 MP 不足檢查和扣除，正式上線時還原
-    // if (mp < cost) { alert(`魔力不足！需要 ${cost} MP，目前只有 ${mp} MP`); return; }
+    if (mp < cost) {
+      setMpBlocked(true);
+      setMpBlockMessage(`魔力不足！需要 ${cost} MP，目前只有 ${mp} MP。每日登入可回復 5 MP。`);
+      setTimeout(() => setMpBlocked(false), 3000);
+      return;
+    }
     const visibleCount = getFieldVisibility(selectedCurse.fields.length, castLevel);
     const autoInputs: any = {}; selectedCurse.fields.forEach((f: any, idx: number) => { const isVisible = idx < visibleCount; autoInputs[f.id] = isVisible ? (inputs[f.id] || "「尚未輸入內容」") : HIDDEN_MARKER; }); const spell = selectedCurse.generate({ ...autoInputs, [selectedCurse.tweak?.id]: inputs[selectedCurse.tweak?.id] || selectedCurse.tweak?.options[0] });
-    // TODO: 測試模式 — 暫停扣除 MP，正式上線時還原
-    // saveMp(mp - cost);
+    saveMp(mp - cost);
     // 全力詠唱解鎖卡片（允許重複收集）
     if (castLevel === 'full') {
-      saveCollection([...collectedCards, selectedCurse.id]);
+      const newCollection = [...collectedCards, selectedCurse.id];
+      saveCollection(newCollection);
+      // Check milestone rewards
+      const uniqueCount = [...new Set(newCollection)].length;
+      checkMilestoneRewards(uniqueCount);
     }
     const cleanSpell = spell.replace(/\[\[/g, '').replace(/\]\]/g, '');
     // Filter out lines with hidden params so copied spell only contains visible params
@@ -278,7 +297,7 @@ export function AcademyProvider({ children }: { children: React.ReactNode }) {
     selectedCurse, setSelectedCurse,
     inputs, setInputs,
     castLevel, setCastLevel,
-    mp, saveMp,
+    mp, saveMp, mpBlocked, mpBlockMessage,
     collectedCards, saveCollection,
     isCopied, setIsCopied,
     showPortal, setShowPortal,
@@ -302,6 +321,7 @@ export function AcademyProvider({ children }: { children: React.ReactNode }) {
     showSharePreview, setShowSharePreview,
     shareText, setShareText,
     shareImageUrl, setShareImageUrl,
+    activeSchool, setActiveSchool,
     filteredCurses,
     groupedCurses,
     handleCardClick,

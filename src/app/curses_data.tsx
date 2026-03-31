@@ -1,7 +1,19 @@
 import {
-  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock
+  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users
 } from "lucide-react";
 import React from "react";
+
+// 學派類型
+export type SchoolType = 'defense' | 'attack' | 'healing' | 'illusion' | 'contract' | 'insight';
+
+export const SCHOOL_CONFIG: Record<SchoolType, { label: string; emoji: string; color: string }> = {
+  defense:  { label: '防禦', emoji: '\u{1F6E1}', color: '#3B82F6' },
+  attack:   { label: '攻擊', emoji: '\u{2694}', color: '#DC2626' },
+  healing:  { label: '治癒', emoji: '\u{1FA79}', color: '#10B981' },
+  illusion: { label: '幻術', emoji: '\u{1F3AD}', color: '#8B5CF6' },
+  contract: { label: '契約', emoji: '\u{1F4DC}', color: '#D97706' },
+  insight:  { label: '洞察', emoji: '\u{1F52E}', color: '#6366F1' },
+};
 
 // 階級定義
 export const TIER_CONFIG: Record<string, { label: string; color: string; borderColor: string; bgGlow: string; mpMultiplier: number }> = {
@@ -21,7 +33,7 @@ export const CAST_LEVELS = [
 
 // 魔法編號系統
 const TIER_CODE: Record<string, string> = { apprentice: 'Ⅰ', adept: 'Ⅱ', master: 'Ⅲ', archmage: 'Ⅳ', forbidden: 'Ⅴ' };
-const TAB_CODE: Record<string, string> = { '人際擋箭': 'AR', '職場求生': 'SV', '日常雜症': 'DX', '創業/斜槓': 'BZ' };
+const TAB_CODE: Record<string, string> = { '人際擋箭': 'AR', '職場求生': 'SV', '日常雜症': 'DX', '創業/斜槓': 'BZ', '校園生存': 'CS' };
 
 export function getSpellCode(curse: { tier: string; tab: string; id: string }): string {
   const tierSymbol = TIER_CODE[curse.tier] || 'Ⅰ';
@@ -40,6 +52,7 @@ export const CURSES = [
     tab: "日常雜症",
     isPro: false,
     tier: "apprentice",
+    school: "illusion" as SchoolType,
     outputFormat: "LINE 遲到通知",
     icon: <Clock className="w-8 h-8 text-gray-500" />,
     color: "gray",
@@ -69,6 +82,8 @@ export const CURSES = [
     tab: "人際擋箭",
     isPro: false,
     tier: "adept",
+    school: "illusion" as SchoolType,
+    subSchool: "attack" as SchoolType,
     outputFormat: "要錢話術組合",
     icon: <Coins className="w-8 h-8 text-blue-500" />,
     color: "blue",
@@ -100,6 +115,8 @@ export const CURSES = [
     tab: "職場求生",
     isPro: false,
     tier: "master",
+    school: "attack" as SchoolType,
+    subSchool: "insight" as SchoolType,
     outputFormat: "反搶功作戰計畫",
     icon: <Swords className="w-8 h-8 text-purple-500" />,
     color: "purple",
@@ -132,6 +149,8 @@ export const CURSES = [
     tab: "創業/斜槓",
     isPro: true,
     tier: "archmage",
+    school: "contract" as SchoolType,
+    subSchool: "defense" as SchoolType,
     outputFormat: "合夥協議 + 退場機制",
     icon: <Shield className="w-8 h-8 text-red-500" />,
     color: "red",
@@ -165,6 +184,8 @@ export const CURSES = [
     tab: "人際擋箭",
     isPro: true,
     tier: "forbidden",
+    school: "defense" as SchoolType,
+    subSchool: "insight" as SchoolType,
     outputFormat: "情勒脫困全系統",
     icon: <Skull className="w-8 h-8 text-yellow-600" />,
     color: "yellow",
@@ -198,6 +219,7 @@ export const CURSES = [
     tab: "人際擋箭",
     isPro: false,
     tier: "apprentice",
+    school: "defense" as SchoolType,
     outputFormat: "溫柔拒絕訊息",
     icon: <Shield className="w-8 h-8 text-gray-500" />,
     color: "gray",
@@ -228,6 +250,7 @@ export const CURSES = [
     tab: "職場求生",
     isPro: false,
     tier: "apprentice",
+    school: "attack" as SchoolType,
     outputFormat: "一句致命說服話術",
     icon: <Target className="w-8 h-8 text-gray-500" />,
     color: "gray",
@@ -258,6 +281,7 @@ export const CURSES = [
     tab: "日常雜症",
     isPro: false,
     tier: "apprentice",
+    school: "healing" as SchoolType,
     outputFormat: "尷尬修復台詞",
     icon: <Heart className="w-8 h-8 text-gray-500" />,
     color: "gray",
@@ -287,6 +311,8 @@ export const CURSES = [
     tab: "日常雜症",
     isPro: false,
     tier: "apprentice",
+    school: "insight" as SchoolType,
+    subSchool: "attack" as SchoolType,
     outputFormat: "殺價話術 + 行情分析提示",
     icon: <Eye className="w-8 h-8 text-gray-500" />,
     color: "gray",
@@ -317,6 +343,7 @@ export const CURSES = [
     tab: "人際擋箭",
     isPro: false,
     tier: "apprentice",
+    school: "contract" as SchoolType,
     outputFormat: "承諾確認訊息/對話腳本",
     icon: <Lock className="w-8 h-8 text-gray-500" />,
     color: "gray",
@@ -347,6 +374,7 @@ export const CURSES = [
     tab: "日常雜症",
     isPro: false,
     tier: "apprentice",
+    school: "insight" as SchoolType,
     outputFormat: "社交場景讀心分析 + 避雷話術",
     icon: <Eye className="w-8 h-8 text-gray-500" />,
     color: "gray",
@@ -377,6 +405,8 @@ export const CURSES = [
     tab: "職場求生",
     isPro: false,
     tier: "apprentice",
+    school: "defense" as SchoolType,
+    subSchool: "illusion" as SchoolType,
     outputFormat: "會議應答話術",
     icon: <Target className="w-8 h-8 text-gray-500" />,
     color: "gray",
@@ -407,6 +437,8 @@ export const CURSES = [
     tab: "人際擋箭",
     isPro: false,
     tier: "apprentice",
+    school: "healing" as SchoolType,
+    subSchool: "illusion" as SchoolType,
     outputFormat: "道歉訊息/對話腳本",
     icon: <Heart className="w-8 h-8 text-gray-500" />,
     color: "gray",
@@ -436,6 +468,8 @@ export const CURSES = [
     tab: "日常雜症",
     isPro: false,
     tier: "adept",
+    school: "illusion" as SchoolType,
+    subSchool: "healing" as SchoolType,
     outputFormat: "社交失誤轉機劇本",
     icon: <Sparkles className="w-8 h-8 text-blue-500" />,
     color: "blue",
@@ -469,6 +503,8 @@ export const CURSES = [
     tab: "職場求生",
     isPro: false,
     tier: "adept",
+    school: "insight" as SchoolType,
+    subSchool: "attack" as SchoolType,
     outputFormat: "目標心理檔案 + 說服話術腳本",
     icon: <Eye className="w-8 h-8 text-blue-500" />,
     color: "blue",
@@ -503,6 +539,8 @@ export const CURSES = [
     tab: "人際擋箭",
     isPro: false,
     tier: "adept",
+    school: "defense" as SchoolType,
+    subSchool: "healing" as SchoolType,
     outputFormat: "溫柔拒絕全流程腳本",
     icon: <Shield className="w-8 h-8 text-blue-500" />,
     color: "blue",
@@ -537,6 +575,8 @@ export const CURSES = [
     tab: "人際擋箭",
     isPro: false,
     tier: "adept",
+    school: "contract" as SchoolType,
+    subSchool: "attack" as SchoolType,
     outputFormat: "承諾追索計畫 + 預防性協議模板",
     icon: <Target className="w-8 h-8 text-blue-500" />,
     color: "blue",
@@ -571,6 +611,8 @@ export const CURSES = [
     tab: "日常雜症",
     isPro: false,
     tier: "adept",
+    school: "illusion" as SchoolType,
+    subSchool: "defense" as SchoolType,
     outputFormat: "脫身作戰計畫",
     icon: <Clock className="w-8 h-8 text-blue-500" />,
     color: "blue",
@@ -606,6 +648,8 @@ export const CURSES = [
     tab: "人際擋箭",
     isPro: false,
     tier: "adept",
+    school: "insight" as SchoolType,
+    subSchool: "defense" as SchoolType,
     outputFormat: "讀心防壁分析報告",
     icon: <Eye className="w-8 h-8 text-blue-500" />,
     color: "blue",
@@ -640,6 +684,8 @@ export const CURSES = [
     tab: "職場求生",
     isPro: true,
     tier: "master",
+    school: "attack" as SchoolType,
+    subSchool: "illusion" as SchoolType,
     outputFormat: "升遷加速作戰系統",
     icon: <Sparkles className="w-8 h-8 text-purple-500" />,
     color: "purple",
@@ -674,6 +720,8 @@ export const CURSES = [
     tab: "人際擋箭",
     isPro: true,
     tier: "master",
+    school: "healing" as SchoolType,
+    subSchool: "defense" as SchoolType,
     outputFormat: "衝突轉化全系統",
     icon: <Heart className="w-8 h-8 text-purple-500" />,
     color: "purple",
@@ -708,6 +756,8 @@ export const CURSES = [
     tab: "職場求生",
     isPro: true,
     tier: "master",
+    school: "insight" as SchoolType,
+    subSchool: "illusion" as SchoolType,
     outputFormat: "幕後操盤作戰地圖",
     icon: <Eye className="w-8 h-8 text-purple-500" />,
     color: "purple",
@@ -742,6 +792,8 @@ export const CURSES = [
     tab: "人際擋箭",
     isPro: true,
     tier: "master",
+    school: "defense" as SchoolType,
+    subSchool: "insight" as SchoolType,
     outputFormat: "心理鐵壁建構系統",
     icon: <Shield className="w-8 h-8 text-purple-500" />,
     color: "purple",
@@ -776,6 +828,8 @@ export const CURSES = [
     tab: "職場求生",
     isPro: true,
     tier: "archmage",
+    school: "contract" as SchoolType,
+    subSchool: "attack" as SchoolType,
     outputFormat: "職場正義作戰系統",
     icon: <Swords className="w-8 h-8 text-red-500" />,
     color: "red",
@@ -810,6 +864,8 @@ export const CURSES = [
     tab: "職場求生",
     isPro: true,
     tier: "archmage",
+    school: "attack" as SchoolType,
+    subSchool: "insight" as SchoolType,
     outputFormat: "談判核武發射系統",
     icon: <Target className="w-8 h-8 text-red-500" />,
     color: "red",
@@ -844,6 +900,8 @@ export const CURSES = [
     tab: "創業/斜槓",
     isPro: true,
     tier: "forbidden",
+    school: "contract" as SchoolType,
+    subSchool: "defense" as SchoolType,
     outputFormat: "關係憲法完整文本",
     icon: <Shield className="w-8 h-8 text-yellow-600" />,
     color: "yellow",
@@ -878,6 +936,8 @@ export const CURSES = [
     tab: "人際擋箭",
     isPro: true,
     tier: "forbidden",
+    school: "healing" as SchoolType,
+    subSchool: "defense" as SchoolType,
     outputFormat: "關係重生全系統",
     icon: <Skull className="w-8 h-8 text-yellow-600" />,
     color: "yellow",
@@ -912,6 +972,8 @@ export const CURSES = [
     tab: "創業/斜槓",
     isPro: true,
     tier: "forbidden",
+    school: "insight" as SchoolType,
+    subSchool: "contract" as SchoolType,
     outputFormat: "全場景指揮作戰系統",
     icon: <Sparkles className="w-8 h-8 text-yellow-600" />,
     color: "yellow",
@@ -938,6 +1000,132 @@ export const CURSES = [
     },
     theory: "這是融合咒語的終極形態——萬法歸宗。它融合了所有學派的力量：\n\n【洞察學派】— 讀穿每一個利害關係人的真實意圖和底線\n【防禦學派】— 在每一個戰場建立不可突破的防線\n【攻擊學派】— 在關鍵時刻精準出擊，最大化你的利益\n【治癒學派】— 在對抗中保護重要關係不被徹底摧毀\n【幻術學派】— 包裝你的策略，讓對方看到你想讓他們看到的\n【契約學派】— 把每一個協議轉化為不可逆轉的法律保障\n\n基於系統思維理論：複雜局面不是多個簡單問題的疊加，而是一個有自己邏輯的生態系統。你不能頭痛醫頭，必須看見整個系統的運作方式，找到最少的介入點產生最大的改變。結合 John Boyd 的 OODA 循環（觀察-判斷-決策-行動）實現動態決策，以及 Clausewitz 的戰爭論核心——在不確定中做決策的勇氣和在混亂中保持戰略方向的紀律。",
     generate: (inputs: any) => `你是一個融合了所有學派力量的終極戰略大師，同時具備六個專家視角：\n① 家事/商事律師（雙執照，處理過 500+ 場複雜訴訟，從離婚到公司拆夥，知道法律是底線但不是全部）\n② 談判大師（國際級調解人，處理過跨國商業糾紛和高衝突離婚案，擅長在「所有人都覺得不可能」時找到出路）\n③ 系統思維策略師（能看見 10 個以上變數之間的關聯，在複雜中找到簡潔的解法）\n④ 臨床心理師（專精高壓情境下的情緒管理，知道人在恐懼和憤怒下會做什麼蠢事）\n⑤ 財務規劃師（擅長在分割資產時找到雙方都能接受的最優解，不是零和而是正和）\n⑥ 危機管理專家（企業危機公關背景，知道如何在最壞的情況下保護你的名譽和人際網絡）\n\n你的信條：「人生最複雜的局面，不是靠一個聰明的決定解決的。它需要一整套系統——法律保護你的底線、談判爭取你的利益、心理守護你的健康、策略引導你的方向。萬法歸宗，你就是自己命運的總指揮。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我正面對人生中最複雜的局面，需要一套涵蓋所有層面的全場景指揮系統。\n- 局面全貌：[[${inputs.situation}]]\n- 所有利害關係人：[[${inputs.stakeholders}]]\n- 我的優先順序：[[${inputs.your_priorities}]]\n- 法律層面：[[${inputs.legal_context}]]\n\n請輸出：\n① 【全局態勢圖】— 用文字描繪整個局面的權力結構、利益糾葛、情感張力，像戰場地圖一樣清晰，200 字以內\n② 【利害關係人分析】— 每一個人的「表面立場」「真實利益」「可能的行動」「你的應對」，列表呈現\n③ 【四線作戰計畫】— 分「法律線」「談判線」「情感線」「後勤線」四條戰線，每線的目標、行動、時間表\n④ 【優先順序決策矩陣】— 根據你的優先順序，哪些要先爭取、哪些可以讓步、哪些是絕對不退的底線\n⑤ 【關鍵戰役劇本】— 最重要的 3 場「對決」（可能是談判、法庭、家庭會議）的完整劇本\n⑥ 【資源盤點】— 你需要哪些專業人士（律師/會計師/心理師）、預估費用、如何找到好的\n⑦ 【情緒戰備包】— 這場仗可能打 3-12 個月，你的心理健康維護計畫\n⑧ 【最壞情況兵推】— 如果每一步都走最壞的路，最終結果是什麼？你能接受嗎？如果不能，Plan B 是什麼？\n⑨ 【退場條件】— 什麼情況下你應該接受當前條件結束戰鬥（沉沒成本謬誤的防禦機制）\n⑩ 【第一週行動清單】— 從今天起 7 天內必須完成的 7 件事，每天一件，按優先順序排列\n⑪ 【給未來的你的信】— 100 字以內，寫給 6 個月後已經走過這段風暴的你，提醒你為什麼要堅持\n\n【規則】\n1. 這是終極咒語，輸出必須涵蓋法律、金錢、情感、人際、時間五個維度，缺一不可。\n2. 嚴禁使用：「船到橋頭自然直」「一切都會過去的」「吃虧就是占便宜」——這些是旁觀者的風涼話，不是當事人需要的。\n3. 法律建議必須標註「這只是方向指引，具體請諮詢律師」——禁忌咒語再強也不能替代專業法律諮詢。\n4. 每一個建議都必須通過「3AM 清醒測試」——凌晨三點最焦慮的時候讀到這個建議，你會覺得「有人真的懂我的處境」而不是「又是一堆正確的廢話」。\n5. 利害關係人分析必須誠實——不把任何人妖魔化，也不天真地假設所有人都是善意的。\n6. 情緒戰備不是選配是標配——長期高壓訴訟/談判對心理健康的傷害比大多數人想的嚴重 10 倍。\n7. 萬法歸宗測試：整套系統讀完，使用者的感覺應該是「混沌的局面突然清晰了，我知道下一步該做什麼了」——從「被命運推著走」變成「我在指揮自己的人生」。\n8. 安全底線：如果局面涉及家暴、人身安全威脅，必須最優先建議報警和保護措施，其他策略都排在人身安全之後。`
+  },
+
+  // ━━━ 📜 見習咒文 | 校園生存 | Free ━━━
+  {
+    id: "group_project_savior",
+    tab: "校園生存",
+    isPro: false,
+    tier: "apprentice",
+    school: "contract" as SchoolType,
+    subSchool: "attack" as SchoolType,
+    outputFormat: "分工協調訊息 + 追蹤話術",
+    icon: <Users className="w-8 h-8 text-gray-500" />,
+    color: "gray",
+    title: "組隊聖盾：分組報告求生術",
+    desc: "分組報告總有人擺爛？deadline 前一天才發現隊友什麼都沒做？這個咒語幫你在不撕破臉的前提下，把雷隊友變成能用的戰力。",
+    tags: ["分組報告", "校園合作", "雷隊友"],
+    fields: [
+      { id: "project", label: "報告主題", placeholder: "例：行銷學期末報告 / 程式設計專題" },
+      { id: "freeloader", label: "擺爛隊友", placeholder: "例：小明，總說『我來做』但什麼都沒交" },
+      { id: "deadline", label: "截止日期", placeholder: "例：下週三 / 3天後" },
+      { id: "your_role", label: "你在組裡的角色", placeholder: "例：組長 / 普通組員但最認真的那個" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "組隊策略",
+      options: [
+        "溫柔施壓型：用關心的語氣提醒進度，同時把責任釘死在對方身上",
+        "制度綁定型：建立共享文件和明確分工表，讓擺爛行為無所遁形",
+      ]
+    },
+    theory: "基於社會懈怠理論（Social Loafing）與責任分散效應：團體中個人的努力程度會隨人數增加而下降。對抗方法是讓每個人的貢獻「可辨識」且「被公開追蹤」。同時運用承諾一致性原則，讓隊友自己承諾具體的交付物和時間。",
+    generate: (inputs: any) => `你是一位大學團隊合作教練，自己也當過無數次組長，深知分組報告的痛。你的信條：「不是要你當壞人，是要你當聰明的組長。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n分組報告有隊友擺爛，我需要在不撕破臉的前提下推動進度。\n- 報告主題：[[${inputs.project}]]\n- 擺爛隊友：[[${inputs.freeloader}]]\n- 截止日期：[[${inputs.deadline}]]\n- 我的角色：[[${inputs.your_role}]]\n\n請輸出：\n① 【群組訊息】— 發到小組群的進度確認訊息，60 字以內，語氣友善但暗藏壓力\n② 【私訊話術】— 單獨傳給擺爛隊友的訊息，40 字以內，讓他不好意思繼續擺爛\n③ 【分工確認表】— 一份簡單的任務分配文字，格式清楚可直接貼群組\n④ 【最後通牒】— 如果 deadline 前 48 小時對方還是沒動作，溫柔但堅定的最後訊息，50 字以內\n⑤ 【自保話術】— 萬一報告爛掉，跟教授說明情況的一段話，80 字以內，不告狀但讓教授看見你的付出\n\n【規則】\n1. 所有訊息口語化，能直接貼到 LINE 群組。\n2. 嚴禁使用：「你到底做了沒」「你是不是要我幫你做」「我一個人扛」——這些是情緒勒索，會讓關係惡化。\n3. 群組訊息必須讓認真的隊友感到被肯定，同時讓擺爛的人感到壓力。\n4. 自保話術必須客觀陳述事實，不帶情緒，讓教授自己判斷。\n5. 同學測試：這些訊息發完，隊友的反應是「好，我馬上做」而不是「你好機車」。`
+  },
+
+  {
+    id: "professor_handler",
+    tab: "校園生存",
+    isPro: false,
+    tier: "apprentice",
+    school: "illusion" as SchoolType,
+    subSchool: "attack" as SchoolType,
+    outputFormat: "教授溝通郵件/話術",
+    icon: <BookOpen className="w-8 h-8 text-gray-500" />,
+    color: "gray",
+    title: "師徒外交：教授應對術",
+    desc: "教授出了不合理的作業、給分超嚴、課堂上被點名答不出來？這個咒語幫你用得體的方式跟教授溝通，爭取該有的權益又不會被記仇。",
+    tags: ["教授溝通", "校園生存", "學術話術"],
+    fields: [
+      { id: "professor_type", label: "教授類型", placeholder: "例：嚴格派 / 佛系派 / 情緒化型" },
+      { id: "issue", label: "遇到什麼問題", placeholder: "例：作業要求不合理 / 分數給太低 / 被當面刁難" },
+      { id: "goal", label: "你想達成什麼", placeholder: "例：延長繳交期限 / 調分 / 請教授說明評分標準" },
+      { id: "context", label: "溝通管道", placeholder: "例：寄 email / office hour 面談 / 課後找教授" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "外交策略",
+      options: [
+        "虛心求教型：以『想學更好』的姿態包裝你的訴求，讓教授覺得你是認真的學生",
+        "制度申訴型：引用學校規定或課程大綱，用制度語言讓訴求合理化",
+      ]
+    },
+    theory: "基於權力距離理論（Hofstede）與向上管理原則：師生關係中存在天然權力不對等，直接挑戰只會觸發防禦機制。關鍵是讓教授感覺你在『尋求指導』而非『質疑權威』，同時用具體事實和制度框架為你的訴求背書。",
+    generate: (inputs: any) => `你是一位大學生涯輔導師，處理過 200+ 件師生溝通案例。你的信條：「教授也是人，用對方法，鐵面也能融化。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我需要跟教授溝通一件敏感的事，要有禮貌但也要達成目標。\n- 教授類型：[[${inputs.professor_type}]]\n- 遇到的問題：[[${inputs.issue}]]\n- 想達成的目標：[[${inputs.goal}]]\n- 溝通管道：[[${inputs.context}]]\n\n請輸出：\n① 【開場白】— 見面或信件開頭的第一句話，30 字以內，展現尊重但不卑微\n② 【核心訴求】— 表達你的需求，80 字以內，用「學習動機」包裝實際訴求\n③ 【被拒絕的備案】— 如果教授說不，你的第二輪回應，50 字以內\n④ 【Email 範本】— 如果是寄信，一封完整但簡潔的 email，150 字以內\n⑤ 【地雷清單】— 跟這類教授溝通時絕對不能說的 3 句話\n\n【規則】\n1. Email 必須用正式但不僵硬的語氣，繁體中文，格式正確（稱謂、正文、結語）。\n2. 嚴禁使用：「這不公平」「其他教授都不會這樣」「同學都覺得...」——這些是在挑戰權威，100% 會被駁回。\n3. 核心訴求必須以「我想學得更好」為框架，不是「我覺得你不對」。\n4. 禮貌測試：教授讀完你的訊息/email，對你的印象是「這學生有想法且有禮貌」而非「這學生在找碴」。`
+  },
+
+  {
+    id: "exam_stress_shield",
+    tab: "校園生存",
+    isPro: false,
+    tier: "apprentice",
+    school: "healing" as SchoolType,
+    subSchool: "insight" as SchoolType,
+    outputFormat: "考前戰略 + 心理建設",
+    icon: <Shield className="w-8 h-8 text-gray-500" />,
+    color: "gray",
+    title: "考前結界：臨陣不亂術",
+    desc: "明天就要考試但什麼都不會？焦慮到讀不進去、腦袋一片空白？這個咒語不是教你讀書，而是幫你在有限時間內最大化你的分數，同時守住心理防線。",
+    tags: ["考試焦慮", "讀書策略", "心理建設"],
+    fields: [
+      { id: "exam", label: "什麼考試", placeholder: "例：微積分期中考 / 會計學期末 / 多益" },
+      { id: "time_left", label: "還剩多少時間", placeholder: "例：12 小時 / 3 天 / 明天早上" },
+      { id: "current_state", label: "目前準備狀態", placeholder: "例：完全沒讀 / 讀了一半但不懂 / 有讀但怕忘" },
+      { id: "anxiety_level", label: "焦慮程度", placeholder: "例：還好只是有點緊張 / 焦慮到吃不下 / 已經想放棄了" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "應考策略",
+      options: [
+        "效率極大化型：用 80/20 法則找出最可能考的重點，放棄完美主義集中火力",
+        "心理穩定型：先處理焦慮情緒再開始讀書，因為焦慮狀態下的學習效率趨近於零",
+      ]
+    },
+    theory: "基於 Yerkes-Dodson 定律（適度壓力提升表現但過度壓力崩盤）與間隔效應（Spacing Effect）：考前焦慮的核心問題不是「不夠努力」而是「認知負荷超載」。當焦慮占據工作記憶，能用於學習的認知資源大幅減少。本咒語先釋放認知空間，再用策略性時間分配最大化投入產出比。",
+    generate: (inputs: any) => `你同時是學習策略教練和考試心理輔導師，輔導過 500+ 位學生度過考前危機。你的信條：「考試不是測你會多少，是測你在壓力下能展現多少。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我快要考試了，需要一套務實的應考策略和心理建設。\n- 考試科目：[[${inputs.exam}]]\n- 剩餘時間：[[${inputs.time_left}]]\n- 目前準備狀態：[[${inputs.current_state}]]\n- 焦慮程度：[[${inputs.anxiety_level}]]\n\n請輸出：\n① 【情緒急救】— 現在立刻做一件事來降低焦慮，30 字以內，具體到秒\n② 【時間切割表】— 把剩餘時間切成幾個區塊，每個區塊做什麼，精確到分鐘\n③ 【重點狙擊清單】— 根據這科的出題邏輯，列出最值得花時間的 3-5 個主題\n④ 【考場心法】— 拿到考卷後的前 3 分鐘 SOP，讓你不會腦袋空白\n⑤ 【放棄清單】— 明確告訴你哪些東西這次可以放棄，把罪惡感拿掉\n⑥ 【考前咒語】— 走進考場前默念的一句話，15 字以內\n\n【規則】\n1. 時間切割表必須務實——如果只剩 12 小時，不能排出 20 小時的計畫。\n2. 嚴禁使用：「早知道就早點讀」「你應該更認真」「下次不要這樣了」——這些是廢話，只會加重罪惡感。\n3. 重點狙擊必須有邏輯——不是叫他「把課本讀完」，而是告訴他「先讀 ch3 和 ch7，因為每年必考」。\n4. 放棄清單很重要——告訴他哪些可以策略性放棄，比告訴他全部都要讀有用 100 倍。\n5. 焦慮測試：讀完這份策略，感覺是「好，我知道接下來該怎麼做了」而不是「天啊我更焦慮了」。`
+  },
+
+  {
+    id: "campus_social_survival",
+    tab: "校園生存",
+    isPro: false,
+    tier: "adept",
+    school: "insight" as SchoolType,
+    subSchool: "illusion" as SchoolType,
+    outputFormat: "校園社交策略分析",
+    icon: <Eye className="w-8 h-8 text-blue-500" />,
+    color: "blue",
+    title: "校園讀心：人際地圖術",
+    desc: "大學社交比高中複雜十倍——社團政治、宿舍八卦、系上小圈圈。誰是真朋友？誰在背後捅刀？這個咒語幫你看懂校園人際的隱藏規則，找到最適合你的社交策略。",
+    tags: ["校園社交", "人際關係", "社團政治"],
+    fields: [
+      { id: "situation", label: "你的社交困境", placeholder: "例：被小圈圈排擠 / 社團內鬥被夾在中間 / 不知道怎麼融入新環境" },
+      { id: "environment", label: "環境描述", placeholder: "例：大一剛入學 / 大三系學會 / 研究所實驗室" },
+      { id: "key_people", label: "關鍵人物", placeholder: "例：社團學長、隔壁班的風雲人物、實驗室學姊" },
+      { id: "your_goal", label: "你想要什麼", placeholder: "例：交到真心朋友 / 不被排擠就好 / 拿到社團幹部推薦" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "社交策略",
+      options: [
+        "低調觀察型：先搞清楚場上的權力結構和人際關係網，再決定怎麼出牌",
+        "主動建橋型：不等別人來找你，主動建立有價值的連結，用能力和真誠贏得位置",
+        "超然獨立型：不加入任何小圈圈，做一個每一邊都歡迎但不屬於任何一方的自由人",
+      ]
+    },
+    theory: "基於 Dunbar 社交網絡層級理論（150人法則）與 Granovetter 弱連結理論：校園社交的核心不是「認識很多人」而是「在對的圈子裡有對的位置」。強連結（好朋友）給你情感支持，弱連結（點頭之交）給你資訊和機會。本咒語幫你建立兼顧兩者的最優社交結構。",
+    generate: (inputs: any) => `你是一位校園社交生態觀察家，自己從邊緣人逆襲成社交達人，後來專門研究大學生社交動態 10 年。你的信條：「校園是最好的社交練功場——犯錯成本最低、學習價值最高。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我在校園裡遇到社交困境，需要一份人際地圖和行動策略。\n- 社交困境：[[${inputs.situation}]]\n- 環境描述：[[${inputs.environment}]]\n- 關鍵人物：[[${inputs.key_people}]]\n- 我想要的結果：[[${inputs.your_goal}]]\n\n請輸出：\n① 【人際地圖解讀】— 分析你所在環境的社交結構，誰是核心、誰是邊緣、誰是橋樑，100 字以內\n② 【你的定位建議】— 在這張人際地圖上，你最適合站在哪個位置，50 字以內\n③ 【本週行動清單】— 3 個這週可以執行的社交動作，每個 30 字以內\n④ 【破冰話術】— 跟關鍵人物開啟對話的 2 句開場白，每句 20 字以內\n⑤ 【避雷指南】— 這個環境裡 3 件絕對不能做的事，每件 20 字以內\n⑥ 【長期策略】— 一個學期的社交經營方向，80 字以內\n\n【規則】\n1. 所有建議必須務實，不能說「做自己就好」——做自己是結果不是方法。\n2. 嚴禁使用：「你不需要在意別人」「真正的朋友不會...」「不合群也沒關係」——這些是安慰不是策略。\n3. 行動清單必須是具體動作——不是「多跟人互動」而是「週三中午主動約 X 去學餐吃飯」。\n4. 必須考慮失敗場景——如果破冰失敗怎麼辦？如果被拒絕怎麼辦？\n5. 大學生測試：一個大二學生讀完這份策略，覺得是「學長姊在教我實戰技巧」而不是「老師在講大道理」。`
   },
 ];
 

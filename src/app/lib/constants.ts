@@ -1,8 +1,9 @@
-import { CURSES as _CURSES, TIER_CONFIG as _TIER_CONFIG, CAST_LEVELS as _CAST_LEVELS, getSpellCode as _getSpellCode } from "../curses_data";
+import { CURSES as _CURSES, TIER_CONFIG as _TIER_CONFIG, CAST_LEVELS as _CAST_LEVELS, getSpellCode as _getSpellCode, SCHOOL_CONFIG as _SCHOOL_CONFIG } from "../curses_data";
 export const CURSES = _CURSES;
 export const TIER_CONFIG = _TIER_CONFIG;
 export const CAST_LEVELS = _CAST_LEVELS;
 export const getSpellCode = _getSpellCode;
+export const SCHOOL_CONFIG = _SCHOOL_CONFIG;
 
 export const TABS = ["職場求生", "校園生存", "人際擋箭", "日常雜症", "創業/斜槓"];
 
