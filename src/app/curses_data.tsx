@@ -1,5 +1,5 @@
 import {
-  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint
+  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell
 } from "lucide-react";
 import React from "react";
 
@@ -1927,6 +1927,86 @@ export const CURSES = [
     ],
     theory: "基於擬人化(Anthropomorphism)與社群分享心理：把毛孩擬人化、用第一人稱『代牠說話』，會大幅提升貼文的情感連結與互動率，因為讀者感覺到的是一個有個性的小傢伙在對他說話，而不是一張普通照片配說明。再結合『可愛侵略性』(cute aggression) 觸發的分享衝動，讓貼文更容易被按愛心、被 tag、被轉發。",
     generate: (inputs: any) => `你是一位專門幫毛孩經營社群的寫手，最會抓住每隻寵物的個性，用牠的口吻寫出讓人忍不住按愛心、tag 朋友的貼文。你的信條：「毛孩不會打字，但牠的個性值得被好好說出來。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我拍到毛孩的可愛瞬間想發文，請用牠的第一人稱幫我寫貼文。\n- 毛孩資訊：[[${inputs.pet}]]\n- 想記錄的瞬間：[[${inputs.moment}]]\n- 想發的平台：[[${inputs.platform}]]\n\n請輸出：\n① 【三個版本貼文】— 短版（限動一句話）、中版（IG／FB 貼文）、長版（有故事感的小短文），全部用毛孩第一人稱口吻，依我選的平台微調語氣\n② 【互動引導句】— 結尾一句引導粉絲留言或按愛心的話，15 字以內\n③ 【主題標籤】— 5 到 8 個適合的中英文 hashtag，混搭大標籤與毛孩專屬標籤\n\n【規則】\n1. 全程用毛孩的第一人稱（例：本喵、本汪、馬麻把拔），三個版本都要能直接複製貼上。\n2. 嚴禁罐頭文：「今天也是可愛的一天」「療癒」「萌翻」「日常」這類千篇一律、誰都能套的句子一律不准用。\n3. 運用擬人化：賦予毛孩語氣、小心機和情緒，讓人覺得牠真的在跟你說話、在吐槽或撒嬌。\n4. 語氣依風格走（萌系撒嬌或厭世吐槽）——口語、有畫面、有個性，不要書面腔。\n5. 分享測試：朋友看到這篇會想 tag 同樣養寵物的人，而不是無感滑過去。`
+  },
+
+  // ━━━ 📜 中階咒文 | 校園生存 | Free ━━━
+  {
+    id: "stage_report_craft",
+    tab: "校園生存",
+    isPro: false,
+    tier: "adept",
+    school: "insight" as SchoolType,
+    subSchool: "illusion" as SchoolType,
+    outputFormat: "報告講稿 + 投影片要點",
+    icon: <Presentation className="w-8 h-8 text-gray-500" />,
+    color: "gray",
+    title: "講台煉金：上台報告術",
+    desc: "明天要上台報告，投影片做完了卻不知道嘴巴要講什麼？怕緊張到結巴、怕超時、怕被問倒？這咒語把你手上的內容變成一份口語講稿——開場鉤子、分段骨架、逐字關鍵句、投影片要點到 Q&A 防身全給齊，照著練就能穩穩講完。",
+    tags: ["上台報告", "簡報", "口語表達"],
+    fields: [
+      { id: "topic", label: "報告主題與科目", placeholder: "例：行銷學期末報告，講一個品牌的社群策略" },
+      { id: "duration", label: "報告時間長度", placeholder: "例：10 分鐘 / 5 分鐘 / 一個人 3 分鐘" },
+      { id: "material", label: "你手上已有的內容／重點", placeholder: "例：投影片 12 頁，重點是三個案例和一個結論" },
+      { id: "worry", label: "你最擔心的環節", placeholder: "例：開場不知道怎麼起頭 / 會超時 / 被教授問問題" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "報告策略",
+      options: [
+        "穩紮穩打型：結構清晰、邏輯分明，讓教授覺得你準備充分、條理清楚",
+        "故事吸睛型：用故事或提問開場，抓住全班注意力，讓報告不無聊好記",
+        "救急速成型：時間不多時用最少準備生出能上台的講稿，先求穩穩過關",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '簡報教練＋口語表達師' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依時間長度分配段落' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '開場+骨架+講稿+投影片+QA' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '禁照稿唸的書面語' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '不灌水、控時不超時' },
+    ],
+    theory: "基於金字塔原理（Pyramid Principle, Barbara Minto）與峰終定律（Peak-End Rule）：聽眾的注意力有限，記得住的只有少數重點。金字塔原理要求『先講結論、再講支撐』，讓每一段都先讓人知道重點是什麼，降低聽眾的認知負荷；峰終定律則指出，人對一段體驗的記憶取決於最高峰與結尾，所以一個有力的開場鉤子和收尾，會決定教授對你整場報告的印象。本咒語把你零散的投影片內容，重組成『有結論、有節奏、有記憶點』的口語講稿。",
+    generate: (inputs: any) => `你是一位簡報教練兼口語表達訓練師，帶過上百位學生與上班族從『怕上台』到『講得讓人記住』。你最擅長把一堆零散的投影片內容，變成一份能直接照著練、講出來像在跟人說話的講稿。你的信條：「報告不是把字唸完，是讓台下記得住你想講的那一件事。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我要上台報告，投影片有了但不知道嘴巴怎麼講，請幫我生出一份口語講稿。\n- 報告主題與科目：[[${inputs.topic}]]\n- 報告時間長度：[[${inputs.duration}]]\n- 我手上已有的內容／重點：[[${inputs.material}]]\n- 我最擔心的環節：[[${inputs.worry}]]\n\n請輸出：\n① 【開場 30 秒】— 一個能立刻抓住注意力的開場（故事、提問或反差數據），60 字以內，照著講就好\n② 【報告骨架】— 依我的時間長度切成幾大段，每段一句核心訊息＋分配幾分鐘，總和不超過指定時間\n③ 【逐字關鍵句】— 每段開頭與段落轉場的關鍵句，講出來像在說話、不是唸論文\n④ 【投影片要點】— 每頁一個標題＋最多 3 個重點，提醒我哪頁字太多該砍\n⑤ 【Q&A 防身】— 教授或同學最可能問的 3 個問題＋簡短的回答方向\n⑥ 【上台前心法】— 一個抗緊張的具體動作＋走上台前默念的一句話，15 字以內\n\n【規則】\n1. 講稿要口語、能唸出來像在跟人說話，可直接照著練，不是書面報告腔。\n2. 嚴禁出現：「報告完畢謝謝大家」「接下來我要講的是」「呃…那個…」這類空話贅詞，也不准叫我把投影片塞滿字。\n3. 運用金字塔原理：每段先講結論再講支撐；用峰終定律設計強開場與強結尾，讓人記得住重點。\n4. 語氣自信但不背稿感，依我選的策略走（穩紮／故事／救急）。\n5. 計時測試：照這份練一次，時間要落在指定長度內、且結尾讓台下記得住我的重點，而不是超時被打斷或講完沒人記得。`
+  },
+
+  // ━━━ 📜 中階咒文 | 生活娛樂 | Free ━━━
+  {
+    id: "home_workout_forge",
+    tab: "生活娛樂",
+    isPro: false,
+    tier: "adept",
+    school: "healing" as SchoolType,
+    subSchool: "insight" as SchoolType,
+    outputFormat: "個人化健身菜單",
+    icon: <Dumbbell className="w-8 h-8 text-gray-500" />,
+    color: "gray",
+    title: "居家煉體：健身菜單術",
+    desc: "想運動卻不知從何下手？網路課表不是器材對不上就是強度太狂？這咒語當你的 AI 私人教練，依你的目標、手邊器材、能練的時間和身體狀況，排出一週課表＋每個動作的組數次數，連怎麼漸進加量都給你，照著做就行。",
+    tags: ["健身", "運動課表", "居家訓練"],
+    fields: [
+      { id: "goal", label: "健身目標", placeholder: "例：減脂 / 增肌 / 練線條 / 改善體態久坐腰痠" },
+      { id: "equipment", label: "可用器材與場地", placeholder: "例：家裡只有一對啞鈴和瑜伽墊 / 有健身房 / 完全徒手" },
+      { id: "schedule", label: "每週能練幾天、每次多久", placeholder: "例：一週 3 天、每次 30 分鐘 / 假日才有空" },
+      { id: "body", label: "身體狀況與限制", placeholder: "例：新手沒運動過 / 膝蓋舊傷不能深蹲 / 體重 80kg" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "訓練取向",
+      options: [
+        "高效燃脂型：用複合動作搭短休息把心率拉高，時間少也能有效燃脂",
+        "增肌雕塑型：聚焦目標肌群與漸進加量，練出力量與線條",
+        "新手友善型：從零開始、動作簡單，先把習慣建立起來、優先不受傷",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '私人教練＋運動生理' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依器材與天數排課' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '週課表+菜單+漸進+提醒' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '動作具體到組數秒數' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '傷病不適先就醫' },
+    ],
+    theory: "基於漸進超負荷（Progressive Overload）與執行意圖（Implementation Intentions, Gollwitzer）：身體只有在被『比上次稍微多一點』的負荷刺激時才會進步，所以一份好的課表必須內建『下週怎麼加量』，而不是每週原地踏步。但比課表更難的是『持續做』——研究顯示，把運動用『在 X 情境就做 Y』的具體計畫綁進固定時間（如『下班到家先換衣服就開始』），執行率會大幅提高。本咒語同時給你進步的路徑與不放棄的觸發機制。",
+    generate: (inputs: any) => `你是一位有實戰經驗的私人教練，懂運動生理也帶過很多新手，最擅長依每個人手邊的器材、時間和身體狀況，排出『做得到又看得到效果』的課表。你不會丟一份網紅同款狂操菜單，而是量身打造。你的信條：「最好的課表不是最狂的，是你會持續做下去的那一份。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我想開始運動，請依我的條件幫我排一份能直接照做的健身菜單。\n- 健身目標：[[${inputs.goal}]]\n- 可用器材與場地：[[${inputs.equipment}]]\n- 每週能練幾天、每次多久：[[${inputs.schedule}]]\n- 身體狀況與限制：[[${inputs.body}]]\n\n請輸出：\n① 【一週課表】— 哪幾天練、各練什麼部位、哪天休息，一眼看懂，符合我能練的天數\n② 【單次訓練菜單】— 每個動作的組數×次數＋組間休息秒數，照著做就好，符合我有的器材\n③ 【動作要點與替代】— 每個動作一句正確做法提醒，並給一個沒器材或受限時的替代動作\n④ 【漸進計畫】— 下週或下個月怎麼加量避免卡關，30 字以內\n⑤ 【吃的小建議】— 配合目標的 3 個能做到的飲食原則，不要叫我算複雜熱量\n⑥ 【安全提醒】— 哪些狀況該停下或先看醫生，結尾再給我一句鼓勵，30 字以內\n\n【規則】\n1. 課表與菜單要具體到能直接照做（幾組幾下休息幾秒），且符合我列的器材與時間，不要排出我做不到的份量。\n2. 嚴禁拿「視個人情況調整」「請諮詢專業教練後再做」當主要內容打發我，也不准用「燃脂」「爆汗」這類空泛形容詞充數。\n3. 運用漸進超負荷說明這週強度與下週怎麼進步；用執行意圖把運動綁進固定時間情境（如「下班到家先換衣服就開始」）。\n4. 語氣像會帶人的教練——明確、給得出數字、會鼓勵但不灌雞湯。\n5. 安全測試：這份菜單對我的狀況要安全可執行；若我有提到傷病或身體不適，必須在最前面提醒我先就醫評估、並給出保守版本（本菜單僅供參考，不取代專業醫療或教練評估）。`
   },
 ];
 
