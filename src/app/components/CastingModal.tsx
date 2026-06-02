@@ -12,6 +12,7 @@ import {
 } from "../lib/constants";
 import TerminalPrompt from "./shared/TerminalPrompt";
 import SpellModules from "./SpellModules";
+import CastRitualAnime from "./CastRitualAnime";
 
 export default function CastingModal() {
   const {
@@ -688,62 +689,7 @@ export default function CastingModal() {
             {/* Halftone dot pattern bg */}
             <div className="absolute inset-0 halftone-bg pointer-events-none" style={{ opacity: 0.1 }} />
 
-            {/* ── 魔法陣施法儀式 ── */}
-            <div style={{ position: 'relative', width: 260, height: 260, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-
-              {/* 外環符文（順時針旋轉） */}
-              <motion.svg width="260" height="260" viewBox="0 0 100 100" style={{ position: 'absolute' }}
-                animate={{ rotate: 360 }} transition={{ duration: 9, repeat: Infinity, ease: 'linear' }}>
-                <circle cx="50" cy="50" r="47" fill="none" stroke="#E8A838" strokeWidth="0.7" opacity="0.85" />
-                <circle cx="50" cy="50" r="41.5" fill="none" stroke="#E8A838" strokeWidth="0.4" strokeDasharray="1 3" opacity="0.55" />
-                {Array.from({ length: 12 }).map((_, i) => (
-                  <rect key={i} x="49.3" y="2.2" width="1.4" height="5" fill="#E8A838" opacity="0.85" transform={`rotate(${i * 30} 50 50)`} />
-                ))}
-              </motion.svg>
-
-              {/* 中環（逆時針，青綠虛線＋六芒星） */}
-              <motion.svg width="196" height="196" viewBox="0 0 100 100" style={{ position: 'absolute' }}
-                animate={{ rotate: -360 }} transition={{ duration: 7, repeat: Infinity, ease: 'linear' }}>
-                <circle cx="50" cy="50" r="46" fill="none" stroke="#1A5C5A" strokeWidth="1" strokeDasharray="6 5" opacity="0.7" />
-                <polygon points="50,9 85.5,70.5 14.5,70.5" fill="none" stroke="#1A5C5A" strokeWidth="0.6" opacity="0.5" />
-                <polygon points="50,91 14.5,29.5 85.5,29.5" fill="none" stroke="#1A5C5A" strokeWidth="0.6" opacity="0.5" />
-              </motion.svg>
-
-              {/* 進度環（暗紅，1.6 秒填滿） */}
-              <svg width="150" height="150" viewBox="0 0 100 100" style={{ position: 'absolute', transform: 'rotate(-90deg)' }}>
-                <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(244,238,216,0.1)" strokeWidth="3" />
-                <motion.circle cx="50" cy="50" r="45" fill="none" stroke="#8B2626" strokeWidth="3" strokeLinecap="round"
-                  initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.6, ease: 'easeInOut' }} />
-              </svg>
-
-              {/* 放射火花 */}
-              {Array.from({ length: 10 }).map((_, i) => (
-                <motion.span key={i}
-                  style={{ position: 'absolute', width: 5, height: 5, borderRadius: '50%', background: '#E8A838' }}
-                  animate={{ x: Math.cos((i / 10) * Math.PI * 2) * 132, y: Math.sin((i / 10) * Math.PI * 2) * 132, opacity: [0, 1, 0], scale: [0, 1.2, 0] }}
-                  transition={{ duration: 1.4, repeat: Infinity, delay: i * 0.13, ease: 'easeOut' }} />
-              ))}
-
-              {/* 中央咒語圖示（脈動發光） */}
-              <motion.div
-                animate={{ scale: [1, 1.12, 1], filter: ['drop-shadow(0 0 6px rgba(232,168,56,0.7))', 'drop-shadow(0 0 24px rgba(232,168,56,0.95))', 'drop-shadow(0 0 6px rgba(232,168,56,0.7))'] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-                style={{ position: 'relative', zIndex: 2, color: '#E8A838', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <div style={{ transform: 'scale(2.2)', display: 'flex' }}>{selectedCurse?.icon || <Sparkles className="w-8 h-8" />}</div>
-              </motion.div>
-            </div>
-
-            {/* 詠唱文字 */}
-            <motion.p
-              className="text-2xl font-black mt-9 mb-2 tracking-[0.35em]"
-              style={{ fontFamily: 'var(--font-noto-serif-tc)', color: '#E8A838', fontWeight: 900 }}
-              animate={{ opacity: [0.45, 1, 0.45] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}>
-              詠唱中
-            </motion.p>
-            <p className="text-[10px] tracking-[0.3em] uppercase"
-              style={{ fontFamily: 'var(--font-chivo)', color: 'rgba(244,238,216,0.4)' }}>
-              SUMMONING THE SPELL
-            </p>
+            <CastRitualAnime icon={selectedCurse?.icon} />
           </motion.div>
         )}
       </AnimatePresence>
