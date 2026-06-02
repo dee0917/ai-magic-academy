@@ -5,7 +5,6 @@ import { useAcademy } from "../context/AcademyContext";
 
 export default function NavBar() {
   const {
-    mp,
     collectedCards, setShowSpellBook, setShowFusion,
   } = useAcademy();
 
@@ -24,22 +23,14 @@ export default function NavBar() {
 
           {/* Right side: MP + Collection + Login */}
           <div className="flex items-center gap-3">
-            {/* MP Display — visual bar */}
-            <div className="flex items-center gap-1.5">
-              <span className="text-xs" style={{ color: 'var(--teal)' }}>⚡</span>
-              <div className="relative w-20 h-4" style={{ border: '2px solid var(--ink)', background: 'rgba(0,0,0,0.05)' }}>
-                <div
-                  className="absolute top-0 left-0 h-full transition-all duration-500"
-                  style={{
-                    width: `${Math.min(100, (mp / 30) * 100)}%`,
-                    background: mp > 10 ? 'var(--teal)' : mp > 3 ? 'var(--mustard)' : 'var(--dark-red)',
-                  }}
-                />
-                <span className="absolute inset-0 flex items-center justify-center text-[9px] font-black"
-                  style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', mixBlendMode: 'multiply' }}>
-                  {mp} MP
-                </span>
-              </div>
+            {/* Beta unlimited indicator */}
+            <div className="flex items-center gap-1 px-2 py-1"
+              style={{ border: '2px solid var(--ink)', boxShadow: '2px 2px 0 var(--ink)', background: 'var(--teal)' }}>
+              <span className="text-[10px]" style={{ color: 'var(--mustard)' }}>⚡</span>
+              <span className="text-[10px] font-black tracking-wider"
+                style={{ fontFamily: 'var(--font-chivo)', color: 'var(--parchment)' }}>
+                BETA · 魔力無限
+              </span>
             </div>
 
             {/* Magic Book button */}

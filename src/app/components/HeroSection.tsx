@@ -18,7 +18,7 @@ export default function HeroSection() {
         <div className="max-w-5xl mx-auto px-6 md:px-8">
 
           {/* Top meta info bar */}
-          <div className="flex justify-between text-[10px] tracking-[0.25em] uppercase font-bold pt-12 md:pt-16 pb-3 mb-8"
+          <div className="flex justify-between text-[10px] tracking-[0.25em] uppercase font-bold pt-8 md:pt-10 pb-3 mb-6"
             style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.4, borderBottom: '1.5px solid var(--ink)' }}>
             <span>VOL. I — 現代魔法法典</span>
             <span>EST. 2026</span>
@@ -27,7 +27,7 @@ export default function HeroSection() {
           {/* Main title — Classic Ticket */}
           <div className="text-center">
             {/* Line 1: 麻瓜專用 with red decorative bars */}
-            <div className="flex items-center justify-center gap-5 md:gap-8 mb-8">
+            <div className="flex items-center justify-center gap-5 md:gap-8 mb-5">
               <div style={{ height: '2px', width: '56px', background: 'var(--dark-red)' }} />
               <h1
                 className="text-[2.5rem] sm:text-5xl md:text-6xl tracking-[0.25em]"
@@ -49,7 +49,7 @@ export default function HeroSection() {
             </div>
 
             {/* Tagline */}
-            <p className="mt-8 mb-0 text-base md:text-lg tracking-wider"
+            <p className="mt-6 mb-0 text-base md:text-lg tracking-wider"
               style={{ fontFamily: 'var(--font-noto-serif-tc)', color: 'var(--ink)', opacity: 0.7, fontWeight: 700, fontStyle: 'italic' }}>
               「別人花 3 小時學 AI，你只需要一鍵施法。」<br />
               <span className="text-xs md:text-sm tracking-[0.2em] not-italic"
@@ -63,11 +63,11 @@ export default function HeroSection() {
       </header>
 
       {/* ── §03 FREE TRIAL SECTION ── */}
-      <section className="w-full max-w-4xl mx-auto px-4 pt-6 pb-24 relative z-10">
-        <div className="text-center mb-12">
+      <section className="w-full max-w-4xl mx-auto px-4 pt-4 pb-12 relative z-10">
+        <div className="text-center mb-8">
           <div style={{ border: '4px solid var(--ink)', boxShadow: 'var(--shadow)', background: 'var(--teal)', display: 'inline-block', padding: '6px 20px', marginBottom: '12px' }}>
             <span className="font-black text-xs uppercase tracking-[0.3em]" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--parchment)' }}>
-              免費試咒 · 無需登入
+              BETA 內測・受邀貴賓限定
             </span>
           </div>
           <h2
@@ -76,6 +76,10 @@ export default function HeroSection() {
           >
             先施放一道，再決定要不要留下
           </h2>
+          <p className="text-sm md:text-base mt-3 max-w-xl mx-auto leading-relaxed"
+            style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.75 }}>
+            內測期間，全站咒語<span style={{ color: 'var(--dark-red)', fontWeight: 900 }}>無限免費施放</span>、不限次數。你是受邀搶先體驗的貴賓。
+          </p>
         </div>
 
         {/* Trial selector buttons */}
@@ -141,7 +145,7 @@ export default function HeroSection() {
           </div>
         </motion.div>
 
-        <div className="mt-8 text-center">
+        <div className="mt-6 text-center">
           <button
             onClick={() => document.getElementById('職場求生')?.scrollIntoView({ behavior: 'smooth' })}
             className="text-sm font-black flex items-center justify-center gap-2 mx-auto transition-all hover:gap-4"

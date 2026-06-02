@@ -1,4 +1,4 @@
-const CACHE_NAME = "ai-magic-v3"; // Increment version
+const CACHE_NAME = "ai-magic-v4"; // Increment version
 
 self.addEventListener("install", (event) => {
   self.skipWaiting();

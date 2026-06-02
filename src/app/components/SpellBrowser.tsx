@@ -18,7 +18,7 @@ export default function SpellBrowser() {
   return (
     <>
       {/* ── §05 SEARCH + TAB NAV ── */}
-      <div className="w-full max-w-5xl mx-auto px-4 pt-8 mb-8 relative z-10">
+      <div className="w-full max-w-5xl mx-auto px-4 pt-6 mb-6 relative z-10">
         {/* Search bar */}
         <div className="max-w-xl mx-auto mb-6">
           <div className="relative flex items-center" style={{ border: '3px solid var(--ink)', background: '#FEFAF0', boxShadow: '4px 4px 0px var(--ink)' }}>
@@ -115,14 +115,14 @@ export default function SpellBrowser() {
       </div>
 
       {/* ── MAIN LIBRARY ── */}
-      <main className="w-full max-w-7xl mx-auto relative z-10 pb-24 px-0">
+      <main className="w-full max-w-7xl mx-auto relative z-10 pb-12 px-0">
         {TABS.map(tab => {
           const tabCurses = groupedCurses[tab];
           if (searchQuery && tabCurses.length === 0) return null;
           if (activeSchool !== "all" && tabCurses.length === 0) return null;
 
           return (
-            <section key={tab} id={tab} className="mb-12 md:mb-16 last:mb-0 scroll-mt-32">
+            <section key={tab} id={tab} className="mb-8 md:mb-10 last:mb-0 scroll-mt-32">
               {/* Section header */}
               <div className="flex items-center gap-0 px-4 mb-6">
                 <div
@@ -151,7 +151,7 @@ export default function SpellBrowser() {
               <div className="relative">
                 <div className="absolute right-0 top-0 bottom-0 w-16 pointer-events-none z-20" style={{ background: 'linear-gradient(to left, var(--parchment), transparent)' }} />
 
-                <div className="flex overflow-x-auto gap-5 px-4 pb-8 no-scrollbar snap-x snap-mandatory scroll-smooth tab-scroll-container">
+                <div className="flex overflow-x-auto gap-5 px-4 pb-6 no-scrollbar snap-x snap-mandatory scroll-smooth tab-scroll-container">
                   {(expandedTabs[tab] || searchQuery || activeSchool !== "all" ? tabCurses : tabCurses.slice(0, 3)).map((curse: any, idx: number) => {
                     const tabColor = getTabColor(curse.tab);
                     const schoolInfo = curse.school && SCHOOL_CONFIG[curse.school as SchoolType] ? SCHOOL_CONFIG[curse.school as SchoolType] : null;

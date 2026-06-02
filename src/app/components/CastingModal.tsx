@@ -119,15 +119,14 @@ export default function CastingModal() {
                       <div className="mb-5">
                         <label className="block text-[10px] font-black uppercase tracking-[0.15em] mb-2"
                           style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)' }}>
-                          魔力消耗 MP COST
+                          詠唱強度 CHANT LEVEL
                         </label>
                         <div className="flex gap-0" style={{ border: '3px solid var(--ink)' }}>
                           {CAST_LEVELS.map((cl, i) => {
-                            const cost = getMpCost(selectedCurse, cl.id);
                             return (
                             <button key={cl.id} type="button"
                               onClick={() => setCastLevel(cl.id as any)}
-                              className="flex-1 px-2 py-2 text-[10px] font-black"
+                              className="flex-1 px-2 py-2 text-[11px] font-black"
                               style={{
                                 fontFamily: 'var(--font-chivo)',
                                 background: castLevel === cl.id ? 'var(--mustard)' : 'transparent',
@@ -135,13 +134,12 @@ export default function CastingModal() {
                                 borderLeft: i > 0 ? '3px solid var(--ink)' : 'none',
                               }}>
                               {cl.label}
-                              <span className="block text-[9px] opacity-60">{cost} MP</span>
                             </button>
                           )})}
                         </div>
                         <div className="flex items-center justify-between mt-2">
                           <span className="text-[10px] font-bold" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.5 }}>
-                            目前魔力：{mp} MP
+                            BETA 內測・魔力無限
                           </span>
                           {castLevel === 'full' && (
                             <span className="text-[9px] font-black px-2 py-0.5" style={{ background: 'var(--teal)', color: 'var(--parchment)', fontFamily: 'var(--font-chivo)' }}>
@@ -348,7 +346,6 @@ export default function CastingModal() {
                       </label>
                       <div className="flex gap-0" style={{ border: '3px solid var(--ink)' }}>
                         {CAST_LEVELS.map((cl, i) => {
-                          const cost = getMpCost(selectedCurse, cl.id);
                           return (
                           <button key={cl.id} type="button"
                             onClick={() => setCastLevel(cl.id as any)}
@@ -359,7 +356,7 @@ export default function CastingModal() {
                               color: 'var(--ink)',
                               borderLeft: i > 0 ? '3px solid var(--ink)' : 'none',
                             }}>
-                            {cl.label} <span className="opacity-60">({cost}MP)</span>
+                            {cl.label}
                           </button>
                         )})}
                       </div>
