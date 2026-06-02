@@ -23,12 +23,10 @@ export default function SpellModules({ modules, totalFields, defaultExpanded = f
 
   if (!modules || modules.length === 0) return null;
 
-  // Cast level comparison: approximate module count per level
-  // Quick uses ~40% of fields -> maps to fewer modules
-  // Standard uses ~70% -> most modules
-  // Full uses 100% -> all modules
-  const quickModules = Math.max(2, Math.ceil(modules.length * 0.5));
-  const fullModules = modules.length;
+  // Cast level controls how many input fields you fill (the rest auto-filled by AI)
+  const quickFields = getFieldsForCastLevel(totalFields, 'quick');
+  const stdFields = getFieldsForCastLevel(totalFields, 'standard');
+  const fullFields = getFieldsForCastLevel(totalFields, 'full');
 
   return (
     <div style={{ border: '3px solid var(--ink)', marginBottom: 16 }}>
@@ -139,8 +137,7 @@ export default function SpellModules({ modules, totalFields, defaultExpanded = f
                 opacity: 0.7,
               }}
             >
-              {'\u{26A1}'} 速詠使用 {quickModules} 個模組，全力詠唱使用 {fullModules} 個模組
-              {' -- '}詠唱等級越高，Prompt 結構越完整
+              {'\u{26A1}'} 本咒由 {modules.length} 個 Prompt 模組構成。速詠填 {quickFields} 格、標準 {stdFields} 格、全力 {fullFields} 格，其餘由 AI 自動補全，填越多越貼合你的情況。
             </p>
           </div>
         </div>
@@ -153,11 +150,12 @@ export default function SpellModules({ modules, totalFields, defaultExpanded = f
  * Static version for server components (spell detail page).
  * No expand/collapse, shows all modules with explanations.
  */
-export function SpellModulesStatic({ modules }: { modules: SpellModule[] }) {
+export function SpellModulesStatic({ modules, totalFields = 0 }: { modules: SpellModule[]; totalFields?: number }) {
   if (!modules || modules.length === 0) return null;
 
-  const quickModules = Math.max(2, Math.ceil(modules.length * 0.5));
-  const fullModules = modules.length;
+  const quickFields = getFieldsForCastLevel(totalFields, 'quick');
+  const stdFields = getFieldsForCastLevel(totalFields, 'standard');
+  const fullFields = getFieldsForCastLevel(totalFields, 'full');
 
   return (
     <div
@@ -278,8 +276,7 @@ export function SpellModulesStatic({ modules }: { modules: SpellModule[] }) {
               opacity: 0.7,
             }}
           >
-            {'\u{26A1}'} 速詠使用 {quickModules} 個模組，全力詠唱使用 {fullModules} 個模組
-            {' -- '}詠唱等級越高，Prompt 結構越完整
+            {'\u{26A1}'} 本咒由 {modules.length} 個 Prompt 模組構成。速詠填 {quickFields} 格、標準 {stdFields} 格、全力 {fullFields} 格，其餘由 AI 自動補全，填越多越貼合你的情況。
           </p>
         </div>
       </div>

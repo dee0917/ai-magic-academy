@@ -235,7 +235,7 @@ export default async function SpellPage({ params }: SpellPageProps) {
 
           {/* Spell Modules - prompt structure analysis */}
           {(spell as any).modules && (spell as any).modules.length > 0 && (
-            <SpellModulesStatic modules={(spell as any).modules} />
+            <SpellModulesStatic modules={(spell as any).modules} totalFields={(spell as any).fields?.length || 0} />
           )}
 
           {/* CTA Button */}
