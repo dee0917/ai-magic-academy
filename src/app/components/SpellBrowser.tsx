@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { motion } from "framer-motion";
 import { Sparkles, X, Search, ArrowRight, RefreshCw } from "lucide-react";
 import { useAcademy } from "../context/AcademyContext";
 import { TABS, TIER_CONFIG, getSpellCode, getTabColor, scrollToTab, CURSES, SCHOOL_CONFIG } from "../lib/constants";
@@ -157,8 +158,11 @@ export default function SpellBrowser() {
                     const schoolInfo = curse.school && SCHOOL_CONFIG[curse.school as SchoolType] ? SCHOOL_CONFIG[curse.school as SchoolType] : null;
                     const subSchoolInfo = (curse as any).subSchool && SCHOOL_CONFIG[(curse as any).subSchool as SchoolType] ? SCHOOL_CONFIG[(curse as any).subSchool as SchoolType] : null;
                     return (
-                    <div
-                      key={curse.id}
+                    <motion.div
+                      key={`${curse.id}__${activeSchool}`}
+                      initial={{ opacity: 0, y: 14 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.34, delay: Math.min(idx * 0.045, 0.45), ease: [0.22, 1, 0.36, 1] }}
                       onPointerDown={(e) => { (e.currentTarget as any)._startX = e.clientX; (e.currentTarget as any)._startY = e.clientY; (e.currentTarget as any)._startT = Date.now(); }}
                       onPointerUp={(e) => {
                         const dx = Math.abs(e.clientX - ((e.currentTarget as any)._startX || 0));
@@ -285,7 +289,7 @@ export default function SpellBrowser() {
                           詠唱 <ArrowRight className="w-3 h-3" />
                         </span>
                       </div>
-                    </div>
+                    </motion.div>
                     );
                   })}
 

@@ -683,130 +683,66 @@ export default function CastingModal() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[400] flex flex-col items-center justify-center"
-            style={{ background: 'var(--parchment)' }}
+            style={{ background: 'rgba(26,23,19,0.97)' }}
           >
             {/* Halftone dot pattern bg */}
-            <div className="absolute inset-0 halftone-bg pointer-events-none" />
+            <div className="absolute inset-0 halftone-bg pointer-events-none" style={{ opacity: 0.1 }} />
 
-            {/* ── Cauldron + bubbles group ── */}
-            <div style={{ position: 'relative', width: 160, height: 200, display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}>
+            {/* ── 魔法陣施法儀式 ── */}
+            <div style={{ position: 'relative', width: 260, height: 260, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 
-              {/* Bubble 1 — large mustard, centre */}
+              {/* 外環符文（順時針旋轉） */}
+              <motion.svg width="260" height="260" viewBox="0 0 100 100" style={{ position: 'absolute' }}
+                animate={{ rotate: 360 }} transition={{ duration: 9, repeat: Infinity, ease: 'linear' }}>
+                <circle cx="50" cy="50" r="47" fill="none" stroke="#E8A838" strokeWidth="0.7" opacity="0.85" />
+                <circle cx="50" cy="50" r="41.5" fill="none" stroke="#E8A838" strokeWidth="0.4" strokeDasharray="1 3" opacity="0.55" />
+                {Array.from({ length: 12 }).map((_, i) => (
+                  <rect key={i} x="49.3" y="2.2" width="1.4" height="5" fill="#E8A838" opacity="0.85" transform={`rotate(${i * 30} 50 50)`} />
+                ))}
+              </motion.svg>
+
+              {/* 中環（逆時針，青綠虛線＋六芒星） */}
+              <motion.svg width="196" height="196" viewBox="0 0 100 100" style={{ position: 'absolute' }}
+                animate={{ rotate: -360 }} transition={{ duration: 7, repeat: Infinity, ease: 'linear' }}>
+                <circle cx="50" cy="50" r="46" fill="none" stroke="#1A5C5A" strokeWidth="1" strokeDasharray="6 5" opacity="0.7" />
+                <polygon points="50,9 85.5,70.5 14.5,70.5" fill="none" stroke="#1A5C5A" strokeWidth="0.6" opacity="0.5" />
+                <polygon points="50,91 14.5,29.5 85.5,29.5" fill="none" stroke="#1A5C5A" strokeWidth="0.6" opacity="0.5" />
+              </motion.svg>
+
+              {/* 進度環（暗紅，1.6 秒填滿） */}
+              <svg width="150" height="150" viewBox="0 0 100 100" style={{ position: 'absolute', transform: 'rotate(-90deg)' }}>
+                <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(244,238,216,0.1)" strokeWidth="3" />
+                <motion.circle cx="50" cy="50" r="45" fill="none" stroke="#8B2626" strokeWidth="3" strokeLinecap="round"
+                  initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.6, ease: 'easeInOut' }} />
+              </svg>
+
+              {/* 放射火花 */}
+              {Array.from({ length: 10 }).map((_, i) => (
+                <motion.span key={i}
+                  style={{ position: 'absolute', width: 5, height: 5, borderRadius: '50%', background: '#E8A838' }}
+                  animate={{ x: Math.cos((i / 10) * Math.PI * 2) * 132, y: Math.sin((i / 10) * Math.PI * 2) * 132, opacity: [0, 1, 0], scale: [0, 1.2, 0] }}
+                  transition={{ duration: 1.4, repeat: Infinity, delay: i * 0.13, ease: 'easeOut' }} />
+              ))}
+
+              {/* 中央咒語圖示（脈動發光） */}
               <motion.div
-                style={{ position: 'absolute', left: '44%', bottom: '76%', width: 20, height: 20, borderRadius: '50%', background: '#E8A838', border: '3px solid #1a1a1a', zIndex: 2 }}
-                animate={{ y: [0, -90], opacity: [1, 0], scale: [1, 0.3] }}
-                transition={{ duration: 1.3, repeat: Infinity, ease: 'easeOut', repeatDelay: 0.1 }}
-              />
-              {/* Bubble 2 — small dark, right */}
-              <motion.div
-                style={{ position: 'absolute', left: '62%', bottom: '80%', width: 12, height: 12, borderRadius: '50%', background: 'transparent', border: '3px solid #1a1a1a', zIndex: 2 }}
-                animate={{ y: [0, -70], opacity: [1, 0], scale: [1, 0.2] }}
-                transition={{ duration: 1.1, repeat: Infinity, ease: 'easeOut', delay: 0.4, repeatDelay: 0.2 }}
-              />
-              {/* Bubble 3 — medium dark, left */}
-              <motion.div
-                style={{ position: 'absolute', left: '28%', bottom: '82%', width: 15, height: 15, borderRadius: '50%', background: 'transparent', border: '3px solid #1a1a1a', zIndex: 2 }}
-                animate={{ y: [0, -80], opacity: [1, 0], scale: [1, 0.25] }}
-                transition={{ duration: 1.2, repeat: Infinity, ease: 'easeOut', delay: 0.7, repeatDelay: 0.15 }}
-              />
-
-              {/* Bobbing cauldron */}
-              <motion.div
-                animate={{ y: [0, -7, 0] }}
-                transition={{ duration: 0.85, repeat: Infinity, ease: 'easeInOut' }}
-                style={{ position: 'relative', zIndex: 1 }}
-              >
-                <svg width="150" height="140" viewBox="0 0 150 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  {/* === Wide flat rim === */}
-                  <rect x="15" y="46" width="120" height="14" fill="#2A2723" />
-                  {/* Left handle knob */}
-                  <rect x="4"  y="41" width="16" height="13" rx="2" fill="#2A2723" />
-                  {/* Right handle knob */}
-                  <rect x="130" y="41" width="16" height="13" rx="2" fill="#2A2723" />
-
-                  {/* === Liquid overflowing at rim === */}
-                  {/* Flat mustard liquid inside rim */}
-                  <rect x="17" y="48" width="116" height="11" fill="#E8A838" />
-                  {/* Liquid hump in centre */}
-                  <ellipse cx="75" cy="46" rx="22" ry="9" fill="#E8A838" />
-                  {/* Liquid shine */}
-                  <rect x="30" y="50" width="28" height="4" fill="#F4EED8" opacity="0.28" />
-
-                  {/* === Cauldron body === */}
-                  {/* Outer body (rounded bottom) */}
-                  <path d="M22 58 Q18 130 75 132 Q132 130 128 58 Z" fill="#232323" />
-                  {/* Body highlight band */}
-                  <path d="M30 58 Q27 110 75 112 Q123 110 120 58 Z" fill="#1a1a1a" />
-                  {/* Centre groove / indent */}
-                  <path d="M38 80 Q75 84 112 80 L114 92 Q75 97 36 92 Z" fill="#111111" />
-
-                  {/* === Feet / legs === */}
-                  <ellipse cx="52"  cy="131" rx="13" ry="9" fill="#1a1a1a" />
-                  <ellipse cx="98"  cy="131" rx="13" ry="9" fill="#1a1a1a" />
-                </svg>
-
-                {/* Fire glow beneath (pulsing via Framer) */}
-                <motion.div
-                  animate={{ opacity: [0.45, 0.85, 0.45], scaleX: [1, 1.25, 1] }}
-                  transition={{ duration: 0.75, repeat: Infinity, ease: 'easeInOut' }}
-                  style={{
-                    position: 'absolute',
-                    bottom: 2,
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    width: 90,
-                    height: 24,
-                    borderRadius: '50%',
-                    background: 'radial-gradient(ellipse, rgba(220,90,70,0.75) 0%, rgba(220,90,70,0) 70%)',
-                    filter: 'blur(6px)',
-                    pointerEvents: 'none',
-                  }}
-                />
+                animate={{ scale: [1, 1.12, 1], filter: ['drop-shadow(0 0 6px rgba(232,168,56,0.7))', 'drop-shadow(0 0 24px rgba(232,168,56,0.95))', 'drop-shadow(0 0 6px rgba(232,168,56,0.7))'] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                style={{ position: 'relative', zIndex: 2, color: '#E8A838', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ transform: 'scale(2.2)', display: 'flex' }}>{selectedCurse?.icon || <Sparkles className="w-8 h-8" />}</div>
               </motion.div>
             </div>
 
-            {/* Label */}
-            <p
-              className="text-2xl font-black mt-3 mb-6"
-              style={{ fontFamily: 'var(--font-noto-serif-tc)', color: 'var(--ink)', fontWeight: 900 }}
-            >
-              研磨草藥中...
-            </p>
-
-            {/* Progress bar — Framer animated width */}
-            <div
-              style={{
-                width: 240,
-                height: 24,
-                border: '3px solid var(--ink)',
-                boxShadow: '4px 4px 0px var(--ink)',
-                background: 'var(--parchment)',
-                overflow: 'hidden',
-                position: 'relative',
-              }}
-            >
-              <motion.div
-                initial={{ width: '0%' }}
-                animate={{ width: '100%' }}
-                transition={{ duration: 2, ease: 'linear' }}
-                style={{
-                  height: '100%',
-                  background: 'repeating-linear-gradient(45deg, #1A5C5A 0px, #1A5C5A 8px, #134A48 8px, #134A48 16px)',
-                }}
-              />
-            </div>
-
-            {/* Warning text */}
-            <p
-              className="mt-5 text-[11px] font-bold px-4 py-2"
-              style={{
-                fontFamily: 'var(--font-chivo)',
-                color: 'var(--dark-red)',
-                border: '2px solid var(--dark-red)',
-                background: 'rgba(139,38,38,0.04)',
-              }}
-            >
-              ▲ 施法期間請勿關閉視窗，以免造成法術逆火 ▲
+            {/* 詠唱文字 */}
+            <motion.p
+              className="text-2xl font-black mt-9 mb-2 tracking-[0.35em]"
+              style={{ fontFamily: 'var(--font-noto-serif-tc)', color: '#E8A838', fontWeight: 900 }}
+              animate={{ opacity: [0.45, 1, 0.45] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}>
+              詠唱中
+            </motion.p>
+            <p className="text-[10px] tracking-[0.3em] uppercase"
+              style={{ fontFamily: 'var(--font-chivo)', color: 'rgba(244,238,216,0.4)' }}>
+              SUMMONING THE SPELL
             </p>
           </motion.div>
         )}
