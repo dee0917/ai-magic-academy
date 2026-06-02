@@ -126,7 +126,7 @@ export default function SpellBrowser() {
             <motion.section key={tab} id={tab} className="mb-8 md:mb-10 last:mb-0 scroll-mt-32"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
+              viewport={{ once: false, margin: "-80px" }}
               transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}>
               {/* Section header */}
               <div className="flex items-center gap-0 px-4 mb-6">
