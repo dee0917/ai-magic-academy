@@ -123,7 +123,11 @@ export default function SpellBrowser() {
           if (activeSchool !== "all" && tabCurses.length === 0) return null;
 
           return (
-            <section key={tab} id={tab} className="mb-8 md:mb-10 last:mb-0 scroll-mt-32">
+            <motion.section key={tab} id={tab} className="mb-8 md:mb-10 last:mb-0 scroll-mt-32"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}>
               {/* Section header */}
               <div className="flex items-center gap-0 px-4 mb-6">
                 <div
@@ -159,10 +163,8 @@ export default function SpellBrowser() {
                     const subSchoolInfo = (curse as any).subSchool && SCHOOL_CONFIG[(curse as any).subSchool as SchoolType] ? SCHOOL_CONFIG[(curse as any).subSchool as SchoolType] : null;
                     return (
                     <motion.div
-                      key={`${curse.id}__${activeSchool}`}
-                      initial={{ opacity: 0, y: 14 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.34, delay: Math.min(idx * 0.045, 0.45), ease: [0.22, 1, 0.36, 1] }}
+                      key={curse.id}
+                      whileHover={{ scale: 1.04, transition: { type: "spring", stiffness: 320, damping: 18 } }}
                       onPointerDown={(e) => { (e.currentTarget as any)._startX = e.clientX; (e.currentTarget as any)._startY = e.clientY; (e.currentTarget as any)._startT = Date.now(); }}
                       onPointerUp={(e) => {
                         const dx = Math.abs(e.clientX - ((e.currentTarget as any)._startX || 0));
@@ -327,7 +329,7 @@ export default function SpellBrowser() {
                   <div className="flex-shrink-0 w-8 md:w-20" />
                 </div>
               </div>
-            </section>
+            </motion.section>
           );
         })}
       </main>
