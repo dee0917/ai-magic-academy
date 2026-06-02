@@ -49,7 +49,7 @@ export default function CastRitualAnime({ icon, school, title }: { icon?: React.
         if (nameEl && text?.splitText) {
           const sp = text.splitText(nameEl, { chars: true });
           if (reduce) { animate(sp.chars, { opacity: [0, 1], duration: 200 }); }
-          else { animate(sp.chars, { opacity: [0, 1], y: [16, 0], scale: [0.4, 1], duration: 520, delay: stagger(45, { start: 850 }), ease: "outExpo" }); }
+          else { animate(sp.chars, { opacity: [0, 1], y: [16, 0], scale: [0.4, 1], duration: 440, delay: stagger(35, { start: 430 }), ease: "outExpo" }); }
         }
       } catch {}
 
@@ -71,7 +71,7 @@ export default function CastRitualAnime({ icon, school, title }: { icon?: React.
         }
       } catch {}
       // 衝擊波
-      try { animate(Q(".shock"), { scale: [0, 2.6], opacity: [0.6, 0], duration: 820, delay: 720, ease: "outExpo" }); } catch {}
+      try { animate(Q(".shock"), { scale: [0, 2.6], opacity: [0.6, 0], duration: 760, delay: 480, ease: "outExpo" }); } catch {}
     })();
     return () => { alive = false; };
   }, [s]);

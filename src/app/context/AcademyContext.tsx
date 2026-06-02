@@ -255,7 +255,7 @@ export function AcademyProvider({ children }: { children: React.ReactNode }) {
       setShowPortal(true);
       setShowCopyToast(true);
       setTimeout(() => setShowCopyToast(false), 6000);
-    }, 2000);
+    }, 1500);
   };
 
   const brewAndCopy = () => {
@@ -318,7 +318,7 @@ export function AcademyProvider({ children }: { children: React.ReactNode }) {
       setShowCopyToast(true);
       setTimeout(() => setIsCopied(false), 3000);
       setTimeout(() => setShowCopyToast(false), 6000);
-    }, 2000);
+    }, 1500);
   };
 
   const handleCopy = () => {
