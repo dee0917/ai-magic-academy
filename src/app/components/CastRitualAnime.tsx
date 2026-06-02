@@ -49,7 +49,7 @@ export default function CastRitualAnime({ icon, school }: { icon?: React.ReactNo
           .add(Q(".flash"), { opacity: [0, 0.85, 0], scale: [0.6, 1.6], duration: 320, ease: "outQuad" }, 760)
           .add(Q(".spark"), { x: (_t: any, i: number) => Math.round(Math.cos((i / 12) * 6.283) * 150), y: (_t: any, i: number) => Math.round(Math.sin((i / 12) * 6.283) * 150), opacity: [0, 1, 0], scale: [0, 1.4, 0], duration: 620, delay: stagger(18), ease: "outQuad" }, 820);
       } else if (s === "healing") {
-        run(() => animate(Q(".mote"), { y: [60, -140], x: () => Math.round((Math.random ? 0 : 0)), opacity: [0, 1, 0], scale: [0.5, 1, 0.4], duration: 1800, delay: stagger(120), loop: true, ease: "inOutSine" }));
+        run(() => animate(Q(".mote"), { y: [60, -140], opacity: [0, 1, 0], scale: [0.5, 1, 0.4], duration: 1800, delay: stagger(120), loop: true, ease: "inOutSine" }));
         run(() => animate(Q(".halo"), { scale: [0.3, 2], opacity: [0.55, 0], duration: 1600, delay: stagger(400), loop: true, ease: "outSine" }));
       } else if (s === "illusion") {
         run(() => animate(Q(".ghost"), {
