@@ -689,7 +689,7 @@ export default function CastingModal() {
             {/* Halftone dot pattern bg */}
             <div className="absolute inset-0 halftone-bg pointer-events-none" style={{ opacity: 0.1 }} />
 
-            <CastRitualAnime icon={selectedCurse?.icon} />
+            <CastRitualAnime icon={selectedCurse?.icon} school={selectedCurse?.school} />
           </motion.div>
         )}
       </AnimatePresence>
