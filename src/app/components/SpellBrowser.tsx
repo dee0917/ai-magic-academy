@@ -155,6 +155,7 @@ export default function SpellBrowser() {
                   {(expandedTabs[tab] || searchQuery || activeSchool !== "all" ? tabCurses : tabCurses.slice(0, 3)).map((curse: any, idx: number) => {
                     const tabColor = getTabColor(curse.tab);
                     const schoolInfo = curse.school && SCHOOL_CONFIG[curse.school as SchoolType] ? SCHOOL_CONFIG[curse.school as SchoolType] : null;
+                    const subSchoolInfo = (curse as any).subSchool && SCHOOL_CONFIG[(curse as any).subSchool as SchoolType] ? SCHOOL_CONFIG[(curse as any).subSchool as SchoolType] : null;
                     return (
                     <div
                       key={curse.id}
@@ -210,16 +211,31 @@ export default function SpellBrowser() {
                             )}
                             {schoolInfo && (
                               <div
-                                className="text-[10px] font-black px-1.5 py-0.5"
+                                className="text-[9px] font-black px-2 py-1 tracking-wider flex items-center gap-1"
                                 style={{
-                                  fontFamily: 'var(--font-noto-sans-tc)',
+                                  fontFamily: 'var(--font-chivo)',
                                   color: schoolInfo.color,
-                                  border: `1.5px solid ${schoolInfo.color}`,
-                                  opacity: 0.8,
+                                  border: `2px solid ${schoolInfo.color}`,
+                                  background: 'transparent',
                                 }}
-                                title={`${schoolInfo.emoji} ${schoolInfo.label}流派`}
+                                title={`主流派：${schoolInfo.label}`}
                               >
-                                {schoolInfo.emoji}
+                                <span>{schoolInfo.emoji}</span>{schoolInfo.label}
+                              </div>
+                            )}
+                            {subSchoolInfo && (
+                              <div
+                                className="text-[9px] font-black px-2 py-1 tracking-wider flex items-center gap-1"
+                                style={{
+                                  fontFamily: 'var(--font-chivo)',
+                                  color: subSchoolInfo.color,
+                                  border: `2px dashed ${subSchoolInfo.color}`,
+                                  background: 'transparent',
+                                  opacity: 0.75,
+                                }}
+                                title={`副流派：${subSchoolInfo.label}`}
+                              >
+                                <span>{subSchoolInfo.emoji}</span>{subSchoolInfo.label}
                               </div>
                             )}
                           </div>
