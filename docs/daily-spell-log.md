@@ -41,3 +41,5 @@
 | 生活娛樂 | **3** ← 今日從 1 增加 |
 
 ---
+
+> **2026-06-02 補記（平行 session）**：本 session 獨立研究後選定相同主題（旅遊規劃＋食材料理），鍛造完成 `travel_planner` + `fridge_alchemy` 並通過 build，但推送時偵測到遠端同日另一 session 已率先上站 `trip_planner` + `kitchen_wizard`，場景實質重複。依「寧缺勿濫」鐵則放棄重複上架，git reset 還原，本日最終成果以先行 session 為準。
