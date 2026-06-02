@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Sparkles, X, Search, Lock, ArrowRight, RefreshCw } from "lucide-react";
+import { Sparkles, X, Search, ArrowRight, RefreshCw } from "lucide-react";
 import { useAcademy } from "../context/AcademyContext";
 import { TABS, TIER_CONFIG, getSpellCode, getTabColor, scrollToTab, CURSES, SCHOOL_CONFIG } from "../lib/constants";
 import type { SchoolType } from "../curses_data";
@@ -11,7 +11,7 @@ export default function SpellBrowser() {
   const {
     searchQuery, setSearchQuery,
     groupedCurses, expandedTabs, setExpandedTabs,
-    isLoggedIn, handleCardClick,
+    handleCardClick,
     activeSchool, setActiveSchool,
   } = useAcademy();
 
@@ -223,16 +223,9 @@ export default function SpellBrowser() {
                               </div>
                             )}
                           </div>
-                          {curse.isPro && !isLoggedIn ? (
-                            <div className="flex items-center gap-1 text-[10px] font-black px-2 py-1"
-                              style={{ background: 'var(--dark-red)', border: '2px solid var(--ink)', color: 'var(--parchment)', fontFamily: 'var(--font-chivo)' }}>
-                              <Lock className="w-3 h-3" /> PRO
-                            </div>
-                          ) : (
-                            <div className="text-lg" style={{ color: 'var(--ink)', opacity: 0.4 }}>
-                              {curse.icon}
-                            </div>
-                          )}
+                          <div className="text-lg" style={{ color: 'var(--ink)', opacity: 0.4 }}>
+                            {curse.icon}
+                          </div>
                         </div>
 
                         {/* Title — large bold */}

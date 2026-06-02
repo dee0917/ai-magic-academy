@@ -5,7 +5,7 @@ import { useAcademy } from "../context/AcademyContext";
 
 export default function NavBar() {
   const {
-    mp, isLoggedIn, setIsLoggedIn, setShowAuthModal,
+    mp,
     collectedCards, setShowSpellBook, setShowFusion,
   } = useAcademy();
 
@@ -73,21 +73,6 @@ export default function NavBar() {
               onClick={() => setShowFusion(true)}
             >
               <Zap className="w-3 h-3" /> <span className="hidden sm:inline">融合爐</span>
-            </button>
-
-            {/* Login button */}
-            <button
-              className="flex items-center gap-1 px-2.5 py-1 text-[10px] font-black transition-all hover:translate-x-0.5 hover:translate-y-0.5"
-              style={{
-                fontFamily: 'var(--font-chivo)',
-                border: '2px solid var(--ink)',
-                boxShadow: '2px 2px 0 var(--ink)',
-                background: isLoggedIn ? 'var(--teal)' : 'var(--dark-red)',
-                color: 'var(--parchment)',
-              }}
-              onClick={() => isLoggedIn ? setIsLoggedIn(false) : setShowAuthModal(true)}
-            >
-              {isLoggedIn ? '👤 已登入' : '🔑 登入'}
             </button>
           </div>
         </div>

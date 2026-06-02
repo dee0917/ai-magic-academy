@@ -7,7 +7,7 @@ import { SchoolType } from "../curses_data";
 import { Quest } from "../lib/quests";
 import {
   CURSES, CAST_LEVELS, TIER_CONFIG, TABS,
-  HIDDEN_MARKER, getFieldVisibility, getMpCost,
+  HIDDEN_MARKER, getFieldVisibility,
 } from "../lib/constants";
 import Fuse from "fuse.js";
 
@@ -254,16 +254,9 @@ export function AcademyProvider({ children }: { children: React.ReactNode }) {
   };
 
   const brewAndCopy = () => {
-    const cost = getMpCost(selectedCurse, castLevel);
-    if (mp < cost) {
-      setMpBlocked(true);
-      setMpBlockMessage(`魔力不足！需要 ${cost} MP，目前只有 ${mp} MP。每日登入可回復 5 MP。`);
-      setTimeout(() => setMpBlocked(false), 3000);
-      return;
-    }
+    // MVP 驗證階段：魔力無限，施法不扣 MP、永不阻擋（移除人造稀缺，讓人無限試）
     const visibleCount = getFieldVisibility(selectedCurse.fields.length, castLevel);
     const autoInputs: any = {}; selectedCurse.fields.forEach((f: any, idx: number) => { const isVisible = idx < visibleCount; autoInputs[f.id] = isVisible ? (inputs[f.id] || "「尚未輸入內容」") : HIDDEN_MARKER; }); const spell = selectedCurse.generate({ ...autoInputs, [selectedCurse.tweak?.id]: inputs[selectedCurse.tweak?.id] || selectedCurse.tweak?.options[0] });
-    saveMp(mp - cost);
 
     // Quest check: cast action
     const castResults = checkQuestProgress('cast', {
@@ -295,7 +288,7 @@ export function AcademyProvider({ children }: { children: React.ReactNode }) {
       }
     }
     if (questMpBonus > 0) {
-      saveMp(mp - cost + questMpBonus);
+      saveMp(mp + questMpBonus);
     }
 
     // Show toast for first completed quest
