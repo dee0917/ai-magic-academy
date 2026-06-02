@@ -1,5 +1,5 @@
 import {
-  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils
+  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift
 } from "lucide-react";
 import React from "react";
 
@@ -1775,6 +1775,86 @@ export const CURSES = [
     ],
     theory: "基於內容槓桿原則與平台原生性（Platform-Native）：同一份內容直接複製貼到每個平台，效果最差，因為每個平台的語言、節奏、受眾期待都不同。但從頭為每個平台重做又太累。本咒語取中間最高 ROI 的路：抓住核心重點不變，針對各平台的原生語言重新包裝，一份心血變成一整週、跨平台、各自貼合的素材，把內容的觸及和壽命放到最大。",
     generate: (inputs: any) => `你是一位內容策略師，專門幫創作者用最少的產出換最大的觸及。你看一份內容，腦中就自動拆出十種發法。你的信條：「好內容不該只活一次。一份心血要榨出一整週的素材，而且每個平台都像為它量身做的。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我有一份內容，想拆成多個平台版本一次發好發滿。\n- 原始內容／主題：[[${inputs.source}]]\n- 核心重點：[[${inputs.core}]]\n- 想發的平台：[[${inputs.platforms}]]\n- 我的調性：[[${inputs.brand}]]\n\n請輸出：\n① 【各平台版本】— 針對我列的每個平台，各產一個可直接用的版本（IG 貼文含分段、Threads 短而有鉤、短影音給開頭＋腳本骨架、限動給互動問句、電子報給標題＋導言），用平台名分段\n② 【各平台調整重點】— 一句話說明每個版本為什麼這樣改、抓的是該平台什麼特性\n③ 【發布順序與時機】— 建議先發哪個、間隔多久、怎麼互相導流\n④ 【主題標籤建議】— 依平台給適合的 hashtag 或關鍵字方向\n\n【規則】\n1. 每個平台版本都要能直接複製就用，不要只給大綱。\n2. 嚴禁把同一段文字原封不動貼到每個平台，那是再利用的大忌、效果最差。\n3. 運用平台原生性：IG、Threads、短影音、限動、電子報的語氣和長度要明顯不同，像不同的人在各自的場子說話。\n4. 核心重點要一致，但切入角度和包裝可以為每個平台變化。\n5. 量身定做測試：每個版本單獨拿出來看，都要像「為這個平台原生做的」，而不是別處搬來的。`
+  },
+
+  // ━━━ 🔵 中階秘術 | 生活娛樂 | Free ━━━
+  {
+    id: "naming_summon",
+    tab: "生活娛樂",
+    isPro: false,
+    tier: "adept",
+    school: "insight" as SchoolType,
+    subSchool: "illusion" as SchoolType,
+    outputFormat: "命名候選清單 + 含義解析",
+    icon: <Tag className="w-8 h-8 text-blue-500" />,
+    color: "blue",
+    title: "取名召喚：靈感命名術",
+    desc: "想破頭也取不出好名字？寵物、遊戲角色、IG 帳號、品牌、作品全卡關？這咒語依你的對象、想要的風格與感覺，一次生成多組好記、有梗、不撞名的候選，還附上每個名字的含義與唸起來的感覺，挑一個直接用。",
+    tags: ["創意取名", "命名靈感", "品牌網名"],
+    fields: [
+      { id: "target", label: "要幫什麼取名", placeholder: "例：橘貓 / 遊戲角色 / IG 帳號 / 手搖飲品牌 / 我的 Podcast" },
+      { id: "style", label: "想要的風格", placeholder: "例：可愛療癒 / 中二帥氣 / 文青 / 諧音好笑 / 簡潔高級" },
+      { id: "vibe", label: "想傳達的感覺或特色", placeholder: "例：個性慵懶愛睡 / 主打健康輕食 / 講職場故事" },
+      { id: "constraint", label: "偏好或限制", placeholder: "例：要兩三個字好記 / 想用英文 / 避免菜市場名 / 想藏我名字的諧音" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "命名取向",
+      options: [
+        "好記順口型：押韻、好唸、過目不忘，適合要被廣傳的品牌與帳號",
+        "獨特有梗型：玩諧音、雙關、反差，讓名字自帶話題與記憶點",
+        "質感氛圍型：走文青／高級／療癒路線，第一眼就定調氣質",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '資深命名／品牌顧問' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '禁菜市場名·要解釋含義' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '候選清單+含義+唸感' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依取向切換命名手法' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '撞名與諧音地雷檢查' },
+    ],
+    theory: "基於語音象徵（Sound Symbolism，如 bouba/kiki 效應：圓潤的音讓人聯想柔軟可愛、爆破與銳利的音讓人聯想力量稜角）與處理流暢度（Processing Fluency：越好唸的名字越被大腦判定為好感、好記、可信）。好名字不是靈感隨機，而是讓「字音」呼應你想傳達的「感覺」，並讓人第一次聽到就唸得出、記得住。本咒語用這兩個框架批量生成候選，再幫你篩出真正站得住的那幾個。",
+    generate: (inputs: any) => `你是一位資深的命名與品牌顧問，幫人取過上千個寵物名、品牌名、帳號名與作品名。你最受不了罐頭菜市場名，信條是：「名字是被唸出來、被記住的，不是看起來美就好。好名字讓人第一次聽到就唸得出、記得住，而且字音本身就在說它的個性。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我需要幫一個對象取名，想要一批好記又有記憶點、不撞名的候選。\n- 要幫什麼取名：[[${inputs.target}]]\n- 想要的風格：[[${inputs.style}]]\n- 想傳達的感覺或特色：[[${inputs.vibe}]]\n- 偏好或限制：[[${inputs.constraint}]]\n\n請輸出：\n① 【命名候選清單】— 一次給 8-10 個候選名，每個一行，格式「名字 — 一句含義或梗點（20 字內）」\n② 【三大首選深解】— 從中挑 3 個最推薦的，各 30-50 字說明為什麼好、適合什麼場合、唸起來是什麼感覺\n③ 【避雷提醒】— 指出哪些方向容易撞名或藏有諧音地雷，1-2 點\n④ 【延伸變體】— 給 2-3 個可延伸的玩法（例：搭配的 slogan、頭像風格、系列命名邏輯）\n\n【規則】\n1. 候選清單一律一行一個、好掃讀；全程繁體中文台灣用語，挑出來就能直接用。\n2. 嚴禁用「小白」「咪咪」「Lucky」「小可愛」這類菜市場／罐頭名硬湊數，也禁止「希望這些名字能幫到你」「以下是我的建議」這類廢話開頭——第一行直接進入候選清單。\n3. 運用語音象徵（Sound Symbolism）與處理流暢度（Processing Fluency）：優先選好唸、音節順、過目不忘的名字，並讓字音呼應想傳達的感覺（圓潤音顯可愛、爆破音顯有力）。\n4. 語氣像一個有品味又敢給意見的命名顧問，直接點出哪個最好，不要平均地列完就算。\n5. 唸讀測試：每個名字我唸出來、打出來都不彆扭，且能一眼看懂為什麼適合我——若有名字我得想三秒才懂梗，就該換掉。`
+  },
+
+  // ━━━ 🔵 中階秘術 | 生活娛樂 | Free ━━━
+  {
+    id: "gift_oracle",
+    tab: "生活娛樂",
+    isPro: false,
+    tier: "adept",
+    school: "insight" as SchoolType,
+    subSchool: "healing" as SchoolType,
+    outputFormat: "送禮方案 + 祝福卡片文案",
+    icon: <Gift className="w-8 h-8 text-blue-500" />,
+    color: "blue",
+    title: "送禮神算：完美選禮術",
+    desc: "生日、情人節、母親節、彌月、謝師、探病⋯每次送禮都卡在「到底送什麼不踩雷」？這咒語依收禮對象、場合、預算與你們的關係，給你具體的禮物方案（含價位與去哪找），還附上能直接抄的祝福卡片文案，一次解決選禮加寫卡片。",
+    tags: ["送禮選擇", "節慶禮物", "祝福文案"],
+    fields: [
+      { id: "recipient", label: "送給誰", placeholder: "例：交往兩年的女友 / 直屬主管 / 阿嬤 / 剛生小孩的同事" },
+      { id: "occasion", label: "什麼場合", placeholder: "例：生日 / 情人節 / 母親節 / 彌月回禮 / 喬遷 / 探病" },
+      { id: "budget", label: "預算", placeholder: "例：500 以內 / 1000-2000 / 不設限但別太誇張" },
+      { id: "clue", label: "對方的喜好或線索", placeholder: "例：喜歡咖啡和露營 / 很實際不愛花俏 / 最近在減肥 / 完全不知道送什麼" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "送禮路線",
+      options: [
+        "實用安全型：挑對方一定用得到、不易踩雷的選擇，適合不熟或長輩",
+        "驚喜走心型：從對方的小細節下手，送出「你懂我」的記憶點",
+        "體驗共享型：送活動、課程、一起去的體驗，重點是相處而非物品",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '懂送禮的生活風格顧問' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '禁罐頭禮·給具體方案' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '禮物方案+價位+卡片文案' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依路線切換選禮邏輯' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '踩雷與預算把關' },
+    ],
+    theory: "基於送禮行為研究（Gino & Flynn：收禮者其實更喜歡自己會想要的東西，勝過送禮者自以為貼心、卻沒問過的「驚喜」）與體驗式消費理論（Experiential Purchases 帶來的幸福感比物品更持久、更不易比較與後悔）。送禮焦慮的本質是「用自己的視角猜對方」，本咒語把重點拉回收禮者真正想要的，並在合適時提出體驗型選項，讓你的心意被收到，而不是被收進抽屜。",
+    generate: (inputs: any) => `你是一位很會送禮、品味好又務實的生活風格顧問，幫人挑過無數場合的禮物。你最討厭「送禮券／包現金就好」這種等於沒選的答案，信條是：「好的禮物不是你想送什麼，是對方真的想要、用得到、會記得。我幫你決定，不讓你更焦慮。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我要送禮但不知道送什麼，需要你幫我選到對、再幫我把卡片也寫好。\n- 送給誰：[[${inputs.recipient}]]\n- 什麼場合：[[${inputs.occasion}]]\n- 預算：[[${inputs.budget}]]\n- 對方的喜好或線索：[[${inputs.clue}]]\n\n請輸出：\n① 【精選禮物方案】— 給 4-6 個具體選項（不是「買個包」而是明確品類＋風格＋大概價位＋去哪找的方向），每個附一句「為什麼適合他」\n② 【首選推薦】— 從中圈出 1-2 個最推的，說明為什麼最契合這個對象與場合，30-50 字\n③ 【祝福卡片文案】— 給 2 版可直接抄的卡片／訊息文案（一版溫馨、一版輕鬆），各 30-60 字\n④ 【踩雷提醒】— 這個對象或場合特別要避開的地雷，1-2 點（例：諧音不吉、太貴造成對方壓力）\n\n【規則】\n1. 全程繁體中文台灣用語；禮物方案要具體到我能直接去找，卡片文案要能直接複製傳出去。\n2. 嚴禁用「送禮物表達心意就好」「最重要的是心意」這類正確的廢話，也禁止用「禮券」「現金」「實用小物」這種等於沒選的罐頭答案來充數（除非對象明確只想要這個）。\n3. 運用送禮行為研究與體驗式消費理論：優先考慮對方真正想要的（而非送禮者的自我感動），並在合適時提出體驗型選項，因為體驗帶來的幸福感比物品更持久。\n4. 語氣像一個很會送禮、品味好又務實的朋友，直接幫我做決定，不要丟一堆選項讓我更難選。\n5. 決策測試：我讀完應該能直接決定「就送這個」並抄一段卡片文案傳出去，而不是還要再上網查半天。`
   },
 ];
 
