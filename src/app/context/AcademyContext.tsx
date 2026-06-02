@@ -11,6 +11,7 @@ import {
 } from "../lib/constants";
 import Fuse from "fuse.js";
 import { track } from "@vercel/analytics";
+import posthog from "posthog-js";
 
 interface AcademyContextType {
   // Spell selection
@@ -244,6 +245,7 @@ export function AcademyProvider({ children }: { children: React.ReactNode }) {
   const handleTrialCopy = (text: string) => {
     try { navigator.clipboard.writeText(text).catch(() => {}); } catch {}
     try { track('trial_copy'); } catch {}
+    try { posthog.capture('trial_copy'); } catch {}
     setIsTrialCopied(true);
     setShowBrewing(true);
     setTimeout(() => {
@@ -306,6 +308,7 @@ export function AcademyProvider({ children }: { children: React.ReactNode }) {
     // Try clipboard, but don't block the flow if it fails
     try { navigator.clipboard.writeText(visibleSpell).catch(() => {}); } catch {}
     try { track('cast', { spell: selectedCurse?.id, tab: selectedCurse?.tab, level: castLevel }); } catch {}
+    try { posthog.capture('cast', { spell: selectedCurse?.id, title: selectedCurse?.title, tab: selectedCurse?.tab, level: castLevel }); } catch {}
     setShowBrewing(true);
     setTimeout(() => {
       setShowBrewing(false);

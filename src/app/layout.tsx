@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Rye, Chivo, Noto_Serif_TC, Noto_Sans_TC } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import PostHogProvider from "./components/PostHogProvider";
 import "./globals.css";
 
 const rye = Rye({
@@ -59,7 +60,7 @@ export default function RootLayout({
       <body
         className={`${rye.variable} ${chivo.variable} ${notoSerifTC.variable} ${notoSansTC.variable} antialiased overflow-x-hidden`}
       >
-        {children}
+        <PostHogProvider>{children}</PostHogProvider>
         <Analytics />
         <script
           dangerouslySetInnerHTML={{
