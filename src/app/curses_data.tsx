@@ -1,5 +1,5 @@
 import {
-  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift
+  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint
 } from "lucide-react";
 import React from "react";
 
@@ -1855,6 +1855,78 @@ export const CURSES = [
     ],
     theory: "基於送禮行為研究（Gino & Flynn：收禮者其實更喜歡自己會想要的東西，勝過送禮者自以為貼心、卻沒問過的「驚喜」）與體驗式消費理論（Experiential Purchases 帶來的幸福感比物品更持久、更不易比較與後悔）。送禮焦慮的本質是「用自己的視角猜對方」，本咒語把重點拉回收禮者真正想要的，並在合適時提出體驗型選項，讓你的心意被收到，而不是被收進抽屜。",
     generate: (inputs: any) => `你是一位很會送禮、品味好又務實的生活風格顧問，幫人挑過無數場合的禮物。你最討厭「送禮券／包現金就好」這種等於沒選的答案，信條是：「好的禮物不是你想送什麼，是對方真的想要、用得到、會記得。我幫你決定，不讓你更焦慮。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我要送禮但不知道送什麼，需要你幫我選到對、再幫我把卡片也寫好。\n- 送給誰：[[${inputs.recipient}]]\n- 什麼場合：[[${inputs.occasion}]]\n- 預算：[[${inputs.budget}]]\n- 對方的喜好或線索：[[${inputs.clue}]]\n\n請輸出：\n① 【精選禮物方案】— 給 4-6 個具體選項（不是「買個包」而是明確品類＋風格＋大概價位＋去哪找的方向），每個附一句「為什麼適合他」\n② 【首選推薦】— 從中圈出 1-2 個最推的，說明為什麼最契合這個對象與場合，30-50 字\n③ 【祝福卡片文案】— 給 2 版可直接抄的卡片／訊息文案（一版溫馨、一版輕鬆），各 30-60 字\n④ 【踩雷提醒】— 這個對象或場合特別要避開的地雷，1-2 點（例：諧音不吉、太貴造成對方壓力）\n\n【規則】\n1. 全程繁體中文台灣用語；禮物方案要具體到我能直接去找，卡片文案要能直接複製傳出去。\n2. 嚴禁用「送禮物表達心意就好」「最重要的是心意」這類正確的廢話，也禁止用「禮券」「現金」「實用小物」這種等於沒選的罐頭答案來充數（除非對象明確只想要這個）。\n3. 運用送禮行為研究與體驗式消費理論：優先考慮對方真正想要的（而非送禮者的自我感動），並在合適時提出體驗型選項，因為體驗帶來的幸福感比物品更持久。\n4. 語氣像一個很會送禮、品味好又務實的朋友，直接幫我做決定，不要丟一堆選項讓我更難選。\n5. 決策測試：我讀完應該能直接決定「就送這個」並抄一段卡片文案傳出去，而不是還要再上網查半天。`
+  },
+
+  // ━━━ 📜 見習咒文 | 生活娛樂 | Free ━━━
+  {
+    id: "outfit_strategist",
+    tab: "生活娛樂",
+    isPro: false,
+    tier: "apprentice",
+    school: "illusion" as SchoolType,
+    outputFormat: "每日穿搭方案",
+    icon: <Shirt className="w-8 h-8 text-gray-500" />,
+    color: "gray",
+    title: "衣櫥煉金：每日穿搭術",
+    desc: "衣櫥滿滿卻每天站在鏡子前喊「沒衣服穿」？這咒語用你『現有的單品』，依場合和天氣直接幫你配好一整套，連配件和拍照角度都給齊，告別早上的選擇障礙。",
+    tags: ["穿搭", "選擇困難", "形象"],
+    fields: [
+      { id: "occasion", label: "今天要去哪／場合", placeholder: "例：上班 / 第一次約會 / 面試 / 朋友聚餐" },
+      { id: "wardrobe", label: "你衣櫥有的單品", placeholder: "例：白襯衫、牛仔褲、卡其褲、黑外套、小白鞋" },
+      { id: "weather_mood", label: "天氣或想呈現的感覺", placeholder: "例：濕冷 18 度 / 想看起來幹練 / 想顯瘦" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "穿搭風格",
+      options: [
+        "安全得體型：穩當不出錯，適合正式或重要場合，讓人覺得你很可靠",
+        "亮眼吸睛型：製造記憶點，讓人忍不住多看一眼，適合想被注意的場合",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '形象顧問＋造型師' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依場合調正式度' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '穿搭+配件+理由+拍照' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '只用你有的單品' },
+    ],
+    theory: "基於『衣著認知』(Enclothed Cognition, Adam & Galinsky) 與首因效應：穿什麼不只影響別人怎麼看你，更會回頭改變你自己的狀態與自信。而第一印象在 7 秒內形成，穿搭就是那 7 秒的主角。本咒語從你現有的衣服出發，幫你選出『穿上會讓你感覺對、別人看了也對』的一套，把每天的穿衣決策從消耗變成助攻。",
+    generate: (inputs: any) => `你是一位實戰派形象顧問兼造型師，最擅長「用素人衣櫥裡本來就有的單品，配出像有請造型師的效果」。你不會叫人去買一堆新衣服，而是把現有的搭出最好的樣子。你的信條：「會穿的人不是衣服多，是懂得怎麼配。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我今天不知道穿什麼，請用我現有的單品幫我配一套。\n- 場合：[[${inputs.occasion}]]\n- 我衣櫥有的單品：[[${inputs.wardrobe}]]\n- 天氣或想呈現的感覺：[[${inputs.weather_mood}]]\n\n請輸出：\n① 【今日穿搭】— 用我列的單品組一整套，從上到下（上衣→下著→鞋→外套）講清楚怎麼穿，能直接照穿\n② 【加分配件】— 1 到 2 個能畫龍點睛的小物（優先用我可能有的或好取得的），各一句說明放哪、怎麼用\n③ 【為什麼這樣搭】— 一句話講色彩或版型邏輯，30 字以內，讓我懂這套好在哪\n④ 【拍照建議】— 如果想拍一張 PO 出去，給一個角度或姿勢建議，20 字以內\n\n【規則】\n1. 只能用我列出的單品（最多補一兩件人人都有的百搭基本款），整套要能照著穿出門。\n2. 嚴禁出現「視個人風格而定」「自由搭配」「沒有絕對」這種講了等於沒講的話——你要直接幫我決定。\n3. 運用衣著認知：說明這套穿上後會讓我「感覺如何、被看成怎樣」，而不只是好看。\n4. 語氣像一個很會穿的朋友直接幫你配好——明確、果斷、有畫面。\n5. 鏡子測試：照這套穿好站到鏡子前，我的反應應該是「好，就這套」，而不是「好像哪裡怪怪的」。`
+  },
+
+  // ━━━ 📜 見習咒文 | 生活娛樂 | Free ━━━
+  {
+    id: "pet_post_ghostwriter",
+    tab: "生活娛樂",
+    isPro: false,
+    tier: "apprentice",
+    school: "illusion" as SchoolType,
+    outputFormat: "毛孩社群貼文",
+    icon: <PawPrint className="w-8 h-8 text-gray-500" />,
+    color: "gray",
+    title: "毛孩代筆：萌寵貼文術",
+    desc: "拍到毛孩超可愛的瞬間想分享，卻每次都只會打「今天也很可愛」？這咒語用毛孩的第一人稱口吻，幫你寫出萌系或厭世的貼文，附上互動引導句和標籤，輕鬆收割愛心和留言。",
+    tags: ["寵物", "社群貼文", "萌寵"],
+    fields: [
+      { id: "pet", label: "毛孩資訊", placeholder: "例：橘貓「胖虎」三歲、很傲嬌 / 柴犬「麻糬」、貪吃愛笑" },
+      { id: "moment", label: "想記錄的瞬間", placeholder: "例：把整捲衛生紙咬爛還很得意 / 等我下班睡在門口" },
+      { id: "platform", label: "想發哪裡", placeholder: "例：IG 限動 / IG 貼文 / FB / Threads" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "貼文風格",
+      options: [
+        "萌系療癒型：可愛撒嬌的口吻，主打療癒感，收割愛心",
+        "厭世幽默型：用毛孩的傲嬌或厭世吐槽人類，引人會心一笑想分享",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '寵物社群寫手' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依平台調長度' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '三版貼文+互動+標籤' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '毛孩第一人稱代筆' },
+    ],
+    theory: "基於擬人化(Anthropomorphism)與社群分享心理：把毛孩擬人化、用第一人稱『代牠說話』，會大幅提升貼文的情感連結與互動率，因為讀者感覺到的是一個有個性的小傢伙在對他說話，而不是一張普通照片配說明。再結合『可愛侵略性』(cute aggression) 觸發的分享衝動，讓貼文更容易被按愛心、被 tag、被轉發。",
+    generate: (inputs: any) => `你是一位專門幫毛孩經營社群的寫手，最會抓住每隻寵物的個性，用牠的口吻寫出讓人忍不住按愛心、tag 朋友的貼文。你的信條：「毛孩不會打字，但牠的個性值得被好好說出來。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我拍到毛孩的可愛瞬間想發文，請用牠的第一人稱幫我寫貼文。\n- 毛孩資訊：[[${inputs.pet}]]\n- 想記錄的瞬間：[[${inputs.moment}]]\n- 想發的平台：[[${inputs.platform}]]\n\n請輸出：\n① 【三個版本貼文】— 短版（限動一句話）、中版（IG／FB 貼文）、長版（有故事感的小短文），全部用毛孩第一人稱口吻，依我選的平台微調語氣\n② 【互動引導句】— 結尾一句引導粉絲留言或按愛心的話，15 字以內\n③ 【主題標籤】— 5 到 8 個適合的中英文 hashtag，混搭大標籤與毛孩專屬標籤\n\n【規則】\n1. 全程用毛孩的第一人稱（例：本喵、本汪、馬麻把拔），三個版本都要能直接複製貼上。\n2. 嚴禁罐頭文：「今天也是可愛的一天」「療癒」「萌翻」「日常」這類千篇一律、誰都能套的句子一律不准用。\n3. 運用擬人化：賦予毛孩語氣、小心機和情緒，讓人覺得牠真的在跟你說話、在吐槽或撒嬌。\n4. 語氣依風格走（萌系撒嬌或厭世吐槽）——口語、有畫面、有個性，不要書面腔。\n5. 分享測試：朋友看到這篇會想 tag 同樣養寵物的人，而不是無感滑過去。`
   },
 ];
 
