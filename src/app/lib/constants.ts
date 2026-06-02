@@ -9,7 +9,7 @@ export const MODULE_CONFIG = _MODULE_CONFIG;
 export const MODULE_EXPLANATIONS = _MODULE_EXPLANATIONS;
 export type { SpellModule, ModuleType };
 
-export const TABS = ["職場求生", "校園生存", "人際擋箭", "日常雜症", "創業/斜槓", "生活娛樂"];
+export const TABS = ["職場求生", "校園生存", "人際擋箭", "日常雜症", "創業/自媒體", "生活娛樂"];
 
 export const HIDDEN_MARKER = "（由 AI 根據情境自動填充）";
 
@@ -19,7 +19,7 @@ export const getTabColor = (tab: string) => {
     '校園生存': '#2D6A4F',
     '人際擋箭': '#8B2626',
     '日常雜症': '#B8860B',
-    '創業/斜槓': '#4A3580',
+    '創業/自媒體': '#4A3580',
     '生活娛樂': '#BE185D',
   };
   return map[tab] || '#1A5C5A';
