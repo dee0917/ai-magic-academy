@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { Sparkles, Brain, Bot, MessageSquare, X, Lock } from "lucide-react";
+import posthog from "posthog-js";
 import { useAcademy } from "../context/AcademyContext";
 import { TIER_CONFIG, CAST_LEVELS, getSpellCode } from "../lib/constants";
 
@@ -67,6 +68,7 @@ export default function PortalOverlay() {
               <div className="flex gap-2 mb-4">
                 <button
                   onClick={async () => {
+                    try { posthog.capture('card_download', { spell: lastCastCurse?.id }); } catch {}
                     const el = document.getElementById('spell-card-capture');
                     if (!el) return;
                     const html2canvas = (await import('html2canvas')).default;
@@ -124,7 +126,7 @@ export default function PortalOverlay() {
                 ].map(({ label, icon, color, web, scheme }) => (
                   <button
                     key={label}
-                    onClick={() => { if (scheme) { handleDeepLink(web, scheme); } else { setShowPortal(false); window.open(web, '_blank'); } }}
+                    onClick={() => { try { posthog.capture('ai_platform', { platform: label, spell: lastCastCurse?.id }); } catch {} if (scheme) { handleDeepLink(web, scheme); } else { setShowPortal(false); window.open(web, '_blank'); } }}
                     className="flex flex-col items-center gap-1 transition-all active:scale-95"
                   >
                     <div

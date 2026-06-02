@@ -240,6 +240,7 @@ export function AcademyProvider({ children }: { children: React.ReactNode }) {
     setSelectedCurse(curse);
     setAgreedToRisk(false);
     setInputs({});
+    try { posthog.capture('spell_open', { spell: curse?.id, title: curse?.title, tab: curse?.tab }); } catch {}
   };
 
   const handleTrialCopy = (text: string) => {
@@ -335,6 +336,7 @@ export function AcademyProvider({ children }: { children: React.ReactNode }) {
   };
 
   const handleShare = () => {
+    try { posthog.capture('share_click', { spell: selectedCurse?.id, title: selectedCurse?.title }); } catch {}
     const spellUrl = selectedCurse?.id
       ? `https://ai-magic-academy.vercel.app/spell/${selectedCurse.id}`
       : window.location.href;
