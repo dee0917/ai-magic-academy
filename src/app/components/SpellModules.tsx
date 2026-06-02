@@ -56,15 +56,16 @@ export default function SpellModules({ modules, totalFields, defaultExpanded = f
       {isExpanded && (
         <div className="p-4">
           {/* Module chips */}
-          <div className="flex flex-wrap gap-2 mb-3">
-            {modules.map((mod) => {
+          <div className="grid grid-cols-2 gap-2 mb-3">
+            {modules.map((mod, idx) => {
               const config = MODULE_CONFIG[mod.type];
               const isChipExpanded = expandedChip === mod.type;
+              const isLastOdd = idx === modules.length - 1 && modules.length % 2 === 1;
               return (
                 <button
                   key={mod.type}
                   onClick={() => setExpandedChip(isChipExpanded ? null : mod.type)}
-                  className="text-left transition-all"
+                  className={`text-left transition-all h-full ${isLastOdd ? 'col-span-2' : ''}`}
                   style={{
                     border: `2px solid ${config.color}`,
                     background: isChipExpanded ? config.color : `${config.color}15`,
@@ -188,13 +189,15 @@ export function SpellModulesStatic({ modules }: { modules: SpellModule[] }) {
 
       {/* Modules list */}
       <div style={{ padding: '16px 18px' }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 16 }}>
-          {modules.map((mod) => {
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 16 }}>
+          {modules.map((mod, idx) => {
             const config = MODULE_CONFIG[mod.type];
+            const isLastOdd = idx === modules.length - 1 && modules.length % 2 === 1;
             return (
               <div
                 key={mod.type}
                 style={{
+                  gridColumn: isLastOdd ? '1 / -1' : undefined,
                   border: `2px solid ${config.color}`,
                   background: `${config.color}15`,
                   padding: '6px 10px',
