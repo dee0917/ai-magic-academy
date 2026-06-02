@@ -1,5 +1,5 @@
 import {
-  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users
+  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film
 } from "lucide-react";
 import React from "react";
 
@@ -60,7 +60,7 @@ export const CAST_LEVELS = [
 
 // 魔法編號系統
 const TIER_CODE: Record<string, string> = { apprentice: 'Ⅰ', adept: 'Ⅱ', master: 'Ⅲ', archmage: 'Ⅳ', forbidden: 'Ⅴ' };
-const TAB_CODE: Record<string, string> = { '人際擋箭': 'AR', '職場求生': 'SV', '日常雜症': 'DX', '創業/斜槓': 'BZ', '校園生存': 'CS' };
+const TAB_CODE: Record<string, string> = { '人際擋箭': 'AR', '職場求生': 'SV', '日常雜症': 'DX', '創業/斜槓': 'BZ', '校園生存': 'CS', '生活娛樂': 'EN' };
 
 export function getSpellCode(curse: { tier: string; tab: string; id: string }): string {
   const tierSymbol = TIER_CODE[curse.tier] || 'Ⅰ';
@@ -1253,6 +1253,46 @@ export const CURSES = [
     },
     theory: "基於 Dunbar 社交網絡層級理論（150人法則）與 Granovetter 弱連結理論：校園社交的核心不是「認識很多人」而是「在對的圈子裡有對的位置」。強連結（好朋友）給你情感支持，弱連結（點頭之交）給你資訊和機會。本咒語幫你建立兼顧兩者的最優社交結構。",
     generate: (inputs: any) => `你是一位校園社交生態觀察家，自己從邊緣人逆襲成社交達人，後來專門研究大學生社交動態 10 年。你的信條：「校園是最好的社交練功場——犯錯成本最低、學習價值最高。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我在校園裡遇到社交困境，需要一份人際地圖和行動策略。\n- 社交困境：[[${inputs.situation}]]\n- 環境描述：[[${inputs.environment}]]\n- 關鍵人物：[[${inputs.key_people}]]\n- 我想要的結果：[[${inputs.your_goal}]]\n\n請輸出：\n① 【人際地圖解讀】— 分析你所在環境的社交結構，誰是核心、誰是邊緣、誰是橋樑，100 字以內\n② 【你的定位建議】— 在這張人際地圖上，你最適合站在哪個位置，50 字以內\n③ 【本週行動清單】— 3 個這週可以執行的社交動作，每個 30 字以內\n④ 【破冰話術】— 跟關鍵人物開啟對話的 2 句開場白，每句 20 字以內\n⑤ 【避雷指南】— 這個環境裡 3 件絕對不能做的事，每件 20 字以內\n⑥ 【長期策略】— 一個學期的社交經營方向，80 字以內\n\n【規則】\n1. 所有建議必須務實，不能說「做自己就好」——做自己是結果不是方法。\n2. 嚴禁使用：「你不需要在意別人」「真正的朋友不會...」「不合群也沒關係」——這些是安慰不是策略。\n3. 行動清單必須是具體動作——不是「多跟人互動」而是「週三中午主動約 X 去學餐吃飯」。\n4. 必須考慮失敗場景——如果破冰失敗怎麼辦？如果被拒絕怎麼辦？\n5. 大學生測試：一個大二學生讀完這份策略，覺得是「學長姊在教我實戰技巧」而不是「老師在講大道理」。`
+  },
+
+  // ━━━ 🔵 中階秘術 | 生活娛樂 | Free ━━━
+  {
+    id: "story_recap_anchor",
+    tab: "生活娛樂",
+    isPro: false,
+    tier: "adept",
+    school: "insight" as SchoolType,
+    subSchool: "healing" as SchoolType,
+    outputFormat: "追劇接續脈絡簡報",
+    icon: <Film className="w-8 h-8 text-blue-500" />,
+    color: "blue",
+    title: "劇情錨定：追劇接續術",
+    desc: "中斷太久回不去那部劇？跳過流水帳，直接用『核心衝突＋陣營地圖』把你斷掉的記憶網路重新接上，一分鐘無縫接續後續劇情。",
+    tags: ["追劇補番", "劇情重建", "資訊錨定"],
+    fields: [
+      { id: "work", label: "作品名稱", placeholder: "例：進擊的巨人 / 鬼滅之刃 / 權力遊戲" },
+      { id: "currentEp", label: "目前準備看的集數", placeholder: "例：第 82 集 / 第 4 季第 3 集" },
+      { id: "reviewed", label: "回來後已補看哪些", placeholder: "例：77、78、79、80 集 / 沒補，直接接" },
+      { id: "gap", label: "大約中斷多久", placeholder: "例：半年沒看 / 一年前追到一半" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "重建視角",
+      options: [
+        "防暴雷脈絡型：嚴格不提目前集數之後的劇情，完美保留後續的震撼與未知",
+        "高視角全知型：透露後續走向框架，讓你帶著預知視角更輕鬆看懂複雜伏筆",
+        "陣營博弈型：聚焦各勢力的利害關係與政治角力，適合政治文戲重的作品",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '資深長篇劇情分析師' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '禁流水帳·只給核心' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '核心背景+反轉+局勢' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依視角切換暴雷尺度' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '嚴守不暴雷防線' },
+    ],
+    theory: "基於認知心理學的圖式理論（Schema Theory）與資訊架構的脈絡錨定：長期中斷後大腦缺乏提取線索，硬要逐集回憶只會更亂。本咒語直接給出高概括的『核心衝突』與『陣營地圖』，強行激活你既有的長期記憶網路，完成高效知識重建。",
+    generate: (inputs: any) => `你是一位資深的長篇敘事劇情分析師，追過 500+ 部動漫、影集與電影，專門幫人「中途回歸」複雜作品。你最痛恨流水帳，信條是：「重建劇情不是從第一集講起，是直接點亮你腦中那張早就畫好、只是積了灰的地圖。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我中斷很久後想接續觀看一部結構複雜的作品，需要你幫我跨越資訊斷層、無縫接回後續劇情。\n- 作品名稱：[[${inputs.work}]]\n- 目前準備看的集數：[[${inputs.currentEp}]]\n- 回來後已補看：[[${inputs.reviewed}]]\n- 大約中斷多久：[[${inputs.gap}]]\n\n請不要按時間軸記流水帳，直接重點輸出：\n① 【核心背景與機制】— 引爆目前局勢最底層的設定或角色動機，3-4 點條列\n② 【關鍵反轉回顧】— 我中斷期間發生的顛覆性大事件，挑最重要的 3-5 個，每個一句話\n③ 【當前戰力與局勢分佈】— 目前這一步各主要陣營、生死不明的關鍵角色，分別處於什麼狀態與位置\n④ 【觀影核心懸念】— 接下來看下去，核心的價值衝突或最大看點是什麼，1-2 句\n\n【規則】\n1. 全文 Markdown，用粗體 Heading 分割區塊、條列呈現，總長 500-800 字，精煉到 1 分鐘內讀完即可接續觀影。\n2. 嚴禁：從第 1 集或大前期逐集講起的流水帳、交代無關配角的資訊過載，以及「沒問題，讓我來幫你回憶一下」「這部作品真的很精彩」這類媚俗廢話開頭——第一行直接進入【核心背景與機制】。\n3. 運用圖式理論（Schema Theory）：優先給高概括性的「核心衝突」與「陣營地圖」當提取線索喚醒記憶，而非塞滿瑣碎細節。\n4. 暴雷尺度依採用策略嚴格執行——「防暴雷脈絡型」下絕對不可提及目前集數之後的任何情節。\n5. 一分鐘測試：我讀完應該能立刻按下播放、無縫接續，而不是還要回去翻維基或重看。`
   },
 ];
 
