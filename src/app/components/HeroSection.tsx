@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Copy, Check, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useAcademy } from "../context/AcademyContext";
@@ -10,6 +10,30 @@ export default function HeroSection() {
     activeTrial, setActiveTrial,
     isTrialCopied, handleTrialCopy,
   } = useAcademy();
+
+  // 首頁大標「逐字燃現」+ 全站省電/無障礙基礎（anime.js 延遲載入，尊重 prefers-reduced-motion）
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let alive = true;
+    (async () => {
+      let mod: any;
+      try { mod = await import("animejs"); } catch { return; }
+      if (!alive) return;
+      const { animate, stagger, text, engine } = mod;
+      try { if (engine) engine.pauseOnDocumentHidden = true; } catch {}
+      try {
+        const chars: any[] = [];
+        document.querySelectorAll(".hero-glyph").forEach((t) => {
+          try { const sp = text.splitText(t, { chars: true }); chars.push(...sp.chars); } catch {}
+        });
+        if (chars.length) {
+          animate(chars, { opacity: [0, 1], y: [28, 0], scale: [0.6, 1], duration: 720, delay: stagger(45), ease: "outExpo" });
+        }
+      } catch {}
+    })();
+    return () => { alive = false; };
+  }, []);
 
   return (
     <>
@@ -30,7 +54,7 @@ export default function HeroSection() {
             <div className="flex items-center justify-center gap-5 md:gap-8 mb-5">
               <div style={{ height: '2px', width: '56px', background: 'var(--dark-red)' }} />
               <h1
-                className="text-[2.5rem] sm:text-5xl md:text-6xl tracking-[0.25em]"
+                className="hero-glyph text-[2.5rem] sm:text-5xl md:text-6xl tracking-[0.25em]"
                 style={{ fontFamily: 'var(--font-noto-serif-tc)', fontWeight: 300, color: 'var(--ink)', lineHeight: 1.2 }}
               >
                 麻瓜專用
@@ -41,7 +65,7 @@ export default function HeroSection() {
             {/* Line 2: AI魔法外掛 on black strip with gold text */}
             <div className="inline-block shadow-md" style={{ background: 'var(--ink)', padding: '16px 24px', maxWidth: '100%' }}>
               <h1
-                className="text-[2.8rem] sm:text-5xl md:text-7xl tracking-[0.08em]"
+                className="hero-glyph text-[2.8rem] sm:text-5xl md:text-7xl tracking-[0.08em]"
                 style={{ fontFamily: 'var(--font-noto-serif-tc)', fontWeight: 900, color: 'var(--mustard)', lineHeight: 1.15 }}
               >
                 AI魔法外掛
