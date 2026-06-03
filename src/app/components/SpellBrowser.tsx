@@ -218,19 +218,8 @@ export default function SpellBrowser() {
                               </div>
                             )}
                           </div>
-                          {/* School crest — main + sub as emoji only (solution A) */}
-                          <div className="flex items-center gap-1.5 flex-shrink-0">
-                            <span className="text-lg leading-none" style={{ color: 'var(--ink)', opacity: 0.4 }}>
-                              {curse.icon}
-                            </span>
-                            {schoolInfo && (
-                              <span className="flex items-baseline gap-0.5 leading-none">
-                                <span className="text-xl leading-none" title={`主流派：${schoolInfo.label}`}>{schoolInfo.emoji}</span>
-                                {subSchoolInfo && (
-                                  <span className="text-sm leading-none" style={{ opacity: 0.65 }} title={`副流派：${subSchoolInfo.label}`}>{subSchoolInfo.emoji}</span>
-                                )}
-                              </span>
-                            )}
+                          <div className="text-lg" style={{ color: 'var(--ink)', opacity: 0.4 }}>
+                            {curse.icon}
                           </div>
                         </div>
 
@@ -258,20 +247,48 @@ export default function SpellBrowser() {
                       {/* Dashed divider */}
                       <div className="mx-5" style={{ borderTop: '2px dashed var(--ink)', opacity: 0.3 }} />
 
-                      {/* Footer */}
-                      <div className="flex items-center justify-between px-5 py-3">
-                        {/* Stamp-style spell code */}
-                        <span className="text-[11px] font-black px-1.5 py-0.5 tracking-wider select-none"
-                          style={{
-                            fontFamily: 'var(--font-chivo)',
-                            color: 'var(--dark-red)',
-                            border: '1.5px solid var(--dark-red)',
-                            opacity: 0.8,
-                            transform: 'rotate(-2deg)',
-                          }}>
-                          {getSpellCode(curse)}
-                        </span>
-                        <span className="flex items-center gap-1 text-xs font-black" style={{ fontFamily: 'var(--font-noto-sans-tc)', color: tabColor }}>
+                      {/* Footer — spell code + school seals as matching ink stamps */}
+                      <div className="flex items-center justify-between gap-2 px-5 py-3">
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          {/* Stamp-style spell code */}
+                          <span className="text-[11px] font-black px-1.5 py-0.5 tracking-wider select-none"
+                            style={{
+                              fontFamily: 'var(--font-chivo)',
+                              color: 'var(--dark-red)',
+                              border: '1.5px solid var(--dark-red)',
+                              opacity: 0.8,
+                              transform: 'rotate(-2deg)',
+                            }}>
+                            {getSpellCode(curse)}
+                          </span>
+                          {/* Main school seal — same stamp style, school color */}
+                          {schoolInfo && (
+                            <span className="text-[11px] font-black px-1.5 py-0.5 tracking-wider select-none flex items-center gap-1"
+                              style={{
+                                fontFamily: 'var(--font-noto-sans-tc)',
+                                color: schoolInfo.color,
+                                border: `1.5px solid ${schoolInfo.color}`,
+                                transform: 'rotate(1.5deg)',
+                              }}
+                              title={`主流派：${schoolInfo.label}`}>
+                              <span>{schoolInfo.emoji}</span>{schoolInfo.label}
+                            </span>
+                          )}
+                          {/* Sub school seal — dashed, emoji only */}
+                          {subSchoolInfo && (
+                            <span className="text-[11px] font-black px-1 py-0.5 select-none"
+                              style={{
+                                color: subSchoolInfo.color,
+                                border: `1.5px dashed ${subSchoolInfo.color}`,
+                                opacity: 0.7,
+                                transform: 'rotate(-1.5deg)',
+                              }}
+                              title={`副流派：${subSchoolInfo.label}`}>
+                              {subSchoolInfo.emoji}
+                            </span>
+                          )}
+                        </div>
+                        <span className="flex items-center gap-1 text-xs font-black flex-shrink-0" style={{ fontFamily: 'var(--font-noto-sans-tc)', color: tabColor }}>
                           詠唱 <ArrowRight className="w-3 h-3" />
                         </span>
                       </div>
