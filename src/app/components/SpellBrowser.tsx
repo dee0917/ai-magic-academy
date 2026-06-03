@@ -185,16 +185,43 @@ export default function SpellBrowser() {
                       {/* Colored top stripe */}
                       <div style={{ height: '6px', background: curse.tier && TIER_CONFIG[curse.tier] ? TIER_CONFIG[curse.tier].color : tabColor }} />
 
-                      {/* School spine ribbon — left-edge two-tone band (magic-book bookmark) */}
+                      {/* School wax seal — magic-scroll emblem pressed into top-right corner */}
                       {schoolInfo && (
                         <div
-                          className="absolute left-0 top-0 bottom-0 w-1.5 z-10 flex flex-col"
+                          className="absolute top-2.5 right-2.5 z-20 pointer-events-none"
                           title={subSchoolInfo ? `主流派：${schoolInfo.label}　副流派：${subSchoolInfo.label}` : `主流派：${schoolInfo.label}`}
                         >
-                          <div style={{ flex: '1 1 0', background: schoolInfo.color }} />
+                          {/* sub school — smaller seal tucked behind */}
                           {subSchoolInfo && (
-                            <div style={{ flex: '1 1 0', background: subSchoolInfo.color, opacity: 0.85 }} />
+                            <span
+                              className="absolute flex items-center justify-center leading-none"
+                              style={{
+                                width: '26px', height: '26px', bottom: '-9px', left: '-13px',
+                                background: subSchoolInfo.color,
+                                backgroundImage: 'radial-gradient(circle at 36% 30%, rgba(255,255,255,0.4), rgba(255,255,255,0) 55%)',
+                                borderRadius: '50%',
+                                border: '2px solid rgba(0,0,0,0.25)',
+                                boxShadow: '2px 2px 0 var(--ink)',
+                                fontSize: '12px',
+                                transform: 'rotate(10deg)',
+                              }}
+                            >{subSchoolInfo.emoji}</span>
                           )}
+                          {/* main school — large wax seal */}
+                          <span
+                            className="relative flex items-center justify-center leading-none"
+                            style={{
+                              width: '46px', height: '46px',
+                              background: schoolInfo.color,
+                              backgroundImage: 'radial-gradient(circle at 36% 30%, rgba(255,255,255,0.5), rgba(255,255,255,0) 58%)',
+                              borderRadius: '50%',
+                              border: '2px solid rgba(0,0,0,0.28)',
+                              boxShadow: '3px 3px 0 var(--ink), inset 0 0 0 3px rgba(254,250,240,0.4)',
+                              fontSize: '22px',
+                              transform: 'rotate(-7deg)',
+                              textShadow: '0 1px 1px rgba(0,0,0,0.25)',
+                            }}
+                          >{schoolInfo.emoji}</span>
                         </div>
                       )}
 
@@ -231,14 +258,11 @@ export default function SpellBrowser() {
                               </div>
                             )}
                           </div>
-                          <div className="text-lg" style={{ color: 'var(--ink)', opacity: 0.4 }}>
-                            {curse.icon}
-                          </div>
                         </div>
 
                         {/* Title — large bold */}
                         <h3
-                          className="text-xl md:text-2xl leading-tight mb-0 relative z-10"
+                          className="text-xl md:text-2xl leading-tight mb-0 relative z-10 pr-12"
                           style={{ fontFamily: 'var(--font-noto-serif-tc)', fontWeight: 900, color: 'var(--ink)' }}
                         >
                           {curse.title.replace(/【|】/g, '').replace(/\n/g, '')}
