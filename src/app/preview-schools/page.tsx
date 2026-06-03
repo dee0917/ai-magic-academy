@@ -260,8 +260,102 @@ function V5Cartouche({ curse }: { curse: Sample }) {
   );
 }
 
+/* ───────────────── V6 — 符文卷軸 (rune scroll, per reference image) ───────────────── */
+const TORN = "polygon(0% 0%,100% 0%,97% 8%,100% 16%,96% 25%,100% 34%,97% 45%,100% 55%,96% 66%,100% 76%,97% 88%,100% 100%,0% 100%,3% 88%,0% 76%,4% 66%,0% 55%,3% 45%,0% 34%,4% 25%,0% 16%,3% 8%)";
+const RUNE_PATHS = ["M3 1V13", "M3 1V13M3 4L8 1M3 8L8 5", "M2 1L8 7L2 13", "M3 1V13M3 1L8 4M3 7L8 4", "M2 7H10M6 2V12", "M3 1V13M8 1V13M3 7H8", "M2 2L8 12M8 2L2 12", "M5 1V13M2 4L5 1L8 4"];
+function RuneRow({ color, n = 8 }: { color: string; n?: number }) {
+  return (
+    <div className="flex gap-2 items-center justify-center">
+      {RUNE_PATHS.slice(0, n).map((d, i) => (
+        <svg key={i} className="rune" width="11" height="14" viewBox="0 0 11 14" fill="none" stroke={color} strokeWidth="1.4" strokeLinecap="round" style={{ filter: `drop-shadow(0 0 3px ${color})` }}><path d={d} /></svg>
+      ))}
+    </div>
+  );
+}
+function Rod() {
+  return (
+    <div className="relative" style={{ height: 22 }}>
+      <div style={{ position: "absolute", inset: "0 8px", borderRadius: 6, background: "linear-gradient(180deg,#F0C25E,#C8942F 55%,#8a5f16)", border: "2px solid var(--ink)" }} />
+      <div style={{ position: "absolute", left: 16, right: 16, top: "50%", height: 2, background: "rgba(42,39,35,0.35)" }} />
+      <div style={{ position: "absolute", left: -5, top: "50%", transform: "translateY(-50%)", width: 17, height: 17, borderRadius: "50%", background: "radial-gradient(circle at 35% 35%,#F0C25E,#7a5413)", border: "2px solid var(--ink)" }} />
+      <div style={{ position: "absolute", right: -5, top: "50%", transform: "translateY(-50%)", width: 17, height: 17, borderRadius: "50%", background: "radial-gradient(circle at 35% 35%,#F0C25E,#7a5413)", border: "2px solid var(--ink)" }} />
+    </div>
+  );
+}
+function V6Scroll({ curse }: { curse: Sample }) {
+  const root = useRef<HTMLDivElement>(null);
+  const main = SCHOOL_CONFIG[curse.school];
+  const sub = SCHOOL_CONFIG[curse.subSchool];
+  const ticks = Array.from({ length: 20 });
+  useEffect(() => {
+    const el = root.current; if (!el) return;
+    animate(el.querySelectorAll<HTMLElement>(".panel-unroll"), { scaleY: [0.82, 1], opacity: [0, 1], duration: 720, ease: "outExpo" });
+    animate(el.querySelectorAll<HTMLElement>(".circle-spin"), { rotate: "1turn", loop: true, ease: "linear", duration: 38000 });
+    animate(el.querySelectorAll<HTMLElement>(".circle-spin-rev"), { rotate: "-1turn", loop: true, ease: "linear", duration: 26000 });
+    animate(el.querySelectorAll<HTMLElement>(".glow-pulse"), { opacity: [0.28, 0.6], scale: [0.94, 1.06], loop: true, alternate: true, ease: "inOutSine", duration: 2200 });
+    animate(el.querySelectorAll<HTMLElement>(".rune"), { opacity: [0, 1], duration: 480, delay: stagger(70), ease: "outQuad" });
+  }, []);
+  const tabColor = getTabColor(curse.tab);
+  return (
+    <div ref={root} className="flex-shrink-0 w-[300px] relative" style={{ overflow: "visible" }}>
+      <Rod />
+      <div className="panel-unroll relative" style={{ transformOrigin: "center", margin: "-2px 0" }}>
+        {/* hard offset shadow that follows the torn shape */}
+        <div className="absolute" style={{ inset: 0, transform: "translate(4px,4px)", background: "var(--ink)", clipPath: TORN, zIndex: 0 }} />
+        {/* torn parchment */}
+        <div className="relative" style={{ background: "#F7EeCf", clipPath: TORN, zIndex: 1, padding: "14px 16px" }}>
+          {/* engraved gold frame */}
+          <div className="absolute pointer-events-none" style={{ inset: 9, border: `2px solid ${GOLD}` }} />
+          <div className="absolute pointer-events-none" style={{ inset: 13, border: `1px solid ${GOLD}`, opacity: 0.55 }} />
+
+          {/* central glowing magic circle (behind content) */}
+          <div className="absolute" style={{ left: "50%", top: "52%", transform: "translate(-50%,-50%)", width: 184, height: 184, zIndex: 1 }}>
+            <div className="glow-pulse absolute inset-0" style={{ background: "radial-gradient(circle, rgba(232,168,56,0.5), rgba(232,168,56,0) 62%)" }} />
+            <div className="circle-spin absolute inset-0" style={{ transformOrigin: "50% 50%", filter: `drop-shadow(0 0 4px rgba(232,168,56,0.7))`, opacity: 0.55 }}>
+              <svg width="184" height="184" viewBox="0 0 184 184" fill="none" stroke={GOLD} strokeWidth="1.3">
+                <circle cx="92" cy="92" r="86" /><circle cx="92" cy="92" r="66" />
+                {ticks.map((_, i) => { const a = (i / 20) * Math.PI * 2; return <line key={i} x1={92 + Math.cos(a) * 66} y1={92 + Math.sin(a) * 66} x2={92 + Math.cos(a) * 86} y2={92 + Math.sin(a) * 86} />; })}
+              </svg>
+            </div>
+            <div className="circle-spin-rev absolute inset-0 flex items-center justify-center" style={{ transformOrigin: "50% 50%", filter: `drop-shadow(0 0 4px rgba(232,168,56,0.7))`, opacity: 0.6 }}>
+              <svg width="120" height="120" viewBox="0 0 120 120" fill="none" stroke={GOLD} strokeWidth="1.3">
+                <circle cx="60" cy="60" r="46" /><path d="M60 14 L98 60 L60 106 L22 60 Z" /><path d="M60 22 L90 60 L60 98 L30 60 Z" />
+              </svg>
+            </div>
+            <div className="absolute inset-0 flex items-center justify-center" style={{ filter: `drop-shadow(0 0 5px ${main.color})` }}>
+              <SchoolSigil school={curse.school} size={40} color={main.color} strokeWidth={1.5} />
+            </div>
+          </div>
+
+          {/* readable content above the circle */}
+          <div className="relative" style={{ zIndex: 2 }}>
+            <div className="mb-2"><RuneRow color={GOLD} /></div>
+            <div className="flex items-start justify-between mb-2"><div className="flex items-center gap-1.5 flex-wrap"><CategoryPill curse={curse} /><TierBadge curse={curse} /></div><RepIcon curse={curse} /></div>
+            <h3 className="text-xl leading-tight mb-2" style={{ fontFamily: "var(--font-noto-serif-tc)", fontWeight: 900, color: INK }}>{curse.title}</h3>
+            <div style={{ borderLeft: `3px solid ${tabColor}`, paddingLeft: 10, marginBottom: 56 }}>
+              <p className="text-sm leading-relaxed" style={{ fontFamily: "var(--font-noto-sans-tc)", color: INK, opacity: 0.78 }}>{curse.desc}</p>
+            </div>
+            {/* school plaque */}
+            <div className="flex items-center justify-center gap-2 mb-2 py-1" style={{ borderTop: `1px solid ${GOLD}`, borderBottom: `1px solid ${GOLD}` }}>
+              <SchoolSigil school={curse.school} size={15} color={main.color} /><span className="text-[12px] font-black" style={{ fontFamily: "var(--font-noto-serif-tc)", color: INK }}>{main.label}</span>
+              <span style={{ color: GOLD }}>✦</span>
+              <SchoolSigil school={curse.subSchool} size={13} color={sub.color} /><span className="text-[11px] font-black" style={{ fontFamily: "var(--font-noto-serif-tc)", color: INK, opacity: 0.85 }}>{sub.label}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-black px-1.5 py-0.5 tracking-wider select-none" style={{ fontFamily: "var(--font-chivo)", color: WAX, border: `1.5px solid ${WAX}`, opacity: 0.8, transform: "rotate(-2deg)" }}>{curse.code}</span>
+              <span className="flex items-center gap-1 text-xs font-black" style={{ fontFamily: "var(--font-noto-sans-tc)", color: tabColor }}>詠唱 →</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Rod />
+    </div>
+  );
+}
+
 /* ───────────────── page ───────────────── */
 const SECTIONS = [
+  { Comp: V6Scroll, name: "版本六　符文卷軸（依你的參考圖）", blurb: "依你給的卷軸圖做：上下木金捲軸桿＋圓頭、羊皮紙撕裂邊、泥金邊框、邊緣發光符文、中央會旋轉發光的魔法符陣（陣心是該流派符印）。發光改成我們的金黃色不用紫色，維持調性。載入時卷軸展開、符陣旋轉、符文逐一亮起。" },
   { Comp: V1Pendant, name: "版本一　垂吊封蠟", blurb: "從中縫垂下兩枚火漆封印（主大、副小），印面是該流派的手繪符印，下方標名。載入時封印落下、之後像吊牌一樣輕輕擺動。" },
   { Comp: V2Ribbon, name: "版本二　燕尾紋章絲帶", blurb: "真正的絲帶：兩端有回摺暗面、底邊燕尾開叉，帶上是符印＋流派名。副流派是下方小尾旗。載入時由中心展開。不擋分類與階級。" },
   { Comp: V3Frame, name: "版本三　泥金邊框", blurb: "四角泥金捲草飾＋內金線框，像泥金裝飾手抄本。流派收進底部金邊飾牌（符印＋名）。載入時四角逐一綻放、飾牌升起。" },

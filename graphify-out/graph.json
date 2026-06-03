@@ -1,0 +1,1393 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "next-env.d.ts",
+      "file_type": "code",
+      "source_file": "next-env.d.ts",
+      "source_location": "L1",
+      "id": "next_env_d_ts",
+      "community": 19
+    },
+    {
+      "label": "next.config.ts",
+      "file_type": "code",
+      "source_file": "next.config.ts",
+      "source_location": "L1",
+      "id": "next_config_ts",
+      "community": 20
+    },
+    {
+      "label": "sw.js",
+      "file_type": "code",
+      "source_file": "public\\sw.js",
+      "source_location": "L1",
+      "id": "public_sw_js",
+      "community": 21
+    },
+    {
+      "label": "curses_data.tsx",
+      "file_type": "code",
+      "source_file": "src\\app\\curses_data.tsx",
+      "source_location": "L1",
+      "id": "src_app_curses_data_tsx",
+      "community": 5
+    },
+    {
+      "label": "getSpellCode()",
+      "file_type": "code",
+      "source_file": "src\\app\\curses_data.tsx",
+      "source_location": "L65",
+      "id": "curses_data_getspellcode",
+      "community": 5
+    },
+    {
+      "label": "lookupRecipe()",
+      "file_type": "code",
+      "source_file": "src\\app\\curses_data.tsx",
+      "source_location": "L1297",
+      "id": "curses_data_lookuprecipe",
+      "community": 5
+    },
+    {
+      "label": "getFragmentType()",
+      "file_type": "code",
+      "source_file": "src\\app\\curses_data.tsx",
+      "source_location": "L1304",
+      "id": "curses_data_getfragmenttype",
+      "community": 5
+    },
+    {
+      "label": "FusionSystem.tsx",
+      "file_type": "code",
+      "source_file": "src\\app\\FusionSystem.tsx",
+      "source_location": "L1",
+      "id": "src_app_fusionsystem_tsx",
+      "community": 6
+    },
+    {
+      "label": "loadJSON()",
+      "file_type": "code",
+      "source_file": "src\\app\\FusionSystem.tsx",
+      "source_location": "L45",
+      "id": "fusionsystem_loadjson",
+      "community": 6
+    },
+    {
+      "label": "saveJSON()",
+      "file_type": "code",
+      "source_file": "src\\app\\FusionSystem.tsx",
+      "source_location": "L52",
+      "id": "fusionsystem_savejson",
+      "community": 6
+    },
+    {
+      "label": "mainCard()",
+      "file_type": "code",
+      "source_file": "src\\app\\FusionSystem.tsx",
+      "source_location": "L275",
+      "id": "fusionsystem_maincard",
+      "community": 6
+    },
+    {
+      "label": "layout.tsx",
+      "file_type": "code",
+      "source_file": "src\\app\\layout.tsx",
+      "source_location": "L1",
+      "id": "src_app_layout_tsx",
+      "community": 9
+    },
+    {
+      "label": "RootLayout()",
+      "file_type": "code",
+      "source_file": "src\\app\\layout.tsx",
+      "source_location": "L51",
+      "id": "layout_rootlayout",
+      "community": 9
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src\\app\\page.tsx",
+      "source_location": "L1",
+      "id": "src_app_page_tsx",
+      "community": 10
+    },
+    {
+      "label": "MagicAcademyMVP()",
+      "file_type": "code",
+      "source_file": "src\\app\\page.tsx",
+      "source_location": "L13",
+      "id": "page_magicacademymvp",
+      "community": 10
+    },
+    {
+      "label": "SpellCard.tsx",
+      "file_type": "code",
+      "source_file": "src\\app\\SpellCard.tsx",
+      "source_location": "L1",
+      "id": "src_app_spellcard_tsx",
+      "community": 11
+    },
+    {
+      "label": "SpellCard()",
+      "file_type": "code",
+      "source_file": "src\\app\\SpellCard.tsx",
+      "source_location": "L27",
+      "id": "spellcard_spellcard",
+      "community": 11
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src\\app\\collection\\page.tsx",
+      "source_location": "L1",
+      "id": "src_app_collection_page_tsx",
+      "community": 22
+    },
+    {
+      "label": "CastDeepLink.tsx",
+      "file_type": "code",
+      "source_file": "src\\app\\components\\CastDeepLink.tsx",
+      "source_location": "L1",
+      "id": "src_app_components_castdeeplink_tsx",
+      "community": 12
+    },
+    {
+      "label": "CastDeepLink()",
+      "file_type": "code",
+      "source_file": "src\\app\\components\\CastDeepLink.tsx",
+      "source_location": "L7",
+      "id": "castdeeplink_castdeeplink",
+      "community": 12
+    },
+    {
+      "label": "CastingModal.tsx",
+      "file_type": "code",
+      "source_file": "src\\app\\components\\CastingModal.tsx",
+      "source_location": "L1",
+      "id": "src_app_components_castingmodal_tsx",
+      "community": 23
+    },
+    {
+      "label": "HeroSection.tsx",
+      "file_type": "code",
+      "source_file": "src\\app\\components\\HeroSection.tsx",
+      "source_location": "L1",
+      "id": "src_app_components_herosection_tsx",
+      "community": 24
+    },
+    {
+      "label": "NavBar.tsx",
+      "file_type": "code",
+      "source_file": "src\\app\\components\\NavBar.tsx",
+      "source_location": "L1",
+      "id": "src_app_components_navbar_tsx",
+      "community": 25
+    },
+    {
+      "label": "PortalOverlay.tsx",
+      "file_type": "code",
+      "source_file": "src\\app\\components\\PortalOverlay.tsx",
+      "source_location": "L1",
+      "id": "src_app_components_portaloverlay_tsx",
+      "community": 13
+    },
+    {
+      "label": "async()",
+      "file_type": "code",
+      "source_file": "src\\app\\components\\PortalOverlay.tsx",
+      "source_location": "L85",
+      "id": "portaloverlay_async",
+      "community": 13
+    },
+    {
+      "label": "QuestToast.tsx",
+      "file_type": "code",
+      "source_file": "src\\app\\components\\QuestToast.tsx",
+      "source_location": "L1",
+      "id": "src_app_components_questtoast_tsx",
+      "community": 26
+    },
+    {
+      "label": "SpellBookModal.tsx",
+      "file_type": "code",
+      "source_file": "src\\app\\components\\SpellBookModal.tsx",
+      "source_location": "L1",
+      "id": "src_app_components_spellbookmodal_tsx",
+      "community": 27
+    },
+    {
+      "label": "SpellBrowser.tsx",
+      "file_type": "code",
+      "source_file": "src\\app\\components\\SpellBrowser.tsx",
+      "source_location": "L1",
+      "id": "src_app_components_spellbrowser_tsx",
+      "community": 28
+    },
+    {
+      "label": "SpellModules.tsx",
+      "file_type": "code",
+      "source_file": "src\\app\\components\\SpellModules.tsx",
+      "source_location": "L1",
+      "id": "src_app_components_spellmodules_tsx",
+      "community": 14
+    },
+    {
+      "label": "getFieldsForCastLevel()",
+      "file_type": "code",
+      "source_file": "src\\app\\components\\SpellModules.tsx",
+      "source_location": "L14",
+      "id": "spellmodules_getfieldsforcastlevel",
+      "community": 14
+    },
+    {
+      "label": "RiskScroll.tsx",
+      "file_type": "code",
+      "source_file": "src\\app\\components\\shared\\RiskScroll.tsx",
+      "source_location": "L1",
+      "id": "src_app_components_shared_riskscroll_tsx",
+      "community": 29
+    },
+    {
+      "label": "TerminalPrompt.tsx",
+      "file_type": "code",
+      "source_file": "src\\app\\components\\shared\\TerminalPrompt.tsx",
+      "source_location": "L1",
+      "id": "src_app_components_shared_terminalprompt_tsx",
+      "community": 30
+    },
+    {
+      "label": "AcademyContext.tsx",
+      "file_type": "code",
+      "source_file": "src\\app\\context\\AcademyContext.tsx",
+      "source_location": "L1",
+      "id": "src_app_context_academycontext_tsx",
+      "community": 8
+    },
+    {
+      "label": "useAcademy()",
+      "file_type": "code",
+      "source_file": "src\\app\\context\\AcademyContext.tsx",
+      "source_location": "L108",
+      "id": "academycontext_useacademy",
+      "community": 8
+    },
+    {
+      "label": "AcademyProvider()",
+      "file_type": "code",
+      "source_file": "src\\app\\context\\AcademyContext.tsx",
+      "source_location": "L114",
+      "id": "academycontext_academyprovider",
+      "community": 8
+    },
+    {
+      "label": "useMPSystem.ts",
+      "file_type": "code",
+      "source_file": "src\\app\\hooks\\useMPSystem.ts",
+      "source_location": "L1",
+      "id": "src_app_hooks_usempsystem_ts",
+      "community": 15
+    },
+    {
+      "label": "useMPSystem()",
+      "file_type": "code",
+      "source_file": "src\\app\\hooks\\useMPSystem.ts",
+      "source_location": "L18",
+      "id": "usempsystem_usempsystem",
+      "community": 15
+    },
+    {
+      "label": "useQuestSystem.ts",
+      "file_type": "code",
+      "source_file": "src\\app\\hooks\\useQuestSystem.ts",
+      "source_location": "L1",
+      "id": "src_app_hooks_usequestsystem_ts",
+      "community": 16
+    },
+    {
+      "label": "useQuestSystem()",
+      "file_type": "code",
+      "source_file": "src\\app\\hooks\\useQuestSystem.ts",
+      "source_location": "L15",
+      "id": "usequestsystem_usequestsystem",
+      "community": 16
+    },
+    {
+      "label": "useSpellCollection.ts",
+      "file_type": "code",
+      "source_file": "src\\app\\hooks\\useSpellCollection.ts",
+      "source_location": "L1",
+      "id": "src_app_hooks_usespellcollection_ts",
+      "community": 17
+    },
+    {
+      "label": "useSpellCollection()",
+      "file_type": "code",
+      "source_file": "src\\app\\hooks\\useSpellCollection.ts",
+      "source_location": "L4",
+      "id": "usespellcollection_usespellcollection",
+      "community": 17
+    },
+    {
+      "label": "constants.ts",
+      "file_type": "code",
+      "source_file": "src\\app\\lib\\constants.ts",
+      "source_location": "L1",
+      "id": "src_app_lib_constants_ts",
+      "community": 4
+    },
+    {
+      "label": "getTabColor()",
+      "file_type": "code",
+      "source_file": "src\\app\\lib\\constants.ts",
+      "source_location": "L16",
+      "id": "constants_gettabcolor",
+      "community": 4
+    },
+    {
+      "label": "getFieldVisibility()",
+      "file_type": "code",
+      "source_file": "src\\app\\lib\\constants.ts",
+      "source_location": "L95",
+      "id": "constants_getfieldvisibility",
+      "community": 4
+    },
+    {
+      "label": "getMpCost()",
+      "file_type": "code",
+      "source_file": "src\\app\\lib\\constants.ts",
+      "source_location": "L101",
+      "id": "constants_getmpcost",
+      "community": 4
+    },
+    {
+      "label": "scrollToTab()",
+      "file_type": "code",
+      "source_file": "src\\app\\lib\\constants.ts",
+      "source_location": "L108",
+      "id": "constants_scrolltotab",
+      "community": 4
+    },
+    {
+      "label": "quests.ts",
+      "file_type": "code",
+      "source_file": "src\\app\\lib\\quests.ts",
+      "source_location": "L1",
+      "id": "src_app_lib_quests_ts",
+      "community": 18
+    },
+    {
+      "label": "getSchoolQuests()",
+      "file_type": "code",
+      "source_file": "src\\app\\lib\\quests.ts",
+      "source_location": "L275",
+      "id": "quests_getschoolquests",
+      "community": 18
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src\\app\\spell\\[id]\\page.tsx",
+      "source_location": "L1",
+      "id": "src_app_spell_id_page_tsx",
+      "community": 7
+    },
+    {
+      "label": "findSpell()",
+      "file_type": "code",
+      "source_file": "src\\app\\spell\\[id]\\page.tsx",
+      "source_location": "L12",
+      "id": "page_findspell",
+      "community": 7
+    },
+    {
+      "label": "generateMetadata()",
+      "file_type": "code",
+      "source_file": "src\\app\\spell\\[id]\\page.tsx",
+      "source_location": "L16",
+      "id": "page_generatemetadata",
+      "community": 7
+    },
+    {
+      "label": "generateStaticParams()",
+      "file_type": "code",
+      "source_file": "src\\app\\spell\\[id]\\page.tsx",
+      "source_location": "L44",
+      "id": "page_generatestaticparams",
+      "community": 7
+    },
+    {
+      "label": "MagicAcademyMVP Component",
+      "file_type": "code",
+      "source_file": "ai_studio_code.txt",
+      "source_location": "line 32",
+      "id": "ai_studio_code_MagicAcademyMVP",
+      "community": 2
+    },
+    {
+      "label": "CURSES Data Array",
+      "file_type": "code",
+      "source_file": "ai_studio_code.txt",
+      "source_location": "line 6",
+      "id": "ai_studio_code_CURSES",
+      "community": 0
+    },
+    {
+      "label": "Boss LINE Curse Spell",
+      "file_type": "code",
+      "source_file": "ai_studio_code.txt",
+      "source_location": "line 8",
+      "id": "ai_studio_code_boss_line_curse",
+      "community": 0
+    },
+    {
+      "label": "React (useState)",
+      "file_type": "dependency",
+      "source_file": "ai_studio_code.txt",
+      "source_location": "line 2",
+      "id": "ai_studio_code_react",
+      "community": 2
+    },
+    {
+      "label": "lucide-react Icons",
+      "file_type": "dependency",
+      "source_file": "ai_studio_code.txt",
+      "source_location": "line 3",
+      "id": "ai_studio_code_lucide_react",
+      "community": 2
+    },
+    {
+      "label": "Gemini Portal (External Link)",
+      "file_type": "concept",
+      "source_file": "ai_studio_code.txt",
+      "source_location": "line 153",
+      "id": "ai_studio_code_gemini_portal",
+      "community": 2
+    },
+    {
+      "label": "Intent Wrapping Technique",
+      "file_type": "concept",
+      "source_file": "ai_studio_code.txt",
+      "source_location": "line 18",
+      "id": "ai_studio_code_intent_wrapping",
+      "community": 0
+    },
+    {
+      "label": "Option Transfer Method",
+      "file_type": "concept",
+      "source_file": "ai_studio_code.txt",
+      "source_location": "line 18",
+      "id": "ai_studio_code_option_transfer",
+      "community": 0
+    },
+    {
+      "label": "Three-Level Scaffold (Input/Tweak/Theory)",
+      "file_type": "concept",
+      "source_file": "ai_studio_code.txt",
+      "source_location": "lines 93-139",
+      "id": "ai_studio_code_three_level_scaffold",
+      "community": 2
+    },
+    {
+      "label": "Cache Invalidation Fix (SW + Network-First)",
+      "file_type": "concept",
+      "source_file": "PROGRESS.md",
+      "source_location": "section 1",
+      "id": "progress_cache_invalidation",
+      "community": 1
+    },
+    {
+      "label": "Premium UI Overhaul",
+      "file_type": "concept",
+      "source_file": "PROGRESS.md",
+      "source_location": "section 2",
+      "id": "progress_ui_overhaul",
+      "community": 1
+    },
+    {
+      "label": "Custom Magic Cursor",
+      "file_type": "concept",
+      "source_file": "PROGRESS.md",
+      "source_location": "section 2",
+      "id": "progress_magic_cursor",
+      "community": 1
+    },
+    {
+      "label": "Glassmorphism Tarot Cards",
+      "file_type": "concept",
+      "source_file": "PROGRESS.md",
+      "source_location": "section 2",
+      "id": "progress_glassmorphism_cards",
+      "community": 1
+    },
+    {
+      "label": "Dynamic Hot Tags",
+      "file_type": "concept",
+      "source_file": "PROGRESS.md",
+      "source_location": "section 3",
+      "id": "progress_dynamic_hot_tags",
+      "community": 0
+    },
+    {
+      "label": "curses_data.tsx",
+      "file_type": "code",
+      "source_file": "PROGRESS.md",
+      "source_location": "section 3",
+      "id": "progress_curses_data_tsx",
+      "community": 0
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "PROGRESS.md",
+      "source_location": "section 3",
+      "id": "progress_page_tsx",
+      "community": 0
+    },
+    {
+      "label": "sw.js (Service Worker)",
+      "file_type": "code",
+      "source_file": "PROGRESS.md",
+      "source_location": "section 1",
+      "id": "progress_sw_js",
+      "community": 1
+    },
+    {
+      "label": "Tailwind 4 Engine",
+      "file_type": "dependency",
+      "source_file": "PROGRESS.md",
+      "source_location": "checklist",
+      "id": "progress_tailwind4",
+      "community": 1
+    },
+    {
+      "label": "Agent Antigravity",
+      "file_type": "entity",
+      "source_file": "PROGRESS.md",
+      "source_location": "line 11",
+      "id": "progress_agent_antigravity",
+      "community": 1
+    },
+    {
+      "label": "Next.js Framework",
+      "file_type": "dependency",
+      "source_file": "README.md",
+      "source_location": null,
+      "id": "readme_nextjs",
+      "community": 2
+    },
+    {
+      "label": "Vercel Deployment",
+      "file_type": "concept",
+      "source_file": "README.md",
+      "source_location": null,
+      "id": "readme_vercel",
+      "community": 2
+    },
+    {
+      "label": "Geist Font (next/font)",
+      "file_type": "dependency",
+      "source_file": "README.md",
+      "source_location": "line 24",
+      "id": "readme_geist_font",
+      "community": 2
+    },
+    {
+      "label": "PROGRESS.md Reference",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "line 4",
+      "id": "readme_progress_md",
+      "community": 1
+    },
+    {
+      "label": "Hero Section (Parchment BG)",
+      "file_type": "concept",
+      "source_file": "docs/plans/2026-03-21-homepage-redesign.md",
+      "source_location": "section 01",
+      "id": "redesign_hero_section",
+      "community": 3
+    },
+    {
+      "label": "Trust Bar (Live Counter)",
+      "file_type": "concept",
+      "source_file": "docs/plans/2026-03-21-homepage-redesign.md",
+      "source_location": "section 02",
+      "id": "redesign_trust_bar",
+      "community": 3
+    },
+    {
+      "label": "Free Trial Section (4 Hook Spells)",
+      "file_type": "concept",
+      "source_file": "docs/plans/2026-03-21-homepage-redesign.md",
+      "source_location": "section 03",
+      "id": "redesign_free_trial",
+      "community": 0
+    },
+    {
+      "label": "Testimonials Marquee",
+      "file_type": "concept",
+      "source_file": "docs/plans/2026-03-21-homepage-redesign.md",
+      "source_location": "section 04",
+      "id": "redesign_testimonials",
+      "community": 31
+    },
+    {
+      "label": "Spell Library Section",
+      "file_type": "concept",
+      "source_file": "docs/plans/2026-03-21-homepage-redesign.md",
+      "source_location": "section 05",
+      "id": "redesign_spell_library",
+      "community": 0
+    },
+    {
+      "label": "Visual Rhythm (Alternating BG Pattern)",
+      "file_type": "concept",
+      "source_file": "docs/plans/2026-03-21-homepage-redesign.md",
+      "source_location": "section Visual Rhythm",
+      "id": "redesign_visual_rhythm",
+      "community": 3
+    },
+    {
+      "label": "Multi-AI Platform Support (ChatGPT/Claude/Gemini/Grok/DeepSeek)",
+      "file_type": "concept",
+      "source_file": "docs/plans/2026-03-21-homepage-redesign.md",
+      "source_location": "section 02",
+      "id": "redesign_ai_platforms",
+      "community": 3
+    },
+    {
+      "label": "Three-Step Guide (Select/Cast/Redirect)",
+      "file_type": "concept",
+      "source_file": "docs/plans/2026-03-21-homepage-redesign.md",
+      "source_location": "section 01",
+      "id": "redesign_three_step_guide",
+      "community": 3
+    },
+    {
+      "label": "Rationale: Redesign for Clarity, Rhythm, and Trust",
+      "file_type": "rationale",
+      "source_file": "docs/plans/2026-03-21-homepage-redesign.md",
+      "source_location": "Summary",
+      "id": "redesign_rationale_clarity",
+      "community": 3
+    },
+    {
+      "label": "Rationale: Network-First Cache for Frequent Updates",
+      "file_type": "rationale",
+      "source_file": "PROGRESS.md",
+      "source_location": "Dev Notes",
+      "id": "progress_rationale_cache",
+      "community": 1
+    },
+    {
+      "label": "Rationale: Data Decoupling for Easy Spell Addition",
+      "file_type": "rationale",
+      "source_file": "ai_studio_code.txt",
+      "source_location": "line 5",
+      "id": "ai_studio_code_rationale_data_decoupling",
+      "community": 0
+    },
+    {
+      "label": "Rationale: Intent Wrapping + Option Transfer for Boss Replies",
+      "file_type": "rationale",
+      "source_file": "ai_studio_code.txt",
+      "source_location": "line 18",
+      "id": "ai_studio_code_rationale_theory",
+      "community": 0
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\curses_data.tsx",
+      "source_location": "L65",
+      "weight": 1.0,
+      "_src": "src_app_curses_data_tsx",
+      "_tgt": "curses_data_getspellcode",
+      "source": "src_app_curses_data_tsx",
+      "target": "curses_data_getspellcode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\curses_data.tsx",
+      "source_location": "L1297",
+      "weight": 1.0,
+      "_src": "src_app_curses_data_tsx",
+      "_tgt": "curses_data_lookuprecipe",
+      "source": "src_app_curses_data_tsx",
+      "target": "curses_data_lookuprecipe",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\curses_data.tsx",
+      "source_location": "L1304",
+      "weight": 1.0,
+      "_src": "src_app_curses_data_tsx",
+      "_tgt": "curses_data_getfragmenttype",
+      "source": "src_app_curses_data_tsx",
+      "target": "curses_data_getfragmenttype",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\curses_data.tsx",
+      "source_location": "L1305",
+      "weight": 1.0,
+      "_src": "curses_data_getfragmenttype",
+      "_tgt": "curses_data_lookuprecipe",
+      "source": "curses_data_lookuprecipe",
+      "target": "curses_data_getfragmenttype",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\FusionSystem.tsx",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_src": "src_app_fusionsystem_tsx",
+      "_tgt": "fusionsystem_loadjson",
+      "source": "src_app_fusionsystem_tsx",
+      "target": "fusionsystem_loadjson",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\FusionSystem.tsx",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_src": "src_app_fusionsystem_tsx",
+      "_tgt": "fusionsystem_savejson",
+      "source": "src_app_fusionsystem_tsx",
+      "target": "fusionsystem_savejson",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\FusionSystem.tsx",
+      "source_location": "L275",
+      "weight": 1.0,
+      "_src": "src_app_fusionsystem_tsx",
+      "_tgt": "fusionsystem_maincard",
+      "source": "src_app_fusionsystem_tsx",
+      "target": "fusionsystem_maincard",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\layout.tsx",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_src": "src_app_layout_tsx",
+      "_tgt": "layout_rootlayout",
+      "source": "src_app_layout_tsx",
+      "target": "layout_rootlayout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\page.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_src": "src_app_page_tsx",
+      "_tgt": "page_magicacademymvp",
+      "source": "src_app_page_tsx",
+      "target": "page_magicacademymvp",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\SpellCard.tsx",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_src": "src_app_spellcard_tsx",
+      "_tgt": "spellcard_spellcard",
+      "source": "src_app_spellcard_tsx",
+      "target": "spellcard_spellcard",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\components\\CastDeepLink.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_src": "src_app_components_castdeeplink_tsx",
+      "_tgt": "castdeeplink_castdeeplink",
+      "source": "src_app_components_castdeeplink_tsx",
+      "target": "castdeeplink_castdeeplink",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\components\\PortalOverlay.tsx",
+      "source_location": "L252",
+      "weight": 1.0,
+      "_src": "src_app_components_portaloverlay_tsx",
+      "_tgt": "portaloverlay_async",
+      "source": "src_app_components_portaloverlay_tsx",
+      "target": "portaloverlay_async",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\components\\SpellModules.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_src": "src_app_components_spellmodules_tsx",
+      "_tgt": "spellmodules_getfieldsforcastlevel",
+      "source": "src_app_components_spellmodules_tsx",
+      "target": "spellmodules_getfieldsforcastlevel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\context\\AcademyContext.tsx",
+      "source_location": "L108",
+      "weight": 1.0,
+      "_src": "src_app_context_academycontext_tsx",
+      "_tgt": "academycontext_useacademy",
+      "source": "src_app_context_academycontext_tsx",
+      "target": "academycontext_useacademy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\context\\AcademyContext.tsx",
+      "source_location": "L114",
+      "weight": 1.0,
+      "_src": "src_app_context_academycontext_tsx",
+      "_tgt": "academycontext_academyprovider",
+      "source": "src_app_context_academycontext_tsx",
+      "target": "academycontext_academyprovider",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\hooks\\useMPSystem.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_src": "src_app_hooks_usempsystem_ts",
+      "_tgt": "usempsystem_usempsystem",
+      "source": "src_app_hooks_usempsystem_ts",
+      "target": "usempsystem_usempsystem",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\hooks\\useQuestSystem.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_src": "src_app_hooks_usequestsystem_ts",
+      "_tgt": "usequestsystem_usequestsystem",
+      "source": "src_app_hooks_usequestsystem_ts",
+      "target": "usequestsystem_usequestsystem",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\hooks\\useSpellCollection.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_src": "src_app_hooks_usespellcollection_ts",
+      "_tgt": "usespellcollection_usespellcollection",
+      "source": "src_app_hooks_usespellcollection_ts",
+      "target": "usespellcollection_usespellcollection",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\lib\\constants.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_src": "src_app_lib_constants_ts",
+      "_tgt": "constants_gettabcolor",
+      "source": "src_app_lib_constants_ts",
+      "target": "constants_gettabcolor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\lib\\constants.ts",
+      "source_location": "L95",
+      "weight": 1.0,
+      "_src": "src_app_lib_constants_ts",
+      "_tgt": "constants_getfieldvisibility",
+      "source": "src_app_lib_constants_ts",
+      "target": "constants_getfieldvisibility",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\lib\\constants.ts",
+      "source_location": "L101",
+      "weight": 1.0,
+      "_src": "src_app_lib_constants_ts",
+      "_tgt": "constants_getmpcost",
+      "source": "src_app_lib_constants_ts",
+      "target": "constants_getmpcost",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\lib\\constants.ts",
+      "source_location": "L108",
+      "weight": 1.0,
+      "_src": "src_app_lib_constants_ts",
+      "_tgt": "constants_scrolltotab",
+      "source": "src_app_lib_constants_ts",
+      "target": "constants_scrolltotab",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\lib\\quests.ts",
+      "source_location": "L275",
+      "weight": 1.0,
+      "_src": "src_app_lib_quests_ts",
+      "_tgt": "quests_getschoolquests",
+      "source": "src_app_lib_quests_ts",
+      "target": "quests_getschoolquests",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\spell\\[id]\\page.tsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_src": "src_app_spell_id_page_tsx",
+      "_tgt": "page_findspell",
+      "source": "src_app_spell_id_page_tsx",
+      "target": "page_findspell",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\spell\\[id]\\page.tsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_src": "src_app_spell_id_page_tsx",
+      "_tgt": "page_generatemetadata",
+      "source": "src_app_spell_id_page_tsx",
+      "target": "page_generatemetadata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\spell\\[id]\\page.tsx",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_src": "src_app_spell_id_page_tsx",
+      "_tgt": "page_generatestaticparams",
+      "source": "src_app_spell_id_page_tsx",
+      "target": "page_generatestaticparams",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\app\\spell\\[id]\\page.tsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_src": "page_generatemetadata",
+      "_tgt": "page_findspell",
+      "source": "page_findspell",
+      "target": "page_generatemetadata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ai_studio_code.txt",
+      "weight": 1.0,
+      "_src": "ai_studio_code_MagicAcademyMVP",
+      "_tgt": "ai_studio_code_react",
+      "source": "ai_studio_code_MagicAcademyMVP",
+      "target": "ai_studio_code_react"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ai_studio_code.txt",
+      "weight": 1.0,
+      "_src": "ai_studio_code_MagicAcademyMVP",
+      "_tgt": "ai_studio_code_lucide_react",
+      "source": "ai_studio_code_MagicAcademyMVP",
+      "target": "ai_studio_code_lucide_react"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ai_studio_code.txt",
+      "weight": 1.0,
+      "_src": "ai_studio_code_MagicAcademyMVP",
+      "_tgt": "ai_studio_code_CURSES",
+      "source": "ai_studio_code_MagicAcademyMVP",
+      "target": "ai_studio_code_CURSES"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ai_studio_code.txt",
+      "weight": 1.0,
+      "_src": "ai_studio_code_MagicAcademyMVP",
+      "_tgt": "ai_studio_code_gemini_portal",
+      "source": "ai_studio_code_MagicAcademyMVP",
+      "target": "ai_studio_code_gemini_portal"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ai_studio_code.txt",
+      "weight": 1.0,
+      "_src": "ai_studio_code_MagicAcademyMVP",
+      "_tgt": "ai_studio_code_three_level_scaffold",
+      "source": "ai_studio_code_MagicAcademyMVP",
+      "target": "ai_studio_code_three_level_scaffold"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "source_file": "PROGRESS.md",
+      "weight": 0.7,
+      "_src": "progress_page_tsx",
+      "_tgt": "ai_studio_code_MagicAcademyMVP",
+      "source": "ai_studio_code_MagicAcademyMVP",
+      "target": "progress_page_tsx"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "ai_studio_code.txt",
+      "weight": 0.8,
+      "_src": "ai_studio_code_MagicAcademyMVP",
+      "_tgt": "readme_nextjs",
+      "source": "ai_studio_code_MagicAcademyMVP",
+      "target": "readme_nextjs"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ai_studio_code.txt",
+      "weight": 1.0,
+      "_src": "ai_studio_code_CURSES",
+      "_tgt": "ai_studio_code_boss_line_curse",
+      "source": "ai_studio_code_CURSES",
+      "target": "ai_studio_code_boss_line_curse"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ai_studio_code.txt",
+      "weight": 1.0,
+      "_src": "ai_studio_code_rationale_data_decoupling",
+      "_tgt": "ai_studio_code_CURSES",
+      "source": "ai_studio_code_CURSES",
+      "target": "ai_studio_code_rationale_data_decoupling"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "PROGRESS.md",
+      "weight": 0.8,
+      "_src": "progress_curses_data_tsx",
+      "_tgt": "ai_studio_code_CURSES",
+      "source": "ai_studio_code_CURSES",
+      "target": "progress_curses_data_tsx"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/plans/2026-03-21-homepage-redesign.md",
+      "weight": 0.7,
+      "_src": "redesign_free_trial",
+      "_tgt": "ai_studio_code_CURSES",
+      "source": "ai_studio_code_CURSES",
+      "target": "redesign_free_trial"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ai_studio_code.txt",
+      "weight": 1.0,
+      "_src": "ai_studio_code_boss_line_curse",
+      "_tgt": "ai_studio_code_intent_wrapping",
+      "source": "ai_studio_code_boss_line_curse",
+      "target": "ai_studio_code_intent_wrapping"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ai_studio_code.txt",
+      "weight": 1.0,
+      "_src": "ai_studio_code_boss_line_curse",
+      "_tgt": "ai_studio_code_option_transfer",
+      "source": "ai_studio_code_boss_line_curse",
+      "target": "ai_studio_code_option_transfer"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ai_studio_code.txt",
+      "weight": 1.0,
+      "_src": "ai_studio_code_rationale_theory",
+      "_tgt": "ai_studio_code_boss_line_curse",
+      "source": "ai_studio_code_boss_line_curse",
+      "target": "ai_studio_code_rationale_theory"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "docs/plans/2026-03-21-homepage-redesign.md",
+      "weight": 0.8,
+      "_src": "redesign_ai_platforms",
+      "_tgt": "ai_studio_code_gemini_portal",
+      "source": "ai_studio_code_gemini_portal",
+      "target": "redesign_ai_platforms"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PROGRESS.md",
+      "weight": 1.0,
+      "_src": "progress_cache_invalidation",
+      "_tgt": "progress_sw_js",
+      "source": "progress_cache_invalidation",
+      "target": "progress_sw_js"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PROGRESS.md",
+      "weight": 1.0,
+      "_src": "progress_agent_antigravity",
+      "_tgt": "progress_cache_invalidation",
+      "source": "progress_cache_invalidation",
+      "target": "progress_agent_antigravity"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PROGRESS.md",
+      "weight": 1.0,
+      "_src": "progress_rationale_cache",
+      "_tgt": "progress_cache_invalidation",
+      "source": "progress_cache_invalidation",
+      "target": "progress_rationale_cache"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "weight": 0.8,
+      "_src": "readme_progress_md",
+      "_tgt": "progress_cache_invalidation",
+      "source": "progress_cache_invalidation",
+      "target": "readme_progress_md"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PROGRESS.md",
+      "weight": 1.0,
+      "_src": "progress_ui_overhaul",
+      "_tgt": "progress_magic_cursor",
+      "source": "progress_ui_overhaul",
+      "target": "progress_magic_cursor"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PROGRESS.md",
+      "weight": 1.0,
+      "_src": "progress_ui_overhaul",
+      "_tgt": "progress_glassmorphism_cards",
+      "source": "progress_ui_overhaul",
+      "target": "progress_glassmorphism_cards"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PROGRESS.md",
+      "weight": 1.0,
+      "_src": "progress_agent_antigravity",
+      "_tgt": "progress_ui_overhaul",
+      "source": "progress_ui_overhaul",
+      "target": "progress_agent_antigravity"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PROGRESS.md",
+      "weight": 0.8,
+      "_src": "progress_ui_overhaul",
+      "_tgt": "progress_tailwind4",
+      "source": "progress_ui_overhaul",
+      "target": "progress_tailwind4"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PROGRESS.md",
+      "weight": 1.0,
+      "_src": "progress_dynamic_hot_tags",
+      "_tgt": "progress_curses_data_tsx",
+      "source": "progress_dynamic_hot_tags",
+      "target": "progress_curses_data_tsx"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PROGRESS.md",
+      "weight": 1.0,
+      "_src": "progress_dynamic_hot_tags",
+      "_tgt": "progress_page_tsx",
+      "source": "progress_dynamic_hot_tags",
+      "target": "progress_page_tsx"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "docs/plans/2026-03-21-homepage-redesign.md",
+      "weight": 0.7,
+      "_src": "redesign_spell_library",
+      "_tgt": "progress_curses_data_tsx",
+      "source": "progress_curses_data_tsx",
+      "target": "redesign_spell_library"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "weight": 0.8,
+      "_src": "readme_nextjs",
+      "_tgt": "readme_vercel",
+      "source": "readme_nextjs",
+      "target": "readme_vercel"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "weight": 1.0,
+      "_src": "readme_nextjs",
+      "_tgt": "readme_geist_font",
+      "source": "readme_nextjs",
+      "target": "readme_geist_font"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/plans/2026-03-21-homepage-redesign.md",
+      "weight": 1.0,
+      "_src": "redesign_hero_section",
+      "_tgt": "redesign_three_step_guide",
+      "source": "redesign_hero_section",
+      "target": "redesign_three_step_guide"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/plans/2026-03-21-homepage-redesign.md",
+      "weight": 1.0,
+      "_src": "redesign_rationale_clarity",
+      "_tgt": "redesign_hero_section",
+      "source": "redesign_hero_section",
+      "target": "redesign_rationale_clarity"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/plans/2026-03-21-homepage-redesign.md",
+      "weight": 1.0,
+      "_src": "redesign_trust_bar",
+      "_tgt": "redesign_ai_platforms",
+      "source": "redesign_trust_bar",
+      "target": "redesign_ai_platforms"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/plans/2026-03-21-homepage-redesign.md",
+      "weight": 1.0,
+      "_src": "redesign_rationale_clarity",
+      "_tgt": "redesign_trust_bar",
+      "source": "redesign_trust_bar",
+      "target": "redesign_rationale_clarity"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/plans/2026-03-21-homepage-redesign.md",
+      "weight": 1.0,
+      "_src": "redesign_rationale_clarity",
+      "_tgt": "redesign_visual_rhythm",
+      "source": "redesign_visual_rhythm",
+      "target": "redesign_rationale_clarity"
+    }
+  ],
+  "hyperedges": []
+}
