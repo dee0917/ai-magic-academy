@@ -6,3 +6,7 @@ out/
 .vercel
 .env
 .env.local
+
+# graphify analysis artifacts
+.graphify_*.json
+graphify-out/
