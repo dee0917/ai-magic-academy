@@ -1,5 +1,5 @@
 import {
-  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell
+  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap
 } from "lucide-react";
 import React from "react";
 
@@ -2007,6 +2007,83 @@ export const CURSES = [
     ],
     theory: "基於漸進超負荷（Progressive Overload）與執行意圖（Implementation Intentions, Gollwitzer）：身體只有在被『比上次稍微多一點』的負荷刺激時才會進步，所以一份好的課表必須內建『下週怎麼加量』，而不是每週原地踏步。但比課表更難的是『持續做』——研究顯示，把運動用『在 X 情境就做 Y』的具體計畫綁進固定時間（如『下班到家先換衣服就開始』），執行率會大幅提高。本咒語同時給你進步的路徑與不放棄的觸發機制。",
     generate: (inputs: any) => `你是一位有實戰經驗的私人教練，懂運動生理也帶過很多新手，最擅長依每個人手邊的器材、時間和身體狀況，排出『做得到又看得到效果』的課表。你不會丟一份網紅同款狂操菜單，而是量身打造。你的信條：「最好的課表不是最狂的，是你會持續做下去的那一份。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我想開始運動，請依我的條件幫我排一份能直接照做的健身菜單。\n- 健身目標：[[${inputs.goal}]]\n- 可用器材與場地：[[${inputs.equipment}]]\n- 每週能練幾天、每次多久：[[${inputs.schedule}]]\n- 身體狀況與限制：[[${inputs.body}]]\n\n請輸出：\n① 【一週課表】— 哪幾天練、各練什麼部位、哪天休息，一眼看懂，符合我能練的天數\n② 【單次訓練菜單】— 每個動作的組數×次數＋組間休息秒數，照著做就好，符合我有的器材\n③ 【動作要點與替代】— 每個動作一句正確做法提醒，並給一個沒器材或受限時的替代動作\n④ 【漸進計畫】— 下週或下個月怎麼加量避免卡關，30 字以內\n⑤ 【吃的小建議】— 配合目標的 3 個能做到的飲食原則，不要叫我算複雜熱量\n⑥ 【安全提醒】— 哪些狀況該停下或先看醫生，結尾再給我一句鼓勵，30 字以內\n\n【規則】\n1. 課表與菜單要具體到能直接照做（幾組幾下休息幾秒），且符合我列的器材與時間，不要排出我做不到的份量。\n2. 嚴禁拿「視個人情況調整」「請諮詢專業教練後再做」當主要內容打發我，也不准用「燃脂」「爆汗」這類空泛形容詞充數。\n3. 運用漸進超負荷說明這週強度與下週怎麼進步；用執行意圖把運動綁進固定時間情境（如「下班到家先換衣服就開始」）。\n4. 語氣像會帶人的教練——明確、給得出數字、會鼓勵但不灌雞湯。\n5. 安全測試：這份菜單對我的狀況要安全可執行；若我有提到傷病或身體不適，必須在最前面提醒我先就醫評估、並給出保守版本（本菜單僅供參考，不取代專業醫療或教練評估）。`
+  },
+
+  // ━━━ 🔵 中階秘術 | 校園生存 | Free ━━━
+  {
+    id: "self_intro_forge",
+    tab: "校園生存",
+    isPro: false,
+    tier: "adept",
+    school: "illusion" as SchoolType,
+    subSchool: "insight" as SchoolType,
+    outputFormat: "自傳 + 60秒口說自介",
+    icon: <GraduationCap className="w-8 h-8 text-blue-500" />,
+    color: "blue",
+    title: "自傳煉成：自我介紹術",
+    desc: "履歷自傳寫不出來、面試一開口就卡？全丟給 AI 又被嫌沒人味、過不了 ATS 篩選？這咒語把你零散的經歷煉成有結構又有溫度的自傳，再附一份 60 秒面試口說稿，讓你一開口就贏。",
+    tags: ["履歷自傳", "面試自介", "求職新鮮人"],
+    fields: [
+      { id: "background", label: "你的身分與求職方向", placeholder: "例：資管系應屆 / 想轉職數位行銷 / 找暑期實習" },
+      { id: "experiences", label: "你有哪些經歷或作品", placeholder: "例：辦過系上活動、打工兩年、做過一個side project、社團幹部" },
+      { id: "target", label: "要投的職位或科系", placeholder: "例：行銷企劃實習 / 軟體工程師 / 研究所推甄" },
+      { id: "personality", label: "你想強調的特質", placeholder: "例：扛得住高壓、很會帶團隊、自學能力強" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "煉成策略",
+      options: [
+        "故事亮點型：用一個具體事件當主線，讓人記得住你、不淪為流水帳",
+        "數據實績型：把經歷量化成成果數字，最快通過 HR 和 ATS 的第一眼篩選",
+        "潛力翻轉型：經歷不多也不怕，把學習力與動機包裝成「可栽培」的稀缺特質",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '資深HR＋履歷顧問' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '禁空泛形容詞' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '自傳+口說+關鍵字+地雷' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依經歷多寡選策略' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '人味測試防AI腔' },
+    ],
+    theory: "基於 STAR 行為面試法則與敘事身份理論（Narrative Identity, McAdams）：HR 一份履歷平均只看 7 秒，刷掉你的不是經歷不夠，而是你寫得跟所有人一樣。本咒語用 STAR（情境-任務-行動-結果）把空泛特質換成可驗證的成果，再用敘事身份把零散經歷串成一條「你是誰」的主線；同時遵守台灣 HR 共識的『七三原則』（七成真實經歷、三成潤飾），既過 ATS 關鍵字也保住人味。",
+    generate: (inputs: any) => `你是一位資深 HR 兼履歷顧問，看過上萬份履歷，也當過面試官，最清楚「7 秒內被刷掉」和「想約來聊聊」的差別在哪。你的信條：「沒有不值得寫的經歷，只有不會說故事的人。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我要寫自傳和準備面試自我介紹，請把我的經歷煉成讓人想錄取我的版本。\n- 我的身分與求職方向：[[${inputs.background}]]\n- 我有的經歷或作品：[[${inputs.experiences}]]\n- 要投的職位或科系：[[${inputs.target}]]\n- 想強調的特質：[[${inputs.personality}]]\n\n請輸出：\n① 【自傳草稿】— 一篇 250-350 字的自傳，分「我是誰 → 我做過什麼 → 為什麼是我」三段，可直接貼上\n② 【60 秒口說自介】— 面試一開口就講的版本，120 字以內，口語、好背、念得完\n③ 【ATS 關鍵字】— 針對這個職位該植入的 5 個關鍵字，列出來\n④ 【一句記憶點】— 讓面試官記住你的個人標籤，15 字以內\n⑤ 【地雷清單】— 這份自傳/自介最容易踩的 3 個雷，各一句\n\n【規則】\n1. 自傳分三段、可直接複製貼上；口說稿要能一口氣念完不超過 60 秒。\n2. 嚴禁使用：「抗壓性高」「學習力強」「個性活潑」「認真負責」這類人人都寫、HR 一眼略過的空話——每個特質都必須用一件具體事件證明。\n3. 運用 STAR 把經歷寫成可驗證的成果，並遵守七三原則：只能潤飾與重組我提供的真實經歷，絕不虛構或灌水數字。\n4. 語氣像一個有底氣的人在自我推薦——不卑微、不浮誇、不灌雞湯。\n5. 人味測試：念出來要像「真人在講自己的故事」而非 ChatGPT 罐頭——如果整段把名字拿掉後套在任何人身上都成立，就是失敗，重寫到只屬於我。`
+  },
+
+  // ━━━ 📜 見習咒文 | 生活娛樂 | Free ━━━
+  {
+    id: "dating_icebreaker",
+    tab: "生活娛樂",
+    isPro: false,
+    tier: "apprentice",
+    school: "illusion" as SchoolType,
+    subSchool: "insight" as SchoolType,
+    outputFormat: "交友開場白 + 話題鉤子",
+    icon: <Magnet className="w-8 h-8 text-gray-500" />,
+    color: "gray",
+    title: "破冰召喚：配對開場術",
+    desc: "配對到心儀對象卻只會傳『嗨』『在嗎』然後被已讀不回？這咒語讀對方的檔案幫你客製一句讓人想回的開場白，再附幾顆能聊下去的話題鉤子，把配對變成真正的對話。",
+    tags: ["交友軟體", "聊天開場", "脫單"],
+    fields: [
+      { id: "their_profile", label: "對方檔案有什麼", placeholder: "例：照片在爬山、自介寫愛看貓、放了一張咖啡照" },
+      { id: "my_vibe", label: "你想給的感覺", placeholder: "例：幽默風趣 / 真誠穩重 / 輕鬆隨性" },
+      { id: "app_context", label: "在哪配對、想先聊還是想約", placeholder: "例：Tinder想先聊熟 / Omi答題配對 / 想直接約咖啡" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "破冰策略",
+      options: [
+        "細節鉤子型：抓對方檔案裡一個小細節當切入點，證明你有認真看、不是亂槍打鳥",
+        "趣味挑戰型：用一個輕鬆的提問或玩笑邀請對方接話，讓對話自然滾起來",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '約會教練＋聊天軍師' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '禁罐頭開場語' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '開場+話題鉤+接話+地雷' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依對方檔案選切入' },
+    ],
+    theory: "基於社會滲透理論（Social Penetration, Altman & Taylor）的自我揭露遞進：聊天能不能熱起來，關鍵不是你多有趣，而是你有沒有給對方一個「容易接、且想接」的話頭。「嗨／在嗎」這種罐頭把回話成本整個丟給對方，已讀率最高；本咒語反過來降低對方的回覆門檻，扣住檔案裡的具體細節給一個低成本好接的開口，讓關係從淺到深自然滾動。",
+    generate: (inputs: any) => `你是一位約會教練兼聊天軍師，幫過上百人從「配對到沒下文」變成「聊到約出來」，最懂交友軟體上一句話的生與死。你的信條：「會不會聊，差在你有沒有給對方一個想回的理由。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我在交友軟體上配對到對象，需要一句讓對方想回的開場白和能聊下去的話題。\n- 對方檔案有什麼：[[${inputs.their_profile}]]\n- 我想給的感覺：[[${inputs.my_vibe}]]\n- 在哪配對、想先聊還是想約：[[${inputs.app_context}]]\n\n請輸出：\n① 【開場白】— 3 個版本，每個 30 字以內，可直接複製傳出\n② 【話題鉤子】— 根據對方檔案延伸的 3 個能聊下去的話題方向\n③ 【接話備案】— 如果對方只回「哈哈」或很冷淡時的第二句，25 字以內\n④ 【地雷清單】— 這類對象最容易聊死的 3 種開場，各一句\n\n【規則】\n1. 每則開場白 30 字以內，口語、能直接貼到交友軟體送出。\n2. 嚴禁用「嗨」「在嗎」「可以認識你嗎」「你好漂亮／好帥」開頭——這些是把球丟回給對方的罐頭，已讀率最高。\n3. 運用自我揭露遞進：開場要給對方一個低成本、好接話的話頭，且最好扣住對方檔案的具體細節，不要泛泛而談。\n4. 語氣依我選的感覺走，輕鬆自然、像真人在聊天，不油、不裝、不像業務開發。\n5. 回覆測試：這句開場傳出去，對方會想「咦這個有點意思」而動手回，而不是已讀不回。`
   },
 ];
 
