@@ -147,7 +147,7 @@ export default function SpellBrowser() {
                   className="flex-1 h-4"
                   style={{ borderTop: '4px solid var(--ink)', borderBottom: '4px solid var(--ink)', background: 'var(--mustard)', opacity: 0.5 }}
                 />
-                <div className="flex items-center gap-2 px-4 text-[10px] font-black uppercase tracking-[0.2em]" style={{ color: 'var(--ink)', opacity: 0.4, fontFamily: 'var(--font-chivo)' }}>
+                <div className="flex items-center gap-2 px-4 text-[10px] font-black uppercase tracking-[0.2em]" style={{ color: 'var(--ink)', opacity: 0.6, fontFamily: 'var(--font-chivo)' }}>
                   Scroll <ArrowRight className="w-3 h-3" />
                 </div>
               </div>
@@ -199,14 +199,14 @@ export default function SpellBrowser() {
                         <div className="flex items-start justify-between mb-3 relative z-10">
                           <div className="flex items-center gap-1.5 flex-wrap">
                             <div
-                              className="text-[10px] font-black px-2 py-1"
+                              className="text-[11px] font-black px-2 py-1"
                               style={{ background: tabColor, fontFamily: 'var(--font-chivo)', color: '#FEFAF0' }}
                             >
                               {curse.tab}
                             </div>
                             {curse.tier && TIER_CONFIG[curse.tier] && (
                               <div
-                                className="text-[9px] font-black px-2 py-1 tracking-wider"
+                                className="text-[11px] font-black px-2 py-1 tracking-wider"
                                 style={{
                                   fontFamily: 'var(--font-chivo)',
                                   color: curse.tier === 'forbidden' ? '#D4AF37' : TIER_CONFIG[curse.tier].color,
@@ -217,38 +217,20 @@ export default function SpellBrowser() {
                                 {TIER_CONFIG[curse.tier].label}
                               </div>
                             )}
-                            {schoolInfo && (
-                              <div
-                                className="text-[9px] font-black px-2 py-1 tracking-wider flex items-center gap-1"
-                                style={{
-                                  fontFamily: 'var(--font-chivo)',
-                                  color: schoolInfo.color,
-                                  border: `2px solid ${schoolInfo.color}`,
-                                  background: 'transparent',
-                                }}
-                                title={`主流派：${schoolInfo.label}`}
-                              >
-                                <span>{schoolInfo.emoji}</span>{schoolInfo.label}
-                              </div>
-                            )}
-                            {subSchoolInfo && (
-                              <div
-                                className="text-[9px] font-black px-2 py-1 tracking-wider flex items-center gap-1"
-                                style={{
-                                  fontFamily: 'var(--font-chivo)',
-                                  color: subSchoolInfo.color,
-                                  border: `2px dashed ${subSchoolInfo.color}`,
-                                  background: 'transparent',
-                                  opacity: 0.75,
-                                }}
-                                title={`副流派：${subSchoolInfo.label}`}
-                              >
-                                <span>{subSchoolInfo.emoji}</span>{subSchoolInfo.label}
-                              </div>
-                            )}
                           </div>
-                          <div className="text-lg" style={{ color: 'var(--ink)', opacity: 0.4 }}>
-                            {curse.icon}
+                          {/* School crest — main + sub as emoji only (solution A) */}
+                          <div className="flex items-center gap-1.5 flex-shrink-0">
+                            <span className="text-lg leading-none" style={{ color: 'var(--ink)', opacity: 0.4 }}>
+                              {curse.icon}
+                            </span>
+                            {schoolInfo && (
+                              <span className="flex items-baseline gap-0.5 leading-none">
+                                <span className="text-xl leading-none" title={`主流派：${schoolInfo.label}`}>{schoolInfo.emoji}</span>
+                                {subSchoolInfo && (
+                                  <span className="text-sm leading-none" style={{ opacity: 0.65 }} title={`副流派：${subSchoolInfo.label}`}>{subSchoolInfo.emoji}</span>
+                                )}
+                              </span>
+                            )}
                           </div>
                         </div>
 
@@ -279,12 +261,12 @@ export default function SpellBrowser() {
                       {/* Footer */}
                       <div className="flex items-center justify-between px-5 py-3">
                         {/* Stamp-style spell code */}
-                        <span className="text-[9px] font-black px-1.5 py-0.5 tracking-wider select-none"
+                        <span className="text-[11px] font-black px-1.5 py-0.5 tracking-wider select-none"
                           style={{
                             fontFamily: 'var(--font-chivo)',
                             color: 'var(--dark-red)',
                             border: '1.5px solid var(--dark-red)',
-                            opacity: 0.45,
+                            opacity: 0.8,
                             transform: 'rotate(-2deg)',
                           }}>
                           {getSpellCode(curse)}

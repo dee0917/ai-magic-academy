@@ -86,7 +86,7 @@ export default function CastingModal() {
                         {selectedCurse.icon}
                       </div>
                       <div>
-                        <div className="text-[10px] font-black uppercase tracking-wider mb-1"
+                        <div className="text-[11px] font-black uppercase tracking-wider mb-1"
                           style={{ fontFamily: 'var(--font-chivo)', color: getTabColor(selectedCurse.tab) }}>
                           {selectedCurse.tab}
                         </div>
@@ -118,7 +118,7 @@ export default function CastingModal() {
                     <div style={{ border: '2px dashed var(--ink)', padding: '20px', opacity: 0.9 }}>
                       {/* Cast level selector — 魔力消耗 */}
                       <div className="mb-5">
-                        <label className="block text-[10px] font-black uppercase tracking-[0.15em] mb-2"
+                        <label className="block text-[11px] font-black uppercase tracking-[0.15em] mb-2"
                           style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)' }}>
                           詠唱強度 CHANT LEVEL
                         </label>
@@ -139,11 +139,11 @@ export default function CastingModal() {
                           )})}
                         </div>
                         <div className="flex items-center justify-between mt-2">
-                          <span className="text-[10px] font-bold" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.5 }}>
+                          <span className="text-[11px] font-bold" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.7 }}>
                             BETA 內測・魔力無限
                           </span>
                           {castLevel === 'full' && (
-                            <span className="text-[9px] font-black px-2 py-0.5" style={{ background: 'var(--teal)', color: 'var(--parchment)', fontFamily: 'var(--font-chivo)' }}>
+                            <span className="text-[11px] font-black px-2 py-0.5" style={{ background: 'var(--teal)', color: 'var(--parchment)', fontFamily: 'var(--font-chivo)' }}>
                               ★ 可收集卡片
                             </span>
                           )}
@@ -157,7 +157,7 @@ export default function CastingModal() {
                         )
                         .map((f: any) => (
                           <div key={f.id} className="mb-5">
-                            <label className="block text-[10px] font-black uppercase tracking-[0.15em] mb-2"
+                            <label className="block text-[11px] font-black uppercase tracking-[0.15em] mb-2"
                               style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)' }}>
                               {f.label} {f.id.toUpperCase().replace(/_/g, ' ')}
                             </label>
@@ -175,7 +175,7 @@ export default function CastingModal() {
                       {/* Tweak */}
                       {selectedCurse.tweak && (
                         <div className="mb-2">
-                          <label className="block text-[10px] font-black uppercase tracking-[0.15em] mb-2"
+                          <label className="block text-[11px] font-black uppercase tracking-[0.15em] mb-2"
                             style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)' }}>
                             {selectedCurse.tweak.label}
                           </label>
@@ -235,7 +235,7 @@ export default function CastingModal() {
                       </p>
                       <div className="flex gap-2">
                         {['META_DATA: V2.4', 'STRENGTH: HIGH', `PARAMS: ${selectedCurse.fields?.length || 0}`].map(tag => (
-                          <span key={tag} className="text-[9px] font-bold px-2 py-1"
+                          <span key={tag} className="text-[11px] font-bold px-2 py-1"
                             style={{ fontFamily: 'var(--font-chivo)', border: '1px solid rgba(139,38,38,0.5)', color: 'rgba(139,38,38,0.8)', background: 'rgba(139,38,38,0.1)' }}>
                             {tag}
                           </span>
@@ -313,7 +313,7 @@ export default function CastingModal() {
                         {selectedCurse.icon}
                       </div>
                       <div>
-                        <div className="text-[10px] font-black uppercase tracking-wider mb-1"
+                        <div className="text-[11px] font-black uppercase tracking-wider mb-1"
                           style={{ fontFamily: 'var(--font-chivo)', color: getTabColor(selectedCurse.tab) }}>
                           {selectedCurse.tab}
                         </div>
@@ -341,7 +341,7 @@ export default function CastingModal() {
                   <div style={{ border: '2px dashed var(--ink)', padding: '20px', opacity: 0.9 }}>
                     {/* Cast level selector — desktop */}
                     <div className="mb-5">
-                      <label className="block text-[10px] font-black uppercase tracking-[0.15em] mb-2"
+                      <label className="block text-[11px] font-black uppercase tracking-[0.15em] mb-2"
                         style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)' }}>
                         魔力消耗 MP COST
                       </label>
@@ -362,11 +362,11 @@ export default function CastingModal() {
                         )})}
                       </div>
                       <div className="flex items-center justify-between mt-2">
-                        <span className="text-[10px] font-bold" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.5 }}>
+                        <span className="text-[11px] font-bold" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)', opacity: 0.7 }}>
                           目前魔力：{mp} MP
                         </span>
                         {castLevel === 'full' && (
-                          <span className="text-[9px] font-black px-2 py-0.5" style={{ background: 'var(--teal)', color: 'var(--parchment)', fontFamily: 'var(--font-chivo)' }}>
+                          <span className="text-[11px] font-black px-2 py-0.5" style={{ background: 'var(--teal)', color: 'var(--parchment)', fontFamily: 'var(--font-chivo)' }}>
                             ★ 可收集卡片
                           </span>
                         )}
@@ -380,7 +380,7 @@ export default function CastingModal() {
                       )
                       .map((f: any) => (
                         <div key={f.id} className="mb-5">
-                          <label className="block text-[10px] font-black uppercase tracking-[0.15em] mb-2"
+                          <label className="block text-[11px] font-black uppercase tracking-[0.15em] mb-2"
                             style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)' }}>
                             {f.label} {f.id.toUpperCase().replace(/_/g, ' ')}
                           </label>
@@ -398,7 +398,7 @@ export default function CastingModal() {
                     {/* Tweak */}
                     {selectedCurse.tweak && (
                       <div className="mb-2">
-                        <label className="block text-[10px] font-black uppercase tracking-[0.15em] mb-2"
+                        <label className="block text-[11px] font-black uppercase tracking-[0.15em] mb-2"
                           style={{ fontFamily: 'var(--font-chivo)', color: 'var(--ink)' }}>
                           {selectedCurse.tweak.label}
                         </label>
@@ -511,7 +511,7 @@ export default function CastingModal() {
                       `STRENGTH: HIGH`,
                       `PARAMS: ${selectedCurse.fields?.length || 0}`,
                     ].map(tag => (
-                      <span key={tag} className="text-[9px] font-bold px-2 py-1"
+                      <span key={tag} className="text-[11px] font-bold px-2 py-1"
                         style={{ fontFamily: 'var(--font-chivo)', border: '1px solid rgba(139,38,38,0.5)', color: 'rgba(139,38,38,0.8)', background: 'rgba(139,38,38,0.1)' }}>
                         {tag}
                       </span>
