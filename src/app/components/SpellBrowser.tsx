@@ -9,6 +9,25 @@ import { SchoolSigil } from "./SchoolSigil";
 
 const SCHOOL_KEYS: SchoolType[] = ['defense', 'attack', 'healing', 'illusion', 'contract', 'insight'];
 
+// 泥金邊框：四角捲草飾 + 內金線框（純裝飾，不擋點擊）
+function GoldFrame() {
+  const corner = (pos: 'tl' | 'tr' | 'bl' | 'br') => {
+    const rot = { tl: 0, tr: 90, br: 180, bl: 270 }[pos];
+    const place: React.CSSProperties = { tl: { top: 6, left: 6 }, tr: { top: 6, right: 6 }, bl: { bottom: 6, left: 6 }, br: { bottom: 6, right: 6 } }[pos];
+    return (
+      <svg key={pos} className="absolute z-10 pointer-events-none" style={{ ...place, transform: `rotate(${rot}deg)` }} width="30" height="30" viewBox="0 0 34 34" fill="none" stroke="var(--mustard)" strokeWidth="1.6" strokeLinecap="round">
+        <path d="M2 14 V2 H14" /><path d="M2 14 C2 7 7 2 14 2" /><path d="M6 6 C12 6 12 12 6 12" /><circle cx="4" cy="4" r="1.4" fill="var(--mustard)" stroke="none" />
+      </svg>
+    );
+  };
+  return (
+    <>
+      {(['tl', 'tr', 'bl', 'br'] as const).map(corner)}
+      <div className="absolute z-10 pointer-events-none" style={{ inset: 10, border: '1px solid var(--mustard)', opacity: 0.5 }} />
+    </>
+  );
+}
+
 export default function SpellBrowser() {
   const {
     searchQuery, setSearchQuery,
@@ -185,6 +204,9 @@ export default function SpellBrowser() {
                     >
                       {/* Colored top stripe */}
                       <div style={{ height: '6px', background: curse.tier && TIER_CONFIG[curse.tier] ? TIER_CONFIG[curse.tier].color : tabColor }} />
+
+                      {/* 泥金邊框 */}
+                      <GoldFrame />
 
                       {/* Big background number — card center-right */}
                       <span
