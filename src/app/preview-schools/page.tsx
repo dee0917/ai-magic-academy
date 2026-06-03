@@ -7,15 +7,15 @@ import { SchoolSigil } from "../components/SchoolSigil";
 
 const PARCH = "#FEFAF0";
 const INK = "var(--ink)";
-const WAX = "#8B2626"; // dark-red wax
+const WAX = "#8B2626";
 const GOLD = "var(--mustard)";
+const GOLD_HEX = "#E8A838";
 
 type Sample = {
   id: string; tab: string; tier: keyof typeof TIER_CONFIG;
   school: SchoolType; subSchool: SchoolType;
   title: string; desc: string; icon: string; code: string;
 };
-
 const SAMPLES: Sample[] = [
   { id: "demo1", tab: "職場求生", tier: "master", school: "attack", subSchool: "insight",
     title: "奪回戰功術", icon: "⚔️", code: "Ⅲ-SV-014",
@@ -25,10 +25,9 @@ const SAMPLES: Sample[] = [
     desc: "合夥要拆夥？先把醜話寫成漂亮條款，保護自己不被坑也不傷和氣。" },
 ];
 
-/* ───────────────── shared pieces (all variants keep these) ───────────────── */
+/* shared */
 function CategoryPill({ curse }: { curse: Sample }) {
-  const tabColor = getTabColor(curse.tab);
-  return <span className="text-[11px] font-black px-2 py-1" style={{ background: tabColor, fontFamily: "var(--font-chivo)", color: PARCH }}>{curse.tab}</span>;
+  return <span className="text-[11px] font-black px-2 py-1" style={{ background: getTabColor(curse.tab), fontFamily: "var(--font-chivo)", color: PARCH }}>{curse.tab}</span>;
 }
 function TierBadge({ curse }: { curse: Sample }) {
   const tier = TIER_CONFIG[curse.tier];
@@ -38,343 +37,132 @@ function TierBadge({ curse }: { curse: Sample }) {
 function RepIcon({ curse }: { curse: Sample }) {
   return <span className="text-lg" style={{ color: INK, opacity: 0.4 }}>{curse.icon}</span>;
 }
-function Desc({ curse }: { curse: Sample }) {
-  const tabColor = getTabColor(curse.tab);
-  return (
-    <div className="px-5 py-3 flex-1">
-      <div style={{ borderLeft: `3px solid ${tabColor}`, paddingLeft: "12px" }}>
-        <p className="text-sm leading-relaxed" style={{ fontFamily: "var(--font-noto-sans-tc)", color: INK, opacity: 0.75 }}>{curse.desc}</p>
-      </div>
-    </div>
-  );
-}
-function Footer({ curse }: { curse: Sample }) {
-  const tabColor = getTabColor(curse.tab);
-  return (
-    <div className="flex items-center justify-between px-5 py-3">
-      <span className="text-[11px] font-black px-1.5 py-0.5 tracking-wider select-none" style={{ fontFamily: "var(--font-chivo)", color: WAX, border: `1.5px solid ${WAX}`, opacity: 0.8, transform: "rotate(-2deg)" }}>{curse.code}</span>
-      <span className="flex items-center gap-1 text-xs font-black" style={{ fontFamily: "var(--font-noto-sans-tc)", color: tabColor }}>詠唱 →</span>
-    </div>
-  );
-}
-function shellStyle(curse: Sample): React.CSSProperties {
-  const tier = TIER_CONFIG[curse.tier];
-  return { border: `4px solid ${tier.borderColor}`, boxShadow: "var(--shadow-sm)", background: PARCH };
-}
-function TopStripe({ curse }: { curse: Sample }) {
-  const tier = TIER_CONFIG[curse.tier];
-  return <div style={{ height: "6px", background: tier.color }} />;
-}
 
-/* ───────────────── V1 — 垂吊封蠟 (hanging charter seals) ───────────────── */
-function V1Pendant({ curse }: { curse: Sample }) {
-  const root = useRef<HTMLDivElement>(null);
+/* the requested school line: ──✦ [sigil]主 · [sigil]副 ✦── */
+function SchoolDivider({ curse }: { curse: Sample }) {
   const main = SCHOOL_CONFIG[curse.school];
   const sub = SCHOOL_CONFIG[curse.subSchool];
-  useEffect(() => {
-    const el = root.current; if (!el) return;
-    animate(el.querySelectorAll<HTMLElement>(".seal-drop"), { y: [-16, 0], opacity: [0, 1], duration: 600, delay: stagger(120), ease: "outBack" });
-    animate(el.querySelectorAll<HTMLElement>(".seal-swing"), { rotate: [-3.5, 3.5], loop: true, alternate: true, ease: "inOutSine", duration: 2600, delay: stagger(300) });
-  }, []);
-  const Seal = ({ s, big }: { s: typeof main; big?: boolean }) => {
-    const d = big ? 44 : 30;
-    return (
-      <div className="seal-swing flex flex-col items-center" style={{ transformOrigin: "top center" }}>
-        <div style={{ width: 2, height: big ? 16 : 11, background: INK, opacity: 0.7 }} />
-        <div className="seal-drop flex items-center justify-center" style={{ width: d, height: d, borderRadius: "50%", background: WAX, border: "2px solid var(--ink)", boxShadow: "3px 3px 0 var(--ink)" }}>
-          <SchoolSigil school={s === main ? curse.school : curse.subSchool} size={big ? 24 : 17} color={PARCH} strokeWidth={1.6} />
-        </div>
-        <span className="mt-1 text-[10px] font-black tracking-wide" style={{ fontFamily: "var(--font-noto-serif-tc)", color: INK }}>{s.label}</span>
-      </div>
-    );
-  };
   return (
-    <div ref={root} className="flex-shrink-0 w-[300px] flex flex-col relative overflow-hidden" style={shellStyle(curse)}>
-      <TopStripe curse={curse} />
-      <div className="p-5 pb-3 flex items-start justify-between"><div className="flex items-center gap-1.5 flex-wrap"><CategoryPill curse={curse} /><TierBadge curse={curse} /></div><RepIcon curse={curse} /></div>
-      <h3 className="px-5 text-xl leading-tight" style={{ fontFamily: "var(--font-noto-serif-tc)", fontWeight: 900, color: INK }}>{curse.title}</h3>
-      <Desc curse={curse} />
-      <div className="mx-5" style={{ borderTop: "2px dashed var(--ink)", opacity: 0.3 }} />
-      <div className="flex items-start justify-center gap-7 pt-2 pb-1">
-        <Seal s={main} big />
-        <Seal s={sub} />
-      </div>
-      <Footer curse={curse} />
+    <div className="flex items-center gap-2 mx-5 my-1 relative z-10">
+      <div className="flex-1" style={{ borderTop: "2px dashed var(--ink)", opacity: 0.3 }} />
+      <span style={{ color: GOLD, fontSize: 12 }}>✦</span>
+      <span className="flex items-center gap-1 text-[12px] font-black" style={{ fontFamily: "var(--font-noto-serif-tc)", color: INK }}>
+        <SchoolSigil school={curse.school} size={15} color={main.color} />{main.label}
+      </span>
+      <span style={{ color: INK, opacity: 0.4 }}>·</span>
+      <span className="flex items-center gap-1 text-[12px] font-black" style={{ fontFamily: "var(--font-noto-serif-tc)", color: INK, opacity: 0.88 }}>
+        <SchoolSigil school={curse.subSchool} size={13} color={sub.color} />{sub.label}
+      </span>
+      <span style={{ color: GOLD, fontSize: 12 }}>✦</span>
+      <div className="flex-1" style={{ borderTop: "2px dashed var(--ink)", opacity: 0.3 }} />
     </div>
   );
 }
 
-/* ───────────────── V2 — 燕尾紋章絲帶 (forked heraldic ribbon) ───────────────── */
-function V2Ribbon({ curse }: { curse: Sample }) {
-  const root = useRef<HTMLDivElement>(null);
-  const main = SCHOOL_CONFIG[curse.school];
-  const sub = SCHOOL_CONFIG[curse.subSchool];
-  useEffect(() => {
-    const el = root.current; if (!el) return;
-    animate(el.querySelectorAll<HTMLElement>(".ribbon-main"), { scaleX: [0, 1], opacity: [0, 1], duration: 760, ease: "outExpo" });
-    animate(el.querySelectorAll<HTMLElement>(".ribbon-sub"), { scaleX: [0, 1], opacity: [0, 1], duration: 700, delay: 220, ease: "outExpo" });
-  }, []);
-  return (
-    <div ref={root} className="flex-shrink-0 w-[300px] flex flex-col relative overflow-hidden" style={shellStyle(curse)}>
-      <TopStripe curse={curse} />
-      <div className="p-5 pb-3 flex items-start justify-between"><div className="flex items-center gap-1.5 flex-wrap"><CategoryPill curse={curse} /><TierBadge curse={curse} /></div><RepIcon curse={curse} /></div>
-      <h3 className="px-5 text-xl leading-tight" style={{ fontFamily: "var(--font-noto-serif-tc)", fontWeight: 900, color: INK }}>{curse.title}</h3>
-      <Desc curse={curse} />
-      {/* main ribbon banner with folded ends + swallowtail */}
-      <div className="relative mt-1 mb-2" style={{ height: 64 }}>
-        <div className="ribbon-main absolute left-0 right-0" style={{ top: 8, transformOrigin: "center" }}>
-          {/* fold tabs behind */}
-          <div className="absolute" style={{ left: 6, top: -6, width: 16, height: 12, background: main.color, filter: "brightness(0.62)", clipPath: "polygon(0 0,100% 0,100% 100%)" }} />
-          <div className="absolute" style={{ right: 6, top: -6, width: 16, height: 12, background: main.color, filter: "brightness(0.62)", clipPath: "polygon(0 0,100% 0,0 100%)" }} />
-          <div className="mx-3 flex items-center justify-center gap-2" style={{ height: 30, background: main.color, color: PARCH, boxShadow: "0 3px 0 rgba(0,0,0,0.28)", clipPath: "polygon(0 0,100% 0,100% 70%,92% 100%,50% 78%,8% 100%,0 70%)" }}>
-            <SchoolSigil school={curse.school} size={17} color={PARCH} strokeWidth={1.7} />
-            <span className="text-[13px] font-black tracking-wide" style={{ fontFamily: "var(--font-noto-serif-tc)" }}>{main.label}</span>
-          </div>
-        </div>
-        {/* sub ribbon tail */}
-        <div className="ribbon-sub absolute" style={{ top: 40, left: "50%", transform: "translateX(-50%)", transformOrigin: "center" }}>
-          <div className="flex items-center gap-1 px-3" style={{ height: 20, background: sub.color, color: PARCH, opacity: 0.92, clipPath: "polygon(0 0,100% 0,90% 100%,50% 72%,10% 100%)" }}>
-            <SchoolSigil school={curse.subSchool} size={12} color={PARCH} strokeWidth={1.8} />
-            <span className="text-[10px] font-black" style={{ fontFamily: "var(--font-noto-serif-tc)" }}>{sub.label}</span>
-          </div>
-        </div>
-      </div>
-      <Footer curse={curse} />
-    </div>
-  );
-}
-
-/* ───────────────── V3 — 泥金邊框 (illuminated gold frame + cartouche) ───────────────── */
 function FiligreeCorner({ pos }: { pos: "tl" | "tr" | "bl" | "br" }) {
   const rot = { tl: 0, tr: 90, br: 180, bl: 270 }[pos];
-  const place: React.CSSProperties = {
-    tl: { top: 6, left: 6 }, tr: { top: 6, right: 6 }, bl: { bottom: 6, left: 6 }, br: { bottom: 6, right: 6 },
-  }[pos];
+  const place: React.CSSProperties = { tl: { top: 6, left: 6 }, tr: { top: 6, right: 6 }, bl: { bottom: 6, left: 6 }, br: { bottom: 6, right: 6 } }[pos];
   return (
-    <svg className="filigree absolute" style={{ ...place, transform: `rotate(${rot}deg)` }} width="34" height="34" viewBox="0 0 34 34" fill="none" stroke={GOLD} strokeWidth="1.6" strokeLinecap="round">
-      <path d="M2 14 V2 H14" />
-      <path d="M2 14 C2 7 7 2 14 2" />
-      <path d="M6 6 C12 6 12 12 6 12" />
-      <circle cx="4" cy="4" r="1.4" fill={GOLD} stroke="none" />
+    <svg className="filigree absolute z-10" style={{ ...place, transform: `rotate(${rot}deg)` }} width="34" height="34" viewBox="0 0 34 34" fill="none" stroke={GOLD} strokeWidth="1.6" strokeLinecap="round">
+      <path d="M2 14 V2 H14" /><path d="M2 14 C2 7 7 2 14 2" /><path d="M6 6 C12 6 12 12 6 12" /><circle cx="4" cy="4" r="1.4" fill={GOLD} stroke="none" />
     </svg>
   );
 }
-function V3Frame({ curse }: { curse: Sample }) {
+
+const RUNE_PATHS = ["M3 1V13", "M3 1V13M3 4L8 1M3 8L8 5", "M2 1L8 7L2 13", "M3 1V13M3 1L8 4M3 7L8 4", "M2 7H10M6 2V12", "M3 1V13M8 1V13M3 7H8", "M2 2L8 12M8 2L2 12", "M5 1V13M2 4L5 1L8 4"];
+const RUNE_POS = [{ t: 26, l: 24 }, { t: 60, l: 250 }, { t: 110, l: 40 }, { t: 150, l: 232 }, { t: 96, l: 150 }, { t: 200, l: 60 }, { t: 188, l: 246 }, { t: 230, l: 150 }];
+const DUST = Array.from({ length: 14 });
+
+type BG = "runes" | "ring" | "dust" | "halftone" | "shimmer";
+
+function FrameCard({ curse, bg }: { curse: Sample; bg: BG }) {
   const root = useRef<HTMLDivElement>(null);
-  const main = SCHOOL_CONFIG[curse.school];
-  const sub = SCHOOL_CONFIG[curse.subSchool];
   useEffect(() => {
     const el = root.current; if (!el) return;
     animate(el.querySelectorAll<HTMLElement>(".filigree"), { scale: [0.4, 1], opacity: [0, 1], duration: 700, delay: stagger(110), ease: "outBack" });
-    animate(el.querySelectorAll<HTMLElement>(".cartouche"), { y: [10, 0], opacity: [0, 1], duration: 700, delay: 360, ease: "outExpo" });
-  }, []);
-  return (
-    <div ref={root} className="flex-shrink-0 w-[300px] flex flex-col relative overflow-hidden" style={shellStyle(curse)}>
-      <TopStripe curse={curse} />
-      <FiligreeCorner pos="tl" /><FiligreeCorner pos="tr" /><FiligreeCorner pos="bl" /><FiligreeCorner pos="br" />
-      <div className="absolute pointer-events-none" style={{ inset: 12, border: `1px solid ${GOLD}`, opacity: 0.5 }} />
-      <div className="p-5 pb-3 flex items-start justify-between relative z-10"><div className="flex items-center gap-1.5 flex-wrap"><CategoryPill curse={curse} /><TierBadge curse={curse} /></div><RepIcon curse={curse} /></div>
-      <h3 className="px-5 text-xl leading-tight relative z-10" style={{ fontFamily: "var(--font-noto-serif-tc)", fontWeight: 900, color: INK }}>{curse.title}</h3>
-      <Desc curse={curse} />
-      {/* gold cartouche carrying the schools */}
-      <div className="cartouche mx-auto mb-2 flex items-center gap-2 px-4 py-1.5" style={{ border: `1.5px solid ${GOLD}`, background: "rgba(232,168,56,0.10)", boxShadow: "2px 2px 0 rgba(42,39,35,0.25)" }}>
-        <span className="flex items-center gap-1" style={{ color: main.color }}><SchoolSigil school={curse.school} size={16} color={main.color} /><span className="text-[12px] font-black" style={{ fontFamily: "var(--font-noto-serif-tc)", color: INK }}>{main.label}</span></span>
-        <span style={{ color: GOLD }}>✦</span>
-        <span className="flex items-center gap-1" style={{ opacity: 0.85 }}><SchoolSigil school={curse.subSchool} size={13} color={sub.color} /><span className="text-[11px] font-black" style={{ fontFamily: "var(--font-noto-serif-tc)", color: INK }}>{sub.label}</span></span>
-      </div>
-      <Footer curse={curse} />
-    </div>
-  );
-}
+    if (bg === "runes") animate(el.querySelectorAll<HTMLElement>(".bg-rune"), { translateY: [8, -8], opacity: [0.05, 0.22], loop: true, alternate: true, ease: "inOutSine", duration: 3000, delay: stagger(260) });
+    if (bg === "ring") animate(el.querySelectorAll<HTMLElement>(".bg-ring"), { rotate: "1turn", loop: true, ease: "linear", duration: 42000 });
+    if (bg === "dust") animate(el.querySelectorAll<HTMLElement>(".bg-dust"), { translateY: [0, -46], opacity: [0.5, 0], scale: [1, 0.3], loop: true, ease: "outQuad", duration: 2800, delay: stagger(190) });
+    if (bg === "halftone") animate(el.querySelectorAll<HTMLElement>(".bg-halftone"), { opacity: [0.05, 0.13], scale: [1, 1.06], loop: true, alternate: true, ease: "inOutSine", duration: 2800 });
+    if (bg === "shimmer") animate(el.querySelectorAll<HTMLElement>(".bg-shimmer"), { translateX: ["-130%", "130%"], loop: true, ease: "linear", duration: 3600 });
+  }, [bg]);
 
-/* ───────────────── V4 — 星盤符環 (rotating arcane sigil ring) ───────────────── */
-function V4SigilRing({ curse }: { curse: Sample }) {
-  const root = useRef<HTMLDivElement>(null);
-  const main = SCHOOL_CONFIG[curse.school];
-  const sub = SCHOOL_CONFIG[curse.subSchool];
-  useEffect(() => {
-    const el = root.current; if (!el) return;
-    animate(el.querySelectorAll<HTMLElement>(".ring-spin"), { rotate: "1turn", loop: true, ease: "linear", duration: 44000 });
-    animate(el.querySelectorAll<HTMLElement>(".ring-fade"), { scale: [0.6, 1], opacity: [0, 0.16], duration: 1000, ease: "outQuad" });
-  }, []);
-  const ticks = Array.from({ length: 24 });
-  return (
-    <div ref={root} className="flex-shrink-0 w-[300px] flex flex-col relative overflow-hidden" style={shellStyle(curse)}>
-      <TopStripe curse={curse} />
-      {/* watermark arcane ring */}
-      <div className="ring-fade absolute" style={{ right: -34, top: 34, width: 200, height: 200, opacity: 0.16, color: INK }}>
-        <div className="ring-spin absolute inset-0" style={{ transformOrigin: "50% 50%" }}>
-          <svg width="200" height="200" viewBox="0 0 200 200" fill="none" stroke={INK} strokeWidth="1.4">
-            <circle cx="100" cy="100" r="92" /><circle cx="100" cy="100" r="74" /><circle cx="100" cy="100" r="50" />
-            {ticks.map((_, i) => { const a = (i / 24) * Math.PI * 2; return <line key={i} x1={100 + Math.cos(a) * 74} y1={100 + Math.sin(a) * 74} x2={100 + Math.cos(a) * 92} y2={100 + Math.sin(a) * 92} />; })}
-            <path d="M100 26 L130 100 L100 174 L70 100 Z" />
-          </svg>
-        </div>
-        <div className="absolute inset-0 flex items-center justify-center"><SchoolSigil school={curse.school} size={56} color={INK} strokeWidth={1.2} /></div>
-      </div>
-      <div className="p-5 pb-3 flex items-start justify-between relative z-10"><div className="flex items-center gap-1.5 flex-wrap"><CategoryPill curse={curse} /><TierBadge curse={curse} /></div><RepIcon curse={curse} /></div>
-      <h3 className="px-5 text-xl leading-tight relative z-10" style={{ fontFamily: "var(--font-noto-serif-tc)", fontWeight: 900, color: INK }}>{curse.title}</h3>
-      <Desc curse={curse} />
-      <div className="mx-5" style={{ borderTop: "2px dashed var(--ink)", opacity: 0.3 }} />
-      <div className="relative z-10 flex items-center gap-2 px-5 py-2 text-[12px] font-black" style={{ fontFamily: "var(--font-noto-serif-tc)", color: INK }}>
-        <SchoolSigil school={curse.school} size={15} color={main.color} />{main.label}
-        <span style={{ opacity: 0.4 }}>·</span>
-        <SchoolSigil school={curse.subSchool} size={13} color={sub.color} /><span style={{ opacity: 0.85 }}>{sub.label}</span>
-      </div>
-      <Footer curse={curse} />
-    </div>
-  );
-}
-
-/* ───────────────── V5 — 烙印符牌 (letterpress sigil cartouche, stamp-in) ───────────────── */
-function V5Cartouche({ curse }: { curse: Sample }) {
-  const root = useRef<HTMLDivElement>(null);
-  const main = SCHOOL_CONFIG[curse.school];
-  const sub = SCHOOL_CONFIG[curse.subSchool];
-  useEffect(() => {
-    const el = root.current; if (!el) return;
-    animate(el.querySelectorAll<HTMLElement>(".stamp"), { scale: [1.5, 1], rotate: [-9, 0], opacity: [0, 1], duration: 720, ease: "outBack" });
-  }, []);
-  return (
-    <div ref={root} className="flex-shrink-0 w-[300px] flex flex-col relative overflow-hidden" style={shellStyle(curse)}>
-      <TopStripe curse={curse} />
-      {/* stamped rectangular sigil plaque, top-right */}
-      <div className="stamp absolute z-20" style={{ top: 14, right: 14, transformOrigin: "center" }}>
-        <div className="flex flex-col items-center px-2.5 py-1.5" style={{ border: `2px solid ${main.color}`, background: PARCH, boxShadow: "3px 3px 0 var(--ink)", transform: "rotate(-3deg)" }}>
-          <SchoolSigil school={curse.school} size={22} color={main.color} strokeWidth={1.8} />
-          <span className="mt-0.5 text-[11px] font-black tracking-widest" style={{ fontFamily: "var(--font-noto-serif-tc)", color: INK }}>{main.label}</span>
-          <span className="mt-0.5 flex items-center gap-1 text-[9px] font-bold" style={{ fontFamily: "var(--font-noto-serif-tc)", color: sub.color, borderTop: `1px dashed ${sub.color}`, paddingTop: 2 }}>
-            <SchoolSigil school={curse.subSchool} size={10} color={sub.color} strokeWidth={2} />{sub.label}
-          </span>
-        </div>
-      </div>
-      <div className="p-5 pb-3 flex items-start" style={{ paddingRight: 96 }}><div className="flex items-center gap-1.5 flex-wrap"><CategoryPill curse={curse} /><TierBadge curse={curse} /></div></div>
-      <h3 className="px-5 text-xl leading-tight" style={{ fontFamily: "var(--font-noto-serif-tc)", fontWeight: 900, color: INK, paddingRight: 96 }}>{curse.title}</h3>
-      <Desc curse={curse} />
-      <div className="mx-5" style={{ borderTop: "2px dashed var(--ink)", opacity: 0.3 }} />
-      <div className="flex items-center justify-between px-5 py-3">
-        <span className="text-[11px] font-black px-1.5 py-0.5 tracking-wider select-none" style={{ fontFamily: "var(--font-chivo)", color: WAX, border: `1.5px solid ${WAX}`, opacity: 0.8, transform: "rotate(-2deg)" }}>{curse.code}</span>
-        <span className="flex items-center gap-1.5 text-xs font-black" style={{ fontFamily: "var(--font-noto-sans-tc)", color: getTabColor(curse.tab) }}><RepIcon curse={curse} />詠唱 →</span>
-      </div>
-    </div>
-  );
-}
-
-/* ───────────────── V6 — 符文卷軸 (rune scroll, per reference image) ───────────────── */
-const TORN = "polygon(0% 0%,100% 0%,97% 8%,100% 16%,96% 25%,100% 34%,97% 45%,100% 55%,96% 66%,100% 76%,97% 88%,100% 100%,0% 100%,3% 88%,0% 76%,4% 66%,0% 55%,3% 45%,0% 34%,4% 25%,0% 16%,3% 8%)";
-const RUNE_PATHS = ["M3 1V13", "M3 1V13M3 4L8 1M3 8L8 5", "M2 1L8 7L2 13", "M3 1V13M3 1L8 4M3 7L8 4", "M2 7H10M6 2V12", "M3 1V13M8 1V13M3 7H8", "M2 2L8 12M8 2L2 12", "M5 1V13M2 4L5 1L8 4"];
-function RuneRow({ color, n = 8 }: { color: string; n?: number }) {
-  return (
-    <div className="flex gap-2 items-center justify-center">
-      {RUNE_PATHS.slice(0, n).map((d, i) => (
-        <svg key={i} className="rune" width="11" height="14" viewBox="0 0 11 14" fill="none" stroke={color} strokeWidth="1.4" strokeLinecap="round" style={{ filter: `drop-shadow(0 0 3px ${color})` }}><path d={d} /></svg>
-      ))}
-    </div>
-  );
-}
-function Rod() {
-  return (
-    <div className="relative" style={{ height: 22 }}>
-      <div style={{ position: "absolute", inset: "0 8px", borderRadius: 6, background: "linear-gradient(180deg,#F0C25E,#C8942F 55%,#8a5f16)", border: "2px solid var(--ink)" }} />
-      <div style={{ position: "absolute", left: 16, right: 16, top: "50%", height: 2, background: "rgba(42,39,35,0.35)" }} />
-      <div style={{ position: "absolute", left: -5, top: "50%", transform: "translateY(-50%)", width: 17, height: 17, borderRadius: "50%", background: "radial-gradient(circle at 35% 35%,#F0C25E,#7a5413)", border: "2px solid var(--ink)" }} />
-      <div style={{ position: "absolute", right: -5, top: "50%", transform: "translateY(-50%)", width: 17, height: 17, borderRadius: "50%", background: "radial-gradient(circle at 35% 35%,#F0C25E,#7a5413)", border: "2px solid var(--ink)" }} />
-    </div>
-  );
-}
-function V6Scroll({ curse }: { curse: Sample }) {
-  const root = useRef<HTMLDivElement>(null);
-  const main = SCHOOL_CONFIG[curse.school];
-  const sub = SCHOOL_CONFIG[curse.subSchool];
-  const ticks = Array.from({ length: 20 });
-  useEffect(() => {
-    const el = root.current; if (!el) return;
-    animate(el.querySelectorAll<HTMLElement>(".panel-unroll"), { scaleY: [0.82, 1], opacity: [0, 1], duration: 720, ease: "outExpo" });
-    animate(el.querySelectorAll<HTMLElement>(".circle-spin"), { rotate: "1turn", loop: true, ease: "linear", duration: 38000 });
-    animate(el.querySelectorAll<HTMLElement>(".circle-spin-rev"), { rotate: "-1turn", loop: true, ease: "linear", duration: 26000 });
-    animate(el.querySelectorAll<HTMLElement>(".glow-pulse"), { opacity: [0.28, 0.6], scale: [0.94, 1.06], loop: true, alternate: true, ease: "inOutSine", duration: 2200 });
-    animate(el.querySelectorAll<HTMLElement>(".rune"), { opacity: [0, 1], duration: 480, delay: stagger(70), ease: "outQuad" });
-  }, []);
   const tabColor = getTabColor(curse.tab);
+  const tier = TIER_CONFIG[curse.tier];
+
   return (
-    <div ref={root} className="flex-shrink-0 w-[300px] relative" style={{ overflow: "visible" }}>
-      <Rod />
-      <div className="panel-unroll relative" style={{ transformOrigin: "center", margin: "-2px 0" }}>
-        {/* hard offset shadow that follows the torn shape */}
-        <div className="absolute" style={{ inset: 0, transform: "translate(4px,4px)", background: "var(--ink)", clipPath: TORN, zIndex: 0 }} />
-        {/* torn parchment */}
-        <div className="relative" style={{ background: "#F7EeCf", clipPath: TORN, zIndex: 1, padding: "14px 16px" }}>
-          {/* engraved gold frame */}
-          <div className="absolute pointer-events-none" style={{ inset: 9, border: `2px solid ${GOLD}` }} />
-          <div className="absolute pointer-events-none" style={{ inset: 13, border: `1px solid ${GOLD}`, opacity: 0.55 }} />
+    <div ref={root} className="flex-shrink-0 w-[300px] flex flex-col relative overflow-hidden" style={{ border: `4px solid ${tier.borderColor}`, boxShadow: "var(--shadow-sm)", background: PARCH }}>
+      <div style={{ height: 6, background: tier.color }} />
 
-          {/* central glowing magic circle (behind content) */}
-          <div className="absolute" style={{ left: "50%", top: "52%", transform: "translate(-50%,-50%)", width: 184, height: 184, zIndex: 1 }}>
-            <div className="glow-pulse absolute inset-0" style={{ background: "radial-gradient(circle, rgba(232,168,56,0.5), rgba(232,168,56,0) 62%)" }} />
-            <div className="circle-spin absolute inset-0" style={{ transformOrigin: "50% 50%", filter: `drop-shadow(0 0 4px rgba(232,168,56,0.7))`, opacity: 0.55 }}>
-              <svg width="184" height="184" viewBox="0 0 184 184" fill="none" stroke={GOLD} strokeWidth="1.3">
-                <circle cx="92" cy="92" r="86" /><circle cx="92" cy="92" r="66" />
-                {ticks.map((_, i) => { const a = (i / 20) * Math.PI * 2; return <line key={i} x1={92 + Math.cos(a) * 66} y1={92 + Math.sin(a) * 66} x2={92 + Math.cos(a) * 86} y2={92 + Math.sin(a) * 86} />; })}
-              </svg>
-            </div>
-            <div className="circle-spin-rev absolute inset-0 flex items-center justify-center" style={{ transformOrigin: "50% 50%", filter: `drop-shadow(0 0 4px rgba(232,168,56,0.7))`, opacity: 0.6 }}>
-              <svg width="120" height="120" viewBox="0 0 120 120" fill="none" stroke={GOLD} strokeWidth="1.3">
-                <circle cx="60" cy="60" r="46" /><path d="M60 14 L98 60 L60 106 L22 60 Z" /><path d="M60 22 L90 60 L60 98 L30 60 Z" />
-              </svg>
-            </div>
-            <div className="absolute inset-0 flex items-center justify-center" style={{ filter: `drop-shadow(0 0 5px ${main.color})` }}>
-              <SchoolSigil school={curse.school} size={40} color={main.color} strokeWidth={1.5} />
-            </div>
+      {/* ── animated background (z0, faint) ── */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        {bg === "runes" && RUNE_POS.map((p, i) => (
+          <svg key={i} className="bg-rune absolute" style={{ top: p.t, left: p.l, opacity: 0.1 }} width="12" height="15" viewBox="0 0 11 14" fill="none" stroke={GOLD} strokeWidth="1.4" strokeLinecap="round"><path d={RUNE_PATHS[i % RUNE_PATHS.length]} /></svg>
+        ))}
+        {bg === "ring" && (
+          <div className="bg-ring absolute" style={{ left: "50%", top: "52%", width: 220, height: 220, marginLeft: -110, marginTop: -110, transformOrigin: "50% 50%", opacity: 0.12 }}>
+            <svg width="220" height="220" viewBox="0 0 220 220" fill="none" stroke={INK} strokeWidth="1.3">
+              <circle cx="110" cy="110" r="104" /><circle cx="110" cy="110" r="80" /><circle cx="110" cy="110" r="54" />
+              {Array.from({ length: 24 }).map((_, i) => { const a = (i / 24) * Math.PI * 2; return <line key={i} x1={110 + Math.cos(a) * 80} y1={110 + Math.sin(a) * 80} x2={110 + Math.cos(a) * 104} y2={110 + Math.sin(a) * 104} />; })}
+              <path d="M110 30 L150 110 L110 190 L70 110 Z" />
+            </svg>
           </div>
+        )}
+        {bg === "dust" && DUST.map((_, i) => (
+          <span key={i} className="bg-dust absolute" style={{ bottom: 14, left: 18 + (i * 19) % 264, width: 4 + (i % 3), height: 4 + (i % 3), borderRadius: "50%", background: GOLD_HEX, opacity: 0.4 }} />
+        ))}
+        {bg === "halftone" && (
+          <div className="bg-halftone absolute inset-0" style={{ opacity: 0.08, backgroundImage: `radial-gradient(${INK} 1.4px, transparent 1.4px)`, backgroundSize: "12px 12px", transformOrigin: "center" }} />
+        )}
+        {bg === "shimmer" && (
+          <div className="bg-shimmer absolute" style={{ top: 0, bottom: 0, width: "55%", left: 0, background: `linear-gradient(105deg, transparent, rgba(232,168,56,0.32), transparent)`, transform: "skewX(-16deg)" }} />
+        )}
+      </div>
 
-          {/* readable content above the circle */}
-          <div className="relative" style={{ zIndex: 2 }}>
-            <div className="mb-2"><RuneRow color={GOLD} /></div>
-            <div className="flex items-start justify-between mb-2"><div className="flex items-center gap-1.5 flex-wrap"><CategoryPill curse={curse} /><TierBadge curse={curse} /></div><RepIcon curse={curse} /></div>
-            <h3 className="text-xl leading-tight mb-2" style={{ fontFamily: "var(--font-noto-serif-tc)", fontWeight: 900, color: INK }}>{curse.title}</h3>
-            <div style={{ borderLeft: `3px solid ${tabColor}`, paddingLeft: 10, marginBottom: 56 }}>
-              <p className="text-sm leading-relaxed" style={{ fontFamily: "var(--font-noto-sans-tc)", color: INK, opacity: 0.78 }}>{curse.desc}</p>
-            </div>
-            {/* school plaque */}
-            <div className="flex items-center justify-center gap-2 mb-2 py-1" style={{ borderTop: `1px solid ${GOLD}`, borderBottom: `1px solid ${GOLD}` }}>
-              <SchoolSigil school={curse.school} size={15} color={main.color} /><span className="text-[12px] font-black" style={{ fontFamily: "var(--font-noto-serif-tc)", color: INK }}>{main.label}</span>
-              <span style={{ color: GOLD }}>✦</span>
-              <SchoolSigil school={curse.subSchool} size={13} color={sub.color} /><span className="text-[11px] font-black" style={{ fontFamily: "var(--font-noto-serif-tc)", color: INK, opacity: 0.85 }}>{sub.label}</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-[11px] font-black px-1.5 py-0.5 tracking-wider select-none" style={{ fontFamily: "var(--font-chivo)", color: WAX, border: `1.5px solid ${WAX}`, opacity: 0.8, transform: "rotate(-2deg)" }}>{curse.code}</span>
-              <span className="flex items-center gap-1 text-xs font-black" style={{ fontFamily: "var(--font-noto-sans-tc)", color: tabColor }}>詠唱 →</span>
-            </div>
-          </div>
+      {/* ── gold illuminated frame ── */}
+      <FiligreeCorner pos="tl" /><FiligreeCorner pos="tr" /><FiligreeCorner pos="bl" /><FiligreeCorner pos="br" />
+      <div className="absolute pointer-events-none z-10" style={{ inset: 12, border: `1px solid ${GOLD}`, opacity: 0.5 }} />
+
+      {/* ── content ── */}
+      <div className="p-5 pb-3 flex items-start justify-between relative z-10">
+        <div className="flex items-center gap-1.5 flex-wrap"><CategoryPill curse={curse} /><TierBadge curse={curse} /></div>
+        <RepIcon curse={curse} />
+      </div>
+      <h3 className="px-5 text-xl leading-tight relative z-10 mb-2" style={{ fontFamily: "var(--font-noto-serif-tc)", fontWeight: 900, color: INK }}>{curse.title}</h3>
+      <div className="px-5 pb-2 flex-1 relative z-10">
+        <div style={{ borderLeft: `3px solid ${tabColor}`, paddingLeft: 12 }}>
+          <p className="text-sm leading-relaxed" style={{ fontFamily: "var(--font-noto-sans-tc)", color: INK, opacity: 0.78 }}>{curse.desc}</p>
         </div>
       </div>
-      <Rod />
+      <SchoolDivider curse={curse} />
+      <div className="flex items-center justify-between px-5 py-3 relative z-10">
+        <span className="text-[11px] font-black px-1.5 py-0.5 tracking-wider select-none" style={{ fontFamily: "var(--font-chivo)", color: WAX, border: `1.5px solid ${WAX}`, opacity: 0.8, transform: "rotate(-2deg)" }}>{curse.code}</span>
+        <span className="flex items-center gap-1 text-xs font-black" style={{ fontFamily: "var(--font-noto-sans-tc)", color: tabColor }}>詠唱 →</span>
+      </div>
     </div>
   );
 }
 
-/* ───────────────── page ───────────────── */
-const SECTIONS = [
-  { Comp: V6Scroll, name: "版本六　符文卷軸（依你的參考圖）", blurb: "依你給的卷軸圖做：上下木金捲軸桿＋圓頭、羊皮紙撕裂邊、泥金邊框、邊緣發光符文、中央會旋轉發光的魔法符陣（陣心是該流派符印）。發光改成我們的金黃色不用紫色，維持調性。載入時卷軸展開、符陣旋轉、符文逐一亮起。" },
-  { Comp: V1Pendant, name: "版本一　垂吊封蠟", blurb: "從中縫垂下兩枚火漆封印（主大、副小），印面是該流派的手繪符印，下方標名。載入時封印落下、之後像吊牌一樣輕輕擺動。" },
-  { Comp: V2Ribbon, name: "版本二　燕尾紋章絲帶", blurb: "真正的絲帶：兩端有回摺暗面、底邊燕尾開叉，帶上是符印＋流派名。副流派是下方小尾旗。載入時由中心展開。不擋分類與階級。" },
-  { Comp: V3Frame, name: "版本三　泥金邊框", blurb: "四角泥金捲草飾＋內金線框，像泥金裝飾手抄本。流派收進底部金邊飾牌（符印＋名）。載入時四角逐一綻放、飾牌升起。" },
-  { Comp: V4SigilRing, name: "版本四　星盤符環", blurb: "背景一枚緩慢旋轉的占星符環（刻度＋菱星＋中心符印）當暗紋，流派名收在下方一行。最有古魔法陣的氛圍。" },
-  { Comp: V5Cartouche, name: "版本五　烙印符牌", blurb: "右上角一塊長方形烙印符牌（非圓章）：符印＋主流派名，下緣虛線接副流派。載入時像蓋章般砸下。代表圖示移到頁腳詠唱旁。" },
-] as const;
+const SECTIONS: { bg: BG; name: string; blurb: string }[] = [
+  { bg: "runes", name: "版本一　浮動符文", blurb: "金色符文在背景上下緩緩飄動、忽明忽暗。" },
+  { bg: "ring", name: "版本二　旋轉符陣", blurb: "背景一枚淡淡的占星符陣持續緩慢旋轉。" },
+  { bg: "dust", name: "版本三　金塵微光", blurb: "底部金色微粒不斷往上飄散、淡出。" },
+  { bg: "halftone", name: "版本四　半色調脈動", blurb: "全站招牌的點陣半色調當底，輕輕呼吸般脈動。" },
+  { bg: "shimmer", name: "版本五　流金掃光", blurb: "一道斜向金光固定週期掃過卡面。" },
+];
 
 export default function PreviewSchoolsPage() {
   return (
     <div style={{ background: "var(--parchment)", minHeight: "100vh", color: INK }}>
       <div className="max-w-6xl mx-auto px-5 py-10">
-        <h1 className="text-3xl mb-2" style={{ fontFamily: "var(--font-noto-serif-tc)", fontWeight: 900 }}>流派呈現　五版設計</h1>
-        <p className="text-sm mb-1" style={{ fontFamily: "var(--font-noto-sans-tc)", opacity: 0.78 }}>融合魔法卷軸元素（封蠟／絲帶／泥金邊框／符環／烙印），全部用手繪符印取代 emoji，流派名直接寫出來（不靠長按）。每版都有 anime.js 載入動畫。</p>
-        <p className="text-xs mb-10" style={{ fontFamily: "var(--font-noto-sans-tc)", opacity: 0.5 }}>獨立測試頁，不影響正式首頁。看完跟我說選哪版，我再套上去。</p>
-        {SECTIONS.map(({ Comp, name, blurb }) => (
-          <section key={name} className="mb-14">
+        <h1 className="text-3xl mb-2" style={{ fontFamily: "var(--font-noto-serif-tc)", fontWeight: 900 }}>泥金邊框 × 符印分隔線　五種背景動畫</h1>
+        <p className="text-sm mb-1" style={{ fontFamily: "var(--font-noto-sans-tc)", opacity: 0.78 }}>都是版本三的泥金邊框＋四角捲草飾，流派改成「──✦ 主 · 副 ✦──」分隔線，符號換成手繪魔法符印（無 emoji）。差別只在背景動畫，五選一。</p>
+        <p className="text-xs mb-10" style={{ fontFamily: "var(--font-noto-sans-tc)", opacity: 0.5 }}>獨立測試頁，不影響正式首頁。看完跟我說選哪個背景。</p>
+        {SECTIONS.map(({ bg, name, blurb }) => (
+          <section key={bg} className="mb-14">
             <div className="mb-2 inline-block px-4 py-2" style={{ fontFamily: "var(--font-noto-serif-tc)", fontWeight: 900, fontSize: "1.15rem", color: "var(--parchment)", background: "var(--ink)" }}>{name}</div>
             <p className="text-sm mb-5" style={{ fontFamily: "var(--font-noto-sans-tc)", opacity: 0.8, maxWidth: 660 }}>{blurb}</p>
-            <div className="flex flex-wrap gap-6">{SAMPLES.map((c) => <Comp key={c.id} curse={c} />)}</div>
+            <div className="flex flex-wrap gap-6">{SAMPLES.map((c) => <FrameCard key={c.id} curse={c} bg={bg} />)}</div>
           </section>
         ))}
       </div>
