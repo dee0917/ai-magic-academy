@@ -185,6 +185,19 @@ export default function SpellBrowser() {
                       {/* Colored top stripe */}
                       <div style={{ height: '6px', background: curse.tier && TIER_CONFIG[curse.tier] ? TIER_CONFIG[curse.tier].color : tabColor }} />
 
+                      {/* School spine ribbon — left-edge two-tone band (magic-book bookmark) */}
+                      {schoolInfo && (
+                        <div
+                          className="absolute left-0 top-0 bottom-0 w-1.5 z-10 flex flex-col"
+                          title={subSchoolInfo ? `主流派：${schoolInfo.label}　副流派：${subSchoolInfo.label}` : `主流派：${schoolInfo.label}`}
+                        >
+                          <div style={{ flex: '1 1 0', background: schoolInfo.color }} />
+                          {subSchoolInfo && (
+                            <div style={{ flex: '1 1 0', background: subSchoolInfo.color, opacity: 0.85 }} />
+                          )}
+                        </div>
+                      )}
+
                       {/* Big background number — card center-right */}
                       <span
                         className="absolute top-1/2 -translate-y-1/2 right-4 text-8xl font-black leading-none select-none pointer-events-none z-0"
@@ -247,48 +260,20 @@ export default function SpellBrowser() {
                       {/* Dashed divider */}
                       <div className="mx-5" style={{ borderTop: '2px dashed var(--ink)', opacity: 0.3 }} />
 
-                      {/* Footer — spell code + school seals as matching ink stamps */}
-                      <div className="flex items-center justify-between gap-2 px-5 py-3">
-                        <div className="flex items-center gap-1.5 flex-wrap">
-                          {/* Stamp-style spell code */}
-                          <span className="text-[11px] font-black px-1.5 py-0.5 tracking-wider select-none"
-                            style={{
-                              fontFamily: 'var(--font-chivo)',
-                              color: 'var(--dark-red)',
-                              border: '1.5px solid var(--dark-red)',
-                              opacity: 0.8,
-                              transform: 'rotate(-2deg)',
-                            }}>
-                            {getSpellCode(curse)}
-                          </span>
-                          {/* Main school seal — same stamp style, school color */}
-                          {schoolInfo && (
-                            <span className="text-[11px] font-black px-1.5 py-0.5 tracking-wider select-none flex items-center gap-1"
-                              style={{
-                                fontFamily: 'var(--font-noto-sans-tc)',
-                                color: schoolInfo.color,
-                                border: `1.5px solid ${schoolInfo.color}`,
-                                transform: 'rotate(1.5deg)',
-                              }}
-                              title={`主流派：${schoolInfo.label}`}>
-                              <span>{schoolInfo.emoji}</span>{schoolInfo.label}
-                            </span>
-                          )}
-                          {/* Sub school seal — dashed, emoji only */}
-                          {subSchoolInfo && (
-                            <span className="text-[11px] font-black px-1 py-0.5 select-none"
-                              style={{
-                                color: subSchoolInfo.color,
-                                border: `1.5px dashed ${subSchoolInfo.color}`,
-                                opacity: 0.7,
-                                transform: 'rotate(-1.5deg)',
-                              }}
-                              title={`副流派：${subSchoolInfo.label}`}>
-                              {subSchoolInfo.emoji}
-                            </span>
-                          )}
-                        </div>
-                        <span className="flex items-center gap-1 text-xs font-black flex-shrink-0" style={{ fontFamily: 'var(--font-noto-sans-tc)', color: tabColor }}>
+                      {/* Footer */}
+                      <div className="flex items-center justify-between px-5 py-3">
+                        {/* Stamp-style spell code */}
+                        <span className="text-[11px] font-black px-1.5 py-0.5 tracking-wider select-none"
+                          style={{
+                            fontFamily: 'var(--font-chivo)',
+                            color: 'var(--dark-red)',
+                            border: '1.5px solid var(--dark-red)',
+                            opacity: 0.8,
+                            transform: 'rotate(-2deg)',
+                          }}>
+                          {getSpellCode(curse)}
+                        </span>
+                        <span className="flex items-center gap-1 text-xs font-black" style={{ fontFamily: 'var(--font-noto-sans-tc)', color: tabColor }}>
                           詠唱 <ArrowRight className="w-3 h-3" />
                         </span>
                       </div>
