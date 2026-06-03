@@ -5,6 +5,7 @@ import { Sparkles, X, Search, ArrowRight, RefreshCw } from "lucide-react";
 import { useAcademy } from "../context/AcademyContext";
 import { TABS, TIER_CONFIG, getSpellCode, getTabColor, scrollToTab, CURSES, SCHOOL_CONFIG } from "../lib/constants";
 import type { SchoolType } from "../curses_data";
+import { SchoolSigil } from "./SchoolSigil";
 
 const SCHOOL_KEYS: SchoolType[] = ['defense', 'attack', 'healing', 'illusion', 'contract', 'insight'];
 
@@ -217,35 +218,6 @@ export default function SpellBrowser() {
                                 {TIER_CONFIG[curse.tier].label}
                               </div>
                             )}
-                            {schoolInfo && (
-                              <div
-                                className="text-[11px] font-black px-2 py-1 tracking-wider flex items-center gap-1"
-                                style={{
-                                  fontFamily: 'var(--font-chivo)',
-                                  color: schoolInfo.color,
-                                  border: `2px solid ${schoolInfo.color}`,
-                                  background: 'transparent',
-                                }}
-                                title={`主流派：${schoolInfo.label}`}
-                              >
-                                <span>{schoolInfo.emoji}</span>{schoolInfo.label}
-                              </div>
-                            )}
-                            {subSchoolInfo && (
-                              <div
-                                className="text-[11px] font-black px-2 py-1 tracking-wider flex items-center gap-1"
-                                style={{
-                                  fontFamily: 'var(--font-chivo)',
-                                  color: subSchoolInfo.color,
-                                  border: `2px dashed ${subSchoolInfo.color}`,
-                                  background: 'transparent',
-                                  opacity: 0.75,
-                                }}
-                                title={`副流派：${subSchoolInfo.label}`}
-                              >
-                                <span>{subSchoolInfo.emoji}</span>{subSchoolInfo.label}
-                              </div>
-                            )}
                           </div>
                           <div className="text-lg" style={{ color: 'var(--ink)', opacity: 0.4 }}>
                             {curse.icon}
@@ -273,8 +245,28 @@ export default function SpellBrowser() {
                         </div>
                       </div>
 
-                      {/* Dashed divider */}
-                      <div className="mx-5" style={{ borderTop: '2px dashed var(--ink)', opacity: 0.3 }} />
+                      {/* School divider — drawn sigils, no emoji (圖二) */}
+                      {schoolInfo ? (
+                        <div className="flex items-center gap-2 mx-5">
+                          <div className="flex-1" style={{ borderTop: '2px dashed var(--ink)', opacity: 0.3 }} />
+                          <span style={{ color: 'var(--mustard)', fontSize: 12 }}>✦</span>
+                          <span className="flex items-center gap-1 text-[12px] font-black" style={{ fontFamily: 'var(--font-noto-serif-tc)', color: 'var(--ink)' }}>
+                            <SchoolSigil school={curse.school as SchoolType} size={15} color={schoolInfo.color} />{schoolInfo.label}
+                          </span>
+                          {subSchoolInfo && (
+                            <>
+                              <span style={{ color: 'var(--ink)', opacity: 0.4 }}>·</span>
+                              <span className="flex items-center gap-1 text-[12px] font-black" style={{ fontFamily: 'var(--font-noto-serif-tc)', color: 'var(--ink)', opacity: 0.88 }}>
+                                <SchoolSigil school={(curse as any).subSchool as SchoolType} size={13} color={subSchoolInfo.color} />{subSchoolInfo.label}
+                              </span>
+                            </>
+                          )}
+                          <span style={{ color: 'var(--mustard)', fontSize: 12 }}>✦</span>
+                          <div className="flex-1" style={{ borderTop: '2px dashed var(--ink)', opacity: 0.3 }} />
+                        </div>
+                      ) : (
+                        <div className="mx-5" style={{ borderTop: '2px dashed var(--ink)', opacity: 0.3 }} />
+                      )}
 
                       {/* Footer */}
                       <div className="flex items-center justify-between px-5 py-3">
