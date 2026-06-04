@@ -1,5 +1,5 @@
 import {
-  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap
+  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag
 } from "lucide-react";
 import React from "react";
 
@@ -2168,6 +2168,123 @@ export const CURSES = [
     ],
     theory: "建立在兩個框架上：一是『服務補救悖論』（Service Recovery Paradox）——一個抱怨被妥善處理後，客人的忠誠度反而高於從沒出過錯；負評不是傷口，是把不滿的客人變死忠的入口。二是『社會證明』效應——你回的不是那一個負評者，而是『正在看這串評論決定要不要光顧』的上千個潛在客戶，回覆的真正受眾是旁觀者。本咒語據此把回覆拆成兩條線：對外公開回覆是『表演格局給旁觀者看』，對內私訊是『真正解決那位客人的問題』，兩者語氣與目的完全不同，分開處理才不會兩頭落空。",
     generate: (inputs: any) => `你同時具備三個專家視角：\n① 品牌危機公關顧問（操盤過上百起負評與炎上事件，知道哪一句話能滅火、哪一句會澆油）\n② 金牌店長（第一線服務十年，最懂客人在氣什麼、一句話怎麼讓奧客變回頭客）\n③ 社群輿論分析師（清楚一則公開回覆的真正讀者不是抱怨者，而是上千個還在觀望的潛在客人）\n\n你的信條：「負評不是要你贏過那一個客人，是要你贏得正在看的一千個客人。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我的店／品牌收到一則負評，需要一套不會炎上、還能加分的回應方案。\n- 平台與商家類型：[[${inputs.platform}]]\n- 負評內容原文：[[${inputs.review}]]\n- 實際情況、對方說得對不對：[[${inputs.truth}]]\n- 想不想留這客人、有無後續：[[${inputs.relationship}]]\n- 品牌語氣：[[${inputs.brand_voice}]]\n\n請輸出：\n① 【危機分級】— 這則負評屬於「小抱怨／真疏失／不實攻擊／酸民挑釁」哪一級，要不要回、多快回，50 字以內\n② 【對外公開回覆】— 直接貼到評論區的版本，120 字以內，分「同理→回應事實→具體作為→歡迎再給機會」，寫給旁觀者看\n③ 【對內私訊和解稿】— 私下傳給客人的版本，目標是真正解決他的問題、挽回關係，語氣比公開版更個人\n④ 【絕對不能說的話】— 針對這則負評，列出 3 句講了會炎上的地雷回應\n⑤ 【止血後續動作】— 回覆之外該做的 2 件事（如何邀正評、內部怎麼改），防止同類負評再來\n⑥ 【一句定調】— 這則回覆想讓旁觀客人留下的一個印象，用一句話講明\n\n【規則】\n1. 公開回覆與私訊稿都要能直接複製就用，並嚴格分開——公開的給旁觀者看格局，私訊的給當事人解決問題。\n2. 嚴禁與客人對罵或嘲諷，禁用「你根本沒來過」「奧客」「不歡迎你這種客人」這類情緒句——對罵一次，旁觀者全跑光。\n3. 若對方說的屬實，公開回覆必須先真誠認錯再講補救，不可硬拗；若不實，平靜擺事實，不情緒化、不人身攻擊。\n4. 全程不洩漏客人個資與訂單細節，不公開私下對話內容。\n5. 語氣依我的品牌走，但底線是『讓旁觀者覺得這家店有格局、可信任』。\n6. 旁觀者測試：一個沒看過這家店的人讀完這串，對你的好感是上升的——這才算成功。`
+  },
+
+  // ━━━ 🟣 高階禁咒 | 校園生存 | Free ━━━
+  {
+    id: "study_plan_forge",
+    tab: "校園生存",
+    isPro: false,
+    tier: "master",
+    school: "insight" as SchoolType,
+    subSchool: "contract" as SchoolType,
+    outputFormat: "讀書計畫 + 亮點標語 + 自檢清單",
+    icon: <ScrollText className="w-8 h-8 text-purple-500" />,
+    color: "purple",
+    title: "備審煉成：讀書計畫術",
+    desc: "研究所推甄、轉學、在職專班都要交讀書計畫，卻寫成流水帳『我從小就對○○有興趣』？教授一年看幾百份，空泛的直接刷掉。這咒語幫你把零散經歷重構成『動機→能力→規劃』一條清楚的故事線，用具體事例取代喊口號，讓教授看見你是可造之才。",
+    tags: ["讀書計畫", "研究所推甄", "備審資料"],
+    fields: [
+      { id: "apply_target", label: "申請的校系/領域", placeholder: "例：政大企管所 / 台大資工轉學 / 師大在職專班教育" },
+      { id: "background", label: "你的相關背景/經歷", placeholder: "例：本科財金、社團財務、實習過券商 / 非本科想轉領域" },
+      { id: "motivation", label: "為什麼想念這個領域", placeholder: "例：實習時發現自己缺資料分析能力想補強" },
+      { id: "future_goal", label: "未來職涯/研究規劃", placeholder: "例：想進顧問業 / 想往學術走考博班" },
+      { id: "highlight", label: "最想凸顯的亮點", placeholder: "例：帶過全國比賽得獎 / 自學程式做過專案" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "撰寫路線",
+      options: [
+        "學術鑽研型：強調研究熱忱與學術潛力，適合想走研究、考博班的路線",
+        "實務應用型：連結產業需求與職涯目標，適合在職專班與應用型科系",
+        "跨域整合型：把看似不相關的背景轉化為獨特優勢，適合轉領域申請",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '升學備審輔導顧問' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '禁喊口號要具體事例' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '動機+短中長期+結論' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依路線調整重點' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '教授視角真實性把關' },
+    ],
+    theory: "基於敘事傳輸理論（Narrative Transportation）與自我決定理論（SDT）的內在動機：教授評審看的不是『你多想念』，而是『你的過去、現在、未來能不能串成一條有說服力的故事線』。本咒語把流水帳式經歷重構成『動機—能力—規劃』三幕劇，用具體事例與數據取代空泛形容詞，觸發評審的『可造之才』歸因，而非『又一份罐頭範本』的疲乏感。",
+    generate: (inputs: any) => `你是一位資深升學備審輔導顧問，十餘年協助上千名學生錄取研究所、轉學與在職專班，當過系所甄試委員，最清楚教授在幾百份書審中三十秒決定去留的判準。你的信條：「讀書計畫不是寫你多愛這個系，是證明這個系收你不會後悔。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我要寫一份讀書計畫，需要一條清楚有說服力的故事線。\n- 申請校系/領域：[[${inputs.apply_target}]]\n- 我的相關背景：[[${inputs.background}]]\n- 申請動機：[[${inputs.motivation}]]\n- 未來規劃：[[${inputs.future_goal}]]\n- 想凸顯的亮點：[[${inputs.highlight}]]\n\n請輸出：\n① 【破題開場】— 全篇第一段，80 字以內，用一個具體事件或洞察破題，不要『我從小就...』\n② 【申請動機段】— 150 字以內，把動機連結到具體經歷與這個校系的特色（因校制宜）\n③ 【學習計畫段】— 分短期（入學前～第一年）、中期（在學）、長期（畢業後）三層，各 2-3 句具體規劃，避免空話\n④ 【未來規劃與結論】— 100 字以內，堅定收尾，讓評審相信你能完成上述規劃\n⑤ 【一句亮點標語】— 25 字以內，可放標題或自我介紹用，濃縮你的不可取代性\n⑥ 【教授視角自檢清單】— 5 個上傳前必過的檢查點\n\n【規則】\n1. 全篇用書面但不僵硬的繁體中文，段落分明可直接貼進備審文件，總字數控制在一頁能放下。\n2. 嚴禁使用：「我從小就對○○有興趣」「貴系師資優良設備完善」「我一定會努力」「希望教授給我機會」——這些是罐頭句，教授看到就跳過。\n3. 運用敘事傳輸＋SDT：每個主張都要綁一個具體事例或數據（做過什麼、得到什麼結果），用內在動機（我想解決的問題）取代外在動機（為了文憑）。\n4. 語氣自信但不浮誇——是『我準備好了』而非『拜託收我』，展現主動規劃而非被動期待。\n5. 教授測試：把這份計畫拿給沒收你的甄試委員看，他的反應應該是『這個學生想清楚了』而不是『又一份範本』。\n\n（提醒：各校簡章大綱不同，請依簡章要求增刪段落，因校制宜。）`
+  },
+
+  // ━━━ 📜 見習咒文 | 生活娛樂 | Free ━━━
+  {
+    id: "blessing_words_forge",
+    tab: "生活娛樂",
+    isPro: false,
+    tier: "apprentice",
+    school: "healing" as SchoolType,
+    outputFormat: "賀詞長短版 + 適用提醒",
+    icon: <PartyPopper className="w-8 h-8 text-gray-500" />,
+    color: "gray",
+    title: "賀詞召喚：萬用祝福術",
+    desc: "朋友畢業、同事結婚、阿嬤大壽、寶寶彌月，想送祝福卻只擠得出『恭喜恭喜萬事如意』？罐頭賀詞收的人一眼就知道是複製的。這咒語幫你寫出有溫度、像專門為對方寫的祝福，畢業季、婚季、紅包袋、卡片都能直接抄。",
+    tags: ["祝福語", "賀詞", "卡片紅包"],
+    fields: [
+      { id: "occasion", label: "什麼場合", placeholder: "例：大學畢業 / 同事結婚 / 阿嬤80大壽 / 朋友寶寶彌月 / 主管榮退" },
+      { id: "recipient", label: "對象與關係", placeholder: "例：四年死黨 / 不太熟的同事 / 疼我的長輩" },
+      { id: "detail", label: "想提到的心意或小細節", placeholder: "例：一起熬夜趕報告的日子 / 祝她新事業順利（沒有可留空）" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "祝福風格",
+      options: [
+        "真摯感人型：走心暖句，適合親近的人與長輩、正式場合",
+        "輕鬆幽默型：俏皮有梗不肉麻，適合好友與同輩間互相虧",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '賀詞文案寫手' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '禁罐頭老套吉祥話' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '長版+短版+彩蛋句' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依關係調整語氣' },
+    ],
+    theory: "基於峰終定律與具體性效應：賀詞讓人記住的從來不是華麗辭藻，而是『他真的懂我』的那一瞬間。一句指名道姓的具體回憶（你們一起做過的事），勝過一百句『鵬程萬里』。本咒語用具體細節製造情感峰值，再依關係親疏調整語氣，讓收到的人覺得這是專屬於他的、不是群發的。",
+    generate: (inputs: any) => `你是一位專寫祝福賀詞的文案寫手，幫人寫過無數畢業卡、喜帖賀詞、紅包袋題字與長輩壽宴致詞，最擅長把『不知道寫什麼』變成『讓收到的人眼眶一熱』。你的信條：「最好的祝福不是辭藻最美的，是讓對方覺得『這是寫給我的』。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我要送一段祝福，希望有溫度、不要罐頭。\n- 場合：[[${inputs.occasion}]]\n- 對象與關係：[[${inputs.recipient}]]\n- 想提到的心意或細節：[[${inputs.detail}]]\n\n請輸出：\n① 【完整版賀詞】— 60 字以內，適合寫卡片、發訊息或致詞，有起承轉合\n② 【一句短版】— 20 字以內，紅包袋、限動、卡片落款可直接用\n③ 【加碼彩蛋句】— 一句畫龍點睛的暖心或幽默句，讓賀詞更有記憶點\n④ 【適用提醒】— 一句話提醒這段話適合／不適合用在什麼對象，避免踩雷\n\n【規則】\n1. 所有內容口語自然、能直接複製貼上 LINE 或抄上卡片，不要書面腔。\n2. 嚴禁堆砌罐頭吉祥話：「萬事如意」「鵬程萬里」「心想事成」「百年好合」「永浴愛河」這類成語最多出現一次，且要搭配具體內容，不能整句都是。\n3. 運用具體性效應：若有提供細節就一定要寫進去；沒提供也要從關係出發給出『像認識對方』的句子，不能通用到換誰都能用。\n4. 語氣依風格走——真摯型走心不煽情，幽默型俏皮不失禮，長輩場合保留基本敬意。\n5. 本人測試：把這段話給收禮的人看，他的反應應該是『欸這是特地寫給我的吧』而不是『罐頭複製的』。`
+  },
+
+  // ━━━ 🔵 中階秘術 | 創業/自媒體 | Free ━━━
+  {
+    id: "product_copy_forge",
+    tab: "創業/自媒體",
+    isPro: false,
+    tier: "adept",
+    school: "illusion" as SchoolType,
+    subSchool: "attack" as SchoolType,
+    outputFormat: "標題 + 銷售文案 + CTA",
+    icon: <ShoppingBag className="w-8 h-8 text-blue-500" />,
+    color: "blue",
+    title: "賣場煉金：商品文案術",
+    desc: "蝦皮網拍、IG 賣貨、團購開團，商品明明不錯卻只會寫『品質保證、CP值超高』，客人滑過去不下單？問題不是商品爛，是文案在自嗨。這咒語幫你把規格翻譯成顧客好處，用痛點開場、好處收單，產出可直接上架的標題、內文與催單句。",
+    tags: ["商品文案", "電商賣貨", "團購開團"],
+    fields: [
+      { id: "product", label: "商品是什麼", placeholder: "例：保溫便當盒 / 韓系寬褲 / 益生菌 / 線上課程" },
+      { id: "target_customer", label: "誰會買/目標客群", placeholder: "例：帶便當的上班族 / 想顯瘦的小資女 / 腸胃不好的人" },
+      { id: "selling_point", label: "最大賣點/跟別人差在哪", placeholder: "例：可微波又不漏 / 一條抵三種穿法 / 有專利菌株" },
+      { id: "platform", label: "上架平台/形式", placeholder: "例：蝦皮商品描述 / IG限動賣貨 / 團購開團文 / momo" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "文案策略",
+      options: [
+        "痛點戳刺型：先戳中不買的痛再給解方，適合解決問題的功能型商品",
+        "情境帶入型：營造使用畫面與嚮往感，適合生活風格與質感類商品",
+        "限時急殺型：用稀缺與優惠催單，適合團購開團與促銷檔期",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '電商轉換文案操盤手' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '禁自嗨空泛形容詞' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '標題+主文+條列+CTA' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依平台調整結構' },
+      { type: 'example' as ModuleType, label: '範例對比', preview: '自嗨vs熱賣對照' },
+    ],
+    theory: "基於 FAB 法則（Feature特色→Advantage優勢→Benefit好處）與 AIDA 轉換漏斗，輔以損失趨避：客人從來不買『規格』，買的是『規格能為我做什麼』。本咒語強迫把每個賣點翻譯成顧客好處（不漏→包裡不再濕一片），再用注意→興趣→慾望→行動的順序推進到下單，並用認知流暢度原則讓文案一眼就懂、不用思考。",
+    generate: (inputs: any) => `你是一位電商轉換文案操盤手，操刀過破千件熱銷商品頁與團購文，最懂客人滑手機三秒內決定停不停下來、看完會不會手滑下單。你的信條：「沒人想看你的商品有多好，大家只想知道它能讓我變多好。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我要賣一個商品，需要可直接上架的銷售文案。\n- 商品：[[${inputs.product}]]\n- 目標客群：[[${inputs.target_customer}]]\n- 最大賣點：[[${inputs.selling_point}]]\n- 上架平台/形式：[[${inputs.platform}]]\n\n請輸出：\n① 【吸睛標題 3 選】— 各 25 字以內，含關鍵字與好處，給我挑\n② 【主文案】— 150 字以內，依「痛點→賣點→好處→信任感」推進，分行好讀\n③ 【賣點條列】— 3 到 5 條 bullet，每條把規格翻成顧客好處（特色→所以你能...）\n④ 【行動呼籲 CTA】— 1 到 2 句催單，含一個下單理由（限量／優惠／即時好處）\n⑤ 【限動／開團短句】— 50 字以內，可直接貼 IG 限動或團購開頭的精簡版\n\n【規則】\n1. 全部文案依平台調整——蝦皮重關鍵字與條列、IG限動重口語短句、團購重急迫感，並能直接複製上架。\n2. 嚴禁自嗨空泛詞：「品質保證」「CP值超高」「物美價廉」「超好用」「必買」「不買可惜」——這些賣家自嗨詞客人完全無感，要換成具體好處。\n3. 運用 FAB＋AIDA：每個賣點都要完成『特色→好處』的翻譯，整篇照注意→興趣→慾望→行動的順序排，不能只列規格。\n4. 語氣貼近目標客群——對小資女像閨蜜推坑、對上班族講效率、對長輩講安心，不用官腔。\n5. 滑手機測試：一個沒聽過這商品的陌生人滑到這篇，三秒內要看懂『這是賣什麼、干我什麼事』，並產生想點下去的衝動。`
   },
 ];
 
