@@ -51,15 +51,15 @@ export default function HeroSection() {
           {/* Main title — Classic Ticket */}
           <div className="text-center">
             {/* Line 1: 麻瓜專用 with red decorative bars */}
-            <div className="flex items-center justify-center gap-5 md:gap-8 mb-5">
-              <div style={{ height: '2px', width: '56px', background: 'var(--dark-red)' }} />
+            <div className="flex items-center justify-center gap-3 sm:gap-5 md:gap-8 mb-5">
+              <div className="w-9 sm:w-14" style={{ height: '2px', background: 'var(--dark-red)' }} />
               <h1
-                className="hero-glyph text-[2.5rem] sm:text-5xl md:text-6xl tracking-[0.25em]"
+                className="hero-glyph whitespace-nowrap text-[2.5rem] sm:text-5xl md:text-6xl tracking-[0.12em] sm:tracking-[0.25em]"
                 style={{ fontFamily: 'var(--font-noto-serif-tc)', fontWeight: 300, color: 'var(--ink)', lineHeight: 1.2 }}
               >
                 麻瓜專用
               </h1>
-              <div style={{ height: '2px', width: '56px', background: 'var(--dark-red)' }} />
+              <div className="w-9 sm:w-14" style={{ height: '2px', background: 'var(--dark-red)' }} />
             </div>
 
             {/* Line 2: AI魔法外掛 on black strip with gold text */}
@@ -91,7 +91,7 @@ export default function HeroSection() {
         <div className="text-center mb-8">
           <div style={{ border: '4px solid var(--ink)', boxShadow: 'var(--shadow)', background: 'var(--teal)', display: 'inline-block', padding: '6px 20px', marginBottom: '12px' }}>
             <span className="font-black text-xs uppercase tracking-[0.3em]" style={{ fontFamily: 'var(--font-chivo)', color: 'var(--parchment)' }}>
-              BETA 內測・受邀貴賓限定
+              BETA 公測・全部免費
             </span>
           </div>
           <h2
@@ -102,7 +102,7 @@ export default function HeroSection() {
           </h2>
           <p className="text-sm md:text-base mt-3 max-w-xl mx-auto leading-relaxed"
             style={{ fontFamily: 'var(--font-noto-sans-tc)', color: 'var(--ink)', opacity: 0.75 }}>
-            內測期間，全站咒語<span style={{ color: 'var(--dark-red)', fontWeight: 900 }}>無限免費施放</span>、不限次數。你是受邀搶先體驗的貴賓。
+            每道咒語就是一段寫好的 AI 指令：點施法、填空、複製，貼到 ChatGPT 或任何 AI 就能用。公測期間全站<span style={{ color: 'var(--dark-red)', fontWeight: 900 }}>無限免費</span>、不限次數、免註冊。
           </p>
         </div>
 
