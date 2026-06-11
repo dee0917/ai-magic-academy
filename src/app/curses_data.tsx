@@ -1,5 +1,5 @@
 import {
-  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette
+  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube
 } from "lucide-react";
 import React from "react";
 
@@ -2799,6 +2799,126 @@ export const CURSES = [
     ],
     theory: "建立在 AI 影像提示工程的核心框架上：一是『影像提示六要素公式』（主體＋動作／情境＋場景＋風格＋光線／色調＋鏡頭／參數）——AI 生圖模型不像聊天模型會自己補腦，你給的資訊越分層、越具體，構圖命中率越高；一句『一隻可愛的貓』因為缺乏場景、風格與鏡頭，模型只能亂猜，這正是新手生圖總是不對味的根因。二是『正面具體優於負面模糊』原則——AI 繪圖對『不要什麼』的理解遠弱於『要什麼』，所以本咒語以正向描述為主、把限制轉成可執行的構圖指示，並善用比例（如 --ar 9:16）、風格化等參數穩定產出。三是『視覺敘事』的取捨——好的提示詞不是塞滿形容詞，而是抓住一個明確的視覺焦點與氛圍。本咒語把你模糊的想法翻譯成這套結構，並一次給中文版、英文版與參數，讓你貼上就生圖、想微調也有方向。",
     generate: (inputs: any) => `你是一位資深的 AI 影像總監，精通 Midjourney、即夢、Stable Diffusion 與 ChatGPT 生圖，看遍各種風格與鏡頭。你最強的本事，是把客戶一句模糊的『我想要一張好看的圖』，翻譯成一組結構精準、貼上去就出對味圖的提示詞。\n\n你的信條：「AI 生圖不是許願，是下指令——畫面說得越具體分層，AI 越不會亂猜；好咒語讓你第一次就生對。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n請依我的想法，幫我煉成一組可以直接使用的 AI 生圖提示詞。\n- 我想生成的畫面：[[${inputs.subject}]]\n- 用途與要用的工具：[[${inputs.usage}]]\n- 想要的風格與氛圍：[[${inputs.style}]]\n- 比例、重點與不要的東西：[[${inputs.constraint}]]\n\n請輸出：\n① 【中文咒語】— 一段可直接貼進即夢／ChatGPT 生圖的中文提示詞，依『主體＋情境＋場景＋風格＋光線色調＋鏡頭視角』分層寫清楚，讀起來像一句完整的畫面描述\n② 【英文 Prompt】— 對應的英文版本，給 Midjourney／Stable Diffusion 用，用逗號分隔關鍵詞、由主到次排列\n③ 【推薦參數】— 依用途給建議參數與比例（如 --ar 9:16 直式、--ar 16:9 橫式、stylize 強度建議），並一句說明為什麼這樣設\n④ 【3 個變體方向】— 給 3 個可快速替換的關鍵詞組合（換風格／換光線／換鏡頭），方便我一次生多張挑最好的\n⑤ 【微調提示】— 一句：若生出來哪裡不對（主體跑掉、太雜、顏色不對），該加哪個關鍵詞修正\n\n【規則】\n1. 提示詞要能直接整段複製貼上就用，中文版與英文版分開標示，關鍵詞精準、不寫廢話虛詞。\n2. 嚴禁模糊空泛詞與無效負面詞——「一隻可愛的貓」「很美的風景」「高品質」「best quality」這種沒有畫面資訊的詞要展開成具體描述；也不要堆一長串『不要…』，限制請轉成正向的構圖指示。\n3. 運用影像六要素公式（主體＋情境＋場景＋風格＋光線色調＋鏡頭參數）分層構句，以正面具體描述為主，抓住一個明確的視覺焦點。\n4. 語氣像專業又好懂的影像總監，講得出為什麼這樣寫，不堆術語嚇人、也不打高空。\n5. 出圖測試：把中文咒語給一個沒看過我想法的人讀，他腦中要能浮現一張具體清楚的畫面（主體、場景、風格、光線都到位）——若他只想得到一團模糊印象，代表不夠具體，重寫。\n\n（提醒：生成圖像請尊重智慧財產權，勿用於仿冒真實人物、特定品牌商標或抄襲他人原創作品。）`
+  },
+
+  // ━━━ 🔵 中階秘術 | 職場求生 | Free ━━━
+  {
+    id: "interview_killer_qa",
+    tab: "職場求生",
+    isPro: false,
+    tier: "adept",
+    school: "insight" as SchoolType,
+    subSchool: "defense" as SchoolType,
+    outputFormat: "面試考古題回答腳本",
+    icon: <Mic className="w-8 h-8 text-blue-500" />,
+    color: "blue",
+    title: "面試破題：考古題拆解術",
+    desc: "面試被問『為什麼離職』『最大缺點』『薪資期望』就腦袋空白、照網路罐頭答案背、一講就露餡？這咒語拆穿每道考古題背後人資真正想聽的，依你的真實狀況客製成既誠實又加分的回答，還附追問防守。",
+    tags: ["面試準備", "考古題", "求職轉職"],
+    fields: [
+      { id: "identity", label: "你的身分與應徵職位", placeholder: "例：行銷專員想轉職產品經理 / 應屆生找工程師職" },
+      { id: "questions", label: "你最怕被問的題目", placeholder: "例：為什麼離職、最大缺點、空窗期、薪資期望" },
+      { id: "situation", label: "你的真實狀況／難言之隱", placeholder: "例：跟前主管不合、被資遣、轉職沒相關經驗" },
+      { id: "strength", label: "想讓面試官記住的優勢", placeholder: "例：跨部門協調、學東西快、扛過大專案" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "拆題策略",
+      options: [
+        "穩健真誠型：不背罐頭、用真實事例包裝，讓人資覺得你誠懇可信",
+        "亮點主導型：每題都偷渡一個賣點，把防守題變成自我推銷的機會",
+        "新鮮人逆襲型：經歷不足也不慌，把空白與動機轉成可栽培的潛力",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '面試過千人的資深人資' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '拆解每題隱藏考點' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '回答腳本+地雷+追問防守' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '禁背罐頭與抱怨前東家' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '真話測試防露餡' },
+    ],
+    theory: "基於歸因理論（Attribution Theory）與印象管理（Goffman）：人資問『為什麼離職』『最大缺點』不是想聽答案，而是在觀察你怎麼歸因——把問題全推給別人（外歸因）會被貼上『愛抱怨、難帶』的標籤，全往自己身上扛（過度內歸因）又顯得沒自信。本咒語把每道陷阱題重新框架為『展現成熟度與自我覺察』的舞台，教你用對的歸因方式與印象管理，把扣分題答成加分題。",
+    generate: (inputs: any) => `你是一位面試過上千位求職者的資深人資主管，每道題你問出口前，心裡早有想聽的答案。你最看不起背網路罐頭答案的人，也最欣賞「誠實又懂分寸」的應答。你的信條：「面試官問的從來不是字面那題，而是想看你是什麼樣的人。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我要準備面試，請拆解我最怕的考古題並給我能直接背的回答。\n- 我的身分與應徵職位：[[${inputs.identity}]]\n- 我最怕被問的題目：[[${inputs.questions}]]\n- 我的真實狀況／難言之隱：[[${inputs.situation}]]\n- 想讓面試官記住的優勢：[[${inputs.strength}]]\n\n請輸出：\n① 【逐題回答腳本】— 針對我怕的每一題，各給一段 80-120 字、可直接念的回答，先點破這題的隱藏考點再作答\n② 【一句記憶點】— 一句貫穿全場、讓面試官記住我的個人標籤，15 字以內\n③ 【地雷清單】— 我這些題最容易踩的 3 個雷，各一句\n④ 【追問防守】— 面試官可能順勢追問的 2 題與接招方向\n\n【規則】\n1. 每題回答 80-120 字、口語可直接背誦念出，不能是書面條列。\n2. 嚴禁使用：「我最大的缺點就是太追求完美」「我抗壓性很強」「因為公司制度問題」這類一聽就知道在背稿或抱怨前東家的答案。\n3. 運用歸因理論：談離職與缺點時用成熟的歸因方式（談收穫與成長、不牽拖他人），把扣分題答成展現自我覺察的加分題。\n4. 語氣像一個有底氣、想清楚自己要什麼的人——不卑微、不背書、不浮誇。\n5. 真話測試：每個回答都要建立在我提供的真實狀況上，不虛構經歷；念出來若像「任何人都能照背」就重寫到只屬於我的版本。`
+  },
+
+  // ━━━ 🔵 中階秘術 | 日常雜症 | Free ━━━
+  {
+    id: "bill_retention_negotiator",
+    tab: "日常雜症",
+    isPro: false,
+    tier: "adept",
+    school: "contract" as SchoolType,
+    subSchool: "insight" as SchoolType,
+    outputFormat: "客服議價通話腳本+訊息",
+    icon: <PhoneCall className="w-8 h-8 text-blue-500" />,
+    color: "blue",
+    title: "帳單議價：續約挽留術",
+    desc: "電信、第四台、網路、健身房合約到期，續約折扣總是少得可憐，想退訂又被一通電話勸回原方案？這咒語幫你算好籌碼、生成打給客服的議價腳本與訊息，要到真正的留客方案，不再被當盤子。",
+    tags: ["帳單議價", "續約折扣", "退訂挽留"],
+    fields: [
+      { id: "service", label: "哪個服務／業者與方案", placeholder: "例：中華電信 599 吃到飽 / 某健身房月費" },
+      { id: "cost", label: "目前月費與合約狀況", placeholder: "例：月付 599、合約 8 月到期 / 已過綁約" },
+      { id: "leverage", label: "你手上的籌碼", placeholder: "例：用了 6 年 / 競品攜碼只要 488 / 真的想退" },
+      { id: "goal", label: "你想要的結果", placeholder: "例：月費砍到 488 / 升速不加價 / 留住舊優惠" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "議價策略",
+      options: [
+        "理性比價型：搬出競品報價與年資，給客服一個給你折扣的台階",
+        "去意已決型：表明真的要退，逼出只有挽留專員手上的隱藏方案",
+        "老客戶情義型：強調長期貢獻與忠誠，訴諸『別逼老客戶離開』",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '電信客服議價顧問' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依籌碼選議價路線' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '通話腳本+逐字稿+訊息' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '禁理盲動氣與空威脅' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '違約金與綁約提醒' },
+    ],
+    theory: "基於 Akerlof 資訊不對稱與錨定效應（Anchoring）＋ BATNA（最佳替代方案）：第一線客服權限有限，真正的折扣握在『客戶挽留部門』手上，而你能要到多少，取決於你手上的 BATNA（願意走人的可信度）與是否把價格錨定在競品行情。本咒語幫你把競品報價當錨先丟出、把『真的會退』演得可信，逼出檯面下的留客方案，不再乖乖照原價續約。",
+    generate: (inputs: any) => `你是一位專門替消費者跟電信、有線電視、健身房談合約的議價顧問，最清楚第一線客服的權限到哪、真正的折扣藏在「客戶挽留部門」手上。你的信條：「乖乖照原價續約的，都是業者眼中最好賺的客人。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我的合約快到期／想重談，請幫我擬好跟客服議價的腳本。\n- 服務與方案：[[${inputs.service}]]\n- 目前月費與合約狀況：[[${inputs.cost}]]\n- 我手上的籌碼：[[${inputs.leverage}]]\n- 我想要的結果：[[${inputs.goal}]]\n\n請輸出：\n① 【開場定錨句】— 打通電話／傳訊息的第一句，30 字以內，直接亮出籌碼\n② 【議價通話腳本】— 一段 150 字內的逐字稿，含要求折扣的說法與被拒絕時的回應\n③ 【關鍵升級句】— 一句把對話轉接到『挽留部門／專案方案』的話術\n④ 【可直接傳的訊息版】— 若用線上客服／簡訊，60 字以內的文字版\n⑤ 【底線提醒】— 簽約前一定要確認的 2 件事（綁約期、違約金）\n\n【規則】\n1. 腳本要口語、可照著念或直接複製傳出，不能像公文。\n2. 嚴禁使用：「我一定要退」這種沒退路的空威脅，以及辱罵、情緒勒索客服個人的字眼——對人要客氣，對方案要強硬。\n3. 運用錨定效應與 BATNA：先把競品行情或攜碼優惠當錨丟出，並讓對方相信你真的有更好的替代方案。\n4. 語氣像一個做足功課、不好唬弄但講道理的老客戶——理性、堅定、留台階。\n5. 划算測試：照腳本走，目標是拿到比官網續約價更好的條件；本內容僅供協商參考，實際方案、綁約與違約金以業者合約為準。`
+  },
+
+  // ━━━ 🔵 中階秘術 | 創業/自媒體 | Free ━━━
+  {
+    id: "clickbait_title_forge",
+    tab: "創業/自媒體",
+    isPro: false,
+    tier: "adept",
+    school: "illusion" as SchoolType,
+    subSchool: "insight" as SchoolType,
+    outputFormat: "標題組+縮圖字+說明文案",
+    icon: <Youtube className="w-8 h-8 text-blue-500" />,
+    color: "blue",
+    title: "下標煉金：點閱衝高術",
+    desc: "影片內容很用心，標題卻像記流水帳，曝光高、點閱低，被演算法埋沒？這咒語針對你的主題一次生成多組高點閱標題、縮圖該打的字、和搜尋會顯示的說明開頭，兼顧好奇心與 SEO，讓人想點又搜得到。",
+    tags: ["影片標題", "縮圖文案", "點閱率"],
+    fields: [
+      { id: "topic", label: "影片主題／內容重點", placeholder: "例：開箱平價藍牙耳機 / 一週減醣食譜" },
+      { id: "platform", label: "平台與影片類型", placeholder: "例：YouTube 長片 / Shorts / 部落格文章" },
+      { id: "audience", label: "目標觀眾與他們在搜什麼", placeholder: "例：小資族在搜『便宜耳機推薦』" },
+      { id: "angle", label: "你的獨特賣點／結論", placeholder: "例：千元內音質贏萬元款 / 不挨餓也能瘦" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "下標策略",
+      options: [
+        "好奇缺口型：製造資訊缺口與懸念，逼人非點不可",
+        "利益明確型：把觀眾能得到的好處與結果寫進標題，直球吸睛",
+        "搜尋優先型：前置關鍵字、兼顧 SEO，讓人用搜尋也找得到你",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '百萬頻道下標操盤手' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依平台調標題長度' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '標題組+縮圖字+說明開頭' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '禁標題殺人與文不對題' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '0.5秒掃描測試' },
+    ],
+    theory: "基於 Loewenstein 好奇心缺口理論（Information Gap）與點閱率（CTR）演算法邏輯：YouTube 給不給你流量，看的是縮圖＋標題的點擊率。標題太老實沒人點，太誇張點進來秒退反而被降權。本咒語在『好奇』與『兌現』之間抓平衡——製造非點不可的資訊缺口，同時把關鍵字前置餵搜尋，讓影片同時吃到推薦與搜尋兩種流量；它管的是『曝光時讓人點下去』的標題與縮圖文字，而非影片內的口說開場。",
+    generate: (inputs: any) => `你是一位操盤過多個百萬訂閱頻道的下標與縮圖文案手，最懂演算法只憑縮圖加標題決定要不要把你的影片推出去。你的信條：「再好的內容，標題沒人想點，就等於沒做過。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我做了一支影片／一篇內容，需要能衝點閱的標題與縮圖文案。\n- 主題／內容重點：[[${inputs.topic}]]\n- 平台與類型：[[${inputs.platform}]]\n- 目標觀眾與他們在搜什麼：[[${inputs.audience}]]\n- 我的獨特賣點／結論：[[${inputs.angle}]]\n\n請輸出：\n① 【標題組（8 條）】— 8 條風格各異的標題，每條標註用的框架（好奇缺口／利益明確／數字／反差／搜尋型），每條 28 字以內\n② 【最推薦 3 條】— 挑 3 條最適合這支的，各附一句「為什麼這條會被點」\n③ 【縮圖字】— 縮圖上該打的 3-6 個字（兩種版本），與標題互補不重複\n④ 【說明開頭】— 搜尋結果會顯示的前 2 句說明文案，含一個關鍵字\n\n【規則】\n1. 每條標題可直接複製貼上，長標題要顧及平台顯示會被截斷的字數。\n2. 嚴禁使用：「震驚」「不看後悔」「太扯了」這類已被觀眾免疫的農場殺人標，以及與內容不符的標題殺人（點進來發現被騙會被秒退、降權）。\n3. 運用好奇心缺口理論：至少一半標題要製造「資訊缺口」，但缺口必須是內容真的能兌現的。\n4. 語氣貼合平台與觀眾的搜尋語言——YouTube 長片可帶關鍵字、Shorts 更短更直接。\n5. 0.5 秒測試：想像觀眾在滿頁縮圖中快速掃過，這個標題＋縮圖字能不能在 0.5 秒內讓他停下手指點下去？停不下來就重寫。`
   },
 ];
 
