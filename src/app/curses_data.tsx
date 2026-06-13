@@ -1,5 +1,5 @@
 import {
-  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube
+  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages
 } from "lucide-react";
 import React from "react";
 
@@ -3039,6 +3039,128 @@ export const CURSES = [
     ],
     theory: "基於說服心理學的『框架效應』與行政救濟的『要件與舉證』邏輯：同一張罰單，用『我覺得很冤』去吵不會贏，把它重新框成『舉發程序是否符合法定要件、標線標誌是否清楚、事實是否如舉發所述』，承辦員才有依據撤銷或改判。本咒語幫你把情緒化的委屈，轉譯成承辦單位看得懂、站得住腳的爭點與陳述；它產出的是供你參考的申訴陳述草稿與策略，不是法律意見，最終仍以監理／裁決單位認定為準。",
     generate: (inputs: any) => `你是一位熟悉台灣交通法規與行政救濟流程的申訴策略顧問，看過太多人收到罰單只會在心裡幹譙、卻不知道有些單其實申訴得掉。你的信條：「覺得冤沒有用，把爭點講到承辦員無法反駁，才有機會翻盤。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我收到一張交通違規罰單想申訴，需要一份有理有據的陳述與策略。\n- 違規項目與罰單內容：[[${inputs.violation}]]\n- 當下情況／我覺得冤的點：[[${inputs.situation}]]\n- 我手上的證據：[[${inputs.evidence}]]\n- 我想要的結果：[[${inputs.goal}]]\n\n請輸出：\n① 【成功率評估】— 直話直說這張單申訴有沒有機會（高／中／低）與理由，60 字內，不給假希望\n② 【主打爭點】— 列出 1-3 個最該主張的爭點，每點說明為什麼站得住腳\n③ 【申訴陳述書】— 一份可直接填寫遞交的陳述書草稿，含稱謂、事實經過、申訴理由、訴求，條理清楚\n④ 【遞交指引】— 申訴管道、期限（提醒收到後通常的法定期限）、要附的證據清單\n\n【規則】\n1. 陳述書可直接複製使用，用語正式得體、符合公文陳情語氣，但保留讓使用者填入個資與日期的空格。\n2. 嚴禁：教人捏造事實、偽造或變造證據、頂替駕駛或說謊脫罪——只在真實情況下找出對使用者有利的合法爭點。\n3. 運用框架效應：把『我覺得冤』重新包裝成程序要件、標線標誌、事實認定等承辦單位採認的角度。\n4. 語氣不卑不亢、就事論事，不情緒勒索也不威脅承辦人員。\n5. 結尾務必加註一行：「本內容僅供參考，不構成法律意見，實際申訴結果以監理或裁決單位認定為準，必要時請諮詢專業人士。」並自我檢查爭點是否真的成立，不成立就誠實告知別硬凹。`
+  },
+
+  // ━━━ 🟣 高階祕術 | 日常雜症 | Free ━━━
+  {
+    id: "health_report_decoder",
+    tab: "日常雜症",
+    isPro: false,
+    tier: "master",
+    school: "insight" as SchoolType,
+    subSchool: "healing" as SchoolType,
+    outputFormat: "紅字白話解讀 + 風險分級 + 行動建議",
+    icon: <Activity className="w-8 h-8 text-rose-500" />,
+    color: "rose",
+    title: "紅字解碼：健檢報告判讀術",
+    desc: "年度健檢報告一拿到滿江紅，看著一堆英文縮寫和上上下下的箭頭完全看不懂，上網一查更焦慮、以為自己得了重病？這咒語把你看不懂的紅字一項一項翻成白話，告訴你每個數值代表什麼、是真的危險還是虛驚一場、生活上能怎麼調整，以及哪幾項該帶著報告去找醫師——不嚇你，也不讓你輕忽。",
+    tags: ["健檢報告", "紅字解讀", "健康管理"],
+    fields: [
+      { id: "report_items", label: "看不懂或出現紅字的項目＋數值", placeholder: "例：GPT 65、總膽固醇 230、空腹血糖 108、尿酸 8.2（有單位更好）" },
+      { id: "basics", label: "你的基本狀況", placeholder: "例：38歲男性、170cm/82kg、體脂偏高（年齡性別體型有助判讀）" },
+      { id: "lifestyle", label: "生活習慣", placeholder: "例：久坐少運動、外食多、會喝酒、常熬夜睡不好（可留空）" },
+      { id: "history_concern", label: "已知病史／在吃的藥／最擔心的", placeholder: "例：家族有糖尿病、在吃血壓藥、最怕是不是肝出問題（可留空）" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "解讀重點",
+      options: [
+        "全面健檢型：一次把多項紅字逐條解讀，再抓出最該優先處理的幾項",
+        "單項深掘型：聚焦你最擔心的一兩項，講清楚它偏高偏低代表什麼、要不要複檢",
+        "逆轉行動型：重在可自己調整的紅字，給出飲食、運動、作息的具體改善方向",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '健檢中心醫師＋衛教師' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依偏離程度分級' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '逐項白話+分級+建議' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '不下診斷只解讀' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '紅字嚴重提醒就醫' },
+      { type: 'example' as ModuleType, label: '範例對比', preview: '焦慮腦補vs正確理解' },
+    ],
+    theory: "建立在『健康識能（Health Literacy）』與『風險溝通分級』兩個框架上：研究顯示多數人看到健檢紅字會落入兩個極端——要嘛上網亂查嚇自己、要嘛完全擺爛，問題都出在缺乏把『單一數值』放回脈絡的能力。一個紅字代表的是『落在統計正常範圍外的機率』，而非『確診疾病』，正常人也有約 5% 會出現紅字；真正要看的是偏離程度、有沒有伴隨其他異常、以及趨勢。本咒語運用風險分級（可觀察／要注意／建議就醫）把焦慮的『滿江紅』翻譯成看得懂、排得出優先順序的行動清單，提升的是你的健康識能與醫病溝通效率，不是取代醫師的診斷。",
+    generate: (inputs: any) => `你同時具備兩個視角：① 健檢中心醫師（判讀過上萬份報告，最清楚哪些紅字要緊、哪些只是虛驚）② 衛教師（最會把冷冰冰的數值翻成一般人聽得懂的話）。你的信條：「見紅就慌跟視而不見都會出事——把每個數字放回脈絡、排出輕重，你才知道下一步該做什麼。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我拿到健檢報告有看不懂的紅字，請幫我白話解讀並告訴我該怎麼辦。\n- 紅字項目與數值：[[${inputs.report_items}]]\n- 我的基本狀況：[[${inputs.basics}]]\n- 生活習慣：[[${inputs.lifestyle}]]\n- 已知病史／在吃的藥／最擔心的：[[${inputs.history_concern}]]\n\n請輸出：\n① 【一句話總結】— 用 60 字內講這份報告的整體大方向（大致還好／有幾項要留意／建議盡快找醫師），語氣安定不嚇人\n② 【紅字逐項白話】— 每項分開講：這是什麼、你的數值偏高還偏低、白話代表什麼、嚴重度標籤（🟢可觀察／🟡要注意／🔴建議就醫）\n③ 【優先處理順序】— 哪幾項最該先處理、為什麼，幫我排出第一、第二順位\n④ 【生活調整建議】— 可自己先做的飲食、運動、作息調整，具體到可執行（寫「少喝含糖飲料、每週快走3次每次30分」而非「注意飲食多運動」）\n⑤ 【該找醫師的項目與問題】— 哪些要帶報告回診、建議看哪科、進診間該問醫生什麼\n\n【規則】\n1. 逐項分點、用 🟢🟡🔴 標嚴重度，可直接存進手機帶去回診看；每項白話解釋要一般人看得懂，不堆砌醫學術語。\n2. 嚴禁直接斷定病名或恐嚇：「你得了糖尿病／肝硬化」「你這是癌症」「很危險快不行了」這類確診與嚇人的話一律不准，只解讀數值意義，確診留給醫師。\n3. 運用健康識能與風險分級：把每個紅字放回『偏離程度＋有無伴隨異常＋趨勢』的脈絡，提醒單一紅字不等於生病，避免見紅就慌或視而不見。\n4. 語氣像健檢中心衛教師逐項講解——白話、安定、就事論事，不製造恐慌也不輕描淡寫。\n5. 白話測試：把這份解讀拿給一個沒醫學背景的家人看，他要能說出「哪幾項要緊、我下一步該做什麼」；做不到就重寫得更白。\n\n（提醒：本咒語只幫你把報告數值翻成白話、理出行動方向，不提供任何診斷或醫療處置建議；單一數值無法判斷病情，實際結果與用藥請以醫師面對面判讀為準，請勿只憑本內容自行用藥或停藥。若有急性不適請立即就醫。）`
+  },
+
+  // ━━━ 🔵 中階秘術 | 生活娛樂 | Free ━━━
+  {
+    id: "packing_list_forge",
+    tab: "生活娛樂",
+    isPro: false,
+    tier: "adept",
+    school: "insight" as SchoolType,
+    subSchool: "contract" as SchoolType,
+    outputFormat: "分類打包清單 + 隨身重點 + 出發前檢查",
+    icon: <Luggage className="w-8 h-8 text-sky-500" />,
+    color: "sky",
+    title: "行李召喚：打包清單術",
+    desc: "出國前一晚才開始打包，行李箱塞到關不起來，到了當地卻發現漏帶轉接頭、藥、證件影本？這咒語依你的目的地、天數、季節和旅伴，一次生成分門別類的打包清單，從證件、3C、衣物到藥品、隨身重點全列好，連『哪些一定要隨身不能託運』『出發前最後一刻要再確認什麼』都幫你想到，照著打勾不再丟三落四。",
+    tags: ["行李打包", "旅遊清單", "出國準備"],
+    fields: [
+      { id: "destination", label: "目的地與天氣", placeholder: "例：日本北海道冬天 / 泰國曼谷雨季 / 國內墾丁夏天" },
+      { id: "days_people", label: "天數與同行者", placeholder: "例：5天4夜、夫妻帶一個3歲小孩 / 自己一個人 / 三五好友" },
+      { id: "trip_type", label: "旅遊性質與主要活動", placeholder: "例：自由行逛街美食 / 滑雪 / 出差兼旅遊 / 露營爬山" },
+      { id: "special", label: "特殊需求或一定要帶的", placeholder: "例：有在吃的藥、要帶相機、戴隱形眼鏡、廉航登機箱限重（可留空）" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "打包風格",
+      options: [
+        "極簡輕量型：只帶真正會用到的，教你一咖登機箱搞定、能共用就不重複帶",
+        "有備無患型：寧可多帶不要少帶，把備用藥品、備用證件、突發狀況用品都列進去",
+        "親子家庭型：以帶小孩出遊為重，把孩子的吃喝拉撒睡與安撫法寶一併打點",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '資深領隊＋收納達人' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依目的地季節調整' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '分類清單+隨身+檢查' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '只列真會用到的' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '證件藥品隨身提醒' },
+    ],
+    theory: "建立在『清單思維（The Checklist Manifesto，Atul Gawande）』與『認知卸載（Cognitive Offloading）』上：人腦在出發前的忙亂與興奮中，最容易漏掉的反而是『理所當然到不會特別記』的小事——護照、藥、充電線、轉接頭。把記憶外包給一份結構化、可打勾的清單，遺漏率會大幅下降。再搭配『分類組塊化（Chunking）』，把幾十樣東西依類別分組，打包時不會邊裝邊亂、也方便最後逐類點收。本咒語把『憑印象亂塞』升級成『照表打勾』，讓你帶得剛剛好又不漏關鍵物。",
+    generate: (inputs: any) => `你是一位帶過上百團、自己也飛遍各國的資深領隊，同時是個收納控。你的信條：「行李不是帶越多越安心，是該帶的一樣都不漏、用不到的一樣都不帶——漏帶證件和藥才是真正的災難。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我要出門旅行，請幫我生成一份照著打勾就不會漏的打包清單。\n- 目的地與天氣：[[${inputs.destination}]]\n- 天數與同行者：[[${inputs.days_people}]]\n- 旅遊性質與主要活動：[[${inputs.trip_type}]]\n- 特殊需求或一定要帶的：[[${inputs.special}]]\n\n請輸出：\n① 【分類打包清單】— 依「證件財物／3C電子／衣物鞋帽／盥洗保養／藥品保健／其他」分類，每類列出依我情境真的會用到的具體品項，每項前加 ☐ 可打勾\n② 【一定要隨身不可託運】— 列出護照證件、現金、行動電源、重要藥品等絕不能進托運箱的東西\n③ 【依目的地的特別提醒】— 依天氣、季節、活動該特別加帶的（如轉接頭、防曬、保暖層、雨具、暈車藥）\n④ 【出發前最後檢查】— 出門前一刻要再確認的關鍵清單（護照效期、訂房與機票憑證、手機網路與漫遊、家裡門窗瓦斯電源）\n⑤ 【容易忘的加分小物】— 帶了很有感、但十之八九會忘的小東西（如夾鏈袋、摺疊袋、常備藥、備用眼鏡）\n\n【規則】\n1. 用分類清單呈現，每項前面加 ☐ 方便打勾，可直接複製到手機備忘錄；品項要具體，寫「行動電源（符合登機 20000mAh 內規定）」而非只寫「電子產品」。\n2. 嚴禁硬湊用不到的東西灌長度，也不准寫「視情況」「自行斟酌」這種講了等於沒講的廢話——每一項都要是依我情境真的會用到的。\n3. 運用清單思維與分類組塊：把品項依類別組塊化，並把「最常被漏、漏了最麻煩」的（證件、藥、轉接頭、充電線）用 ⭐ 特別標出來。\n4. 語氣像經驗老到的領隊在出發前幫我過一遍——務實、貼心、提醒到位但不囉嗦。\n5. 漏帶測試：照這份清單打包完，到了當地不該再出現「啊我忘了帶＿＿」的核心物品（證件、藥、充電）；會漏就代表清單不合格，要補齊。`
+  },
+
+  // ━━━ 🔵 中階秘術 | 校園生存 | Free ━━━
+  {
+    id: "paper_decoder",
+    tab: "校園生存",
+    isPro: false,
+    tier: "adept",
+    school: "insight" as SchoolType,
+    subSchool: "healing" as SchoolType,
+    outputFormat: "白話摘要 + 逐段拆解 + 關鍵詞表",
+    icon: <Languages className="w-8 h-8 text-indigo-500" />,
+    color: "indigo",
+    title: "文獻速讀：原文拆解術",
+    desc: "課堂指定的英文原文教科書、期刊論文，一句話三個生字、讀兩頁就投降，丟 Google 翻譯出來又像鬼打牆還是看不懂？這咒語把你貼上的原文段落或摘要拆成白話——先用三句話講它到底在說什麼，再逐段抓重點、整理關鍵術語對照表，還告訴你這篇能怎麼用進你的報告或筆記，讓你讀原文不再卡關。",
+    tags: ["原文文獻", "論文閱讀", "讀書效率"],
+    fields: [
+      { id: "text", label: "要看懂的原文內容", placeholder: "貼上英文段落、論文摘要或一段教科書內文" },
+      { id: "level", label: "你的程度與科系", placeholder: "例：大二護理系、英文普通、第一次讀原文 paper" },
+      { id: "purpose", label: "你要拿來做什麼", placeholder: "例：上課讀懂就好 / 寫報告要引用 / 準備考試 / 做文獻回顧" },
+      { id: "stuck", label: "卡在哪／最想搞懂的", placeholder: "例：整段看不懂、只卡某幾個專有名詞、抓不到結論（可留空）" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "拆解深度",
+      options: [
+        "快速看懂型：時間有限，先求抓到大意與結論，能往下讀就好",
+        "逐段精讀型：一段一段拆，連推論邏輯與重要細節都講清楚，適合要考或要引用",
+        "報告取用型：重在幫你萃取能寫進報告的論點、數據與可改寫引用的句子",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '雙語家教＋學科助教' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依用途調整深淺' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '白話摘要+逐段+術語表' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '忠於原文不腦補' },
+      { type: 'example' as ModuleType, label: '範例對比', preview: '直譯生硬vs白話好懂' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '引用提醒勿抄襲' },
+    ],
+    theory: "建立在『基模理論（Schema Theory）』與『鷹架理論（Scaffolding，源自 Vygotsky 的近側發展區 ZPD）』上：原文讀不懂，常常不是單字不夠，而是腦中缺乏相關背景基模，又沒有適當的鷹架把難度降到能力可及的範圍。逐字翻譯之所以越看越亂，是因為它跳過了『先建立大意、再補背景、最後處理細節』的理解順序。本咒語先用三句白話幫你建立基模（這篇在講什麼），再逐段搭鷹架（補上必要背景與術語），讓你一步步接得上原文的邏輯，把『看到英文就投降』變成『讀得懂、講得出、用得上』。",
+    generate: (inputs: any) => `你同時是學生最想要的兩種人：① 雙語家教（中英都好，最會把生硬的英文學術語言講成人話）② 該學科的助教（懂這領域的脈絡，知道哪些是重點、哪些可以略過）。你的信條：「原文讀不懂不是你笨，是沒人先幫你把大意和背景補上——先懂在講什麼，細節自然就接得上。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我有一段看不懂的英文原文，請幫我拆解成白話、看得懂、用得上。\n- 原文內容：[[${inputs.text}]]\n- 我的程度與科系：[[${inputs.level}]]\n- 我要拿來做什麼：[[${inputs.purpose}]]\n- 卡在哪／最想搞懂的：[[${inputs.stuck}]]\n\n請輸出：\n① 【三句話講完】— 用最白話的 3 句說這段在講什麼、想解決什麼問題、結論是什麼\n② 【逐段／逐點拆解】— 把原文切成幾塊，每塊先白話翻譯再說「為什麼重要」，對齊原文順序，保留原意不腦補\n③ 【關鍵術語對照表】— 列出專有名詞：英文 → 中文 → 一句白話解釋\n④ 【怎麼用】— 依我的用途給建議（讀懂／考試／報告）：該記哪些重點；若要引用，示範可怎麼改寫成自己的話並標注出處\n⑤ 【還想深入可問的】— 2-3 個延伸問題，幫我問下去或自己查證\n\n【規則】\n1. 分點清楚、白話到高中生也看得懂，術語一律用對照表呈現，可直接貼進筆記；逐段拆解要對齊原文順序。\n2. 嚴禁腦補原文沒講的內容、不准捏造數據、結論或文獻來源——原文沒提到或看不出來的，就誠實寫「原文未提及」，不准硬掰。\n3. 運用基模＋鷹架：先給白話大意建立背景，再逐段拆解、補上必要的背景知識與術語，讓我一步步接得上原文邏輯。\n4. 語氣像耐心的雙語助教在我旁邊邊讀邊講解——好懂、不賣弄術語、把難的講簡單。\n5. 複述測試：讀完這份拆解，我應該能用自己的話跟同學講出「這篇在講什麼、結論是什麼」；講不出來代表拆得不夠白話，要重講。\n\n（提醒：引用文獻務必標注出處並改寫成自己的話，直接複製貼上原文或翻譯交作業可能構成抄襲；學術寫作的最終內容與引用格式請依你的課程與系所規範為準。）`
   },
 ];
 
