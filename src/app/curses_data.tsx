@@ -1,5 +1,5 @@
 import {
-  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages
+  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle
 } from "lucide-react";
 import React from "react";
 
@@ -3161,6 +3161,128 @@ export const CURSES = [
     ],
     theory: "建立在『基模理論（Schema Theory）』與『鷹架理論（Scaffolding，源自 Vygotsky 的近側發展區 ZPD）』上：原文讀不懂，常常不是單字不夠，而是腦中缺乏相關背景基模，又沒有適當的鷹架把難度降到能力可及的範圍。逐字翻譯之所以越看越亂，是因為它跳過了『先建立大意、再補背景、最後處理細節』的理解順序。本咒語先用三句白話幫你建立基模（這篇在講什麼），再逐段搭鷹架（補上必要背景與術語），讓你一步步接得上原文的邏輯，把『看到英文就投降』變成『讀得懂、講得出、用得上』。",
     generate: (inputs: any) => `你同時是學生最想要的兩種人：① 雙語家教（中英都好，最會把生硬的英文學術語言講成人話）② 該學科的助教（懂這領域的脈絡，知道哪些是重點、哪些可以略過）。你的信條：「原文讀不懂不是你笨，是沒人先幫你把大意和背景補上——先懂在講什麼，細節自然就接得上。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我有一段看不懂的英文原文，請幫我拆解成白話、看得懂、用得上。\n- 原文內容：[[${inputs.text}]]\n- 我的程度與科系：[[${inputs.level}]]\n- 我要拿來做什麼：[[${inputs.purpose}]]\n- 卡在哪／最想搞懂的：[[${inputs.stuck}]]\n\n請輸出：\n① 【三句話講完】— 用最白話的 3 句說這段在講什麼、想解決什麼問題、結論是什麼\n② 【逐段／逐點拆解】— 把原文切成幾塊，每塊先白話翻譯再說「為什麼重要」，對齊原文順序，保留原意不腦補\n③ 【關鍵術語對照表】— 列出專有名詞：英文 → 中文 → 一句白話解釋\n④ 【怎麼用】— 依我的用途給建議（讀懂／考試／報告）：該記哪些重點；若要引用，示範可怎麼改寫成自己的話並標注出處\n⑤ 【還想深入可問的】— 2-3 個延伸問題，幫我問下去或自己查證\n\n【規則】\n1. 分點清楚、白話到高中生也看得懂，術語一律用對照表呈現，可直接貼進筆記；逐段拆解要對齊原文順序。\n2. 嚴禁腦補原文沒講的內容、不准捏造數據、結論或文獻來源——原文沒提到或看不出來的，就誠實寫「原文未提及」，不准硬掰。\n3. 運用基模＋鷹架：先給白話大意建立背景，再逐段拆解、補上必要的背景知識與術語，讓我一步步接得上原文邏輯。\n4. 語氣像耐心的雙語助教在我旁邊邊讀邊講解——好懂、不賣弄術語、把難的講簡單。\n5. 複述測試：讀完這份拆解，我應該能用自己的話跟同學講出「這篇在講什麼、結論是什麼」；講不出來代表拆得不夠白話，要重講。\n\n（提醒：引用文獻務必標注出處並改寫成自己的話，直接複製貼上原文或翻譯交作業可能構成抄襲；學術寫作的最終內容與引用格式請依你的課程與系所規範為準。）`
+  },
+
+  // ━━━ 🔵 中階秘術 | 人際擋箭 | Free ━━━
+  {
+    id: "comfort_message",
+    tab: "人際擋箭",
+    isPro: false,
+    tier: "adept",
+    school: "healing" as SchoolType,
+    subSchool: "insight" as SchoolType,
+    outputFormat: "可直傳的慰問訊息 + 備案",
+    icon: <HeartHandshake className="w-8 h-8 text-rose-500" />,
+    color: "rose",
+    title: "暖語煉成：慰問安慰術",
+    desc: "朋友或家人剛失戀、被資遣、生病、親人離世，你想關心卻怕說錯話，一開口就變「加油」「想開一點」反而更傷人？這咒語幫你寫出真正接得住對方、有溫度又不踩雷的慰問訊息，還附上對方不同反應時的備案，可直接貼 LINE。",
+    tags: ["安慰他人", "慰問訊息", "情緒支持"],
+    fields: [
+      { id: "target", label: "對象與關係", placeholder: "例：交往的女友 / 多年好友 / 同事 / 我媽" },
+      { id: "event", label: "對方遇到什麼事", placeholder: "例：剛分手 / 被資遣 / 確診生病 / 阿公過世 / 寵物走了" },
+      { id: "their_state", label: "對方現在的狀態", placeholder: "例：哭到崩潰 / 表面沒事但很沉默 / 一直自責 / 不想講話" },
+      { id: "concern", label: "你的顧慮或想做到的", placeholder: "例：怕越安慰越糟 / 不知道該不該約出來 / 只想讓他知道我在" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "陪伴視角",
+      options: [
+        "靜靜接住型：不急著給建議，先讓對方知道「你的難過是合理的、我在這」，適合還困在情緒裡的人",
+        "實際支援型：情緒陪伴之外，給一兩個具體能幫上忙的提議，適合對方需要被拉一把",
+        "輕鬆陪伴型：用日常的溫度而非沉重的安慰，適合不想被當可憐蟲、想被正常對待的人",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '懂分寸的療癒型摯友' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '禁加油·禁比慘說教' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依對方狀態調陪伴法' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '可直傳訊息+反應備案' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '重大狀況提醒求助' },
+    ],
+    theory: "建立在『情緒效度（Emotional Validation）』與 Brené Brown 的『同理 vs 同情（Empathy is feeling with people）』之上：人在低潮時要的不是解方或正能量，而是「我的感受被看見、被允許」。多數人安慰失敗，是因為急著修好對方的情緒（給建議、叫他想開、比慘），反而否定了對方的感受、讓人更孤單。本咒語先做情緒效度——承接而不評判，再依對方狀態決定要不要給支援，把『不知道說什麼』升級成『一句真的接得住人的話』。",
+    generate: (inputs: any) => `你是那種「出事第一個會想找的朋友」——高情商、懂分寸，受過情緒支持的訓練，最會在別人最脆弱時把話說得剛剛好。你的信條：「安慰不是把對方的難過趕走，是讓他知道『你可以難過，而且我在』。最爛的安慰，是急著叫一個正在淹水的人冷靜游泳。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我身邊的人出事了，我想關心但很怕說錯話，請幫我寫出一段真正接得住對方的慰問訊息。\n- 對象與關係：[[${inputs.target}]]\n- 對方遇到的事：[[${inputs.event}]]\n- 對方現在的狀態：[[${inputs.their_state}]]\n- 我的顧慮或想做到的：[[${inputs.concern}]]\n\n請輸出：\n① 【可以直接傳的訊息】— 一段 80-150 字、語氣自然到像我會講的話的慰問訊息，先承接情緒再表達陪伴，可直接複製貼上\n② 【為什麼這樣寫】— 用 2-3 句點出這段訊息接住了對方什麼、避開了哪個雷，讓我知道分寸在哪\n③ 【對方不同反應的備案】— 若對方「已讀不回／說沒事不想講／開始哭訴／反過來安慰我」，分別下一句可以怎麼接\n④ 【可以做的一件小事】— 除了訊息，一個低負擔但很有感的具體行動（如送一份宵夜、約散步、只是陪著不講話）\n⑤ 【絕對不要說的話】— 針對這個情境，列出 2-3 句聽起來好意、其實會踩雷的話，提醒我別講\n\n【規則】\n1. 訊息用口語、像真人傳 LINE，不要書信體或心理諮商腔；長度精煉，可直接複製。\n2. 嚴禁出現：「加油」「想開一點」「時間會沖淡一切」「至少你還有⋯」「我懂你的感受」「這是上天的安排」這類否定感受或比慘說教的話。\n3. 運用情緒效度：先承接並肯定對方的感受（你會難過很正常），再決定要不要給建議或行動，順序不可顛倒。\n4. 語氣溫暖、真誠、有重量，像一個真的在乎的人，不浮誇、不過度正能量。\n5. 接得住測試：對方讀完應該覺得「被理解、沒那麼孤單」，而不是「被安慰得很尷尬、更不想講」。\n\n（提醒：若對方的狀態聽起來已是長期低潮、提到傷害自己或活不下去的念頭，這超出一段訊息能承擔的範圍——請溫和鼓勵他尋求專業協助，必要時陪同就醫或撥打安心專線 1925，別獨自扛。）`
+  },
+
+  // ━━━ 🔵 中階秘術 | 校園生存 | Free ━━━
+  {
+    id: "feynman_explainer",
+    tab: "校園生存",
+    isPro: false,
+    tier: "adept",
+    school: "insight" as SchoolType,
+    subSchool: "healing" as SchoolType,
+    outputFormat: "白話比喻 + 拆解 + 檢測題",
+    icon: <Lightbulb className="w-8 h-8 text-amber-500" />,
+    color: "amber",
+    title: "秒懂召喚：白話解釋術",
+    desc: "課本、老師、網路文章講了半天還是聽不懂某個概念（機會成本、相對論、現金流量表、什麼是 ETF）？這咒語用費曼學習法，把任何艱澀概念翻成國中生也懂的白話＋生活比喻，再出幾題檢測你是不是真的懂了，而不是背起來而已。",
+    tags: ["白話解釋", "費曼學習法", "觀念搞懂"],
+    fields: [
+      { id: "concept", label: "想搞懂的概念", placeholder: "例：機會成本 / 相對論 / 現金流量表 / 什麼是 ETF / 光合作用" },
+      { id: "background", label: "你的背景與程度", placeholder: "例：高中生、完全沒基礎 / 大一商管、聽過但很模糊" },
+      { id: "confusion", label: "你卡在哪／哪裡特別不懂", placeholder: "例：老是跟另一個名詞搞混 / 看得懂字但串不起來（可留空）" },
+      { id: "purpose", label: "你要拿來做什麼", placeholder: "例：考試要會 / 上課跟得上 / 要跟人解釋 / 純粹好奇" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "解釋深度",
+      options: [
+        "一句秒懂型：時間有限，先用一個超白話比喻讓我「啊原來如此」，抓到核心就好",
+        "打地基型：從零開始把來龍去脈、為什麼會有這東西講清楚，適合要考或要真懂",
+        "對比釐清型：重點放在「它跟我老是搞混的那個」差在哪，幫我一次分清楚",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '最會打比方的名師' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '禁術語·先比喻再定義' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依程度與用途調深淺' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '比喻+白話+檢測題' },
+      { type: 'example' as ModuleType, label: '範例對比', preview: '教科書腔vs講人話' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '不確定不硬掰' },
+    ],
+    theory: "建立在『費曼學習法（Feynman Technique：能用最白話的方式教會一個外行人，才代表你真的懂；卡住的地方就是你還沒懂的地方）』與『類比學習＋基模理論（Learning by Analogy / Schema Theory：把陌生概念掛到大腦已有的熟悉經驗上，理解才會發生）』之上：聽不懂往往不是你笨，是講的人用一堆術語解釋另一堆術語，從沒把它接到你已知的東西上。本咒語強制先用生活比喻建立直覺，再補白話定義，最後用檢測題逼出『你以為懂但其實沒懂』的盲區，把『背起來』升級成『真的懂』。",
+    generate: (inputs: any) => `你是那種「讓全班都聽懂」的傳奇名師，不管多硬的概念，你都能用一個生活比喻讓人秒懂。你的信條：「沒有難懂的概念，只有還沒被翻成人話的概念。聽不懂不是你的問題，是還沒有人幫你把它接到你已經懂的東西上。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n有個概念我怎麼都搞不懂，請用費曼學習法把它講到我真的懂。\n- 想搞懂的概念：[[${inputs.concept}]]\n- 我的背景與程度：[[${inputs.background}]]\n- 我卡在哪：[[${inputs.confusion}]]\n- 我要拿來做什麼：[[${inputs.purpose}]]\n\n請輸出：\n① 【一句話比喻】— 用一個我生活中一定有過的經驗打比方，讓我先抓到這概念的直覺（例：機會成本就像⋯）\n② 【白話講清楚】— 接著用最白話、不堆術語的方式說它到底是什麼、為什麼會有這東西、解決什麼問題\n③ 【拆解關鍵點】— 把這概念的 2-4 個核心重點條列，每點搭一個小例子，必要時點出「它跟我搞混的那個」差在哪\n④ 【檢測你懂沒】— 出 2-3 題小測驗（含一題情境應用題），附解答，讓我驗證是真懂還是錯覺\n⑤ 【一句話總結】— 用一句話幫我把整個概念收攏，方便記住與複述\n\n【規則】\n1. 全程白話、口語，分點清楚可直接貼進筆記；比喻一定要用日常生活的東西，不要又用另一個專有名詞解釋。\n2. 嚴禁堆砌術語、用更難的詞解釋難詞，也禁止「這很簡單」「眾所周知」這類讓人更挫折的話；專有名詞第一次出現一定附白話。\n3. 運用費曼學習法：先比喻建立直覺、再白話定義、最後用檢測題逼出盲區，順序不可省略。\n4. 語氣像一個耐心、會逗趣、絕不讓你覺得自己笨的好老師。\n5. 複述測試：讀完我應該能用自己的話、搭那個比喻，把這概念講給同學聽；講不出來代表還不夠白話，要重講。\n\n（提醒：解釋若涉及具體數據、公式或專業判斷，請以你的課本與老師說法為準；我可能簡化以便理解，重要考試或報告請再核對權威來源。）`
+  },
+
+  // ━━━ 🔵 中階秘術 | 生活娛樂 | Free ━━━
+  {
+    id: "dating_chat_keeper",
+    tab: "生活娛樂",
+    isPro: false,
+    tier: "adept",
+    school: "illusion" as SchoolType,
+    subSchool: "insight" as SchoolType,
+    outputFormat: "3 組備選回覆 + 時機解析",
+    icon: <MessageCircle className="w-8 h-8 text-pink-500" />,
+    color: "pink",
+    title: "聊天召喚：曖昧不冷場術",
+    desc: "交友軟體配對到了、或正在曖昧的對象，聊兩句就乾掉、句點王上身、想約見面又不知怎麼開口？這咒語接住對方剛說的那句話，幫你生出自然不尷尬、能延續話題又默默推進關係的回覆，還教你什麼時機、怎麼開口約。可直接複製。",
+    tags: ["交友軟體", "聊天接話", "邀約開口"],
+    fields: [
+      { id: "stage", label: "對象與目前進度", placeholder: "例：Tinder 配對 3 天 / IG 互追在曖昧 / 朋友介紹聊一週" },
+      { id: "last_message", label: "對方最後說的話／目前話題", placeholder: "例：貼上對方訊息，如「我也喜歡爬山欸」/ 在聊週末計畫" },
+      { id: "their_vibe", label: "對方給你的感覺", placeholder: "例：回很慢有點冷 / 蠻熱絡會反問 / 有點公式化" },
+      { id: "goal", label: "你這幾句想達到", placeholder: "例：延續話題別冷掉 / 試探有沒有機會 / 想約出來見面" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "聊天策略",
+      options: [
+        "自然延續型：先把眼前話題接好接滿，製造舒服的一來一往節奏，不急著推進",
+        "升溫曖昧型：在安全範圍內加一點調情與專屬感，把朋友線往曖昧線帶",
+        "順勢邀約型：抓住對方剛透露的線索，自然帶出見面邀約，給足台階不尷尬",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '高情商戀愛軍師' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '禁查戶口·禁油膩' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依對方溫度調進退' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '3備選回覆+時機解析' },
+      { type: 'example' as ModuleType, label: '範例對比', preview: '句點王vs會聊的人' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '對方沒興趣就收手' },
+    ],
+    theory: "建立在『社會滲透理論（Social Penetration Theory，Altman & Taylor：關係靠循序漸進、雙向且互惠的自我揭露一層層加深）』與『互惠原則』之上：聊天會乾掉，通常是只顧問問題（像查戶口）、或自顧自講（沒給對方接話的鉤子），破壞了你來我往的節奏。本咒語每句都設計成『有揭露、有鉤子、給得起回應』，讓對話自然往更深一層滾動，再抓準互惠升溫的時機自然邀約，把『句點王』升級成『對方會期待你回的人』。",
+    generate: (inputs: any) => `你是朋友圈裡那個「戀愛軍師」——高情商、會讀空氣，最懂交友軟體與曖昧期的微妙節奏。你的信條：「會聊不是話很多，是每一句都給對方一個好接的球；想約不是用力邀，是讓對方覺得『見面好像很順理成章』。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我跟一個曖昧／配對對象正在聊，請接住對方的話，幫我生出不冷場又能推進的回覆。\n- 對象與進度：[[${inputs.stage}]]\n- 對方最後說的話／話題：[[${inputs.last_message}]]\n- 對方給我的感覺：[[${inputs.their_vibe}]]\n- 我這幾句想達到：[[${inputs.goal}]]\n\n請輸出：\n① 【3 組可直接傳的回覆】— 針對對方那句話，給 3 種不同語氣的回覆（穩妥／俏皮／推進各一），每組可直接複製\n② 【為什麼這樣接】— 各用一句點出這句的鉤子在哪、預期帶出什麼反應，讓我懂原理不只是抄\n③ 【話題彈藥庫】— 依目前話題延伸 2-3 個還能往下聊、不尷尬的方向，避免聊死\n④ 【邀約時機與話術】— 判斷現在適不適合約；若可以，給一句自然的邀約開場；若還太早，說明先做什麼鋪陳\n⑤ 【紅燈提醒】— 點出我這段對話若有踩雷風險（太快、太黏、像查戶口、訊息落差太大）並給修正方向\n\n【規則】\n1. 回覆要像真人傳訊、口語有溫度，長度像正常聊天訊息（別寫成小作文），可直接複製貼上。\n2. 嚴禁油膩噁心的情話、過度討好跪舔、連環問句查戶口，也禁止「在幹嘛」「吃飽沒」這種句點式回覆。\n3. 運用社會滲透理論：每句都要有「自我揭露＋給對方好接的鉤子」，維持雙向互惠的節奏，而非單方拷問或自顧自講。\n4. 語氣自信、輕鬆、有分寸的幽默，不卑不亢，像個有魅力但尊重人的人。\n5. 想回測試：對方收到應該會想笑、想接話、覺得跟你聊很舒服；若三句裡有讓人不想回的，就是不合格要重寫。\n\n（提醒：聊天是雙向的——若對方明顯冷淡、敷衍、已讀不回或表示沒興趣，最好的策略是體面收手、尊重對方界線，不糾纏、不死纏爛打。健康的關係建立在彼此都有意願之上。）`
   },
 ];
 
