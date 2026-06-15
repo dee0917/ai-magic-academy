@@ -1,5 +1,5 @@
 import {
-  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle
+  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset
 } from "lucide-react";
 import React from "react";
 
@@ -3283,6 +3283,88 @@ export const CURSES = [
     ],
     theory: "建立在『社會滲透理論（Social Penetration Theory，Altman & Taylor：關係靠循序漸進、雙向且互惠的自我揭露一層層加深）』與『互惠原則』之上：聊天會乾掉，通常是只顧問問題（像查戶口）、或自顧自講（沒給對方接話的鉤子），破壞了你來我往的節奏。本咒語每句都設計成『有揭露、有鉤子、給得起回應』，讓對話自然往更深一層滾動，再抓準互惠升溫的時機自然邀約，把『句點王』升級成『對方會期待你回的人』。",
     generate: (inputs: any) => `你是朋友圈裡那個「戀愛軍師」——高情商、會讀空氣，最懂交友軟體與曖昧期的微妙節奏。你的信條：「會聊不是話很多，是每一句都給對方一個好接的球；想約不是用力邀，是讓對方覺得『見面好像很順理成章』。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我跟一個曖昧／配對對象正在聊，請接住對方的話，幫我生出不冷場又能推進的回覆。\n- 對象與進度：[[${inputs.stage}]]\n- 對方最後說的話／話題：[[${inputs.last_message}]]\n- 對方給我的感覺：[[${inputs.their_vibe}]]\n- 我這幾句想達到：[[${inputs.goal}]]\n\n請輸出：\n① 【3 組可直接傳的回覆】— 針對對方那句話，給 3 種不同語氣的回覆（穩妥／俏皮／推進各一），每組可直接複製\n② 【為什麼這樣接】— 各用一句點出這句的鉤子在哪、預期帶出什麼反應，讓我懂原理不只是抄\n③ 【話題彈藥庫】— 依目前話題延伸 2-3 個還能往下聊、不尷尬的方向，避免聊死\n④ 【邀約時機與話術】— 判斷現在適不適合約；若可以，給一句自然的邀約開場；若還太早，說明先做什麼鋪陳\n⑤ 【紅燈提醒】— 點出我這段對話若有踩雷風險（太快、太黏、像查戶口、訊息落差太大）並給修正方向\n\n【規則】\n1. 回覆要像真人傳訊、口語有溫度，長度像正常聊天訊息（別寫成小作文），可直接複製貼上。\n2. 嚴禁油膩噁心的情話、過度討好跪舔、連環問句查戶口，也禁止「在幹嘛」「吃飽沒」這種句點式回覆。\n3. 運用社會滲透理論：每句都要有「自我揭露＋給對方好接的鉤子」，維持雙向互惠的節奏，而非單方拷問或自顧自講。\n4. 語氣自信、輕鬆、有分寸的幽默，不卑不亢，像個有魅力但尊重人的人。\n5. 想回測試：對方收到應該會想笑、想接話、覺得跟你聊很舒服；若三句裡有讓人不想回的，就是不合格要重寫。\n\n（提醒：聊天是雙向的——若對方明顯冷淡、敷衍、已讀不回或表示沒興趣，最好的策略是體面收手、尊重對方界線，不糾纏、不死纏爛打。健康的關係建立在彼此都有意願之上。）`
+  },
+
+  // ━━━ 🔵 中階 | 職場求生 | Free ━━━
+  {
+    id: "meeting_minutes_forge",
+    tab: "職場求生",
+    isPro: false,
+    tier: "adept",
+    school: "insight" as SchoolType,
+    subSchool: "contract" as SchoolType,
+    outputFormat: "會議紀錄 + 待辦清單 + 重點摘要",
+    icon: <ClipboardList className="w-8 h-8 text-blue-500" />,
+    color: "blue",
+    title: "會議煉金：開會紀錄整理術",
+    desc: "會開完一團亂、誰負責什麼沒人記得，逐字稿落落長沒人想看，事後又互踢皮球說「我以為不是我做」？這咒語把你散亂的會議筆記或逐字稿，煉成一份結論先行、待辦有人認領、期限寫清楚的會議紀錄，散會就能直接發群組，事情才真的會動起來。",
+    tags: ["會議記錄", "待辦追蹤", "職場效率"],
+    fields: [
+      { id: "meeting_type", label: "會議類型與主題", placeholder: "例：每週專案進度會 / 跨部門行銷提案 / 社團幹部會議 / 客戶需求訪談" },
+      { id: "attendees", label: "與會者與角色", placeholder: "例：PM 小美、工程阿翔、設計 Nina、主管 Kevin / 我和兩位組員" },
+      { id: "raw_notes", label: "會議內容／逐字稿／我的筆記", placeholder: "貼上錄音轉的逐字稿或你隨手記的重點、待辦、誰說了什麼，越完整越好" },
+      { id: "focus", label: "你最想整理出的重點", placeholder: "例：清楚的待辦和負責人 / 拍板了哪些決議 / 下次會議要追什麼" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "整理策略",
+      options: [
+        "決議導向型：聚焦「拍板了什麼、誰拍的板」，把討論收斂成清楚結論，適合決策型會議",
+        "待辦執行型：火力集中在待辦清單，每件事釘上負責人與期限，適合要推事情落地的會議",
+        "完整存檔型：兼顧脈絡與細節，連討論過程與備案都留底，適合需要正式存查的會議",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '資深PM+會議引導師' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '只記真實·禁腦補臆測' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '摘要+決議+待辦表格' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依策略調詳簡重點' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '資訊不足標待補' },
+      { type: 'example' as ModuleType, label: '範例對比', preview: '流水帳vs可執行紀錄' },
+    ],
+    theory: "建立在『金字塔原理（Minto Pyramid Principle：結論先行，再用分層論點支撐，讓讀者用最短時間抓到重點）』與『RACI 責任分配模型』之上：會議紀錄之所以沒人看、看了也沒用，通常是流水帳式照抄（沒有結論層次）、或寫了一堆決議卻沒人認領（待辦沒有負責人與期限）。本咒語先用金字塔原理把發散的討論收斂成『摘要→決議→待辦』的金字塔，再用 RACI 精神替每項待辦釘上負責人與期限，讓會議紀錄從『開完就忘的檔案』變成『推動事情落地的工具』。",
+    generate: (inputs: any) => `你是一位資深的專案經理暨會議引導師（PMP 認證，帶過上百場跨部門會議），最擅長把吵成一團、發散離題的會議內容，萃取成一份「誰看了都知道接下來要做什麼」的會議紀錄。你的信條：「會開完不算數，紀錄落地、待辦有人認領才算數。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n請把我這場會議的內容，整理成一份結構清楚、可直接發給與會者的會議紀錄。\n- 會議類型與主題：[[${inputs.meeting_type}]]\n- 與會者與角色：[[${inputs.attendees}]]\n- 會議內容／逐字稿／我的筆記：[[${inputs.raw_notes}]]\n- 我最想整理出的重點：[[${inputs.focus}]]\n\n請輸出：\n① 【三句話摘要】— 用 3 句話講完這場會議「談了什麼、決定了什麼、接下來最關鍵的一步」，每句 40 字以內\n② 【決議事項】— 條列本次會議拍板的結論（各含背景一句＋結論），每條 50 字以內；尚未定案的另立「待確認」區\n③ 【待辦清單 (Action Items)】— 用表格條列：事項｜負責人｜期限｜備註，每項事項 30 字以內；負責人對應到與會者，會中沒講到期限就標「待補」\n④ 【爭議與風險】— 點出會中沒共識、或可能卡關的 1-3 點，各 40 字以內，並標示需要誰拍板\n⑤ 【下一步與下次會議】— 列出散會後 24 小時內該做的事，以及建議的下次會議主題或時間，60 字以內\n\n【規則】\n1. 格式：用清楚的標題分區，待辦清單務必用表格呈現（事項｜負責人｜期限｜備註），整份可直接複製貼到 LINE／Email／Notion。\n2. 嚴禁加油添醋或腦補：紀錄只能出現會議真的提到的事，禁止使用「應該」「大概」「我猜」「可能是想」這類臆測語；資訊不足就誠實標「待補／未提及」。\n3. 套用金字塔原理（結論先行、由上而下）與 RACI 精神（每件待辦都要有明確負責人），讓讀者 30 秒抓到重點、知道自己該做什麼。\n4. 語氣中立、客觀、專業，像正式公務紀錄，不帶個人情緒與評論，對事不對人。\n5. 想回測試：把這份紀錄丟給一個沒參加會議的人，他應該能看懂「決定了什麼、誰要做什麼、何時要做」；若有任何一項看完還是不清楚，就重整到清楚為止。`
+  },
+
+  // ━━━ 🔵 中階 | 創業/自媒體 | Free ━━━
+  {
+    id: "customer_complaint_reply",
+    tab: "創業/自媒體",
+    isPro: false,
+    tier: "adept",
+    school: "healing" as SchoolType,
+    subSchool: "insight" as SchoolType,
+    outputFormat: "3 版回覆（降火／標準／守底線）+ 應對策略",
+    icon: <Headset className="w-8 h-8 text-emerald-500" />,
+    color: "emerald",
+    title: "客服煉金：客訴降火回覆術",
+    desc: "做生意最怕客人一則抱怨私訊：回太硬被截圖負評、回太軟被予取予求、氣到根本不想回。退換貨、瑕疵客訴、催單、奧客無理要求……這咒語接住客人的訊息，幫你生出不卑不亢、先降火再解決的回覆，把一次抱怨變成「這家處理得真好」的口碑，可直接複製貼上。",
+    tags: ["客服回覆", "客訴處理", "電商小編"],
+    fields: [
+      { id: "business", label: "你的身分／賣什麼", placeholder: "例：蝦皮賣家賣手工皂 / 接案設計師 / 開咖啡廳 / 賣線上課的自媒體" },
+      { id: "customer_message", label: "客人說了什麼", placeholder: "貼上客人的訊息或留言，如「收到有瑕疵，要求退費還要賠償我精神損失」" },
+      { id: "situation", label: "實際狀況", placeholder: "例：確實是出貨前沒檢查 / 客人自己用錯方法 / 要求超出合理範圍 / 不確定誰的問題" },
+      { id: "goal", label: "你想達到的結果", placeholder: "例：留住這個客人 / 婉拒不合理賠償又不被負評 / 快速止血別鬧大" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "回覆策略",
+      options: [
+        "同理降火型：先全力接住情緒、表達理解與歉意，把火降下來再談解法，適合客人正在氣頭上",
+        "守住底線型：態度客氣但立場明確，溫柔而堅定地婉拒不合理要求，適合遇到予取予求或奧客",
+        "加值挽留型：主動提出超出預期的補償或方案，把抱怨變驚喜，適合想把客人變成回頭客",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '金牌客服主管' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '禁辯解甩鍋·禁跪舔' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依對錯定補救或守線' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '3版回覆+讓步階梯' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '不亂承諾不貶低客人' },
+      { type: 'example' as ModuleType, label: '範例對比', preview: '硬槓vs高情商回覆' },
+    ],
+    theory: "建立在『服務補救悖論（Service Recovery Paradox：客訴若被妥善處理，顧客忠誠度反而可能高於從沒出包過的時候）』與『非暴力溝通（NVC：觀察—感受—需要—請求，先接住情緒再談事情）』之上：客訴會越處理越糟，通常是急著辯解、搬規定、或一味退讓，讓客人覺得『不被當人看』或『會吵的有糖吃』。本咒語先用 NVC 接住客人的情緒（讓他覺得被聽見），再依事實判斷該補救還是守住底線，把一次抱怨轉化成『這家服務真的不錯』的口碑機會——既不卑躬屈膝，也不得罪客人。",
+    generate: (inputs: any) => `你是一位身經百戰的金牌客服主管（帶過電商與服務業客訴團隊十年，處理過從小抱怨到網路炎上的各種場面）。你最厲害的本事，是讓一個氣沖沖來討公道的客人，最後留下「這家雖然出包，但處理得真好」的印象。你的信條：「客人要的常常不是賠償，是被當一回事；但被當一回事，不等於我們要任人予取予求。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我收到一則客人的抱怨／客訴，請幫我生出專業、得體、能化解的回覆。\n- 我的身分／賣什麼：[[${inputs.business}]]\n- 客人說了什麼：[[${inputs.customer_message}]]\n- 實際狀況：[[${inputs.situation}]]\n- 我想達到的結果：[[${inputs.goal}]]\n\n請輸出：\n① 【客人情緒與訴求拆解】— 一針見血指出客人現在的情緒、真正想要的（退費？道歉？被重視？），以及這次客訴的風險等級（會不會給負評／炎上），100 字以內\n② 【3 版可直接傳的回覆】— 給「降火版（最軟）／標準版／守底線版（明確但不失禮）」三種，每版都含開頭接情緒＋處理方案＋收尾，可直接複製貼上\n③ 【這樣回的理由】— 各用一兩句說明每版適合什麼情況、關鍵句在哪，讓我懂原理不只是抄\n④ 【底線與讓步階梯】— 條列「可以讓到哪、絕不退讓的是什麼」，給出 2-3 階讓步順序，每階 30 字以內\n⑤ 【止損與升級提醒】— 若客人不買單或威脅負評／投訴，下一步怎麼接；什麼情況該往上呈報或走正式流程，60 字以內\n\n【規則】\n1. 格式：三版回覆要像真人客服口吻、口語有溫度，長度像正常訊息可直接複製貼上，並清楚標示哪版對應哪種情境。\n2. 嚴禁辯解甩鍋與卑微跪舔：禁止使用「這是公司規定」「不可能」「你誤會了」「是你自己」等甩鍋句，也禁止無底線道歉與隨意承諾賠償。\n3. 套用服務補救悖論與非暴力溝通：每版開頭都要先接住情緒（觀察＋同理），再談事情，把客訴當成挽回口碑的機會而非麻煩。\n4. 語氣專業、誠懇、不卑不亢——出錯時誠實負責，被無理要求時溫柔而堅定，全程把客人當「人」尊重，但不當「神」供。\n5. 想回測試：把回覆唸出來，客人收到應該會覺得「有被認真對待」而願意把火氣放下；若任何一版讀起來像官腔罐頭、或像在跪、或會更激怒對方，就重寫。\n\n（提醒：以上為溝通建議，實際退換貨與賠償仍須符合《消費者保護法》等相關規定與各平台政策，重大爭議建議循正式管道處理。）`
   },
 ];
 
