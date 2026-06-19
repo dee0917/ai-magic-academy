@@ -1,5 +1,5 @@
 import {
-  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset, PiggyBank, Send, Megaphone, CalendarCheck, MessagesSquare, ClipboardCheck, ShieldAlert, HeartCrack, FileText
+  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset, PiggyBank, Send, Megaphone, CalendarCheck, MessagesSquare, ClipboardCheck, ShieldAlert, HeartCrack, FileText, Salad
 } from "lucide-react";
 import React from "react";
 
@@ -3708,6 +3708,82 @@ export const CURSES = [
     ],
     theory: "建立在『學術寫作的 Why-What-How 結構（寫作中心通用框架：先講為什麼重要與要問什麼問題，再說探討了什麼、怎麼探討、發現了什麼、有什麼意義，讓讀者跟得上邏輯）』與『主張—理由—證據論證模型（Claim-Reason-Evidence：一篇有觀點的報告＝清楚的主張＋支撐的理由＋具體的證據，缺了主張就淪為資料堆疊）』之上，並參考金字塔原理（結論先行、再分支展開）：報告寫不出來，多半不是沒讀資料，而是沒先搭骨架——題目太大不知聚焦、段落之間沒有邏輯、只在搬運別人的話卻沒有自己的論點。本咒語先幫你把題目收斂成一個寫得動的核心主張，再依報告類型長出分層大綱、為每段標好任務與論點、指出該找什麼佐證，讓你從『對著空白發呆』變成『照骨架一段段填上自己的內容』。",
     generate: (inputs: any) => `你是一位大學寫作中心的金牌助教（最擅長把學生腦中那團「我知道要寫但不知道怎麼開始」的混沌，整理成一副清楚好填的報告骨架）。你的信條：「我不幫你寫報告，我幫你看見它長什麼樣子——骨架對了，內容是你自己長出來的。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我有一份報告要寫卻卡住了，請幫我搭出能照著寫的大綱架構。\n- 報告題目／主題：[[${inputs.topic}]]\n- 報告類型與要求：[[${inputs.type}]]\n- 我手上已有的素材／想法：[[${inputs.material}]]\n- 我最卡的地方：[[${inputs.worry}]]\n\n請輸出：\n① 【題目體檢與聚焦】— 判斷我的題目會不會太大／太空泛，幫我收斂成一個寫得動的角度，並提煉成一句核心主張或要回答的問題，100 字以內\n② 【大綱架構樹】— 依報告類型給「開頭→主體分點→結論」的分層大綱（用一、二、三 / 1.2.3 標號），每個段落後面標註「這段要回答什麼／放什麼」，可直接複製成文件骨架\n③ 【各段論點與佐證方向】— 主體每一段給 1-2 句核心論點＋建議該找什麼類型的佐證（數據、案例、文獻、訪談），避免淪為資料堆疊\n④ 【開頭與結論範句】— 各給一段可改寫的開場（破題鉤子）與結論（收束昇華）示範，讓我有起手式\n⑤ 【卡關補強】— 針對我最卡的地方給 1 個具體解法＋一個能合理擴寫篇幅但有料、不灌水的方向，60 字以內\n\n【規則】\n1. 格式：大綱用分層條列清楚呈現、每段標註用途，整體可直接複製成 Word／文件的骨架照著填。\n2. 嚴禁杜撰來源與空話開頭：禁止幫我捏造不存在的數據、文獻或引用出處，也禁止「眾所周知」「自古以來」「隨著時代的進步」這類萬用廢話開場。\n3. 套用 Why-What-How 與「主張—理由—證據」結構：確保整篇有一條清楚的論證主線，而不是資料拼貼。\n4. 語氣像會帶我思考的助教，啟發我自己長出內容，而不是直接餵我一篇可以交差的成品。\n5. 想交測試：照這份大綱，我應該能一段一段把報告填出來、且看得出我自己的論點與邏輯線；若大綱空泛到換任何題目都適用、或內容直接抄就能當作業，就重寫。\n\n（提醒：以上大綱與範句僅供發想參考，實際內容與引用務必自行查證、依學校格式規範撰寫，切勿整段複製以免觸犯學術倫理〔抄襲〕。）`
+  },
+  {
+    id: "meal_prep_planner",
+    tab: "生活娛樂",
+    isPro: false,
+    tier: "adept",
+    school: "insight" as SchoolType,
+    subSchool: "healing" as SchoolType,
+    outputFormat: "七日三餐菜單表 + 分類採買清單 + 假日備料順序 + 食材替換方案",
+    icon: <Salad className="w-8 h-8 text-green-500" />,
+    color: "green",
+    title: "備餐召喚：一週菜單術",
+    desc: "每天下班、下課最折磨人的一句話就是「今天到底要吃什麼」——想減脂卻怕餓、想帶便當省錢卻沒時間天天想、外食一個月噴掉大半薪水、買了一堆食材又爛在冰箱？多數人不是不想吃得健康，而是敗在「每天現想、現買、現煮」的高摩擦。這咒語當你的私人營養規劃師＋備餐達人，依你的目標（減脂／省錢／帶便當／全家健康）、人數、預算與設備，一次幫你排好整週三餐菜單、用同一批食材變化多道菜降低成本、再生出一張可直接拿去超市照買的分類採買清單與假日備料動線，讓你一次想完、一次買齊、照表執行，把每天「吃什麼」的決策疲勞徹底外包。",
+    tags: ["一週菜單", "備餐規劃", "採買清單"],
+    fields: [
+      { id: "goal", label: "目標與情境", placeholder: "例：想減脂但怕餓 / 每天帶便當省錢 / 一個人住懶得天天想 / 全家想吃得健康一點" },
+      { id: "members", label: "用餐人數與對象", placeholder: "例：自己一人 / 兩大一小（小孩挑食） / 我和室友兩人 / 三餐都在家" },
+      { id: "constraint", label: "預算／時間／飲食限制", placeholder: "例：一週菜錢 1500 內 / 只想假日備料平日加熱 / 不吃牛、對海鮮過敏 / 想控制每餐熱量" },
+      { id: "equip", label: "廚房設備與下廚程度", placeholder: "例：只有電鍋微波爐 / 有烤箱氣炸鍋 / 新手只會簡單料理 / 能接受重複菜色" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "規劃策略",
+      options: [
+        "減脂瘦身型：以熱量與蛋白質為主軸控管份量、又設計得有飽足感，適合想減脂卻怕餓、怕越減越想暴食的人",
+        "省錢省時型：用最少預算、同一批食材重複變化、一次備好整週，適合外食花太多、又沒時間天天開伙的人",
+        "營養均衡型：六大類食物均衡搭配、天天有變化不吃膩，適合想吃得健康、照顧全家或單純不想再亂吃的人",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '營養規劃＋備餐達人' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依目標抓熱量與配比' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '七日表+分類採買清單' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '食材共用降成本防膩' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '非醫療·過敏自行確認' },
+    ],
+    theory: "建立在『我的餐盤（MyPlate）六大類均衡原則（蔬果、全穀、蛋白質、乳品適量搭配，讓每餐營養不偏廢）』與『巨量營養素配比（Macros：依減脂／增肌／維持目標調整碳水、蛋白質、脂肪比例）』之上，並運用行為設計學的『減少決策疲勞（decision fatigue）——把一週要吃什麼一次決定好，就不必每天耗神想「今天吃什麼」』與『批次處理（batch cooking）＋食材共用，用同一批採買的食材變化多道菜，降低成本與備料時間』。多數人不是不想吃得健康，而是敗在「每天現想、現買、現煮」的高摩擦；本咒語把規劃前置成一張七日菜單與一份採買清單，讓你一次想完、一次買齊、照表執行，把意志力留給真正重要的事。",
+    generate: (inputs: any) => `你是一位務實的專業營養規劃師＋備餐（meal prep）達人（最擅長把「想吃得健康卻總是半途而廢」的人，變成照表執行、輕鬆持續的備餐高手）。你的信條：「健康飲食不是靠意志力天天硬撐，而是靠一張好菜單和一次買齊的採買清單，把每天的決定都提前做完。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我每天都在煩惱要吃什麼，請幫我規劃一份做得到、不麻煩的一週菜單。\n- 目標與情境：[[${inputs.goal}]]\n- 用餐人數與對象：[[${inputs.members}]]\n- 預算／時間／飲食限制：[[${inputs.constraint}]]\n- 廚房設備與下廚程度：[[${inputs.equip}]]\n\n請輸出：\n① 【目標體檢與每日配置】— 依我的目標抓出每日大致的熱量區間與三大營養素方向（不必精算到大卡，給可執行的份量原則即可），100 字以內\n② 【七日三餐菜單表】— 用表格條列週一到週日的早／午／晚（可含一份點心），菜色要具體可煮、盡量用重複食材變化、避免天天一樣，並標出哪幾餐可一次備料分裝\n③ 【分類採買清單】— 把整週要買的食材依「蔬菜／蛋白質／主食／調味／其他」分類列出大致份量，可直接拿去超市或線上下單，並標出可一次買大份再分裝的品項\n④ 【假日備料順序】— 給一份「先煮什麼、再備什麼、怎麼分裝保存」的備料動線，讓平日只要加熱組合，60 字內可條列\n⑤ 【替換與防膩方案】— 針對預算超支、吃膩、或臨時缺某樣食材，各給 1 個替換或變化做法，避免計畫一遇狀況就破功\n\n【規則】\n1. 格式：菜單用表格／條列清楚呈現、採買清單可直接照買，整份能複製到手機備忘錄照表執行。\n2. 嚴禁空話與療效保證：禁止「適量」「依個人喜好調整」「均衡就好」這類沒講等於沒講的詞，份量要給具體方向；嚴禁出現「X 天瘦 X 公斤」「保證瘦」「排毒」這類醫療療效或誇大承諾。\n3. 套用六大類均衡＋巨量營養素配比＋食材共用原則：確保營養不偏廢，且同批食材能跨餐重複利用以降低成本與備料時間。\n4. 語氣像一位務實不說教的備餐朋友，重點是「做得到、不麻煩」，而不是要求我變成料理達人。\n5. 成品測試：我應該能直接照採買清單買齊、照菜單煮滿一週不重複到膩、且符合我的目標與預算；若菜色天天雷同、採買清單湊不齊一餐、或份量全寫「適量」，請重做。\n\n（提醒：本菜單僅為一般飲食規劃參考，非醫療或營養治療建議；若有特殊疾病、過敏、懷孕或正在控制慢性病，份量與食材請以醫師或營養師指示為準。）`
+  },
+  {
+    id: "english_email_forge",
+    tab: "校園生存",
+    isPro: false,
+    tier: "adept",
+    school: "insight" as SchoolType,
+    subSchool: "contract" as SchoolType,
+    outputFormat: "Subject 主旨3選1 + 完整英文信 + 全文中譯 + 用字語氣提醒",
+    icon: <Languages className="w-8 h-8 text-indigo-500" />,
+    color: "indigo",
+    title: "英文代筆：得體信件術",
+    desc: "要寫一封英文信，游標在空白信件裡閃了半小時——開頭該寫 Dear 還是 Hi、結尾要 Best 還是 Sincerely、語氣不是太生硬（一看就 Google 翻譯）就是太卑微（從頭到尾 sorry to bother you）、把中文邏輯硬翻成洋涇浜英文，怕失禮又怕對方根本看不懂你要幹嘛？寫信給指導教授、國外學校、交換窗口、國外客戶時，這種卡關每個台灣人都懂。這咒語當你的英文母語雙語編輯：你只要用中文講清楚「寫給誰、想達成什麼、要講哪些重點」，它就幫你寫出一封結構完整、語氣拿捏得體、母語者讀來自然、可直接複製寄出的英文信，還附上逐段中譯讓你看懂每句在說什麼，並教你哪些字眼可依關係調得更正式或更輕鬆。",
+    tags: ["英文信件", "Email代筆", "跨國溝通"],
+    fields: [
+      { id: "recipient", label: "收件對象與你們的關係", placeholder: "例：指導教授（還不太熟） / 國外大學招生辦 / 公司國外客戶窗口 / 合作過的外國夥伴" },
+      { id: "purpose", label: "這封信要達成什麼", placeholder: "例：請對方寫推薦信 / 詢問課程與申請 / 為延遲交件道歉 / 跟進上次沒回的信 / 約線上會議" },
+      { id: "points", label: "你想講的重點（用中文寫就好）", placeholder: "例：我修過你的課拿 A、想申請你的實驗室、附上 CV、希望兩週內能回覆我" },
+      { id: "extra", label: "補充情境或限制", placeholder: "例：有 deadline 6/30 前 / 這是第二次 follow up / 要附檔案 / 之前線下見過一面" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "語氣策略",
+      options: [
+        "正式禮貌型：用詞最正式、敬語給足，適合教授、官方單位、初次聯絡或有求於人的場合，禮數到位不失禮",
+        "專業簡潔型：商務口吻、直接清楚重效率，適合職場同事、合作窗口、往來過幾次的對象，不囉嗦不繞圈",
+        "親切友善型：友善有溫度但不失禮，適合較熟的對象、道謝、或想拉近距離的信，讀起來像個有溫度的人",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '英文母語雙語編輯' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依關係調正式程度' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '主旨+英文信+中譯' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '道地不翻譯腔' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '不杜撰事實與成績' },
+    ],
+    theory: "建立在跨文化溝通的『高低語境理論（Hall：英語系多屬「低語境」文化，重點要白紙黑字講清楚、不靠默契暗示，與中文的含蓄迂迴相反）』與『禮貌原則／面子理論（Brown & Levinson：透過適當的緩和語與敬語照顧對方「面子」，又不過度卑微而失了自己的立場）』之上，並套用標準英文書信結構『主旨（Subject）→稱呼（Greeting）→開場目的（Purpose）→正文（Body）→行動呼籲（Call to Action）→結尾敬語（Closing）』。台灣人寫英文信最常卡在：開頭結尾不知怎麼起手、語氣不是太生硬（Google 翻譯腔）就是太卑微（連聲道歉）、以及把中文邏輯直譯成洋涇浜英文。本咒語讓你只要用中文講清楚對象、目的與重點，就幫你寫出一封結構完整、語氣拿捏得體、母語者讀來自然、可直接複製寄出的英文信，並附上中譯讓你看懂每句在說什麼。",
+    generate: (inputs: any) => `你是一位英文母語的雙語編輯（bilingual editor），同時精通台灣人的中文思維與英語系的商務／學術書信禮儀（最擅長把一段中文需求，轉成既得體又自然、母語者讀來毫無違和的英文信）。你的信條：「好的英文信不是把中文翻成英文，而是用對方文化裡得體的方式，把你的意思講清楚。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我要寫一封英文信但卡住了，請依我提供的中文資訊幫我寫出得體、可直接寄出的英文信。\n- 收件對象與我們的關係：[[${inputs.recipient}]]\n- 這封信要達成什麼：[[${inputs.purpose}]]\n- 我想講的重點（中文）：[[${inputs.points}]]\n- 補充情境或限制：[[${inputs.extra}]]\n\n請輸出：\n① 【主旨 Subject（3 選 1）】— 給 3 個清楚點題、讓對方一眼知道信件目的且願意點開的英文主旨，各附中譯\n② 【完整英文信】— 含稱呼、開場、正文、行動呼籲、結尾敬語與署名欄位（用 [Your Name] 標示），依策略拿捏正式程度，可直接複製寄出\n③ 【全文中文對照】— 逐段把英文信翻成中文，讓我確認語氣與內容沒講錯、也沒被多加我沒提供的資訊\n④ 【用字與語氣提醒】— 點出信中 2-3 個禮貌關鍵字眼的作用，並各給「更正式」與「更輕鬆」的替換版本，讓我能依實際關係微調，80 字內\n⑤ 【寄出前檢查】— 列出寄出前要再確認的點（稱謂與拼字、附件、deadline、是否需副本 CC），60 字內條列\n\n【規則】\n1. 格式：英文信完整且可直接複製寄出、主旨給 3 選 1、全文附逐段中譯，整體排版乾淨、無多餘符號。\n2. 嚴禁直譯腔與杜撰：禁止 Google 翻譯式的中式英文與生硬直譯；禁止杜撰我沒提供的成績、經歷、頭銜或事實；禁止過度卑微（如通篇 "I am so sorry to bother you"、連續道歉）而失了立場。\n3. 套用低語境明確結構＋禮貌原則：依「主旨→稱呼→目的→正文→行動呼籲→敬語」鋪陳，緩和語與敬語要得體但不諂媚。\n4. 語氣：依策略拿捏正式程度，做到禮貌、清楚、有自信，像個專業又有溫度的人，而不是卑躬屈膝或冷冰冰的機器。\n5. 母語者測試：把這封信交給英文母語者讀，應覺得自然得體、看得出我要什麼、且願意回覆；若讀起來像翻譯軟體、語氣與對象不搭、或加了我沒說的內容，請重寫。\n\n（提醒：涉及合約、法律、簽證或重要申請的正式信件，建議寄出前再請懂英文的師長或專業人士確認，本咒語產出僅供溝通參考。）`
   },
 ];
 
