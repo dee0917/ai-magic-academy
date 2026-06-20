@@ -1,5 +1,5 @@
 import {
-  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset, PiggyBank, Send, Megaphone, CalendarCheck, MessagesSquare, ClipboardCheck, ShieldAlert, HeartCrack, FileText, Salad
+  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset, PiggyBank, Send, Megaphone, CalendarCheck, MessagesSquare, ClipboardCheck, ShieldAlert, HeartCrack, FileText, Salad, Calculator, Wand2
 } from "lucide-react";
 import React from "react";
 
@@ -3784,6 +3784,86 @@ export const CURSES = [
     ],
     theory: "建立在跨文化溝通的『高低語境理論（Hall：英語系多屬「低語境」文化，重點要白紙黑字講清楚、不靠默契暗示，與中文的含蓄迂迴相反）』與『禮貌原則／面子理論（Brown & Levinson：透過適當的緩和語與敬語照顧對方「面子」，又不過度卑微而失了自己的立場）』之上，並套用標準英文書信結構『主旨（Subject）→稱呼（Greeting）→開場目的（Purpose）→正文（Body）→行動呼籲（Call to Action）→結尾敬語（Closing）』。台灣人寫英文信最常卡在：開頭結尾不知怎麼起手、語氣不是太生硬（Google 翻譯腔）就是太卑微（連聲道歉）、以及把中文邏輯直譯成洋涇浜英文。本咒語讓你只要用中文講清楚對象、目的與重點，就幫你寫出一封結構完整、語氣拿捏得體、母語者讀來自然、可直接複製寄出的英文信，並附上中譯讓你看懂每句在說什麼。",
     generate: (inputs: any) => `你是一位英文母語的雙語編輯（bilingual editor），同時精通台灣人的中文思維與英語系的商務／學術書信禮儀（最擅長把一段中文需求，轉成既得體又自然、母語者讀來毫無違和的英文信）。你的信條：「好的英文信不是把中文翻成英文，而是用對方文化裡得體的方式，把你的意思講清楚。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我要寫一封英文信但卡住了，請依我提供的中文資訊幫我寫出得體、可直接寄出的英文信。\n- 收件對象與我們的關係：[[${inputs.recipient}]]\n- 這封信要達成什麼：[[${inputs.purpose}]]\n- 我想講的重點（中文）：[[${inputs.points}]]\n- 補充情境或限制：[[${inputs.extra}]]\n\n請輸出：\n① 【主旨 Subject（3 選 1）】— 給 3 個清楚點題、讓對方一眼知道信件目的且願意點開的英文主旨，各附中譯\n② 【完整英文信】— 含稱呼、開場、正文、行動呼籲、結尾敬語與署名欄位（用 [Your Name] 標示），依策略拿捏正式程度，可直接複製寄出\n③ 【全文中文對照】— 逐段把英文信翻成中文，讓我確認語氣與內容沒講錯、也沒被多加我沒提供的資訊\n④ 【用字與語氣提醒】— 點出信中 2-3 個禮貌關鍵字眼的作用，並各給「更正式」與「更輕鬆」的替換版本，讓我能依實際關係微調，80 字內\n⑤ 【寄出前檢查】— 列出寄出前要再確認的點（稱謂與拼字、附件、deadline、是否需副本 CC），60 字內條列\n\n【規則】\n1. 格式：英文信完整且可直接複製寄出、主旨給 3 選 1、全文附逐段中譯，整體排版乾淨、無多餘符號。\n2. 嚴禁直譯腔與杜撰：禁止 Google 翻譯式的中式英文與生硬直譯；禁止杜撰我沒提供的成績、經歷、頭銜或事實；禁止過度卑微（如通篇 "I am so sorry to bother you"、連續道歉）而失了立場。\n3. 套用低語境明確結構＋禮貌原則：依「主旨→稱呼→目的→正文→行動呼籲→敬語」鋪陳，緩和語與敬語要得體但不諂媚。\n4. 語氣：依策略拿捏正式程度，做到禮貌、清楚、有自信，像個專業又有溫度的人，而不是卑躬屈膝或冷冰冰的機器。\n5. 母語者測試：把這封信交給英文母語者讀，應覺得自然得體、看得出我要什麼、且願意回覆；若讀起來像翻譯軟體、語氣與對象不搭、或加了我沒說的內容，請重寫。\n\n（提醒：涉及合約、法律、簽證或重要申請的正式信件，建議寄出前再請懂英文的師長或專業人士確認，本咒語產出僅供溝通參考。）`
+  },
+
+  // ━━━ 🔵 中階秘術 | 職場求生 | Free ━━━
+  {
+    id: "spreadsheet_formula_forge",
+    tab: "職場求生",
+    isPro: false,
+    tier: "adept",
+    school: "insight" as SchoolType,
+    subSchool: "contract" as SchoolType,
+    outputFormat: "可貼上的公式 + 白話拆解 + 套用步驟 + 排錯 + 範例驗證",
+    icon: <Calculator className="w-8 h-8 text-emerald-600" />,
+    color: "emerald",
+    title: "公式召喚：試算表速算術",
+    desc: "想用 Excel 或 Google 試算表算個東西，腦袋知道要幹嘛、手卻打不出公式——VLOOKUP 對不起來、跨欄加總老是錯、想自動標顏色又卡在 IF 巢狀，Google 一堆教學看半天還是套不進自己的表？問題不是你笨，是沒人把『你的需求』翻成『機器看得懂的公式』。這咒語當你的試算表軍師：你只要用白話講清楚『資料長怎樣、想算出什麼』，它就幫你產出可直接貼上的公式（標好放哪一格、註明 Excel 與 Google 語法差異），再把公式逐段拆成白話讓你看懂它在做什麼，附套用步驟、常見錯誤排查與一組範例驗證資料，讓你貼上就能對答案、不再瞎試到崩潰。",
+    tags: ["Excel", "試算表公式", "職場效率"],
+    fields: [
+      { id: "tool", label: "你用的工具", placeholder: "例：Excel / Google 試算表 / Numbers（不確定就寫 Excel）" },
+      { id: "goal", label: "你想算出或做到什麼（白話講）", placeholder: "例：依員工編號從另一張表帶出部門 / 算每個月銷售總和 / 業績達標的列自動標綠色 / 把姓名和電話合併成一欄" },
+      { id: "data_layout", label: "你的資料長怎樣（欄位與位置）", placeholder: "例：A 欄日期、B 欄品項、C 欄金額，資料從第 2 列到第 500 列；對照表在 Sheet2 的 A、B 欄" },
+      { id: "extra", label: "額外條件或遇到的錯誤", placeholder: "例：空白格要顯示 0 不要 #DIV/0! / 已經試過 SUMIF 但出現 #VALUE! / 想排除合計列" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "公式策略",
+      options: [
+        "新手白話型：用最好懂、最不容易出錯的基礎函數，每一步都解釋給完全沒基礎的人聽，寧可多打幾個字也求穩",
+        "公式精簡型：用最簡潔有力的一條公式解決，適合會一點基礎、想要乾淨好維護版本的人，少巢狀少輔助欄",
+        "進階自動化型：善用 XLOOKUP／LET／ARRAYFORMULA／QUERY 等較新較強的函數一次到位，適合資料量大、想一條公式自動展開整欄的人",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '試算表與資料分析軍師' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依需求拆輸入邏輯輸出' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '公式+白話拆解+排錯' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '標儲存格與語法差異' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '不臆測欄位用佔位符' },
+    ],
+    theory: "建立在計算思維（Computational Thinking, Jeannette Wing）的三步驟之上：『分解（Decomposition）』把一個模糊的需求拆成輸入資料、運算邏輯、想要的輸出；『模式辨識（Pattern Recognition）』看出這是查表、條件加總、還是文字處理問題，對應到正確的函數家族（LOOKUP 系、SUMIF/COUNTIF 系、TEXT/CONCAT 系、IF 邏輯系）；『抽象化（Abstraction）』把它組成一條能套用到整欄、資料變動也不會壞的公式。一般人卡關不是不夠聰明，而是直接跳到『要用哪個函數』，卻沒先把需求講清楚——輸入在哪、條件是什麼、要算出什麼。本咒語逼出這三件事再組公式，並強制標明儲存格位置與 Excel／Google 試算表的語法差異（如參數分隔符號、XLOOKUP 支援度），讓你貼上就能用、看得懂、改得動。",
+    generate: (inputs: any) => `你是一位資深的試算表與資料分析軍師，精通 Excel 與 Google 試算表的所有函數，最擅長把一般人用白話描述的需求，翻譯成一條可直接貼上、又好懂好維護的公式（並且總是手把手解釋每一段在做什麼，讓對方下次自己也會）。你的信條：「公式不是越炫越好，而是要對得了答案、看得懂、改得動。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我要在試算表裡算個東西但寫不出公式，請依我提供的資訊幫我生出可直接用的公式並教我怎麼套。\n- 我用的工具：[[${inputs.tool}]]\n- 我想算出或做到什麼：[[${inputs.goal}]]\n- 我的資料長怎樣（欄位與位置）：[[${inputs.data_layout}]]\n- 額外條件或遇到的錯誤：[[${inputs.extra}]]\n\n請輸出：\n① 【可直接貼上的公式】— 用程式碼區塊呈現，明確標示「貼在哪一格」（例：貼進 D2 再往下拉）；若 Excel 與 Google 試算表語法不同（參數分隔符號、函數支援度），分別給兩個版本並註明\n② 【公式白話拆解】— 把公式拆成幾段，逐段說明這一段在做什麼、為什麼這樣寫，讓我下次能自己改，120 字內\n③ 【套用步驟】— 1、2、3 條列，從貼在哪一格、怎麼往下／往右拉、到要不要轉成絕對位置（\\$），照著做就完成\n④ 【常見錯誤與排查】— 針對這條公式最可能噴的錯誤（如 #REF!、#VALUE!、#DIV/0!、#N/A、抓錯欄）各給一句「為什麼會這樣＋怎麼修」，80 字內\n⑤ 【範例驗證】— 給一組小範例資料（3-4 列）與套用公式後的預期結果，讓我貼上後能立刻核對公式對不對\n\n【規則】\n1. 格式：公式一律用程式碼區塊、可直接複製貼上、明確標示儲存格位置；Excel 與 Google 試算表若語法有差（如參數分隔用「,」或「;」、是否支援 XLOOKUP／ARRAYFORMULA）必須分別註明，排版乾淨無多餘符號。\n2. 嚴禁含糊與臆測：禁止「應該可以」「大概是」「你試試看」這類不確定字眼；禁止只丟公式不解釋；禁止假設我沒講清楚的欄位位置或資料範圍——不確定時用佔位符（如 A1、B:B、Sheet2!A:B）並明確要我替換成自己的位置。\n3. 套用計算思維：先在心裡把需求拆成「輸入資料→運算邏輯→想要的輸出」，辨識它屬於查表／條件加總／文字處理／邏輯判斷哪一類，再選對的函數組成公式，而不是硬套一個複雜函數。\n4. 語氣：像一位有耐心、坐你旁邊手把手教的資深同事，白話、不掉書袋、不假設我懂術語，每個專有名詞第一次出現都用一句話解釋。\n5. 驗證測試：附的範例資料貼上後，應能讓我「一眼核對公式算出來對不對」；若這條公式可能因空白格、文字混入數字、或除以零而出錯，要先用 IFERROR／IFNA 等包好並說明，確保我拿去用不會整欄爆紅字。`
+  },
+
+  // ━━━ 🔵 中階秘術 | 創業/自媒體 | Free ━━━
+  {
+    id: "prompt_optimizer_forge",
+    tab: "創業/自媒體",
+    isPro: false,
+    tier: "adept",
+    school: "insight" as SchoolType,
+    subSchool: "illusion" as SchoolType,
+    outputFormat: "優化後指令 + 升級說明 + 待補資訊 + 追問話術 + 精簡版",
+    icon: <Wand2 className="w-8 h-8 text-violet-500" />,
+    color: "violet",
+    title: "指令煉金：AI提問優化術",
+    desc: "問 ChatGPT、Claude、Gemini 老是得到一坨空泛、不對題、像廢話的答案，改了五六次還是不滿意，最後乾脆自己重寫？問題幾乎都不在 AI，而在你的提問——一句『幫我寫一篇關於行銷的文章』，AI 只能用最安全最平庸的方式猜你要什麼。會用 AI 的人跟不會用的人，差距就在『下指令的功力』。這咒語當你的提示工程教練：你只要用白話講清楚『想叫 AI 做什麼、給誰看、希望長怎樣』，它就幫你把模糊需求重組成一條結構完整（角色＋任務＋脈絡＋格式＋限制）、可直接貼進任何 AI 的神級指令，還告訴你它升級了哪裡、你可能還缺什麼資訊，並附上產出不滿意時怎麼追問微調，讓你從『會問 Google』升級成『會指揮 AI』。",
+    tags: ["ChatGPT指令", "Prompt技巧", "AI效率"],
+    fields: [
+      { id: "ai_goal", label: "你想叫 AI 幫你做什麼", placeholder: "例：寫一篇介紹我們咖啡店新品的 IG 貼文 / 把一份會議逐字稿整理成重點 / 幫我發想 10 個影片主題 / 改寫一段太生硬的文案" },
+      { id: "rough_prompt", label: "你原本打算怎麼問（貼上你試過的）", placeholder: "例：幫我寫一篇關於咖啡的貼文 /（還沒想法，只知道想做上面那件事）" },
+      { id: "context", label: "AI 該知道的背景、對象、限制", placeholder: "例：受眾是 25-35 歲上班族、品牌走溫暖文青風、不要太商業、要繁體中文台灣用語、字數 150 字內" },
+      { id: "output_want", label: "你希望產出長什麼樣", placeholder: "例：要 3 個版本可挑 / 條列式 / 附 5 個 hashtag / 語氣活潑帶點幽默 / 直接可複製貼上" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "指令策略",
+      options: [
+        "萬用通才型：產出一條好懂、好複製、適合一般任務的均衡指令，新手也能直接套用，泛用性最高",
+        "精準專家型：給 AI 設定明確的專家角色與嚴格的格式限制，逼出更專業、更聚焦、可直接交付的高品質產出",
+        "連續任務型：把大任務拆成有先後順序的步驟指令，並要 AI 先確認理解或先給大綱再執行，適合複雜或多階段的工作流",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '提示工程教練' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '補齊角色脈絡格式限制' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '優化指令+升級說明' },
+      { type: 'example' as ModuleType, label: '範例對比', preview: '點出原指令缺什麼' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '不堆砌空泛形容詞' },
+    ],
+    theory: "建立在結構化提示工程（Structured Prompting）的核心框架之上：一條好指令應包含『角色（Role）→任務（Task）→脈絡（Context）→輸出格式（Format）→限制條件（Constraints）』五個要素（業界常見的 RTF、CRISPE、CO-STAR 框架皆是此邏輯的變體）。AI 給出平庸答案，幾乎都是因為這五項缺了關鍵的幾項——尤其是『脈絡』（給誰看、什麼風格、什麼背景）與『限制』（字數、語氣、要避免什麼），AI 只能用機率上最安全、最大眾、最無聊的方式填空。本咒語另援引『少樣本提示（Few-shot：給一兩個範例讓 AI 抓到你要的調性）』與『思維鏈（Chain-of-Thought：要 AI 先想步驟或先給大綱再答，複雜任務正確率更高）』。它把你的白話需求逆向工程成補齊五要素的指令，並明白告訴你為什麼這樣改更有效，讓你不只拿到一條好指令，還學會自己下指令。",
+    generate: (inputs: any) => `你是一位專精提示工程（Prompt Engineering）的 AI 指令教練，精通 ChatGPT、Claude、Gemini 等大型語言模型的脾性，最擅長把一般人模糊的白話需求，逆向工程成一條結構完整、能穩定逼出高品質產出的『神級指令』，並用白話解釋每個調整為什麼有效。你的信條：「AI 給你爛答案，九成是因為你問得爛——把指令寫好，平庸的 AI 也能變神。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我想用 AI 完成一件事但問出來的結果很爛，請把我的需求重組成一條好指令，並教我為什麼這樣改。\n- 我想叫 AI 做什麼：[[${inputs.ai_goal}]]\n- 我原本打算怎麼問：[[${inputs.rough_prompt}]]\n- AI 該知道的背景、對象、限制：[[${inputs.context}]]\n- 我希望產出長什麼樣：[[${inputs.output_want}]]\n\n請輸出：\n① 【優化後的完整指令】— 用程式碼區塊呈現、可直接複製貼進任何 AI，結構分明（角色／任務／脈絡／輸出格式／限制條件清楚分段或標示），貼上就能用\n② 【這版做了哪些升級】— 對照我原本的問法，逐點說明補了什麼、為什麼這樣更有效（例：補上受眾脈絡、限定字數、指定角色），讓我下次自己也會寫，120 字內\n③ 【你可能還缺的資訊】— 點出若再補哪 1-3 項資訊，AI 會表現得更好（例：想要的範例、品牌語氣、參考對象），80 字內\n④ 【追問與微調話術】— 給 2-3 句「產出不滿意時可以接著對 AI 說」的追問句（例：要它更口語、換個角度、縮短），可直接複製\n⑤ 【一句話精簡版】— 趕時間時用的濃縮版指令，一行內，保留最關鍵的角色與限制\n\n【規則】\n1. 格式：優化後的指令一律用程式碼區塊、可一鍵複製，五要素（角色／任務／脈絡／輸出格式／限制）清楚分段或標示，排版乾淨、無多餘客套與符號。\n2. 嚴禁空泛與灌水：禁止「請幫我寫一篇關於○○的文章」這類沒有脈絡的空泛開頭；禁止堆砌「最棒的、超專業的、頂尖的、詳細的」這類沒有資訊量的形容詞；禁止杜撰我沒提供的事實、數據、品牌設定塞進指令裡。\n3. 套用結構化提示框架：依「角色→任務→脈絡→輸出格式→限制條件」補齊五要素，任務複雜時加入少樣本範例或要 AI『先給大綱／先確認理解再執行』（思維鏈）。\n4. 語氣：像一位懂 AI、講話接地氣的提示工程教練，每個調整都用白話講清楚為什麼有效，不賣弄術語、不假設我是工程師。\n5. 驗證測試：優化後的指令應做到「換成任何人來貼，都能得到穩定、對題、不需大改的結果」；若這條指令仍可能被 AI 理解成好幾種意思、或少了關鍵脈絡，請明確標出缺口並要我補齊，而不是自己亂猜一個版本給我。`
   },
 ];
 
