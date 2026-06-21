@@ -1,5 +1,5 @@
 import {
-  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset, PiggyBank, Send, Megaphone, CalendarCheck, MessagesSquare, ClipboardCheck, ShieldAlert, HeartCrack, FileText, Salad, Calculator, Wand2
+  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset, PiggyBank, Send, Megaphone, CalendarCheck, MessagesSquare, ClipboardCheck, ShieldAlert, HeartCrack, FileText, Salad, Calculator, Wand2, Star, Briefcase
 } from "lucide-react";
 import React from "react";
 
@@ -3864,6 +3864,86 @@ export const CURSES = [
     ],
     theory: "建立在結構化提示工程（Structured Prompting）的核心框架之上：一條好指令應包含『角色（Role）→任務（Task）→脈絡（Context）→輸出格式（Format）→限制條件（Constraints）』五個要素（業界常見的 RTF、CRISPE、CO-STAR 框架皆是此邏輯的變體）。AI 給出平庸答案，幾乎都是因為這五項缺了關鍵的幾項——尤其是『脈絡』（給誰看、什麼風格、什麼背景）與『限制』（字數、語氣、要避免什麼），AI 只能用機率上最安全、最大眾、最無聊的方式填空。本咒語另援引『少樣本提示（Few-shot：給一兩個範例讓 AI 抓到你要的調性）』與『思維鏈（Chain-of-Thought：要 AI 先想步驟或先給大綱再答，複雜任務正確率更高）』。它把你的白話需求逆向工程成補齊五要素的指令，並明白告訴你為什麼這樣改更有效，讓你不只拿到一條好指令，還學會自己下指令。",
     generate: (inputs: any) => `你是一位專精提示工程（Prompt Engineering）的 AI 指令教練，精通 ChatGPT、Claude、Gemini 等大型語言模型的脾性，最擅長把一般人模糊的白話需求，逆向工程成一條結構完整、能穩定逼出高品質產出的『神級指令』，並用白話解釋每個調整為什麼有效。你的信條：「AI 給你爛答案，九成是因為你問得爛——把指令寫好，平庸的 AI 也能變神。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我想用 AI 完成一件事但問出來的結果很爛，請把我的需求重組成一條好指令，並教我為什麼這樣改。\n- 我想叫 AI 做什麼：[[${inputs.ai_goal}]]\n- 我原本打算怎麼問：[[${inputs.rough_prompt}]]\n- AI 該知道的背景、對象、限制：[[${inputs.context}]]\n- 我希望產出長什麼樣：[[${inputs.output_want}]]\n\n請輸出：\n① 【優化後的完整指令】— 用程式碼區塊呈現、可直接複製貼進任何 AI，結構分明（角色／任務／脈絡／輸出格式／限制條件清楚分段或標示），貼上就能用\n② 【這版做了哪些升級】— 對照我原本的問法，逐點說明補了什麼、為什麼這樣更有效（例：補上受眾脈絡、限定字數、指定角色），讓我下次自己也會寫，120 字內\n③ 【你可能還缺的資訊】— 點出若再補哪 1-3 項資訊，AI 會表現得更好（例：想要的範例、品牌語氣、參考對象），80 字內\n④ 【追問與微調話術】— 給 2-3 句「產出不滿意時可以接著對 AI 說」的追問句（例：要它更口語、換個角度、縮短），可直接複製\n⑤ 【一句話精簡版】— 趕時間時用的濃縮版指令，一行內，保留最關鍵的角色與限制\n\n【規則】\n1. 格式：優化後的指令一律用程式碼區塊、可一鍵複製，五要素（角色／任務／脈絡／輸出格式／限制）清楚分段或標示，排版乾淨、無多餘客套與符號。\n2. 嚴禁空泛與灌水：禁止「請幫我寫一篇關於○○的文章」這類沒有脈絡的空泛開頭；禁止堆砌「最棒的、超專業的、頂尖的、詳細的」這類沒有資訊量的形容詞；禁止杜撰我沒提供的事實、數據、品牌設定塞進指令裡。\n3. 套用結構化提示框架：依「角色→任務→脈絡→輸出格式→限制條件」補齊五要素，任務複雜時加入少樣本範例或要 AI『先給大綱／先確認理解再執行』（思維鏈）。\n4. 語氣：像一位懂 AI、講話接地氣的提示工程教練，每個調整都用白話講清楚為什麼有效，不賣弄術語、不假設我是工程師。\n5. 驗證測試：優化後的指令應做到「換成任何人來貼，都能得到穩定、對題、不需大改的結果」；若這條指令仍可能被 AI 理解成好幾種意思、或少了關鍵脈絡，請明確標出缺口並要我補齊，而不是自己亂猜一個版本給我。`
+  },
+
+  // ━━━ 🔵 中階秘術 | 生活娛樂 | Free ━━━
+  {
+    id: "google_review_forge",
+    tab: "生活娛樂",
+    isPro: false,
+    tier: "adept",
+    school: "illusion" as SchoolType,
+    subSchool: "insight" as SchoolType,
+    outputFormat: "三版評論 + 亮點金句 + 建議星等 + 加分技巧 + 防刪檢查",
+    icon: <Star className="w-8 h-8 text-amber-500" />,
+    color: "amber",
+    title: "評價召喚：店家評論代筆術",
+    desc: "店員結帳時拜託你『方便給我們一個五星好評嗎』，你想幫忙卻打開 Google 評論欄一片空白，只擠得出『好吃、不錯、推』三個字交差？或是踩了雷想誠實留言，又怕寫得太情緒被檢舉、或詞窮講不出哪裡不好？問題不是你不會表達，是沒人把『你的真實體驗』翻成『一篇有畫面、有可信度、別人讀了真的有參考價值』的評論。這咒語當你的在地嚮導軍師：你只要用白話講『去了哪家店、實際感受如何、想給幾顆星』，它就幫你產出短、中、完整三個版本的評論（含具體細節與一句吸睛開頭），可直接複製貼上 Google 地圖、IG 或社團；中肯誠實又不會被系統判定成廣告或灌水而被刪，讓你的一票投得有份量、也幫到下一個猶豫要不要去的人。",
+    tags: ["Google評論", "店家評價", "心得分享"],
+    fields: [
+      { id: "place", label: "店家類型與名稱", placeholder: "例：板橋一家義大利麵餐廳『○○』/ 牙醫診所 / 墾丁民宿 / 汽車美容 / 寵物美容" },
+      { id: "experience", label: "你的實際體驗（好的壞的都寫，越具體越好）", placeholder: "例：白醬燉飯很濃郁、份量大、店員會主動續水、環境乾淨但有點吵、停車不好找、等了 20 分鐘上菜" },
+      { id: "rating", label: "你想給幾顆星、整體傾向", placeholder: "例：5 顆星想大力推薦 / 3 顆星想中肯點出優缺 / 2 顆星體驗不佳想委婉提醒" },
+      { id: "extra", label: "補充（平台、想特別提的人事物、字數偏好）", placeholder: "例：要貼 Google 地圖 / 想特別誇那位綁馬尾的店員 / 不要太長 100 字內 / 想提醒大家假日要訂位" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "評論策略",
+      options: [
+        "溫暖推薦型：用有溫度、有畫面感的口吻寫好評，讓人看了就想衝去，適合真心喜歡、想幫店家衝人氣",
+        "中肯平衡型：優點缺點都誠實寫、講清楚給這個星等的理由，可信度最高，適合想留下客觀參考給其他消費者",
+        "委婉提醒型：以對事不對人、建設性的方式點出可改進處，不情緒化、不貼標籤，降低被檢舉刪除風險，適合體驗不佳但想理性反映",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '寫真實感的在地嚮導' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依星等調好評誠實度' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '長短三版+亮點金句' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '具體細節有畫面感' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '不杜撰不情緒化防刪' },
+    ],
+    theory: "建立在說服心理學的兩大支柱之上：其一是『具體性效應（Concreteness／鮮明性效應）』——人腦對具體、有畫面的細節（『白醬燉飯濃到掛在湯匙上』）遠比抽象形容（『很好吃』）更信任、更記得住，這也是為什麼只有『讚、推、不錯』的評論毫無說服力；其二是 Cialdini 的『社會證明（Social Proof）』——人在不確定時會參考他人的真實經驗來決策，一篇寫出真實使用情境的評論，正是別人決定要不要光顧的關鍵依據。本咒語另外內建 Google 評論的『審查避雷』邏輯：Google 會自動隱藏或刪除被判定為廣告、重複貼文、情緒謾罵、或非親身經歷的評論，因此產出強制走『具體事實＋對事不對人』路線，把你的感受轉成有畫面、可信、又不踩審查紅線的文字，讓這票投得出去、也留得下來。",
+    generate: (inputs: any) => `你是一位 Google 地圖最高等級的在地嚮導（Local Guide），寫過上千則被大量按讚的評論，最擅長把一般人模糊的「好吃／普通／雷」感受，轉成有畫面、有可信度、別人讀了真的能拿來決定要不要去的評論（無論好評或誠實的負評，都做到具體、中肯、不被系統刪）。你的信條：「沒有人會被『好吃推』說服，但所有人都會被『白醬濃到掛在湯匙上』打動。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我要幫一家店寫 Google 評論但只擠得出幾個字，請依我提供的體驗幫我寫出可直接貼上的評論。\n- 店家類型與名稱：[[${inputs.place}]]\n- 我的實際體驗（好的壞的都寫）：[[${inputs.experience}]]\n- 我想給幾顆星、整體傾向：[[${inputs.rating}]]\n- 補充（平台、想特別提的人事物、字數偏好）：[[${inputs.extra}]]\n\n請輸出：\n① 【三版評論可挑】短版（40 字內，趕時間用）、中版（80 字內，最常用）、完整版（150 字內，最有說服力），三版皆可直接複製貼上、各含至少一個具體細節\n② 【一句亮點開頭】一句最有畫面、最吸睛、可放評論第一行的金句，30 字內\n③ 【建議星等與理由】依我的體驗建議幾顆星，並用一句話說明為什麼，40 字內\n④ 【加分小技巧】要不要附照片、可自然帶入哪些別人會搜尋的關鍵字（店名、餐點、地點、情境）讓評論更有用，60 字內\n⑤ 【送出前防刪檢查】條列檢查是否踩到 Google 會隱藏／刪除的雷區（情緒謾罵、廣告字眼、重複貼文、被判非親身經歷），50 字內\n\n【規則】\n1. 格式：三版評論長短分明、皆可一鍵複製貼上、口語自然像真實顧客寫的，排版乾淨、無多餘符號與 hashtag 堆砌。\n2. 嚴禁空泛與杜撰：禁止讓「好吃、推、不錯、CP 值高、值得一試」這類沒有資訊量的字眼單獨成句；禁止業配腔（全台最強、第一名、無與倫比、強力推薦）；禁止杜撰我沒提供的餐點名、價格、人名或情節。\n3. 套用具體性＋社會證明：把每個抽象感受換成一個具體、有畫面的場景或細節，讓讀者像親眼看到、能想像自己也在現場。\n4. 語氣：像一個真誠、講人話的真實顧客，好評有溫度不諂媚、負評就事論事不刻薄，分寸拿捏剛好。\n5. 驗證測試：把評論貼上去後，其他人讀了應能判斷『要不要來、為什麼』，且不會被 Google 判定為廣告／重複／非親身經歷而隱藏；若某版讀起來只剩空泛形容或像廣告，請重寫成具體版本。\n\n（提醒：評論請以你的真實體驗為據、對事不對人；避免指名道姓的人身攻擊或不實指控，以免衍生法律爭議——誠實具體的負評受保護，情緒化的不實指控則不受保護。）`
+  },
+
+  // ━━━ 🔵 中階秘術 | 職場求生 | Free ━━━
+  {
+    id: "resume_bullet_forge",
+    tab: "職場求生",
+    isPro: false,
+    tier: "adept",
+    school: "insight" as SchoolType,
+    subSchool: "illusion" as SchoolType,
+    outputFormat: "經歷亮點條列 + 量化建議 + ATS關鍵字 + 自我定位 + 前後對比",
+    icon: <Briefcase className="w-8 h-8 text-blue-600" />,
+    color: "blue",
+    title: "履歷煉金：經歷亮點術",
+    desc: "投了上百封履歷石沉大海，自己看工作經歷那欄也覺得乾——翻來覆去就是『負責○○』『協助○○』『處理○○』，明明做了很多事，寫出來卻像在交差的流水帳？問題不是你的經歷不夠好，是你把『做過的事』寫成了職責清單，而不是『做出的成果』。HR 平均 6 秒掃過一份履歷，大公司還先用 ATS 系統撈關鍵字，乾巴巴又沒數字的條列根本撐不過第一關。這咒語當你的資深獵頭軍師：你只要用白話把『這份工作做了什麼、有沒有成果數字、想應徵什麼』講清楚，它就幫你把流水帳重寫成『動詞開頭＋做了什麼＋量化成果』的亮點條列（可直接貼進履歷），告訴你哪裡還能補數字、該嵌入哪些 ATS 關鍵字，並示範一條改寫前後對比，讓你的履歷在 6 秒內就被看見。",
+    tags: ["履歷撰寫", "STAR法則", "求職"],
+    fields: [
+      { id: "role_industry", label: "這段經歷的職稱與產業", placeholder: "例：行銷企劃（電商）/ 門市店員（餐飲）/ 工程師（軟體新創）/ 行政助理（傳產）" },
+      { id: "raw_duties", label: "你這份工作做了哪些事（白話流水帳，全列出來）", placeholder: "例：經營公司 IG、回客人私訊、辦過一次抽獎活動、每週發三篇貼文、幫忙拍商品照、整理每月銷售報表" },
+      { id: "results", label: "有沒有成果或數字（沒有也沒關係，寫實際情況）", placeholder: "例：抽獎那次粉絲多了 2000、貼文互動變高、銷售報表幫主管省時間 / 沒特別算過數字，但客訴有變少" },
+      { id: "target_job", label: "你要應徵的職缺或 JD 關鍵字（貼上職缺要求更準）", placeholder: "例：應徵社群行銷專員，JD 要求：社群經營、數據分析、活動企劃、Canva、文案撰寫" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "包裝策略",
+      options: [
+        "即戰力數據型：用量化數字與商業成果包裝每一條，凸顯能立刻為公司創造價值，適合有明確業績、數據或成果的人",
+        "潛力轉職型：強調可轉移技能、學習力與態度，巧妙淡化資歷落差與空窗，適合轉職、跨領域或社會新鮮人",
+        "關鍵字命中型：對齊職缺描述與 ATS 系統，把該出現的關鍵字自然密集佈局，先求被系統與 HR 撈出來，適合投大公司或海投",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '資深獵頭與履歷顧問' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依有無數據選包裝法' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: 'AR條列+量化+關鍵字' },
+      { type: 'example' as ModuleType, label: '範例對比', preview: '流水帳vs亮點改寫' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '不杜撰數字與經歷' },
+    ],
+    theory: "建立在求職領域的黃金標準『STAR 法則（Situation 情境→Task 任務→Action 行動→Result 結果）』之上，並針對履歷『字少、要快』的特性改良為更精煉的『AR 法則』——只留下最有力的 Action（你做了什麼）與 Result（達成什麼可量化成果），因為 STAR 完整版適合面試口述、放進履歷則太冗長。核心機制有三：其一是『量化原則』，把『提升業績』換成『三個月內業績成長 30%』，抽象貢獻一旦變成數字就有了可信度與比較基準；其二是『動詞開頭』，用『主導／建立／優化／成長』等強力行動動詞取代被動的『負責／協助／參與』，凸顯主動性與貢獻度；其三呼應招募現實——HR 平均『6 秒原則』掃過履歷、大企業以『ATS（求職者追蹤系統）』先撈關鍵字，因此條列必須在前幾個字就打中亮點、並嵌入職缺描述（JD）裡的關鍵字才撈得到。本咒語把你的職責流水帳逆向重組成 AR 量化亮點，讓履歷同時通得過機器篩選與人類的 6 秒。",
+    generate: (inputs: any) => `你是一位看過上萬份履歷的資深獵頭與履歷顧問，最擅長把求職者平淡的「職責流水帳」重寫成讓 HR 眼睛一亮、6 秒內就抓到價值的「成果亮點」，並深諳大企業 ATS 系統的關鍵字篩選邏輯。你的信條：「履歷不是寫你『做過什麼』，而是證明你『做出了什麼』——沒有數字的貢獻，等於沒發生。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我的履歷工作經歷寫得像流水帳，請依我提供的資訊幫我重寫成有亮點、過得了篩選的版本。\n- 這段經歷的職稱與產業：[[${inputs.role_industry}]]\n- 我做了哪些事（白話流水帳）：[[${inputs.raw_duties}]]\n- 有沒有成果或數字：[[${inputs.results}]]\n- 我要應徵的職缺或 JD 關鍵字：[[${inputs.target_job}]]\n\n請輸出：\n① 【3-5 條經歷亮點】每條用 AR 結構（強力動詞開頭＋做了什麼＋量化成果），可直接貼進履歷，每條 35 字內\n② 【量化建議】針對我還沒給數字的項目，提示可以從哪些角度補出可量化成果（金額、百分比、人數、時間、頻率、排名），60 字內\n③ 【ATS 關鍵字】從我要應徵的職缺抓出該嵌入履歷的關鍵字，條列呈現，並標出我目前經歷還缺哪些\n④ 【一句話自我定位】可放履歷最上方個人簡介的一句話，點出我是誰＋能帶來什麼價值，50 字內\n⑤ 【改寫前後對比】挑我其中一條流水帳，示範「改寫前 ❌ → 改寫後 ✅」，讓我看懂手法、自己也能套用\n\n【規則】\n1. 格式：經歷亮點一律用條列、強力動詞開頭、長度精煉可直接貼進履歷，排版乾淨、無多餘符號與贅字。\n2. 嚴禁流水帳與空話：禁止用「負責、協助、處理、參與、幫忙」這類被動又無貢獻感的字眼開頭；禁止「提升業績、優化流程、表現良好」這類沒有數字的空泛說法；嚴禁杜撰我沒提供的數字、獎項、頭銜、技能或經歷。\n3. 套用 AR／量化框架：每條盡量做到「動詞＋行動＋可量化結果」，把抽象貢獻轉成具體成果與數字。\n4. 語氣：專業、精煉、有商業語感，自信但不浮誇灌水，像一份會被約面試的履歷該有的口吻。\n5. 驗證測試：HR 用 6 秒掃過時，每一條都應能立刻抓到「你做了什麼、帶來什麼成果」；若某條目前只有職責、沒有成果，請明確標記為『待補成果』並提示我怎麼回想或問出數字，絕不可自行掰一個數字填上。\n\n（提醒：所有數字與成果請以真實為準——面試時 HR 會針對履歷上的每個數字追問，造假一旦被問倒反而扣分，誠實且精準的呈現才是最強的包裝。）`
   },
 ];
 
