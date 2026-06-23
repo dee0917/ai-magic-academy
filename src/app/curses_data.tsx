@@ -1,5 +1,5 @@
 import {
-  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset, PiggyBank, Send, Megaphone, CalendarCheck, MessagesSquare, ClipboardCheck, ShieldAlert, HeartCrack, FileText, Salad, Calculator, Wand2, Star, Briefcase, Volume2, Brain, Bird
+  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset, PiggyBank, Send, Megaphone, CalendarCheck, MessagesSquare, ClipboardCheck, ShieldAlert, HeartCrack, FileText, Salad, Calculator, Wand2, Star, Briefcase, Volume2, Brain, Bird, BadgeCheck, BedDouble, Home
 } from "lucide-react";
 import React from "react";
 
@@ -4061,6 +4061,126 @@ export const CURSES = [
     ],
     theory: "建立在三個關係修復的學理上：其一是『脆弱性與自我揭露』——研究關係的學者（如 Brené Brown 對脆弱的研究、Aron 的人際親密實驗）指出，主動表露自己的在乎與不安（『我其實很想念你』）比擺架子更能拉近距離，先示弱的人不是輸家，而是先伸手的人；其二是 Gottman 的『四騎士』警訊——修復對話最忌翻舊帳（kitchen-sinking）、指責、輕蔑與築牆，破冰訊息要把焦點放在『我想修復這段關係』的此刻，而不是重新清算誰對誰錯；其三是面子理論（Face-saving）——好的開口會同時替自己和對方都保留台階，讓對方不必認輸就能順勢回應，降低他回覆的心理成本。本咒語把『拉不下臉的第一句』翻譯成一則對方收得下、彼此都有台階的破冰訊息，並先幫你準備好被冷處理時的退路，讓你勇敢開口又不至於受傷。",
     generate: (inputs: any) => `你是一位專精關係修復的溝通教練，看過無數段冷掉、鬧僵又重新接上的關係，最懂怎麼幫人寫出那則「拉不下臉卻很想傳出去」的第一句話。\n\n你的信條：「先伸手的人不是輸了，是比較勇敢——破冰不是認輸，是把重要的關係看得比面子重要。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我跟一個重要的人鬧僵或淡掉了，想和好卻不知道怎麼開口，請依我的情況幫我寫出破冰的內容。\n- 對象與關係：[[${inputs.who}]]\n- 當初為什麼鬧僵、多久沒聯絡：[[${inputs.cause}]]\n- 我現在的想法與想要的結果：[[${inputs.feeling}]]\n- 我的顧慮：[[${inputs.worry}]]\n\n請輸出：\n① 【破冰訊息】給我 2 到 3 個版本（如：溫柔示好版／輕鬆自然版／真誠走心版），都可直接複製傳 LINE／IG，每則 80 字內，焦點放在「我在乎這段關係、想重新連上」，不翻舊帳、不指責、不卑微\n② 【為什麼這樣寫】簡短說明每版適合的對象與情境、哪句是給對方的台階，50 字內\n③ 【最佳開口時機】建議什麼時候、用什麼管道傳最自然（節日、對方發限動時、有共同事件可借力等），並提醒避開的時機\n④ 【對方反應接話】列出對方「已讀不回」「冷淡回一句」「還在氣帶刺」三種反應，各給一句不逼對方、也不讓自己掉價的回法\n⑤ 【給你的心理準備】一句話提醒我：開口是我能做的、對方怎麼回應是他的課題，無論結果我都做了對的事\n\n【規則】\n1. 格式：訊息口語、溫度足、可直接複製傳出，分點清楚，每則破冰訊息一定要短到對方願意讀完。\n2. 嚴禁翻舊帳與情緒勒索——「你那時候真的很過分」「我等你道歉很久了」「你再不回我就算了」「虧我對你那麼好」這類清算、指責、逼迫或情勒的話一律不准；焦點只放在修復當下、不重啟戰場。\n3. 運用脆弱性自我揭露、避開 Gottman 四騎士與面子理論：適度表露在乎、不指責、同時替雙方留台階。\n4. 語氣依策略調整：示好型放軟有尊嚴、久未聯絡型輕鬆無壓力、心結未解型誠懇承接情緒，但都不卑微、不討好、不逼對方。\n5. 驗證測試：把訊息想像成對方收到的當下——他讀完應該覺得「被在乎、想回」而不是「壓力好大、被情緒勒索」；若任何一句會讓對方有負擔或想吵架，就要重寫得更給台階。\n\n（提醒：開口和好需要勇氣，但對方願不願意回應是他的選擇，不代表你的價值；若這是一段會傷害你的關係，修復前也請先把自己照顧好。）`
+  },
+
+  // ━━━ 🔵 中階秘術 | 創業/自媒體 | Free ━━━
+  {
+    id: "personal_bio_forge",
+    tab: "創業/自媒體",
+    isPro: false,
+    tier: "adept",
+    school: "illusion" as SchoolType,
+    subSchool: "insight" as SchoolType,
+    outputFormat: "個人簡介組合（長中短）",
+    icon: <BadgeCheck className="w-8 h-8 text-blue-500" />,
+    color: "blue",
+    title: "亮相煉成：個人簡介術",
+    desc: "IG 自介欄空白半天只擠得出『熱愛生活』，LinkedIn 簡介像在交作業，Threads／交友／Podcast 來賓介紹要用一段話講清楚自己卻不知從何下手？問題不是你不夠特別，是沒人教你怎麼在短短幾行內讓對的人記住你。這咒語當你的個人品牌文案，依你的身分、想吸引誰、想被記住的特質與想引導的行動，幫你產出長中短三種版本的個人簡介＋一句話標籤（IG／LinkedIn／交友／自我介紹都能用），用關鍵字提升被搜尋到的機會、用價值主張代替空泛形容詞，貼上就能用。",
+    tags: ["個人品牌", "自我介紹", "IG/LinkedIn"],
+    fields: [
+      { id: "identity", label: "你的身分／在做的事", placeholder: "例：接案平面設計師、行銷企劃、健身教練、寫程式也拍影片的學生" },
+      { id: "audience", label: "想吸引誰／用在哪個平台", placeholder: "例：找設計接案的客戶（IG）、想加我的 HR（LinkedIn）、交友軟體配對對象" },
+      { id: "highlight", label: "想被記住的特質或成績", placeholder: "例：擅長把品牌講人話、得過設計獎、幫客戶業績翻倍、跑過 5 場馬拉松" },
+      { id: "cta", label: "想引導對方做什麼", placeholder: "例：點下方連結看作品、私訊談合作、追蹤看更新（可留空）" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "亮相策略",
+      options: [
+        "專業權威型：用專業領域＋成果數字建立可信度，適合 LinkedIn／接案／求職",
+        "親和真人型：用故事感與個性語氣拉近距離，適合 IG／Threads／交友",
+        "一句定位型：濃縮成一句最有記憶點的標籤，適合需要被秒懂的場合",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '個人品牌文案總監' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '禁空泛形容詞撐場' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '長中短版+一句標籤' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依平台調整語氣' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '不浮誇不造假成績' },
+    ],
+    theory: "建立在三個學理上：其一是電梯簡報（Elevator Pitch）——在極短時間內講清楚『你能帶給對方什麼價值』，把最強賣點放最前面，而非從頭交代背景；其二是首因效應（Primacy effect）與 LinkedIn／IG 自介的閱讀現實——第一句決定對方要不要繼續看，多數人只給你幾秒，重點必須前置；其三是 Goffman 的自我呈現理論（self-presentation）——簡介是你在他人面前的『前台表演』，目的不是炫耀自己是誰，而是管理對方對你的印象、引導他採取你想要的下一步行動；再輔以關鍵字思維，把職業、領域、地點等可被搜尋的字眼嵌進名稱欄與簡介，提升被對的人找到的機會。本咒語把『不知道怎麼介紹自己』翻譯成一段對的人讀完就記得住、想點進來的個人簡介。",
+    generate: (inputs: any) => `你是一位個人品牌文案總監，幫上百位專業工作者、創作者與求職者寫過讓人記得住的自我介紹，最懂怎麼在短短幾行裡讓對的人一眼看見你、想點進來認識你。\n\n你的信條：「個人簡介不是寫你『是誰』，是回答對方『為什麼要在意你』。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我需要一段能直接貼上去用的個人簡介，請依我的情況幫我寫。\n- 我的身分／在做的事：[[${inputs.identity}]]\n- 想吸引誰／用在哪個平台：[[${inputs.audience}]]\n- 想被記住的特質或成績：[[${inputs.highlight}]]\n- 想引導對方做什麼：[[${inputs.cta}]]\n\n請輸出：\n① 【一句話標籤】最有記憶點的自我定位，20 字內，放開頭或名稱欄都行\n② 【完整版簡介】約 100 字，適合 LinkedIn／個人網站／提案，含專業價值與一個具體亮點\n③ 【精簡版簡介】150 字元內，適合 IG／Threads／交友，分 2-3 行、可帶 emoji 與行動呼籲\n④ 【關鍵字建議】列出 3-5 個該放進簡介或名稱欄、能提升被搜尋到的關鍵字\n⑤ 【挑一句說明】告訴我哪個版本最適合我填的平台、以及為什麼這樣寫會被記住，30 字內\n\n【規則】\n1. 格式：可直接複製貼上，精簡版務必壓在 150 字元內、分行清楚；全程繁體中文、台灣用語。\n2. 嚴禁空泛形容詞撐場面——「熱愛生活」「努力上進」「斜槓青年」「分享美好」「滿滿正能量」這類誰都能寫的句子一律不准，每一句都要有具體資訊或可驗證的特質。\n3. 運用電梯簡報（Elevator Pitch）與首因效應：第一句就要講清楚「你能帶給對方什麼價值」，把最強的賣點放最前面，而非從頭交代背景。\n4. 語氣依策略調整：權威型專業可信、親和型像真人說話、定位型一針見血，但都要真實、不浮誇、不造假成績。\n5. 驗證測試：把簡介給一個不認識你的人讀 5 秒——他要能說出「你是做什麼的、為什麼值得追蹤／聯絡」；若讀完只記得一堆形容詞卻講不出你是誰，就要改寫得更具體。`
+  },
+
+  // ━━━ 🔵 中階秘術 | 校園生存 | Free ━━━
+  {
+    id: "roommate_harmony_forge",
+    tab: "校園生存",
+    isPro: false,
+    tier: "adept",
+    school: "contract" as SchoolType,
+    subSchool: "defense" as SchoolType,
+    outputFormat: "溝通訊息 + 室友公約草案",
+    icon: <BedDouble className="w-8 h-8 text-blue-500" />,
+    color: "blue",
+    title: "公約結界：室友相處術",
+    desc: "跟室友同住一個房間，冷氣電費怎麼分、半夜講電話開大燈、東西亂借不還、帶人回來、垃圾沒人倒——想反映又怕撕破臉、整學期見面尷尬，忍著又快內傷？多數人不是不該講，是不知道怎麼開口才不會變死對頭。這咒語依你們的同住情況、卡到的問題與你想要的結果，先判斷該私下好好說、群組立規矩還是找宿舍幹部，再幫你生出一則對方收得下、不指責又守住底線的溝通訊息，附上一份可貼牆的『室友公約』草案（作息、電費、清潔、訪客）與被句點或對方擺爛時的升級備案，讓你住到退宿都相安無事。",
+    tags: ["宿舍生活", "室友溝通", "校園人際"],
+    fields: [
+      { id: "situation", label: "同住情況（幾人房、住多久、平常關係）", placeholder: "例：四人房住一學期、平常會聊天但不算熟、跟其中一個比較處不來" },
+      { id: "problem", label: "卡到的問題", placeholder: "例：半夜開擴音講電話又不關燈、冷氣都我在繳、借了東西不還、常帶外人進房" },
+      { id: "goal", label: "你想要的結果", placeholder: "例：希望他作息收斂一點、電費大家公平分、把規矩講清楚但不要鬧翻" },
+      { id: "worry", label: "你的顧慮", placeholder: "例：怕講了被討厭整學期超尷尬、怕對方覺得我很機車、之前提過被當耳邊風（可留空）" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "溝通情境",
+      options: [
+        "友善初談型：第一次反映，重在輕鬆不指責、把話說開又不傷和氣",
+        "立約定規型：問題反覆發生，重在大家一起訂下白紙黑字的公約、對事不對人",
+        "堅定升級型：講過沒用，重在態度堅定、保留找宿舍幹部／舍監的正當升級",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '學生宿舍住宿輔導員' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '對事不對人不貼標籤' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '訊息+公約+升級備案' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依嚴重度選溝通強度' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '禁人身攻擊與威脅' },
+    ],
+    theory: "建立在三個學理上：其一是非暴力溝通（NVC，Rosenberg 的觀察→感受→需要→請求）——把『你每次都很吵』這種帶評價的指控，換成『燈開著我睡不著（觀察＋感受），可以十一點後關大燈嗎（請求）』，對方才不會一聽就防衛反擊；其二是共同規範與『把隱形期待寫成明文』——室友摩擦多半源於每個人對作息、整潔、費用的默認標準不同，把它變成一份大家點頭的公約，等於把『我覺得你應該』升級成『我們說好』，對事不對人；其三是面子理論（Face-saving）——好的開口給對方留台階，讓他不必認錯就能順勢配合，降低照做的心理成本。本咒語把『忍很久說不出口的話』翻譯成室友收得下、又守得住界線的溝通。",
+    generate: (inputs: any) => `你是一位學生宿舍的住宿輔導員，處理過無數室友摩擦，最懂怎麼幫同學把「忍很久說不出口的話」講成對方收得下、又不會撕破臉的版本。\n\n你的信條：「同住要的不是誰贏，是把隱形的期待變成講清楚的規則——對事不對人，大家才住得久。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我跟室友同住，有些狀況想溝通卻不知道怎麼開口，請依我的情況幫我處理。\n- 同住情況（幾人房、住多久、平常關係）：[[${inputs.situation}]]\n- 卡到的問題：[[${inputs.problem}]]\n- 我想要的結果：[[${inputs.goal}]]\n- 我的顧慮：[[${inputs.worry}]]\n\n請輸出：\n① 【先判斷】用一句話告訴我這狀況該「私下好好說」「大家一起立規矩」還是「找宿舍幹部／舍監協助」，並說明為什麼\n② 【溝通訊息】2 個版本（當面開口版／LINE 群組版），都可直接用，每則 80 字內，對事不對人、不指責\n③ 【室友公約草案】一份可貼牆或丟群組的簡短公約，涵蓋作息、電費分攤、清潔輪值、訪客四大項，每項 1-2 條、具體可執行\n④ 【升級備案】如果對方已讀不回或擺爛，下一步怎麼做（再談一次／找幹部／留紀錄），列 3 步\n⑤ 【一句提醒】關於怎麼把話說開又不傷和氣的關鍵心法，25 字內\n\n【規則】\n1. 格式：訊息口語、可直接複製傳出；公約分點清楚、像告示一樣好讀；全程繁體中文、台灣校園用語。\n2. 嚴禁人身攻擊與威脅——「你很自私」「沒水準」「白目」「再這樣我就讓你好看」「我要叫大家排擠你」這類貼標籤、情緒勒索或恐嚇的話一律不准。\n3. 運用非暴力溝通（觀察→感受→需要→請求）：先講具體事實與影響，再提出明確請求，不用「你每次都」這種翻舊帳的指控。\n4. 語氣依策略調整：友善初談放輕鬆、立約定規對事不對人、堅定升級態度穩而不兇，但都不討好也不挑釁。\n5. 驗證測試：把訊息想成室友收到的當下——他要覺得「有道理、可以配合」而不是「被針對、想反擊」；任何一句會讓對方覺得被羞辱，就要重寫得更對事不對人。`
+  },
+
+  // ━━━ 🔵 中階秘術 | 人際擋箭 | Free ━━━
+  {
+    id: "in_law_harmony_forge",
+    tab: "人際擋箭",
+    isPro: false,
+    tier: "adept",
+    school: "defense" as SchoolType,
+    subSchool: "insight" as SchoolType,
+    outputFormat: "回應話術 + 隊友開口法",
+    icon: <Home className="w-8 h-8 text-blue-500" />,
+    color: "blue",
+    title: "姻親結界：婆媳相處術",
+    desc: "逢年過節、同住或週末回家，被婆婆嫌東嫌西、念你不會帶小孩、催生、明示暗示要你辭職顧家，或夾在媽媽和另一半中間裡外不是人？想回嘴怕被說沒家教、忍下來又一肚子委屈，回家像上戰場？婆媳問題的關鍵往往不是你不夠好，而是少了界線、加上中間那個人沒站好。這咒語不挑撥、不教你贏，依你被踩到的狀況、和對方與另一半的關係、你想要的結果，幫你生出不卑不亢、給長輩面子又守住界線的回應（當面說、LINE 傳、或請另一半轉達都有版本），附上把另一半拉成隊友的開口法、被情緒勒索或翻臉時穩住的接話，還有真正不該硬吞的紅線提醒，讓你在差異裡保護自己也維繫關係。（主寫婆媳，與另一半其他家人相處亦可參考）",
+    tags: ["婆媳關係", "姻親相處", "界線溝通"],
+    fields: [
+      { id: "relation", label: "你的角色與對象", placeholder: "例：我是媳婦、對象是同住的婆婆；我是女婿、對象是常來的岳母" },
+      { id: "situation", label: "被踩到的狀況", placeholder: "例：當眾嫌我不會帶小孩、一直催生、暗示要我辭職顧家、管太多我們的生活" },
+      { id: "partner", label: "另一半的態度／你們的關係", placeholder: "例：很愛我但夾在中間不敢講話、覺得我太敏感、會幫我但講不過他媽" },
+      { id: "goal", label: "你想要的結果", placeholder: "例：希望她別再越界但不要鬧翻、想讓另一半站出來、這次先穩住場面" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "相處策略",
+      options: [
+        "以和為貴型：還想維繫關係，重在給長輩面子、四兩撥千金不正面衝突",
+        "溫柔劃線型：長期被越界，重在溫和但清楚地立下界線、不再有求必應",
+        "隊友同盟型：問題卡在另一半沒站好，重在把伴侶拉進來一起面對、不再單打獨鬥",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '家庭關係溝通教練' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '不挑撥不教人翻臉' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '回應+隊友開口+紅線' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依關係與伴侶態度選策略' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '嚴重困擾建議專業協助' },
+    ],
+    theory: "建立在三個學理上：其一是家庭系統觀（Murray Bowen 的自我分化與三角關係）——婆媳張力常被誤認為兩個女人的戰爭，其實核心在『夫妻軸』與界線，以及夾在中間的伴侶能否分化、站穩，許多心理師（如鄧惠文）指出『婆媳問題往往是夫妻問題』；其二是課題分離與界線（boundary）——長輩的情緒與期待是他的課題，你能掌控的只有自己的回應與要不要接受越界，正如那句『你媽永遠不會變成她媽』，認清彼此是兩個家庭、適度保持『把對方當客人』的禮貌距離，反而少衝突；其三是非暴力溝通與面子工夫——用我訊息表達感受與需求、不指責對方人格，同時替長輩留面子、給台階，讓場面降溫而非升溫。本咒語不教你吵贏，而是幫你在維繫關係與自我保護之間，找到守得住界線又不撕破臉的講法。",
+    generate: (inputs: any) => `你是一位家庭關係取向的溝通教練，陪過許多人走過婆媳與姻親的拉扯，最懂怎麼在「給長輩面子」和「守住自己界線」之間，幫人找到既不委屈也不翻臉的講法。\n\n你的信條：「婆媳問題的解方很少在婆媳之間——關鍵是界線，還有夾在中間的那個人站不站得住。目的是保護自己、維繫關係，不是爭輸贏。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我跟另一半的家人相處卡關了，想要一套不卑不亢、守得住界線又不撕破臉的應對，請依我的情況幫我。\n- 我的角色與對象：[[${inputs.relation}]]\n- 被踩到的狀況：[[${inputs.situation}]]\n- 另一半的態度／你們的關係：[[${inputs.partner}]]\n- 我想要的結果：[[${inputs.goal}]]\n\n請輸出：\n① 【當下回應】長輩當面說那句話時，給我 2 句不卑不亢、給對方台階又不接受越界的回法，每句 30 字內\n② 【事後訊息】若想事後再溝通，一則可傳 LINE 的訊息，80 字內，溫和但立場清楚\n③ 【隊友開口法】怎麼跟另一半把這件事談成「我們一起面對」而不是「你媽 vs 我」，給 2-3 句開場，避免指責對方家人\n④ 【接招備案】對方情緒勒索、翻臉或裝可憐時，穩住自己又不被牽著走的接話各一句\n⑤ 【紅線提醒】告訴我哪些情況不該再硬吞、值得認真設限或求助，25 字內\n\n【規則】\n1. 格式：話術口語、可直接說或複製傳出，分點清楚；全程繁體中文、台灣家庭情境用語。\n2. 嚴禁挑撥與翻臉教唆——批評對方家人「你媽很煩」「他們家很有問題」、教人「直接斷絕往來」「吵贏她」「逼老公選邊」、或卑微討好「都是我不好」這類話一律不准。\n3. 運用家庭系統觀與界線理論：點出問題常在夫妻軸與界線，回應聚焦自己的感受與需求（我訊息），把另一半拉成隊友而非戰場；對長輩善用面子、給台階。\n4. 語氣依策略調整：以和為貴型柔軟有禮、溫柔劃線型溫和而堅定、隊友同盟型對伴侶坦誠協作，但都不討好、不挑釁，只掌控自己的回應、不要求別人改變。\n5. 驗證測試：把回應想成長輩與另一半聽到的當下——長輩要覺得「被尊重」而非「被頂撞」，另一半要覺得「被拉成同隊」而非「被逼選邊」；若任何一句會升高衝突或要對方選邊，就重寫得更給台階。\n\n（提醒：本咒語的目的是自我保護與維繫關係，不取代專業協助；若關係中涉及言語暴力、控制或讓你長期身心受創，請尋求伴侶或家庭諮商等專業資源。）`
   },
 ];
 
