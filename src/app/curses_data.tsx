@@ -1,5 +1,5 @@
 import {
-  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset, PiggyBank, Send, Megaphone, CalendarCheck, MessagesSquare, ClipboardCheck, ShieldAlert, HeartCrack, FileText, Salad, Calculator, Wand2, Star, Briefcase, Volume2, Brain, Bird, BadgeCheck, BedDouble, Home
+  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset, PiggyBank, Send, Megaphone, CalendarCheck, MessagesSquare, ClipboardCheck, ShieldAlert, HeartCrack, FileText, Salad, Calculator, Wand2, Star, Briefcase, Volume2, Brain, Bird, BadgeCheck, BedDouble, Home, DoorOpen
 } from "lucide-react";
 import React from "react";
 
@@ -4181,6 +4181,86 @@ export const CURSES = [
     ],
     theory: "建立在三個學理上：其一是家庭系統觀（Murray Bowen 的自我分化與三角關係）——婆媳張力常被誤認為兩個女人的戰爭，其實核心在『夫妻軸』與界線，以及夾在中間的伴侶能否分化、站穩，許多心理師（如鄧惠文）指出『婆媳問題往往是夫妻問題』；其二是課題分離與界線（boundary）——長輩的情緒與期待是他的課題，你能掌控的只有自己的回應與要不要接受越界，正如那句『你媽永遠不會變成她媽』，認清彼此是兩個家庭、適度保持『把對方當客人』的禮貌距離，反而少衝突；其三是非暴力溝通與面子工夫——用我訊息表達感受與需求、不指責對方人格，同時替長輩留面子、給台階，讓場面降溫而非升溫。本咒語不教你吵贏，而是幫你在維繫關係與自我保護之間，找到守得住界線又不撕破臉的講法。",
     generate: (inputs: any) => `你是一位家庭關係取向的溝通教練，陪過許多人走過婆媳與姻親的拉扯，最懂怎麼在「給長輩面子」和「守住自己界線」之間，幫人找到既不委屈也不翻臉的講法。\n\n你的信條：「婆媳問題的解方很少在婆媳之間——關鍵是界線，還有夾在中間的那個人站不站得住。目的是保護自己、維繫關係，不是爭輸贏。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我跟另一半的家人相處卡關了，想要一套不卑不亢、守得住界線又不撕破臉的應對，請依我的情況幫我。\n- 我的角色與對象：[[${inputs.relation}]]\n- 被踩到的狀況：[[${inputs.situation}]]\n- 另一半的態度／你們的關係：[[${inputs.partner}]]\n- 我想要的結果：[[${inputs.goal}]]\n\n請輸出：\n① 【當下回應】長輩當面說那句話時，給我 2 句不卑不亢、給對方台階又不接受越界的回法，每句 30 字內\n② 【事後訊息】若想事後再溝通，一則可傳 LINE 的訊息，80 字內，溫和但立場清楚\n③ 【隊友開口法】怎麼跟另一半把這件事談成「我們一起面對」而不是「你媽 vs 我」，給 2-3 句開場，避免指責對方家人\n④ 【接招備案】對方情緒勒索、翻臉或裝可憐時，穩住自己又不被牽著走的接話各一句\n⑤ 【紅線提醒】告訴我哪些情況不該再硬吞、值得認真設限或求助，25 字內\n\n【規則】\n1. 格式：話術口語、可直接說或複製傳出，分點清楚；全程繁體中文、台灣家庭情境用語。\n2. 嚴禁挑撥與翻臉教唆——批評對方家人「你媽很煩」「他們家很有問題」、教人「直接斷絕往來」「吵贏她」「逼老公選邊」、或卑微討好「都是我不好」這類話一律不准。\n3. 運用家庭系統觀與界線理論：點出問題常在夫妻軸與界線，回應聚焦自己的感受與需求（我訊息），把另一半拉成隊友而非戰場；對長輩善用面子、給台階。\n4. 語氣依策略調整：以和為貴型柔軟有禮、溫柔劃線型溫和而堅定、隊友同盟型對伴侶坦誠協作，但都不討好、不挑釁，只掌控自己的回應、不要求別人改變。\n5. 驗證測試：把回應想成長輩與另一半聽到的當下——長輩要覺得「被尊重」而非「被頂撞」，另一半要覺得「被拉成同隊」而非「被逼選邊」；若任何一句會升高衝突或要對方選邊，就重寫得更給台階。\n\n（提醒：本咒語的目的是自我保護與維繫關係，不取代專業協助；若關係中涉及言語暴力、控制或讓你長期身心受創，請尋求伴侶或家庭諮商等專業資源。）`
+  },
+
+  // ━━━ 🔵 中階秘術 | 校園生存 | Free ━━━
+  {
+    id: "deposit_reclaim_forge",
+    tab: "校園生存",
+    isPro: false,
+    tier: "adept",
+    school: "contract" as SchoolType,
+    subSchool: "defense" as SchoolType,
+    outputFormat: "溝通訊息 + 正式書面 + 依據彈藥",
+    icon: <DoorOpen className="w-8 h-8 text-blue-500" />,
+    color: "blue",
+    title: "退租結界：押金討回術",
+    desc: "退租搬走了，房東卻以『牆上有釘孔』『要重新粉刷』『清潔費』『折舊』『家具有損壞』為由，凹著押金不退、甚至要你倒貼賠償？租屋族（尤其學生、社會新鮮人）最痛的關卡之一——明知不合理，但不懂契約、不知道哪些是自然耗損房東本來就不能扣、開口又怕撕破臉拿不回錢。這咒語不教你嗆房東，而是依你的租屋與退租情況、房東扣款的理由、你想要的結果，先幫你判斷這筆扣款合不合理、你站得住腳的點，再生出一則房東難反駁、有依據又不卑不亢的溝通訊息（友善協商版／堅定主張版），附上一段可作為存證信函或申訴依據的正式書面，以及你能引用的契約與規範方向（自然耗損、押金上限、返還期限），最後給被擺爛時的升級備案，讓你把該拿回的押金拿回來。",
+    tags: ["租屋退租", "押金爭議", "房東溝通"],
+    fields: [
+      { id: "situation", label: "租屋與退租情況", placeholder: "例：套房租一年、押兩個月共 3 萬、有簽書面契約、已搬空並打掃過、月底到期" },
+      { id: "dispute", label: "房東扣款／要求賠償的理由", placeholder: "例：說牆上釘孔要賠粉刷費 8 千、扣清潔費 2 千、說沙發有刮痕要賠、拖著不退" },
+      { id: "goal", label: "你想要的結果", placeholder: "例：希望全額退還押金、最多接受合理的清潔費、想好好講但不想被吃定" },
+      { id: "evidence", label: "你手上的證據／契約狀況", placeholder: "例：有退租前拍的照片、有契約正本、押金匯款紀錄、入住時就有的舊損沒拍到（可留空）" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "協商強度",
+      options: [
+        "友善協商型：第一次反映，重在好好講、附上依據、給房東台階順勢退錢",
+        "據理力爭型：房東硬凹或拖延，重在搬出契約與常識性規範、不卑不亢主張權利",
+        "正式存證型：協商破裂，重在寫出可發存證信函／向消保官申訴的正式書面、保留法律途徑",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '租屋權益協商顧問' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '對事不對人擺依據' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '訊息+正式信+彈藥' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依爭議大小選強度' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '標註僅供參考非法律意見' },
+    ],
+    theory: "建立在三個學理上：其一是哈佛談判術（Fisher & Ury 的原則性談判）——別陷在『退／不退』的立場拉鋸，而是回到雙方利益，並訴諸『客觀標準』（契約條款、內政部住宅租賃定型化契約應記載事項、一般行情），讓判斷不靠誰兇誰贏，而靠誰有依據；其二是損失趨避（Loss aversion）——房東扣你押金，等於你被迫承受損失，談判時把『這筆錢本來就該退』錨定成基準，再把不合理扣款一項項拆掉，比一開始就讓步更能守住金額；其三是『把模糊期待化為白紙黑字』與舉證思維——退租糾紛多半輸在沒證據、沒搞懂哪些是房東本來就不能扣的自然耗損，先盤點契約與照片等彈藥，再開口，氣勢與底氣都不同。本咒語把『明知不合理卻不知怎麼開口要回押金』翻譯成房東難反駁、又不至於撕破臉的主張。",
+    generate: (inputs: any) => `你是一位專門協助租屋族的租屋權益協商顧問，看過無數退租押金糾紛，最懂怎麼幫房客把『明知不合理卻講不出口的話』，變成房東難反駁、有依據又不卑不亢的主張。\n\n你的信條：「要回押金靠的不是誰兇，是誰有依據——先把彈藥擺好，再好好講，該退的一毛都不少。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我退租後跟房東卡在押金問題，想要一套有依據又不撕破臉的應對，請依我的情況幫我處理。\n- 租屋與退租情況：[[${inputs.situation}]]\n- 房東扣款／要求賠償的理由：[[${inputs.dispute}]]\n- 我想要的結果：[[${inputs.goal}]]\n- 我手上的證據／契約狀況：[[${inputs.evidence}]]\n\n請輸出：\n① 【先判斷】用 2-3 句告訴我房東這些扣款項目哪些站不住腳（如屬正常使用的自然耗損）、哪些可能要付，以及這狀況該「友善協商」「據理力爭」還是「發存證信函／申訴」，並說明為什麼\n② 【溝通訊息】2 個可直接傳的 LINE／訊息版本（友善協商版／堅定主張版），每則 90 字內，對事不對人、附依據不指責\n③ 【正式書面】一段可作為存證信函或向消保官申訴依據的正式文字，150 字內，載明你的主張、依據與希望對方於幾日內返還的金額\n④ 【依據彈藥】列出我可以引用的方向 3-4 點（例如：自然耗損與正常使用本就不得從押金扣除、押金上限、押金應於返還條件成就後合理期限內退還、舉證責任），用白話說明怎麼用\n⑤ 【升級備案＋提醒】房東已讀不回或擺爛時的下一步（留紀錄→存證信函→消保官／租屋服務／法律扶助）列 3 步，並附一句法律免責提醒，30 字內\n\n【規則】\n1. 格式：訊息口語、可直接複製傳出；正式書面用語得體、分點清楚、有金額與期限；全程繁體中文、台灣租屋用語（押金、退租、房東、存證信函）。\n2. 嚴禁威脅恐嚇與卑微討好——「我要告死你」「黑心房東」「再不退我就讓你開不下去」「叫人去鬧」這類恐嚇，以及「算了那不然你看著辦」「不然少退一點也沒關係」這種還沒談就先棄守的話，一律不准。\n3. 運用哈佛談判術（談利益、訴諸契約與規範等客觀標準）與損失趨避：先把事實與依據擺出來、把『該全額退還』錨定為基準，再逐項拆解不合理扣款，而非情緒對嗆。\n4. 語氣依策略調整：友善協商有禮給台階、據理力爭穩而不兇、正式存證冷靜書面，但都不討好也不挑釁，始終站在『有依據』這一邊。\n5. 驗證測試：把訊息想成房東收到的當下——他要覺得「這人有備而來、有依據、不好凹」而不是「在恐嚇我、我擺爛就好」；任何一句是威脅或先自我棄守，就重寫得更有依據、更穩。\n\n（提醒：本內容僅供溝通與自我準備參考，非正式法律意見；金額較大或爭議僵持時，請洽各地租屋服務（如崔媽媽基金會）、消費者服務專線 1950、消保官或法律扶助基金會。）`
+  },
+
+  // ━━━ 🔵 中階秘術 | 生活娛樂 | Free ━━━
+  {
+    id: "ceremony_speech_forge",
+    tab: "生活娛樂",
+    isPro: false,
+    tier: "adept",
+    school: "illusion" as SchoolType,
+    subSchool: "healing" as SchoolType,
+    outputFormat: "完整講稿 + 黃金開場 + 上台提示",
+    icon: <Mic className="w-8 h-8 text-blue-500" />,
+    color: "blue",
+    title: "致詞煉成：場合致詞術",
+    desc: "突然被推上台致詞——婚禮當伴郎伴娘、尾牙當主管講話、謝師宴當學生代表、同事歡送會、社團交接、開幕剪綵——腦袋一片空白，硬擠又全是「在這個特別的日子裡」「千言萬語盡在不言中」這種罐頭場面話，講完自己都尷尬？致詞講得好不好，差別不在詞藻華麗，而在有沒有一個讓人記得住的具體故事、開場有沒有抓住人、結尾有沒有收得漂亮。這咒語依你的場合與角色、聽眾氣氛、你想提到的人事物，幫你生出一篇可以直接照念的完整講稿（含開場、主體故事、結尾祝福），附上 3 種不同風格的黃金開場句、2 句讓人記住的收尾金句，以及停頓、控時、敬酒的上台提示，讓你站上台不再發抖、講完有人鼓掌。",
+    tags: ["致詞稿", "婚禮尾牙", "上台開口"],
+    fields: [
+      { id: "occasion", label: "場合與你的角色", placeholder: "例：好友婚禮我當伴郎、公司尾牙我是部門主管、謝師宴我是畢業生代表、同事歡送會" },
+      { id: "audience", label: "聽眾與氣氛", placeholder: "例：長輩親戚多要莊重一點、台下都是熟同事可以開玩笑、有師長在場要得體" },
+      { id: "content", label: "想提到的人事物／重點", placeholder: "例：想感謝帶我的主管、講一段跟新郎當兵的糗事、宣布明年部門目標、謝謝老師的某件事" },
+      { id: "must", label: "一定要提到或要避開的", placeholder: "例：一定要謝謝爸媽、不要太煽情、控制在 2 分鐘、別提到前任、要帶大家敬酒（可留空）" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "致詞風格",
+      options: [
+        "溫馨真摯型：重在情感真誠、用一個小故事打動人，適合婚禮、歡送、謝師宴",
+        "幽默炒熱型：重在輕鬆有梗、帶動現場氣氛，適合尾牙、熟人聚會、慶功",
+        "莊重得體型：重在正式穩重、面面俱到不失禮，適合長輩多或正式公開場合",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '婚禮主持暨講稿撰稿人' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '禁罐頭場面話' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '講稿+開場+收尾金句' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依場合調語氣長度' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '不踩雷不冷場不失禮' },
+    ],
+    theory: "建立在三個學理上：其一是峰終定律（Peak-end rule，Kahneman）——人對一段體驗的記憶，主要由『最高峰』與『結尾』決定，所以致詞的開場與收尾要最用力，一句抓住人的開場與一句記得住的結尾，勝過整段平均用力；其二是故事力（Storytelling）——大腦記不住形容詞，卻記得住畫面，一個具體的小故事（時間、地點、一句對話）比十句『他人很好、很努力』更能打動全場；其三是具體性原則（取自 Heath 兄弟 Made to Stick 的 Concrete）與口語節奏——上台是用『聽』的，句子要短、要能順口念出來、要留停頓，而非寫成一篇用看的文章。本咒語把『被推上台一片空白、只會講罐頭話』翻譯成一篇有故事、有記憶點、念得順又收得漂亮的致詞。",
+    generate: (inputs: any) => `你是一位資深婚禮主持人暨各式場合的講稿撰稿人，幫上百人寫過婚禮、尾牙、謝師宴、歡送會的致詞，最懂怎麼把『被推上台、腦袋空白』變成一篇有故事、有記憶點、念得順又收得漂亮的講稿。\n\n你的信條：「致詞講得好不好，不在詞藻多華麗，在有沒有一個讓人記得住的具體畫面——開場抓住人，結尾收得漂亮，中間講一個真的發生過的故事。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我臨時要上台致詞，腦袋一片空白，請依我的情況幫我寫一篇可以直接照念的講稿。\n- 場合與我的角色：[[${inputs.occasion}]]\n- 聽眾與氣氛：[[${inputs.audience}]]\n- 想提到的人事物／重點：[[${inputs.content}]]\n- 一定要提到或要避開的：[[${inputs.must}]]\n\n請輸出：\n① 【完整講稿】一篇可以直接照念的講稿，含「開場問候→主體（1-2 個具體故事或重點）→結尾祝福或呼應」，分段標清楚，依我說的時間長度抓字數（沒說就約 1.5 分鐘、約 300 字），句子要短、口語、念得順\n② 【黃金開場】3 個不同風格的開場句（問候型／故事型／幽默型），各 40 字內，讓我挑一個最適合現場的\n③ 【收尾金句】2 句讓人記得住、收得漂亮的結尾，各 30 字內\n④ 【上台提示】關於停頓、眼神、控時、要不要敬酒或請大家舉杯的口頭小提醒，列 3 點\n⑤ 【一句心法】關於這場致詞最該抓住的關鍵，25 字內\n\n【規則】\n1. 格式：全篇口語、可直接照念，句子不要太長、標好段落與停頓點；全程繁體中文、台灣場合用語。\n2. 嚴禁罐頭場面話——「在這個特別的日子裡」「千言萬語盡在不言中」「一路走來點滴在心頭」「感謝大家百忙之中蒞臨」「廢話不多說」這類空泛開場與套語一律不准，每一段都要有具體的人、事或畫面。\n3. 運用峰終定律與故事力：開場與結尾最用力，主體至少放一個具體的小故事（有時間、場景或一句真實對話）來代替一堆形容詞。\n4. 語氣依風格調整：溫馨真摯型動情但不肉麻、幽默炒熱型有梗但不失禮不冒犯當事人、莊重得體型穩重周到，但都要像真人在說話、不假掰。\n5. 驗證測試：把講稿小聲念出來計時——要順口不卡、在預定時間內、且聽眾聽完能記得住一個畫面或一句話；若整篇都是形容詞與套語、講完讓人記不得任何具體的事，就重寫得更有故事、更具體。`
   },
 ];
 
