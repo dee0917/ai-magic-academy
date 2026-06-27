@@ -1,5 +1,5 @@
 import {
-  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset, PiggyBank, Send, Megaphone, CalendarCheck, MessagesSquare, ClipboardCheck, ShieldAlert, HeartCrack, FileText, Salad, Calculator, Wand2, Star, Briefcase, Volume2, Brain, Bird, BadgeCheck, BedDouble, Home, DoorOpen
+  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset, PiggyBank, Send, Megaphone, CalendarCheck, MessagesSquare, ClipboardCheck, ShieldAlert, HeartCrack, FileText, Salad, Calculator, Wand2, Star, Briefcase, Volume2, Brain, Bird, BadgeCheck, BedDouble, Home, DoorOpen, ListChecks
 } from "lucide-react";
 import React from "react";
 
@@ -4422,6 +4422,82 @@ export const CURSES = [
     ],
     theory: "建立在錨定效應（Anchoring）、BATNA（最佳替代方案）與資訊不對稱之上：談薪的人最常輸在兩件事——太早把『期望數字』講出口（先亮底牌，等於讓對方把你錨定在你自己喊的低標），以及手上沒有可信的 BATNA（沒有別的選擇，就只能照單全收）。本咒語幫你把錨點設在『市場行情或你能帶來的價值』而非自己的舊薪水，並把『你有其他選擇／你帶得來的成果』包裝成可信的籌碼，讓對方重新評估『不加碼可能會失去你』。談薪的本質從來不是討價還價拉鋸，而是讓對方把你的價值錨點往上移；當對方覺得你值這個價、加了不會跑、不加可能會跑，數字自然就上來了。",
     generate: (inputs: any) => `你是一位替數百位求職者談過薪資的資深獵頭顧問，最清楚人資的核薪權限到哪、哪些籌碼真的有用、哪種開口方式會把到手的 offer 談丟。\n\n你的信條：「先把數字講死的人先輸——薪水不是你敢不敢要，是你會不會把它框成『你值這個價』。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我要談薪水，請依我的情況幫我算好數字、擬好開口的腳本與接招方式。\n- 我的職位與經歷年資：[[${inputs.role}]]\n- 我在哪個階段：[[${inputs.stage}]]\n- 行情與我打聽到的數字：[[${inputs.market}]]\n- 我手上的籌碼：[[${inputs.leverage}]]\n- 我的目標數字與底線：[[${inputs.target}]]\n\n請輸出：\n① 【該喊的數字區間】依行情與我的籌碼，給一個有底氣又不會嚇跑對方的數字區間，並附一句報這數字的理由，40 字內\n② 【開口腳本】依我的階段給一段可直接用的說法——面試版（回答期望薪資但不先亮底牌）或 offer 版（爭取加碼的 email／對話逐字稿），150 字內，口語好念\n③ 【被壓價接招】當對方說『預算就這樣／公司制度沒辦法』時，給 2 句不撕破臉又守住價碼的回應\n④ 【保留方案】若對方真的加不了底薪，可以改爭取的 3 個替代條件（簽約金、調薪時程、頭銜、遠端、特休等）\n⑤ 【一句底線提醒】簽約前一定要白紙黑字確認的事，20 字內\n\n【規則】\n1. 格式：全程繁體中文、台灣職場用語，腳本要口語、可直接照念或複製成 email，分段好讀。\n2. 嚴禁：主動先把『期望數字』講死當開場、拿辭職或別家 offer 做空威脅、情緒化喊價或哀求（如「我真的很需要這份薪水」），以及辱罵或貶低公司的字眼。\n3. 運用錨定效應與 BATNA：把錨點設在市場行情或我的價值、而非我的舊薪水；把籌碼講得可信但不威脅、不攤牌。\n4. 語氣：像一個清楚自己市場價、不卑不亢、談完還留得住關係的專業工作者——有底氣、不貪婪、不討好。\n5. 驗證測試：把腳本念給人資聽，要讓對方覺得『這人值得加、加了不會跑、不加可能會跑』才算過；若聽起來像獅子大開口、像在哀求、或像在威脅，就重寫。本內容僅供協商參考，實際薪資、職等與條件以雙方正式合約為準。`
+  },
+  {
+    id: "info_digest_forge",
+    tab: "日常雜症",
+    isPro: false,
+    tier: "adept",
+    school: "insight" as SchoolType,
+    subSchool: "defense" as SchoolType,
+    outputFormat: "一句話TL;DR + 分點重點 + 金句 + 待辦 + 轉發版",
+    icon: <ListChecks className="w-8 h-8 text-indigo-500" />,
+    color: "indigo",
+    title: "懶人包煉成：長文摘要術",
+    desc: "存了一堆文章、影片、PDF 說要看，結果越積越多，落落長的內容根本沒時間消化，想分享給朋友或寫進筆記又抓不到重點？這咒語當你的私人重點整理師，把你貼上的長文章、影片逐字稿、會議資料、新聞或產品條款，濃縮成一份秒懂懶人包——先用一句話講完全文在說什麼，再分點抓出關鍵重點、值得收藏的金句或數據，以及你看完該採取的行動，連可以直接轉發群組的精簡版都備好。不是把字數砍短就好，而是用『結論先行』的方式重新排序，讓沒看過原文的人也能在 30 秒內抓到重點，再也不用為了讀完一篇東西耗掉整個下午。",
+    tags: ["重點整理", "懶人包", "資訊過載"],
+    fields: [
+      { id: "content", label: "要摘要的內容", placeholder: "直接貼上整篇文章／影片逐字稿／報告／長訊息；太長可先貼最重要的段落" },
+      { id: "ctype", label: "這是什麼類型的內容", placeholder: "例：新聞報導 / YouTube 逐字稿 / PDF 報告 / 合約條款 / 一長串群組對話" },
+      { id: "purpose", label: "你摘要它的目的", placeholder: "例：自己做筆記 / 轉發給家人朋友 / 寫進報告 / 快速判斷要不要花時間細看" },
+      { id: "depth", label: "想要多濃縮", placeholder: "例：30 秒掃過知道大概 / 3 分鐘抓住重點 / 完整重點一個都別漏" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "摘要風格",
+      options: [
+        "極速懶人包型：砍到只剩骨架，30 秒掃完就能跟人聊上幾句，適合資訊太多、只想先知道個大概再決定要不要深入",
+        "結構筆記型：分層分點＋小標索引，像一張能直接收藏的知識卡，適合要存進筆記、複習或貼進報告",
+        "觀點提煉型：除了講內容，還幫你點出作者的立場、可能的盲點與值得思考之處，適合要寫心得或判斷內容可不可信",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '萃取重點的資深編輯' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依目的與深度調整濃縮度' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: 'TL;DR+重點+金句+待辦' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '只濃縮不腦補不加料' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '不杜撰原文沒有的內容' },
+    ],
+    theory: "建立在金字塔原理（Pyramid Principle，結論先行）與認知負荷理論（Cognitive Load Theory）之上：人腦的工作記憶一次裝不下太多資訊，落落長的內容讓人讀完什麼都沒記住，不是你不專心，是資訊沒有被『整理過』。本咒語先用一句話給出全文結論（讓你的大腦先有掛東西的鉤子），再由上而下分層展開重點，把最關鍵的放最前面（漸進式揭露 progressive disclosure），讓你依需要決定要看多深。好的摘要不是把字數砍短，而是重新排序資訊的優先級——當結論先到、細節分層，沒看過原文的人也能在最短時間內抓到全貌，這正是濃縮的本質。",
+    generate: (inputs: any) => `你是一位專門幫忙萃取重點的資深編輯，每天要把成堆的長文、報告與逐字稿濃縮成主管與讀者一眼就懂的摘要，最擅長把雜亂冗長的內容重新排序、去蕪存菁。\n\n你的信條：「摘要不是把字數砍短，是把最重要的放到最前面——讓沒看過原文的人也能秒懂。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n請把以下內容濃縮成一份秒懂懶人包。\n- 要摘要的內容：[[${inputs.content}]]\n- 內容類型：[[${inputs.ctype}]]\n- 我摘要它的目的：[[${inputs.purpose}]]\n- 想要的濃縮程度：[[${inputs.depth}]]\n\n請輸出：\n① 【一句話 TL;DR】用一句話講完整篇到底在說什麼，40 字內\n② 【關鍵重點】依重要性由高到低，分 3～7 點，每點一句話講清楚，重要的放前面\n③ 【金句／關鍵數據】從原文摘錄最值得記住的 1～3 句話或數字，必須忠於原文、不可改寫竄改；若原文沒有就略過此項\n④ 【看完該做什麼】依我的目的，給 2～3 個可採取的行動或值得延伸思考的點\n⑤ 【可轉發精簡版】100 字內、可直接複製貼 LINE／IG 群組的版本，讓朋友不用點開原文也看得懂\n\n【規則】\n1. 格式：全程繁體中文、台灣用語，分點清楚好掃讀，第⑤項要能直接複製轉發。\n2. 嚴禁：杜撰原文沒提到的內容、補進你自己的事實或數據、用「總而言之／綜上所述／在當今這個時代／隨著科技進步」這類空話套話、把摘要寫得比原文還長。\n3. 運用金字塔原理與認知負荷理論：結論先行、由重要到次要分層展開，讓人依需要決定看多深。\n4. 語氣：像一個幫你把厚厚資料畫好重點的能幹助理——精準、白話、不囉嗦。\n5. 驗證測試：把摘要遮住原文念一遍，要讓沒看過原文的人也能抓到全文重點與結論才算過；若出現原文沒有的資訊、或讀完還是不知道在講什麼，就重寫。若提供的內容不足、矛盾或無法判讀，直接說明缺什麼、不要硬掰。`
+  },
+  {
+    id: "translate_polish_forge",
+    tab: "校園生存",
+    isPro: false,
+    tier: "adept",
+    school: "insight" as SchoolType,
+    subSchool: "illusion" as SchoolType,
+    outputFormat: "道地譯文 + 在地化說明 + 替代句 + 詞彙對照",
+    icon: <Languages className="w-8 h-8 text-blue-500" />,
+    color: "blue",
+    title: "譯文煉成：翻譯潤色術",
+    desc: "報告要附英文摘要、想私訊國外賣家、留學文件要交、IG 想發雙語貼文——丟進 Google 翻譯出來卻一看就是機器翻的，生硬、不道地、語氣不對，傳出去怕貽笑大方？這咒語當你的母語級雙語譯者，把你給的任何文字翻成目標語言，而且不是逐字硬翻，是依場合（學術／商務／口語／社群）調整語氣與用字，翻得像當地人自己寫的。除了可直接複製的主譯文，還附上『為什麼這樣翻』的在地化說明、更正式或更口語的替代說法、和關鍵術語的中外對照，讓你不只拿到譯文，還知道怎麼用對。",
+    tags: ["翻譯", "潤稿", "在地化"],
+    fields: [
+      { id: "source", label: "要翻譯的原文", placeholder: "直接貼上要翻譯的文字（中翻外或外翻中都可）" },
+      { id: "pair", label: "翻譯方向", placeholder: "例：中翻英 / 英翻中 / 中翻日 / 日翻中" },
+      { id: "context", label: "用途與場景", placeholder: "例：學術報告摘要 / 商務 email / IG 貼文 / 跟客服口語對話 / 履歷自傳" },
+      { id: "tone", label: "想要的語氣與風格", placeholder: "例：正式專業 / 自然口語 / 禮貌客氣 / 活潑有行銷感" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "翻譯策略",
+      options: [
+        "道地在地化型：不逐字直譯，改用母語人士真的會用的說法與文化慣例，讀起來像當地人自己寫的，適合貼文、自我介紹、生活對話",
+        "精準對照型：忠於原意、術語精準，並附關鍵詞中外對照，適合學術摘要、合約條款、技術文件這種一個字都不能錯的場合",
+        "語氣改寫型：在翻譯的同時依場合調整正式度與口吻，讓同一句話在 email、貼文、口說各有最合適的版本，適合不確定該多正式時",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '母語級雙語譯者' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依文體場合選翻法' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '譯文+在地化說明+替代句' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '不漏譯不加譯不殘留' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '不竄改原意與數字人名' },
+    ],
+    theory: "建立在奈達（Nida）的動態對等（Dynamic Equivalence）與語用學的語域（Register）理論之上：好的翻譯從來不是逐字對應，而是讓目標語言的讀者讀完，產生和原文讀者相同的反應與感受。逐字直譯之所以一看就『很 Google 翻譯』，是因為它只對到字、沒對到語感與文化脈絡。本咒語先判斷你的使用場景與語域（學術／商務／社群／口語各有不同的正式度與慣用語），再以『目標讀者讀起來的感受』為準重新表達——該道地時道地、該精準時精準、該客氣時客氣，讓譯文擺脫翻譯腔，像母語人士親手寫的。",
+    generate: (inputs: any) => `你是一位在當地生活多年的母語級雙語譯者，同時精通學術、商務與社群不同文體的語感，最痛恨『一看就知道是機器翻的』生硬譯文，總能把任何文字翻得像當地人自己寫的。\n\n你的信條：「翻譯不是把字換成另一種語言，是讓對方讀起來的感受跟原文一模一樣。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n請把以下原文翻成目標語言，並依場合潤色到可以直接使用。\n- 要翻譯的原文：[[${inputs.source}]]\n- 翻譯方向：[[${inputs.pair}]]\n- 用途與場景：[[${inputs.context}]]\n- 想要的語氣與風格：[[${inputs.tone}]]\n\n請輸出：\n① 【主譯文】依場景與語氣翻好、可直接複製使用的版本，獨立成段\n② 【在地化說明】用繁體中文說明你為什麼這樣翻、哪裡為了道地或語氣做了調整，50 字內\n③ 【替代說法】給 1～2 個不同正式度的版本（更正式／更口語），方便我依對象挑選\n④ 【關鍵詞對照】若原文有專有名詞、術語或容易誤譯的字，列出中外對照，最多 5 組；沒有就略過\n⑤ 【一句提醒】若原文有歧義、文化雷或可能造成誤會之處，標出來提醒我，20 字內\n\n【規則】\n1. 格式：第①項主譯文整段使用指定的目標語言、可直接複製，其餘說明與對照用繁體中文分開列。\n2. 嚴禁：漏譯或自行增添原文沒有的句子、竄改數字日期人名地名、逐字硬翻出生硬的翻譯腔、在譯文裡留下沒翻完的原文殘留。\n3. 運用動態對等與語域理論：以『目標讀者讀起來的感受』為準，依場合調整正式度與慣用語，不只對字、要對到語感。\n4. 語氣：像一個在當地生活多年的雙語譯者——道地、自然，該正式時正式、該親切時親切。\n5. 驗證測試：把主譯文念給目標語言的母語者聽，要讓對方覺得『像母語人士自己寫的』、且意思與原文完全一致才算過；若讀起來生硬、有翻譯腔、或意思跑掉，就重寫。翻譯結果僅供參考，正式合約、法律或證件文件請再經專業審校。`
   },
 ];
 
