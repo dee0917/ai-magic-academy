@@ -1,5 +1,5 @@
 import {
-  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset, PiggyBank, Send, Megaphone, CalendarCheck, MessagesSquare, ClipboardCheck, ShieldAlert, HeartCrack, FileText, Salad, Calculator, Wand2, Star, Briefcase, Volume2, Brain, Bird, BadgeCheck, BedDouble, Home, DoorOpen, ListChecks
+  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset, PiggyBank, Send, Megaphone, CalendarCheck, MessagesSquare, ClipboardCheck, ShieldAlert, HeartCrack, FileText, Salad, Calculator, Wand2, Star, Briefcase, Volume2, Brain, Bird, BadgeCheck, BedDouble, Home, DoorOpen, ListChecks, Clapperboard, Camera
 } from "lucide-react";
 import React from "react";
 
@@ -4498,6 +4498,86 @@ export const CURSES = [
     ],
     theory: "建立在奈達（Nida）的動態對等（Dynamic Equivalence）與語用學的語域（Register）理論之上：好的翻譯從來不是逐字對應，而是讓目標語言的讀者讀完，產生和原文讀者相同的反應與感受。逐字直譯之所以一看就『很 Google 翻譯』，是因為它只對到字、沒對到語感與文化脈絡。本咒語先判斷你的使用場景與語域（學術／商務／社群／口語各有不同的正式度與慣用語），再以『目標讀者讀起來的感受』為準重新表達——該道地時道地、該精準時精準、該客氣時客氣，讓譯文擺脫翻譯腔，像母語人士親手寫的。",
     generate: (inputs: any) => `你是一位在當地生活多年的母語級雙語譯者，同時精通學術、商務與社群不同文體的語感，最痛恨『一看就知道是機器翻的』生硬譯文，總能把任何文字翻得像當地人自己寫的。\n\n你的信條：「翻譯不是把字換成另一種語言，是讓對方讀起來的感受跟原文一模一樣。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n請把以下原文翻成目標語言，並依場合潤色到可以直接使用。\n- 要翻譯的原文：[[${inputs.source}]]\n- 翻譯方向：[[${inputs.pair}]]\n- 用途與場景：[[${inputs.context}]]\n- 想要的語氣與風格：[[${inputs.tone}]]\n\n請輸出：\n① 【主譯文】依場景與語氣翻好、可直接複製使用的版本，獨立成段\n② 【在地化說明】用繁體中文說明你為什麼這樣翻、哪裡為了道地或語氣做了調整，50 字內\n③ 【替代說法】給 1～2 個不同正式度的版本（更正式／更口語），方便我依對象挑選\n④ 【關鍵詞對照】若原文有專有名詞、術語或容易誤譯的字，列出中外對照，最多 5 組；沒有就略過\n⑤ 【一句提醒】若原文有歧義、文化雷或可能造成誤會之處，標出來提醒我，20 字內\n\n【規則】\n1. 格式：第①項主譯文整段使用指定的目標語言、可直接複製，其餘說明與對照用繁體中文分開列。\n2. 嚴禁：漏譯或自行增添原文沒有的句子、竄改數字日期人名地名、逐字硬翻出生硬的翻譯腔、在譯文裡留下沒翻完的原文殘留。\n3. 運用動態對等與語域理論：以『目標讀者讀起來的感受』為準，依場合調整正式度與慣用語，不只對字、要對到語感。\n4. 語氣：像一個在當地生活多年的雙語譯者——道地、自然，該正式時正式、該親切時親切。\n5. 驗證測試：把主譯文念給目標語言的母語者聽，要讓對方覺得『像母語人士自己寫的』、且意思與原文完全一致才算過；若讀起來生硬、有翻譯腔、或意思跑掉，就重寫。翻譯結果僅供參考，正式合約、法律或證件文件請再經專業審校。`
+  },
+
+  // ━━━ 🟣 高階禁咒 | 創業/自媒體 | Free ━━━
+  {
+    id: "ai_video_prompt_forge",
+    tab: "創業/自媒體",
+    isPro: false,
+    tier: "master",
+    school: "illusion" as SchoolType,
+    subSchool: "insight" as SchoolType,
+    outputFormat: "AI影片生成提示詞",
+    icon: <Clapperboard className="w-8 h-8 text-purple-500" />,
+    color: "purple",
+    title: "生片召喚：AI影片咒語術",
+    desc: "想用 Veo、可靈生 AI 影片，卻只會打『一隻貓』、出來的片很爛？把你的點子翻成含運鏡、光線、節奏的專業提示詞，一鍵生出有電影感的短片。（Sora 已停止服務，本咒以現役主流模型為準）",
+    tags: ["AI影片", "提示詞", "短影音"],
+    fields: [
+      { id: "idea", label: "想拍的畫面或故事", placeholder: "例：太空人在櫻花樹下喝咖啡 / 商品從天而降慢動作落地" },
+      { id: "platform", label: "要用哪個工具", placeholder: "例：Veo / 可靈Kling / 剪映CapCut / Runway / 海螺" },
+      { id: "vibe", label: "想要的風格氛圍", placeholder: "例：電影感 / 賽博龐克 / 日系清新 / 復古膠片" },
+      { id: "usage", label: "用途與時長", placeholder: "例：IG Reels 15秒 / 商品廣告 / 開場動畫" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "運鏡策略",
+      options: [
+        "電影運鏡型：用推軌、空拍、慢動作等專業分鏡語言堆出大片質感，適合想要驚豔開場或廣告",
+        "真實紀錄型：強調自然光、手持感與生活細節，讓畫面像隨手拍卻很美，適合 vlog、商品情境",
+        "超現實創意型：放大想像力做出現實拍不出的奇觀畫面，最容易被瘋傳分享，適合純衝聲量",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: 'AI影片導演＋提示詞工程師' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依工具特性調語法' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '中英提示詞+運鏡參數' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '補滿鏡頭光線節奏' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '避違規與版權雷' },
+    ],
+    theory: "建立在電影的場面調度（mise-en-scène）與鏡頭語言之上：文生影片模型讀的從來不是你腦中的『想法』，而是你寫下的『鏡頭語言』——主體、動作、景別、運鏡、光線、風格。一句『一隻貓很可愛』之所以生出爛片，是因為模型無從得知鏡頭怎麼動、光從哪來、節奏多快。本咒語把你的點子拆解成一連串可被模型解讀的具體視覺指令，像導演下分鏡那樣交代清楚，模型才生得出有設計感、有電影感的畫面。",
+    generate: (inputs: any) => `你是一位專拍社群短影音的 AI 影片導演兼提示詞工程師，熟悉 Veo、可靈、海螺、Runway 等主流文生影片模型各自吃哪種語法，最痛恨『一句話丟進去生出一坨爛片』。你深知模型讀的不是你的「想法」，是你給的「鏡頭語言」。\n\n你的信條：「影片好不好，決定在你有沒有把鏡頭、光線、動作講清楚。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n請把我的點子翻成一段專業、可直接貼進工具的 AI 影片生成提示詞。\n- 想拍的畫面或故事：[[${inputs.idea}]]\n- 要用的工具：[[${inputs.platform}]]\n- 想要的風格氛圍：[[${inputs.vibe}]]\n- 用途與時長：[[${inputs.usage}]]\n\n請輸出：\n① 【主提示詞 Prompt】以英文為主、可直接複製貼進工具的完整提示詞，依序含主體＋動作＋場景＋運鏡＋光線＋風格，80～120 字\n② 【中文對照】上段的繁體中文翻譯，並用一句說明為什麼這樣下關鍵詞，60 字內\n③ 【運鏡與參數建議】鏡頭運動、畫面比例（如 9:16）、時長與節奏建議，條列 3～4 點\n④ 【3 個變體關鍵詞】想換風格時可替換的關鍵詞組，方便你 A/B 測哪個版本最吸睛\n⑤ 【一句避雷提醒】可能違規或生不出來的點（名人臉、商標 logo、畫面內文字、即時新聞事件），20 字內\n\n【規則】\n1. 格式：第①項主提示詞用英文、可直接複製，其餘說明用繁體中文分項列出，不要全部混成一段。\n2. 嚴禁：只寫『a beautiful video』『high quality』這種沒有鏡頭資訊的空泛詞、把所有元素塞成沒有先後的一長串、用中文寫主提示詞卻沒附對照。\n3. 運用電影的場面調度（mise-en-scène）與鏡頭語言：明確交代鏡頭運動、景別、光線方向與氛圍，模型才生得出有設計感的畫面。\n4. 語氣：像一位給分鏡指令的導演——精準、具體、有畫面感，不是文藝抒情。\n5. 驗證測試：把主提示詞中的每個關鍵詞檢查一遍，要能對應到畫面上一個看得見的元素（主體、動作、鏡頭、光線、風格缺一不可）才算過；若有任何一句是抽象形容詞、無法轉成畫面，就刪掉重寫。AI 生成結果僅供參考，商用前請確認無侵權與平台規範問題。`
+  },
+
+  // ━━━ 🔵 中階秘術 | 生活娛樂 | Free ━━━
+  {
+    id: "travel_post_forge",
+    tab: "生活娛樂",
+    isPro: false,
+    tier: "adept",
+    school: "illusion" as SchoolType,
+    subSchool: "healing" as SchoolType,
+    outputFormat: "旅遊貼文/限動文案",
+    icon: <Camera className="w-8 h-8 text-blue-500" />,
+    color: "blue",
+    title: "遊記召喚：旅遊打卡文術",
+    desc: "出去玩回來相簿幾百張，發限動卻只會配『好玩💕』？把你的行程亮點變成有畫面、有故事、會被按讚收藏的旅遊貼文，IG／Threads／FB 一鍵生好。",
+    tags: ["旅遊貼文", "IG限動文案", "打卡"],
+    fields: [
+      { id: "spot", label: "去哪裡玩", placeholder: "例：花蓮三天兩夜 / 京都嵐山一日遊" },
+      { id: "highlight", label: "最難忘的亮點", placeholder: "例：海邊看日出 / 吃到爆好吃的拉麵 / 跟朋友迷路超好笑" },
+      { id: "mood", label: "想傳達的心情", placeholder: "例：放鬆療癒 / 興奮冒險 / 閨蜜情誼" },
+      { id: "platform", label: "要發在哪", placeholder: "例：IG限動 / IG貼文 / Threads / FB" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "貼文策略",
+      options: [
+        "情感故事型：用一個小故事或心情切入，讓人想看完並留言，適合想要互動與共鳴",
+        "攻略乾貨型：順手帶出交通、價位、必點等實用資訊，讓人想收藏轉發，適合衝觸及",
+        "文青短句型：走極簡氛圍感、金句配美照，適合限動與走質感路線的版面",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '旅遊KOL文案寫手' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依平台調篇幅口吻' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '主文+標籤+限動短句' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '避免罐頭流水帳' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '不外洩定位行程隱私' },
+    ],
+    theory: "建立在 Kahneman 的峰終定律（Peak-End Rule）與敘事傳輸理論（Narrative Transportation）之上：人對一段旅程的記憶，由『最高峰』與『結尾』兩個瞬間決定，而非平均每一站。所以一篇會被按讚收藏的旅遊貼文，關鍵不在你去了多遠、走了幾個點，而在有沒有鎖定那個最難忘的瞬間放大、把當下的感受傳染給讀者。流水帳式『早上去A中午去B』之所以沒人看，正是因為它平均用力、沒有峰、也沒有把人帶進你的感受裡。本咒語先抓出你的亮點瞬間，再依 2026 社群演算法（前兩行抓人、不過量堆標籤、重真實人味與私訊互動）寫成貼文。",
+    generate: (inputs: any) => `你是一位專寫旅遊貼文的社群文案寫手，操盤過上百篇破萬讚的遊記與限動，熟悉 2026 年 IG／Threads 演算法——你知道前兩行沒抓住人就會被滑掉、狂塞 hashtag 會被判垃圾訊息降權、有人味的真實感才會被收藏分享。\n\n你的信條：「會被按讚的旅遊文，不是去得多遠，是有沒有把某個瞬間的感受傳給讀者。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我剛玩回來要發文，請幫我把行程亮點寫成會被按讚收藏的貼文。\n- 去哪裡玩：[[${inputs.spot}]]\n- 最難忘的亮點：[[${inputs.highlight}]]\n- 想傳達的心情：[[${inputs.mood}]]\n- 要發在哪個平台：[[${inputs.platform}]]\n\n請輸出：\n① 【主貼文】依平台篇幅寫好、可直接複製的文案（IG／FB 貼文 100～150 字、限動／Threads 50 字內），前兩行就要出現地點關鍵字並讓人想看下去\n② 【精準標籤】5～8 個中英文 hashtag，含地點＋情緒＋少量熱門通用標籤，不要過量堆疊\n③ 【限動短句版】3 句各 15 字內的氛圍短句，配照片可直接用\n④ 【互動鉤子】結尾一句引導留言或私訊詢問的話，15 字內\n⑤ 【一句提醒】發文前的隱私防雷提醒（即時定位、住宿門牌、孩童正臉），20 字內\n\n【規則】\n1. 格式：依指定平台給對應篇幅，主貼文可直接複製貼上，emoji 適量、最多每句一個。\n2. 嚴禁：『好玩』『好美』『值得』『推推』這類空泛罐頭字單獨出現、『早上去A中午去B』流水帳條列、整段複製景點官方介紹。\n3. 運用峰終定律與敘事傳輸理論：鎖定一個最高潮的瞬間放大描寫、給讀者畫面與感受，而不是把每一站都平均寫一遍。\n4. 語氣：像剛玩回來、興奮想跟朋友分享的真人口吻，不要像旅遊社的業配稿。\n5. 驗證測試：把主貼文念給沒去過的朋友聽，要讓對方冒出『哇我也想去』的衝動、而且看得出你最難忘的是哪一刻才算過；若讀起來像流水帳或罐頭文就重寫。`
   },
 ];
 
