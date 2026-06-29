@@ -1,5 +1,5 @@
 import {
-  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset, PiggyBank, Send, Megaphone, CalendarCheck, MessagesSquare, ClipboardCheck, ShieldAlert, HeartCrack, FileText, Salad, Calculator, Wand2, Star, Briefcase, Volume2, Brain, Bird, BadgeCheck, BedDouble, Home, DoorOpen, ListChecks, Clapperboard, Camera
+  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset, PiggyBank, Send, Megaphone, CalendarCheck, MessagesSquare, ClipboardCheck, ShieldAlert, HeartCrack, FileText, Salad, Calculator, Wand2, Star, Briefcase, Volume2, Brain, Bird, BadgeCheck, BedDouble, Home, DoorOpen, ListChecks, Clapperboard, Camera, Scale, Stamp
 } from "lucide-react";
 import React from "react";
 
@@ -4578,6 +4578,86 @@ export const CURSES = [
     ],
     theory: "建立在 Kahneman 的峰終定律（Peak-End Rule）與敘事傳輸理論（Narrative Transportation）之上：人對一段旅程的記憶，由『最高峰』與『結尾』兩個瞬間決定，而非平均每一站。所以一篇會被按讚收藏的旅遊貼文，關鍵不在你去了多遠、走了幾個點，而在有沒有鎖定那個最難忘的瞬間放大、把當下的感受傳染給讀者。流水帳式『早上去A中午去B』之所以沒人看，正是因為它平均用力、沒有峰、也沒有把人帶進你的感受裡。本咒語先抓出你的亮點瞬間，再依 2026 社群演算法（前兩行抓人、不過量堆標籤、重真實人味與私訊互動）寫成貼文。",
     generate: (inputs: any) => `你是一位專寫旅遊貼文的社群文案寫手，操盤過上百篇破萬讚的遊記與限動，熟悉 2026 年 IG／Threads 演算法——你知道前兩行沒抓住人就會被滑掉、狂塞 hashtag 會被判垃圾訊息降權、有人味的真實感才會被收藏分享。\n\n你的信條：「會被按讚的旅遊文，不是去得多遠，是有沒有把某個瞬間的感受傳給讀者。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我剛玩回來要發文，請幫我把行程亮點寫成會被按讚收藏的貼文。\n- 去哪裡玩：[[${inputs.spot}]]\n- 最難忘的亮點：[[${inputs.highlight}]]\n- 想傳達的心情：[[${inputs.mood}]]\n- 要發在哪個平台：[[${inputs.platform}]]\n\n請輸出：\n① 【主貼文】依平台篇幅寫好、可直接複製的文案（IG／FB 貼文 100～150 字、限動／Threads 50 字內），前兩行就要出現地點關鍵字並讓人想看下去\n② 【精準標籤】5～8 個中英文 hashtag，含地點＋情緒＋少量熱門通用標籤，不要過量堆疊\n③ 【限動短句版】3 句各 15 字內的氛圍短句，配照片可直接用\n④ 【互動鉤子】結尾一句引導留言或私訊詢問的話，15 字內\n⑤ 【一句提醒】發文前的隱私防雷提醒（即時定位、住宿門牌、孩童正臉），20 字內\n\n【規則】\n1. 格式：依指定平台給對應篇幅，主貼文可直接複製貼上，emoji 適量、最多每句一個。\n2. 嚴禁：『好玩』『好美』『值得』『推推』這類空泛罐頭字單獨出現、『早上去A中午去B』流水帳條列、整段複製景點官方介紹。\n3. 運用峰終定律與敘事傳輸理論：鎖定一個最高潮的瞬間放大描寫、給讀者畫面與感受，而不是把每一站都平均寫一遍。\n4. 語氣：像剛玩回來、興奮想跟朋友分享的真人口吻，不要像旅遊社的業配稿。\n5. 驗證測試：把主貼文念給沒去過的朋友聽，要讓對方冒出『哇我也想去』的衝動、而且看得出你最難忘的是哪一刻才算過；若讀起來像流水帳或罐頭文就重寫。`
+  },
+
+  // ━━━ 🟣 高階秘術 | 職場求生 | Free ━━━
+  {
+    id: "layoff_rights_forge",
+    tab: "職場求生",
+    isPro: false,
+    tier: "master",
+    school: "contract" as SchoolType,
+    subSchool: "attack" as SchoolType,
+    outputFormat: "權益試算+爭取話術+失業給付清單",
+    icon: <Scale className="w-8 h-8 text-red-500" />,
+    color: "red",
+    title: "討回權益：被資遣自保術",
+    desc: "突然被資遣、被約談『協議離職』，腦袋一片空白只想趕快簽一簽走人？多數人不知道自己依法能拿資遣費、預告工資、特休未休折現、非自願離職證明，還能再領失業給付，白白少拿好幾個月的錢。這咒語幫你算清楚雇主到底該給你多少、生成不卑不亢的爭取訊息與索取非自願離職證明的話術，再附上失業給付申請清單，讓你就算被裁，也能體面又不吃虧地離開。",
+    tags: ["資遣費", "勞工權益", "失業給付"],
+    fields: [
+      { id: "situation", label: "你是怎麼被資遣的", placeholder: "例：公司虧損要我走、被約談改成自願離職、口頭通知下週是最後一天" },
+      { id: "tenure", label: "年資與月薪（用來估資遣費）", placeholder: "例：到職3年2個月、月薪4萬2、有沒有特休沒休完" },
+      { id: "employer_offer", label: "雇主開的條件／想叫你做的", placeholder: "例：只給1個月、要我簽自願離職書、叫我馬上交接走人" },
+      { id: "goal", label: "你最在意、最想爭取的", placeholder: "例：資遣費拿好拿滿、非自願離職證明、別撕破臉還想要推薦信" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "爭取姿態",
+      options: [
+        "理性據法型：搬出勞基法條與試算數字、冷靜施壓不情緒化，適合想不撕破臉但拿好拿滿",
+        "好聚好散型：語氣和緩留情面、換取資方爽快配合，適合還想要推薦信或維持業界口碑",
+        "堅定維權型：態度明確不退讓、預告必要時申訴調解，適合資方擺爛或想凹你簽自願離職的硬仗",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '站你這邊的勞權顧問' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依資遣型態算該得權益' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '權益試算+爭取話術+申請清單' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '有幾分證據說幾分話' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '估算僅供參考爭議找專業' },
+    ],
+    theory: "建立在談判學的 BATNA（最佳替代方案）與行為經濟學『損失規避』之上：被資遣當下最大的陷阱，是資方利用你『只想趕快結束』的慌亂，把該給的權益縮水、甚至誘導你簽『自願離職』——一簽下去，資遣費與失業給付可能全部歸零。真正的自保不是吵架或求情，而是先搞清楚你的 BATNA（依法你至少該拿到什麼、不簽會怎樣），讓資方意識到『擺爛要面對勞檢調解』的損失大於『依法給足』的成本。本咒語先依你的年資與資遣型態估出你該主張的權益，再幫你把要求寫成有法源、有數字、不卑不亢的訊息；它管的是『讓你知道自己的牌、把話講到位』，不慫恿你誇大年資或捏造事實，重大爭議仍以勞工局調解與專業意見為準。",
+    generate: (inputs: any) => `你是一位專門站在勞工這一邊的勞權顧問，看過太多人被資遣時慌到只想快點簽字走人，結果少拿了好幾個月的資遣費、還被話術誘導簽下『自願離職』連失業給付都領不到。你熟悉台灣勞基法的資遣費、預告工資、特休未休折現與就業保險失業給付規則。你的信條：「被資遣不是你的錯，但少拿一毛錢都是你的損失——先搞清楚你的牌，再開口。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我被資遣了，需要搞清楚自己依法能爭取什麼，並把要求講到位。\n- 我是怎麼被資遣的：[[${inputs.situation}]]\n- 年資與月薪：[[${inputs.tenure}]]\n- 雇主開的條件／想叫我做的：[[${inputs.employer_offer}]]\n- 我最想爭取的：[[${inputs.goal}]]\n\n請輸出：\n① 【權益試算】— 依我的年資與資遣型態，條列我「至少該主張」的項目（資遣費約幾個月、預告工資天數、特休未休折現、非自願離職證明），每項一句說明法源與粗估金額，開頭標註此為估算、實際以勞動部試算工具與個案為準\n② 【爭取訊息】— 一則可直接傳給主管或 HR、不卑不亢、要求依法給足並索取非自願離職證明的訊息，120 字內\n③ 【面談守則】— 3 點當面協商時要守住的底線，以及如何回應雇主常見話術（如「公司有困難」「改成自願離職對你比較好」「先簽了再說」）\n④ 【失業給付清單】— 申請失業給付的資格、需備文件與流程重點，條列 4～6 點\n⑤ 【一句提醒】— 簽任何文件前的提醒，加上「金額大或對方違法時可向當地勞工局申請調解、或洽法律扶助」的提示\n\n【規則】\n1. 格式：訊息可直接複製貼上、符合台灣職場用語稱謂得體；試算與清單用條列、數字清楚。\n2. 嚴禁：教人捏造或灌水年資薪資、使用恐嚇字眼（如「我要讓你們上新聞」「我認識誰」「給你好看」）、給空泛口號（如「加油好好爭取」「相信自己」）；金額一律標明為估算、不掛保證。\n3. 運用 BATNA 與損失規避：先講清楚我依法的底牌與不簽的後果，讓對方意識到擺爛的損失大於配合，而非靠情緒或哀求。\n4. 語氣：冷靜、有條理、有法律份量但不挑釁，像懂法又挺你的顧問，不像來吵架的。\n5. 驗證測試：想像這則訊息被主管轉給法務看，每一句要求都要站得住腳、有法源或事實依據；若出現情緒謾罵、無法舉證的指控或誇大的數字就改寫。本內容僅供參考，具體權益與金額請以勞動部規定及專業諮詢為準。`
+  },
+
+  // ━━━ 🔵 中階秘術 | 日常雜症 | Free ━━━
+  {
+    id: "legal_notice_forge",
+    tab: "日常雜症",
+    isPro: false,
+    tier: "adept",
+    school: "contract" as SchoolType,
+    subSchool: "attack" as SchoolType,
+    outputFormat: "存證信函正文+寄送指引+後續路線",
+    icon: <Stamp className="w-8 h-8 text-amber-600" />,
+    color: "amber",
+    title: "白紙黑字：存證信函代筆術",
+    desc: "錢借出去要不回、房客欠租裝死不搬、買到瑕疵商家擺爛、被人造謠想正式警告——口頭講再多都沒用，對方就是吃定你不會動真格？存證信函是有法律送達效力的『正式催告』，但多數人不知道怎麼寫，寫得情緒化或站不住腳反而扣分。這咒語幫你把糾紛寫成一封格式正確、有理有據、口氣正式的存證信函，連要寄幾份、寄去哪、收到後下一步怎麼走都幫你備好。",
+    tags: ["存證信函", "債務催討", "法律自救"],
+    fields: [
+      { id: "dispute", label: "你遇到的糾紛（人、事、時間）", placeholder: "例：A君去年5月跟我借3萬說年底還、至今未還且已讀不回" },
+      { id: "demand", label: "你要對方做什麼＋期限", placeholder: "例：7日內清償全部欠款 / 14日內搬離並付清欠租 / 限期換貨退款" },
+      { id: "evidence", label: "你手上有的證據／憑證", placeholder: "例：LINE對話、轉帳紀錄、借據、租約、購買發票" },
+      { id: "relationship", label: "對方是誰＋你們關係", placeholder: "例：前同事、房客、網拍賣家、鄰居（影響語氣拿捏）" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "信函姿態",
+      options: [
+        "正式警告型：嚴正陳述事實、明列不履行的法律後果，先禮後兵但表明會走法律途徑",
+        "溫和催告型：語氣留情面、以解決問題為重，適合還想維持關係或對方只是一時拖延",
+        "最後通牒型：態度堅決、設明確期限與訴訟預告，適合對方擺爛已讀不回的最後一步",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '寫過上千封的法務文書手' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依糾紛類型挑該主張的點' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '存證信函正文+寄送指引' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '只陳述事實不謾罵恐嚇' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '範本僅供參考送件前核對' },
+    ],
+    theory: "存證信函的威力，不在用詞多兇，而在它把一場『口頭爭執』正式升級成『有書面與郵局紀錄的法律程序』——這背後是行為經濟學的『損失規避』在運作：當對方收到一封格式正確、有事實有法律主張的信，他評估的不再是『要不要還你個人情』，而是『不處理將面對訴訟、信用與金錢的損失』，而人對損失的痛感遠大於對等利益的渴望，因此正式催告往往比私下盧一百次更有效。一封站得住腳的存證信函有固定骨架：陳述事實→提出法律主張→限期要求→載明不履行的後果，環環相扣、句句可舉證。本咒語幫你依糾紛類型把這四段寫到位，避開情緒謾罵與無法舉證的指控（那只會反過來成為對方的把柄）；但存證信函本身無強制力、且個案差異大，重大或金額高的糾紛仍應諮詢律師或申請法律扶助。",
+    generate: (inputs: any) => `你是一位寫過上千封存證信函的資深法務文書高手，深知一封信的份量不在罵得多兇，而在事實清楚、主張有據、句句站得住腳。你熟悉台灣存證信函的格式、催告效力與常見糾紛（借貸、租賃、買賣瑕疵、妨害名譽）的法律主張。你的信條：「能被法官看的信，才嚇得動對方——情緒越少，份量越重。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我跟人有糾紛，要寄一封存證信函正式催告對方。\n- 糾紛經過（人事時）：[[${inputs.dispute}]]\n- 我的要求與期限：[[${inputs.demand}]]\n- 我手上的證據：[[${inputs.evidence}]]\n- 對方是誰與關係：[[${inputs.relationship}]]\n\n請輸出：\n① 【存證信函正文】— 一封可直接謄寫或列印的完整正文，依「茲因…（事實陳述）→ 按…（法律主張）→ 請於…期限內…（明確要求）→ 否則…（不履行之後果）」的結構，符合台灣存證信函用語、稱謂得體\n② 【事實時間軸】— 把糾紛整理成 3～5 點條列時間軸，標明日期與對應證據，方便附件佐證\n③ 【寄送指引】— 存證信函要寫幾份（正本寄對方、副本自存、一份留郵局）、去哪寄、是否附證據影本、收件人地址要怎麼確認\n④ 【後續路線】— 對方收到後可能的反應，以及你的下一步（調解、支付命令、小額訴訟）各一句重點\n⑤ 【一句提醒】— 提醒此為參考範本、金額大或複雜糾紛建議諮詢律師或洽各地免費法律扶助\n\n【規則】\n1. 格式：正文可直接謄寫使用、用語正式符合台灣存證信函慣例；其餘區塊用條列、清楚好讀。\n2. 嚴禁：人身攻擊或謾罵字眼（如「騙子」「王八蛋」「無恥」）、恐嚇用語（如「讓你好看」「找人去處理你」「走著瞧」）、捏造不存在的事實或誇大成你無法舉證的指控。\n3. 運用催告效力與損失規避：依「事實→法律主張→限期要求→不履行後果」四段環環相扣，讓對方感到不處理的損失大於配合。\n4. 語氣：正式、冷靜、有法律份量但不情緒化，像律師事務所發出的信，而非私人吵架。\n5. 驗證測試：想像這封信被法官逐句檢視，每一句都必須是事實或合理的法律主張、且我舉得出證據；只要出現情緒謾罵或無法佐證的指控就刪掉重寫。本內容僅供參考，不構成法律意見，具體請洽專業律師。`
   },
 ];
 
