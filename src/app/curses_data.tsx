@@ -1,5 +1,5 @@
 import {
-  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset, PiggyBank, Send, Megaphone, CalendarCheck, MessagesSquare, ClipboardCheck, ShieldAlert, HeartCrack, FileText, Salad, Calculator, Wand2, Star, Briefcase, Volume2, Brain, Bird, BadgeCheck, BedDouble, Home, DoorOpen, ListChecks, Clapperboard, Camera, Scale, Stamp
+  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset, PiggyBank, Send, Megaphone, CalendarCheck, MessagesSquare, ClipboardCheck, ShieldAlert, HeartCrack, FileText, Salad, Calculator, Wand2, Star, Briefcase, Volume2, Brain, Bird, BadgeCheck, BedDouble, Home, DoorOpen, ListChecks, Clapperboard, Camera, Scale, Stamp, Gamepad2, Sprout
 } from "lucide-react";
 import React from "react";
 
@@ -4738,6 +4738,86 @@ export const CURSES = [
     ],
     theory: "2026 的搜尋流量正從單一 Google 拆分到 AI Overviews、ChatGPT、Perplexity，內容要被『看見』必須同時滿足兩套邏輯：Google 的 E-E-A-T（經驗、專業、權威、可信）與生成式引擎優化 GEO（讓 AI 願意引用你）。兩者的共同地基是『搜尋意圖』——讀者打這個關鍵字到底想解決什麼。本咒語先以搜尋意圖定位讀者的真實問題，用 AIDA 鋪陳吸引到行動，再以真實經驗（E-E-A-T 的『經驗』維度，正是 AI 內容最缺的稀缺資產）與結構化的明確結論（FAQ、可被一句話複述的重點）讓 Google 排名、也讓 AI 主動引用。它解決的不是『改寫現成稿子』或『下一個標題』，而是『從零產出一篇能帶搜尋與 AI 流量的完整長文』。",
     generate: (inputs: any) => `你是一位寫過破百篇霸榜文章的資深 SEO 內容主編，熟悉 Google E-E-A-T、搜尋意圖分析，以及 2026 年最關鍵的生成式引擎優化（GEO）——讓 ChatGPT、Perplexity、Google AI Overviews 願意引用你的內容。你的信條：「能被搜尋引擎排名、又被 AI 引用的文章，才是真正帶得到流量的文章。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我要寫一篇能帶流量的部落格／官網文章。\n- 主題／目標關鍵字：[[${inputs.keyword}]]\n- 目標讀者與他想解決的事：[[${inputs.audience}]]\n- 我的獨家經驗或觀點：[[${inputs.expertise}]]\n- 想帶到的產品或行動：[[${inputs.cta}]]\n- 篇幅與風格：[[${inputs.length_tone}]]\n\n請輸出：\n① 【標題組】— 3 個含主關鍵字的標題（各 30 字內）：一個疑問式、一個帶數字式、一個結論式\n② 【文章大綱】— H2／H3 結構，每個 H2 標明它對應讀者的哪個搜尋意圖\n③ 【完整文章草稿】— 前言＋各 H2 段落＋結論，依指定篇幅撰寫；前言 3 句內點出讀者痛點並給出本文承諾；自然融入我的獨家經驗\n④ 【FAQ 區】— 3 組常見問題＋精簡答案，方便被 AI 引用與搶 Google 精選摘要\n⑤ 【Meta 描述＋一句話總結】— Meta 描述 60 字內；再給一句「若 AI 要引用本文，會怎麼複述核心結論」的總結，60 字內\n\n【規則】\n1. 格式：H2／H3 標題清楚、段落短好讀、可直接貼進 WordPress 或 Medium；主關鍵字必須出現在標題、首段與結論。\n2. 嚴禁使用：「在當今這個社會」「眾所周知」「綜上所述」「不容置疑」「隨著科技進步」這類 AI 腔空話，也嚴禁把關鍵字硬塞重複堆砌。\n3. 運用搜尋意圖×E-E-A-T×GEO：先判斷讀者想解決什麼，用真實經驗與明確結論回答，讓 Google 想排名、AI 也想引用。\n4. 語氣：依 [[${inputs.length_tone}]] 調整，專業但好讀，像一個有經驗的人在分享，不像業配也不像論文。\n5. 驗證測試：把這篇草稿想像成丟給 AI 問「這篇在講什麼、值不值得引用」——若 AI 無法用一句話複述你的核心結論，就代表重點不夠清楚要重寫；且全文不得出現任何我無法佐證的數據、統計或捏造的親身經歷。`
+  },
+
+  // ━━━ 🔵 中階咒文 | 生活娛樂 | Free ━━━
+  {
+    id: "party_game_summon",
+    tab: "生活娛樂",
+    isPro: false,
+    tier: "adept",
+    school: "illusion" as SchoolType,
+    subSchool: "healing" as SchoolType,
+    outputFormat: "聚會活動企劃 + 主持腳本",
+    icon: <Gamepad2 className="w-8 h-8 text-pink-500" />,
+    color: "pink",
+    title: "團康召喚：聚會炒場活動術",
+    desc: "當主揪、活動股、尾牙小組長，最怕一群人到齊卻乾坐著滑手機、冷場尷尬到想鑽地洞？迎新、尾牙、春酒、家庭聚會、同學會想帶點活動炒氣氛，Google 一堆團康卻不是太幼稚、就是規則落落長現場沒人想玩。這咒語依你的場合、人數、彼此熟不熟、有沒有場地道具，幫你選出 3 個對症的活動，每個都附上可以直接照著唸的規則說明和帶場主持詞，還準備好冷場時的救場備案，讓你從尬到爆變成全場最會帶氣氛的那個人。",
+    tags: ["聚會團康", "破冰炒場", "活動企劃"],
+    fields: [
+      { id: "occasion", label: "什麼場合", placeholder: "例：公司尾牙 / 社團迎新 / 家族聚餐 / 同學會" },
+      { id: "people", label: "人數與對象", placeholder: "例：15 人、同事沒很熟 / 8 個從小玩到大的朋友" },
+      { id: "setting", label: "場地與道具限制", placeholder: "例：餐廳包廂坐著不能動 / 有投影幕 / 只有手機" },
+      { id: "vibe", label: "想要的氣氛與顧慮", placeholder: "例：想炒很熱但別太over / 有長輩別太尷尬 / 30分鐘內" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "炒場策略",
+      options: [
+        "全場爆笑型：主打反差與出糗名場面，讓氣氛瞬間炸開、話題滿滿",
+        "零壓破冰型：低門檻不用才藝、坐著就能玩，讓不熟的人快速有話聊",
+        "團隊競賽型：分組對抗加計分機制，用勝負欲把所有人的參與感點起來",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '帶過百場的資深康輔' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依人數場地選對遊戲' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '3活動＋規則＋主持詞' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '不整人不踩尷尬雷' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '規則講完就能開玩' },
+    ],
+    theory: "基於破冰理論與心理安全感（Psychological Safety）：陌生團體的冷場，根源是每個人都在評估「主動了會不會出糗」的社交風險，於是集體選擇沉默。好的團康透過低門檻、人人平等出糗的設計，把出糗的社交懲罰降到最低，再用共享的笑聲快速建立群體歸屬感（in-group belonging）。同時依 Yerkes-Dodson 定律拿捏難度甜蜜點——太幼稚沒人想玩、太複雜沒人敢玩，要落在「簡單到馬上會、又有點刺激」的區間，參與感才點得起來。",
+    generate: (inputs: any) => `你是一位帶過上百場迎新、尾牙、營隊的資深康輔與活動主持人，什麼冷場你都救過。你的信條：「炒場不是靠你一個人嗨，是靠設計讓每個人都敢玩。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我要在一場聚會帶活動炒氣氛，需要對症、現場能直接用的團康企劃。\n- 場合：[[${inputs.occasion}]]\n- 人數與對象：[[${inputs.people}]]\n- 場地與道具限制：[[${inputs.setting}]]\n- 想要的氣氛與顧慮：[[${inputs.vibe}]]\n\n請輸出：\n① 【暖身選擇】— 依現場氣溫，第一個該開哪種活動、為什麼，40 字以內\n② 【三個對症活動】— 每個活動包含：活動名稱、一句「為何適合這場合」、需要的道具（對應我的限制）、玩法步驟（3-5 步、可直接照著唸就能開玩）、帶場主持詞（開場一句＋炒氣氛一句）\n③ 【計分與收尾機制】— 若有分組，怎麼計分、怎麼收尾頒獎，50 字以內\n④ 【冷場救場包】— 沒人反應或太安靜時，主持人可以立刻丟出的 2 句救場話，加 1 個備用小遊戲\n⑤ 【收尾金句】— 活動結束時暖場收心的一句話，30 字以內\n\n【規則】\n1. 格式：每個活動的玩法步驟要短、口語、可以直接照著唸出來就開始玩，不用玩家再自己想規則。\n2. 嚴禁使用整人、處罰性灌酒、拿身材長相性別開玩笑、強迫上台表演才藝的活動——這些會讓人尷尬或受傷，是炒場最大地雷。\n3. 運用破冰心理學與心理安全感：把活動設計成「低門檻、人人都可能出糗、又有點刺激」，降低怕丟臉的防衛，用共享的笑聲建立連結。\n4. 語氣：主持詞要熱情但不尷尬肉麻，像一個很會帶氣氛的朋友，繁體中文、台灣聚會用語。\n5. 驗證測試：把主持詞想像成現場照唸——如果唸出來會冷場、或讓某個人被針對，就重寫；每個活動都要讓「最邊緣、最不熟的那個人」也敢加入。`
+  },
+
+  // ━━━ 🔵 中階咒文 | 人際擋箭 | Free ━━━
+  {
+    id: "teen_talk_bridge",
+    tab: "人際擋箭",
+    isPro: false,
+    tier: "adept",
+    school: "healing" as SchoolType,
+    subSchool: "insight" as SchoolType,
+    outputFormat: "親子對話腳本 + 接話包",
+    icon: <Sprout className="w-8 h-8 text-green-600" />,
+    color: "green",
+    title: "青春煉語：青少年溝通術",
+    desc: "跟國高中的孩子講不到三句就吵起來、關門不理人、問什麼都『還好』『不知道』？想關心成績、手機、交友、晚歸，一開口就被當嘮叨，越管越遠？青春期的孩子不是變壞，是大腦正在重組、極度在意自尊與自主。這咒語依孩子的狀況、你想談的事和你們平常的相處，把你想講的話翻譯成孩子聽得進去的版本——一段不說教、不翻舊帳、留住面子的開場，加上他頂嘴、擺爛、情緒上來時你穩住不破功的接話，還有絕對不能說的地雷句，把每次對話從角力變成靠近。",
+    tags: ["親子溝通", "青春期", "教養話術"],
+    fields: [
+      { id: "kid", label: "孩子的狀況", placeholder: "例：國三、最近成績下滑又不講話 / 高一、整天手機不離手" },
+      { id: "topic", label: "你想談的事", placeholder: "例：想聊他的手機使用時間 / 關心他跟朋友的狀況 / 談讀書" },
+      { id: "relationship", label: "你們平常的相處", placeholder: "例：以前很黏最近變疏遠 / 常一講就吵 / 幾乎不太講話" },
+      { id: "goal", label: "你真正想要的結果", placeholder: "例：他願意開口聊 / 一起訂手機規則 / 讓他知道我在乎不是在管" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "溝通策略",
+      options: [
+        "先連結後引導型：先接住情緒、認同他的感受，建立安全感再談你的擔心，避免一開口就對立",
+        "共訂規則型：把『我規定你』換成『我們一起討論』，讓孩子有參與感和選擇權，規則才守得住",
+        "好奇提問型：少說教、多用開放式問題，讓孩子自己說出想法，你只當傾聽與釐清的人",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '青少年家庭諮商師' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依相處狀況選開口方式' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '開場＋對話腳本＋接話' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '不打壓自尊不情勒' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '不說教不翻舊帳' },
+    ],
+    theory: "基於青少年發展心理學與非暴力溝通（NVC）：青春期大腦的邊緣系統（情緒）比前額葉（理性煞車）發展更快，加上此階段的核心發展任務正是「建立自我認同與自主」，因此對『被控制』極度敏感，父母的說教容易被解讀成否定，直接觸發防衛與關門。有效溝通的關鍵，是先滿足孩子的自尊與自主需求，用馬歇爾·盧森堡的非暴力溝通框架（觀察→感受→需要→請求）取代批評與命令，把『你應該』換成『我看到、我擔心、我們可以怎麼做』，孩子才願意把門打開。",
+    generate: (inputs: any) => `你是一位專攻青少年與家庭的諮商心理師，陪過上千對親子從冷戰走回對話。你的信條：「青春期不是叛逆，是孩子在練習當一個獨立的人——你越想控制，門關得越緊。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我想跟青春期的孩子好好談一件事，但很怕一開口就吵起來或被句點。\n- 孩子的狀況：[[${inputs.kid}]]\n- 我想談的事：[[${inputs.topic}]]\n- 我們平常的相處：[[${inputs.relationship}]]\n- 我真正想要的結果：[[${inputs.goal}]]\n\n請輸出：\n① 【先別做的事】— 針對這個話題，多數家長會犯的錯誤開場是什麼、為什麼會炸，40 字以內\n② 【破冰開場】— 不說教、不翻舊帳的第一句話，30 字以內，讓孩子不會馬上豎起防衛\n③ 【對話腳本】— 一段 4-6 回合的示範對話（家長說什麼、孩子可能怎麼回、你再怎麼接），可直接參考照著調整\n④ 【情緒接話包】— 當孩子頂嘴、擺爛、爆哭或說「你不懂」時，穩住不破功又不退讓的 3 句接話\n⑤ 【地雷清單】— 這個話題絕對不能說的 3 句話，以及各該換成哪一句\n\n【規則】\n1. 格式：所有話術要口語、像真的會從嘴巴講出來的家常話，不要像教科書或心靈雞湯，能直接參考著對孩子說。\n2. 嚴禁使用：「我是為你好」「我像你這麼大的時候」「你就是不懂事」「再這樣就不要住我家」——這些是情緒勒索與否定自尊，一句就讓孩子關門。\n3. 運用非暴力溝通與青少年發展心理學：把『命令與批評』換成『我看到＋我擔心＋我們一起』，先接住情緒再談事情，尊重他的自主需求。\n4. 語氣：溫和、真誠、有耐心，是想靠近而不是想贏，繁體中文、台灣家庭日常口吻。\n5. 驗證測試：把開場白想像成真的說給孩子聽——如果他的反應會是翻白眼「又來了」或直接關門，就重寫；成功標準是孩子願意多說一句而不是句點你。並在結尾附一句提醒：若孩子出現持續低落、自傷或拒學等狀況，這是需要專業介入的訊號，請尋求學校輔導或身心科、心理師協助。`
   },
 ];
 
