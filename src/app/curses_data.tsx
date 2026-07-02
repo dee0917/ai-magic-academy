@@ -1,5 +1,5 @@
 import {
-  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset, PiggyBank, Send, Megaphone, CalendarCheck, MessagesSquare, ClipboardCheck, ShieldAlert, HeartCrack, FileText, Salad, Calculator, Wand2, Star, Briefcase, Volume2, Brain, Bird, BadgeCheck, BedDouble, Home, DoorOpen, ListChecks, Clapperboard, Camera, Scale, Stamp, Gamepad2, Sprout
+  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset, PiggyBank, Send, Megaphone, CalendarCheck, MessagesSquare, ClipboardCheck, ShieldAlert, HeartCrack, FileText, Salad, Calculator, Wand2, Star, Briefcase, Volume2, Brain, Bird, BadgeCheck, BedDouble, Home, DoorOpen, ListChecks, Clapperboard, Camera, Scale, Stamp, Gamepad2, Sprout, Music
 } from "lucide-react";
 import React from "react";
 
@@ -4818,6 +4818,47 @@ export const CURSES = [
     ],
     theory: "基於青少年發展心理學與非暴力溝通（NVC）：青春期大腦的邊緣系統（情緒）比前額葉（理性煞車）發展更快，加上此階段的核心發展任務正是「建立自我認同與自主」，因此對『被控制』極度敏感，父母的說教容易被解讀成否定，直接觸發防衛與關門。有效溝通的關鍵，是先滿足孩子的自尊與自主需求，用馬歇爾·盧森堡的非暴力溝通框架（觀察→感受→需要→請求）取代批評與命令，把『你應該』換成『我看到、我擔心、我們可以怎麼做』，孩子才願意把門打開。",
     generate: (inputs: any) => `你是一位專攻青少年與家庭的諮商心理師，陪過上千對親子從冷戰走回對話。你的信條：「青春期不是叛逆，是孩子在練習當一個獨立的人——你越想控制，門關得越緊。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我想跟青春期的孩子好好談一件事，但很怕一開口就吵起來或被句點。\n- 孩子的狀況：[[${inputs.kid}]]\n- 我想談的事：[[${inputs.topic}]]\n- 我們平常的相處：[[${inputs.relationship}]]\n- 我真正想要的結果：[[${inputs.goal}]]\n\n請輸出：\n① 【先別做的事】— 針對這個話題，多數家長會犯的錯誤開場是什麼、為什麼會炸，40 字以內\n② 【破冰開場】— 不說教、不翻舊帳的第一句話，30 字以內，讓孩子不會馬上豎起防衛\n③ 【對話腳本】— 一段 4-6 回合的示範對話（家長說什麼、孩子可能怎麼回、你再怎麼接），可直接參考照著調整\n④ 【情緒接話包】— 當孩子頂嘴、擺爛、爆哭或說「你不懂」時，穩住不破功又不退讓的 3 句接話\n⑤ 【地雷清單】— 這個話題絕對不能說的 3 句話，以及各該換成哪一句\n\n【規則】\n1. 格式：所有話術要口語、像真的會從嘴巴講出來的家常話，不要像教科書或心靈雞湯，能直接參考著對孩子說。\n2. 嚴禁使用：「我是為你好」「我像你這麼大的時候」「你就是不懂事」「再這樣就不要住我家」——這些是情緒勒索與否定自尊，一句就讓孩子關門。\n3. 運用非暴力溝通與青少年發展心理學：把『命令與批評』換成『我看到＋我擔心＋我們一起』，先接住情緒再談事情，尊重他的自主需求。\n4. 語氣：溫和、真誠、有耐心，是想靠近而不是想贏，繁體中文、台灣家庭日常口吻。\n5. 驗證測試：把開場白想像成真的說給孩子聽——如果他的反應會是翻白眼「又來了」或直接關門，就重寫；成功標準是孩子願意多說一句而不是句點你。並在結尾附一句提醒：若孩子出現持續低落、自傷或拒學等狀況，這是需要專業介入的訊號，請尋求學校輔導或身心科、心理師協助。`
+  },
+
+  // ━━━ 🔵 中階咒文 | 生活娛樂 | Free ━━━
+  {
+    id: "ai_song_forge",
+    tab: "生活娛樂",
+    isPro: false,
+    tier: "adept",
+    school: "illusion" as SchoolType,
+    subSchool: "healing" as SchoolType,
+    outputFormat: "原創歌詞 + Suno 風格提示詞",
+    icon: <Music className="w-8 h-8 text-purple-500" />,
+    color: "purple",
+    title: "譜曲召喚：AI歌詞生成術",
+    desc: "想用 Suno 這類 AI 做一首自己的歌，卻卡在生出來的歌詞不是文法怪、就是像口號，副歌根本記不住，風格欄位又不知道該填什麼？想幫另一半寫求婚歌、幫毛孩寫主題曲、幫品牌做一首洗腦廣告歌，卻不知道怎麼下咒？這咒語依你的主題、想傳達的情緒和曲風，一次幫你生出有記憶點的歌名、用 Suno 標準段落標記寫好的完整原創歌詞、可直接貼進風格欄位的英文提示詞，還附上每段的演唱情緒指示和一句分享文案，讓你不懂樂理也能做出想單曲循環、還能發出去被朋友問『這是哪首歌』的作品。",
+    tags: ["AI音樂", "Suno作詞", "歌曲創作"],
+    fields: [
+      { id: "theme", label: "主題／想寫的故事", placeholder: "例：暗戀三年終於告白 / 送給爸媽的感謝 / 手搖飲品牌廣告歌" },
+      { id: "emotion", label: "想傳達的情緒", placeholder: "例：甜甜的悸動 / 釋懷後的溫暖 / 熱血想衝一波" },
+      { id: "style", label: "曲風參考", placeholder: "例：抒情鋼琴慢歌 / 輕快city pop / 嘻哈饒舌 / 台語老歌" },
+      { id: "usage", label: "用途與對象", placeholder: "例：婚禮播給新娘 / IG限動分享 / 純粹自己玩 / 品牌行銷" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "曲風策略",
+      options: [
+        "情感催淚型：主打故事感與畫面細節，副歌一句戳中淚點，適合告白、婚禮、思念主題",
+        "洗腦神曲型：節奏輕快、副歌重複好記好跟唱，適合派對、品牌、想被瘋傳的場合",
+        "質感文青型：意象詩意、留白多、旋律清新不濫情，適合抒情獨立風、想要有味道",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '金曲級作詞人＋AI製作人' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依曲風情緒選寫法' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '歌詞＋Suno風格提示詞' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '副歌抓耳可直接生成' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '不抄襲不冒用歌手風格' },
+      { type: 'example' as ModuleType, label: '範例對比', preview: '陳腔濫調vs有畫面歌詞' },
+    ],
+    theory: "基於耳蟲效應（Earworm）與音樂治療的情緒 ISO 原則：一首讓人單曲循環的歌，副歌往往具備『重複、簡單、朗朗上口』三特徵，這種可預期又好模仿的旋律與字句最容易在大腦中形成不自主的音樂記憶（involuntary musical imagery），也就是黏在腦中的耳蟲。情緒鋪陳則運用音樂治療的 ISO 原則——先用貼近聽者當下心情的旋律與歌詞建立共鳴，再一步步把情緒引導到你想抵達的地方，聽者才會被真正帶著走，而不是被說教。",
+    generate: (inputs: any) => `你是一位寫過多首破億串流神曲的金曲級作詞人兼 AI 音樂製作人，熟悉 Suno、Udio 的提示詞邏輯，知道怎麼把一個念頭變成一首會被單曲循環的歌。你的信條：「好聽的旋律讓人聽一次，戳中心裡的歌詞讓人循環一整晚。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我想用 AI（Suno 之類的工具）生一首歌，需要能直接貼上去用的歌詞和風格設定。\n- 主題／想寫的故事：[[${inputs.theme}]]\n- 想傳達的情緒：[[${inputs.emotion}]]\n- 曲風參考：[[${inputs.style}]]\n- 用途與對象：[[${inputs.usage}]]\n\n請輸出：\n① 【歌名提案】— 3 個有記憶點的歌名，各 15 字以內\n② 【完整歌詞】— 用 Suno 標準結構標記段落（[Verse 1]／[Pre-Chorus]／[Chorus]／[Verse 2]／[Bridge]／[Outro]），主歌鋪陳、副歌一句就能記住並適合跟唱，副歌至少重複一次\n③ 【風格提示詞 Style Prompt】— 一組可直接貼進 Suno「Style of Music」欄位的英文風格標籤（曲風＋樂器＋人聲性別＋氛圍＋速度），30 字以內\n④ 【演唱情緒指示】— 給每個段落一句演唱／情緒提示（例：副歌要爆發、Bridge 轉輕），方便微調重生\n⑤ 【分享文案】— 一句貼 IG／Threads 介紹這首歌的文案，30 字以內，帶點好奇心讓人想點開聽\n\n【規則】\n1. 格式：歌詞務必用中括號段落標記（[Verse]／[Chorus] 等）分段，可整段直接貼進 Suno 的 Lyrics 欄位；風格提示詞用英文、逗號分隔。\n2. 嚴禁使用：真實歌手或樂團名字（如周杰倫、五月天、Taylor Swift）當風格提示，也嚴禁抄襲既有歌曲的旋律或歌詞、以及「愛情像海洋」「你是我的陽光」這類陳腔濫調的比喻——版權有風險且不原創。\n3. 運用耳蟲效應與情緒 ISO 原則：副歌用重複、簡單、朗朗上口的字句製造記憶點；情緒鋪陳先貼近聽者當下的心情、再引導到你想去的情緒。\n4. 語氣：依 [[${inputs.emotion}]] 與曲風調整，歌詞要像有畫面的口語，不要像作文或口號，繁體中文（副歌可少量英文點綴）。\n5. 驗證測試：把副歌想像成只聽一次——如果記不住、不想跟著哼，就重寫；並確認整首歌沒有使用任何真實藝人風格或可辨識的既有旋律與歌詞，全為原創。`
   },
 ];
 
