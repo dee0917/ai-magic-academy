@@ -1,5 +1,5 @@
 import {
-  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset, PiggyBank, Send, Megaphone, CalendarCheck, MessagesSquare, ClipboardCheck, ShieldAlert, HeartCrack, FileText, Salad, Calculator, Wand2, Star, Briefcase, Volume2, Brain, Bird, BadgeCheck, BedDouble, Home, DoorOpen, ListChecks, Clapperboard, Camera, Scale, Stamp, Gamepad2, Sprout, Music
+  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset, PiggyBank, Send, Megaphone, CalendarCheck, MessagesSquare, ClipboardCheck, ShieldAlert, HeartCrack, FileText, Salad, Calculator, Wand2, Star, Briefcase, Volume2, Brain, Bird, BadgeCheck, BedDouble, Home, DoorOpen, ListChecks, Clapperboard, Camera, Scale, Stamp, Gamepad2, Sprout, Music, FileSearch, Receipt
 } from "lucide-react";
 import React from "react";
 
@@ -4859,6 +4859,86 @@ export const CURSES = [
     ],
     theory: "基於耳蟲效應（Earworm）與音樂治療的情緒 ISO 原則：一首讓人單曲循環的歌，副歌往往具備『重複、簡單、朗朗上口』三特徵，這種可預期又好模仿的旋律與字句最容易在大腦中形成不自主的音樂記憶（involuntary musical imagery），也就是黏在腦中的耳蟲。情緒鋪陳則運用音樂治療的 ISO 原則——先用貼近聽者當下心情的旋律與歌詞建立共鳴，再一步步把情緒引導到你想抵達的地方，聽者才會被真正帶著走，而不是被說教。",
     generate: (inputs: any) => `你是一位寫過多首破億串流神曲的金曲級作詞人兼 AI 音樂製作人，熟悉 Suno、Udio 的提示詞邏輯，知道怎麼把一個念頭變成一首會被單曲循環的歌。你的信條：「好聽的旋律讓人聽一次，戳中心裡的歌詞讓人循環一整晚。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我想用 AI（Suno 之類的工具）生一首歌，需要能直接貼上去用的歌詞和風格設定。\n- 主題／想寫的故事：[[${inputs.theme}]]\n- 想傳達的情緒：[[${inputs.emotion}]]\n- 曲風參考：[[${inputs.style}]]\n- 用途與對象：[[${inputs.usage}]]\n\n請輸出：\n① 【歌名提案】— 3 個有記憶點的歌名，各 15 字以內\n② 【完整歌詞】— 用 Suno 標準結構標記段落（[Verse 1]／[Pre-Chorus]／[Chorus]／[Verse 2]／[Bridge]／[Outro]），主歌鋪陳、副歌一句就能記住並適合跟唱，副歌至少重複一次\n③ 【風格提示詞 Style Prompt】— 一組可直接貼進 Suno「Style of Music」欄位的英文風格標籤（曲風＋樂器＋人聲性別＋氛圍＋速度），30 字以內\n④ 【演唱情緒指示】— 給每個段落一句演唱／情緒提示（例：副歌要爆發、Bridge 轉輕），方便微調重生\n⑤ 【分享文案】— 一句貼 IG／Threads 介紹這首歌的文案，30 字以內，帶點好奇心讓人想點開聽\n\n【規則】\n1. 格式：歌詞務必用中括號段落標記（[Verse]／[Chorus] 等）分段，可整段直接貼進 Suno 的 Lyrics 欄位；風格提示詞用英文、逗號分隔。\n2. 嚴禁使用：真實歌手或樂團名字（如周杰倫、五月天、Taylor Swift）當風格提示，也嚴禁抄襲既有歌曲的旋律或歌詞、以及「愛情像海洋」「你是我的陽光」這類陳腔濫調的比喻——版權有風險且不原創。\n3. 運用耳蟲效應與情緒 ISO 原則：副歌用重複、簡單、朗朗上口的字句製造記憶點；情緒鋪陳先貼近聽者當下的心情、再引導到你想去的情緒。\n4. 語氣：依 [[${inputs.emotion}]] 與曲風調整，歌詞要像有畫面的口語，不要像作文或口號，繁體中文（副歌可少量英文點綴）。\n5. 驗證測試：把副歌想像成只聽一次——如果記不住、不想跟著哼，就重寫；並確認整首歌沒有使用任何真實藝人風格或可辨識的既有旋律與歌詞，全為原創。`
+  },
+
+  // ━━━ 🔵 中階咒文 | 日常雜症 | Free ━━━
+  {
+    id: "contract_clause_decoder",
+    tab: "日常雜症",
+    isPro: false,
+    tier: "adept",
+    school: "insight" as SchoolType,
+    subSchool: "defense" as SchoolType,
+    outputFormat: "條款白話解讀 + 紅旗清單 + 提問腳本",
+    icon: <FileSearch className="w-8 h-8 text-amber-600" />,
+    color: "amber",
+    title: "條款解密：看懂再簽術",
+    desc: "租約、工作契約、健身房會員、保單、加盟合約——一疊密密麻麻的條文看到頭暈，只想快點簽名了事，結果退租押金要不回、想解約被扒一層皮、才發現被自動續約綁死？定型化契約是對方律師早就寫好、對他最有利的版本，你看不懂不是你笨，是資訊本來就不對等。這咒語當你的把關律師，把你貼上的條款逐條翻成白話，告訴你每一條對你是好是壞，揪出那些顯失公平、藏在小字裡的陷阱（自動綁約、訂金沒收、責任全免、隱藏費用），再給你一份簽約前該問清楚、該要求白紙黑字的提問腳本，讓你看懂再簽、簽得安心，不再當被坑的那個。",
+    tags: ["契約陷阱", "簽約自保", "白話解讀"],
+    fields: [
+      { id: "contract_type", label: "什麼合約", placeholder: "例：租屋契約 / 到職的工作契約 / 健身房會員 / 加盟合約 / 保單" },
+      { id: "clauses", label: "想搞懂的條款內容", placeholder: "把看不懂或不安心的條文貼上來（可拍照打字），越完整越準" },
+      { id: "concern", label: "你最擔心的點", placeholder: "例：押金拿不拿得回 / 能不能提前解約 / 有沒有隱藏費用 / 綁約多久" },
+      { id: "situation", label: "你的處境與談判空間", placeholder: "例：房東在催快簽 / 還在跟別家比較 / 已經簽了想確認有沒有踩雷" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "解讀策略",
+      options: [
+        "陷阱獵人型：主攻對你不利與顯失公平的條款，把每個坑逐一標出來、講清楚危險在哪",
+        "白話翻譯型：主打逐條翻成人話，先讓你百分百看懂每條在說什麼，再判斷好壞",
+        "談判籌碼型：找出可以要求刪改或補上的條款，給你跟對方開口爭取的具體說法",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '資深消保與契約律師' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依合約類型抓關鍵條款' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '白話＋紅旗＋提問腳本' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '標僅供參考建議諮詢' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '只憑內容判讀不臆測' },
+    ],
+    theory: "基於資訊不對稱理論（Information Asymmetry）與《消費者保護法》定型化契約的『顯失公平』原則：定型化契約是企業為與眾多消費者締約而預先單方擬定的條款，擬約方握有資訊與談判優勢，Akerlof 的檸檬市場理論指出，當一方遠比另一方清楚商品／條款真相時，弱勢方極易被坑。法律因此規定，未經個別磋商、且對消費者顯失公平的條款無效（如責任全免、片面加重義務、訂金沒收不對等）。再輔以損失規避（Loss Aversion）——人對『事後被扣錢、押金拿不回』的痛，遠大於當下省事的爽，因此把潛在損失在簽名前就攤在陽光下，才是真正的自保。",
+    generate: (inputs: any) => `你是一位專攻消費者保護與契約審閱的資深律師，看過上千份定型化契約，最擅長站在弱勢一方的立場，把藏在小字裡、對消費者不利的條款一眼揪出來，並用一般人聽得懂的白話講清楚。你的信條：「看不懂不是你的錯，是對方本來就沒打算讓你看懂——但簽名前弄懂，勝過簽名後上法院。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我準備要簽（或已經簽了）一份合約，想在吃虧前把條款徹底搞懂。\n- 什麼合約：[[${inputs.contract_type}]]\n- 想搞懂的條款內容：[[${inputs.clauses}]]\n- 我最擔心的點：[[${inputs.concern}]]\n- 我的處境與談判空間：[[${inputs.situation}]]\n\n請輸出：\n① 【一句話總評】— 這份合約整體對我是有利、中性、還是要小心，並點出最該注意的一件事，40 字以內\n② 【逐條白話翻譯】— 把我貼上的條款逐條處理，每條給：原條款在講什麼（重點）→ 翻成白話是什麼意思 → 對我是好、是中性、還是不利（用 ✅／➖／🚩 標示）\n③ 【紅旗警示】— 集中列出對我不利或常見陷阱的條款（如自動綁約續約、訂金／押金沒收不對等、提前解約高額違約金、責任全免、費用未列明、片面變更權），每項標 🚩 並說明「為什麼危險」及「依消保法這條可能顯失公平」\n④ 【簽約前提問腳本】— 3-5 個簽名前該問對方、或該要求白紙黑字補進合約的問題，可直接複製傳訊息給房東／HR／業務\n⑤ 【下一步建議】— 這份該直接簽、該先談、還是該找誰（消保官、消基會、律師），以及可撥打的求助管道，50 字以內\n\n【規則】\n1. 格式：逐條對照排列、不利條款一律用 🚩 標出、提問腳本可直接複製貼上；只根據我實際貼上的條款內容判讀，我沒提供的部分明說「未提供無法判斷」，絕不臆測補全。\n2. 嚴禁使用：「這份合約完全沒問題，放心簽」「保證合法／一定違法」「你一定會贏」這類把話講死的斷言，也嚴禁虛構我沒貼上的條款或杜撰法條編號。\n3. 運用資訊不對稱與定型化契約顯失公平原則＋損失規避：一律站在我（消費者／受僱者／承租人）這個弱勢方的視角，優先揪出對方預先擬好、對我不利的條款，把潛在損失在簽名前講明白。\n4. 語氣：像一個幫你把關的律師朋友，冷靜、白話、不危言聳聽也不打包票，讓我有能力自己做決定。\n5. 驗證測試：每個標紅旗的條款都要能回答「這條為什麼對我不利、我可以怎麼辦」，答不出來就拿掉；並在結尾必附一句提醒：「本解讀僅供參考、不構成正式法律意見，金額龐大或影響重大的合約，簽署前請諮詢律師或撥打 1950 消費者服務專線、向各縣市消保官諮詢。」`
+  },
+
+  // ━━━ 🔵 中階咒文 | 生活娛樂 | Free ━━━
+  {
+    id: "bill_split_forge",
+    tab: "生活娛樂",
+    isPro: false,
+    tier: "adept",
+    school: "healing" as SchoolType,
+    subSchool: "contract" as SchoolType,
+    outputFormat: "分帳結算表 + 誰付誰 + 催款訊息",
+    icon: <Receipt className="w-8 h-8 text-emerald-600" />,
+    color: "emerald",
+    title: "分帳召喚：聚餐旅遊AA術",
+    desc: "揪了一趟三天兩夜的旅行、當了那個先刷卡付訂金訂房的冤大頭，回來面對一長串花費——住宿誰付的、幾餐誰請的、有人只來一天、有人沒喝酒不想分酒錢，算到頭痛還怕算錯得罪人？帳算好了更尷尬的是開口收錢，一句『欸你還沒付喔』傳出去像討債，乾脆自己吞掉？分帳App只幫你算數字，不會幫你把話講得漂亮。這咒語幫你把每筆帳算到底、誰該付多少一目了然，用最少的轉帳次數把帳結清，再生出一段可以直接貼進LINE群的結算公告，和給還沒付的人不傷感情的私訊範本，讓你算得公平、收得體面，當一個大家都想跟你出去玩的主揪。",
+    tags: ["分帳結算", "AA制", "催款話術"],
+    fields: [
+      { id: "event", label: "什麼場合的帳", placeholder: "例：三天兩夜墾丁團 / 12 人火鍋聚餐 / 室友這個月水電網路" },
+      { id: "expenses", label: "有哪些花費、誰先付的", placeholder: "例：住宿我付 7200、晚餐阿明付 3600、我加購零食 500、租車小美付 2400" },
+      { id: "people_rule", label: "幾個人、怎麼分", placeholder: "例：5 人均分 / 有人只待一天算半價 / 沒喝酒的不分酒錢 / 小孩算半份" },
+      { id: "tone", label: "你跟大家的關係與收款顧慮", placeholder: "例：都很熟可以直接講 / 有長輩或主管不好意思開口 / 想收錢又怕被覺得計較" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "分帳策略",
+      options: [
+        "精算均分型：把每筆帳算到底、誰欠誰一目了然，並用最少的轉帳次數幫大家結清",
+        "圓融收款型：主打把『催你還錢』包裝得輕鬆不尷尬，讓你開口收錢也不傷感情",
+        "彈性分攤型：專門處理有人只參加一部分、消費不同的複雜情況，分得公平到沒人有話說",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '精算又高EQ的分帳管家' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依參與程度算該付多少' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '結算表＋誰付誰＋訊息' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '最少轉帳次數結清' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '不算錯不讓人吃虧' },
+    ],
+    theory: "基於公平理論（Equity Theory, Adams）與 Dan Ariely 的『社會規範 vs 市場規範』衝突：分帳之所以尷尬，是因為朋友聚會運行的是『社會規範』（人情、互相、不計較），而談錢、催款會把關係硬拉進『市場規範』（一分一毫算清楚），兩套規範一撞就令人不適。公平理論則指出，人不只在意自己付多少，更在意『付出與獲得的比例』跟別人是否對等——有人只玩半程卻付全額會不平、有人先墊大筆錢沒人還會委屈。因此好的分帳要同時做到兩件事：計算上讓每個人的分攤比例公平合理，話術上把『市場規範的催款』重新包裝回『社會規範的體貼』，讓開口收錢不再像討債。",
+    generate: (inputs: any) => `你是一位既會精算、EQ 又高的分帳管家，幫無數團體旅行與聚餐擺平過帳務，最擅長把一團亂的花費算得清清楚楚，還能把『收錢』這件尷尬事講得讓人心甘情願又不傷感情。你的信條：「帳要算到公平，話要說到體面——會算錢的人很多，讓人開心付錢的人才是高手。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我要幫一群人把一筆共同花費分帳並收錢，需要算得清楚、又能體面地把錢收回來。\n- 什麼場合的帳：[[${inputs.event}]]\n- 有哪些花費、誰先付的：[[${inputs.expenses}]]\n- 幾個人、怎麼分：[[${inputs.people_rule}]]\n- 我跟大家的關係與收款顧慮：[[${inputs.tone}]]\n\n請輸出：\n① 【每人該付總表】— 逐人列出：這趟總共該分攤多少、已經先墊付多少、最後要『再付』還是『可退』多少，數字清楚可核對\n② 【最少轉帳方案】— 算出誰該轉給誰、各多少，用最少的轉帳次數把帳結清（而不是每個人都轉給每個人），並附一句總花費加總對帳\n③ 【一鍵貼群組公告】— 一段可直接貼進 LINE 群的結算公告：簡述怎麼分的＋每人金額＋匯款資訊（帳號用「[你的帳號]」佔位），語氣輕鬆不像討債\n④ 【個別催款私訊】— 給還沒付的人的私訊範本 2 版（輕鬆版／正式版），開口自然不尷尬\n⑤ 【疑難排解】— 針對可能的爭議（有人覺得算多了、有人只參加半程、有人遲遲不付）各給一句怎麼回應化解，50 字以內\n\n【規則】\n1. 格式：金額一律條列、總表清楚可逐項核對；催款與公告訊息要口語、可直接複製貼上 LINE；匯款帳號用「[你的帳號]」佔位不要亂編。\n2. 嚴禁使用：「你欠我錢」「快還」「到底要不要付」這類命令討債的口氣；也嚴禁把數字算錯或多收——若某筆分法我沒交代清楚，寧可標「請幫我確認這筆怎麼分」也不硬算。\n3. 運用公平理論與社會規範／市場規範橋接：讓每個人的分攤比例看起來公平合理（只玩半程的付少、先墊錢的先拿回），並把『談錢催款』重新包裝成朋友間的體貼，降低開口的尷尬。\n4. 語氣：像一個細心又貼心的朋友在幫大家統整，清楚、輕鬆、不斤斤計較的感覺，繁體中文、台灣聚會日常口語。\n5. 驗證測試：把總表每人金額加總，必須等於總花費、對得起來才算過關，對不上就重算；並把催款私訊想像成真的傳給對方本人——如果他讀了會不爽或覺得被討債，就改得更委婉再輸出。`
   },
 ];
 
