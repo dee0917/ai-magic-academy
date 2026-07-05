@@ -1,5 +1,5 @@
 import {
-  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset, PiggyBank, Send, Megaphone, CalendarCheck, MessagesSquare, ClipboardCheck, ShieldAlert, HeartCrack, FileText, Salad, Calculator, Wand2, Star, Briefcase, Volume2, Brain, Bird, BadgeCheck, BedDouble, Home, DoorOpen, ListChecks, Clapperboard, Camera, Scale, Stamp, Gamepad2, Sprout, Music, FileSearch, Receipt
+  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset, PiggyBank, Send, Megaphone, CalendarCheck, MessagesSquare, ClipboardCheck, ShieldAlert, HeartCrack, FileText, Salad, Calculator, Wand2, Star, Briefcase, Volume2, Brain, Bird, BadgeCheck, BedDouble, Home, DoorOpen, ListChecks, Clapperboard, Camera, Scale, Stamp, Gamepad2, Sprout, Music, FileSearch, Receipt, MailPlus, MailCheck
 } from "lucide-react";
 import React from "react";
 
@@ -5019,6 +5019,86 @@ export const CURSES = [
     ],
     theory: "基於三個定價心理學機制。一是錨定效應（Anchoring, Kahneman & Tversky）——客戶對『合理價格』沒有絕對標準，你先丟出的數字會成為他判斷貴或便宜的錨點，所以第一個報價要合理偏高、由你來定錨，而不是被客戶的『預算有限』先錨死。二是折衷效應與誘餌效應（Compromise / Decoy Effect）——面對基本／標準／進階三個選項，多數人會避開最便宜（怕太陽春）與最貴（怕被當盤子），自動選中間，因此把你真正想成交的方案設計成『中間那個』，成交價自然被往上拉。三是範圍界定對抗需求潛變（Scope Creep）——接案最大的隱形虧損不是開價低，而是『範圍沒講清楚』導致無止境的免費追加與改稿；事先把包含什麼、改幾次、追加怎麼算白紙黑字寫明，才是真正的護城河。",
     generate: (inputs: any) => `你是一位接案資歷十年的報價教練，橫跨設計、影音、教學、攝影等接案領域，最擅長幫剛起步、不敢開價的自由工作者把價格講出口、把範圍框清楚，讓他們既接得到案、又不被凹到做白工。你的信條：「你賺的不是辛苦錢，是專業的價值——不敢開價，是在替不尊重你的客戶打折。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我要向客戶報價一個接案的案子，想開得有底氣、範圍框得清楚，又不把客戶嚇跑。\n- 我提供什麼服務：[[${inputs.service}]]\n- 這次案子的內容與規模：[[${inputs.scope}]]\n- 我的成本、時間與行情概念：[[${inputs.cost_time}]]\n- 客戶狀況與我最怕的事：[[${inputs.client_worry}]]\n\n請輸出：\n① 【行情定位】— 這類服務的合理價格區間，以及依我的成本與規模，這案該落在哪、為什麼，80 字以內，讓我知道自己是開高、開低還是剛好\n② 【三方案報價表】— 基本／標準／進階三個方案，各列『包含什麼、價格、適合誰』；用中間方案定錨，設計成我最想成交的那一個\n③ 【一鍵報價訊息】— 一段可直接傳給客戶（LINE／IG／email）的專業報價訊息，含服務範圍、修改次數、交期、付款方式與訂金安排，語氣自信不高傲\n④ 【守價回應包】— 針對『被殺價／被要求追加／熟人情商砍價』三種情況，各給一句怎麼回，守住價格又不傷關係\n⑤ 【範圍護欄】— 3 條事先講清楚就能避免做白工的界線（例：超出範圍的追加算加購、改稿超過 N 次另計、依節點收款），每條一句話\n\n【規則】\n1. 格式：報價訊息要口語又專業、可直接複製傳 LINE／IG／email；金額一律用新台幣、條列清楚可核對。\n2. 嚴禁使用：「都可以」「你開就好」「隨便啦」「算你便宜沒關係」「先做再說」——這些話會讓你被凹、被賤賣、範圍失控。\n3. 運用錨定效應與方案分級（折衷效應）：先給一個合理偏高的錨點，用基本／標準／進階三選項引導客戶選中間或往上加，並以明確的範圍界定防止需求潛變。\n4. 語氣：像一個尊重自己專業、對價格有底氣卻不高傲的接案者，自信、清楚、對事不對人，不求人也不擺架子。\n5. 驗證測試：報價訊息傳出去，客戶的反應應該是「很專業、清楚知道花多少錢買到什麼」，而不是「太貴」或「這人好凹」；若服務範圍與改稿次數沒寫清楚就補上再輸出。並在結尾附一句提醒：「以上報價為建議區間，實際行情因地區、經驗與市場而異；金額較大或長期合作，建議簽署書面接案合約保障雙方。」`
+  },
+
+  // ━━━ 🟣 高階咒文 | 創業/自媒體 | Free ━━━
+  {
+    id: "cold_outreach_forge",
+    tab: "創業/自媒體",
+    isPro: false,
+    tier: "master",
+    school: "contract" as SchoolType,
+    subSchool: "attack" as SchoolType,
+    outputFormat: "開發訊息 + 破冰主旨 + 跟進三連",
+    icon: <MailPlus className="w-8 h-8 text-sky-500" />,
+    color: "sky",
+    title: "叩門煉金：陌生開發術",
+    desc: "想接案、拉客戶、談合作、找廠商，卻卡在最難的第一步——主動寄一封信給不認識的人。你鼓起勇氣打了一長串『您好，我們是⋯我們公司成立於⋯』，附上落落長的自我介紹和作品集，按下送出後石沉大海、已讀不回，久了連寄的勇氣都沒了。問題不是你不夠好，是陌生開發信的邏輯剛好相反：對方一天收幾十封推銷，憑什麼理你？關鍵不在介紹你自己，而在三秒內讓他覺得『這跟我有關、值得回一下』。這咒語當你成交上億的 BD 開發顧問，先幫你側寫這個對象現在最在意什麼、該從哪切入，再用 AIDA 與互惠原則，生出一封以對方為主語、開頭就戳中他痛點與利益、只留一個明確行動的開發訊息（email／IG／LINE 都能用），附上能提高開信率的破冰主旨、被已讀不回時第 3／7／14 天不惹人厭的跟進三連，還幫你避開會讓信直接進垃圾桶的地雷句，讓你的陌生開發從石沉大海變成談成合作的起點。",
+    tags: ["陌生開發", "開發信", "接案業務"],
+    fields: [
+      { id: "offer", label: "你是誰、提供什麼服務或產品", placeholder: "例：接品牌 IG 短影音代操 / 賣手工皂想進實體店寄賣 / 想找 YouTuber 業配我的 App / 軟體外包工作室" },
+      { id: "target", label: "想開發的對象是誰、為何鎖定他", placeholder: "例：某餐飲品牌行銷窗口，他們最近在衝短影音但成效差 / 這家選物店客群跟我的商品很合 / 頻道 3 萬訂閱、內容調性跟我產品很搭" },
+      { id: "hook", label: "你能幫對方解決的痛點＋佐證", placeholder: "例：曾幫類似品牌 3 個月漲 2 萬粉 / 我的皂在市集回購率高、有客人見證 / 可先免費提供一支樣片試水溫 / 有現成數據案例" },
+      { id: "channel_cta", label: "用什麼管道、想要對方做的下一步＋你的顧慮", placeholder: "例：email，想約 15 分鐘線上聊 / IG 私訊，想寄一份合作提案 / 怕被當推銷秒刪 / 沒沒無聞怕對方不理" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "開發策略",
+      options: [
+        "痛點切入型：開頭就精準戳中對方正在煩的問題，讓他覺得你懂他這行、不是亂槍打鳥的群發推銷",
+        "成果佐證型：用具體案例、數據或客戶見證快速建立可信度，讓一個素未謀面的人願意賭一次回你",
+        "輕鉤軟球型：不急著成交，先拋一個低承諾的小請求（15 分鐘通話、一份免費樣本或試做），把門先打開再說",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '成交上億的 BD 開發顧問' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依對象決策權調整切入' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '主旨＋開發信＋跟進三連' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '講對方利益不自吹自擂' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '禁誇大不實與疲勞轟炸' },
+    ],
+    theory: "建立在三個說服框架上。一是 AIDA 模型（Attention→Interest→Desire→Action）——陌生開發信的黃金順序是：先用一句與對方有關的話勾住注意，再點出他的痛點與你能帶來的利益引發興趣，接著用具體佐證把興趣變成渴望，最後收在一個明確、低阻力的行動呼籲（CTA），而不是把時間浪費在冗長自我介紹上。二是 Cialdini 的互惠原則（Reciprocity）——先給對方價值（一個洞察、一份免費資源、一次無償試做），對方會更傾向回報你一次回覆，主動付出比開口索取更容易打開對話。三是『以對方為主語』的自我涉入效應——人最關心的永遠是自己，全信講的應該是『你能幫對方得到什麼』而非『我想賣什麼』，把主詞從『我／我們公司』換成『你／貴品牌』，開信率與回覆率會截然不同。本咒語把這三者翻成一封可直接寄出的開發訊息，讓陌生開發不再是碰運氣的群發，而是有邏輯、能被回覆的破冰。",
+    generate: (inputs: any) => `你是一位替新創與接案者成交上億訂單的 BD（商業開發）顧問，寄過上萬封陌生開發信，最懂為什麼多數開發信會被秒刪，也最擅長把一封『推銷信』改寫成對方讀了會想回的『破冰信』。你的信條：「陌生開發不是自我介紹大賽——你介紹自己講一百句，都不如點中對方一個痛點來得有力。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我要主動寄一封開發訊息給一個不認識的對象，想打開對話、談成合作，又不被當成推銷秒刪。\n- 我是誰、提供什麼：[[${inputs.offer}]]\n- 想開發的對象與鎖定原因：[[${inputs.target}]]\n- 我能幫對方解決的痛點＋佐證：[[${inputs.hook}]]\n- 管道、想要的下一步與我的顧慮：[[${inputs.channel_cta}]]\n\n請輸出：\n① 【對象側寫】— 用 30 字內判斷這個對象現在最可能在意什麼、我該從哪個角度切入最容易被回\n② 【破冰主旨】— 3 個能提高開信率的 email 主旨或 IG／LINE 私訊開頭第一句，各 20 字內，具體、與對方有關、不像罐頭推銷\n③ 【一鍵開發訊息】— 一則可直接寄出的開發訊息，120-180 字，依 AIDA（勾住注意→點出對方痛點與利益→用佐證建立可信→明確 CTA）；開頭講對方、不用自我介紹起手\n④ 【跟進三連】— 對方已讀不回時，第 3、7、14 天各一則不惹人厭的跟進訊息，每則 40 字內，每則都補一個新價值或新角度，不只是『請問有看到嗎』\n⑤ 【地雷清單】— 3 句會讓開發信直接進垃圾桶的話，每句附一句為什麼會壞事\n\n【規則】\n1. 格式：可直接複製寄 email／LINE／IG DM，繁體中文、台灣商務口語，主旨與正文分開；CTA 只留一個、明確好回應（一個時間、一句話或一個是非題）。\n2. 嚴禁使用：「您好，我們是⋯（以自我介紹開頭）」「叨擾了」「不好意思打擾您」「敝公司成立於⋯」「這是一封群發信」——這些開頭與冗長自介會讓對方在三秒內秒刪。\n3. 運用 AIDA 與互惠原則（Cialdini）：以對方為主語、先給價值（洞察／免費資源／具體幫助）再提請求，全信講的是「你能幫對方得到什麼」，而不是「我想賣什麼」。\n4. 語氣：像一個有料、尊重對方時間的專業夥伴，簡潔、自信、利他，不諂媚也不高壓推銷。\n5. 驗證測試：想像對方 3 秒內掃完的反應應該是「這跟我有關、值得回一下」，而不是「又一封推銷、已讀刪」；若開頭在講自己、或 CTA 超過一個，就重寫。並在結尾附一句提醒：「陌生開發請尊重對方意願與個資規範，被明確拒絕或要求停止就不再打擾；切勿短時間對大量對象群發同一封內容，以免觸法或損害信譽。」`
+  },
+
+  // ━━━ 🔵 中階咒文 | 職場求生 | Free ━━━
+  {
+    id: "interview_thankyou_forge",
+    tab: "職場求生",
+    isPro: false,
+    tier: "adept",
+    school: "insight" as SchoolType,
+    subSchool: "illusion" as SchoolType,
+    outputFormat: "感謝信 + 客製主旨 + 寄送時機",
+    icon: <MailCheck className="w-8 h-8 text-rose-500" />,
+    color: "rose",
+    title: "臨門一謝：面試感謝信術",
+    desc: "面試結束走出公司，多數人就回家滑手機等結果——但你不知道，人資可能同時面了五個條件差不多的人，最後拍板往往只在一線之間。這時一封 24 小時內寄到、寫得誠懇又到位的感謝信，就是你能主動製造的臨門一腳：它能重申你最契合的那個點、把面試時緊張講壞或忘了提的關鍵補回來，也讓你在人資做決定的那一刻剛好浮現在他腦海。問題是，多數人不是不寫，是不會寫——套一段網路罐頭模板、或寫成『請問我上了嗎』的催命信，反而扣分。這咒語當你外商獵頭出身的求職教練，依你面的職位、面試聊到的重點與你的顧慮，幫你生出一封簡短真誠、重申契合度、不卑不亢的面試感謝信（含讓人資願意點開的客製主旨），再告訴你何時寄、多位面試官怎麼寄、用 email 還是人力銀行訊息，並幫你避開催逼、卑微、套版這三個最常見的扣分地雷，讓你在面試結束後還能再補一刀好印象。",
+    tags: ["面試感謝信", "求職加分", "follow-up"],
+    fields: [
+      { id: "interview_info", label: "面的職位、公司與何時面的", placeholder: "例：行銷企劃、某電商，今天下午剛面完 / 應屆生應徵工程師、昨天視訊面試 / 護理師、上午面完現場" },
+      { id: "highlight", label: "面試中聊到、印象深刻或想再強調的點", placeholder: "例：主管提到他們正要建新團隊 / 我剛好有他們缺的技能 / 有個題目答得不好想補救 / 很認同他們的產品理念" },
+      { id: "situation", label: "面試官是誰、整體感覺如何", placeholder: "例：一位用人主管＋一位人資，聊得很順 / 三位主管一起面、氣氛嚴肅 / 只有 HR，感覺還算有戲" },
+      { id: "goal_worry", label: "你想達成什麼＋顧慮", placeholder: "例：想加深好印象、拉高錄取率 / 想補救沒答好的題目 / 想禮貌問後續時程但怕太急 / 很想要這份工作但怕顯得卑微" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "感謝信策略",
+      options: [
+        "誠懇加分型：24 小時內寄出、簡短真誠，重申一個最契合的點，讓面試的好印象再補一刀",
+        "亮點補救型：把面試時緊張講壞、或當下忘了提的關鍵，自然地補進感謝信裡替自己扳回一城",
+        "進度探詢型：禮貌詢問後續時程與結果，表達高度意願又不顯得緊迫逼人、不讓人資有壓力",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '外商獵頭出身的求職教練' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依面試官層級調整寄法' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '主旨＋感謝信＋寄送指南' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '禁複製貼上罐頭模板' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '不催逼進度不過度客套' },
+    ],
+    theory: "建立在兩個記憶心理學機制上。一是 Kahneman 的峰終定律（Peak-End Rule）——人對一段經歷的整體評價，主要取決於過程中的『高峰』與『結尾』，而非全部細節的平均。面試官對你的印象也是如此，而『結尾』正是你面試後唯一還能主動出手優化的環節：一封及時、誠懇、聚焦你最契合特質的感謝信，等於替整場面試補上一個正向的收尾，直接拉高整體評價。二是近因效應（Recency Effect）——在一連串候選人中，最後接觸到的訊息最容易被記住；當人資坐下來拍板、腦中候選人一字排開時，那個剛寄來一封得體感謝信的你，會比默默回家等結果的人更容易被想起。本咒語把這兩個效應翻成一封可直接寄出的感謝信：不是討拍、不是催進度，而是精準地在對的時間、用一個記憶點，讓你在決策的最後一哩路保持在人資心裡。",
+    generate: (inputs: any) => `你是一位外商獵頭出身的求職教練，經手過上千場面試的前後端，最清楚人資在面完到拍板之間的心理，也最擅長把一封平凡的『謝謝面試』改寫成能實質拉高錄取率的臨門一腳。你的信條：「面試結束不是終點——多數人回家等結果，而你還能用一封信，在他做決定前再被記住一次。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我面試完想寄一封感謝信，希望加深好印象、拉高錄取率，又不顯得卑微或在催結果。\n- 面的職位、公司與何時面的：[[${inputs.interview_info}]]\n- 面試中想強調或想補救的點：[[${inputs.highlight}]]\n- 面試官是誰、整體感覺：[[${inputs.situation}]]\n- 我想達成什麼＋顧慮：[[${inputs.goal_worry}]]\n\n請輸出：\n① 【定調提醒】— 一句話幫我抓對感謝信的心態（是加分不是討拍、簡短勝過長篇），25 字內\n② 【客製主旨】— 2 個讓人資願意點開的 email 主旨，各 20 字內，帶職位與姓名、不空泛\n③ 【一鍵感謝信】— 一封可直接寄出的感謝信，120-180 字，依序：謝面試機會 → 重申一個最契合的點或自然補上沒講好的關鍵 → 再次表達高度意願 → 禮貌收尾\n④ 【寄送指南】— 何時寄（面試後幾小時內）、多位面試官怎麼寄（主寄誰、副本給誰）、用 email 還是 104／人力銀行訊息，60 字內\n⑤ 【NG 清單】— 3 個會扣分的地雷（催逼結果、罐頭模板、過度卑微或浮誇），每個附一句為什麼會壞事\n\n【規則】\n1. 格式：可直接複製寄出，繁體中文、台灣求職語境，主旨與內文分開；簡短為上（正文 120-180 字），一封信只講重點、不長篇大論。\n2. 嚴禁使用：「請問我上了嗎」「什麼時候能給我答覆」「拜託給我這個機會」「貴公司是我唯一的選擇」——催逼、卑微或空泛套版都會扣分。\n3. 運用峰終定律與近因效應：把感謝信當成你能主動製造的『最後好印象』，結尾正向、聚焦一個最契合的記憶點，讓人資在拍板時剛好想起你。\n4. 語氣：誠懇、專業、不卑不亢，像真心想加入、也尊重對方決定的求職者，不緊迫盯人也不過度討好。\n5. 驗證測試：人資讀完的反應應該是「這人有心又好共事，加分」，而不是「怎麼在催我」或「一看就是複製貼上的罐頭」；若讀起來像逼問進度或空泛套版就重寫。並在結尾附一句提醒：「內容務必依你真實的面試經過與感受客製，切勿捏造細節或誇大；一封就好，勿反覆追寄造成反效果。」`
   },
 ];
 
