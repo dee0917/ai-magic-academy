@@ -1,5 +1,5 @@
 import {
-  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset, PiggyBank, Send, Megaphone, CalendarCheck, MessagesSquare, ClipboardCheck, ShieldAlert, HeartCrack, FileText, Salad, Calculator, Wand2, Star, Briefcase, Volume2, Brain, Bird, BadgeCheck, BedDouble, Home, DoorOpen, ListChecks, Clapperboard, Camera, Scale, Stamp, Gamepad2, Sprout, Music, FileSearch, Receipt, MailPlus, MailCheck
+  Clock, Swords, Skull, Coins, Shield, Heart, Eye, Target, Sparkles, Lock, BookOpen, Users, Film, Compass, LogOut, Magnet, Video, PenTool, RefreshCcw, Map, Utensils, Tag, Gift, Shirt, PawPrint, Presentation, Dumbbell, GraduationCap, ScrollText, PartyPopper, ShoppingBag, Highlighter, Stethoscope, Mail, CalendarDays, Popcorn, Baby, Handshake, KeyRound, Award, HeartHandshake, TrendingUp, NotebookPen, Palette, Mic, PhoneCall, Youtube, Activity, Luggage, Languages, Lightbulb, MessageCircle, ClipboardList, Headset, PiggyBank, Send, Megaphone, CalendarCheck, MessagesSquare, ClipboardCheck, ShieldAlert, HeartCrack, FileText, Salad, Calculator, Wand2, Star, Briefcase, Volume2, Brain, Bird, BadgeCheck, BedDouble, Home, DoorOpen, ListChecks, Clapperboard, Camera, Scale, Stamp, Gamepad2, Sprout, Music, FileSearch, Receipt, MailPlus, MailCheck, Rocket, Radio
 } from "lucide-react";
 import React from "react";
 
@@ -5099,6 +5099,86 @@ export const CURSES = [
     ],
     theory: "建立在兩個記憶心理學機制上。一是 Kahneman 的峰終定律（Peak-End Rule）——人對一段經歷的整體評價，主要取決於過程中的『高峰』與『結尾』，而非全部細節的平均。面試官對你的印象也是如此，而『結尾』正是你面試後唯一還能主動出手優化的環節：一封及時、誠懇、聚焦你最契合特質的感謝信，等於替整場面試補上一個正向的收尾，直接拉高整體評價。二是近因效應（Recency Effect）——在一連串候選人中，最後接觸到的訊息最容易被記住；當人資坐下來拍板、腦中候選人一字排開時，那個剛寄來一封得體感謝信的你，會比默默回家等結果的人更容易被想起。本咒語把這兩個效應翻成一封可直接寄出的感謝信：不是討拍、不是催進度，而是精準地在對的時間、用一個記憶點，讓你在決策的最後一哩路保持在人資心裡。",
     generate: (inputs: any) => `你是一位外商獵頭出身的求職教練，經手過上千場面試的前後端，最清楚人資在面完到拍板之間的心理，也最擅長把一封平凡的『謝謝面試』改寫成能實質拉高錄取率的臨門一腳。你的信條：「面試結束不是終點——多數人回家等結果，而你還能用一封信，在他做決定前再被記住一次。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我面試完想寄一封感謝信，希望加深好印象、拉高錄取率，又不顯得卑微或在催結果。\n- 面的職位、公司與何時面的：[[${inputs.interview_info}]]\n- 面試中想強調或想補救的點：[[${inputs.highlight}]]\n- 面試官是誰、整體感覺：[[${inputs.situation}]]\n- 我想達成什麼＋顧慮：[[${inputs.goal_worry}]]\n\n請輸出：\n① 【定調提醒】— 一句話幫我抓對感謝信的心態（是加分不是討拍、簡短勝過長篇），25 字內\n② 【客製主旨】— 2 個讓人資願意點開的 email 主旨，各 20 字內，帶職位與姓名、不空泛\n③ 【一鍵感謝信】— 一封可直接寄出的感謝信，120-180 字，依序：謝面試機會 → 重申一個最契合的點或自然補上沒講好的關鍵 → 再次表達高度意願 → 禮貌收尾\n④ 【寄送指南】— 何時寄（面試後幾小時內）、多位面試官怎麼寄（主寄誰、副本給誰）、用 email 還是 104／人力銀行訊息，60 字內\n⑤ 【NG 清單】— 3 個會扣分的地雷（催逼結果、罐頭模板、過度卑微或浮誇），每個附一句為什麼會壞事\n\n【規則】\n1. 格式：可直接複製寄出，繁體中文、台灣求職語境，主旨與內文分開；簡短為上（正文 120-180 字），一封信只講重點、不長篇大論。\n2. 嚴禁使用：「請問我上了嗎」「什麼時候能給我答覆」「拜託給我這個機會」「貴公司是我唯一的選擇」——催逼、卑微或空泛套版都會扣分。\n3. 運用峰終定律與近因效應：把感謝信當成你能主動製造的『最後好印象』，結尾正向、聚焦一個最契合的記憶點，讓人資在拍板時剛好想起你。\n4. 語氣：誠懇、專業、不卑不亢，像真心想加入、也尊重對方決定的求職者，不緊迫盯人也不過度討好。\n5. 驗證測試：人資讀完的反應應該是「這人有心又好共事，加分」，而不是「怎麼在催我」或「一看就是複製貼上的罐頭」；若讀起來像逼問進度或空泛套版就重寫。並在結尾附一句提醒：「內容務必依你真實的面試經過與感受客製，切勿捏造細節或誇大；一封就好，勿反覆追寄造成反效果。」`
+  },
+
+  // ━━━ 🔵 中階秘術 | 校園生存 | Free ━━━
+  {
+    id: "task_kickstart_forge",
+    tab: "校園生存",
+    isPro: false,
+    tier: "adept",
+    school: "healing" as SchoolType,
+    subSchool: "insight" as SchoolType,
+    outputFormat: "五分鐘第一步 + 番茄衝刺表 + 防分心設定",
+    icon: <Rocket className="w-8 h-8 text-orange-500" />,
+    color: "orange",
+    title: "開工結界：拖延終結術",
+    desc: "報告 deadline 逼近、要讀的書堆成山，你卻打開檔案又關掉、滑了兩小時手機，愈拖愈焦慮、愈焦慮愈拖——明明知道該做，就是動不了。多數人以為這是懶或沒毅力，於是狂喝雞湯、下載一堆番茄鐘 App，結果還是坐在那裡發呆。真相是：拖延幾乎不是人品問題，而是「任務設計」問題——大腦看到一個模糊又巨大的任務（『把報告寫完』），會自動判定為威脅而啟動逃避；只要第一步小到不像威脅，行動就會自己發生。這咒語當你的行為設計教練，依你在拖什麼、卡在哪、剩多少時間、在什麼環境，幫你把嚇人的大任務翻譯成一個『小到不可能失敗』的五分鐘第一步，再排出一張 25 分鐘一格的番茄衝刺表、幫你把手機和雜念先關在門外，連做到一半又想逃時的自我對話都幫你寫好。不跟你喊加油，只給你現在就能站起來開始做的第一個動作。",
+    tags: ["拖延症", "開始行動", "番茄鐘"],
+    fields: [
+      { id: "task", label: "你在拖的事、卡在哪一步", placeholder: "例：期末報告還沒開始、光看到題目就想逃 / 要準備明天的簡報但不知從何下手 / 一大章原文書要念完" },
+      { id: "why_stuck", label: "你覺得為什麼開不了工", placeholder: "例：任務太大不知從哪開始 / 怕做不好乾脆不做 / 覺得無聊沒動力 / 一直被手機分心" },
+      { id: "deadline", label: "期限與你現在有的時間", placeholder: "例：後天要交、今晚有 3 小時 / 一週後考試、每天大概能擠 1 小時 / 兩小時後要交出草稿" },
+      { id: "env", label: "你現在的狀態與環境", placeholder: "例：在宿舍、桌上就是手機最容易分心 / 在圖書館但腦子很亂 / 累到不想動、只想躺著" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "啟動策略",
+      options: [
+        "微啟動型：把第一步縮到『小到不可能失敗』，五分鐘內就能開始，先破除起步那一刻最大的心理門檻",
+        "番茄衝刺型：用一連串 25 分鐘的專注區塊拆解任務，讓你邊做邊累積進度感，越做越有勁、停不下來",
+        "拆解攻堅型：把嚇人的大任務切成看得到終點的小關卡，逐關擊破，讓你不再面對一片模糊而想逃",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '行為設計讀書教練' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依卡點選啟動策略' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '五分鐘第一步+番茄表' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '禁空泛喊加油' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '第一步真能立刻開始測試' },
+    ],
+    theory: "建立在四個行為科學機制上。一是原子習慣的『兩分鐘法則』——把任務的起頭縮到兩分鐘內能完成，行動的阻力就會低到大腦不再抗拒，關鍵是先『開始』而非『做完』。二是番茄工作法——把工作切成 25 分鐘的專注區塊，因為『只做 25 分鐘』聽起來不嚇人，大腦會判定為安全而願意啟動。三是蔡格尼效應（Zeigarnik Effect）——大腦對『已開始但未完成』的任務會保持張力、惦記著想把它做完，所以只要騙過起步那一刻，慣性就會接手。四是執行意圖（Implementation Intention）——把模糊的『我要念書』改寫成『幾點、在哪、先做哪個具體動作』，達成率會大幅提升。本咒語把這四者合成一份不喊口號、只給第一步的行動處方，直擊拖延的真正病灶：不是你不夠努力，是任務被設計得太可怕。",
+    generate: (inputs: any) => `你是一位結合行為設計學與讀書教練經驗的『啟動專家』，最擅長把讓人動彈不得的大任務，拆成小到不可能失敗的第一步。你深信一件事：拖延幾乎不是懶或沒毅力，而是任務被設計得太模糊、太巨大，大腦才會判定為威脅而逃避。你的信條：「不要問他為什麼不開始，要幫他把第一步縮到不需要動力也能做。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我正在拖延一件事、遲遲無法開始，需要你幫我現在就動起來。\n- 我在拖的事、卡在哪一步：[[${inputs.task}]]\n- 我覺得開不了工的原因：[[${inputs.why_stuck}]]\n- 期限與我現在有的時間：[[${inputs.deadline}]]\n- 我的狀態與環境：[[${inputs.env}]]\n\n請輸出：\n① 【卡點翻譯】— 一句話點出我拖延的真正原因（不是懶，而是任務太大／怕失敗／太模糊等），把責任從『我這人有問題』移到『這任務要重新設計』，25 字內\n② 【五分鐘第一步】— 一個小到不可能失敗、五分鐘內就能開始動手的具體第一步（例：只把檔案打開打三行標題），附一句現在就念的啟動口令\n③ 【番茄衝刺表】— 依我有的時間，把任務切成 3-5 個 25 分鐘番茄鐘區塊，每一塊明確寫『這 25 分鐘只做哪一件事』，區塊之間標 5 分鐘休息要做什麼\n④ 【防分心設定】— 依我的環境，列 2-3 個開工前先排除的干擾（手機、分頁、雜念），每個附一個具體到馬上能做的動作\n⑤ 【卡住急救】— 如果做到一半又想逃或想滑手機，一句能立刻把我拉回桌前的自我對話\n\n【規則】\n1. 格式：可直接照著做的行動清單，繁體中文、台灣語境，步驟具體到『現在馬上能做』，不要理論長篇或大道理。\n2. 嚴禁空泛喊話：不准出現「加油」「你可以的」「要有毅力」「克服惰性」「調整心態」這類廢話；每一步都必須是一個看得到、做得到的動作。\n3. 運用兩分鐘法則、番茄工作法、蔡格尼效應與執行意圖：第一步必須小到兩分鐘內能起頭，任務一律拆成 25 分鐘可推進的區塊，並把模糊目標改寫成『幾點、在哪、先做什麼』的明確指令。\n4. 語氣：像真的懂你的教練，理解拖延不是人品問題而是任務設計問題，溫和但給明確指令，不說教、不罵人、不灌雞湯。\n5. 驗證測試：看完我應該能『現在就站起來開始做第一步』，而不是『又讀了一篇道理但還是沒動』；若某個步驟讓我覺得還是好難、不知道從哪下手，就把它再拆更小。`
+  },
+
+  // ━━━ 🔵 中階秘術 | 創業/自媒體 | Free ━━━
+  {
+    id: "podcast_episode_forge",
+    tab: "創業/自媒體",
+    isPro: false,
+    tier: "adept",
+    school: "illusion" as SchoolType,
+    subSchool: "insight" as SchoolType,
+    outputFormat: "單集標題 + 黃金開場逐字稿 + 段落大綱 + 訪綱",
+    icon: <Radio className="w-8 h-8 text-purple-500" />,
+    color: "purple",
+    title: "開麥召喚：節目企劃術",
+    desc: "想做 Podcast、或已經在做，最卡的往往不是設備和剪輯，而是每一集『到底要講什麼、怎麼開場才留得住人』。麥克風架好了、錄音軟體開著，游標卻在空白的企劃檔上閃了半小時——開頭一句『欸大家好，今天要來跟大家聊聊』就把人聽走了，中段講得零散像流水帳，結尾也忘了叫聽眾訂閱。2026 年 Podcast 的製作、剪輯、影音化都能外包給工具，唯獨『內容企劃』外包不了，那正是一集好不好聽的分水嶺。這咒語當你操盤過排行榜節目的製作人，依你這集的主題、節目形式（獨白／雙人／訪談）、聽眾是誰、想達成什麼，幫你生出一份可以直接照著錄的單集企劃：3 個讓人想點開的標題、一段 15 秒內就拋出鉤子的黃金開場逐字稿、切好時間分配的段落大綱、能被剪成短影音的金句與自然的行動呼籲，訪談還附一份循序漸進、讓來賓好接話的訪綱。從此打開錄音軟體不再對著空白發呆。",
+    tags: ["Podcast", "節目企劃", "訪綱"],
+    fields: [
+      { id: "topic", label: "這集主題／想聊什麼", placeholder: "例：小資族怎麼開始投資 / 訪問一位轉職成功的工程師 / 聊聊我這半年創業踩過的坑" },
+      { id: "format", label: "節目形式", placeholder: "例：一個人獨白分享 / 兩位主持人閒聊 / 邀請一位來賓訪談" },
+      { id: "audience", label: "聽眾是誰＋這集大概多長", placeholder: "例：20-30 歲想理財的上班族、單集約 30 分鐘 / 想入行的新鮮人、約 20 分鐘" },
+      { id: "goal", label: "這集想達成的目標", placeholder: "例：漲粉、讓人想追蹤 / 帶動留言討論 / 置入一段業配 / 建立我在這領域的專業感" },
+    ],
+    tweak: {
+      id: "strat",
+      label: "節目策略",
+      options: [
+        "個人獨白型：一個人也能撐起全場，用清楚的觀點與一條故事線帶著聽眾走，讓人一路聽到最後",
+        "雙人閒聊型：設計來回話題與拋接的梗點，讓兩人對話自然有火花、不冷場也不失焦",
+        "來賓訪談型：用循序漸進的訪綱挖出來賓的故事與乾貨，讓來賓好回答、聽眾有收穫",
+      ]
+    },
+    modules: [
+      { type: 'role' as ModuleType, label: '角色設定', preview: '排行榜Podcast製作人' },
+      { type: 'decision' as ModuleType, label: '判斷邏輯', preview: '依形式與目標調結構' },
+      { type: 'output' as ModuleType, label: '輸出格式', preview: '開場逐字稿+段落+訪綱' },
+      { type: 'behavior' as ModuleType, label: '行為規則', preview: '禁流水帳無重點開場' },
+      { type: 'safety' as ModuleType, label: '安全邊界', preview: '開場念一遍15秒抓人測試' },
+    ],
+    theory: "建立在三個內容設計框架上。一是 Simon Sinek 的黃金圈理論（Why-How-What）——先講『為什麼這集值得聽（Why）』再談方法與內容，能讓觀點更有感染力、聽眾更願意跟隨。二是敘事曲線與鉤子理論——聲音沒有畫面，聽眾滑走只需一秒，因此開場前 15 秒必須拋出懸念、痛點或反常識來抓住人，中段要有起伏、避免平鋪直敘的流水帳。三是 Kahneman 的峰終定律（Peak-End Rule）——人對一段體驗的記憶取決於最高點與結尾，所以要刻意設計一句『高潮金句』當記憶點，並用一個明確的行動呼籲收尾。本咒語把這三者組成一份可直接照錄的單集企劃：開場負責留人、中段負責給價值、結尾負責收割訂閱與分享。",
+    generate: (inputs: any) => `你是一位操盤過多檔排行榜 Podcast 的節目製作人，最清楚聲音內容『沒有畫面、聽眾滑走只要一秒』的殘酷，也最擅長把一個模糊的主題變成一集讓人聽到最後、還想分享的節目。你的信條：「一集節目的成敗，八成在開場前 15 秒就決定了——聽眾不會給你暖場的時間。」\n\n採用策略：[[${inputs.strat}]]\n\n【任務】\n我要企劃一集 Podcast，需要一份能讓聽眾聽到最後的單集企劃，可以直接照著錄。\n- 這集主題／想聊什麼：[[${inputs.topic}]]\n- 節目形式：[[${inputs.format}]]\n- 聽眾是誰＋單集長度：[[${inputs.audience}]]\n- 這集想達成的目標：[[${inputs.goal}]]\n\n請輸出：\n① 【單集標題】— 3 個讓人在一排節目中想點開的單集標題，各 20 字內，具體帶好奇心、不空泛\n② 【黃金開場】— 一段 30-60 秒的開場逐字稿，前 15 秒就要拋出鉤子（懸念／痛點／反常識），嚴禁冗長的自我介紹與暖場\n③ 【段落大綱】— 依設定長度把這集切成 3-5 個段落，每段標明『這段要講什麼＋大約幾分鐘＋一句串到下一段的轉場話』\n④ 【金句與 CTA】— 1-2 句適合被剪成短影音或被引用的金句，加一句自然不尷尬的行動呼籲（訂閱／留言／分享／導購），扣合這集目標\n⑤ 【訪綱或延伸提問】— 若是訪談，給 8-10 題由淺入深、讓來賓好接話的訪綱；若非訪談，給 5 個能把內容講得更深的自問自答問題\n\n【規則】\n1. 格式：可直接照著錄的企劃稿，繁體中文、台灣口語，開場給逐字稿、其餘給要點，段落要標好時間分配。\n2. 嚴禁流水帳：不准把整集寫成沒有起伏的清單堆疊；不要用「欸大家好，今天要來跟大家聊聊」這類把人聽走的平淡開場；每個段落都要有一個『聽眾為什麼要繼續聽下去』的理由。\n3. 運用黃金圈理論（先 Why 再 How、What）鋪陳觀點，並用敘事曲線與峰終定律安排起伏：開場鉤子最強、中段埋一句高潮金句、結尾收得讓人想行動。\n4. 語氣：緊貼節目形式與人設——獨白像跟聽眾對坐聊天、雙人有你來我往的節奏、訪談讓來賓好接話；全程口語、能直接念出口，不要書面腔。\n5. 驗證測試：把開場念一遍要能在 15 秒內抓住人、整集念完時間對得上設定長度；若某段念起來讓人想快轉或抓不到重點，就重寫。並在結尾附一句提醒：「內容請依你真實的觀點與來賓資訊調整，切勿捏造事實或數據。」`
   },
 ];
 
