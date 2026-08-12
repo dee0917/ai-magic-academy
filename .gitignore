@@ -10,3 +10,6 @@ out/
 # graphify analysis artifacts
 .graphify_*.json
 graphify-out/
+
+# test coverage
+coverage/
